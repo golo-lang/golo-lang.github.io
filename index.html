@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Golo &mdash; a lightweight dynamic language for the JVM.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Droid+Sans+Mono|Droid+Serif:400,700,700italic,400italic' rel='stylesheet' type='text/css'>
+    <style type="text/css" media="screen">
+    h1, h2, h4, h4, h5, .btn, .header > p {
+      font-family: 'Droid Sans', sans-serif;
+    }
+    p {
+      font-family: 'Droid Serif', serif;
+      font-size: 16px;
+    }
+    .golo-code {
+      font-family: 'Droid Sans Mono', monospace;
+      font-size: 16px;
+    }
+    .keyword {
+      font-weight: bold;
+      color: #0060B0;      
+    }
+    .identifier {
+      color: #B00060;;
+    }
+    .string {
+      color: #008000;
+    }
+    .section {
+      margin-top: 50px;
+    }
+    .arg {
+      color: #303090;
+    }
+    .hero-unit {
+      background-color: #ecf2f3;
+    }
+    .header {
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    </style>
+  </head>
+
+  <body>
+    
+    <div class="container">
+      
+      <div class="header">
+        <h1>Golo <small>&mdash; a lightweight dynamic language for the JVM.</small></h1>
+      </div>
+      
+      <div class="hero-unit">
+        <div class="row">
+          <div class="span4">
+            <p class="golo-code">
+              <span class="keyword">module</span> <span class="identifier">hello.world</span><br>
+              <br>
+              <span class="keyword">function</span> <span class="identifier">main</span> = |<span class="arg">args</span>| {                  <br>
+                &nbsp;&nbsp;println(<span class="string">"Hello world")</span><br>
+              }
+            </p>
+          </div>
+          <div class="span6">
+            <p class="lead">
+            The world didn't need another language on the JVM.<br>
+            So we built yet another one. A simple one.</p>
+            <p>
+              <a href="https://docs.google.com/spreadsheet/viewform?formkey=dGNnWFV5YnhIdkVZbC1PTEwzbW54c2c6MQ" class="btn btn-large btn-info"><i class="icon-plane icon-large"></i> Notify me of the first release</a>
+              &nbsp;
+              <a href="mailto:julien.ponge@insa-lyon.fr?subject=Golo" class="btn btn-large btn-success"><i class="icon-comments icon-large"></i> Contact the main developer</a>
+            </p>
+          </div>
+        </div>      
+      </div>   
+
+      <div class="row section">
+        <div class="span4">
+          <h4><i class="icon-glass icon-large"></i> Simple foundations</h4>
+          <p>
+            Golo is a simple dynamic, weakly-typed language that favours explicit over implicit.
+            You should become a Golo programmer within hours, not days.
+          </p>
+        </div>
+        <div class="span4">
+          <h4><i class="icon-bolt icon-large"></i> invokedynamic</h4>
+          <p>
+            Built from day 1 with 
+            <a href="http://docs.oracle.com/javase/7/docs/technotes/guides/vm/multiple-language-support.html">invokedynamic</a>,
+            Golo takes advantage of the latest advances of 
+            the JVM. It is also a showcase on how to build a language runtime with invokedynamic.
+          </p>
+        </div>
+        <div class="span4">
+          <h4><i class="icon-beaker icon-large"></i> Origins</h4>
+          <p>
+            While we have great plans for Golo in
+            <a href="http://dynamid.citi-lab.fr/research/">our research projects</a>, we also think that it
+            can be useful for the larger Java community.
+          </p>
+        </div>
+      </div>
+        
+      <div class="row section">
+        <div class="span4">
+          <h4><i class="icon-ok icon-large"></i> Mix and match</h4>          
+          <p>
+            Golo seeks a minimal runtime and a maximal Java interoperability. Golo is not designed 
+            to be a replacement for
+            <a href="http://docs.oracle.com/javase/specs/">Java</a>,
+            <a href="http://groovy.codehaus.org/">Groovy</a>,
+            <a href="http://ceylon-lang.org">Ceylon</a> or <em>whatever</em>. 
+          </p>
+        </div> 
+        <div class="span4">
+          <h4><i class="icon-dashboard icon-large"></i> Roadmap</h4>          
+          <p>
+            We plan to make Golo public around March / April 2013.
+            A first public demo will happen in February at the <a href="http://lavajug.org/">LavaJUG</a>.
+          </p>
+        </div>  
+        <div class="span4">
+          <h4><i class="icon-comments icon-large"></i> Interested?</h4>          
+          <p>     
+            <a href="https://docs.google.com/spreadsheet/viewform?formkey=dGNnWFV5YnhIdkVZbC1PTEwzbW54c2c6MQ">Be 
+            notified</a> when we have a release, and/or 
+            <a href="mailto:julien.ponge@insa-lyon.fr?subject=Golo">contact the main author</a> if you would like
+            to know more!
+          </p>
+        </div>  
+      </div>
+      
+      <div class="footer section">
+        <hr/>
+        <p>
+          Golo is an internal project
+          as part of the research activities of
+          the <a href="http://dynamid.citi-lab.fr/">Dynamid group</a> of
+          the <a href="http://www.citi-lab.fr/">CITI laboratory</a>
+          at <a href="http://www.insa-lyon.fr/">INSA-Lyon</a>.
+        </p>
+      </div>
+      
+    </div>      
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-658166-13']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    
+  </body>
+</html>
+
