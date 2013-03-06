@@ -1,3 +1,6 @@
+body {
+  color: #444;
+}
 h1, h2, h4, h4, h5, .btn, .header > p {
   font-family: 'Droid Sans', sans-serif;
 }
@@ -6,8 +9,8 @@ p {
   font-size: 16px;
 }
 .golo-code {
-  font-family: 'Droid Sans Mono', monospace;
-  font-size: 16px;
+  font-family: 'Inconsolata', monospace;
+  font-size: 20px;
 }
 .keyword {
   font-weight: bold;
