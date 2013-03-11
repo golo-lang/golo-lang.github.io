@@ -2,10 +2,6 @@
 layout: main
 title: Golo &mdash; a lightweight dynamic language for the JVM.
 ---
-
-<div class="header">
-  <h1>Golo <small>&mdash; a lightweight dynamic language for the JVM.</small></h1>
-</div>
       
 <div class="hero-unit">
   <div class="row">
@@ -19,19 +15,65 @@ title: Golo &mdash; a lightweight dynamic language for the JVM.
       </p>
     </div>
     <div class="span6">
-      <p class="lead">
-      The world didn't need another language on the JVM.<br>
+      <p class="lead">The world didn't need another JVM language.<br>
       So we built yet another one. A simple one.</p>
       <p>
-        <a href="https://docs.google.com/spreadsheet/viewform?formkey=dGNnWFV5YnhIdkVZbC1PTEwzbW54c2c6MQ" class="btn btn-large btn-info"><i class="icon-plane icon-large"></i> Notify me of the first release</a>
+        <a href="" class="btn btn-large btn-success">
+          <i class="icon-2x icon-cloud-download pull-left"></i>
+          Download Golo<br/>
+          <small>(still in beta)</small>
+        </a>
         &nbsp;
-        <a href="mailto:julien.ponge@insa-lyon.fr?subject=Golo" class="btn btn-large btn-success"><i class="icon-comments icon-large"></i> Contact the main developer</a>
+        ...or <a href="http://golo-console.appspot.com/">try on Google AppEngine</a>
       </p>
     </div>
   </div>      
-</div>   
+</div>
 
 <div class="row section">
+  
+  <div class="span4">
+    <h3><i class="icon-large icon-rss"></i> &nbsp; Latest news</h3>
+    <ul>
+    {% for news in site.posts limit:4 %}
+      <li>
+        <a href="{{ news.url }}">{{ news.title }}</a>
+        <br/> <small>{{ news.date | date_to_string }}</small>
+      </li>
+    {% endfor %}
+      <li><a href="/news/">(archives)</a></li>
+    </ul>    
+  </div>
+  
+  <div class="span4">
+    <h3><i class="icon-large icon-book"></i> &nbsp; Learn Golo</h3>
+    <p>
+      We invite you to read the development version of the
+      <a href="docs/dev/index.html">Golo Programming Language Guide</a>.
+    </p>
+  </div>
+  
+  <div class="span4">
+    <h3><i class="icon-large icon-comments"></i> &nbsp; Community</h3>
+    <ul>
+      <li>
+        Need some help?
+        Look for the 
+        <a href="http://stackoverflow.com/questions/tagged/golo-lang">'golo-lang' tag</a>
+        on StackOverflow!
+      </li>
+      <li>
+        Get the code, report issues and contribute <a href="https://github.com/golo-lang/golo-lang">on GitHub</a>.
+      </li>
+      <li>
+        Discuss on <a href="http://sourceforge.net/p/golo-lang/discussion/">our forums / lists</a> at SourceForge.
+      </li>
+    </ul>
+  </div>
+  
+</div>
+
+<!-- <div class="row section">
   <div class="span4">
     <h4><i class="icon-glass icon-large"></i> Simple foundations</h4>
     <p>
@@ -85,4 +127,4 @@ title: Golo &mdash; a lightweight dynamic language for the JVM.
       to know more!
     </p>
   </div>  
-</div>
+</div> -->
