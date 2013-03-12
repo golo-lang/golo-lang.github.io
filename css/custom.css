@@ -9,6 +9,10 @@ p, ul {
   font-family: 'Droid Serif', serif;
   font-size: 16px;
 }
+.footer, .footer > p {
+  font-family: 'Droid Serif', serif;
+  font-size: 13px;
+}
 .golo-code {
   font-family: 'Inconsolata', monospace;
   font-size: 20px;
@@ -30,7 +34,7 @@ p, ul {
   color: #303090;
 }
 .hero-unit {
-  background-color: #ecf2f3;
+  background-color: #E1F2F5;
 }
 .header {
   margin-top: 50px;
