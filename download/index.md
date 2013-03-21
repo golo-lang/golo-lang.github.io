@@ -12,17 +12,21 @@ Standalone distributions can be obtained [from SourceForge](http://sourceforge.n
 Maven release and snapshot artifacts can be downloaded from both Maven Central and the
 [Sonatype OSS Maven Repository](https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide).
 
-The Golo library (runtime + compiler) is:
+The Golo library (runtime + compiler) artifact is:
 
-    <groupId>org.golo-lang</groupId>
-    <artifactId>golo</artifactId>
-    <version>0-SNAPSHOT</version>
+{% highlight xml %}
+<groupId>org.golo-lang</groupId>
+<artifactId>golo</artifactId>
+<version>0-SNAPSHOT</version>
+{% endhighlight %}
 
-The Maven plugin is:
+The Maven plugin artifact is:
 
-    <groupId>org.golo-lang</groupId>
-    <artifactId>golo-maven-plugin</artifactId>
-    <version>0-SNAPSHOT</version>
+{% highlight xml %}
+<groupId>org.golo-lang</groupId>
+<artifactId>golo-maven-plugin</artifactId>
+<version>0-SNAPSHOT</version>
+{% endhighlight %}
 
 ### Source code
 
