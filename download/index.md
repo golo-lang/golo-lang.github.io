@@ -28,6 +28,10 @@ The Maven plugin artifact is:
 <version>0-preview1</version>
 {% endhighlight %}
 
+### Native packages
+
+* RPM: see the [DevOps Incubator project](https://github.com/hgomez/devops-incubator) and look for `golo-lang`.
+
 ### Source code
 
 The canonical repository is at [https://github.com/golo-lang/golo-lang](https://github.com/golo-lang/golo-lang).
