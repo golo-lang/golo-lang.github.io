@@ -17,7 +17,7 @@ The Golo library (runtime + compiler) artifact is:
 {% highlight xml %}
 <groupId>org.golo-lang</groupId>
 <artifactId>golo</artifactId>
-<version>0-SNAPSHOT</version>
+<version>0-preview1</version>
 {% endhighlight %}
 
 The Maven plugin artifact is:
@@ -25,7 +25,7 @@ The Maven plugin artifact is:
 {% highlight xml %}
 <groupId>org.golo-lang</groupId>
 <artifactId>golo-maven-plugin</artifactId>
-<version>0-SNAPSHOT</version>
+<version>0-preview1</version>
 {% endhighlight %}
 
 ### Source code
