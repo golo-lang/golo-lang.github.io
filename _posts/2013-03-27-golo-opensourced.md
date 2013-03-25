@@ -30,9 +30,9 @@ Big thanks to our early testers before Golo was made public!
 *(in no particular order)*
 
 *Pierre Colomb, Olivier Coupelon, Cédric Exbrayat, Frédéric Le Mouel, Nicolas Stouls, Henri Gomez,
-Julien Viet, Philippe Charrière, Ludovic Champenois, Thierry Chantier, David Gageot, David Festal,
-Gildas Cuisinier, Thomas Maurel, Yannick Loiseau, Alexis Plantin, Sylvain Desgrais, William Guyot,
-Agnès Crépet, Cyril Lacote.*
+Julien Viet, Philippe Charrière, Ludovic Champenois, Thierry Chantier, Daniel Pétisme, David Gageot, 
+David Festal, Gildas Cuisinier, Thomas Maurel, Yannick Loiseau, Alexis Plantin, Sylvain Desgrais, 
+William Guyot, Agnès Crépet, Cyril Lacote.*
 
 Special thanks also go to our first external contributor David Festal and his employer
 [Serli](http://www.serli.com/) for having allocated David some time to develop
