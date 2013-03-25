@@ -1,0 +1,3850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="AsciiDoc 8.6.8">
+<title>The Golo Programming Language</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #777777;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+tt {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+.monospaced {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+/*
+ * Theme specific overrides of the preceding (asciidoc.css) CSS.
+ *
+ */
+body {
+  font-family: Garamond, Georgia, serif;
+  font-size: 17px;
+  color: #3E4349;
+  line-height: 1.3em;
+}
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Garmond, Georgia, serif;
+  font-weight: normal;
+  border-bottom-width: 0;
+  color: #3E4349;
+}
+div.title, caption.title { color: #596673; font-weight: bold; }
+h1 { font-size: 240%; }
+h2 { font-size: 180%; }
+h3 { font-size: 150%; }
+h4 { font-size: 130%; }
+h5 { font-size: 115%; }
+h6 { font-size: 100%; }
+#header h1 { margin-top: 0; }
+#toc {
+  color: #444444;
+  line-height: 1.5;
+  padding-top: 1.5em;
+}
+#toctitle {
+  font-size: 20px;
+}
+#toc a {
+    border-bottom: 1px dotted #999999;
+    color: #444444 !important;
+    text-decoration: none !important;
+}
+#toc a:hover {
+    border-bottom: 1px solid #6D4100;
+    color: #6D4100 !important;
+    text-decoration: none !important;
+}
+div.toclevel1 { margin-top: 0.2em; font-size: 16px; }
+div.toclevel2 { margin-top: 0.15em; font-size: 14px; }
+em, dt, td.hdlist1 { color: black; }
+strong { color: #3E4349; }
+a { color: #004B6B; text-decoration: none; border-bottom: 1px dotted #004B6B; }
+a:visited { color: #615FA0; border-bottom: 1px dotted #615FA0; }
+a:hover { color: #6D4100; border-bottom: 1px solid #6D4100; }
+div.tableblock > table, table.tableblock { border: 3px solid #E8E8E8; }
+th.tableblock, td.tableblock { border: 1px solid #E8E8E8; }
+ul > li > * { color: #3E4349; }
+pre, tt, .monospaced { font-family: Consolas,Menlo,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; }
+tt, .monospaced { font-size: 0.9em; color: black;
+}
+div.exampleblock > div.content, div.sidebarblock > div.content, div.listingblock > div.content { border-width: 0 0 0 3px; border-color: #E8E8E8; }
+div.verseblock { border-left-width: 0; margin-left: 3em; }
+div.quoteblock { border-left-width: 3px; margin-left: 0; margin-right: 0;}
+div.admonitionblock td.content { border-left: 3px solid #E8E8E8; }
+/*
+  pygmentize filter
+*/
+.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f4f4f4; }
+.highlight .c { color: #008800; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #AA22FF; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .cm { color: #008800; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #008800 } /* Comment.Preproc */
+.highlight .c1 { color: #008800; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #008800; font-weight: bold } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #808080 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0040D0 } /* Generic.Traceback */
+.highlight .kc { color: #AA22FF; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #AA22FF; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #AA22FF; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #AA22FF } /* Keyword.Pseudo */
+.highlight .kr { color: #AA22FF; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #00BB00; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BB4444 } /* Literal.String */
+.highlight .na { color: #BB4444 } /* Name.Attribute */
+.highlight .nb { color: #AA22FF } /* Name.Builtin */
+.highlight .nc { color: #0000FF } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #00A000 } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #B8860B } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sb { color: #BB4444 } /* Literal.String.Backtick */
+.highlight .sc { color: #BB4444 } /* Literal.String.Char */
+.highlight .sd { color: #BB4444; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BB4444 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BB4444 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BB4444 } /* Literal.String.Single */
+.highlight .ss { color: #B8860B } /* Literal.String.Symbol */
+.highlight .bp { color: #AA22FF } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #B8860B } /* Name.Variable.Class */
+.highlight .vg { color: #B8860B } /* Name.Variable.Global */
+.highlight .vi { color: #B8860B } /* Name.Variable.Instance */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
+
+
+
+@media screen {
+  body {
+    max-width: 50em; /* approximately 80 characters wide */
+    margin-left: 16em;
+  }
+
+  #toc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 13em;
+    padding: 0.5em;
+    padding-bottom: 1.5em;
+    margin: 0;
+    overflow: auto;
+    border-right: 3px solid #f8f8f8;
+    background-color: white;
+  }
+
+  #toc .toclevel1 {
+    margin-top: 0.5em;
+  }
+
+  #toc .toclevel2 {
+    margin-top: 0.25em;
+    display: list-item;
+    color: #aaaaaa;
+  }
+
+  #toctitle {
+    margin-top: 0.5em;
+  }
+}
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>The Golo Programming Language</h1>
+<span id="author">Julien Ponge</span><br>
+<span id="email" class="monospaced">&lt;<a href="mailto:julien.ponge@insa-lyon.fr">julien.ponge@insa-lyon.fr</a>&gt;</span><br>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>This is the documentation for the Golo programming language.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Caution" src="data:image/png;base64,
+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">
+</td>
+<td class="content">This is a work in progress. Golo is even far from being feature-complete. You have been
+warned, but hey, you somehow knew it I&#8217;m pretty sure.</td>
+</tr></table>
+</div>
+<div class="listingblock">
+<div class="title">Copyright and License Notice</div>
+<div class="content monospaced">
+<pre>Copyright 2012-2013 Institut National des Sciences Appliquées de Lyon (INSA-Lyon)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basics">Basics</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Let us start with the Golo basics.</p></div>
+<div class="sect2">
+<h3 id="_editor_ide_support">Editor / IDE support</h3>
+<div class="paragraph"><p>Editor and IDE support for Golo is available for:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://github.com/jponge/vim-golo">Vim</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://github.com/k33g/sublime-golo">Sublime Text 2</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://github.com/k33g/golo-storm">IntelliJ IDEA (syntax highthing)</a>
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_hello_world">Hello world</h3>
+<div class="paragraph"><p>Golo source code need to be placed in <em>modules</em>. Module names are
+separated with dots, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>Foo
+foo.Bar
+foo.bar.Baz
+(...)
+</pre></div></div></div>
+<div class="paragraph"><p>It is suggested yet not enforced that the first elements in a module
+name are in lowercase, and that the last one have an uppercase first
+letter.</p></div>
+<div class="paragraph"><p>A Golo module can be executable if it has a <em>function</em> named <span class="monospaced">main</span> and
+that takes an argument for the JVM program arguments:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module hello.World
+
+function main = |args| {
+  println(&quot;Hello world!&quot;)
+}
+</pre></div></div></div>
+<div class="paragraph"><p><span class="monospaced">println</span> is a predefined function that outputs a value to the standard
+console. As you can easily guess, here we output <span class="monospaced">Hello, world!</span> and
+that is an awesome achievement.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_running_em_hello_world_em_with_span_class_monospaced_gologolo_span">Running <em>"Hello world"</em> with <span class="monospaced">gologolo</span></h3>
+<div class="paragraph"><p>Of course, we need to run this incredibly complex application.</p></div>
+<div class="paragraph"><p>Golo comes with a <span class="monospaced">gologolo</span> script found in the distribution <span class="monospaced">bin/</span>
+folder. Provided that it is available from your current <span class="monospaced">$PATH</span>, you may
+simply invoke it as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> gologolo samples/helloworld.golo
+<span class="go">Hello world!</span>
+<span class="gp">$</span>
+</pre></div></div></div>
+<div class="paragraph"><p><span class="monospaced">gologolo</span> takes several Golo source files as input. It expects the last
+one to have a <span class="monospaced">main</span> function to call. The Golo code is compiled on the
+fly and executed straight into a JVM.</p></div>
+<div class="paragraph"><p>You may also pass arguments to the <span class="monospaced">main</span> function by appending <span class="monospaced">--args</span>
+on the command line invocation. Suppose that we have a module <span class="monospaced">EchoArgs</span>
+as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module EchoArgs
+
+function main = |args| {
+  for (var i = 0, i &lt; alength(args), i = i + 1) {
+    println(&quot;#&quot; + i + &quot; -&gt; &quot; + aget(args, i))
+  }
+}
+</pre></div></div></div>
+<div class="paragraph"><p>We may invoke it as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> gologolo samples/echo-args.golo --args plop da plop
+<span class="gp">#</span>0 -&gt; plop
+<span class="gp">#</span>1 -&gt; da
+<span class="gp">#</span>2 -&gt; plop
+<span class="gp">$</span>
+</pre></div></div></div>
+<div class="paragraph"><p>Note that <span class="monospaced">args</span> is expected to be an array, and we can use built-in
+functions to deal with it: <span class="monospaced">alength</span> gives the length of an array while
+<span class="monospaced">aget</span> gives the value of an element at a given index.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_compiling_golo_source_code">Compiling Golo source code</h3>
+<div class="paragraph"><p>Golo comes with a <span class="monospaced">goloc</span> compiler that generates JVM bytecode in
+<span class="monospaced">.class</span> files. We will give more details in the chapter on
+interoperability with Java.</p></div>
+<div class="paragraph"><p>Compiling Golo files is straightforward:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> goloc -output classes samples/helloworld.golo
+<span class="gp">$</span>
+</pre></div></div></div>
+<div class="paragraph"><p>This compiles the code found in <span class="monospaced">samples/helloworld.golo</span> and outputs
+the generated classes to a <span class="monospaced">classes</span> folder (it will be created if
+needed):</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> tree classes/
+<span class="go">classes/</span>
+<span class="go">└── hello</span>
+<span class="go">    └── World.class</span>
+
+<span class="go">1 directory, 1 file</span>
+<span class="gp">$</span>
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_running_compiled_golo_code">Running compiled Golo code</h3>
+<div class="paragraph"><p>Golo provides a <span class="monospaced">golo</span> command for running compiled Golo code:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>classes
+<span class="gp">$</span> golo hello.World
+<span class="go">Hello world!</span>
+<span class="gp">$</span>
+</pre></div></div></div>
+<div class="paragraph"><p>Simple, isn&#8217;t it?</p></div>
+</div>
+<div class="sect2">
+<h3 id="_passing_jvm_specific_flags">Passing JVM-specific flags</h3>
+<div class="paragraph"><p>Both <span class="monospaced">golo</span> and <span class="monospaced">gologolo</span> can be given JVM-specific flags using the <span class="monospaced">JAVA_OPTS</span> environment
+variable.</p></div>
+<div class="paragraph"><p>As an example, the following runs <span class="monospaced">fibonacci.golo</span> and prints JIT compilation along the way:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">#</span> Exporting an environment variable
+<span class="gp">$</span> <span class="nb">export </span><span class="nv">JAVA_OPTS</span><span class="o">=</span>-XX:+PrintCompilation
+<span class="gp">$</span> gologolo samples/fibonacci.golo
+
+<span class="gp">#</span> ...or you may use this one-liner
+<span class="gp">$</span> <span class="nv">JAVA_OPTS</span><span class="o">=</span>-XX:+PrintCompilation gologolo samples/fibonacci.golo
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_comments">Comments</h3>
+<div class="paragraph"><p>Golo comments start with a <span class="monospaced">#</span>, just like in Bash, Python or Ruby:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># This is a comment
+println(&quot;WTF?&quot;) # it works here, too
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_variables_and_constants">Variables and constants</h3>
+<div class="paragraph"><p>Golo does not check for types at compile time, and they are not
+declared. Everything happens at runtime in Golo.</p></div>
+<div class="paragraph"><p>Variables are declared using the <span class="monospaced">var</span> keyword, while constants are
+declared with <span class="monospaced">let</span>. It is strongly advised that you favour <span class="monospaced">let</span> over
+<span class="monospaced">var</span> unless you are certain that you need mutability.</p></div>
+<div class="paragraph"><p>Variables and constants need to be initialized when declared. Failing to
+do so results in a compilation error.</p></div>
+<div class="paragraph"><p>Here are a few examples:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># Ok
+var i = 3
+i = i + 1
+
+# The assignment fails because truth is a constant
+let truth = 42
+truth = 666
+
+# Invalid statement, variables / constants have to be initialized
+var foo
+</pre></div></div></div>
+<div class="paragraph"><p>Valid names contain upper and lower case letters within the <span class="monospaced">[a..z]</span> range, underscores (<span class="monospaced">_</span>),
+dollar symbols (<span class="monospaced">$</span>) and numbers. In any case, an identifier must not start with a number.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># Ok, but not necessarily great for humans...
+let _$_f_o_$$666 = 666
+
+# Wrong!
+let 666_club = 666
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_data_literals">Data literals</h3>
+<div class="paragraph"><p>Golo supports a set of data literals. They directly map to their counterparts from the Java Standard
+API. We give them along with examples in <a href="#data-literals">the data literals table</a> below.</p></div>
+<table class="tableblock frame-all grid-all" id="data-literals"
+style="
+width:100%;
+">
+<col style="width:50%;">
+<col style="width:50%;">
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" >Java type </th>
+<th class="tableblock halign-left valign-top" > Golo literals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">null</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">null</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.lang.Boolean</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">true</span> or <span class="monospaced">false</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.lang.String</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">"hello world"</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.lang.Character</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">'a'</span>, <span class="monospaced">'b'</span>, &#8230;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.lang.Integer</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">123</span>, <span class="monospaced">-123</span>, &#8230;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.lang.Long</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">123_L</span>, <span class="monospaced">-123_L</span>, &#8230;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.lang.Double</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">1.234</span>, <span class="monospaced">-1.234</span>, <span class="monospaced">1.234e9</span>, &#8230;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.lang.Float</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">1.234_F</span>, <span class="monospaced">-1.234_F</span>, <span class="monospaced">1.234e9_F</span>, &#8230;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.lang.Class</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">String.class</span>, <span class="monospaced">java.lang.String.class</span>, <span class="monospaced">gololang.Predef.module</span>, &#8230;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.lang.invoke.MethodHandle</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">^foo</span>, <span class="monospaced">^some.module::foo</span>, &#8230;</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_operators">Operators</h3>
+<div class="paragraph"><p>Golo supports the following <a href="#operators">set of operators</a>.</p></div>
+<table class="tableblock frame-all grid-all" id="operators"
+style="
+width:100%;
+">
+<col style="width:33%;">
+<col style="width:33%;">
+<col style="width:33%;">
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" >Symbol(s) </th>
+<th class="tableblock halign-left valign-top" >Description </th>
+<th class="tableblock halign-left valign-top" >Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">+</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Addition on numbers and strings.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">1 + 2</span> gives 3.</p>
+<p class="tableblock"><span class="monospaced">"foo" + "bar"</span> gives <span class="monospaced">"foobar"</span>.</p>
+<p class="tableblock"><span class="monospaced">"foo" + something</span> where <span class="monospaced">something</span> is any object instance is equivalent to
+<span class="monospaced">"foo" + something.toString()</span> in Java.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">-</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Subtraction on numbers.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">4 - 1</span> gives <span class="monospaced">3</span>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">*</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Multiplication on numbers and strings.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">2 * 2</span> gives <span class="monospaced">4</span>.</p>
+<p class="tableblock"><span class="monospaced">"a" * 3</span> gives <span class="monospaced">"aaa"</span>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">/</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Division on numbers.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">4 / 2</span> gives <span class="monospaced">2</span>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><em>%</em></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Modulo on numbers.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">4 % 2</span> gives <span class="monospaced">0</span>, <span class="monospaced">3 % 2</span> gives <span class="monospaced">1</span>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">"&lt;"</span>, <span class="monospaced">"&lt;="</span>, <span class="monospaced">"=="</span>, <span class="monospaced">"!="</span>, <span class="monospaced">"&gt;"</span>, <span class="monospaced">"&gt;="</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Comparison between numbers and objects that implement <span class="monospaced">java.lang.Comparable</span>.
+<span class="monospaced">==</span> is equivalent to calling <span class="monospaced">Object#equals(Object)</span> in Java.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">1 &lt; 2</span> gives <span class="monospaced">true</span>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">is</span>, <span class="monospaced">isnt</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Comparison of reference equality.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">a is b</span> gives <span class="monospaced">true</span> only if <span class="monospaced">a</span> and <span class="monospaced">b</span> reference the same object instance.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">and</span>, <span class="monospaced">or</span>, <span class="monospaced">not</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Boolean operators. <span class="monospaced">not</span> is of course a unary operator.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">true and true</span> gives <span class="monospaced">true</span>, <span class="monospaced">not(true)</span> gives <span class="monospaced">false</span>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">oftype</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Checks the type of an object instance, equivalent to the <span class="monospaced">instanceof</span> operator
+in Java.</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">("plop" oftype String.class)</span> gives <span class="monospaced">true</span>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_calling_a_method">Calling a method</h3>
+<div class="paragraph"><p>Although we will discuss this in more details later on, you should already know that <span class="monospaced">:</span> is used to
+invoke instance methods.</p></div>
+<div class="paragraph"><p>You could for instance call the <span class="monospaced">toString()</span> method that any Java object has, and print it out as
+follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>println(123: toString())
+println(someObject: toString())
+</pre></div></div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_functions">Functions</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Functions are first-class citizen in Golo. Here is how to define and
+call some.</p></div>
+<div class="sect2">
+<h3 id="_parameter_less_functions">Parameter-less functions</h3>
+<div class="paragraph"><p>Golo modules can define functions as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module sample
+
+function hello = {
+  return &quot;Hello!&quot;
+}
+</pre></div></div></div>
+<div class="paragraph"><p>In turn, you may invoke a function with a familiar notation:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let str = hello()
+</pre></div></div></div>
+<div class="paragraph"><p>A function needs to return a value using the <span class="monospaced">return</span> keyword. Some
+languages state that the last statement is the return value, but Golo
+does not follow that trend. We believe that <span class="monospaced">return</span> is more explicit,
+and that a few keystrokes in favour of readability is still a good deal.</p></div>
+<div class="paragraph"><p>Still, you may omit <span class="monospaced">return</span> statements if your function does not return
+a value:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function printer = {
+  println(&quot;Hey!&quot;)
+}
+</pre></div></div></div>
+<div class="paragraph"><p>If you do so, the function will actually return <span class="monospaced">null</span>, hence <span class="monospaced">result</span>
+in the next statement is <span class="monospaced">null</span>:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># result will be null
+let result = printer()
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_functions_with_parameters">Functions with parameters</h3>
+<div class="paragraph"><p>Of course functions may take some parameters, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function addition = |a, b| {
+  return a + b
+}
+</pre></div></div></div>
+<div class="paragraph"><p>Invoking functions that take parameters is straightforward, too:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let three = addition(1, 2)
+let hello_world = addition(&quot;hello &quot;, &quot;world!&quot;)
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_variable_arity_functions">Variable-arity functions</h3>
+<div class="paragraph"><p>Functions may take a varying number of parameters. To define one, just
+add <span class="monospaced">...</span> to the last parameter name:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function foo = |a, b, c...| {
+  # ...
+}
+</pre></div></div></div>
+<div class="paragraph"><p>Here, <span class="monospaced">c</span> catches the variable arguments in an array, just like it would
+be the case with Java. You can thus treat <span class="monospaced">c</span> as being a Java object of
+type <span class="monospaced">Object[]</span>.</p></div>
+<div class="paragraph"><p>Calling variable-arity functions does not requiring wrapping the last
+arguments in an array. While invoking the <span class="monospaced">foo</span> function above, the
+following examples are legit:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># a=1, b=2, c=[]
+foo(1, 2)
+
+# a=1, b=2, c=[3]
+foo(1, 2, 3)
+
+# a=1, b=2, c=[3,4]
+foo(1, 2, 3, 4)
+</pre></div></div></div>
+<div class="paragraph"><p>Because the parameter that catches the last arguments is an array, you
+may call the array functions. Given:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function elementAt = |index, args...| {
+  return aget(args, index)
+}
+</pre></div></div></div>
+<div class="paragraph"><p>then:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># prints &quot;2&quot;
+println(elementAt(1, 1, 2, 3))
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_functions_from_other_modules_and_imports">Functions from other modules and imports</h3>
+<div class="paragraph"><p>Suppose that we have a module <span class="monospaced">Foo.Bar</span>:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module Foo.Bar
+
+function f = {
+  return &quot;f()&quot;
+}
+</pre></div></div></div>
+<div class="paragraph"><p>We can invoke <span class="monospaced">f</span> from another module by prefixing it with its module
+name:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let r = Foo.Bar.f()
+</pre></div></div></div>
+<div class="paragraph"><p>Of course, we may also take advantage of an <span class="monospaced">import</span> statement:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module Somewhere.Else
+
+import Foo.Bar
+
+function plop = {
+  return f()
+}
+</pre></div></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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">
+</td>
+<td class="content">Imports in Golo do not work as in Java.
+Golo is a dynamic language where symbols are being resolved at runtime. Module imports are
+<strong>not</strong> checked at compilation time, and their sole purpose is to help in dynamic resolution. Back
+to the previous example, <span class="monospaced">f</span> cannot be resolved from the current module, and the Golo runtime
+subsequently tries to resolve <span class="monospaced">f</span> from each <span class="monospaced">import</span> statement. Also, note that the order of
+<span class="monospaced">import</span> statements is important, as the resolution stops at the first module having the <span class="monospaced">f</span>
+function.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Last but not least, you may prepend the last piece of the module name. The following invocations are
+equivalent:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module Somewhere.Else
+
+import Foo.Bar
+
+function plop = {
+  let result = f()
+  let result_bis = Bar.f()
+  let result_full = Foo.Bar.f()
+  return result
+}
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_local_functions">Local functions</h3>
+<div class="paragraph"><p>By default, functions are visible outside of their module. You may
+restrict the visibility of a function by using the <span class="monospaced">local</span> keyword:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module Foo
+
+local function a = {
+  return 666
+}
+
+function b = {
+  return a()
+}
+</pre></div></div></div>
+<div class="paragraph"><p>Here, <span class="monospaced">b</span> is visible while <span class="monospaced">a</span> can only be invoked from within the <span class="monospaced">Foo</span>
+module. Given another module called <span class="monospaced">Bogus</span>, the following would fail at
+runtime:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module Bogus
+
+function i_will_crash = {
+  return Foo.a()
+}
+</pre></div></div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_java_interoperability">Java interoperability</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Golo aims at providing a seamless 2-way interoperability with the Java programming language.</p></div>
+<div class="sect2">
+<h3 id="_calling_static_methods">Calling static methods</h3>
+<div class="paragraph"><p>Golo can invoke public Java static methods by treating them as functions:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module sample
+
+import java.util.Arrays
+
+function oneTwoThree = {
+  return asList(1, 2, 3)
+}
+</pre></div></div></div>
+<div class="paragraph"><p>In this example, <span class="monospaced">asList</span> is resolved from the <span class="monospaced">java.util.Arrays</span> import and called as a function.
+Note that we could equivalently have written a qualified invocation as <span class="monospaced">Arrays.asList(1, 2, 3)</span>.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_calling_instance_methods">Calling instance methods</h3>
+<div class="paragraph"><p>When you have an object, you may invoke its methods using the <span class="monospaced">:</span> operator.</p></div>
+<div class="paragraph"><p>The following would call the <span class="monospaced">toString</span> method of any kind, then print it:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>println(&quot;&gt;&gt;&gt; &quot; + someObject: toString())
+</pre></div></div></div>
+<div class="paragraph"><p>Of course, you may chain calls as long as a method is not of a <span class="monospaced">void</span> return type. Golo converts
+Java <span class="monospaced">void</span> methods by making them return <span class="monospaced">null</span>. This is neither a bug or a feature: the
+<strong>invokedynamic</strong> support on the JVM simply does so.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_creating_objects">Creating objects</h3>
+<div class="paragraph"><p>Golo doesn&#8217;t have an instantiation operator like <span class="monospaced">new</span> in Java. Instead, creating an object and
+calling its constructor is done as if it was just another function.</p></div>
+<div class="paragraph"><p>As an example, we may allocate a <span class="monospaced">java.util.LinkedList</span> as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module sample
+
+import java.util
+
+function aList = {
+  return LinkedList()
+}
+</pre></div></div></div>
+<div class="paragraph"><p>Another example would be using a <span class="monospaced">java.lang.StringBuilder</span>.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function str_build = {
+  return java.lang.StringBuilder(&quot;h&quot;):
+    append(&quot;e&quot;):
+    append(&quot;l&quot;):
+    append(&quot;l&quot;):
+    append(&quot;o&quot;):
+    toString()
+}
+</pre></div></div></div>
+<div class="paragraph"><p>As one would expect, the <span class="monospaced">str_build</span> function above gives the <span class="monospaced">"hello"</span> string.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_static_fields">Static fields</h3>
+<div class="paragraph"><p>Golo treats public static fields as function, so one could get the maximum value for an <span class="monospaced">Integer</span> as
+follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module samples.MaxInt
+
+local function max_int = {
+  return java.lang.Integer.MAX_VALUE()
+}
+
+function main = |args| {
+  println(max_int())
+}
+</pre></div></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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">
+</td>
+<td class="content">Given than most static fields are used as constants in Java, Golo does not provide support to
+change their values. This may change in the future if compelling general-interest use-cases emerge.</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_instance_fields">Instance fields</h3>
+<div class="paragraph"><p>Instance fields can be accessed as functions, both for reading and writing. Suppose that we have a
+Java class that looks as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">bar</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div></div></div>
+<div class="paragraph"><p>We can access the <span class="monospaced">bar</span> field as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let foo = Foo()
+
+# Write
+foo: bar(&quot;baz&quot;)
+
+# Read, prints &quot;baz&quot;
+println(foo: bar())
+</pre></div></div></div>
+<div class="paragraph"><p>An interesting behavior when writing fields is that the <strong>"methods"</strong> return the object, which means
+that you can chain invocations.</p></div>
+<div class="paragraph"><p>Suppose that we have a Java class as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">bar</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">baz</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div></div></div>
+<div class="paragraph"><p>We can set all fields by chaining invocations as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let foo = Foo(): bar(1): baz(2)
+</pre></div></div></div>
+<div class="paragraph"><p>It should be noted that Golo won&#8217;t bypass the regular Java visibility access rules on fields.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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">
+</td>
+<td class="content">
+<div class="title">What happens if there is both a field and a method with the same names?</div>
+<div class="paragraph"><p>Back to the previous example, suppose that we have both a field and a method with the same name, as
+in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="n">String</span> <span class="n">bar</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">bar</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">bar</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div></div></div>
+<div class="paragraph"><p><strong>Golo resolves methods first, fields last.</strong> Hence, the following Golo code will resolve the
+<span class="monospaced">bar()</span> method, not the <span class="monospaced">bar</span> field:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let foo = Foo()
+
+# Write the field
+foo: bar(&quot;baz&quot;)
+
+# Calls the bar() method
+println(foo: bar())
+</pre></div></div></div>
+</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inner_classes_and_enumerations">Inner classes and enumerations</h3>
+<div class="paragraph"><p>We will illustrate both how to deal with public static inner classes and enumerations at once.</p></div>
+<div class="paragraph"><p>The rules to deal with them in Golo are as follows.</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Inner classes are identified by their real name in the JVM, with nested classes being separated
+   by a <span class="monospaced">$</span> sign. Hence, <span class="monospaced">Thread.State</span> in Java is written <span class="monospaced">Thread$State</span> in Golo.
+</p>
+</li>
+<li>
+<p>
+Enumerations are just normal objects. They expose each entry as a static field, and each entry is
+   an instance of the enumeration class.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>Let us consider the following example:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module sample.EnumsThreadState
+
+import java.lang.Thread$State
+
+function main = |args| {
+
+  # Call the enum entry like a function
+  let new = Thread$State.NEW()
+  println(&quot;name=&quot; + new: name() + &quot;, ordinal=&quot; + new: ordinal())
+
+  # Walk through all enum entries
+  foreach (element in atoList(Thread$State.values())) {
+    println(&quot;name=&quot; + element: name() + &quot;, ordinal=&quot; + element: ordinal())
+  }
+}
+</pre></div></div></div>
+<div class="paragraph"><p>Running it yields the following console output:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> gologolo samples/enums-thread-state.golo
+<span class="go">name=NEW, ordinal=0</span>
+<span class="go">name=NEW, ordinal=0</span>
+<span class="go">name=RUNNABLE, ordinal=1</span>
+<span class="go">name=BLOCKED, ordinal=2</span>
+<span class="go">name=WAITING, ordinal=3</span>
+<span class="go">name=TIMED_WAITING, ordinal=4</span>
+<span class="go">name=TERMINATED, ordinal=5</span>
+<span class="gp">$</span>
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_clashes_with_golo_operators_and_escaping">Clashes with Golo operators and escaping</h3>
+<div class="paragraph"><p>Because Golo provides a few named operators such as <span class="monospaced">is</span>, <span class="monospaced">and</span> or <span class="monospaced">not</span>, they are recognized as
+operator tokens.</p></div>
+<div class="paragraph"><p>However, you may find yourself in a situation where you need to invoke a Java method whose name is
+a Golo operator, such as:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># Function call
+is()
+
+# Method call
+someObject: foo(): is(): not(): bar()
+</pre></div></div></div>
+<div class="paragraph"><p>This results in a parsing error, as <span class="monospaced">is</span> and <span class="monospaced">not</span> will be matched as operators instead of method
+identifiers.</p></div>
+<div class="paragraph"><p>The solution is to use <strong>escaping</strong>, by prefixing identifiers with a backtick, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># Function call
+`is()
+
+# Method call
+someObject: foo(): `is(): `not(): bar()
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_golo_class_loader">Golo class loader</h3>
+<div class="paragraph"><p>Golo provides a class loader for directly loading and compiling Golo modules. You may use it as
+follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">fr.insalyon.citi.golo.compiler.GoloClassLoader</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Throwable</span> <span class="o">{</span>
+    <span class="n">GoloClassLoader</span> <span class="n">classLoader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GoloClassLoader</span><span class="o">();</span>
+    <span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">moduleClass</span> <span class="o">=</span> <span class="n">classLoader</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="s">&quot;foo.golo&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="s">&quot;/path/to/foo.golo&quot;</span><span class="o">));</span>
+    <span class="n">Method</span> <span class="n">bar</span> <span class="o">=</span> <span class="n">moduleClass</span><span class="o">.</span><span class="na">getMethod</span><span class="o">(</span><span class="s">&quot;bar&quot;</span><span class="o">,</span> <span class="n">Object</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="n">bar</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="s">&quot;golo golo&quot;</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div></div></div>
+<div class="paragraph"><p>This would work with a Golo module defined as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module foo.Bar
+
+function bar = |wat| -&gt; println(wat)
+</pre></div></div></div>
+<div class="paragraph"><p>Indeed, a Golo module is viewable as a Java class where each function is a static method.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Important" src="data:image/png;base64,
+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
+EQn3XQAAAABJRU5ErkJggg==">
+</td>
+<td class="content"><span class="monospaced">GoloClassLoader</span> is rather dumb at this stage, and you will get an exception if you try
+to load two Golo source files with the same <span class="monospaced">module</span> name declaration. This is because it will
+attempt to redefine an already defined class.</td>
+</tr></table>
+</div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Caution" src="data:image/png;base64,
+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">
+</td>
+<td class="content">Later in the glorious and glamorous future, Golo will have objects and not just functions.
+Be patient, it&#8217;s coming in!</td>
+</tr></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_control_flow">Control flow</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Control flow in Golo is imperative and has the usual constructions found in upstream languages.</p></div>
+<div class="sect2">
+<h3 id="_conditional_branching">Conditional branching</h3>
+<div class="paragraph"><p>Golo supports the traditional <span class="monospaced">if</span> / <span class="monospaced">else</span> constructions, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>if goloIsGreat() {
+  println(&quot;Golo Golo&quot;)
+}
+
+if (someCondition) {
+  doThis()
+} else if someOtherCondition {
+  doThat()
+} else {
+  doThatThing()
+}
+</pre></div></div></div>
+<div class="paragraph"><p>The condition of an <span class="monospaced">if</span> statement does not need parenthesis. You may add some to clarify a more
+elaborated expression, though.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_span_class_monospaced_case_span_branching"><span class="monospaced">case</span> branching</h3>
+<div class="paragraph"><p>Golo offers a versatile <span class="monospaced">case</span> construction for conditional branching. It may be used in place of
+multiple nested <span class="monospaced">if</span> / <span class="monospaced">else</span> statements, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function what = |obj| {
+  case {
+    when obj oftype String.class {
+      return &quot;String&quot;
+    }
+    when obj oftype Integer.class {
+      return &quot;Integer&quot;
+    }
+    otherwise {
+      return &quot;alien&quot;
+    }
+  }
+}
+</pre></div></div></div>
+<div class="paragraph"><p>A <span class="monospaced">case</span> statement requires at least 1 <span class="monospaced">when</span> clause and a mandatory <span class="monospaced">otherwise</span> clause. Each clause
+is being associated with a block. It is semantically equivalent to the corresponding <span class="monospaced">if</span> / <span class="monospaced">else</span>
+chain:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function what = |obj| {
+  if obj oftype String.class {
+    return &quot;String&quot;
+  } else if obj oftype Integer.class {
+    return &quot;Integer&quot;
+  } else {
+    return &quot;alien&quot;
+  }
+}
+</pre></div></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Important" src="data:image/png;base64,
+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
+EQn3XQAAAABJRU5ErkJggg==">
+</td>
+<td class="content"><span class="monospaced">when</span> clauses are being evaluated in the declaration order, and only the first satisfied
+one is being executed.</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_span_class_monospaced_match_span_statements"><span class="monospaced">match</span> statements</h3>
+<div class="paragraph"><p>The <span class="monospaced">match</span> statement is a convenient shortcut for cases where a <span class="monospaced">case</span> statement would be used to
+match a value, and give back a result. While it may resemble <strong>pattern matching</strong> operators in some
+other languages it is not fully equivalent, as Golo does not support destructuring.</p></div>
+<div class="paragraph"><p><span class="monospaced">match</span> is a great addition to the Golo programmer:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let item = &quot;foo@bar.com&quot;
+
+let what_it_could_be = -&gt; match {
+  when item: contains(&quot;@&quot;) then &quot;an email?&quot;
+  when item: startsWith(&quot;+33&quot;) then &quot;a French phone number?&quot;
+  when item: startsWith(&quot;http://&quot;) then &quot;a website URL?&quot;
+  otherwise &quot;I have no clue, mate!&quot;
+}
+
+# prints &quot;an email?&quot;
+println(what_it_could_be(item))
+</pre></div></div></div>
+<div class="paragraph"><p>The values to be returned are specified after a <span class="monospaced">then</span> keyword that follows a boolean expression to
+be evaluated.</p></div>
+<div class="paragraph"><p>Like <span class="monospaced">case</span> statements, a <span class="monospaced">match</span> construct needs at least one <span class="monospaced">when</span> clause and one <span class="monospaced">otherwise</span>
+clause.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_span_class_monospaced_while_span_loops"><span class="monospaced">while</span> loops</h3>
+<div class="paragraph"><p>While loops in Golo are straightforward:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function times = |n| {
+  var times = 0
+  while (times &lt; n) { times = times + 1 }
+  return times
+}
+</pre></div></div></div>
+<div class="paragraph"><p>The parenthesis in the <span class="monospaced">while</span> condition may be omitted like it is the case for <span class="monospaced">if</span> statements.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_span_class_monospaced_for_span_loops"><span class="monospaced">for</span> loops</h3>
+<div class="paragraph"><p>This is the most versatile loop construction, as it features:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+a variable declaration and initialization (a Golo variable is always initialized anyway), and
+</p>
+</li>
+<li>
+<p>
+a loop progress condition, and
+</p>
+</li>
+<li>
+<p>
+a loop progress statement.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>The following function shows a <span class="monospaced">for</span> loop:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function fact = |value, n| {
+  var result = 1
+  for (var i = 0, i &lt; n, i = i + 1) {
+    result = result * value
+  }
+  return result
+}
+</pre></div></div></div>
+<div class="paragraph"><p>As you can see, it is very much like a <span class="monospaced">for</span> loop in Java, except that:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+the <span class="monospaced">for</span> loop elements are separated by <span class="monospaced">','</span> instead of <span class="monospaced">';'</span>, and
+</p>
+</li>
+<li>
+<p>
+there cannot be multiple variables in the loop, and
+</p>
+</li>
+<li>
+<p>
+there cannot be multiple loop progress statements.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Again, this choice is dictated by the pursue of simplicity.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_span_class_monospaced_foreach_span_loops"><span class="monospaced">foreach</span> loops</h3>
+<div class="paragraph"><p>Golo provides a "for each" style of iteration over iterable elements. Any object that is an instance
+of <span class="monospaced">java.lang.Iterable</span> can be used in <span class="monospaced">foreach</span> loops, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function concat_to_string = |iterable| {
+  var result = &quot;&quot;
+  foreach (item in iterable) {
+    result = result + item
+  }
+  return result
+}
+</pre></div></div></div>
+<div class="paragraph"><p>In this example, <span class="monospaced">item</span> is a variable within the <span class="monospaced">foreach</span> loop scope, and <span class="monospaced">iterable</span> is an object
+that is expected to be iterable.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Important" src="data:image/png;base64,
+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
+EQn3XQAAAABJRU5ErkJggg==">
+</td>
+<td class="content">
+<div class="title">Arrays and <span class="monospaced">foreach</span> loops</div>
+<div class="paragraph"><p><span class="monospaced">foreach</span> loops do not work with Java arrays, instances of <span class="monospaced">Object[]</span>.</p></div>
+<div class="paragraph"><p>If you need to do so, then you can take advantage of the predefined <span class="monospaced">atoList</span> function that
+turns an array into a collection (internally, it uses <span class="monospaced">java.util.Arrays#asList</span>).</p></div>
+<div class="paragraph"><p>Here is how you could process the arguments of a <span class="monospaced">main</span> function with a <span class="monospaced">foreach</span> loop:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function main = |args| {
+  foreach (arg in atoList(args)) {
+    println(arg)
+  }
+}
+</pre></div></div></div>
+</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_why_no_value_from_most_control_flow_constructions">Why no value from most control flow constructions?</h3>
+<div class="paragraph"><p>Some programming languages return values from selected control flow constructions, with the returned
+value being the evaluation of the last statement in a block. This can be handy in some situations
+such as the following code snippet in Scala:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="n">println</span><span class="o">(</span><span class="k">if</span> <span class="o">(</span><span class="mi">4</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="s">&quot;even&quot;</span> <span class="k">else</span> <span class="s">&quot;odd&quot;</span><span class="o">)</span>
+</pre></div></div></div>
+<div class="paragraph"><p>The Golo original author recognizes and appreciates the expressiveness of such construct. However,
+he often finds it harder to spot the returned values with such constructs, and he thought that
+trading a few keystrokes for <strong>explicitness</strong> was better than shorter construct based in
+<strong>implicitness</strong>.</p></div>
+<div class="paragraph"><p>Therefore, most Golo control flow constructions do not return values, and programmers are instead
+required to extract a variable or provide an explicit <span class="monospaced">return</span> statement.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exceptions">Exceptions</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Exception handling in Golo is simple. There is no distinction between <strong>checked</strong> and <strong>unchecked</strong>
+exceptions.</p></div>
+<div class="sect2">
+<h3 id="_raising_exceptions">Raising exceptions</h3>
+<div class="paragraph"><p>Golo provides 2 predefined functions for raising exceptions:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">raise(message)</span> throws a <span class="monospaced">java.lang.RuntimeException</span> with a message given as a string, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">raise(message, cause)</span> does the same and specifies a cause which must be an instance of
+  <span class="monospaced">java.lang.Throwable</span>.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Throwing an exception is thus as easy as:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>if somethingIsWrong() {
+  raise(&quot;Woops!&quot;)
+}
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_raising_specialized_exceptions">Raising specialized exceptions</h3>
+<div class="paragraph"><p>Of course not every exception shall be an instance of <span class="monospaced">java.lang.RuntimeException</span>. When a more
+specialized type is required, you may simply instantiate a Java exception and throw it using the
+<span class="monospaced">throw</span> keyword as in the following example:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module golotest.execution.Exceptions
+
+import java.lang.RuntimeException
+
+function runtimeException = {
+  throw RuntimeException(&quot;w00t&quot;)
+}
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_exception_handling">Exception handling</h3>
+<div class="paragraph"><p>Exception handling uses the familiar <span class="monospaced">try / catch</span>, <span class="monospaced">try / catch / finally</span> and <span class="monospaced">try / finally</span>
+constructions. Their semantics are the same as found in other languages such as Java, especially
+regarding the handling of <span class="monospaced">finally</span> blocks.</p></div>
+<div class="paragraph"><p>The following snippets show each exception handling form.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># Good old try / catch
+try {
+  something()
+} catch (e) {
+  e: printStackTrace()
+}
+
+# A try / finally
+try {
+  doSomething()
+} finally {
+  cleanup()
+}
+
+# Full try / catch / finally construct
+try {
+  doSomething()
+} catch (e) {
+  e: printStackTrace()
+  case {
+    when e oftype IOException.class {
+      println(&quot;Oh, an I/O exception that I was expecting!&quot;)
+    }
+    when e oftype SecurityException.class {
+      println(&quot;Damn, I didn&#39;t expect a security problem...&quot;)
+      throw e
+    }
+    otherwise {
+      throw e
+    }
+  }
+} finally {
+  cleanup()
+}
+</pre></div></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Tip" src="data:image/png;base64,
+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">
+</td>
+<td class="content">Because Golo is a weakly typed dynamic language, you need to check for the exception type
+with the <span class="monospaced">oftype</span> operator. In a statically typed language like Java, you would instead have several
+<span class="monospaced">catch</span> clauses with the exception reference given a specific type. We suggest that you take
+advantage of the <span class="monospaced">case</span> branching statement.</td>
+</tr></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_closures">Closures</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Golo supports <strong>closures</strong>, which means that functions can be treated as first-class citizen.</p></div>
+<div class="sect2">
+<h3 id="_defining_and_using_a_closure">Defining and using a closure</h3>
+<div class="paragraph"><p>Defining a closure is straightforward as it derives from the way a function can be defined:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let adder = |a, b| {
+  return a + b
+}
+</pre></div></div></div>
+<div class="paragraph"><p>At runtime, a closure is an instance of <span class="monospaced">java.lang.invoke.MethodHandle</span>. This means that you can do
+all the operations that method handles support, such as invoking them or inserting arguments as
+illustrated in the following example:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let adder = |a, b| {
+  return a + b
+}
+println(adder: invokeWithArguments(1, 2))
+
+let addToTen = adder: bindTo(10)
+println(addToTen: invokeWithArguments(2))
+</pre></div></div></div>
+<div class="paragraph"><p>As one would expect, this prints <span class="monospaced">3</span> and <span class="monospaced">12</span>.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_compact_closures">Compact closures</h3>
+<div class="paragraph"><p>Golo supports a compact form of closures for the cases where their body consists of a single
+expression. The example above can be simplified as:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let adder = |a, b| -&gt; a + b
+</pre></div></div></div>
+<div class="paragraph"><p>You may also use this compact form when defining regular functions, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module Foo
+
+local function sayHello = |who| -&gt; &quot;Hello &quot; + who + &quot;!&quot;
+
+# Prints &quot;Hello Julien!&quot;
+function main = |args| {
+  println(sayHello(&quot;Julien&quot;))
+}
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_calling_closures">Calling closures</h3>
+<div class="paragraph"><p>While you may take advantage of closures being method handles and call them using
+<span class="monospaced">invokeWithArguments</span>, there is a (much) better way.</p></div>
+<div class="paragraph"><p>When you have a reference to a closure, you may simply call it as a regular function. The previous
+<span class="monospaced">adder</span> example can be equivalently rewritten as:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let adder = |a, b| -&gt; a + b
+println(adder(1, 2))
+
+let addToTen = adder: bindTo(10)
+println(addToTen(2))
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_limitations">Limitations</h3>
+<div class="paragraph"><p>Closures have access to the lexical scope of their defining environment. Consider this example:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function plus_3 = {
+  let foo = 3
+  return |x| -&gt; x + foo
+}
+</pre></div></div></div>
+<div class="paragraph"><p>The <span class="monospaced">plus_3</span> function returns a closure that has access to the <span class="monospaced">foo</span> reference, just as you would
+expect. The <span class="monospaced">foo</span> reference is said to have been <strong>captured</strong> and made available in the closure.</p></div>
+<div class="paragraph"><p>However, <strong>captured references cannot be re-assigned from a closure</strong>, as illustrated by the next
+example:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function foo = {
+
+  # To be captured...
+  var i = 0
+
+  let myClosure = {
+    i = i + 1
+    println(i) # prints &#39;1&#39;
+  }
+  myClosure()
+
+  # prints &#39;0&#39;
+  println(i)
+}
+</pre></div></div></div>
+<div class="paragraph"><p>That being said, a closure has a reference on the same object as its defining environment, so a
+mutable object is a sensible way to pass data back from a closure as a side-effect, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let list = java.util.LinkedList()
+let pump_it = {
+  list: add(&quot;I heard you say&quot;)
+  list: add(&quot;Hey!&quot;)
+  list: add(&quot;Hey!&quot;)
+}
+pump_it()
+println(list)
+</pre></div></div></div>
+<div class="paragraph"><p>which prints <span class="monospaced">[I heard you say, Hey!, Hey!]</span>.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_closures_to_single_method_interfaces">Closures to single-method interfaces</h3>
+<div class="paragraph"><p>The Java SE APIs have plenty of interfaces with a single method: <span class="monospaced">java.util.concurrent.Callable</span>,
+<span class="monospaced">java.lang.Runnable</span>, <span class="monospaced">javax.swing.ActionListener</span>, etc.</p></div>
+<div class="paragraph"><p>The predefined function <span class="monospaced">asInterfaceInstance</span> can be used to convert a method handle or Golo closure
+to an instance of a specific interface.</p></div>
+<div class="paragraph"><p>Here is how one could pass an action listener to a <span class="monospaced">javax.swing.JButton</span>:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let button = JButton(&quot;Click me!&quot;)
+let handler = |event| -&gt; println(&quot;Clicked!&quot;)
+button: addActionListener(asInterfaceInstance(ActionListener.class, handler))
+</pre></div></div></div>
+<div class="paragraph"><p>Because the <span class="monospaced">asInterfaceInstance</span> call consumes some readability budget, you may refactor it with a
+local function as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>local function listener = |handler| -&gt; asInterfaceInstance(ActionListener.class, handler)
+
+# (...)
+let button = JButton(&quot;Click me!&quot;)
+button: addActionListener(listener(|event| -&gt; println(&quot;Clicked!&quot;)))
+</pre></div></div></div>
+<div class="paragraph"><p>Here is another example that uses the <span class="monospaced">java.util.concurrent</span> APIs to obtain an executor, pass it a
+task, fetch the result with a <span class="monospaced">Future</span> object then shut it down:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function give_me_hey = {
+  let executor = Executors.newSingleThreadExecutor()
+  let future = executor: submit(asInterfaceInstance(Callable.class, -&gt; &quot;hey!&quot;))
+  let result = future: get()
+  executor: shutdown()
+  return result
+}
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_conversion_to_single_method_interfaces">Conversion to single-method interfaces</h3>
+<div class="paragraph"><p>Instead of using <span class="monospaced">asInterfaceInstance</span>, you may use a <strong>pimp</strong> which is described later in this
+documentation. In short, it allows you to call a <span class="monospaced">to</span> method on instances of <span class="monospaced">MethodHandle</span>, which
+in turn calls <span class="monospaced">asInterfaceInstance</span>. Back to the previous examples, the next 2 lines are equivalent:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># Calling asInterfaceInstance
+future = executor: submit(asInterfaceInstance(Callable.class, -&gt; &quot;hey!&quot;))
+
+# Using a pimp
+future = executor: submit((-&gt; &quot;hey!&quot;): to(Callable.class))
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_getting_a_reference_to_a_closure_golo_function">Getting a reference to a closure / Golo function</h3>
+<div class="paragraph"><p>You may also take advantage of the predefined <span class="monospaced">fun</span> function to obtain a reference to a closure, as
+in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>import golotest.Closures
+
+local function local_fun = |x| -&gt; x + 1
+
+function call_local_fun = {
+
+  # local_fun, with a parameter
+  var f = fun(&quot;local_fun&quot;, golotest.Closures.module, 1)
+
+  # ...or just like this if there is only 1 local_fun definition
+  f = fun(&quot;local_fun&quot;, golotest.Closures.module)
+
+  return f(1)
+}
+</pre></div></div></div>
+<div class="paragraph"><p>Last but not least, we have an even shorter notation if function are not overridden:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>import golotest.Closures
+
+local function local_fun = |x| -&gt; x + 1
+
+function call_local_fun = {
+
+  # In the current module
+  var f = ^fun
+
+  # ...or with a full module name
+  f = ^golotest.Closures::fun
+
+  return f(1)
+}
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_binding_and_composing">Binding and composing</h3>
+<div class="paragraph"><p>Because closure references are just instances of <span class="monospaced">java.lang.invoke.MethodHandle</span>, you can bind its
+first argument using the <span class="monospaced">bindTo(value)</span> method. If you need to bind an argument at another position
+than 0, you may take advantage of the <span class="monospaced">bindAt(position, value)</span> pimp:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let diff = |a, b| -&gt; a - b
+let minus10 = diff: bindAt(1, 10)
+
+# 10
+println(minus10(20))
+</pre></div></div></div>
+<div class="paragraph"><p>You may compose function using the <span class="monospaced">andThen</span> pimp method:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let f = (|x| -&gt; x + 1): andThen(|x| -&gt; x - 10): andThen(|x| -&gt; x * 100)
+
+# -500
+println(f(4))
+</pre></div></div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_predefined_functions">Predefined functions</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Every Golo module definition comes with <span class="monospaced">gololang.Predefined</span> as a default import. It provides
+useful functions.</p></div>
+<div class="sect2">
+<h3 id="_console_output">Console output</h3>
+<div class="paragraph"><p><span class="monospaced">print</span> and <span class="monospaced">println</span> do just what you would expect.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>print(&quot;Hey&quot;)
+println()
+
+println(&quot;Hey&quot;)
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_exceptions_2">Exceptions</h3>
+<div class="paragraph"><p><span class="monospaced">raise</span> can be used to throw a <span class="monospaced">java.lang.RuntimeException</span>. It comes in two forms: one with a
+message as a string, and one with a message and a cause.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>raise(&quot;Somehow something is wrong&quot;)
+
+try {
+  ...
+} catch (e) {
+  ...
+  raise(&quot;Something was wrong, and here is the cause&quot;, e)
+}
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_preconditions">Preconditions</h3>
+<div class="paragraph"><p>Preconditions are useful, especially in a dynamically-typed language.</p></div>
+<div class="paragraph"><p><span class="monospaced">require</span> can check for a boolean expression along with an error message. In case of error, it
+throws an <span class="monospaced">AssertionError</span>.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function foo = |a| {
+  require(a oftype String.class, &quot;a must be a String&quot;)
+  ...
+}
+</pre></div></div></div>
+<div class="paragraph"><p>You may also use <span class="monospaced">requireNotNull</span> that&#8230; well&#8230; checks that its argument is not <span class="monospaced">null</span>:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function foo = |a| {
+  requireNotNull(a)
+  ...
+}
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_arrays">Arrays</h3>
+<div class="paragraph"><p>Golo deals with <span class="monospaced">Object[]</span> Java arrays as follows:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+the <span class="monospaced">Array</span> function takes a variable number of arguments and returns a Java array from them,
+</p>
+</li>
+<li>
+<p>
+the <span class="monospaced">aget</span> function takes an array and an index to return the element at that position,
+</p>
+</li>
+<li>
+<p>
+the <span class="monospaced">aset</span> function takes an array, an index and a value to set the element at that position,
+</p>
+</li>
+<li>
+<p>
+the <span class="monospaced">alength</span> function returns the length of an array.
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let a = Array(1, 2, 3)
+require(alength(a) == 3, &quot;a must be of length 3&quot;)
+require(aget(a, 0) == 1, &quot;the first element shall be 1&quot;)
+aset(a, 0, 666)
+require(aget(a, 0) == 666, &quot;the new first element shall be 666&quot;)
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_ranges">Ranges</h3>
+<div class="paragraph"><p>The <span class="monospaced">range</span> function yields an iterable range over either <span class="monospaced">Integer</span> or <span class="monospaced">Long</span> bounds:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># Prints 1 2 (...) 100
+foreach (i in range(1, 101)) {
+  print(i + &quot; &quot;)
+}
+</pre></div></div></div>
+<div class="paragraph"><p>The lower bound is inclusive, the upper bound is exclusive.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_closures_2">Closures</h3>
+<div class="paragraph"><p>Given a closure reference or a method handle, one can convert it to an instance of an interface with
+a single method declaration, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>local function listener = |handler| -&gt; asInterfaceInstance(ActionListener.class, handler)
+
+# (...)
+let button = JButton(&quot;Click me!&quot;)
+button: addActionListener(listener(|event| -&gt; println(&quot;Clicked!&quot;)))
+</pre></div></div></div>
+<div class="paragraph"><p>It is possible to test if an object is a closure or not with the <span class="monospaced">isClosure</span> function. This is
+useful to support values and delayed evaluation, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>if isClosure(value) {
+  map: put(key, value())
+} else {
+  map: put(key, value)
+}
+</pre></div></div></div>
+<div class="paragraph"><p>You can get a reference to a closure using the predefined <span class="monospaced">fun</span> function:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>import golotest.Closures
+
+local function local_fun = |x| -&gt; x + 1
+
+function call_local_fun = {
+  let f = fun(&quot;local_fun&quot;, golotest.Closures.module)
+  return f(1)
+}
+</pre></div></div></div>
+<div class="paragraph"><p>Because functions may be overloaded, there is a form that accepts an extra parameter for specifying
+the number of parameters:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>import golotest.Closures
+
+local function local_fun = |x| -&gt; x + 1
+
+function call_local_fun = {
+  let f = fun(&quot;local_fun&quot;, golotest.Closures.module, 1)
+  return f(1)
+}
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_misc">Misc.</h3>
+<div class="paragraph"><p><span class="monospaced">mapEntry</span> gives instances of <span class="monospaced">java.util.AbstractMap.SimpleEntry</span>, and is used as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let e = mapEntry(&quot;foo&quot;, &quot;bar&quot;)
+
+# prints &quot;foo =&gt; bar&quot;
+println(e: getKey() + &quot; =&gt; &quot; + e: getValue())
+</pre></div></div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pimps">Pimps</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Many dynamic languages support the ability to extend existing classes by adding new methods to them.
+You may think of categories in Objective-C and Groovy, or <strong>open classes</strong> in Ruby.</p></div>
+<div class="paragraph"><p>This is generally implemented by providing <strong>meta-classes</strong>. When some piece of code adds a method
+<span class="monospaced">foo</span> to, say, <span class="monospaced">SomeClass</span>, then all instances of <span class="monospaced">SomeClass</span> get that new <span class="monospaced">foo</span> method. While very
+convenient, such an open system may lead to well-known conflicts between the added methods.</p></div>
+<div class="paragraph"><p>Golo provides a more limited but explicit way to add methods to existing classes in the form of
+<strong>pimps</strong>.</p></div>
+<div class="sect2">
+<h3 id="_wrapping_a_string_with_a_function">Wrapping a string with a function</h3>
+<div class="paragraph"><p>Let us motivate the value of pimps by starting with the following example. Suppose that we would
+like a function to wrap a string with a left and right string. We could do that in Golo as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function wrap = |left, str, right| -&gt; left + str + right
+
+# (...)
+let str = wrap(&quot;(&quot;, &quot;foo&quot;, &quot;)&quot;)
+println(str) # prints &quot;(abc)&quot;
+</pre></div></div></div>
+<div class="paragraph"><p>Defining functions for such tasks makes perfect sense, but what if we could just add the <span class="monospaced">wrap</span>
+method to all instances of <span class="monospaced">java.lang.String</span> instead?</p></div>
+</div>
+<div class="sect2">
+<h3 id="_pimping_classes">Pimping classes</h3>
+<div class="paragraph"><p>Defining a pimp is a matter of adding a <span class="monospaced">pimp</span> block in a module:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module foo
+
+pimp java.lang.String {
+  function wrap = |this, left, right| -&gt; left + this + right
+}
+
+function wrapped = -&gt; &quot;abc&quot;: wrap(&quot;(&quot;, &quot;)&quot;)
+</pre></div></div></div>
+<div class="paragraph"><p>More specifically:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+a <span class="monospaced">pimp</span> definition is made on a fully-qualified class name, and
+</p>
+</li>
+<li>
+<p>
+a pimp function takes the receiver object as its first argument, followed by optional arguments,
+   and
+</p>
+</li>
+<li>
+<p>
+there can be as many pimp functions as you want, and
+</p>
+</li>
+<li>
+<p>
+there can be as many pimps as you want.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>It is a good convention to name the receiver <span class="monospaced">this</span>, but you are free to call it differently.</p></div>
+<div class="paragraph"><p>Also, pimp functions can take variable-arity arguments, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>pimp java.lang.String {
+
+  function concatWith = |this, args...| {
+    var result = this
+    foreach(arg in atoList(args)) {
+      result = result + arg
+    }
+    return result
+  }
+}
+
+# (...)
+function varargs = -&gt; &quot;a&quot;: concatWith(&quot;b&quot;, &quot;c&quot;, &quot;d&quot;)
+</pre></div></div></div>
+<div class="paragraph"><p>It should be noted that pimps work with class hierarchies too. The following example adds a pimp to
+<span class="monospaced">java.util.Collection</span>, which also adds it to concrete subclasses such as <span class="monospaced">java.util.LinkedList</span>:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>pimp java.util.Collection {
+  function plop = |this| -&gt; &quot;plop!&quot;
+}
+
+# (...)
+function plop_in_a_list = -&gt; java.util.LinkedList(): plop()
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_pimp_scopes_reusable_pimps">Pimp scopes, reusable pimps</h3>
+<div class="paragraph"><p>By default, a pimp is only visible from its defining module. <strong>Pimps are clear and explicit as they
+only affect the instances from which you have decided to make them visible.</strong></p></div>
+<div class="paragraph"><p>It is advised to place reusable pimps in separate module definitions. Then, a module that needs such
+pimps can make them available through imports.</p></div>
+<div class="paragraph"><p>Suppose that you want to define pimps for dealing with URLs from strings. You could define a
+<span class="monospaced">string-url-pimps.golo</span> module source as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module my.StringUrlPimps
+
+import java.net
+
+pimp java.lang.String {
+
+  function toURL = |this| -&gt; URL(this)
+
+  function httpGet = |this| {
+    # Open the URL, get a connection, grab the body as a string, etc
+    # (...)
+  }
+
+  # (...)
+}
+</pre></div></div></div>
+<div class="paragraph"><p>Then, a module willing to take advantage of those pimps can simply import their defining module:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module my.App
+
+import my.StringUrlPimps
+
+function googPageBody = -&gt; &quot;http://www.google.com/&quot;: httpGet()
+</pre></div></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Tip" src="data:image/png;base64,
+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">
+</td>
+<td class="content">As a matter of style, we suggest that your module names end with <span class="monospaced">Pimps</span>. Because importing a
+module imports <strong>all</strong> of its pimp definitions, we suggest that you modularize them with <strong>fine
+taste</strong> (for what it means).</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_standard_pimps">Standard pimps</h3>
+<div class="paragraph"><p>Golo comes with a set of pre-defined pimps.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Caution" src="data:image/png;base64,
+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">
+</td>
+<td class="content">Until we have a tool to extract the documentation from Golo source files, their documentation will
+simply be the inclusion of that file content.</td>
+</tr></table>
+</div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># ............................................................................................... #
+#
+# Copyright 2012-2013 Institut National des Sciences Appliquées de Lyon (INSA-Lyon)
+#
+# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# ............................................................................................... #
+
+module gololang.StandardPimps
+
+# ............................................................................................... #
+
+pimp java.lang.invoke.MethodHandle {
+
+  function to = |this, interfaceClass| -&gt; asInterfaceInstance(interfaceClass, this)
+
+  function andThen = |this, filter| -&gt;
+    java.lang.invoke.MethodHandles.filterReturnValue(this, filter)
+
+  function bindAt = |this, pos, val| -&gt;
+    java.lang.invoke.MethodHandles.insertArguments(this, pos, val)
+}
+
+# ............................................................................................... #
+
+pimp java.util.Collection {
+
+  function newWithSameType = |this| -&gt; this: getClass(): newInstance()
+
+  function reduce = |this, initialValue, func| {
+    var acc = initialValue
+    foreach (element in this) {
+      acc = func(acc, element)
+    }
+    return acc
+  }
+}
+
+# ............................................................................................... #
+
+pimp java.util.List {
+
+  function append = |this, element| {
+    this: add(element)
+    return this
+  }
+
+  function prepend = |this, element| {
+    this: add(0, element)
+    return this
+  }
+
+  function insert = |this, index, element| {
+    this: add(index, element)
+    return this
+  }
+
+  function append = |this, head, tail...| {
+    this: append(head)
+    foreach (element in atoList(tail)) {
+      this: append(element)
+    }
+    return this
+  }
+
+  function prepend = |this, head, tail...| {
+    for (var i = alength(tail) - 1, i &gt;= 0, i = i - 1) {
+      this: prepend(aget(tail, i))
+    }
+    return this: prepend(head)
+  }
+
+  function head = |this| -&gt; this: get(0)
+  function tail = |this| -&gt; this: subList(1, this: size())
+  function unmodifiableView = |this| -&gt; java.util.Collections.unmodifiableList(this)
+
+  function filter = |this, pred| {
+    let filtered = this: newWithSameType()
+    foreach (element in this) {
+      if pred(element) {
+        filtered: append(element)
+      }
+    }
+    return filtered
+  }
+
+  function map = |this, func| {
+    let mapped = this: newWithSameType()
+    foreach (element in this) {
+      mapped: append(func(element))
+    }
+    return mapped
+  }
+
+  function each = |this, func| {
+    foreach (element in this) {
+      func(element)
+    }
+  }
+}
+
+# ............................................................................................... #
+
+pimp java.util.Set {
+
+  function include = |this, element| {
+    this: add(element)
+    return this
+  }
+
+  function exclude = |this, element| {
+    this: remove(element)
+    return this
+  }
+
+  function include = |this, first, rest...| {
+    this: add(first)
+    foreach (element in atoList(rest)) {
+      this: add(element)
+    }
+    return this
+  }
+
+  function exclude = |this, first, rest...| {
+    this: remove(first)
+    foreach (element in atoList(rest)) {
+      this: remove(element)
+    }
+    return this
+  }
+
+  function has = |this, element| -&gt; this: contains(element)
+
+  function has = |this, first, rest...| {
+    if not(this: contains(first)) {
+      return false
+    } else {
+      foreach (element in atoList(rest)) {
+        if not(this: contains(element)) {
+          return false
+        }
+      }
+    }
+    return true
+  }
+
+  function unmodifiableView = |this| -&gt; java.util.Collections.unmodifiableSet(this)
+
+  function filter = |this, pred| {
+    let filtered = this: newWithSameType()
+    foreach (element in this) {
+      if pred(element) {
+        filtered: include(element)
+      }
+    }
+    return filtered
+  }
+
+  function map = |this, func| {
+    let mapped = this: newWithSameType()
+    foreach (element in this) {
+      mapped: include(func(element))
+    }
+    return mapped
+  }
+
+  function each = |this, func| {
+    foreach (element in this) {
+      func(element)
+    }
+  }
+}
+
+# ............................................................................................... #
+
+pimp java.util.Map {
+
+  function add = |this, key, value| {
+    this: put(key, value)
+    return this
+  }
+
+  function delete = |this, key| {
+    this: remove(key)
+    return this
+  }
+
+  function addIfAbsent = |this, key, value| {
+    if not(this: containsKey(key)) {
+      if isClosure(value) {
+        this: put(key, value())
+      } else {
+        this: put(key, value)
+      }
+    }
+    return this
+  }
+
+  function getOrElse = |this, key, replacement| {
+    let value = this: get(key)
+    if value isnt null {
+      return value
+    }
+    if isClosure(replacement) {
+      return replacement()
+    } else {
+      return replacement
+    }
+  }
+
+  function unmodifiableView = |this| -&gt; java.util.Collections.unmodifiableMap(this)
+
+  function newWithSameType = |this| -&gt; this: getClass(): newInstance()
+
+  function filter = |this, pred| {
+    let filtered = this: newWithSameType()
+    foreach (entry in this: entrySet()) {
+      let key = entry: getKey()
+      let value = entry: getValue()
+      if pred(key, value) {
+        filtered: put(key, value)
+      }
+    }
+    return filtered
+  }
+
+  function map = |this, func| {
+    let mapped = this: newWithSameType()
+    foreach (entry in this: entrySet()) {
+      let key = entry: getKey()
+      let value = entry: getValue()
+      let result = func(key, value)
+      mapped: put(result: getKey(), result: getValue())
+    }
+    return mapped
+  }
+
+  function reduce = |this, initialValue, func| {
+    var acc = initialValue
+    foreach (entry in this: entrySet()) {
+      let key = entry: getKey()
+      let value = entry: getValue()
+      acc = func(acc, key, value)
+    }
+    return acc
+  }
+
+  function each = |this, func| {
+    foreach (entry in this: entrySet()) {
+      func(entry: getKey(), entry: getValue())
+    }
+  }
+}
+
+# ............................................................................................... #
+</pre></div></div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dynamic_objects">Dynamic objects</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Dynamic objects can have values and methods being added and removed dynamically at runtime. You can
+think of it as an enhancement over using hash maps and putting closures in them.</p></div>
+<div class="sect2">
+<h3 id="_creating_dynamic_objects">Creating dynamic objects</h3>
+<div class="paragraph"><p>Creating a dynamic object is as simple as calling the <span class="monospaced">DynamicObject</span> function:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let foo = DynamicObject()
+</pre></div></div></div>
+<div class="paragraph"><p>Dynamic objects have the following <strong>reserved</strong> methods, that is, methods that you cannot override:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">define(name, value)</span> allows to define an object property, which can be either a value or a
+  closure, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">get(name)</span> gives the value or closure for a property name, or <span class="monospaced">null</span> if there is none, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">undefine(name)</span> removes a property from the object, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">mixin(dynobj)</span> mixes in all the properties of the dynamic object <span class="monospaced">dynobj</span>, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">copy()</span> gives a copy of a dynamic object, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">freeze()</span> locks an object, and calling <span class="monospaced">define</span> will raise an <span class="monospaced">IllegalStateException</span>, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">properties()</span> gives the set of entries in the dynamic object.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_defining_values">Defining values</h3>
+<div class="paragraph"><p>Defining values also defines getter and setter methods, as illustrated by the next example:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let person = DynamicObject():
+  define(&quot;name&quot;, &quot;MrBean&quot;):
+  define(&quot;email&quot;, &quot;mrbean@gmail.com&quot;)
+
+# prints &quot;Mr Bean&quot;
+println(person: name())
+
+# prints &quot;Mr Beanz&quot;
+person: name(&quot;Mr Beanz&quot;)
+println(person: name())
+</pre></div></div></div>
+<div class="paragraph"><p>Calling a setter method for a non-existent property defines it, hence the previous example can be
+rewritten as:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let person = DynamicObject(): name(&quot;MrBean&quot;): email(&quot;mrbean@gmail.com&quot;)
+
+# prints &quot;Mr Bean&quot;
+println(person: name())
+
+# prints &quot;Mr Beanz&quot;
+person: name(&quot;Mr Beanz&quot;)
+println(person: name())
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_defining_methods">Defining methods</h3>
+<div class="paragraph"><p>Dynamic object methods are simply defined as closures. They must take the dynamic object object as
+their first argument, and we suggest that you call it <span class="monospaced">this</span>. You can then define as many parameters
+as you want.</p></div>
+<div class="paragraph"><p>Here is an example where we define a <span class="monospaced">toString</span>-style of method:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>local function mrbean = -&gt; DynamicObject():
+  name(&quot;Mr Bean&quot;):
+  email(&quot;mrbean@gmail.com&quot;):
+  define(&quot;toString&quot;, |this| -&gt; this: name() + &quot; &lt;&quot; + this: email() + &quot;&gt;&quot;)
+
+function main = |args| {
+
+  let bean = mrbean()
+  println(bean: toString())
+
+  bean: email(&quot;mrbean@outlook.com&quot;)
+  println(bean: toString())
+}
+</pre></div></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Warning" src="data:image/png;base64,
+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
+/F/lgJiyQFHragAAAABJRU5ErkJggg==">
+</td>
+<td class="content">You cannot overload methods, that is, providing methods with the same name but different
+signatures.</td>
+</tr></table>
+</div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Caution" src="data:image/png;base64,
+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">
+</td>
+<td class="content">Dynamic objects cause call site invalidations that may degrade performance in some cases.
+If this happens to you and performance matter, please investigate the use of <strong>real</strong> objects.</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_querying_the_properties">Querying the properties</h3>
+<div class="paragraph"><p>The <span class="monospaced">properties()</span> method returns a set of entries, as instances of <span class="monospaced">java.util.Map.Entry</span>. You can
+thus write code such as:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>function dump = |obj| {
+  foreach (prop in obj: properties()) {
+    println(prop: getKey() + &quot; -&gt; &quot; + prop: getValue())
+  }
+}
+</pre></div></div></div>
+<div class="paragraph"><p>Because dynamic object entries mix both values and method handles, do not forget that the predefined
+<span class="monospaced">isClosure(obj)</span> function can be useful to distinguish them.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_concurrency_with_workers">Concurrency with workers</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Concurrency is <strong>hard</strong>. Fortunately for us the <span class="monospaced">java.util.concurrent</span> packages bring useful
+abstractions, data types and execution mechanisms to get concurrency <strong>"a little bit better"</strong>.</p></div>
+<div class="paragraph"><p>Golo doesn&#8217;t provide a equivalent to the <span class="monospaced">synchronized</span> keyword of Java. This is on-purpose: when
+facing concurrency, we advise you to just use whatever is in <span class="monospaced">java.util.concurrent</span>.</p></div>
+<div class="paragraph"><p>That being said we provide a simple abstraction for concurrent executions in the form of <strong>workers</strong>.
+They pretty much resemble JavaScript web workers or <strong>isolates</strong> in Dart, albeit they do not really
+isolate the workers data space.</p></div>
+<div class="sect2">
+<h3 id="_the_big_picture">The big picture</h3>
+<div class="paragraph"><p>A <strong>worker</strong> is simply a Golo function that can be executed concurrently. You can pass <strong>messages</strong> to a
+worker, and they are eventually received and handled by their target worker. In other words, workers
+react to messages in an asynchronous fashion.</p></div>
+<div class="paragraph"><p>Communications between a worker and some client code happens through <strong>ports</strong>. A <strong>port</strong> is simply an
+object that is responsible for dispatching a message to its worker.</p></div>
+<div class="paragraph"><p>Ports are obtained by <strong>spawning</strong> a worker function from a <strong>worker environment</strong>. Internally, a worker
+environment manages a <span class="monospaced">java.util.concurrent</span> executor, which means that you do not have to deal with
+thread management.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_worker_environments">Worker environments</h3>
+<div class="paragraph"><p>Worker environments are defined in the <span class="monospaced">gololang.concurrent.workers.WorkerEnvironment</span> class /
+module.</p></div>
+<div class="paragraph"><p>You can directly pass an instance of <span class="monospaced">java.util.concurrent.ExecutorService</span> to its constructor, or
+you may go through its builder object and call either of the following static methods:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">withCachedThreadPool()</span> uses a cached thread pool,
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">withFixedThreadPool(size)</span> uses a fixed number of threads in a pool,
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">withFixedThreadPool()</span> uses a pool with 1 thread per processor core,
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">withSingleThreadExecutor()</span> uses a single executor thread.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>In most scenarios <span class="monospaced">withCachedThreadPool()</span> is a safe choice, but as usual, your mileage varies. If
+you have many concurrent tasks to perform and they are not IO-bound, then <span class="monospaced">withFixedThreadPool()</span> is
+probably a better option. You should always measure, and remember that you can always pass a
+fine-tuned executor to the <span class="monospaced">WorkerEnvironment()</span> constructor.</p></div>
+<div class="paragraph"><p>Worker environments also provide delegate methods to their internal executor. It is important to
+call <span class="monospaced">shutdown()</span> to close the workers environment and release the threads pool. You can also call
+the <span class="monospaced">awaitTermination</span>, <span class="monospaced">isShutdown</span> and <span class="monospaced">isTerminated</span> methods whose semantics are exactly those of
+<span class="monospaced">java.util.concurrent.ExecutorService</span>.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_spawning_a_worker_and_passing_messages">Spawning a worker and passing messages</h3>
+<div class="paragraph"><p>Worker functions take a single parameter which is the message to be received. To obtain a port, you
+need to call the <span class="monospaced">spawn(target)</span> function of a worker environment, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let env = WorkerEnvironment.builder(): withFixedThreadPool()
+let port = env: spawn(|message| -&gt; println(&quot;&gt;&gt;&gt; &quot; + message))
+</pre></div></div></div>
+<div class="paragraph"><p>A port provides a <span class="monospaced">send(message)</span> method:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>port: send(&quot;hello&quot;): send(&quot;world&quot;)
+</pre></div></div></div>
+<div class="paragraph"><p>Messages are being put in a queue, and eventually dispatched to the function that we spawned.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_a_complete_and_useless_example">A complete and useless example</h3>
+<div class="paragraph"><p>To better understand how workers can be used, here is a (fairly useless) example:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module SampleWithWorkers
+
+import java.lang.Thread
+import java.util.concurrent
+import gololang.concurrent.workers.WorkerEnvironment
+
+local function pusher = |queue, message| -&gt; queue: offer(message) <img alt="3" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAAB4SURBVHja
+JU6rFcNADBM09BqBhl6ltDCwKxQeDOwKB7tGYGCoYaChK6cmlt7TD1W5uap/sgoVBnEXWBTSoOdx
+7gpLDOAVorWC0ABdcBPqwZtx8Muf+DPXJpQ96Nu/LSMYl/n17oCOnplTOrpiwW3sUs4ZJmob5/wA
+Ubg1Y/zrjUwAAABDdEVYdFNvZnR3YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBj
+cmlzdHlAbXlzdGljLmVzLmR1cG9udC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUAODBiYmRhMjcy
+NmRkYWNlOGFiOGEwMWY1OWRlMmViZGII/Q51AAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAA
+SUVORK5CYII=">
+
+local function generator = |port, message| { <img alt="1" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAABjSURBVHja
+VY6xDcAwCAS/pPQaLim9QmajdOk2I2SNrMEIlARIoigU8Cek/4e7zdHaWOYOVwaoA6wOCw05Y7FB
+gE0tIWQ+sBcwKM8qoD/wB5wGL8hjfdzWrh01GRp1hInGjDoXwHgsFuzBVLQAAABDdEVYdFNvZnR3
+YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBjcmlzdHlAbXlzdGljLmVzLmR1cG9u
+dC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUANThhMDcyZTA3MGRhMjJmNjEzNWNiZDNlNDE0NTQ2
+ZjloaiHtAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAASUVORK5CYII=">
+  foreach (i in range(0, 100)) {
+    port: send(message)                      <img alt="2" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAAB7SURBVHja
+HY6hFcMwDEQ/NDQsNSwU9Apdo7Cw0CsIBoZmhKzQEQJLDQsFVclHpHu693W429Zr7bu541Pg3kCm
+Y0K75u9TEUPhuGgWU4mQDvieEaSQEnsT6zKPeZY0EUNtrHMCXvYUuSUg0PsMjUSvpysUT6OOSil9
+izp/VNk1YJ8vf6MAAABDdEVYdFNvZnR3YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8w
+MSBjcmlzdHlAbXlzdGljLmVzLmR1cG9udC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUAODBlYWU1
+MjljOTRhN2Y0N2RlY2NmYWRhMjhhY2I5ZGblb7ENAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30A
+AAAASUVORK5CYII=">
+  }
+}
+
+function main = |args| {
+
+  let env = WorkerEnvironment.builder(): withFixedThreadPool()
+  let queue = ConcurrentLinkedQueue()
+
+  let pusherPort = env: spawn(^pusher: bindTo(queue))
+  let generatorPort = env: spawn(^generator: bindTo(pusherPort))
+
+  let finishPort = env: spawn(|any| -&gt; env: shutdown()) <img alt="5" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAAB2SURBVHja
+FY6hEcQwDAQPChqGGhoaqgWX8PUYBhqGBn4rX0JooKDh/UlsZ3b2BJKXH8XPTYLh1lpt1h+BwxkR
+A23jhsCQd2IkfH9T3HEkzPFegCXUKSUSpJUPsN7UFOgc9VkZUBoz9l0yrVHZarUcJZeb9XznDyNb
+Ny9CX3/7AAAAQ3RFWHRTb2Z0d2FyZQBAKCMpSW1hZ2VNYWdpY2sgNC4yLjggOTkvMDgvMDEgY3Jp
+c3R5QG15c3RpYy5lcy5kdXBvbnQuY29tkbohuAAAACp0RVh0U2lnbmF0dXJlAGZlNjkwNDYzMzc5
+ZWIyNWU1NjJmY2M4Y2M5YjNjN2Uw37I5ngAAAA50RVh0UGFnZQAxMngxMiswKzCEbbt9AAAAAElF
+TkSuQmCC">
+
+  foreach (i in range(0, 10)) {
+    generatorPort: send(&quot;[&quot; + i + &quot;]&quot;)
+  }
+  Thread.sleep(2000_L)
+  finishPort: send(&quot;Die!&quot;) <img alt="4" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAABzSURBVHja
+HY0hEoUwEEMjkZVYZGVlr1CJxCKRXKPyy28reyVsZeXKsCFi573ZzAQk+x5jaQ6gFQAxIA8XceEN
+ZEN3DkOCH/TobUoSVuAYwSSLyzbvaHWVFJxUmmp+PF+twrLkuXzLwPmZ8+OjtH8KS6pGvuoGNo5b
+6rzDAAAAQ3RFWHRTb2Z0d2FyZQBAKCMpSW1hZ2VNYWdpY2sgNC4yLjggOTkvMDgvMDEgY3Jpc3R5
+QG15c3RpYy5lcy5kdXBvbnQuY29tkbohuAAAACp0RVh0U2lnbmF0dXJlADlmODJmY2FjOWUwMzlj
+YmRiNzIzODBhNDU5MTMyNGY1gLv4dgAAAA50RVh0UGFnZQAxMngxMiswKzCEbbt9AAAAAElFTkSu
+QmCC">
+
+  env: awaitTermination(2000)
+  println(queue: reduce(&quot;&quot;, |acc, next| -&gt; acc + &quot; &quot; + next))
+}
+</pre></div></div></div>
+<div class="paragraph"><p>In this example, we spawn 3 workers:</p></div>
+<div class="colist arabic"><table>
+<tr><td><img alt="1" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAABjSURBVHja
+VY6xDcAwCAS/pPQaLim9QmajdOk2I2SNrMEIlARIoigU8Cek/4e7zdHaWOYOVwaoA6wOCw05Y7FB
+gE0tIWQ+sBcwKM8qoD/wB5wGL8hjfdzWrh01GRp1hInGjDoXwHgsFuzBVLQAAABDdEVYdFNvZnR3
+YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBjcmlzdHlAbXlzdGljLmVzLmR1cG9u
+dC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUANThhMDcyZTA3MGRhMjJmNjEzNWNiZDNlNDE0NTQ2
+ZjloaiHtAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAASUVORK5CYII="></td><td>
+the first repeats a message 100 times,
+</td></tr>
+<tr><td><img alt="2" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAAB7SURBVHja
+HY6hFcMwDEQ/NDQsNSwU9Apdo7Cw0CsIBoZmhKzQEQJLDQsFVclHpHu693W429Zr7bu541Pg3kCm
+Y0K75u9TEUPhuGgWU4mQDvieEaSQEnsT6zKPeZY0EUNtrHMCXvYUuSUg0PsMjUSvpysUT6OOSil9
+izp/VNk1YJ8vf6MAAABDdEVYdFNvZnR3YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8w
+MSBjcmlzdHlAbXlzdGljLmVzLmR1cG9udC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUAODBlYWU1
+MjljOTRhN2Y0N2RlY2NmYWRhMjhhY2I5ZGblb7ENAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30A
+AAAASUVORK5CYII="></td><td>
+&#8230;forwarding them to another one,
+</td></tr>
+<tr><td><img alt="3" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAAB4SURBVHja
+JU6rFcNADBM09BqBhl6ltDCwKxQeDOwKB7tGYGCoYaChK6cmlt7TD1W5uap/sgoVBnEXWBTSoOdx
+7gpLDOAVorWC0ABdcBPqwZtx8Muf+DPXJpQ96Nu/LSMYl/n17oCOnplTOrpiwW3sUs4ZJmob5/wA
+Ubg1Y/zrjUwAAABDdEVYdFNvZnR3YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBj
+cmlzdHlAbXlzdGljLmVzLmR1cG9udC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUAODBiYmRhMjcy
+NmRkYWNlOGFiOGEwMWY1OWRlMmViZGII/Q51AAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAA
+SUVORK5CYII="></td><td>
+&#8230;that ultimately pushes them to a concurrent queue.
+</td></tr>
+<tr><td><img alt="4" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAABzSURBVHja
+HY0hEoUwEEMjkZVYZGVlr1CJxCKRXKPyy28reyVsZeXKsCFi573ZzAQk+x5jaQ6gFQAxIA8XceEN
+ZEN3DkOCH/TobUoSVuAYwSSLyzbvaHWVFJxUmmp+PF+twrLkuXzLwPmZ8+OjtH8KS6pGvuoGNo5b
+6rzDAAAAQ3RFWHRTb2Z0d2FyZQBAKCMpSW1hZ2VNYWdpY2sgNC4yLjggOTkvMDgvMDEgY3Jpc3R5
+QG15c3RpYy5lcy5kdXBvbnQuY29tkbohuAAAACp0RVh0U2lnbmF0dXJlADlmODJmY2FjOWUwMzlj
+YmRiNzIzODBhNDU5MTMyNGY1gLv4dgAAAA50RVh0UGFnZQAxMngxMiswKzCEbbt9AAAAAElFTkSu
+QmCC"></td><td>
+A message is sent to a final worker,
+</td></tr>
+<tr><td><img alt="5" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAAB2SURBVHja
+FY6hEcQwDAQPChqGGhoaqgWX8PUYBhqGBn4rX0JooKDh/UlsZ3b2BJKXH8XPTYLh1lpt1h+BwxkR
+A23jhsCQd2IkfH9T3HEkzPFegCXUKSUSpJUPsN7UFOgc9VkZUBoz9l0yrVHZarUcJZeb9XznDyNb
+Ny9CX3/7AAAAQ3RFWHRTb2Z0d2FyZQBAKCMpSW1hZ2VNYWdpY2sgNC4yLjggOTkvMDgvMDEgY3Jp
+c3R5QG15c3RpYy5lcy5kdXBvbnQuY29tkbohuAAAACp0RVh0U2lnbmF0dXJlAGZlNjkwNDYzMzc5
+ZWIyNWU1NjJmY2M4Y2M5YjNjN2Uw37I5ngAAAA50RVh0UGFnZQAxMngxMiswKzCEbbt9AAAAAElF
+TkSuQmCC"></td><td>
+&#8230;that shuts the workers environment down.
+</td></tr>
+</table></div>
+<div class="paragraph"><p>As an aside, the example illustrates that worker functions may take further dependencies as
+arguments. The <span class="monospaced">pusher</span> function takes a queue target and <span class="monospaced">generator</span> needs a port.</p></div>
+<div class="paragraph"><p>You can satisfy dependencies by pre-binding function arguments, all you need is to make sure that
+each function passed to <span class="monospaced">spawn</span> only expects a single message as its argument, as in:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">^pusher: bindTo(queue)</span>, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">^generator: bindTo(pusherPort)</span>, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">env: spawn(|any| -&gt; env: shutdown())</span> where the worker function is defined as a closure, and
+  implicitly captures its <span class="monospaced">env</span> dependency from the surrounding context.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_common_pitfalls">Common pitfalls</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Discovering a new programming language is fun. Yet, we all make mistakes in the beginning, as we
+idiomatically repeat habits from other languages.</p></div>
+<div class="paragraph"><p>Because Golo works closely with the Java programming language, it is likely that Java programmers
+will make some of the following mistakes early on.</p></div>
+<div class="sect2">
+<h3 id="_span_class_monospaced_new_span"><span class="monospaced">new</span></h3>
+<div class="paragraph"><p>Golo does not have a <span class="monospaced">new</span> operator for allocating objects. Instead, one should just call a
+constructor as a function:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># Good
+let foo = java.util.LinkedList()
+
+# Compilation fails
+let foo = new java.util.LinkedList()
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_imports">Imports</h3>
+<div class="paragraph"><p>Golo does not have <strong>star</strong> imports like in Java. Imports are only used at runtime as Golo tries to
+resolve names of types, functions, and so on.</p></div>
+<div class="paragraph"><p>You must think of <span class="monospaced">import</span> statements as a notational shortcut, nothing else. Golo tries to resolve
+a name as-is, then tries to complete with every import until a match is found.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>import java.util
+import java.util.concurrent.AtomicInteger
+
+# (...)
+
+# Direct resolution at runtime
+let foo = java.util.LinkedList()
+
+# Resolution with the 1st import
+let foo = LinkedList()
+
+# Resolution with the 2nd import
+let foo = AtomicInteger(666)
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_method_invocations">Method invocations</h3>
+<div class="paragraph"><p>Keep in mind that instance methods are invoked using the <span class="monospaced">:</span> operator, not with dots (<span class="monospaced">.</span>) like in
+many languages.</p></div>
+<div class="paragraph"><p>This is a common mistake!</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># Calls toString() on foo
+foo: toString()
+
+# Looks for a function toString() in module foo
+foo.toString()
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_span_class_monospaced_match_span_is_not_a_closure"><span class="monospaced">match</span> is not a closure</h3>
+<div class="paragraph"><p>One thing to keep in mind is that <span class="monospaced">match</span> returns a value, and that it is not a closure unless you
+want it to.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let foo = match {
+  case plop then 1
+  case ploped then 2
+  otherwise -1
+}
+
+# Ok
+println(foo)
+
+# Bad! foo is an integer!
+println(foo(&quot;abc&quot;))
+</pre></div></div></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2013-03-14 09:55:29 CET
+</div>
+</div>
+</body>
+</html>
