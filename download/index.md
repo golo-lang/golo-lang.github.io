@@ -46,4 +46,4 @@ Here are the projects that we are aware of:
 - [Vim](https://github.com/jponge/vim-golo)
 - [Sublime Text 2](https://github.com/k33g/sublime-golo)
 - [IntelliJ IDEA (syntax highthing)](https://github.com/k33g/golo-storm)
-- GoloIDE for Netbeans by [Serli](http://www.serli.com/) *(in development)*
+- [GoloIDE for Netbeans](https://github.com/golo-lang/golo-netbeans) by [Serli](http://www.serli.com/)
