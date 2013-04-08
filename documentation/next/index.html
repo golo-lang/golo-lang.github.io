@@ -2279,6 +2279,51 @@ turns an array into a collection (internally, it uses <span class="monospaced">j
 </div>
 </div>
 <div class="sect2">
+<h3 id="_span_class_monospaced_break_span_and_span_class_monospaced_continue_span"><span class="monospaced">break</span> and <span class="monospaced">continue</span></h3>
+<div class="paragraph"><p>Although not strictly necessary, the <span class="monospaced">break</span> and <span class="monospaced">continue</span> statements can be useful to simplify
+some loops in imperative languages.</p></div>
+<div class="paragraph"><p>Like in Java and many other languages:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">break</span> exits the current inner-most loop, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">continue</span> skips to the next iteration of the current inner-most loop.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Consider the following contrived example:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module test
+
+function main = |args| {
+  var i = 0
+  while true {
+    i = i + 1
+    if i &lt; 40 {
+      continue
+    } else {
+      print(i + &quot; &quot;)
+    }
+    if i == 50 {
+      break
+    }
+  }
+  println(&quot;bye&quot;)
+}
+</pre></div></div></div>
+<div class="paragraph"><p>It prints the following output:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>40 41 42 43 44 45 46 47 48 49 50 bye</pre>
+</div></div>
+<div class="paragraph"><p>Golo does not support <span class="monospaced">break</span> statements to labels like Java does. In fact, this is a <span class="monospaced">goto</span>
+statement in disguise.</p></div>
+</div>
+<div class="sect2">
 <h3 id="_why_no_value_from_most_control_flow_constructions">Why no value from most control flow constructions?</h3>
 <div class="paragraph"><p>Some programming languages return values from selected control flow constructions, with the returned
 value being the evaluation of the last statement in a block. This can be handy in some situations
@@ -2579,14 +2624,14 @@ task, fetch the result with a <span class="monospaced">Future</span> object then
 </div>
 <div class="sect2">
 <h3 id="_conversion_to_single_method_interfaces">Conversion to single-method interfaces</h3>
-<div class="paragraph"><p>Instead of using <span class="monospaced">asInterfaceInstance</span>, you may use a <strong>pimp</strong> which is described later in this
+<div class="paragraph"><p>Instead of using <span class="monospaced">asInterfaceInstance</span>, you may use a <strong>class augmentation</strong> which is described later in this
 documentation. In short, it allows you to call a <span class="monospaced">to</span> method on instances of <span class="monospaced">MethodHandle</span>, which
 in turn calls <span class="monospaced">asInterfaceInstance</span>. Back to the previous examples, the next 2 lines are equivalent:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre># Calling asInterfaceInstance
 future = executor: submit(asInterfaceInstance(Callable.class, -&gt; &quot;hey!&quot;))
 
-# Using a pimp
+# Using a class augmentation
 future = executor: submit((-&gt; &quot;hey!&quot;): to(Callable.class))
 </pre></div></div></div>
 </div>
@@ -2632,7 +2677,7 @@ function call_local_fun = {
 <h3 id="_binding_and_composing">Binding and composing</h3>
 <div class="paragraph"><p>Because closure references are just instances of <span class="monospaced">java.lang.invoke.MethodHandle</span>, you can bind its
 first argument using the <span class="monospaced">bindTo(value)</span> method. If you need to bind an argument at another position
-than 0, you may take advantage of the <span class="monospaced">bindAt(position, value)</span> pimp:</p></div>
+than 0, you may take advantage of the <span class="monospaced">bindAt(position, value)</span> augmentation:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre>let diff = |a, b| -&gt; a - b
 let minus10 = diff: bindAt(1, 10)
@@ -2640,7 +2685,7 @@ let minus10 = diff: bindAt(1, 10)
 # 10
 println(minus10(20))
 </pre></div></div></div>
-<div class="paragraph"><p>You may compose function using the <span class="monospaced">andThen</span> pimp method:</p></div>
+<div class="paragraph"><p>You may compose function using the <span class="monospaced">andThen</span> augmentation method:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre>let f = (|x| -&gt; x + 1): andThen(|x| -&gt; x - 10): andThen(|x| -&gt; x * 100)
 
@@ -2800,7 +2845,7 @@ println(e: getKey() + &quot; =&gt; &quot; + e: getValue())
 </div>
 </div>
 <div class="sect1">
-<h2 id="_pimps">Pimps</h2>
+<h2 id="_class_augmentations">Class augmentations</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Many dynamic languages support the ability to extend existing classes by adding new methods to them.
 You may think of categories in Objective-C and Groovy, or <strong>open classes</strong> in Ruby.</p></div>
@@ -2808,10 +2853,10 @@ You may think of categories in Objective-C and Groovy, or <strong>open classes</
 <span class="monospaced">foo</span> to, say, <span class="monospaced">SomeClass</span>, then all instances of <span class="monospaced">SomeClass</span> get that new <span class="monospaced">foo</span> method. While very
 convenient, such an open system may lead to well-known conflicts between the added methods.</p></div>
 <div class="paragraph"><p>Golo provides a more limited but explicit way to add methods to existing classes in the form of
-<strong>pimps</strong>.</p></div>
+<strong>class augmentations</strong>.</p></div>
 <div class="sect2">
 <h3 id="_wrapping_a_string_with_a_function">Wrapping a string with a function</h3>
-<div class="paragraph"><p>Let us motivate the value of pimps by starting with the following example. Suppose that we would
+<div class="paragraph"><p>Let us motivate the value of <strong>augmentations</strong> by starting with the following example. Suppose that we would
 like a function to wrap a string with a left and right string. We could do that in Golo as follows:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre>function wrap = |left, str, right| -&gt; left + str + right
@@ -2824,12 +2869,12 @@ println(str) # prints &quot;(abc)&quot;
 method to all instances of <span class="monospaced">java.lang.String</span> instead?</p></div>
 </div>
 <div class="sect2">
-<h3 id="_pimping_classes">Pimping classes</h3>
-<div class="paragraph"><p>Defining a pimp is a matter of adding a <span class="monospaced">pimp</span> block in a module:</p></div>
+<h3 id="_augmenting_classes">Augmenting classes</h3>
+<div class="paragraph"><p>Defining an augmentation is a matter of adding a <span class="monospaced">augment</span> block in a module:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre>module foo
 
-pimp java.lang.String {
+augment java.lang.String {
   function wrap = |this, left, right| -&gt; left + this + right
 }
 
@@ -2839,30 +2884,30 @@ function wrapped = -&gt; &quot;abc&quot;: wrap(&quot;(&quot;, &quot;)&quot;)
 <div class="olist arabic"><ol class="arabic">
 <li>
 <p>
-a <span class="monospaced">pimp</span> definition is made on a fully-qualified class name, and
+a <span class="monospaced">augment</span> definition is made on a fully-qualified class name, and
 </p>
 </li>
 <li>
 <p>
-a pimp function takes the receiver object as its first argument, followed by optional arguments,
-   and
+an augmentation function takes the receiver object as its first argument, followed by optional
+   arguments, and
 </p>
 </li>
 <li>
 <p>
-there can be as many pimp functions as you want, and
+there can be as many augmentation functions as you want, and
 </p>
 </li>
 <li>
 <p>
-there can be as many pimps as you want.
+there can be as many augmentations as you want.
 </p>
 </li>
 </ol></div>
 <div class="paragraph"><p>It is a good convention to name the receiver <span class="monospaced">this</span>, but you are free to call it differently.</p></div>
-<div class="paragraph"><p>Also, pimp functions can take variable-arity arguments, as in:</p></div>
+<div class="paragraph"><p>Also, augmentation functions can take variable-arity arguments, as in:</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>pimp java.lang.String {
+<div class="content"><div class="highlight"><pre>augment java.lang.String {
 
   function concatWith = |this, args...| {
     var result = this
@@ -2876,10 +2921,10 @@ there can be as many pimps as you want.
 # (...)
 function varargs = -&gt; &quot;a&quot;: concatWith(&quot;b&quot;, &quot;c&quot;, &quot;d&quot;)
 </pre></div></div></div>
-<div class="paragraph"><p>It should be noted that pimps work with class hierarchies too. The following example adds a pimp to
-<span class="monospaced">java.util.Collection</span>, which also adds it to concrete subclasses such as <span class="monospaced">java.util.LinkedList</span>:</p></div>
+<div class="paragraph"><p>It should be noted that augmentations work with class hierarchies too. The following example adds an
+augmentation to <span class="monospaced">java.util.Collection</span>, which also adds it to concrete subclasses such as <span class="monospaced">java.util.LinkedList</span>:</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>pimp java.util.Collection {
+<div class="content"><div class="highlight"><pre>augment java.util.Collection {
   function plop = |this| -&gt; &quot;plop!&quot;
 }
 
@@ -2888,19 +2933,20 @@ function plop_in_a_list = -&gt; java.util.LinkedList(): plop()
 </pre></div></div></div>
 </div>
 <div class="sect2">
-<h3 id="_pimp_scopes_reusable_pimps">Pimp scopes, reusable pimps</h3>
-<div class="paragraph"><p>By default, a pimp is only visible from its defining module. <strong>Pimps are clear and explicit as they
+<h3 id="_augmentation_scopes_reusable_augmentations">Augmentation scopes, reusable augmentations</h3>
+<div class="paragraph"><p>By default, an augmentation is only visible from its defining module.</p></div>
+<div class="paragraph"><p><strong>Augmentations are clear and explicit as they
 only affect the instances from which you have decided to make them visible.</strong></p></div>
-<div class="paragraph"><p>It is advised to place reusable pimps in separate module definitions. Then, a module that needs such
-pimps can make them available through imports.</p></div>
-<div class="paragraph"><p>Suppose that you want to define pimps for dealing with URLs from strings. You could define a
-<span class="monospaced">string-url-pimps.golo</span> module source as follows:</p></div>
+<div class="paragraph"><p>It is advised to place reusable augmentations in separate module definitions. Then, a module that needs such
+augmentations can make them available through imports.</p></div>
+<div class="paragraph"><p>Suppose that you want to define augmentations for dealing with URLs from strings. You could define a
+<span class="monospaced">string-url-augmentations.golo</span> module source as follows:</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>module my.StringUrlPimps
+<div class="content"><div class="highlight"><pre>module my.StringUrlAugmentations
 
 import java.net
 
-pimp java.lang.String {
+augment java.lang.String {
 
   function toURL = |this| -&gt; URL(this)
 
@@ -2912,11 +2958,11 @@ pimp java.lang.String {
   # (...)
 }
 </pre></div></div></div>
-<div class="paragraph"><p>Then, a module willing to take advantage of those pimps can simply import their defining module:</p></div>
+<div class="paragraph"><p>Then, a module willing to take advantage of those augmentations can simply import their defining module:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre>module my.App
 
-import my.StringUrlPimps
+import my.StringUrlAugmentations
 
 function googPageBody = -&gt; &quot;http://www.google.com/&quot;: httpGet()
 </pre></div></div></div>
@@ -2973,15 +3019,15 @@ Pvx+P8FgkGAw+OWfD7gj94RG13U0TSOdTpNOp8lMbmQ0TcvbArrrK1mW8Xg8eL3e7BLB5/N9dSc0
 uSP3jMwwjKy4G3AXwB0ugAsx5YzMndW//DOy3OFMjGwrxrKs7NX9LBfAneFFUcxec6rU5zqpvCqA
 qTCT16/0nPgLA/i6xjf+Xw3+B2ll/uiqTaJTAAAAAElFTkSuQmCC">
 </td>
-<td class="content">As a matter of style, we suggest that your module names end with <span class="monospaced">Pimps</span>. Because importing a
-module imports <strong>all</strong> of its pimp definitions, we suggest that you modularize them with <strong>fine
+<td class="content">As a matter of style, we suggest that your module names end with <span class="monospaced">Augmentations</span>. Because importing a
+module imports <strong>all</strong> of its augmentation definitions, we suggest that you modularize them with <strong>fine
 taste</strong> (for what it means).</td>
 </tr></table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_standard_pimps">Standard pimps</h3>
-<div class="paragraph"><p>Golo comes with a set of pre-defined pimps.</p></div>
+<h3 id="_standard_augmentations">Standard augmentations</h3>
+<div class="paragraph"><p>Golo comes with a set of pre-defined augmentations.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -3058,11 +3104,11 @@ simply be the inclusion of that file content.</td>
 #
 # ............................................................................................... #
 
-module gololang.StandardPimps
+module gololang.StandardAugmentations
 
 # ............................................................................................... #
 
-pimp java.lang.invoke.MethodHandle {
+augment java.lang.invoke.MethodHandle {
 
   function to = |this, interfaceClass| -&gt; asInterfaceInstance(interfaceClass, this)
 
@@ -3075,7 +3121,7 @@ pimp java.lang.invoke.MethodHandle {
 
 # ............................................................................................... #
 
-pimp java.util.Collection {
+augment java.util.Collection {
 
   function newWithSameType = |this| -&gt; this: getClass(): newInstance()
 
@@ -3090,7 +3136,7 @@ pimp java.util.Collection {
 
 # ............................................................................................... #
 
-pimp java.util.List {
+augment java.util.List {
 
   function append = |this, element| {
     this: add(element)
@@ -3153,7 +3199,7 @@ pimp java.util.List {
 
 # ............................................................................................... #
 
-pimp java.util.Set {
+augment java.util.Set {
 
   function include = |this, element| {
     this: add(element)
@@ -3225,7 +3271,7 @@ pimp java.util.Set {
 
 # ............................................................................................... #
 
-pimp java.util.Map {
+augment java.util.Map {
 
   function add = |this, key, value| {
     this: put(key, value)
@@ -3843,7 +3889,7 @@ println(foo(&quot;abc&quot;))
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-03-14 09:55:29 CET
+Last updated 2013-04-08 18:01:49 CEST
 </div>
 </div>
 </body>
