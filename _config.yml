@@ -1,3 +1,9 @@
+# Jekyll
 auto: true
 pygments: true
 permalink: /news/:year/:month/:day/:title
+
+# Custom
+name: Golo news
+description: "News about Golo, a lightweight dynamic language for the JVM."
+url: http://golo-lang.org
