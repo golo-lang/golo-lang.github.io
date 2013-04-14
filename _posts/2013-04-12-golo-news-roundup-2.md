@@ -35,6 +35,6 @@ We have yet to release a `0-preview2` version, but meanwhile you can build Golo 
 
 * Philippe Charriere [experimented with a script / class loading tool called JGolo](https://github.com/k33g/jgolo). It clearly shows how easy it is to embed Golo.
 
-* Yannick Loiseau [posted a very good article (in French) to explain functional programming terminology](http://yloiseau.net/articles/functionnal/). Lambda, closures, partial application, currying... they are all explained in simple terms with examples in Python, OCaml, JavaScript... and Golo!
+* Yannick Loiseau [posted a very good article (in English and French) to explain functional programming terminology](http://yloiseau.net/articles/functionnal/). Lambda, closures, partial application, currying... they are all explained in simple terms with examples in Python, OCaml, JavaScript... and Golo!
 
 Stay tuned for more Golo news! Feel-free to share interesting news that we could have missed.
