@@ -9,7 +9,7 @@ We are pleased to announce the second preview release of Golo!
 
 As you can expect, this release contains many bug fixes since we first made Golo available as an opensource project.
 
-The notable lannguage changes are the following:
+The notable language changes are the following:
 
 * the `augment` keyword replaces `pimp`,
 * we introduced `continue` and `break` statements,
