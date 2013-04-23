@@ -28,9 +28,15 @@ The Maven plugin artifact is:
 <version>0-preview2</version>
 {% endhighlight %}
 
+### Gradle
+
+Check out the [Gradle Golo Plugin](https://github.com/golo-lang/gradle-golo-plugin) project.
+
+Binaries are being released to Maven Central under the `org.golo-lang` group.
+
 ### Native packages
 
-* RPM: see the [DevOps Incubator project](https://github.com/hgomez/devops-incubator) and look for `golo-lang`.
+RPM: see the [DevOps Incubator project](https://github.com/hgomez/devops-incubator) and look for `golo-lang`.
 
 ### Source code
 
