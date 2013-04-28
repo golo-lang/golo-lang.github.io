@@ -21,6 +21,6 @@ It has to be said that [Ninja Squad](http://ninja-squad.com/) did this with abso
 
 **If you are looking for a small shop of developers, trainers and consultants who know what they are doing, talk to Ninja Squad.**
 
-They are based in France, but they can work from pretty much everywhere, too!
+They are based in France, but they can work remotely for you, too!
 
 Thanks again Agnès, Cédric, Cyril and Jean-Baptiste!
