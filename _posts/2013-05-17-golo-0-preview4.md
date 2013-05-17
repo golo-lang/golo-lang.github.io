@@ -13,6 +13,7 @@ Well, the embarassing story is that a Git merge of an upstream branch had been f
 
 ### What's new in Golo?
 
+* Golo now provides `null`-safe operators.
 * Multi-line strings can now be defined. They are delimited between `"""`.
 * Local functions can now be called from augmentations from the same module.
 * JVM arrays can now be manipulated as objects with methods such as `get(index)` or `length()` instead of predefined functions (e.g., `aget(array, index)` and `alength(array)`).
