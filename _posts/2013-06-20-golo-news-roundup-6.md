@@ -20,7 +20,7 @@ now enforce parameters to be constant references, so any attempt to re-assign a 
 an error. In short: a function parameter is a `let`, and captured references are, too. We also
 improved the related compilation error reporting along the way.
 
-* Boolean expressions are now partially evaluated, which is what any sound language should be doing
+* Boolean expressions are now subject to [*minimal evaluation*](http://en.wikipedia.org/wiki/Short-circuit_evaluation), which is what any sound language should be doing
 anyway. This means that expressions such as `(false and null: plop())` will properly return `false`
 instead of evaluating the right expression. In this case this would also throw
 a `NullPointerException`, which is not what you would expect from a sane language.
