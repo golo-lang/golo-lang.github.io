@@ -170,7 +170,7 @@ Do not forget to help Jeff and give him feedback:
 
 ### That's all, folks!
 
-As you can guess with some many changes, we are close to a new preview release. Stay tuned!
+As you can guess with so many changes, we are close to a new preview release. Stay tuned!
 
 Thanks again for your interest in Golo!
 
