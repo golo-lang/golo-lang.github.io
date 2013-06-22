@@ -163,7 +163,7 @@ problems as well as the generated Golo code for a template.
 Jeff Maury is still making progress with the *Golo Language Develoment Tools* (GLDT) for Eclipse.
 
 You can get it by pointing your Eclipse update center to
-[http://gldt-update-site.golo-lang.org](http://gldt-update-site.golo-lang.org)
+[http://gldt-update-site.golo-lang.org/nightly](http://gldt-update-site.golo-lang.org/nightly)
 
 Do not forget to help Jeff and give him feedback:
 [https://github.com/golo-lang/gldt](https://github.com/golo-lang/gldt).
