@@ -1,4 +1,5 @@
 # Jekyll
+markdown: rdiscount
 pygments: true
 permalink: /news/:year/:month/:day/:title
 
