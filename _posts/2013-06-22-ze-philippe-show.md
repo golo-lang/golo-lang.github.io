@@ -8,10 +8,10 @@ title: 'Ze Philippe Show'
 Our *awesome* Golo Developer Advocate Philippe Charrière did a 2 hours long talk at the
 [Montpellier JUG June 2013 session](http://www.jug-montpellier.org/).
 
-Philippe is a sales guy with no formal curriculum in computer science or engineering. Still, he is
-a self-taught geek who codes a lot on the side to change his mind from Word, Excel and PowerPoint.
-You can see him playing with web frameworks, a Raspberry Pi, or controlling a copter drone from his
-phone.
+Philippe is a sales guy with curriculum consisting of a mixture of business and IT courses. Still,
+he is a self-taught geek who codes a lot on the side to change his mind from Word, Excel and
+PowerPoint. You can see him playing with web frameworks, a Raspberry Pi, or controlling a copter
+drone from his phone.
 
 People like Philippe bring us back to sometimes forgotten values of the free software and opensource
 movements: sharing knowledge, seeing each others as peers rather than producer-consumers, and...
