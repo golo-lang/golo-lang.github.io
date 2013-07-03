@@ -1099,17 +1099,41 @@ PAr9L8j/96+U/w3yCoCXW14B8HLLvwDd67nwZIEPdgAAAABJRU5ErkJggg==">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_running_em_hello_world_em_with_span_class_monospaced_gologolo_span">Running <em>"Hello world"</em> with <span class="monospaced">gologolo</span></h3>
+<h3 id="_running_em_hello_world_em">Running <em>"Hello world"</em></h3>
 <div class="paragraph"><p>Of course, we need to run this incredibly complex application.</p></div>
-<div class="paragraph"><p>Golo comes with a <span class="monospaced">gologolo</span> script found in the distribution <span class="monospaced">bin/</span>
-folder. Provided that it is available from your current <span class="monospaced">$PATH</span>, you may
-simply invoke it as follows:</p></div>
+<div class="paragraph"><p>Golo comes with a <span class="monospaced">golo</span> script found in the distribution <span class="monospaced">bin/</span> folder. It provides several
+commands, notably:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">version</span> to query the Golo version,
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">compile</span> to compile some Golo code to JVM classes,
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">run</span> to execute some already compiled Golo code, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">golo</span> to directly execute Golo code from source files.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>The complete commands usage instructions can be listed by running <span class="monospaced">golo --help</span>.</p></div>
+<div class="paragraph"><p>Provided that <span class="monospaced">golo</span> is available from your current <span class="monospaced">$PATH</span>, you may run the program above as
+follows:</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="gp">$</span> gologolo samples/helloworld.golo
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> golo golo --files samples/helloworld.golo
 <span class="go">Hello world!</span>
 <span class="gp">$</span>
 </pre></div></div></div>
-<div class="paragraph"><p><span class="monospaced">gologolo</span> takes several Golo source files as input. It expects the last
+<div class="paragraph"><p><span class="monospaced">golo golo</span> takes several Golo source files as input. It expects the last
 one to have a <span class="monospaced">main</span> function to call. The Golo code is compiled on the
 fly and executed straight into a JVM.</p></div>
 <div class="paragraph"><p>You may also pass arguments to the <span class="monospaced">main</span> function by appending <span class="monospaced">--args</span>
@@ -1119,14 +1143,14 @@ as follows:</p></div>
 <div class="content"><div class="highlight"><pre>module EchoArgs
 
 function main = |args| {
-  foreach (arg in args) {
+  foreach arg in args {
     println(&quot;-&gt;  &quot; + arg)
   }
 }
 </pre></div></div></div>
 <div class="paragraph"><p>We may invoke it as follows:</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="gp">$</span> gologolo samples/echo-args.golo --args plop da plop
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> golo golo --files samples/echo-args.golo --args plop da plop
 <span class="go">-&gt; plop</span>
 <span class="go">-&gt; da</span>
 <span class="go">-&gt; plop</span>
@@ -1136,12 +1160,11 @@ function main = |args| {
 </div>
 <div class="sect2">
 <h3 id="_compiling_golo_source_code">Compiling Golo source code</h3>
-<div class="paragraph"><p>Golo comes with a <span class="monospaced">goloc</span> compiler that generates JVM bytecode in
-<span class="monospaced">.class</span> files. We will give more details in the chapter on
-interoperability with Java.</p></div>
+<div class="paragraph"><p>Golo comes with a compiler that generates JVM bytecode in <span class="monospaced">.class</span> files. We will give more details
+in the chapter on interoperability with Java.</p></div>
 <div class="paragraph"><p>Compiling Golo files is straightforward:</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="gp">$</span> goloc -output classes samples/helloworld.golo
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> golo compile --output classes samples/helloworld.golo
 <span class="gp">$</span>
 </pre></div></div></div>
 <div class="paragraph"><p>This compiles the code found in <span class="monospaced">samples/helloworld.golo</span> and outputs
@@ -1162,7 +1185,7 @@ needed):</p></div>
 <div class="paragraph"><p>Golo provides a <span class="monospaced">golo</span> command for running compiled Golo code:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>classes
-<span class="gp">$</span> golo hello.World
+<span class="gp">$</span> golo run --module hello.World
 <span class="go">Hello world!</span>
 <span class="gp">$</span>
 </pre></div></div></div>
@@ -1170,16 +1193,16 @@ needed):</p></div>
 </div>
 <div class="sect2">
 <h3 id="_passing_jvm_specific_flags">Passing JVM-specific flags</h3>
-<div class="paragraph"><p>Both <span class="monospaced">golo</span> and <span class="monospaced">gologolo</span> can be given JVM-specific flags using the <span class="monospaced">JAVA_OPTS</span> environment
+<div class="paragraph"><p>Both <span class="monospaced">golo</span> and <span class="monospaced">run</span> commands can be given JVM-specific flags using the <span class="monospaced">JAVA_OPTS</span> environment
 variable.</p></div>
 <div class="paragraph"><p>As an example, the following runs <span class="monospaced">fibonacci.golo</span> and prints JIT compilation along the way:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre><span class="gp">#</span> Exporting an environment variable
 <span class="gp">$</span> <span class="nb">export </span><span class="nv">JAVA_OPTS</span><span class="o">=</span>-XX:+PrintCompilation
-<span class="gp">$</span> gologolo samples/fibonacci.golo
+<span class="gp">$</span> golo golo --files samples/fibonacci.golo
 
 <span class="gp">#</span> ...or you may use this one-liner
-<span class="gp">$</span> <span class="nv">JAVA_OPTS</span><span class="o">=</span>-XX:+PrintCompilation gologolo samples/fibonacci.golo
+<span class="gp">$</span> <span class="nv">JAVA_OPTS</span><span class="o">=</span>-XX:+PrintCompilation golo golo --files samples/fibonacci.golo
 </pre></div></div></div>
 </div>
 <div class="sect2">
@@ -1191,14 +1214,14 @@ println(&quot;WTF?&quot;) # it works here, too
 </pre></div></div></div>
 </div>
 <div class="sect2">
-<h3 id="_variables_and_constants">Variables and constants</h3>
-<div class="paragraph"><p>Golo does not check for types at compile time, and they are not
-declared. Everything happens at runtime in Golo.</p></div>
-<div class="paragraph"><p>Variables are declared using the <span class="monospaced">var</span> keyword, while constants are
-declared with <span class="monospaced">let</span>. It is strongly advised that you favour <span class="monospaced">let</span> over
-<span class="monospaced">var</span> unless you are certain that you need mutability.</p></div>
-<div class="paragraph"><p>Variables and constants need to be initialized when declared. Failing to
-do so results in a compilation error.</p></div>
+<h3 id="_variable_and_constant_references">Variable and constant references</h3>
+<div class="paragraph"><p>Golo does not check for types at compile time, and they are not declared. Everything happens at
+runtime in Golo.</p></div>
+<div class="paragraph"><p>Variables are declared using the <span class="monospaced">var</span> keyword, while constant references are declared with <span class="monospaced">let</span>.
+It is strongly advised that you favour <span class="monospaced">let</span> over <span class="monospaced">var</span> unless you are certain that you need
+mutability.</p></div>
+<div class="paragraph"><p>Variables and constants need to be initialized when declared. Failing to do so results in a
+compilation error.</p></div>
 <div class="paragraph"><p>Here are a few examples:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre># Ok
@@ -1413,7 +1436,7 @@ be invoked on arrays:</p></div>
 </li>
 <li>
 <p>
-<span class="monospaced">length()</span> returns the array length,
+<span class="monospaced">length()</span> and <span class="monospaced">size()</span> return the array length,
 </p>
 </li>
 <li>
@@ -1570,6 +1593,58 @@ let result = printer()
   return a + b
 }
 </pre></div></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Note" src="data:image/png;base64,
+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">
+</td>
+<td class="content">Parameters are constant references, hence they cannot be reassigned.</td>
+</tr></table>
+</div>
 <div class="paragraph"><p>Invoking functions that take parameters is straightforward, too:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre>let three = addition(1, 2)
@@ -2098,14 +2173,14 @@ function main = |args| {
   println(&quot;name=&quot; + new: name() + &quot;, ordinal=&quot; + new: ordinal())
 
   # Walk through all enum entries
-  foreach (element in Thread$State.values()) {
+  foreach element in Thread$State.values() {
     println(&quot;name=&quot; + element: name() + &quot;, ordinal=&quot; + element: ordinal())
   }
 }
 </pre></div></div></div>
 <div class="paragraph"><p>Running it yields the following console output:</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre><span class="gp">$</span> gologolo samples/enums-thread-state.golo
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> golo golo --files samples/enums-thread-state.golo
 <span class="go">name=NEW, ordinal=0</span>
 <span class="go">name=NEW, ordinal=0</span>
 <span class="go">name=RUNNABLE, ordinal=1</span>
@@ -2499,7 +2574,7 @@ of <span class="monospaced">java.lang.Iterable</span> can be used in <span class
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre>function concat_to_string = |iterable| {
   var result = &quot;&quot;
-  foreach (item in iterable) {
+  foreach item in iterable {
     result = result + item
   }
   return result
@@ -2507,6 +2582,8 @@ of <span class="monospaced">java.lang.Iterable</span> can be used in <span class
 </pre></div></div></div>
 <div class="paragraph"><p>In this example, <span class="monospaced">item</span> is a variable within the <span class="monospaced">foreach</span> loop scope, and <span class="monospaced">iterable</span> is an object
 that is expected to be iterable.</p></div>
+<div class="paragraph"><p>You may use parenthesis around a <span class="monospaced">foreach</span> expression, so <span class="monospaced">foreach (foo in bar)</span> is equivalent to
+<span class="monospaced">foreach foo in bar</span>.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -2840,24 +2917,17 @@ println(addToTen(2))
 </pre></div></div></div>
 <div class="paragraph"><p>The <span class="monospaced">plus_3</span> function returns a closure that has access to the <span class="monospaced">foo</span> reference, just as you would
 expect. The <span class="monospaced">foo</span> reference is said to have been <strong>captured</strong> and made available in the closure.</p></div>
-<div class="paragraph"><p>However, <strong>captured references cannot be re-assigned from a closure</strong>, as illustrated by the next
-example:</p></div>
+<div class="paragraph"><p>It is important to <strong>note that captured references are constants within the closure</strong>. Consider the
+following example:</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>function foo = {
-
-  # To be captured...
-  var i = 0
-
-  let myClosure = {
-    i = i + 1
-    println(i) # prints &#39;1&#39;
-  }
-  myClosure()
-
-  # prints &#39;0&#39;
-  println(i)
+<div class="content"><div class="highlight"><pre>var a = 1
+let f = {
+  a = 2   # Compilation error!
 }
 </pre></div></div></div>
+<div class="paragraph"><p>The compilation fails because although <span class="monospaced">a</span> is declared using <span class="monospaced">var</span> in its original scope, it is
+actually passed as an argument to the <span class="monospaced">f</span> closure. Because function parameters are implicitly
+constant references, this results in a compilation error.</p></div>
 <div class="paragraph"><p>That being said, a closure has a reference on the same object as its defining environment, so a
 mutable object is a sensible way to pass data back from a closure as a side-effect, as in:</p></div>
 <div class="listingblock">
@@ -3148,9 +3218,18 @@ object methods instead: <span class="monospaced">get</span>, <span class="monosp
 <div class="paragraph"><p>The <span class="monospaced">range</span> function yields an iterable range over either <span class="monospaced">Integer</span> or <span class="monospaced">Long</span> bounds:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre># Prints 1 2 (...) 100
-foreach (i in range(1, 101)) {
+foreach i in range(1, 101) {
   print(i + &quot; &quot;)
 }
+
+let r = range(0, 6): incrementBy(2)
+println(&quot;Start: &quot; + r: from())
+println(&quot;End: &quot; + r: to())
+foreach i in r {
+  println(i)
+}
+
+println(&quot;Increment: &quot; + r: increment())
 </pre></div></div></div>
 <div class="paragraph"><p>The lower bound is inclusive, the upper bound is exclusive.</p></div>
 </div>
@@ -3197,6 +3276,22 @@ function call_local_fun = {
   return f(1)
 }
 </pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_file_i_o">File I/O</h3>
+<div class="paragraph"><p>Sometimes it is very desirable to read the content of a text file. The <span class="monospaced">fileToText</span> function does just that:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let text = fileToText(&quot;/some/file.txt&quot;, &quot;UTF-8&quot;)
+</pre></div></div></div>
+<div class="paragraph"><p>The first parameter is either a <span class="monospaced">java.lang.String</span>, a <span class="monospaced">java.io.File</span> or a <span class="monospaced">java.nio.file.Path</span>. The second parameter
+represents the encoding charset, either as a <span class="monospaced">java.lang.String</span> or a <span class="monospaced">java.nio.charset.Charset</span>.</p></div>
+<div class="paragraph"><p>We can write some text to a file, too:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>textToFile(&quot;Hello, world!&quot;, &quot;/foo/bar.txt&quot;)
+</pre></div></div></div>
+<div class="paragraph"><p>The <span class="monospaced">textToFile</span> function overwrites existing files, and creates new ones if needed.</p></div>
+<div class="paragraph"><p>These functions are provided for convenience, so if you need more fine-grained control over reading and writing text
+then we suggest that you look into the <span class="monospaced">java.nio.file</span> package.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_misc">Misc.</h3>
@@ -3494,6 +3589,39 @@ local function _newWithSameType = |this| {
   }
 }
 
+local function _closureWithIndexArgument = |target| -&gt; match {
+  when target: type(): parameterCount() == 0
+    then java.lang.invoke.MethodHandles.dropArguments(target, 0, java.lang.Object.class)
+  otherwise
+    target
+}
+
+# ............................................................................................... #
+
+augment java.lang.Number {
+
+  function times = |count, func| {
+    let target = _closureWithIndexArgument(func)
+    for (var i = 0, i &lt; count, i = i + 1) {
+      target(i)
+    }
+  }
+
+  function upTo = |low, high, func| {
+    let target = _closureWithIndexArgument(func)
+    for (var i = low, i &lt;= high, i = i + 1) {
+      target(i)
+    }
+  }
+
+  function downTo = |high, low, func| {
+    let target = _closureWithIndexArgument(func)
+    for (var i = high, i &gt;= low, i = i - 1) {
+      target(i)
+    }
+  }
+}
+
 # ............................................................................................... #
 
 augment java.lang.invoke.MethodHandle {
@@ -3505,6 +3633,19 @@ augment java.lang.invoke.MethodHandle {
 
   function bindAt = |this, pos, val| -&gt;
     java.lang.invoke.MethodHandles.insertArguments(this, pos, val)
+}
+
+# ............................................................................................... #
+
+augment java.lang.String {
+
+  function format = |this, args...| {
+    if args: length() == 1 {
+      return java.lang.String.format(this, args: get(0))
+    } else {
+      return java.lang.String.format(this, args)
+    }
+  }
 }
 
 # ............................................................................................... #
@@ -3523,9 +3664,12 @@ augment java.lang.Iterable {
     foreach (element in this) {
       func(element)
     }
+    return this
   }
 
 }
+
+# ............................................................................................... #
 
 augment java.util.Collection {
 
@@ -3600,6 +3744,39 @@ augment java.util.List {
       }
     }
     return buffer: toString()
+  }
+
+  function reverse = |this| {
+    java.util.Collections.reverse(this)
+    return this
+  }
+
+  function reversed = |this| {
+    let reversedList = this: newWithSameType()
+    reversedList: addAll(this)
+    return reversedList: reverse()
+  }
+
+  function sort = |this| {
+    java.util.Collections.sort(this)
+    return this
+  }
+
+  function sorted = |this| {
+    let sortedList = this: newWithSameType()
+    sortedList: addAll(this)
+    return sortedList: sort()
+  }
+
+  function sort = |this, comparator| {
+    java.util.Collections.sort(this, comparator)
+    return this
+  }
+
+  function sorted = |this, comparator| {
+    let sortedList = this: newWithSameType()
+    sortedList: addAll(this)
+    return sortedList: sort(comparator)
   }
 }
 
@@ -3747,6 +3924,7 @@ augment java.util.Map {
     foreach (entry in this: entrySet()) {
       func(entry: getKey(), entry: getValue())
     }
+    return this
   }
 }
 
@@ -3924,6 +4102,97 @@ signatures.</td>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
+<img alt="Warning" src="data:image/png;base64,
+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
+/F/lgJiyQFHragAAAABJRU5ErkJggg==">
+</td>
+<td class="content">
+<div class="paragraph"><p>It is strongly recommended that you use <span class="monospaced">define</span> to create and update methods.
+Consider the following example:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>let obj = DynamicObject():
+  plop(|this| -&gt; "Plop!")</pre>
+</div></div>
+<div class="paragraph"><p>Any call such as <span class="monospaced">obj: plop()</span> properly calls <span class="monospaced">plop()</span>. Because the dynamic object is fresh and new,
+the first call to <span class="monospaced">plop</span> creates a property since it is currently missing.</p></div>
+<div class="paragraph"><p>That being said, the following would fail:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>obj: plop(|this| -&gt; "Plop it up!")</pre>
+</div></div>
+<div class="paragraph"><p>Indeed, when the value of a dynamic object property is a function, it is understood to be a method,
+hence calling <span class="monospaced">plop</span> like it would be a setter method fails because there already exists a property
+that is a function, and it has a different signature. It needs to be updated as in:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>obj: define('plop', |this| -&gt; "Plop it up!")</pre>
+</div></div>
+<div class="paragraph"><p><strong>As a rule of thumb, prefer named setters for values and <span class="monospaced">define</span> for methods. It is acceptable
+to have named definitions for methods if and only if a call happens after the object creation and
+before any call to <span class="monospaced">mixin</span> (remember that it injects properties from other objects, including
+methods).</strong></p></div>
+</td>
+</tr></table>
+</div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
 <img alt="Caution" src="data:image/png;base64,
 iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAKdUlEQVRoge1Ze1AV1x3+zt279wEi
 DWCYGzRVktqa1MEmmtbWR22ncXxUrTDWV/5IqG2wUAUfmUwSkk6V+EAJCEQC6figwZBqZtRxqukf
@@ -3985,13 +4254,114 @@ If this happens to you and performance matter, please investigate the use of <st
 thus write code such as:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre>function dump = |obj| {
-  foreach (prop in obj: properties()) {
+  foreach prop in obj: properties() {
     println(prop: getKey() + &quot; -&gt; &quot; + prop: getValue())
   }
 }
 </pre></div></div></div>
 <div class="paragraph"><p>Because dynamic object entries mix both values and method handles, do not forget that the predefined
 <span class="monospaced">isClosure(obj)</span> function can be useful to distinguish them.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dynamic_code_evaluation">Dynamic code evaluation</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Golo provides facilities for dynamically evaluating code from strings in the form of the
+<span class="monospaced">gololang.EvaluationEnvironment</span> class. It provides an API that is useful both when used from Golo
+code, or when used from a polyglot JVM application that embeds Golo.</p></div>
+<div class="sect2">
+<h3 id="_loading_a_module">Loading a module</h3>
+<div class="paragraph"><p>The code of a complete module can be evaluated by the <span class="monospaced">asModule</span> method:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let env = gololang.EvaluationEnvironment()
+let code =
+&quot;&quot;&quot;
+module foo
+
+function a = -&gt; &quot;a!&quot;
+function b = -&gt; &quot;b!&quot;
+&quot;&quot;&quot;
+let mod = env: asModule(code)
+let a = fun(&quot;a&quot;, mod)
+let b = fun(&quot;b&quot;, mod)
+println(a())
+println(b())
+</pre></div></div></div>
+<div class="paragraph"><p>It is important to note that an <span class="monospaced">EvaluationEnvironment</span> instance has a <span class="monospaced">GoloClassloader</span>, and that
+attempting to evaluate module code with the same <span class="monospaced">module</span> declaration will cause an error. Indeed, a
+class loader cannot load classes with the same name twice.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_anonymous_modules">Anonymous modules</h3>
+<div class="paragraph"><p>The <span class="monospaced">anonymousModule</span> method is similar to <span class="monospaced">asModule</span>, except that the code to evaluate is free of
+<span class="monospaced">module</span> declaration:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let env = gololang.EvaluationEnvironment()
+let code =
+&quot;&quot;&quot;
+function a = -&gt; &quot;a!&quot;
+function b = -&gt; &quot;b!&quot;
+&quot;&quot;&quot;
+let mod = env: anonymousModule(code)
+let a = fun(&quot;a&quot;, mod)
+let b = fun(&quot;b&quot;, mod)
+println(a())
+println(b())
+</pre></div></div></div>
+<div class="paragraph"><p>The modules that get evaluated through <span class="monospaced">anonymousModule</span> have unique names, hence this method is
+suitable in cases where the same code is to be re-evaluated several times.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_functions_2">Functions</h3>
+<div class="paragraph"><p>The <span class="monospaced">asFunction</span> and <span class="monospaced">def</span> methods evaluate function code. Here is how <span class="monospaced">asFunction</span> can be used:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let env = gololang.EvaluationEnvironment()
+let code = &quot;return (a + b) * 2&quot;
+let f = env: asFunction(code, &quot;a&quot;, &quot;b&quot;)
+println(f(10, 20))
+</pre></div></div></div>
+<div class="paragraph"><p>It evaluates straight code as the body of a function. Note that <span class="monospaced">imports</span> can be used to specify
+<span class="monospaced">import</span> statements to be available while evaluation the code:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>env:
+  imports(&quot;java.util.LinkedList&quot;, &quot;java.util.HashMap&quot;):
+  asFunction(&quot;&quot;&quot;let l = LinkedList()
+let m = HashMap()&quot;&quot;&quot;)
+</pre></div></div></div>
+<div class="paragraph"><p>The <span class="monospaced">def</span> method is similar, except that it has the parameters definition in the code to evaluate:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let env = gololang.EvaluationEnvironment()
+let code = &quot;|a, b| -&gt; (a + b) * 2&quot;
+let f = env: def(code)
+println(f(10, 20))
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_running_code">Running code</h3>
+<div class="paragraph"><p>The first form of <span class="monospaced">run</span> method works as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let env = gololang.EvaluationEnvironment()
+let code = &quot;&quot;&quot;println(&quot;&gt;&gt;&gt; run&quot;)
+foreach i in range(0, 3) {
+  println(&quot;w00t&quot;)
+}
+return 666&quot;&quot;&quot;
+println(env: run(code)) # =&gt; &quot;w00t&quot;x3 and &quot;666&quot;
+</pre></div></div></div>
+<div class="paragraph"><p>The second form allows passing parameter values in a map:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let env = gololang.EvaluationEnvironment()
+let code = &quot;&quot;&quot;println(&quot;&gt;&gt;&gt; run_map&quot;)
+println(a)
+println(b)
+&quot;&quot;&quot;
+let values = java.util.TreeMap(): add(&quot;a&quot;, 1): add(&quot;b&quot;, 2)
+env: run(code, values)
+</pre></div></div></div>
+<div class="paragraph"><p>It is important not to abuse <span class="monospaced">run</span>, as each invocation triggers the generation of a one-shot
+class. If the same code is to be run several times, we suggest that you take advantage of either
+<span class="monospaced">def</span> or <span class="monospaced">asFunction</span>.</p></div>
 </div>
 </div>
 </div>
@@ -4093,7 +4463,7 @@ gE0tIWQ+sBcwKM8qoD/wB5wGL8hjfdzWrh01GRp1hInGjDoXwHgsFuzBVLQAAABDdEVYdFNvZnR3
 YXJlAEAoIylJbWFnZU1hZ2ljayA0LjIuOCA5OS8wOC8wMSBjcmlzdHlAbXlzdGljLmVzLmR1cG9u
 dC5jb22RuiG4AAAAKnRFWHRTaWduYXR1cmUANThhMDcyZTA3MGRhMjJmNjEzNWNiZDNlNDE0NTQ2
 ZjloaiHtAAAADnRFWHRQYWdlADEyeDEyKzArMIRtu30AAAAASUVORK5CYII=">
-  foreach (i in range(0, 100)) {
+  foreach i in range(0, 100) {
     port: send(message)                      <img alt="2" src="data:image/png;base64,
 iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAAAAABzHgM7AAAAAmJLR0QAAKqNIzIAAAB7SURBVHja
 HY6hFcMwDEQ/NDQsNSwU9Apdo7Cw0CsIBoZmhKzQEQJLDQsFVclHpHu693W429Zr7bu541Pg3kCm
@@ -4122,7 +4492,7 @@ c3R5QG15c3RpYy5lcy5kdXBvbnQuY29tkbohuAAAACp0RVh0U2lnbmF0dXJlAGZlNjkwNDYzMzc5
 ZWIyNWU1NjJmY2M4Y2M5YjNjN2Uw37I5ngAAAA50RVh0UGFnZQAxMngxMiswKzCEbbt9AAAAAElF
 TkSuQmCC">
 
-  foreach (i in range(0, 10)) {
+  foreach i in range(0, 10) {
     generatorPort: send(&quot;[&quot; + i + &quot;]&quot;)
   }
   Thread.sleep(2000_L)
@@ -4212,6 +4582,143 @@ each function passed to <span class="monospaced">spawn</span> only expects a sin
 </div>
 </div>
 <div class="sect1">
+<h2 id="_golo_template_engine">Golo template engine</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Golo comes with a built-in template engine that is reminiscent of Java Server Pages or Ruby ERB. It
+compiles template text into Golo functions.</p></div>
+<div class="sect2">
+<h3 id="_example">Example</h3>
+<div class="paragraph"><p>Consider the following example.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let template = &quot;&quot;&quot;
+&lt;%@params posts %&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Golo Chat&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;form action=&quot;/&quot; method=&quot;post&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;msg&quot;&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Send&quot;&gt;
+  &lt;/form&gt;
+  &lt;div&gt;
+    &lt;h3&gt;Last posts&lt;/h3&gt;
+    &lt;% foreach post in posts { %&gt;
+      &lt;div&gt;
+        &lt;%= post %&gt;
+      &lt;/div&gt;
+    &lt;% } %&gt;
+  &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+&quot;&quot;&quot;
+</pre></div></div></div>
+<div class="paragraph"><p>This multi-line string has a Golo template. It can be compiled into a function as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let tpl = gololang.TemplateEngine(): compile(template)
+println(tpl(someDataModel: posts()))
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_directives">Directives</h3>
+<div class="paragraph"><p>As you may have guess from the previous example:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Golo code snippets are placed in <span class="monospaced">&lt;% %&gt;</span> blocks, and
+</p>
+</li>
+<li>
+<p>
+expressions can output values using <span class="monospaced">&lt;%= %&gt;</span>, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">&lt;%@import foo.bar.Baz %&gt;</span> causes <span class="monospaced">foo.bar.Baz</span> to be imported, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">&lt;%@params foo, bar, baz %&gt;</span> causes the template function to have 3 parameters, i.e., it is a
+  <span class="monospaced">|foo, bar, baz| { ... }</span> function.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>When no <span class="monospaced">&lt;%@params ... %&gt;</span> exists, the function is assumed to have a single <span class="monospaced">params</span> parameter.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Warning" src="data:image/png;base64,
+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
+/F/lgJiyQFHragAAAABJRU5ErkJggg==">
+</td>
+<td class="content">The template engine is a simple one and makes <strong>no</strong> verification either on the templates
+or the resulting Golo source code. The <span class="monospaced">compile</span> method may throw a <span class="monospaced">GoloCompilation</span> exception
+though, and you can query the exception <span class="monospaced">getSourceCode()</span> and <span class="monospaced">getProblems()</span> methods to obtain
+more details.</td>
+</tr></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_common_pitfalls">Common pitfalls</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Discovering a new programming language is fun. Yet, we all make mistakes in the beginning, as we
@@ -4289,7 +4796,7 @@ println(foo(&quot;abc&quot;))
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-05-05 11:58:54 CEST
+Last updated 2013-06-19 15:23:27 CEST
 </div>
 </div>
 </body>
