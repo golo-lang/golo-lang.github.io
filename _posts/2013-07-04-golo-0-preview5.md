@@ -3,6 +3,8 @@ layout: news
 title: "Now available: Golo 0-preview5"
 ---
 
+![Inside the CITI Lab.](http://farm8.staticflickr.com/7456/9204859449_790808ae92_z_d.jpg)
+
 Golo `0-preview5` is now available!
 
 This new release brings the usual round of bug fixes as well as the following new features:
