@@ -1280,11 +1280,11 @@ width:100%;
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.lang.Integer</span></p></td>
-<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">123</span>, <span class="monospaced">-123</span>, &#8230;</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">123</span>, <span class="monospaced">-123</span>, <span class="monospaced">1_234</span>, &#8230;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.lang.Long</span></p></td>
-<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">123_L</span>, <span class="monospaced">-123_L</span>, &#8230;</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">123_L</span>, <span class="monospaced">-123_L</span>, <span class="monospaced">1_234_L</span>, &#8230;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.lang.Double</span></p></td>
@@ -1326,6 +1326,149 @@ a multi-line string.
       is
         that?</pre>
 </div></div>
+</div>
+<div class="sect2">
+<h3 id="_collection_literals">Collection literals</h3>
+<div class="paragraph"><p>Golo support special support for common collections. The syntax uses brackets prefixed by a
+collection name, as in:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>let s = set[1, 2, "a", "b"]
+let v = vector[1, 2, 3]
+let m = map[[1, "a"], [2, "b"]]
+# (...)</pre>
+</div></div>
+<div class="paragraph"><p>The syntax and type matchings are the following:</p></div>
+<table class="tableblock frame-all grid-all" id="collection-literals-matching"
+style="
+width:100%;
+">
+<col style="width:33%;">
+<col style="width:33%;">
+<col style="width:33%;">
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" >Collection </th>
+<th class="tableblock halign-left valign-top" >Java type </th>
+<th class="tableblock halign-left valign-top" >Syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Tuple</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">gololang.Tuple</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">tuple[1, 2, 3]</span>, or simply <span class="monospaced">[1, 2, 3]</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Array</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.lang.Object[]</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">array[1, 2, 3]</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">List</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.util.LinkedList</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">list[1, 2, 3]</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Vector</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.util.ArrayList</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">vector[1, 2, 3]</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Set</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.util.LinkedHashSet</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">set[1, 2, 3]</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Map</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">java.util.LinkedHashMap</span></p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><span class="monospaced">map[[1, "a"], [2, "b"]]</span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_a_note_on_tuples">A note on tuples</h4>
+<div class="paragraph"><p>Tuples essentially behave as immutable arrays.</p></div>
+<div class="paragraph"><p>The <span class="monospaced">gololang.Tuple</span> class provides the following methods:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+a constructor with a variable-arguments list of values,
+</p>
+</li>
+<li>
+<p>
+a <span class="monospaced">get(index)</span> method to get the element at a specified index,
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">size()</span> and <span class="monospaced">isEmpty()</span> methods that do what their names suggest,
+</p>
+</li>
+<li>
+<p>
+an <span class="monospaced">iterator()</span> method because tuples are iterable, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">equals(other)</span>, <span class="monospaced">hashCode()</span> and <span class="monospaced">toString()</span> do just what you would expect.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_a_note_on_maps">A note on maps</h4>
+<div class="paragraph"><p>The map collection literal expects entries to be specified as tuples where the first entry is the
+key, and the second entry is the value. This allows nested structures to be specified as in:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>map[
+  ["foo", "bar"],
+  ["plop", set[1, 2, 3, 4, 5]],
+  ["mrbean", map[
+    ["name", "Mr Bean"],
+    ["email", "bean@outlook.com"]
+  ]]
+]</pre>
+</div></div>
+<div class="paragraph"><p>There are a few rules to observe:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+not providing a series of tuples will yield class cast exceptions,
+</p>
+</li>
+<li>
+<p>
+tuples must have at least 2 entries or will yield index bound exceptions,
+</p>
+</li>
+<li>
+<p>
+tuples with more than 2 entries are ok, but only the first 2 entries matter.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Because of that, the following code compiles but raises exceptions at runtime:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>let m1 = map[1, 2, 4, 5]
+let m2 = map[
+  [1],
+  ["a", "b"]
+]</pre>
+</div></div>
+<div class="paragraph"><p>The rationale for map literals to be loose is that we let you put any valid Golo expression, like
+functions returning valid tuples:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>let a = -&gt; [1, 'a']
+let b = -&gt; [2, 'b']
+let m = map[a(), b()]</pre>
+</div></div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_operators">Operators</h3>
@@ -1456,7 +1599,12 @@ be invoked on arrays:</p></div>
 </li>
 <li>
 <p>
-<span class="monospaced">equals(someArray)</span> delegates to <span class="monospaced">java.util.Arrays.equals(this, someArray)</span>.
+<span class="monospaced">equals(someArray)</span> delegates to <span class="monospaced">java.util.Arrays.equals(this, someArray)</span>,
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">getClass()</span> return the array class.
 </p>
 </li>
 </ul></div>
@@ -1544,6 +1692,12 @@ vr6+wTfK/4tEfzeeMmUKkydPzhg8jJAAREgEg0H6+vrQNC2pFL8ZUVWVrKws8vPzycnJQVXVjH/s
 <div class="content monospaced">
 <pre>let a = Array(1, 2, 3, 4)
 let b = Array("a", "b")</pre>
+</div></div>
+<div class="paragraph"><p>You can of course take advantage of the <span class="monospaced">array</span> collection literal, too:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>let a = array[1, 2, 3, 4]
+let b = array["a", "b"]</pre>
 </div></div>
 </div>
 </div>
@@ -3757,26 +3911,26 @@ augment java.util.List {
     return reversedList: reverse()
   }
 
-  function sort = |this| {
+  function order = |this| {
     java.util.Collections.sort(this)
     return this
   }
 
-  function sorted = |this| {
+  function ordered = |this| {
     let sortedList = this: newWithSameType()
     sortedList: addAll(this)
-    return sortedList: sort()
+    return sortedList: order()
   }
 
-  function sort = |this, comparator| {
+  function order = |this, comparator| {
     java.util.Collections.sort(this, comparator)
     return this
   }
 
-  function sorted = |this, comparator| {
+  function ordered = |this, comparator| {
     let sortedList = this: newWithSameType()
     sortedList: addAll(this)
-    return sortedList: sort(comparator)
+    return sortedList: order(comparator)
   }
 }
 
@@ -3929,7 +4083,348 @@ augment java.util.Map {
 }
 
 # ............................................................................................... #
+
+augment gololang.Tuple {
+
+  function filter = |this, func| {
+    let matching = list[]
+    foreach element in this {
+      if func(element) {
+        matching: add(element)
+      }
+    }
+    return gololang.Tuple.fromArray(matching: toArray())
+  }
+
+  function map = |this, func| {
+    let values = list[]
+    foreach element in this {
+      values: add(func(element))
+    }
+    return gololang.Tuple.fromArray(values: toArray())
+  }
+
+  function join = |this, separator| {
+    let size = this: size()
+    case {
+      when size == 0 {
+        return &quot;&quot;
+      }
+      when size == 1 {
+        return this: get(0): toString()
+      }
+      otherwise {
+        let buffer = java.lang.StringBuilder(this: get(0): toString())
+        for (var i = 1, i &lt; size, i = i + 1) {
+          buffer: append(separator): append(this: get(i): toString())
+        }
+        return buffer: toString()
+      }
+    }
+  }
+}
+
+# ............................................................................................... #
 </pre></div></div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_structs">Structs</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Golo allows the definition of simple structures using the <span class="monospaced">struct</span> keyword. They resemble structures
+in procedural languages such as C <span class="monospaced">struct</span> or Pascal <strong>records</strong>. They are useful to store data when
+the set of named entries is fixed.</p></div>
+<div class="sect2">
+<h3 id="_definition">Definition</h3>
+<div class="paragraph"><p>Structures are defined at the module-level:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>module sample
+
+struct Person = { name, age, email }
+
+function main = |args| {
+  let p1 = Person("Mr Bean", 54, "bean@gmail.com")
+  println(p1: name())
+  let p2 = Person(): name("John"): age(32): email("john@b-root.com")
+  println(p2: age())
+}</pre>
+</div></div>
+<div class="paragraph"><p>When declaring a structure, it also defines two factory functions: one with no arguments, and one
+with all arguments in their order of declaration in the <span class="monospaced">struct</span> statement. When not initialized,
+member values are <span class="monospaced">null</span>.</p></div>
+<div class="paragraph"><p>Each member yields a <strong>getter</strong> and a <strong>setter</strong> method: given a member <span class="monospaced">a</span>, the getter is method <span class="monospaced">a()</span>
+while the setter is method <span class="monospaced">a(newValue)</span>. It should be noted that setter methods return the
+structure instance which makes it possible to chain calls as illustrated in the previous example
+while building <span class="monospaced">p2</span>.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_jvm_existence">JVM existence</h3>
+<div class="paragraph"><p>Each <span class="monospaced">struct</span> is compiled to a self-contained JVM class.</p></div>
+<div class="paragraph"><p>Given:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>module sample
+
+struct Point = { x, y }</pre>
+</div></div>
+<div class="paragraph"><p>a class <span class="monospaced">sample.types.Point</span> is being generated.</p></div>
+<div class="paragraph"><p>It is important to note that:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+each <span class="monospaced">struct</span> class is <span class="monospaced">final</span>,
+</p>
+</li>
+<li>
+<p>
+each <span class="monospaced">struct</span> class inherits from <span class="monospaced">gololang.GoloStruct</span>,
+</p>
+</li>
+<li>
+<p>
+proper definitions of <span class="monospaced">toString()</span>, <span class="monospaced">hashCode()</span> and <span class="monospaced">equals()</span> are being provided.
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_span_class_monospaced_tostring_span_behavior"><span class="monospaced">toString()</span> behavior</h3>
+<div class="paragraph"><p>The <span class="monospaced">toString()</span> method is being overridden to provide a meaningful description of a structure
+content.</p></div>
+<div class="paragraph"><p>Given the following program:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>module test
+
+struct Point = { x, y }
+
+function main = |args| {
+  println(Point(1, 2))
+}</pre>
+</div></div>
+<div class="paragraph"><p>running it prints the following console output:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>struct Point{x=1, y=2}</pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_copying">Copying</h3>
+<div class="paragraph"><p>Instances of a structure provide copying methods:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">copy()</span> returns a <strong>shallow</strong> copy of the structure instance, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">frozenCopy()</span> returns a read-only <strong>shallow</strong> copy.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Trying to invoke any setter methods on an instance obtained through <span class="monospaced">frozenCopy()</span> raises a
+<span class="monospaced">java.lang.IllegalStateException</span>.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Important" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAALa0lEQVRogdWZa2wc1RXHfzM7O/te
+P9e1vXHSmEdjx3YeDkkaF6REKRRCEDSEFNkRjdSWSsgC2iqoRWqLQKiqIBg1NOQDiMeHtkQIQkRR
+S9S4aWwgCQoUgl232KkT28J21l6vd3d2dx79sDuTXdtre03Uqlc62tl53Pv/n3PuOffcKxiGwf9z
+E//XAL5sk65WR0a6AaDrOjMtKwgCoigiCAKCIAhXa9wvTcAEHhoc5KMjR7jw3nucf+MN67k/GCS4
+YQOr77yTpl27kGUZm81mXC0ywlLnQDbwEwcO0P2b3yz4jV5RwZq2Nm5/5BH8fj+SJGGz2b4UiSUR
+MAzD0DSNEwcO8MdHHln8d0AcsAUCfOe551h7yy04HA7sdvuSrVEwAV3XjdDgIC/v2cOl06dznqWA
+JCAAMvn9MwlEgF1PP8037rsPt9uN3W5fkjUKIqDrujF+4QLP3XQTU0NDOc8UIAa4y8sJtrQQqK/H
+7XQSfv99Pn/nHQRRxNB16/0EEAUatm9n76uv4vP5cDgcBZNYNIF84I0MEK20lIZvf5sNe/dSWlqK
+1+vFxBEZHubT3/+evqNHmR4dJRWP55BevW0bra+8gt/vx+l0IknSokksikA+8ElgClixYwc3799P
+ZWUlTqczbz+x0VFOPvEEQ6dPE/niCwxdt0jUbd1K68svU1xcXBCJBQnMBz5eWkrL/v2s++Y3KSsr
+QxQXlxc7f/5zBjo7CQ8NoadSKKQn943t7dyyf79FYjHuNC8BwzAMVVV56Z57+OzNN3PAJ8vK+FZH
+B2s2b55X6/nahRMnOP7TnxLOKEXJyO2/+hVf37uXoqIinE6nmfzyksirMjNUvvGjH+WAVwG1vJxb
+Dhxg1bp1uFwuMwQWJCu3bWPN3r24SkoAcGbA/OXXv2bws8+IRqOkUqlZGX1RBAzDMHRd51+nTvHe
+wYNX7gPTQMO+faxav56SkpIlgTdlU3s7TXv2IGUs6AGioRDH2tuZmJggFouhqirGPCzyEUBVVX7X
+1pZzPwI0fP/7bNmzh7KysrzADh8+zP3338++ffs4ePBg3vdEUWTDD3/IsuZmRLsdW4bEpd5eOp99
+lnA4jKIoaJqWl8QsAqb2Txw4kDNp40BxXR0bWlspLy/PC+qZZ55hdHQUSZIYHByko6ODxx57bBZw
+cy3kq6xk6y9/ib+qCgQBmbQ7nT50iIs9PUSjUZLJJIZhzEliLgKMDQzwp5/9zLqnkQ51W3/xCwKB
+AE6nMy+B3t5exsfH6ezspLe3l3g8zuHDh2cBz5bKpibWtrXhLi0FwA3owNsPP8zExATxeBxVVecy
+QC4Bc+L+taNjluvU33031dddN6/2BUGgpKSE/v5+JicncweaA3i2tDz8MIHrr0eU0gsQBzDW10ff
+yZNEIhESicScrpRDQNd1xgYG+OC3v7XuJQBXIMDWn/yEioqKeUGMjY0hCAKKoszS1MjIyLzfAmx/
+4gmKli0DQcBJOmicfOopJicnicfjJoG5LWBq/+Szz+a8oABNe/bgdrvndR1BEKiqqiIejxOLxWYR
+CAaDC0alqjVrqGxowFNWhkDalUKff07f3/5mWSFTLFksLAK6rjN+4UKO9lXAUV7O2tbWeaNOthZl
+WZ4FHlh0aN3y4IPIHk+6L8AGvNfRQTgctuZCthVEU/u6rnPutddyBk0A9bt3W4us+QY2fbyurg6v
+15vTzw033LBoAsHmZoLNzdgcDgBcQKi/n391dTE9PU0ymcyxgkmAVCrF+4cO5WjfFgiwfoGwOTOy
+lJWVUVtba1mkUAKCILClvR1veTkA9owVPnzllZy8YFnA1H5/dzfTw8PWgziwcutWfD4fsiwvCNyU
+xsZG3G43lZWVVl933XVXQQSq161j+ebNlhXcwBdnzxIOh60lhmkFEUDTNP7++uvWgBrp6mrNHBk3
+H/BsAtFoFEdm8GAwyMaNGwsiIAgCjbt346uosKwgAp8cPWolNj1THInmsqHn6FGLQApY1thIxcqV
++Hy+WX6+0ETesWMHLpcLWZZ54IEHCgYvCAKrbrsNyem0JrQEXMzkhKzlBaKu61z+97+ZHhnJmbwr
+tm2zJu5CWp8pra2tNDU1sXPnTtrb25dEQBAEvrplC57MXJCB8XPniEQixONxa6Uq6brOQHd3jvvo
+QP2ttxZUpMxsL7zwwpK+AyxLXrt9Oxe6uxFEEXvGZc4fO0bVD35AMplM1wuapjGYtbugAp5AgKLq
+aquu/W/JTEs37dqFqihWzSADk8PD1jzQNC3tQtmrThUINDbm+H4h0tfXx6OPPsodd9xBW1sbPT09
+BQPPluu2b7fWRxIQ6usjFotZBCRN06wZbbZAfT1FRUWWKQtpzz//PMPDw/T09DA1NcXo6CjHjx+f
+11Xma95AwHJjEdB0HUVRrhCYuRGrAiXBoFUqFtq6u7sZHx9nJBMUurq65uxnsX0Hm5v56A9/ANIJ
+LXrpEolEwgqlUqZQyPlo6OOPlzx5ly1bxnBWQmxpackBW6hSBEC02axrpqasNZGmaek8kN0kYPDj
+j1FVdUlz4Mknn6Surs4Cb5aUhYZiUy59+GGOgm3V1WiadiUPCILAV9autV5wAaM9PXQeOWJprBBp
+aGjgxIkTpFIpOjs7aWxsXBJwUwZOnUKZmgLS2zl4vUjSlV1XURRFqtavv3IDKAVe/O53efPxx69a
+SCxUBs+c4dV77+Vyfz+xy5eBdG3iX7ECm81m9S2JokiwuZmiujrCPT1AuqgOAqcef5zzL77Imt27
+uemhhyipqVnYZ5cw8bPbR0eOcOall7g8MEB4aIhEJAJk9qOAwKZNyLJsHpQgRKNRIxQK0XPmDH/+
+3vdQQ6G8na/YtIk199zDypYWVmzceFWAT1y8yMWzZzn/9tv0vfsudqeTlKIQHRvL2QSOAqU7d/K1
+W2/l2muvpba2Nl3iJhIJIxKJMDw8TO/Zs3zw4x+jTUzkHVCw2fCUleHw+QiuXYu/upqqhgb8VVUY
+hkFNczPFweCs7z556y3r+vyxYwiiyD+PHwdBwNB1krEYhqYRC4UwdB2D9LJmmnRtXHz77VTfeCPL
+ly+ntraWmpqa9MaaqqqGoiiEQiGGhoYYHBzk00OHiHR2LkqDNlnG7nJhd7nQswqN+ZogiuipFMlY
+DDWRgBl5KEF6woqAUFFByc03U756NZWVlSxfvpyamhoCgQAejwdB13VDVVVisRihUIiRkRGGh4cZ
++sc/GO3qIt7VhZGJAle7mVpWuVKDCBng8jXX4N68Gc8111BUVER5eTnV1dVUV1cTCASuFFqGYaDr
+upFKpYjH40xMTDA+Ps7Y2Bjj4+OEw2EmenqYPneO1OAgZCWpxTY9S9QMcLhyHGUDRI8HqbISZ309
+zoYGnE4nHo8Hv99PaWkpgUCAiooK6/DE4XCkI1HW2a6hqiqKojA9Pc3k5KQl4XCY6elpotFoetuk
+v59UKIR66RLToRBJTcMYHUWIRvMSMPO6rbY2/SsIOFatQpYk5NWrkSQJWZZxOBy43W68Xi9+v5+i
+oiJKSkooLi7G5/PhdruRZdnads85HzD3hpLJJIqiEIvFiEajRCIRIpEI0WiUWCxGPB631iOKopBK
+pazUbi4Oc7Y+snKCzWbDZrMhSRKSJGG3262w6HK5cLlceDwevF4vPp8Pr9eL2+3G5XLhcDjMkxuE
+TNibdcBhnv9qmkYqlSKZTJJIJFAUhXg8jqIoKIpCIpGwSCSTSVRVtWSuk3qTiAnebrfngHc4HDid
+TpxOJy6Xy7qWZdk6wZzrxCbvCY1JRNd1NE3LAWgSM69ngp+PgCiK1gF3NhFTzHvmO+Y3wCzw8xLI
+JpL5tYCZpEyw2f/nWt1ag2UtM0x3Mq1iAp1j+bH0M7KFCGWDnfmbd8AMnuxfUzL/C0rp/wFnFd4n
+EQn3XQAAAABJRU5ErkJggg==">
+</td>
+<td class="content">The result of calling <span class="monospaced">copy()</span> on a frozen instance <strong>is a mutable</strong> copy, not a frozen
+copy.</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_span_class_monospaced_equals_span_and_span_class_monospaced_hashcode_span_semantics"><span class="monospaced">equals()</span> and <span class="monospaced">hashCode()</span> semantics</h3>
+<div class="paragraph"><p>Golo structures honor the contract of Java objects regarding equality and hash codes.</p></div>
+<div class="paragraph"><p>By default, <span class="monospaced">equals()</span> and <span class="monospaced">hashCode()</span> are the ones of <span class="monospaced">java.lang.Object</span>. Indeed, structure
+members can be changed, so they cannot be used to compute stable values.</p></div>
+<div class="paragraph"><p>Nevertheless, structure instances returned by <span class="monospaced">frozenCopy()</span> have stable members, and members are
+being used.</p></div>
+<div class="paragraph"><p>Consider the following program:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>module test
+
+struct Point = { x, y }
+
+function main = |args| {
+
+  let p1 = Point(1, 2)
+  let p2 = Point(1, 2)
+  let p3 = p1: frozenCopy()
+  let p4 = p1: frozenCopy()
+
+  println("p1 == p2 " + (p1 == p2))
+  println("p1 == p3 " + (p1 == p3))
+  println("p3 == p4 " + (p3 == p4))
+
+  println("#p1 " + p1: hashCode())
+  println("#p2 " + p2: hashCode())
+  println("#p3 " + p3: hashCode())
+  println("#p4 " + p4: hashCode())
+}</pre>
+</div></div>
+<div class="paragraph"><p>the console output is the following:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>p1 == p2 false
+p1 == p3 false
+p3 == p4 true
+#p1 1555845260
+#p2 104739310
+#p3 994
+#p4 994</pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Tip" src="data:image/png;base64,
+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">
+</td>
+<td class="content">It is recommended that you use <span class="monospaced">frozenCopy()</span> when you can, especially when storing values into
+collections.</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_helper_methods">Helper methods</h3>
+<div class="paragraph"><p>A number of helper methods are being generated:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">members()</span> returns a tuple of the member names,
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">values()</span> returns a tuple with the current member values,
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">isFrozen()</span> returns a boolean to check for frozen structure instances,
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">iterator()</span> provides an iterator over a structure where each element is a tuple <span class="monospaced">[member, value]</span>,
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">get(name)</span> returns the value of a member by its name,
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">set(name, value)</span> updates the value of a member by its name, and returns the same structure.
+</p>
+</li>
+</ul></div>
 </div>
 </div>
 </div>
@@ -3979,7 +4474,12 @@ think of it as an enhancement over using hash maps and putting closures in them.
 </li>
 <li>
 <p>
-<span class="monospaced">properties()</span> gives the set of entries in the dynamic object.
+<span class="monospaced">properties()</span> gives the set of entries in the dynamic object, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">invoker(name, type)</span> which is mostly used by the Golo runtime internals.
 </p>
 </li>
 </ul></div>
@@ -4188,63 +4688,6 @@ to have named definitions for methods if and only if a call happens after the ob
 before any call to <span class="monospaced">mixin</span> (remember that it injects properties from other objects, including
 methods).</strong></p></div>
 </td>
-</tr></table>
-</div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<img alt="Caution" src="data:image/png;base64,
-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">
-</td>
-<td class="content">Dynamic objects cause call site invalidations that may degrade performance in some cases.
-If this happens to you and performance matter, please investigate the use of <strong>real</strong> objects.</td>
 </tr></table>
 </div>
 </div>
@@ -4796,7 +5239,7 @@ println(foo(&quot;abc&quot;))
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-06-19 15:23:27 CEST
+Last updated 2013-07-24 12:58:06 CEST
 </div>
 </div>
 </body>
