@@ -12,7 +12,7 @@ h3. (for the impatient)
 Here is what's new in Golo @0-preview6@.
 
 # New collection literals for common data structures (arrays, tuples, lists, sets, maps, vectors).
-# The ability to define stuctured data types through the @struct@ keyword.
+# The ability to define structured data types through the @struct@ keyword.
 # Number literals now support underscores (contributed by Franck Verrot).
 # Dynamic objects performance is better than ever (@~14x@ factor).
 
