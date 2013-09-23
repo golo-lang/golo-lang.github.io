@@ -1121,7 +1121,12 @@ commands, notably:</p></div>
 </li>
 <li>
 <p>
-<span class="monospaced">golo</span> to directly execute Golo code from source files.
+<span class="monospaced">golo</span> to directly execute Golo code from source files, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">diagnose</span> to print compiler internal diagnosis information.
 </p>
 </li>
 </ul></div>
@@ -3446,6 +3451,14 @@ represents the encoding charset, either as a <span class="monospaced">java.lang.
 <div class="paragraph"><p>The <span class="monospaced">textToFile</span> function overwrites existing files, and creates new ones if needed.</p></div>
 <div class="paragraph"><p>These functions are provided for convenience, so if you need more fine-grained control over reading and writing text
 then we suggest that you look into the <span class="monospaced">java.nio.file</span> package.</p></div>
+<div class="paragraph"><p>In addition, if you need to verify that a file exists, you can use the <span class="monospaced">fileExists</span> function.</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>if fileExists(&quot;/foo/bar.txt&quot;) {
+  println(&quot;file found!&quot;)
+}
+</pre></div></div></div>
+<div class="paragraph"><p>As in the other File I/O methods, the parameter is either a <span class="monospaced">java.lang.String</span>, a <span class="monospaced">java.io.File</span> or a <span class="monospaced">java.nio.file.Path</span>.
+The <span class="monospaced">fileExists</span> function will return true if the file exists, false if it doesn&#8217;t.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_misc">Misc.</h3>
@@ -3800,6 +3813,21 @@ augment java.lang.String {
       return java.lang.String.format(this, args)
     }
   }
+
+  function toInt = |this| -&gt;
+    java.lang.Integer.parseInt(this)
+
+  function toInteger = |this| -&gt;
+    java.lang.Integer.parseInt(this)
+
+  function toDouble = |this| -&gt;
+    java.lang.Double.parseDouble(this)
+
+  function toFloat = |this| -&gt;
+    java.lang.Float.parseFloat(this)
+
+  function toLong = |this| -&gt;
+    java.lang.Long.parseLong(this)
 }
 
 # ............................................................................................... #
@@ -5239,7 +5267,7 @@ println(foo(&quot;abc&quot;))
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-07-24 12:58:06 CEST
+Last updated 2013-08-28 07:55:55 CEST
 </div>
 </div>
 </body>
