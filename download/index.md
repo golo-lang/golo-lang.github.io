@@ -5,7 +5,10 @@ title: Download Golo
 
 ### Standalone distribution
 
-Standalone distributions can be obtained [from SourceForge](http://sourceforge.net/projects/golo-lang/files/).
+Standalone distributions can be obtained [from Maven Central](http://search.maven.org/#browse|1246390074):
+
+* [golo-0-preview7-distribution.tar.gz](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/0-preview7/golo-0-preview7-distribution.tar.gz)
+* [golo-0-preview7-distribution.zip](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/0-preview7/golo-0-preview7-distribution.zip)
 
 ### Maven
 
@@ -17,7 +20,7 @@ The Golo library (runtime + compiler) artifact is:
 {% highlight xml %}
 <groupId>org.golo-lang</groupId>
 <artifactId>golo</artifactId>
-<version>0-preview6</version>
+<version>0-preview7</version>
 {% endhighlight %}
 
 The Maven plugin artifact is:
@@ -25,7 +28,7 @@ The Maven plugin artifact is:
 {% highlight xml %}
 <groupId>org.golo-lang</groupId>
 <artifactId>golo-maven-plugin</artifactId>
-<version>0-preview6/version>
+<version>0-preview7</version>
 {% endhighlight %}
 
 ### Gradle
