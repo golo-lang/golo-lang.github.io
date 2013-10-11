@@ -10,6 +10,11 @@ Standalone distributions can be obtained [from Maven Central](http://search.mave
 * [golo-0-preview7-distribution.tar.gz](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/0-preview7/golo-0-preview7-distribution.tar.gz)
 * [golo-0-preview7-distribution.zip](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/0-preview7/golo-0-preview7-distribution.zip)
 
+<span class="label label-important">Important</span>
+Given that Golo is still a young project, snapshot releases more than often contain important bug
+fixes and improvements:
+[get the golo-0-preview8-SNAPSHOT artefacts](https://oss.sonatype.org/content/repositories/snapshots/org/golo-lang/golo/0-preview8-SNAPSHOT/).
+
 ### Maven
 
 Maven release and snapshot artifacts can be downloaded from both Maven Central and the
