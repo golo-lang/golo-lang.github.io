@@ -3205,6 +3205,102 @@ println(minus10(20))
 println(f(4))
 </pre></div></div></div>
 </div>
+<div class="sect2">
+<h3 id="_calling_functions_that_return_functions">Calling functions that return functions</h3>
+<div class="paragraph"><p>Given that functions are first-class objects in Golo, you may define functions (or closures) that
+return functions, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let f = |x| -&gt; |y| -&gt; |z| -&gt; -&gt; x + y + z
+</pre></div></div></div>
+<div class="paragraph"><p>You could use intermediate references to use the <span class="monospaced">f</span> function above:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>let f1 = f(1)
+let f2 = f1(2)
+let f3 = f2(3)
+
+# Prints &#39;6&#39;
+println(f3())
+</pre></div></div></div>
+<div class="paragraph"><p>Golo supports a nicer syntax if you don&#8217;t need intermediate references:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># Prints &#39;6&#39;
+println(f(1)(2)(3)())
+</pre></div></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Important" src="data:image/png;base64,
+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
+EQn3XQAAAABJRU5ErkJggg==">
+</td>
+<td class="content">
+<div class="paragraph"><p>This syntax only works following a function or method invocation, not on expressions. This means
+that:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>foo: bar()("baz")</pre>
+</div></div>
+<div class="paragraph"><p>is valid, while:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>(foo: bar())("baz")</pre>
+</div></div>
+<div class="paragraph"><p>is not. Let us say that "It is not a bug, it is a feature".</p></div>
+</td>
+</tr></table>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -3459,6 +3555,28 @@ then we suggest that you look into the <span class="monospaced">java.nio.file</s
 </pre></div></div></div>
 <div class="paragraph"><p>As in the other File I/O methods, the parameter is either a <span class="monospaced">java.lang.String</span>, a <span class="monospaced">java.io.File</span> or a <span class="monospaced">java.nio.file.Path</span>.
 The <span class="monospaced">fileExists</span> function will return true if the file exists, false if it doesn&#8217;t.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_array_types">Array types</h3>
+<div class="paragraph"><p>Golo does not provide a literal syntax for array types, such as <span class="monospaced">Object[].class</span> in Java.</p></div>
+<div class="paragraph"><p>Instead, we provide 3 helper functions.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">isArray(object)</span>: returns a boolean if <span class="monospaced">object</span> is an array.
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">objectArrayType()</span>: returns <span class="monospaced">Object[].class</span>.
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">arrayTypeOf(type)</span>: given <span class="monospaced">type</span> as a <span class="monospaced">java.lang.Class</span>, returns an array of type <span class="monospaced">type[]</span>.
+</p>
+</li>
+</ul></div>
 </div>
 <div class="sect2">
 <h3 id="_misc">Misc.</h3>
@@ -3897,6 +4015,15 @@ augment java.util.List {
   function tail = |this| -&gt; this: subList(1, this: size())
   function unmodifiableView = |this| -&gt; java.util.Collections.unmodifiableList(this)
 
+  function find = |this, pred| {
+    foreach (element in this) {
+      if pred(element) {
+        return element
+      }
+    }
+    return null
+  }
+
   function filter = |this, pred| {
     let filtered = this: newWithSameType()
     foreach (element in this) {
@@ -4009,6 +4136,15 @@ augment java.util.Set {
 
   function unmodifiableView = |this| -&gt; java.util.Collections.unmodifiableSet(this)
 
+  function find = |this, pred| {
+    foreach (element in this) {
+      if pred(element) {
+        return element
+      }
+    }
+    return null
+  }
+
   function filter = |this, pred| {
     let filtered = this: newWithSameType()
     foreach (element in this) {
@@ -4069,6 +4205,17 @@ augment java.util.Map {
 
   function newWithSameType = |this| -&gt; _newWithSameType(this)
 
+  function find = |this, pred| {
+    foreach (entry in this: entrySet()) {
+      let key = entry: getKey()
+      let value = entry: getValue()
+      if pred(key, value) {
+        return entry
+      }
+    }
+    return null
+  }
+
   function filter = |this, pred| {
     let filtered = this: newWithSameType()
     foreach (entry in this: entrySet()) {
@@ -4113,6 +4260,15 @@ augment java.util.Map {
 # ............................................................................................... #
 
 augment gololang.Tuple {
+
+  function find = |this, pred| {
+    foreach (element in this) {
+      if pred(element) {
+        return element
+      }
+    }
+    return null
+  }
 
   function filter = |this, func| {
     let matching = list[]
@@ -4498,6 +4654,11 @@ think of it as an enhancement over using hash maps and putting closures in them.
 <li>
 <p>
 <span class="monospaced">freeze()</span> locks an object, and calling <span class="monospaced">define</span> will raise an <span class="monospaced">IllegalStateException</span>, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">isFrozen()</span> checks whether a dynamic object is frozen or not, and
 </p>
 </li>
 <li>

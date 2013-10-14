@@ -7,13 +7,13 @@ title: Download Golo
 
 Standalone distributions can be obtained [from Maven Central](http://search.maven.org/#browse|1246390074):
 
-* [golo-0-preview7-distribution.tar.gz](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/0-preview7/golo-0-preview7-distribution.tar.gz)
-* [golo-0-preview7-distribution.zip](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/0-preview7/golo-0-preview7-distribution.zip)
+* [golo-0-preview8-distribution.tar.gz](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/0-preview8/golo-0-preview8-distribution.tar.gz)
+* [golo-0-preview8-distribution.zip](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/0-preview8/golo-0-preview8-distribution.zip)
 
 <span class="label label-important">Important</span>
 Given that Golo is still a young project, snapshot releases more than often contain important bug
 fixes and improvements:
-[get the golo-0-preview8-SNAPSHOT artefacts](https://oss.sonatype.org/content/repositories/snapshots/org/golo-lang/golo/0-preview8-SNAPSHOT/).
+[get the golo-0-preview9-SNAPSHOT artefacts](https://oss.sonatype.org/content/repositories/snapshots/org/golo-lang/golo/0-preview9-SNAPSHOT/).
 
 ### Maven
 
@@ -25,7 +25,7 @@ The Golo library (runtime + compiler) artifact is:
 {% highlight xml %}
 <groupId>org.golo-lang</groupId>
 <artifactId>golo</artifactId>
-<version>0-preview7</version>
+<version>0-preview8</version>
 {% endhighlight %}
 
 The Maven plugin artifact is:
@@ -33,7 +33,7 @@ The Maven plugin artifact is:
 {% highlight xml %}
 <groupId>org.golo-lang</groupId>
 <artifactId>golo-maven-plugin</artifactId>
-<version>0-preview7</version>
+<version>0-preview8</version>
 {% endhighlight %}
 
 ### Gradle
@@ -64,5 +64,5 @@ Here are the projects that we are aware of:
 - [IntelliJ IDEA (syntax highthing)](https://github.com/k33g/golo-storm) by Philippe Charriere
 - [GoloIDE for Netbeans](https://github.com/golo-lang/golo-netbeans) by [Serli](http://www.serli.com/)
 - [Golo Language Development Tools for Eclipse](https://github.com/golo-lang/gldt) by Jeff Maury, the
-  update site for Eclipse is [http://gldt-update-site.golo-lang.org/](http://gldt-update-site.golo-lang.org/)
+  update site for Eclipse is [http://gldt-update-site.golo-lang.org/nightly](http://gldt-update-site.golo-lang.org/nightly)
 

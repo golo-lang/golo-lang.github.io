@@ -2,6 +2,8 @@
 markdown: rdiscount
 pygments: true
 permalink: /news/:year/:month/:day/:title
+redcloth:
+  hard_breaks: false
 
 # Custom
 name: Golo news
