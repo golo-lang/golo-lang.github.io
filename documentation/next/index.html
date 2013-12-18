@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="generator" content="AsciiDoc 8.6.8">
+<meta name="generator" content="AsciiDoc 8.6.9">
 <title>The Golo Programming Language</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -602,19 +602,16 @@ div.exampleblock > div.content, div.sidebarblock > div.content, div.listingblock
 div.verseblock { border-left-width: 0; margin-left: 3em; }
 div.quoteblock { border-left-width: 3px; margin-left: 0; margin-right: 0;}
 div.admonitionblock td.content { border-left: 3px solid #E8E8E8; }
-/*
-  pygmentize filter
-*/
 .highlight .hll { background-color: #ffffcc }
-.highlight  { background: #f4f4f4; }
-.highlight .c { color: #008800; font-style: italic } /* Comment */
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
 .highlight .err { border: 1px solid #FF0000 } /* Error */
-.highlight .k { color: #AA22FF; font-weight: bold } /* Keyword */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
 .highlight .o { color: #666666 } /* Operator */
-.highlight .cm { color: #008800; font-style: italic } /* Comment.Multiline */
-.highlight .cp { color: #008800 } /* Comment.Preproc */
-.highlight .c1 { color: #008800; font-style: italic } /* Comment.Single */
-.highlight .cs { color: #008800; font-weight: bold } /* Comment.Special */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
 .highlight .gd { color: #A00000 } /* Generic.Deleted */
 .highlight .ge { font-style: italic } /* Generic.Emph */
 .highlight .gr { color: #FF0000 } /* Generic.Error */
@@ -625,49 +622,48 @@ div.admonitionblock td.content { border-left: 3px solid #E8E8E8; }
 .highlight .gs { font-weight: bold } /* Generic.Strong */
 .highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
 .highlight .gt { color: #0040D0 } /* Generic.Traceback */
-.highlight .kc { color: #AA22FF; font-weight: bold } /* Keyword.Constant */
-.highlight .kd { color: #AA22FF; font-weight: bold } /* Keyword.Declaration */
-.highlight .kn { color: #AA22FF; font-weight: bold } /* Keyword.Namespace */
-.highlight .kp { color: #AA22FF } /* Keyword.Pseudo */
-.highlight .kr { color: #AA22FF; font-weight: bold } /* Keyword.Reserved */
-.highlight .kt { color: #00BB00; font-weight: bold } /* Keyword.Type */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
 .highlight .m { color: #666666 } /* Literal.Number */
-.highlight .s { color: #BB4444 } /* Literal.String */
-.highlight .na { color: #BB4444 } /* Name.Attribute */
-.highlight .nb { color: #AA22FF } /* Name.Builtin */
-.highlight .nc { color: #0000FF } /* Name.Class */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
 .highlight .no { color: #880000 } /* Name.Constant */
 .highlight .nd { color: #AA22FF } /* Name.Decorator */
 .highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
 .highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.highlight .nf { color: #00A000 } /* Name.Function */
+.highlight .nf { color: #0000FF } /* Name.Function */
 .highlight .nl { color: #A0A000 } /* Name.Label */
 .highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
 .highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.highlight .nv { color: #B8860B } /* Name.Variable */
+.highlight .nv { color: #19177C } /* Name.Variable */
 .highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
 .highlight .w { color: #bbbbbb } /* Text.Whitespace */
 .highlight .mf { color: #666666 } /* Literal.Number.Float */
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
-.highlight .sb { color: #BB4444 } /* Literal.String.Backtick */
-.highlight .sc { color: #BB4444 } /* Literal.String.Char */
-.highlight .sd { color: #BB4444; font-style: italic } /* Literal.String.Doc */
-.highlight .s2 { color: #BB4444 } /* Literal.String.Double */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.highlight .sh { color: #BB4444 } /* Literal.String.Heredoc */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
 .highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
 .highlight .sx { color: #008000 } /* Literal.String.Other */
 .highlight .sr { color: #BB6688 } /* Literal.String.Regex */
-.highlight .s1 { color: #BB4444 } /* Literal.String.Single */
-.highlight .ss { color: #B8860B } /* Literal.String.Symbol */
-.highlight .bp { color: #AA22FF } /* Name.Builtin.Pseudo */
-.highlight .vc { color: #B8860B } /* Name.Variable.Class */
-.highlight .vg { color: #B8860B } /* Name.Variable.Global */
-.highlight .vi { color: #B8860B } /* Name.Variable.Instance */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
-
 
 
 @media screen {
@@ -1111,12 +1107,12 @@ commands, notably:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
-<span class="monospaced">version</span> to query the Golo version,
+<span class="monospaced">version</span> to query the Golo version, and
 </p>
 </li>
 <li>
 <p>
-<span class="monospaced">compile</span> to compile some Golo code to JVM classes,
+<span class="monospaced">compile</span> to compile some Golo code to JVM classes, and
 </p>
 </li>
 <li>
@@ -1131,11 +1127,84 @@ commands, notably:</p></div>
 </li>
 <li>
 <p>
-<span class="monospaced">diagnose</span> to print compiler internal diagnosis information.
+<span class="monospaced">diagnose</span> to print compiler internal diagnosis information, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">doc</span> to generate module(s) documentation, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">new</span> to generate new project(s).
 </p>
 </li>
 </ul></div>
 <div class="paragraph"><p>The complete commands usage instructions can be listed by running <span class="monospaced">golo --help</span>.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Important" src="data:image/png;base64,
+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
+EQn3XQAAAABJRU5ErkJggg==">
+</td>
+<td class="content">The <span class="monospaced">golo</span> script comes with JVM tuning settings that may not be appropriate to your
+environment. We also provide a <span class="monospaced">vanilla-golo</span> script with no tuning. You may use the <span class="monospaced">$JAVA_OPTS</span>
+environment variable to provide custom JVM tuning to <span class="monospaced">vanilla-golo</span>.</td>
+</tr></table>
+</div>
 <div class="paragraph"><p>Provided that <span class="monospaced">golo</span> is available from your current <span class="monospaced">$PATH</span>, you may run the program above as
 follows:</p></div>
 <div class="listingblock">
@@ -1216,6 +1285,70 @@ variable.</p></div>
 <span class="gp">#</span> ...or you may use this one-liner
 <span class="gp">$</span> <span class="nv">JAVA_OPTS</span><span class="o">=</span>-XX:+PrintCompilation golo golo --files samples/fibonacci.golo
 </pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_bash_autocompletion">Bash autocompletion</h3>
+<div class="paragraph"><p>A bash script can be found in <span class="monospaced">share/shell-completion/</span> called <span class="monospaced">golo-bash-completion</span> that will provide autocomplete support for the <span class="monospaced">golo</span> and <span class="monospaced">vanilla-golo</span> CLI scripts. You may either <span class="monospaced">source</span> the script, or drop the script into your <span class="monospaced">bash_completion.d/</span> folder and restart your terminal.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img alt="Tip" src="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAKZUlEQVRoge2aa3BU5RmAn3Pbs7fs
+JmwCRGITk0hVLFAtNWoq6pAiU0cKaYfa6ShT+YN4YbQw9F/8QX+UMv6gM3Q6oxMV6TgIbe10Gq2g
+cSzDpRaFgmIk4SKB3LP3Pff+SM66m+xuFvEyzvSbeefsbva8+z7nvXzf934RHMfhmzzEr9uAqx3/
+B/i6xzceQP6iFDmT1cBxHNzCkFsgBEHIXnNeC1f7u1cN4DiOY9s2rliWhWVZWRDHcbJGC4KAJElI
+koQoioii6IiieFUgnxvAtm3HNdg0Tbq6uuju7ubYsWP09vYyMjKCpmmoqkokEqGhoYGFCxfS2tpK
+W1sbiqJkRZIkZxLoikGEK50H3CdumiZ9fX3s3LmT3bt3U1V3A0033cKc2nkEQxV4PSqSJOI4Dpqu
+k0gkGLx8kZ4T7zF87iSrV69m3bp1NDY2oqoqHo8HWZa5Uo9cEYBt245lWRiGQUdHB9u2beOe1Y8w
+/6bFVAT9xJJpYvEUiVSGjG5gmBY4DqIoonoUfF4PoYAfRRE5/8kp3njlD6xfv54tW7YQCATw+Xyu
+R8r2RtkAtm07pmly5MgRHn/8cZSaZpbcfjd+n5f+wVEGRqJkdCMv3vME8t77vB6qQn4+OX6YsXPH
+2bp1Ky0tLQQCAVRVdb0xI0RZZdQ1ft++fSxbtozrlqzgrnvvI5nRee9UL+f6h9B0A1EQEIsBiOKE
+TL7XdJOBkTg1jYtouu1+1qxZw549e4hGo6TTaUzTxLbtGZ/ujEmca/wvHnqYnz/2DLNn19B74TID
+I9HPjCvwlLMls4RHdMNC8IRZ8dBmnnp6E7Zts2rVKgB8Ph+yLDulPFEyhBzHcUzT5PDhwyxbtow1
+j3YQqanmozOfEk2kChuLQ3x0lGQihmM7qF4vVdWz8fr9hYFyoK30OG/ufpYXXniB1tZWwuEwXq8X
+WZaLJnZJAMuyHE3TuPPOO2lcsoLGpmZO9ZzPM37q0x0ZuISla2xY2077j5ZSFargZM9Znt97gE8u
+DBb3ziRIfPAcF4/v59VXX6W6uppQKISqqkiSVBCgaA64odPR0YFS00xjUzNnLlwmmkznxbKYI45j
+k04mefaZJ3j04VXMqZ6Fx6Pw3QXXs/3Xv6Tp2rnTALL3T8wDBCLz8M2Zz/bt24nFYjPmQ0EAt9b3
+9fWxbds2ltxxD0NjMQbdmC+QlIIgIIkSoWCAH971/Wk6PYrCg/f/oHiVmhSP6qWm/gY6Ozvp6ekh
+mUyi6zq2bWeXK+UAYFkWO3fu5N72dQT8Pi5cGp6xuoiiiBoMktH0gl5trp87DbqQBEMRbl32U3bt
+2kUikUDTtOzypGwAwzDYvXs3316wiEuDoxiGWVaZrAjP4qW/vFUQ4NAHPdlwKQWiqF4qa+ro6uoi
+kUiQTqcxDKM8ADd8Xn/9dWZdewMVwSCDo7GicT8NSBTZt/8oT259jgOHThBNpIgmUjy3dz/P7z2Q
+r2My7gs9FNUXoPpbN9Ld3Z0FKBRG0+YBN3y6u7tpWnAr8WR6+gxLfr03TYNMMolhGFimiWVbXDzb
+x4G3/4XgOIiyTF3DdW45nHG2RhBQfX6q65o5evQoy5cvn9BtWUiSRG5FLQhg2zbHjh3j+tsfKFrv
+3R8EGL7UT23NLNraWmi+ro5r5kSYHakiVOHH7/OiyDKxZIonf9NJIpWZMQcEwOPx4vNXcPr0B2Qy
+mdxEzrO34ExsWRa9vb3csjzEaP9w1sUFZ1RBQJJk/vjbTdTXzS2kDoBQwI9HmcEDOSJ7PAiiSH9/
+P7quY5omlmVN01soB3Ach5GREbyqiqabM8a+NxAglcmvPOf7h9jR+WdOfNQLwNtHTzIeT+XFfdGC
+IAiIogSOQzQaxTRNdy4ozwO2baNpGpIkY1j2RAJTeJ0jCAKRmtmcPHORmkglxz48y/5DJ3jrnUPM
+b7iGxx7+MZZls/efR0rG/VQPgwMC2eQtZHxRAABVVbM3lEpgV178azcvvfYOgiCgZTJomsbGR9oR
+BIHzl4YYGo2VlcCuWOaE5xVFwbbtqVHiCJOZXBQgEomg6zqSKOIUMrqER+LRKItvaubW78wH4NLQ
+WNmx7+q1DB1ZkgmFQohifqS7xhcFEEWRhoYGEokEqkeeWPLmurcEiGPbpJJJfvbAPVl95/qHJyYv
+mH5/EdG1FA5QW1ubzZvc8pm1deoHroKFCxcycPkiPlWdnmC5iTxlVk2n0wT9Xu69Y3FW51g8OfH3
+ye+WnAgnRcukyKQSNDU1Icty7n65NACAJEm0trbSc/zfVAT9JZ/U1NWklslwx/duxqMoWX0Zzcy/
+bwr0VCDT0NDTSS6f/ZBFixZlN/ySJJXnAVEUaWtrY6DvOIoiFlx5FhPLsrjl5uvzdPq8nsLfL6I3
+FR1FlhUG+v5LS0tLtmtRlgcEYaL5pCgKq1ev5lzPKfxeT8FwKSQA115Tk6eztjpcsubn6rUMnfj4
+MLHxIZYuXYrX683rVpQDIIiiiKIorFu3jn+8vIPKCt+0cCkG4m4Bc0fd3OqCoVIIJDo2iCQrvPu3
+F1m5cmVeu6VQz6hgDrj1t7GxkfXr1/Px+wdRPcr02C+wmgxVVnLm3KU8ffNmVxX03lSgRHSEVGyc
+oYt9tLe3U19fTzAYzAKUVYVyw0hVVbZs2cJw7/uYyZGSIeCCeFWVd499jGGaWX1zq8OfrYOKeC+T
+ijM+cBHHsRju/Q9r164lFAoRDAbdPfEVAQiiKOLxeAgEAmzdupW/v/A7RLPEyjTHuGjKYMfLb3B5
+eBzdMNl/+CSmZReN+0wqztDFs4iSxIE9O9mwYQPhcJhwOEwgEMhN4GkEZXUlYrEYe/bs4elfbWLF
+Q5tQKyJlVaRy+kSJ6AhjA58iihJdf9rBUxufYPny5cyZM6esrkTJxpabzIFAgFWrVmHbNps3b+bu
+n6wnVF2H4lHLmlULgZiGTmxkgGR8DNu2efOV3/PUxo20tbURiUSorKwkEAhkk7fYmLE36rZX0uk0
+0WiUgwcP0tHRQcW8G5ndsIBgaBYe1TvtyRYDMXWNZGyU+Ngwkiwz+GkfQ73vsWHDBhYvXkwkEmHW
+rFmEw2G3M1eyR1pWczcXIh6PMz4+zvbt2+ns7OS2+x6kanYdqjeA1xdAUb3IioIoSjg42JaJaejo
+mTRaOoGeTiHJEvGxYd55rZP29nbWrl1LOBymqqqKyspKKioqyjK+bIBcCE3TSCaTxGIxenp62LVr
+F11dXdTUL2BO/Xx8/goEUcSxbYSJ2EGS5IlzgnSC/r4PuXzmOEuXLmXlypXU19cTCoUIh8OEQqEr
+7k5/7vOBdDpNMpkkkUiQSCTo7u7m6NGjnD59mv7+fqLRKIZhoCgKoVCI2tpampqaWLRoES0tLfh8
+Pvx+P8FgkGAw+OWfD7gj94RG13U0TSOdTpNOp8lMbmQ0TcvbArrrK1mW8Xg8eL3e7BLB5/N9dSc0
+uSP3jMwwjKy4G3AXwB0ugAsx5YzMndW//DOy3OFMjGwrxrKs7NX9LBfAneFFUcxec6rU5zqpvCqA
+qTCT16/0nPgLA/i6xjf+Xw3+B2ll/uiqTaJTAAAAAElFTkSuQmCC">
+</td>
+<td class="content">Not sure where your <span class="monospaced">bash_completion.d/</span> folder is? Try <span class="monospaced">/etc/bash_completion.d/</span> on Linux or <span class="monospaced">/usr/local/etc/bash_completion.d/</span> for Mac Homebrew users.</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_zsh_autocompletion">Zsh autocompletion</h3>
+<div class="paragraph"><p>A zsh script can be found in <span class="monospaced">share/shell-completion/</span> called <span class="monospaced">golo-zsh-completion</span> that works using the <span class="monospaced">golo-bash-completion</span> to provide autocomplete support using the bash autocomplete support provided by zsh. Place both files into the same directory and <span class="monospaced">source golo-zsh-completion</span> from your terminal or <span class="monospaced">.zshrc</span> to give it a try!</p></div>
 </div>
 <div class="sect2">
 <h3 id="_comments">Comments</h3>
@@ -1715,6 +1848,145 @@ let b = array["a", "b"]</pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_creating_new_project_s">Creating new project(s)</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The <span class="monospaced">golo new</span> command can create new Golo project(s):</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> golo new Foo
+</pre></div></div></div>
+<div class="paragraph"><p>The command creates a new Golo module named <span class="monospaced">Foo</span> in a <span class="monospaced">main.golo</span> file with a simple <em>function</em>
+named <span class="monospaced">main</span> that takes an argument for the JVM program arguments.</p></div>
+<div class="paragraph"><p>By default we create a new free-form project but you can specify the type of project with the
+<span class="monospaced">--type</span> command argument. Three types of projects are currently available:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Free-form project,
+</p>
+</li>
+<li>
+<p>
+Maven-driven project,
+</p>
+</li>
+<li>
+<p>
+Gradle-driven project.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>As an example if you want to create a Maven-driven project, just add <span class="monospaced">--type maven</span>:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> golo new Foo --type maven
+</pre></div></div></div>
+<div class="paragraph"><p>By default we create the project directory where the <span class="monospaced">golo</span> command is run. If you need to create
+your project directory elsewhere you can use the <span class="monospaced">--path</span> command argument:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> golo new Bar --path /opt/golo
+</pre></div></div></div>
+<div class="paragraph"><p>This creates the project directory named <span class="monospaced">Bar</span> in <span class="monospaced">/opt/golo</span>.</p></div>
+<div class="sect2">
+<h3 id="_free_form_project">Free-form project</h3>
+<div class="paragraph"><p>The structure of a free-form project is as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> tree Foo
+<span class="go">Foo</span>
+<span class="go">├── imports</span>
+<span class="go">├── jars</span>
+<span class="go">└── main.golo</span>
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_maven_driven_project">Maven-driven project</h3>
+<div class="paragraph"><p>The structure of a Maven-driven project is as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> tree Foo
+<span class="go">Foo</span>
+<span class="go">├── pom.xml</span>
+<span class="go">└── src</span>
+<span class="go">    └── main</span>
+<span class="go">        └── golo</span>
+<span class="go">            └── main.golo</span>
+</pre></div></div></div>
+<div class="paragraph"><p>The project can be built and packaged with Maven using the following command:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> mvn package
+</pre></div></div></div>
+<div class="paragraph"><p>You can now run the module <span class="monospaced">Foo</span> with:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">mvn</span>
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> mvn <span class="nb">exec</span>:java
+</pre></div></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">java</span>
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> java -jar target/Foo-*-jar-with-dependencies.jar
+</pre></div></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">golo</span>
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>target/classes
+<span class="gp">$</span> golo run --module Foo
+</pre></div></div></div>
+</div>
+<div class="sect2">
+<h3 id="_gradle_driven_project">Gradle-driven project</h3>
+<div class="paragraph"><p>The structure of a Gradle-driven project is as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> tree Foo
+<span class="go">Foo</span>
+<span class="go">├── build.gradle</span>
+<span class="go">└── src</span>
+<span class="go">    └── main</span>
+<span class="go">        └── golo</span>
+<span class="go">            └── main.golo</span>
+</pre></div></div></div>
+<div class="paragraph"><p>The project can be built and packaged with Gradle using the following command:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> gradle build
+</pre></div></div></div>
+<div class="paragraph"><p>You can now run the module <span class="monospaced">Foo</span> with:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">gradle</span>
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> gradle run
+</pre></div></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="monospaced">golo</span>
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> <span class="nb">cd </span>build/classes/main
+<span class="gp">$</span> golo run --module Foo
+</pre></div></div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_functions">Functions</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Functions are first-class citizen in Golo. Here is how to define and
@@ -1857,9 +2129,9 @@ println(elementAt(1, 1, 2, 3))
 </div>
 <div class="sect2">
 <h3 id="_functions_from_other_modules_and_imports">Functions from other modules and imports</h3>
-<div class="paragraph"><p>Suppose that we have a module <span class="monospaced">Foo.Bar</span>:</p></div>
+<div class="paragraph"><p>Suppose that we have a module <span class="monospaced">foo.Bar</span>:</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>module Foo.Bar
+<div class="content"><div class="highlight"><pre>module foo.Bar
 
 function f = {
   return &quot;f()&quot;
@@ -1868,13 +2140,13 @@ function f = {
 <div class="paragraph"><p>We can invoke <span class="monospaced">f</span> from another module by prefixing it with its module
 name:</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre>let r = Foo.Bar.f()
+<div class="content"><div class="highlight"><pre>let r = foo.Bar.f()
 </pre></div></div></div>
 <div class="paragraph"><p>Of course, we may also take advantage of an <span class="monospaced">import</span> statement:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre>module Somewhere.Else
 
-import Foo.Bar
+import foo.Bar
 
 function plop = {
   return f()
@@ -1943,12 +2215,12 @@ equivalent:</p></div>
 <div class="listingblock">
 <div class="content"><div class="highlight"><pre>module Somewhere.Else
 
-import Foo.Bar
+import foo.Bar
 
 function plop = {
   let result = f()
   let result_bis = Bar.f()
-  let result_full = Foo.Bar.f()
+  let result_full = foo.Bar.f()
   return result
 }
 </pre></div></div></div>
@@ -1985,6 +2257,27 @@ function i_will_crash = {
 <h2 id="_java_interoperability">Java interoperability</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Golo aims at providing a seamless 2-way interoperability with the Java programming language.</p></div>
+<div class="sect2">
+<h3 id="_main_function_java_compliance">Main function Java compliance</h3>
+<div class="paragraph"><p>If the Golo compiler find a unary function named <span class="monospaced">main</span>, it will be compiled to a <span class="monospaced">void(String[])</span> static method.
+This <span class="monospaced">main</span> method can servers as a JVM entry point.</p></div>
+<div class="paragraph"><p>Suppose that we have the following Golo module:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre>module mainEntryPoint
+
+
+function main = |args| {
+  println(&quot;-&gt; &quot; + args: get(0))
+}
+</pre></div></div></div>
+<div class="paragraph"><p>Once compiled, we may invoke it as follows:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> golo compile mainEntryPoint.golo
+<span class="gp">$</span> java -cp <span class="s2">&quot;.:golo.jar&quot;</span> mainEntryPoint GoloRocks
+<span class="go">-&gt; GoloRocks</span>
+<span class="gp">$</span>
+</pre></div></div></div>
+</div>
 <div class="sect2">
 <h3 id="_calling_static_methods">Calling static methods</h3>
 <div class="paragraph"><p>Golo can invoke public Java static methods by treating them as functions:</p></div>
@@ -3142,6 +3435,19 @@ task, fetch the result with a <span class="monospaced">Future</span> object then
 </pre></div></div></div>
 </div>
 <div class="sect2">
+<h3 id="_direct_closure_passing_works">Direct closure passing works</h3>
+<div class="paragraph"><p>When a function or method parameter of a Java API expects a single method interface type, you
+can pass a closure directly, as in:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre># (...)
+let button = JButton(&quot;Click me!&quot;)
+button: addActionListener(|event| -&gt; println(&quot;Clicked!&quot;))
+</pre></div></div></div>
+<div class="paragraph"><p>Note that this causes the creation of a method handle proxy object for each function or method
+invocation. For performance-sensitive contexts, we suggest that you use either <span class="monospaced">asInterfaceInstance</span>
+or the <span class="monospaced">to</span> conversion method described hereafter.</p></div>
+</div>
+<div class="sect2">
 <h3 id="_conversion_to_single_method_interfaces">Conversion to single-method interfaces</h3>
 <div class="paragraph"><p>Instead of using <span class="monospaced">asInterfaceInstance</span>, you may use a <strong>class augmentation</strong> which is described later in this
 documentation. In short, it allows you to call a <span class="monospaced">to</span> method on instances of <span class="monospaced">MethodHandle</span>, which
@@ -3781,559 +4087,19 @@ taste</strong> (for what it means).</td>
 </div>
 <div class="sect2">
 <h3 id="_standard_augmentations">Standard augmentations</h3>
-<div class="paragraph"><p>Golo comes with a set of pre-defined augmentations.</p></div>
-<div class="admonitionblock">
-<table><tr>
-<td class="icon">
-<img alt="Caution" src="data:image/png;base64,
-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">
-</td>
-<td class="content">Until we have a tool to extract the documentation from Golo source files, their documentation will
-simply be the inclusion of that file content.</td>
-</tr></table>
-</div>
+<div class="paragraph"><p>Golo comes with a set of pre-defined augmentations over collections, strings, closures and more.</p></div>
+<div class="paragraph"><p>These augmentation do not require a special import, and they are defined in the
+<span class="monospaced">gololang.StandardAugmentations</span> module.</p></div>
+<div class="paragraph"><p>Here is an example:</p></div>
 <div class="listingblock">
-<div class="content"><div class="highlight"><pre># ............................................................................................... #
-#
-# Copyright 2012-2013 Institut National des Sciences Appliquées de Lyon (INSA-Lyon)
-#
-# Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-# ............................................................................................... #
-
-module gololang.StandardAugmentations
-
-
-local function _newWithSameType = |this| {
-  try {
-    return this: getClass(): newInstance()
-  } catch (e) {
-    if not(e oftype java.lang.InstantiationException.class) {
-      throw e
-    }
-    let fallback = match {
-      when this oftype java.util.RandomAccess.class then java.util.ArrayList()
-      when this oftype java.util.List.class then java.util.LinkedList()
-      when this oftype java.util.Set.class then java.util.HashSet()
-      when this oftype java.util.Map.class then java.util.HashMap()
-      otherwise null
-    }
-    if fallback is null {
-      raise(&quot;Cannot create a new collection from &quot; + this: getClass())
-    }
-    return fallback
-  }
-}
-
-local function _closureWithIndexArgument = |target| -&gt; match {
-  when target: type(): parameterCount() == 0
-    then java.lang.invoke.MethodHandles.dropArguments(target, 0, java.lang.Object.class)
-  otherwise
-    target
-}
-
-# ............................................................................................... #
-
-augment java.lang.Number {
-
-  function times = |count, func| {
-    let target = _closureWithIndexArgument(func)
-    for (var i = 0, i &lt; count, i = i + 1) {
-      target(i)
-    }
-  }
-
-  function upTo = |low, high, func| {
-    let target = _closureWithIndexArgument(func)
-    for (var i = low, i &lt;= high, i = i + 1) {
-      target(i)
-    }
-  }
-
-  function downTo = |high, low, func| {
-    let target = _closureWithIndexArgument(func)
-    for (var i = high, i &gt;= low, i = i - 1) {
-      target(i)
-    }
-  }
-}
-
-# ............................................................................................... #
-
-augment java.lang.invoke.MethodHandle {
-
-  function to = |this, interfaceClass| -&gt; asInterfaceInstance(interfaceClass, this)
-
-  function andThen = |this, filter| -&gt;
-    java.lang.invoke.MethodHandles.filterReturnValue(this, filter)
-
-  function bindAt = |this, pos, val| -&gt;
-    java.lang.invoke.MethodHandles.insertArguments(this, pos, val)
-
-  function spread = |this, args| -&gt; this:
-    asSpreader(objectArrayType(), args: length()):
-    invokeWithArguments(args)
-}
-
-# ............................................................................................... #
-
-augment java.lang.String {
-
-  function format = |this, args...| {
-    if args: length() == 1 {
-      return java.lang.String.format(this, args: get(0))
-    } else {
-      return java.lang.String.format(this, args)
-    }
-  }
-
-  function toInt = |this| -&gt;
-    java.lang.Integer.parseInt(this)
-
-  function toInteger = |this| -&gt;
-    java.lang.Integer.parseInt(this)
-
-  function toDouble = |this| -&gt;
-    java.lang.Double.parseDouble(this)
-
-  function toFloat = |this| -&gt;
-    java.lang.Float.parseFloat(this)
-
-  function toLong = |this| -&gt;
-    java.lang.Long.parseLong(this)
-}
-
-# ............................................................................................... #
-
-augment java.lang.Iterable {
-
-  function reduce = |this, initialValue, func| {
-    var acc = initialValue
-    foreach (element in this) {
-      acc = func(acc, element)
-    }
-    return acc
-  }
-
-  function each = |this, func| {
-    foreach (element in this) {
-      func(element)
-    }
-    return this
-  }
-
-  function count = |this, pred| -&gt;
-    this: filter(pred): size()
-
-  function exists = |this, pred| -&gt;
-    this: filter(pred): size() &gt; 0
-
-}
-
-# ............................................................................................... #
-
-augment java.util.Collection {
-
-  function newWithSameType = |this| -&gt; _newWithSameType(this)
-
-}
-
-# ............................................................................................... #
-
-augment java.util.List {
-
-  function append = |this, element| {
-    this: add(element)
-    return this
-  }
-
-  function prepend = |this, element| {
-    this: add(0, element)
-    return this
-  }
-
-  function insert = |this, index, element| {
-    this: add(index, element)
-    return this
-  }
-
-  function append = |this, head, tail...| {
-    this: append(head)
-    foreach (element in tail) {
-      this: append(element)
-    }
-    return this
-  }
-
-  function prepend = |this, head, tail...| {
-    for (var i = tail: length() - 1, i &gt;= 0, i = i - 1) {
-      this: prepend(tail: get(i))
-    }
-    return this: prepend(head)
-  }
-
-  function head = |this| -&gt; this: get(0)
-  function tail = |this| -&gt; this: subList(1, this: size())
-  function unmodifiableView = |this| -&gt; java.util.Collections.unmodifiableList(this)
-
-  function find = |this, pred| {
-    foreach (element in this) {
-      if pred(element) {
-        return element
-      }
-    }
-    return null
-  }
-
-  function filter = |this, pred| {
-    let filtered = this: newWithSameType()
-    foreach (element in this) {
-      if pred(element) {
-        filtered: append(element)
-      }
-    }
-    return filtered
-  }
-
-  function map = |this, func| {
-    let mapped = this: newWithSameType()
-    foreach (element in this) {
-      mapped: append(func(element))
-    }
-    return mapped
-  }
-
-  function join = |this, separator| {
-    var buffer = java.lang.StringBuilder(&quot;&quot;)
-    if not (this: isEmpty()) {
-      buffer: append(this: head())
-      let tail = this: tail()
-      if not (tail: isEmpty()) {
-        buffer: append(separator)
-        buffer: append(tail: join(separator))
-      }
-    }
-    return buffer: toString()
-  }
-
-  function reverse = |this| {
-    java.util.Collections.reverse(this)
-    return this
-  }
-
-  function reversed = |this| {
-    let reversedList = this: newWithSameType()
-    reversedList: addAll(this)
-    return reversedList: reverse()
-  }
-
-  function order = |this| {
-    java.util.Collections.sort(this)
-    return this
-  }
-
-  function ordered = |this| {
-    let sortedList = this: newWithSameType()
-    sortedList: addAll(this)
-    return sortedList: order()
-  }
-
-  function order = |this, comparator| {
-    java.util.Collections.sort(this, comparator)
-    return this
-  }
-
-  function ordered = |this, comparator| {
-    let sortedList = this: newWithSameType()
-    sortedList: addAll(this)
-    return sortedList: order(comparator)
-  }
-}
-
-# ............................................................................................... #
-
-augment java.util.Set {
-
-  function include = |this, element| {
-    this: add(element)
-    return this
-  }
-
-  function exclude = |this, element| {
-    this: remove(element)
-    return this
-  }
-
-  function include = |this, first, rest...| {
-    this: add(first)
-    foreach (element in rest) {
-      this: add(element)
-    }
-    return this
-  }
-
-  function exclude = |this, first, rest...| {
-    this: remove(first)
-    foreach (element in rest) {
-      this: remove(element)
-    }
-    return this
-  }
-
-  function has = |this, element| -&gt; this: contains(element)
-
-  function has = |this, first, rest...| {
-    if not(this: contains(first)) {
-      return false
-    } else {
-      foreach (element in rest) {
-        if not(this: contains(element)) {
-          return false
-        }
-      }
-    }
-    return true
-  }
-
-  function unmodifiableView = |this| -&gt; java.util.Collections.unmodifiableSet(this)
-
-  function find = |this, pred| {
-    foreach (element in this) {
-      if pred(element) {
-        return element
-      }
-    }
-    return null
-  }
-
-  function filter = |this, pred| {
-    let filtered = this: newWithSameType()
-    foreach (element in this) {
-      if pred(element) {
-        filtered: include(element)
-      }
-    }
-    return filtered
-  }
-
-  function map = |this, func| {
-    let mapped = this: newWithSameType()
-    foreach (element in this) {
-      mapped: include(func(element))
-    }
-    return mapped
-  }
-}
-
-# ............................................................................................... #
-
-augment java.util.Map {
-
-  function add = |this, key, value| {
-    this: put(key, value)
-    return this
-  }
-
-  function delete = |this, key| {
-    this: remove(key)
-    return this
-  }
-
-  function addIfAbsent = |this, key, value| {
-    if not(this: containsKey(key)) {
-      if isClosure(value) {
-        this: put(key, value())
-      } else {
-        this: put(key, value)
-      }
-    }
-    return this
-  }
-
-  function getOrElse = |this, key, replacement| {
-    let value = this: get(key)
-    if value isnt null {
-      return value
-    }
-    if isClosure(replacement) {
-      return replacement()
-    } else {
-      return replacement
-    }
-  }
-
-  function unmodifiableView = |this| -&gt; java.util.Collections.unmodifiableMap(this)
-
-  function newWithSameType = |this| -&gt; _newWithSameType(this)
-
-  function find = |this, pred| {
-    foreach (entry in this: entrySet()) {
-      let key = entry: getKey()
-      let value = entry: getValue()
-      if pred(key, value) {
-        return entry
-      }
-    }
-    return null
-  }
-
-  function filter = |this, pred| {
-    let filtered = this: newWithSameType()
-    foreach (entry in this: entrySet()) {
-      let key = entry: getKey()
-      let value = entry: getValue()
-      if pred(key, value) {
-        filtered: put(key, value)
-      }
-    }
-    return filtered
-  }
-
-  function map = |this, func| {
-    let mapped = this: newWithSameType()
-    foreach (entry in this: entrySet()) {
-      let key = entry: getKey()
-      let value = entry: getValue()
-      let result = func(key, value)
-      mapped: put(result: getKey(), result: getValue())
-    }
-    return mapped
-  }
-
-  function reduce = |this, initialValue, func| {
-    var acc = initialValue
-    foreach (entry in this: entrySet()) {
-      let key = entry: getKey()
-      let value = entry: getValue()
-      acc = func(acc, key, value)
-    }
-    return acc
-  }
-
-  function each = |this, func| {
-    foreach (entry in this: entrySet()) {
-      func(entry: getKey(), entry: getValue())
-    }
-    return this
-  }
-
-  function count = |this, pred| -&gt;
-    this: filter(pred): size()
-
-  function exists = |this, pred| -&gt;
-    this: filter(pred): size() &gt; 0
-}
-
-# ............................................................................................... #
-
-augment gololang.Tuple {
-
-  function find = |this, pred| {
-    foreach (element in this) {
-      if pred(element) {
-        return element
-      }
-    }
-    return null
-  }
-
-  function filter = |this, func| {
-    let matching = list[]
-    foreach element in this {
-      if func(element) {
-        matching: add(element)
-      }
-    }
-    return gololang.Tuple.fromArray(matching: toArray())
-  }
-
-  function map = |this, func| {
-    let values = list[]
-    foreach element in this {
-      values: add(func(element))
-    }
-    return gololang.Tuple.fromArray(values: toArray())
-  }
-
-  function join = |this, separator| {
-    let size = this: size()
-    case {
-      when size == 0 {
-        return &quot;&quot;
-      }
-      when size == 1 {
-        return this: get(0): toString()
-      }
-      otherwise {
-        let buffer = java.lang.StringBuilder(this: get(0): toString())
-        for (var i = 1, i &lt; size, i = i + 1) {
-          buffer: append(separator): append(this: get(i): toString())
-        }
-        return buffer: toString()
-      }
-    }
-  }
-}
-
-# ............................................................................................... #
-</pre></div></div></div>
+<div class="content monospaced">
+<pre>let odd = [1, 2, 3, 4, 5]: filter(|n| -&gt; (n % 2) == 0)
+
+let m = map[]
+println(m: getOrElse("foo", -&gt; "bar"))</pre>
+</div></div>
+<div class="paragraph"><p>The full set of standard augmentations is documented in the generated <strong>golodoc</strong> (hint: look for
+<span class="monospaced">doc/golodoc</span> in the Golo distribution).</p></div>
 </div>
 </div>
 </div>
@@ -4416,6 +4182,30 @@ function main = |args| {
 <div class="listingblock">
 <div class="content monospaced">
 <pre>struct Point{x=1, y=2}</pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_immutable_structs">Immutable structs</h3>
+<div class="paragraph"><p>Structure instances are mutable by default. Golo generates a factory function with the <span class="monospaced">Immutable</span>
+prefix to directly build immutable instances:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>module test
+
+struct Point = { x, y }
+
+function main = |args| {
+
+  let p = ImmutablePoint(1, 2)
+  println(p)
+
+  try {
+    # Fails! (p is immutable)
+    p: x(100)
+  } catch (expected) {
+    println(expected: getMessage())
+  }
+}</pre>
 </div></div>
 </div>
 <div class="sect2">
@@ -4593,8 +4383,8 @@ Pvx+P8FgkGAw+OWfD7gj94RG13U0TSOdTpNOp8lMbmQ0TcvbArrrK1mW8Xg8eL3e7BLB5/N9dSc0
 uSP3jMwwjKy4G3AXwB0ugAsx5YzMndW//DOy3OFMjGwrxrKs7NX9LBfAneFFUcxec6rU5zqpvCqA
 qTCT16/0nPgLA/i6xjf+Xw3+B2ll/uiqTaJTAAAAAElFTkSuQmCC">
 </td>
-<td class="content">It is recommended that you use <span class="monospaced">frozenCopy()</span> when you can, especially when storing values into
-collections.</td>
+<td class="content">It is recommended that you use <span class="monospaced">Immutable&lt;name of struct&gt;(...)</span> or <span class="monospaced">frozenCopy()</span> when you can,
+especially when storing values into collections.</td>
 </tr></table>
 </div>
 </div>
@@ -4688,6 +4478,11 @@ think of it as an enhancement over using hash maps and putting closures in them.
 <li>
 <p>
 <span class="monospaced">properties()</span> gives the set of entries in the dynamic object, and
+</p>
+</li>
+<li>
+<p>
+<span class="monospaced">hasMethod(name)</span> checks if a method is defined or not in the dynamic object, and
 </p>
 </li>
 <li>
@@ -5859,6 +5654,71 @@ more details.</td>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_documenting_golo_code">Documenting Golo code</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Of course you can document your code using comments (<span class="monospaced">#</span>), but who reads source code?</p></div>
+<div class="sect2">
+<h3 id="_documentation_blocks">Documentation blocks</h3>
+<div class="paragraph"><p>Golo provides a support for documentation blocks on modules, functions, augmentations and structs.
+Blocks are delimited by <span class="monospaced">----</span> and contain free-form
+<a href="http://daringfireball.net/projects/markdown/syntax">Markdown text</a>.</p></div>
+<div class="paragraph"><p>Here is a quick example:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>----
+This is a *nice* module that does a bunch of useless things.
+
+See more at [our website](http://www.typeunsafe.org).
+----
+module Hello
+
+----
+Adds 2 elements, which is quite surprising given the name.
+
+* `x` is the first argument,
+* `y` is the second argument.
+
+The following snipped prints `3`:
+
+    let result = adder(1, 2)
+    println(result)
+
+Impressive!
+----
+function adder = |x, y| -&gt; x + y</pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_rendering_documentation">Rendering documentation</h3>
+<div class="paragraph"><p>The <span class="monospaced">golo doc</span> command can render documentation in <span class="monospaced">html</span> (the default) or <span class="monospaced">markdown</span> format:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span class="gp">$</span> golo doc --output target/documentation src/**/*.golo
+</pre></div></div></div>
+<div class="paragraph"><p>Please consult <span class="monospaced">golo help</span> for more details.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_alignment">Alignment</h3>
+<div class="paragraph"><p>It is sometimes necessary to indent documentation blocks to match the surrounding code format.
+Documentation blocks erase indentation based on the indentation level of the opening block:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>----
+The most useful augmentation *ever*.
+----
+augment java.lang.String {
+
+  ----
+  Creates a URL from a string, as in: `let url = "http://foo.bar/plop": toURL()`.
+  ----
+  function toURL = |this| -&gt; java.net.URL(this)
+}</pre>
+</div></div>
+<div class="paragraph"><p>When generating documentation from the code above, the documentation block of the <span class="monospaced">toURL</span> function
+is unindented of 2 spaces.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_common_pitfalls">Common pitfalls</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Discovering a new programming language is fun. Yet, we all make mistakes in the beginning, as we
@@ -5936,7 +5796,7 @@ println(foo(&quot;abc&quot;))
 <div id="footnotes"><hr></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-11-05 09:28:31 CET
+Last updated 2013-12-09 09:53:34 CET
 </div>
 </div>
 </body>
