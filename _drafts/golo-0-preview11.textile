@@ -1,0 +1,260 @@
+---
+layout: news
+title: "Now available: Golo 0-preview11"
+---
+
+We are pleased to announce the release of Golo 0-preview11. This is the first release of 2014
+following Golo 0-preview10 last December.
+
+You can "download a Golo 0-preview11 now":/download/ with the following noteworthy changes:
+
+* fallback methods for dynamic objects,
+* lax imports,
+* new JMH-based benchmarks,
+* struct members encapsulation,
+* Go-style objects.
+* asynchronous future and promises API.
+
+h3. What's new?
+
+h4. Fallbacks methods for dynamic objects
+
+Daniel contributed the support of fallback methods for dynamic objects. Here is an example snippet:
+
+{% highlight text %}
+let obj = DynamicObject(): fallback(|this, method, args...| {
+  return "Method: " + method + ", with args: " + args: asList(): join(" ")
+})
+
+println(obj: casperGetter())
+println(obj: casperMethod("foo", "bar"))
+{% endhighlight %}
+
+As you can see, this can be used to provide a default behavior when a method is not defined in a
+dynamic object instance.
+
+h4. Lax imports
+
+Lax imports widen the range of valid imports in Golo, as in:
+
+{% highlight text %}
+import java.util
+function foo = -> Arrays.asList(1, 2, 3)
+{% endhighlight %}
+
+or,
+
+{% highlight text %}
+import java
+function foo = -> util.Arrays.asList(1, 2, 3)
+{% endhighlight %}
+
+Previously, one would have had to use either of the following constructs:
+
+{% highlight text %}
+import java.util.Arrays
+function foo = -> Arrays.asList(1, 2, 3)
+{% endhighlight %}
+
+or,
+
+{% highlight text %}
+import java.util.Arrays
+function foo = -> asList(1, 2, 3)
+{% endhighlight %}
+
+h4. New benchmarks
+
+We rewrote our benchmarks using the "OpenJDK JMH harness":http://openjdk.java.net/projects/code-tools/jmh/.
+
+Benchmarking on the JVM/HotSpot is hard, especially as the virtual machine is doing lots of
+optimizations that can defeat the purpose of your benchmarks. JMH provides great support to mitigate
+these effects and get more meaningful results.
+
+h4. Struct members encapsulation
+
+It is now possible to make some struct members private by prefixing them with @_@, as in:
+
+{% highlight text %}
+struct Foo = { a, _b, c }
+
+# (...)
+
+let foo = Foo(1, 2, 3)
+{% endhighlight %}
+
+In this case, @_b@ is a private struct member. This means that @foo: _b()@ and @foo: _b(666)@ are
+valid calls only if made from:
+
+* a function from the declaring module, or
+* an augmentation defined in the declaring module.
+
+Any call to, say, @foo: _b()@ from another module will yield a @NoSuchMethodError@ exception.
+
+Private struct members also have the following impact:
+
+* they do not appear in @members()@ and @values()@ calls, and
+* they are not iterated through @iterator()@-provided iterators, and
+* they are being used like other members in @equals()@ and @hashCode()@, and
+* they do not appear in @toString()@ representations.
+
+h4. Go-style "objects", simpler same-module struct augmentations
+
+Struct members encapsulation offers a simple object mecanism for Golo that is very much like what
+the "Google Go":http://golang.org programming language offers. More precisely:
+
+* Golo structs offers containers for state where some members can be encapsulated, and
+* Golo augmentations provide methods over instances of structs.
+
+To make this more practical, we simplified same-module struct augmentations declarations.
+Previously, one had to to the following:
+
+{% highlight text %}
+module Plop
+
+struct Foo = { a, b, _c }
+
+augment Plop.types.Foo {
+  function whatever = |receiver, a, b| -> "Plop"
+}
+{% endhighlight %}
+
+Now one can simply omit the full struct qualified name:
+
+{% highlight text %}
+module Plop
+
+struct Foo = { a, b, _c }
+
+augment Foo {
+  function whatever = |receiver, a, b| -> "Plop"
+}
+{% endhighlight %}
+
+h4. Asynchronous helpers with promises and futures
+
+The new @gololang.Async@ module provides helpers for composable futures and promises to support
+asynchronous programming model.
+
+The API that we designed is orthogonal to the underlying execution strategy, so you may opt to
+execute some stream operations on the same thread, in a new thread, in a new executor task and so
+on.
+
+You should consult the "golodoc":/documentation/next/golodoc/ to learn more about the API, but here
+is some sample code to give you a feeling of how this works:
+
+{% highlight text %}
+module samples.AsyncHelpers
+
+import gololang.Async
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.Executors
+
+local function fib = |n| {
+  if n <= 1 {
+    return n
+  } else {
+    return fib(n - 1) + fib(n - 2)
+  }
+}
+
+function main = |args| {
+
+  let executor = newCachedThreadPool()
+  println("Let's do some useless asynchronous operations...")
+
+  var f = executor: enqueue({
+    Thread.sleep(1000_L)
+    return 666
+  })
+  f:
+    onSet(|v| -> println(">>> #slow -> " + v)):
+    onFail(|e| -> println(">>> #fail -> " + e))
+  f:
+    cancel(true)
+
+  f = executor: enqueue({
+    Thread.sleep(1000_L)
+    return 666
+  })
+  f:
+    onSet(|v| -> println(">>> #ok -> " + v)):
+    onFail(|e| -> println(">>> #wtf? -> " + e))
+
+  let fib_10 = promise()
+  let fib_20 = promise()
+  let fib_30 = promise()
+  let fib_40 = promise()
+
+  let futures = [
+    fib_10: future(), fib_20: future(),
+    fib_30: future(), fib_40: future()
+  ]
+
+  executor: submit(-> fib_10: set(fib(10)))
+  executor: submit(-> fib_20: set(fib(20)))
+  executor: submit(-> fib_30: set(fib(30)))
+  executor: submit(-> fib_40: set(fib(40)))
+
+  all(futures): onSet(|results| -> println(">>> Fibs: " + results))
+
+  let truth = promise()
+  truth:
+    future():
+    map(|v| -> "truth=" + v):
+    onSet(|v| -> executor: submit(-> println(">>> (another thread) " + v))):
+    onSet(|v| -> println(">>> (same thread) " + v))
+  executor: submit({
+    Thread.sleep(500_L)
+    truth: set(42)
+  })
+
+  Thread.sleep(1000_L)
+  executor: shutdown()
+  executor: awaitTermination(2_L, SECONDS())
+  println("Bye!")
+}
+{% endhighlight %}
+
+h4. @textToFile@ fix
+
+Philippe spotted a bug in the @fileToText@ function implementation where files would not be
+truncated on overwrites.
+
+In the best spirit of opensource, he also provided a fix.
+
+h3. In the community
+
+h4. Atom editor
+
+GitHub is working on a new text editor called "Atom":https://atom.io, and Philippe did an awesome
+job in providing "a support package for Golo":https://github.com/k33g/language-golo:
+
+!/images/posts/golo-atom.gif!
+
+Good job Philippe!
+
+h4. LLVM hacking
+
+Franck Verrot has been playing with a "LLVM":http://llvm.org/ generation from Golo code:
+
+<blockquote class="twitter-tweet" lang="en"><p>One of today&#39;s achievement: compiling a <a href="https://twitter.com/golo_lang">@golo_lang</a> function with goloc-llvm, then using it in a <a href="https://twitter.com/RubyMotion">@RubyMotion</a> app. Yeay for <a href="https://twitter.com/search?q=%23LLVM&amp;src=hash">#LLVM</a> !</p>&mdash; Franck Verrot (@franckverrot) <a href="https://twitter.com/franckverrot/statuses/437301227345678337">February 22, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" lang="en"><p>Is <a href="https://twitter.com/golo_lang">@golo_lang</a> going native? Probably not, but I know it could… :-) <a href="http://t.co/nOniVLW8ej">http://t.co/nOniVLW8ej</a></p>&mdash; Franck Verrot (@franckverrot) <a href="https://twitter.com/franckverrot/statuses/434675805583835136">February 15, 2014</a></blockquote>
+
+Of course it's an incomplete hack, but it highlights that Golo is hobbyist-friendly :-)
+
+h4. Eclipse IDE
+
+Jeff is keeping the Eclipse IDE support up-to-date, give it a try!
+
+<blockquote class="twitter-tweet" lang="en"><p>Little Christmas present: Golo libraries in <a href="https://twitter.com/search?q=%23GLDT&amp;src=hash">#GLDT</a> <a href="https://twitter.com/golo_lang">@golo_lang</a> <a href="https://twitter.com/typeunsafe">@typeunsafe</a> <a href="http://t.co/QYLSFKqbim">pic.twitter.com/QYLSFKqbim</a></p>&mdash; Jeff MAURY (@jeffmaury) <a href="https://twitter.com/jeffmaury/statuses/415821362297450496">December 25, 2013</a></blockquote>
+
+h3. Until next time...
+
+* "Try Golo on Google AppEngine":http://golo-console.appspot.com/
+* "Download a preview release of Golo":/download/
+* "Read the Golo programming language guide":/documentation/next/
+* "Fork the project on GitHub":https://github.com/golo-lang/golo-lang
+* "Get in touch on our mailing-list":http://groups.google.com/group/golo-lang
