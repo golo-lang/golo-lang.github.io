@@ -234,6 +234,18 @@ job in providing "a support package for Golo":https://github.com/k33g/language-g
 
 Good job Philippe!
 
+h4. Philippe goes to Devoxx France (and so does Jeff, too!)
+
+"Philippe will do a talk at Devoxx France on
+Golo":http://cfp.devoxx.fr/devoxxfr2014/talk/HUY-998/Golo,%20de%20la%20sucrette%20syntaxique%20pour%20vos%20applications%20Java
+called _"Golo, de la sucrette syntaxique pour vos applications Java"_.
+
+He will also take part in "another talk on web framework
+performance":http://cfp.devoxx.fr/devoxxfr2014/talk/TYU-863/Web%20performances,%20regardons%20les%20résultats%20de%20près
+with JVM wizard Rémi Forax, Play! Framework specialist Nicolas Leroux and our Eclipse IDE guru Jeff Maury.
+
+We wish you the best, mates!
+
 h4. LLVM hacking
 
 Franck Verrot has been playing with a "LLVM":http://llvm.org/ generation from Golo code:
