@@ -100,7 +100,7 @@ Private struct members also have the following impact:
 
 h4. Go-style "objects", simpler same-module struct augmentations
 
-Struct members encapsulation offers a simple object mecanism for Golo that is very much like what
+Struct members encapsulation offers a simple object mechanism for Golo that is very much like what
 the "Google Go":http://golang.org programming language offers. More precisely:
 
 * Golo structs offers containers for state where some members can be encapsulated, and
