@@ -21,7 +21,7 @@ h4. Fallbacks methods for dynamic objects
 
 Daniel contributed the support of fallback methods for dynamic objects. Here is an example snippet:
 
-{% highlight text %}
+{% highlight coffeescript %}
 let obj = DynamicObject(): fallback(|this, method, args...| {
   return "Method: " + method + ", with args: " + args: asList(): join(" ")
 })
@@ -37,28 +37,28 @@ h4. Lax imports
 
 Lax imports widen the range of valid imports in Golo, as in:
 
-{% highlight text %}
+{% highlight coffeescript %}
 import java.util
 function foo = -> Arrays.asList(1, 2, 3)
 {% endhighlight %}
 
 or,
 
-{% highlight text %}
+{% highlight coffeescript %}
 import java
 function foo = -> util.Arrays.asList(1, 2, 3)
 {% endhighlight %}
 
 Previously, one would have had to use either of the following constructs:
 
-{% highlight text %}
+{% highlight coffeescript %}
 import java.util.Arrays
 function foo = -> Arrays.asList(1, 2, 3)
 {% endhighlight %}
 
 or,
 
-{% highlight text %}
+{% highlight coffeescript %}
 import java.util.Arrays
 function foo = -> asList(1, 2, 3)
 {% endhighlight %}
@@ -75,7 +75,7 @@ h4. Struct members encapsulation
 
 It is now possible to make some struct members private by prefixing them with @_@, as in:
 
-{% highlight text %}
+{% highlight coffeescript %}
 struct Foo = { a, _b, c }
 
 # (...)
@@ -109,7 +109,7 @@ the "Google Go":http://golang.org programming language offers. More precisely:
 To make this more practical, we simplified same-module struct augmentations declarations.
 Previously, one had to to the following:
 
-{% highlight text %}
+{% highlight coffeescript %}
 module Plop
 
 struct Foo = { a, b, _c }
@@ -121,7 +121,7 @@ augment Plop.types.Foo {
 
 Now one can simply omit the full struct qualified name:
 
-{% highlight text %}
+{% highlight coffeescript %}
 module Plop
 
 struct Foo = { a, b, _c }
@@ -143,7 +143,7 @@ on.
 You should consult the "golodoc":/documentation/next/golodoc/ to learn more about the API, but here
 is some sample code to give you a feeling of how this works:
 
-{% highlight text %}
+{% highlight coffeescript %}
 module samples.AsyncHelpers
 
 import gololang.Async
