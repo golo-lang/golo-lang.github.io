@@ -270,3 +270,5 @@ h3. Until next time...
 * "Read the Golo programming language guide":/documentation/next/
 * "Fork the project on GitHub":https://github.com/golo-lang/golo-lang
 * "Get in touch on our mailing-list":http://groups.google.com/group/golo-lang
+
+<iframe src="//instagram.com/p/iW9zVvPpE7/embed/" style="margin-top: 1em;" width="612" height="710" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
