@@ -1,6 +1,6 @@
 # Jekyll
 markdown: rdiscount
-pygments: true
+highlighter: pygments
 permalink: /news/:year/:month/:day/:title
 redcloth:
   hard_breaks: false
