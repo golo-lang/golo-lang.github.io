@@ -76,7 +76,7 @@ Yannick Loiseau provided a Golo syntax highlighting support for Pygments.
 
 The next release of Golo will have syntax highlighted documentation.
 
-The Pygments hasn't merged Yannick's pull request yet, so meanwhile one needs to install Pygments
+The Pygments maintainers haven't merged Yannick's pull request yet, so meanwhile one needs to install Pygments
 "from his fork":https://bitbucket.org/yloiseau/pygments-main.
 
 h3. Golo 1.0 release date
