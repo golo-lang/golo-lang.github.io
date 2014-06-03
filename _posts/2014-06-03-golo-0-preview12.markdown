@@ -1,0 +1,32 @@
+---
+layout: news
+title: "Now available: Golo 0-preview12"
+---
+
+![](https://farm6.staticflickr.com/5559/14197361552_e70285bdea_z_d.jpg)
+
+We are very pleased to announce the availability of Golo `0-preview12`.
+
+This marks the last preview release as we are now focusing on the `1.0.0` release planned for July 9th.
+
+## What's new?
+
+Briefly, here are the main highlights in this release:
+
+* Nested try/catch fixes.
+* JSON support.
+* Golodoc fixes.
+* New utility containers (Observable and DynamicVariable).
+
+For more details, please check the [Golo news roundup #9](/news/2014/05/15/golo-news-roundup9/).
+
+## Get Golo!
+
+* [Download Golo 0-preview12](/download/)
+* [Play with Golo on Google AppEngine](http://golo-console.appspot.com/)
+* [Read the Golo programming language guide](/documentation/next/)
+* [Fork the project on GitHub](https://github.com/golo-lang/golo-lang)
+* [Get in touch on our mailing-list](http://groups.google.com/group/golo-lang)
+
+
+

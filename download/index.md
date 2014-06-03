@@ -7,13 +7,13 @@ title: Download Golo
 
 Standalone distributions can be obtained [from Maven Central](http://search.maven.org/#browse|1246390074):
 
-* [golo-0-preview11-distribution.tar.gz](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/0-preview11/golo-0-preview11-distribution.tar.gz)
-* [golo-0-preview11-distribution.zip](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/0-preview11/golo-0-preview11-distribution.zip)
+* [golo-0-preview12-distribution.tar.gz](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/0-preview12/golo-0-preview12-distribution.tar.gz)
+* [golo-0-preview12-distribution.zip](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/0-preview12/golo-0-preview12-distribution.zip)
 
 <span class="label label-important">Important</span>
 Given that Golo is still a young project, snapshot releases more than often contain important bug
 fixes and improvements:
-[get the golo-0-preview12-SNAPSHOT artefacts](https://oss.sonatype.org/content/repositories/snapshots/org/golo-lang/golo/0-preview12-SNAPSHOT/).
+[get the golo-1.0.0-SNAPSHOT artefacts](https://oss.sonatype.org/content/repositories/snapshots/org/golo-lang/golo/1.0.0-SNAPSHOT/).
 
 ### Maven
 
@@ -25,7 +25,7 @@ The Golo library (runtime + compiler) artifact is:
 {% highlight xml %}
 <groupId>org.golo-lang</groupId>
 <artifactId>golo</artifactId>
-<version>0-preview11</version>
+<version>0-preview12</version>
 {% endhighlight %}
 
 The Maven plugin artifact is:
@@ -33,7 +33,7 @@ The Maven plugin artifact is:
 {% highlight xml %}
 <groupId>org.golo-lang</groupId>
 <artifactId>golo-maven-plugin</artifactId>
-<version>0-preview11</version>
+<version>0-preview12</version>
 {% endhighlight %}
 
 ### Gradle

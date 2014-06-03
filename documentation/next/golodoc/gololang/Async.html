@@ -88,75 +88,25 @@ code from the same thread, from a separate thread, or by pushing new tasks to a 
 </div>
 
 
-<h2>Functions</h2>
+<h2>Structs</h2>
 
-  <h3>all(futures)</h3>
+  <h3>FutureBridge</h3>
+  <p>Members:</p>
+  <ul>
+  
+    <li><code>_goloFuture</code></li>
+  
+    <li><code>_javaFuture</code></li>
+  
+  </ul>
   <div>
-    <p>Given a collection of futures, returns a future whose value is eventually avector with the
-results of these futures.</p>
-<p>Given:</p>
-<pre><code>all([ setFuture(1), failedFuture(e) ])
-</code></pre>
-<p>this yields a future whose eventual value is:</p>
-<pre><code>vector[1, e]
-</code></pre>
-<p>Results are accumulated as futures get resolved. The last completed future triggers the calls to
-<code>onSet</code>-registered listeners on the same thread.</p>
-
-  </div>
-
-  <h3>any(futures)</h3>
-  <div>
-    <p>Given a collection of futures, returns a future whose value is set to the first completing future.</p>
-<p>If all futures fail, then the returned future fails to a <code>java.util.NoSuchElementException</code>.</p>
-
-  </div>
-
-  <h3>failedFuture(throwable)</h3>
-  <div>
-    <p>Returns a failed future to a <code>throwable</code> exception.</p>
-
-  </div>
-
-  <h3>promise()</h3>
-  <div>
-    <p>Returns a new promise. Promise objects have the following useful methods.</p>
+    <p>Bridge structure to hold a reference to a Golo future and a Java future.</p>
+<p>Instances of this struct are being returned by the <code>enqueue</code> augmentation on <code>ExecutorService</code>
+instances. This essentially adds the ability to:</p>
 <ul>
-<li><code>set(value)</code>: sets the promise value. The value is ignored if the promise has already been set.</li>
-<li><code>fail(exception)</code>: set the value to an exception.</li>
-<li><code>get()</code>: returns the promise value. It returns a bogus <code>null</code> value if the promise is still
-undefined.</li>
-<li><code>blockingGet()</code>: waits until the promise is set or failed, and returns the value.</li>
-<li><code>future()</code>: returns a new future object on a promise.</li>
-<li><code>isResolved()</code> and <code>isFailed()</code> query the promise status.</li>
+<li>use the Golo future for its composability, and</li>
+<li>use tha Java future to cancel a job.</li>
 </ul>
-<p>Future objects have the following methods.</p>
-<ul>
-<li><code>onSet(|v| {...})</code>: registers a callback when the value is set, or executes it right now if it
-has already been set.</li>
-<li><code>onFail(|e| {...})</code>: registers a callback when the corresponding promise fails with an exception.</li>
-<li><code>isResolved()</code>, <code>isFailed()</code> <code>get()</code> and <code>blockingGet()</code> delegate to the promise implementation.</li>
-</ul>
-
-  </div>
-
-  <h3>reduce(futures, init, reducer)</h3>
-  <div>
-    <p>Returns a future whose value is set to the <em>reduction</em> of a collection of futures.</p>
-<ul>
-<li><code>futures</code> is a collection of futures, and</li>
-<li><code>init</code> is the initial value, and</li>
-<li><code>reducer</code> is the reducing function of the form <code>|acc, next| {...}</code>.</li>
-</ul>
-<p>If any future fails, then the result future fails, too. Otherwise, the returned future is set to the
-accumulation of the values. Listeners callbacks get executed on the thread of the completing future
-which is either the last successful future or the first future to fail.</p>
-
-  </div>
-
-  <h3>setFuture(value)</h3>
-  <div>
-    <p>Returns a future set to <code>value</code>.</p>
 
   </div>
 
@@ -309,25 +259,75 @@ f: cancel(true)
 
 
 
-<h2>Structs</h2>
+<h2>Functions</h2>
 
-  <h3>FutureBridge</h3>
-  <p>Members:</p>
-  <ul>
-  
-    <li><code>_goloFuture</code></li>
-  
-    <li><code>_javaFuture</code></li>
-  
-  </ul>
+  <h3>all(futures)</h3>
   <div>
-    <p>Bridge structure to hold a reference to a Golo future and a Java future.</p>
-<p>Instances of this struct are being returned by the <code>enqueue</code> augmentation on <code>ExecutorService</code>
-instances. This essentially adds the ability to:</p>
+    <p>Given a collection of futures, returns a future whose value is eventually avector with the
+results of these futures.</p>
+<p>Given:</p>
+<pre><code>all([ setFuture(1), failedFuture(e) ])
+</code></pre>
+<p>this yields a future whose eventual value is:</p>
+<pre><code>vector[1, e]
+</code></pre>
+<p>Results are accumulated as futures get resolved. The last completed future triggers the calls to
+<code>onSet</code>-registered listeners on the same thread.</p>
+
+  </div>
+
+  <h3>any(futures)</h3>
+  <div>
+    <p>Given a collection of futures, returns a future whose value is set to the first completing future.</p>
+<p>If all futures fail, then the returned future fails to a <code>java.util.NoSuchElementException</code>.</p>
+
+  </div>
+
+  <h3>failedFuture(throwable)</h3>
+  <div>
+    <p>Returns a failed future to a <code>throwable</code> exception.</p>
+
+  </div>
+
+  <h3>promise()</h3>
+  <div>
+    <p>Returns a new promise. Promise objects have the following useful methods.</p>
 <ul>
-<li>use the Golo future for its composability, and</li>
-<li>use tha Java future to cancel a job.</li>
+<li><code>set(value)</code>: sets the promise value. The value is ignored if the promise has already been set.</li>
+<li><code>fail(exception)</code>: set the value to an exception.</li>
+<li><code>get()</code>: returns the promise value. It returns a bogus <code>null</code> value if the promise is still
+undefined.</li>
+<li><code>blockingGet()</code>: waits until the promise is set or failed, and returns the value.</li>
+<li><code>future()</code>: returns a new future object on a promise.</li>
+<li><code>isResolved()</code> and <code>isFailed()</code> query the promise status.</li>
 </ul>
+<p>Future objects have the following methods.</p>
+<ul>
+<li><code>onSet(|v| {...})</code>: registers a callback when the value is set, or executes it right now if it
+has already been set.</li>
+<li><code>onFail(|e| {...})</code>: registers a callback when the corresponding promise fails with an exception.</li>
+<li><code>isResolved()</code>, <code>isFailed()</code> <code>get()</code> and <code>blockingGet()</code> delegate to the promise implementation.</li>
+</ul>
+
+  </div>
+
+  <h3>reduce(futures, init, reducer)</h3>
+  <div>
+    <p>Returns a future whose value is set to the <em>reduction</em> of a collection of futures.</p>
+<ul>
+<li><code>futures</code> is a collection of futures, and</li>
+<li><code>init</code> is the initial value, and</li>
+<li><code>reducer</code> is the reducing function of the form <code>|acc, next| {...}</code>.</li>
+</ul>
+<p>If any future fails, then the result future fails, too. Otherwise, the returned future is set to the
+accumulation of the values. Listeners callbacks get executed on the thread of the completing future
+which is either the last successful future or the first future to fail.</p>
+
+  </div>
+
+  <h3>setFuture(value)</h3>
+  <div>
+    <p>Returns a future set to <code>value</code>.</p>
 
   </div>
 
