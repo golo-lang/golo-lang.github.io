@@ -61,7 +61,7 @@ Here are the projects that we are aware of:
 
 - [Vim](https://github.com/jponge/vim-golo) by Julien Ponge
 - [Sublime Text 2](https://github.com/k33g/sublime-golo) by Philippe Charriere
-- [IntelliJ IDEA (syntax highthing)](https://github.com/k33g/golo-storm) by Philippe Charriere
+- [IntelliJ IDEA (syntax highlight)](https://github.com/k33g/golo-storm) by Philippe Charriere
 - [GoloIDE for Netbeans](https://github.com/golo-lang/golo-netbeans) by [Serli](http://www.serli.com/)
 - [Golo Language Development Tools for Eclipse](https://github.com/golo-lang/gldt) by Jeff Maury, the
   update site for Eclipse is [http://gldt-update-site.golo-lang.org/nightly](http://gldt-update-site.golo-lang.org/nightly)
