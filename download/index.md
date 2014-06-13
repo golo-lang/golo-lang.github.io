@@ -48,6 +48,14 @@ Binaries are being released to Maven Central under the `org.golo-lang` group.
 RPM: see the [DevOps Incubator project](https://github.com/hgomez/devops-incubator) by Henri Gomez
 and look for `golo-lang`.
 
+### Docker
+
+[Docker](http://docker.com/) is on top of the hype, and so do we!
+
+[We provide images](https://registry.hub.docker.com/u/jponge/golo-lang/) based on Ubuntu 14.04 and Java SE 8: `docker pull jponge/golo-lang`
+
+You can either use them as-is, or derive your own specialized images based on top of them.
+
 ### Source code
 
 The canonical repository is at [https://github.com/golo-lang/golo-lang](https://github.com/golo-lang/golo-lang).
