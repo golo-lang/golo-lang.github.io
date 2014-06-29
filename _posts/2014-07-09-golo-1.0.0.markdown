@@ -1,0 +1,90 @@
+---
+layout: news
+title: "Golo 1.0.0 is here!"
+---
+
+We are very glad to announce the release of Golo 1.0.0 exactly 2 years after the the initial commit!
+
+## How did we get there?
+
+Golo wasn't exactly meant to turn into a real project. It all started back in July 2012 as a summer
+side-project while some [Dynamid research group](http://dynamid.citi-lab.fr/) members further
+explored the capabilities of `invokedynamic` on the JVM. Playing with the implementation of a simple
+dynamically-typed language just made a lot of sense, especially as few languages had working
+`invokedynamic`-based runtimes back then.
+
+As the development progressed we quickly realised that we should also eventually share it with the
+rest of the world. Performance was looking good even with a very simple runtime design, thanks to
+`invokedynamic`.
+
+As researchers in the field of middleware for dynamic systems, we often played with software
+modifications at runtime. We were also used to designing APIs, but in either case there is always
+a point where certain problems are better investigated through language extensions rather than hacks
+on top of them.
+
+Yet, language design and implementation remains a field of specialists. Picking an existing language
+and making modifications is *complex*, and certainly complex enough to overflow the duration of
+a typical student reseach project. The code base of a typical popular JVM language can be quite
+intimidating.
+
+That's why we opted to pursue work on Golo with the following objectives in mind:
+
+1. explore the capabilities of `invokedynamic` to design a whole language around it,
+2. design a simple language that would be suitable to experiment with derivatives,
+3. disseminate and share our work outside of the academic research circles.
+
+## Looking back on 2 years of work
+
+It took 2 years to reach this `1.0.0` version, but digging through the Git history reveals that the
+active days count is roughly of 1 year and that Golo is nearly a one-man show:
+
+```
+$ git summary 
+
+ project  : gololang
+ repo age : 2 years
+ active   : 374 days
+ commits  : 1404
+ files    : 352
+ authors  : 
+  1303	Julien Ponge            92.8%
+    28	Philippe Charrière     2.0%
+    18	Daniel Petisme          1.3%
+    16	Kel Cecil               1.1%
+    16	David Festal            1.1%
+     8	Guillaume Grossetie     0.6%
+     5	Jeff Maury              0.4%
+     4	Sylvain                 0.3%
+     3	Yannick Loiseau         0.2%
+     1	Franck Verrot           0.1%
+     1	Thierry Chantier        0.1%
+     1	Dan Allen               0.1%
+```
+
+> Note: while Dynamid members Frédéric Le Mouel and Nicolas Stouls do not appear in the commit
+> history, they still have an input that does not necessarily translate into a direct commit.
+
+Implementing Golo is actually a lot of work, especially as it is not backed by any research grant.
+It mainly exists because the [CITI laboratory](http://www.citi-lab.fr/) supports such experiments,
+but the lack of official funding is always a limitating factor in modern research.
+
+Let us now see how Golo has met its objectives.
+
+### Exploring `invokedynamic`
+
+Golo is the first language that was designed *around* `invokedynamic`. We accumulated a fair share
+of experience around what it can do well.
+
+We explored certain language features implementation patterns, both in terms of ability to be
+implemented and performance. This is an area where we gathered significant experience that is worth
+publications for the research community. 
+
+That being said the limited resources that we could allocate to Golo mean that we only found time to
+publish 1 research paper at PPPJ'2013. This is not enough, and we will devote time for writing new
+publications now that version 1.0.0 has been delivered. Research work has to be evaluated through
+peer-reviewed publications, and we look forward to do so!
+
+### Making a hackable language
+
+
+
