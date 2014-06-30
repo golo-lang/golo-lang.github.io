@@ -5,6 +5,15 @@ title: "Golo 1.0.0 is here!"
 
 We are very glad to announce the release of Golo 1.0.0 exactly 2 years after the the initial commit!
 
+* [Download Golo 1.0.0](/download/)
+* [Play with Golo on Google AppEngine](http://golo-console.appspot.com/)
+* [Read the Golo programming language guide](/documentation/1.0.0)
+* [Fork the project on GitHub](https://github.com/golo-lang/golo-lang)
+* [Get in touch on our mailing-list](http://groups.google.com/group/golo-lang)
+
+Releasing a version 1.0.0 is always an important achievement, so let's take a few paragraphs to
+reflect on the journey.
+
 ## How did we get there?
 
 Golo wasn't exactly meant to turn into a real project. It all started back in July 2012 as a summer
@@ -118,4 +127,49 @@ Last but not least: contributions did not stop to code as Philippe Charrière an
 several talks in Java User Groups and conferences (Devoxx France, Soft Shake, etc).
 
 ## What's next?
+
+We are commited to pursue the development of Golo beyond this release, but ultimately what's next
+for Golo is *also* a lot about where *you* will push it :-)
+
+You can already expect new features to appear soon, including:
+
+* [Python-style](https://github.com/golo-lang/golo-lang/issues/124) decorators courtesy of Sylvain Desgrais and Yannick Loiseau, or
+* [full Java 8 lambda support](https://github.com/golo-lang/golo-lang/issues/101) as Golo currently supports SAM-methods, but not functional interfaces with default methods yet.
+
+## Big Big thanks to...
+
+First and foremost, huge thanks to the [CITI-INRIA Laboratory](http://www.citi-lab.fr/) at
+[INSA-Lyon](http://www.insa-lyon.fr/) for letting us take some time on doing this (not funded)
+development in the open.
+
+We wouldn't have reached this important milestone without the support of our awesome contributors:
+
+* Philippe Charrière
+* Daniel Petisme  
+* Kel Cecil        
+* David Festal  
+* Guillaume Grossetie
+* Jeff Maury
+* Sylvain Desgrais 
+* Yannick Loiseau  
+* Franck Verrot     
+* Thierry Chantier    
+* Dan Allen 
+
+2 companies helped along the way: [Serli](http://www.serli.com/) and [Ninja Squad](http://ninja-squad.com/).
+
+The wider community also includes Marcin Erdmann for the 
+[Gradle plugin](https://github.com/golo-lang/gradle-golo-plugin) and Romain Lespinasse for the 
+[Homebrew integration](https://github.com/TypeUnsafe/homebrew-golo).
+
+We do not forget our initial testers before we released Golo in the open at Devoxx France 2013:
+Pierre Colomb, Olivier Coupelon, Cédric Exbrayat, Frédéric Le Mouel, Nicolas Stouls, Henri Gomez,
+Julien Viet, Philippe Charrière, Ludovic Champenois, Thierry Chantier, Daniel Petisme, David Gageot,
+David Festal, Gildas Cuisinier, Thomas Maurel, Yannick Loiseau, Alexis Plantin, Sylvain Desgrais,
+William Guyot, Agnès Crépet, Cyril Lacote.
+
+Last but not least, thanks to all of you that have an opinion on Golo. We like you even if you don't
+like us :-)
+
+Until next time, have fun!
 
