@@ -86,5 +86,16 @@ peer-reviewed publications, and we look forward to do so!
 
 ### Making a hackable language
 
+Contributors without previous language implementation experience helped us on some language
+features, so it seems like Golo is easy to play with.
 
+There are 2 ongoing language research experiments based on Golo. One is on the runtime
+implementation and is being developed by our team in Lyon. The other one is a language extension by
+one of our student in Shangai under the supervision of Frédéric Le Mouel. Again, the student is on
+a limited time frame and he had no previous language work experience, but Golo was simple enough for
+him to get up to speed on time to contribute (e.g., design, implement and validate a solution to his
+research problem).
+
+In both cases the projects are based on Golo as a simple language, and while they won't always seek
+for feature completeness, they will support research work.
 
