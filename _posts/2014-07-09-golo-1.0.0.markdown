@@ -158,6 +158,8 @@ We wouldn't have reached this important milestone without the support of our awe
 * Thierry Chantier    
 * Dan Allen 
 
+Guillaume Poyet designed our iconic logo.
+
 2 companies helped along the way: [Serli](http://www.serli.com/) and [Ninja Squad](http://ninja-squad.com/).
 
 The wider community also includes Marcin Erdmann for the 
