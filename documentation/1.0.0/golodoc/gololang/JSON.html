@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>Documentation for gololang.JSON</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      line-height: 1.5;
+      margin: 2em 3em;
+      text-align: left;
+      padding: 0 100px 0 100px;
+    }
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 80%;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    li p {
+      margin: 0.3em;
+    }
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 36px;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 30px;
+    }
+    h3 {
+      color: #666;
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 21px;
+    }
+    h5 {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Documentation for gololang.JSON</h1>
+<div>
+  <p>A set of useful APIs for dealing with JSON documents from Golo.</p>
+<p>The implementation is backed by <a href="https://code.google.com/p/json-simple/">json-simple</a>. While
+<code>json-simple</code> only supports encoding from lists and maps, this API brings support for sets, arrays,
+Golo tuples, dynamic objects and structs.</p>
+
+</div>
+
+
+
+
+<h2>Augmentations</h2>
+
+  <h3>gololang.GoloStruct</h3>
+  <div>
+    <p>JSON augmentations for structs.</p>
+
+  </div>
+  
+    
+      <h4>toJSON(this)</h4>
+    
+    <div>
+      <p>Conveniently adds a <code>toJSON()</code> method, which is equivalent to calling <code>JSON.stringify()</code>:</p>
+<pre><code>struct Person = { name, age, email }
+# (...)
+
+Person("Mr Bean", "mrbean@outlook.com", 64): toJSON()
+</code></pre>
+
+    </div>
+  
+    
+      <h4>updateFromJSON(this, str)</h4>
+    
+    <div>
+      <p>Populates the elements of a struct based on the values found in a JSON string.</p>
+<pre><code>let str = JSON.stringify(map[
+  ["name", "Foo"],
+  ["email", "foo@gmail.com"],
+  ["age", 99],
+  ["gender", "N/A"]
+])
+let foo = Person(): updateFromJSON(str)
+</code></pre>
+<p>Note that missing entries from the JSON data yield <code>null</code> values in the struct.</p>
+
+    </div>
+  
+
+
+
+
+<h2>Functions</h2>
+
+  <h3>dynamicObjectMixin()</h3>
+  <div>
+    <p>Provides a mixin for dynamic objects that includes a <code>toJSON()</code> method:</p>
+<pre><code>object: mixin(JSON.dynamicObjectMixin()): toJSON()
+</code></pre>
+<p>which is equivalent to:</p>
+<pre><code>JSON.stringify(object)
+</code></pre>
+
+  </div>
+
+  <h3>parse(str)</h3>
+  <div>
+    <p>Parses a JSON string and gives an object representation as a list or map collection:</p>
+<pre><code>let data = JSON.parse(text)
+println(data: get("name"))
+</code></pre>
+
+  </div>
+
+  <h3>stringify(obj)</h3>
+  <div>
+    <p>Takes any know object, and gives a JSON string representation:</p>
+<pre><code>let data = map[
+  ["name", "Somebody"],
+  ["age", 69],
+  ["friends", list[
+    "Mr Bean", "John B", "Larry"
+  ]]
+]
+let asText = JSON.stringify(data)
+</code></pre>
+<p><code>obj</code> may be a list, an array, a set, a map, a tuple, a dynamic object or a struct. If <code>obj</code> is from
+another type then its string representation is given according to <code>obj: toString()</code> or <code>"null"</code> if
+<code>obj</code> is <code>null</code>.</p>
+
+  </div>
+
+  <h3>toDynamicObject(str)</h3>
+  <div>
+    <p>Returns a new dynamic object from a JSON string where each first-level entry is mapped into the
+dynamic object:</p>
+<pre><code>let obj = JSON.toDynamicObject(JSON.stringify(map[
+  ["a", "1"], ["b", "2"]
+]))
+
+println(obj: a())
+println(obj: b())
+</code></pre>
+
+  </div>
+
+
+
+</body>
+</html>

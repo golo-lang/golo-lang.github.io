@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>Documentation for gololang.StandardAugmentations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      line-height: 1.5;
+      margin: 2em 3em;
+      text-align: left;
+      padding: 0 100px 0 100px;
+    }
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 80%;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    li p {
+      margin: 0.3em;
+    }
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 36px;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 30px;
+    }
+    h3 {
+      color: #666;
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 21px;
+    }
+    h5 {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Documentation for gololang.StandardAugmentations</h1>
+<div>
+  <p>This module defines the set of standard augmentations.</p>
+
+</div>
+
+
+
+
+<h2>Augmentations</h2>
+
+  <h3>gololang.Tuple</h3>
+  <div>
+    <p>Augmentations for Golo tuples.</p>
+
+  </div>
+  
+    
+      <h4>filter(this, func)</h4>
+    
+    <div>
+      <p>Filters elements using a predicate, returning a new tuple.</p>
+
+    </div>
+  
+    
+      <h4>find(this, pred)</h4>
+    
+    <div>
+      <p>Returns the first element that satisfies a predicate, or <code>null</code> if none matches.</p>
+
+    </div>
+  
+    
+      <h4>join(this, separator)</h4>
+    
+    <div>
+      <p>Joins the elements of a tuple into a string and using a separator.</p>
+
+    </div>
+  
+    
+      <h4>map(this, func)</h4>
+    
+    <div>
+      <p>Maps the elements of a tuple, and returns a tuple with the transformed values.</p>
+
+    </div>
+  
+
+  <h3>java.lang.Iterable</h3>
+  <div>
+    <p>Augmentations over iterable collections.</p>
+
+  </div>
+  
+    
+      <h4>count(this, pred)</h4>
+    
+    <div>
+      <p>Counts the number of elements that satisfy a predicate:</p>
+<pre><code>println([1, 2, 3, 4]: count(|n| -&gt; (n % 2) == 0))
+</code></pre>
+<ul>
+<li><code>this</code>: an iterable.</li>
+<li><code>pred</code>: a predicate function, taking an element and returning a boolean.</li>
+</ul>
+
+    </div>
+  
+    
+      <h4>each(this, func)</h4>
+    
+    <div>
+      <p>Applies a function over each element:</p>
+<pre><code>[1, 2, 3]: each(|e| -&gt; println(e))
+</code></pre>
+<ul>
+<li><code>this</code>: an iterable.</li>
+<li><code>func</code>: the function to apply, taking the current element as a parameter.</li>
+</ul>
+
+    </div>
+  
+    
+      <h4>exists(this, pred)</h4>
+    
+    <div>
+      <p>Checks wether any element satisfied a predicate:</p>
+<pre><code>println([1, 2, 3, 4]: exists(|n| -&gt; n &gt; 3))
+</code></pre>
+<ul>
+<li><code>this</code>: an iterable.</li>
+<li><code>pred</code> a predicate function, taking an element and returning a boolean.</li>
+</ul>
+
+    </div>
+  
+    
+      <h4>reduce(this, initialValue, func)</h4>
+    
+    <div>
+      <p>General purpose reducing operation:</p>
+<pre><code>let data = [1, 2, 3, 4, 5]
+println("sum = " + data: reduce(0, |acc, next| -&gt; acc + next))
+</code></pre>
+<ul>
+<li><code>this</code>: an iterable.</li>
+<li><code>initialValue</code>: the initial accumulator value for the reducing operation.</li>
+<li><code>func</code>: the function to apply over an accumulator and the next value.</li>
+</ul>
+
+    </div>
+  
+
+  <h3>java.lang.Number</h3>
+  <div>
+    <p>Number augmentations.</p>
+
+  </div>
+  
+    
+      <h4>downTo(high, low, func)</h4>
+    
+    <div>
+      <p>Similar to <code>upTo</code>, except that the interval iteration is made from <code>high</code> down to <code>low</code>.</p>
+
+    </div>
+  
+    
+      <h4>times(count, func)</h4>
+    
+    <div>
+      <p>Repeats a function many times, as in:</p>
+<pre><code>3: times(-&gt; println("Hey!")
+4: times(|i| -&gt; println(i))
+</code></pre>
+<ul>
+<li><code>count</code>: how many times the <code>func</code> function must be repeated.</li>
+<li><code>func</code>: a function to execute.</li>
+</ul>
+<p>The <code>func</code> function may take 0 or 1 argument. In the later case the argument is the iteration
+count index.</p>
+
+    </div>
+  
+    
+      <h4>upTo(low, high, func)</h4>
+    
+    <div>
+      <p>Repeats a function over a discrete interval:</p>
+<pre><code>1: upTo(3, -&gt; println("Hello"))
+1: upTo(3, |i| -&gt;println(i))
+</code></pre>
+<ul>
+<li><code>low</code>: the start value (inclusive).</li>
+<li><code>high</code>: the end value (inclusive).</li>
+<li><code>func</code>: the function to execute.</li>
+</ul>
+<p>As in the case of <code>times</code>, <code>func</code> may take an optional index parameter.</p>
+
+    </div>
+  
+
+  <h3>java.lang.String</h3>
+  <div>
+    <p>Useful string augmentations.</p>
+
+  </div>
+  
+    
+      <h4>format(this, args...)</h4>
+    
+    <div>
+      <p>Convenience wrapper over <code>java.lang.String.format(...)</code>.</p>
+
+    </div>
+  
+    
+      <h4>toDouble(this)</h4>
+    
+    <div>
+      <p>Wrapper over <code>java.lang.Integer.parseDouble</code>.</p>
+
+    </div>
+  
+    
+      <h4>toFloat(this)</h4>
+    
+    <div>
+      <p>Wrapper over <code>java.lang.Integer.parseFloat</code>.</p>
+
+    </div>
+  
+    
+      <h4>toInt(this)</h4>
+    
+    <div>
+      <p>Wrapper over <code>java.lang.Integer.parseInt</code>.</p>
+
+    </div>
+  
+    
+      <h4>toInteger(this)</h4>
+    
+    <div>
+      <p>rapper over <code>java.lang.Integer.parseInt</code>.</p>
+
+    </div>
+  
+    
+      <h4>toLong(this)</h4>
+    
+    <div>
+      <p>Wrapper over <code>java.lang.Integer.parseLong</code>.</p>
+
+    </div>
+  
+
+  <h3>java.lang.invoke.MethodHandle</h3>
+  <div>
+    <p>Augmentations over method handles.</p>
+<p>Given that Golo closures are method handles, these augmentations work on closure references.</p>
+
+  </div>
+  
+    
+      <h4>andThen(this, filter)</h4>
+    
+    <div>
+      <p>Function composition:</p>
+<pre><code>let f = |x| -&gt; x + 1
+let g = |y| -&gt; y * 10
+let h = f: andThen(g)
+println(h(2))
+</code></pre>
+<ul>
+<li><code>this</code>: a function.</li>
+<li><code>filter</code>: a function that takes the return value of <code>this</code> as an argument.</li>
+</ul>
+
+    </div>
+  
+    
+      <h4>bindAt(this, pos, val)</h4>
+    
+    <div>
+      <p>Partial application:</p>
+<pre><code>let adder = |x, y| -&gt; x + y
+let add2 = adder: bindAt(1, 2)    # binds 'y'
+println(add2(1))
+</code></pre>
+<ul>
+<li><code>this</code>: a function.</li>
+<li><code>pos</code>: a 0-based index of the argument to apply.</li>
+<li><code>val</code>: the value to apply.</li>
+</ul>
+
+    </div>
+  
+    
+      <h4>spread(this, args)</h4>
+    
+    <div>
+      <p>Arguments spreading.</p>
+<ul>
+<li><code>this</code>: a function.</li>
+<li><code>args</code>: an array of arguments to spread over those of <code>this</code>.</li>
+</ul>
+<p>Returns an argument-spreading function.</p>
+
+    </div>
+  
+    
+      <h4>to(this, interfaceClass)</h4>
+    
+    <div>
+      <p>Converts a closure to an instance of a single method interface.</p>
+<pre><code>let f = |event| -&gt; println("click")
+let handler = f: to(java.awt.event.ActionListener.class)
+</code></pre>
+<ul>
+<li><code>this</code>: a Golo closure.</li>
+<li><code>interfaceClass</code> a class object.</li>
+</ul>
+
+    </div>
+  
+
+  <h3>java.util.Collection</h3>
+  <div>
+    <p>Java collections augmentations.</p>
+
+  </div>
+  
+    
+      <h4>newWithSameType(this)</h4>
+    
+    <div>
+      <p>Returns an empty collection of the same type as <code>this</code>.</p>
+
+    </div>
+  
+
+  <h3>java.util.List</h3>
+  <div>
+    <p>Java lists augmentations.</p>
+
+  </div>
+  
+    
+      <h4>append(this, element)</h4>
+    
+    <div>
+      <p>Appends an element to a list.</p>
+
+    </div>
+  
+    
+      <h4>append(this, head, tail...)</h4>
+    
+    <div>
+      <p>Appends a variable number of arguments to a list.</p>
+<ul>
+<li><code>head</code>: an element to append.</li>
+<li><code>tail</code>: a variable number of elements to append.</li>
+</ul>
+
+    </div>
+  
+    
+      <h4>filter(this, pred)</h4>
+    
+    <div>
+      <p>Filters elements based on a predicate:</p>
+<pre><code>println(list[1, 2, 3, 4]: filter(|n| -&gt; (n % 2) == 0))
+</code></pre>
+<ul>
+<li><code>this</code>: a list.</li>
+<li><code>pred</code>: a predicate function taking an element and returning a boolean.</li>
+</ul>
+<p><code>filter</code> returns a new collection of the same type as the original one, hence the original list is
+kept intact.</p>
+
+    </div>
+  
+    
+      <h4>find(this, pred)</h4>
+    
+    <div>
+      <p>Finds the first element of a list matching a predicate:</p>
+<pre><code>println(list[1, 2, 3, 4]: find(|n| -&gt; n &gt; 3))
+</code></pre>
+<ul>
+<li><code>this</code>: a list.</li>
+<li><code>pred</code>: a predicate function taking an element and returning a boolean.</li>
+</ul>
+<p><code>find</code> returns <code>null</code> when no element satisfies <code>pred</code>.</p>
+
+    </div>
+  
+    
+      <h4>head(this)</h4>
+    
+    <div>
+      <p>Returns a list first element.</p>
+
+    </div>
+  
+    
+      <h4>insert(this, index, element)</h4>
+    
+    <div>
+      <p>Inserts an element at some index.</p>
+
+    </div>
+  
+    
+      <h4>join(this, separator)</h4>
+    
+    <div>
+      <p>Join the elements into a string:</p>
+<pre><code>println(list[1, 2, 3]: join(", "))
+</code></pre>
+<ul>
+<li><code>this</code>: a list.</li>
+<li><code>separator</code>: the element separator string.</li>
+</ul>
+<p>The returned string is <code>""</code> when the list is empty.</p>
+
+    </div>
+  
+    
+      <h4>map(this, func)</h4>
+    
+    <div>
+      <p>Maps elements of a list using a function:</p>
+<pre><code>println(list[1, 2, 3]: map(|n| -&gt; n * 10))
+</code></pre>
+<ul>
+<li><code>this</code>: a list.</li>
+<li><code>func</code>: a transformation function.</li>
+</ul>
+<p><code>map</code> returns a new list with the same type, keeping the original list intact.</p>
+
+    </div>
+  
+    
+      <h4>order(this)</h4>
+    
+    <div>
+      <p>Sorts the list elements and returns the list.</p>
+
+    </div>
+  
+    
+      <h4>order(this, comparator)</h4>
+    
+    <div>
+      <p>Sorts the element using a comparator, see <code>java.util.Collections.sort(...)</code>.</p>
+
+    </div>
+  
+    
+      <h4>ordered(this)</h4>
+    
+    <div>
+      <p>Returns a new list where the elements have been sorted.</p>
+
+    </div>
+  
+    
+      <h4>ordered(this, comparator)</h4>
+    
+    <div>
+      <p>Returns a new list where the elements have been sorted using a comparator.
+See <code>java.util.Collections.sort</code>.:w</p>
+
+    </div>
+  
+    
+      <h4>prepend(this, element)</h4>
+    
+    <div>
+      <p>Prepends an element to a list.</p>
+
+    </div>
+  
+    
+      <h4>prepend(this, head, tail...)</h4>
+    
+    <div>
+      <p>Prepends a variable number of arguments to a list.</p>
+
+    </div>
+  
+    
+      <h4>reverse(this)</h4>
+    
+    <div>
+      <p>Reverse the elements of the list and returns the list.</p>
+
+    </div>
+  
+    
+      <h4>reversed(this)</h4>
+    
+    <div>
+      <p>Same as <code>reverse</code>, but the returned list is a new one, leaving the original list order intact.</p>
+
+    </div>
+  
+    
+      <h4>tail(this)</h4>
+    
+    <div>
+      <p>Returns the rest of a list after its head.</p>
+
+    </div>
+  
+    
+      <h4>unmodifiableView(this)</h4>
+    
+    <div>
+      <p>Convenience wrapper over <code>java.util.Collections.unmodifiableList</code>.</p>
+
+    </div>
+  
+
+  <h3>java.util.Map</h3>
+  <div>
+    <p>Augmentations over maps.</p>
+
+  </div>
+  
+    
+      <h4>add(this, key, value)</h4>
+    
+    <div>
+      <p>Alias for <code>put</code> that returns the map.</p>
+
+    </div>
+  
+    
+      <h4>addIfAbsent(this, key, value)</h4>
+    
+    <div>
+      <p>Adds an element to the map only if there is no entry for that key.</p>
+<ul>
+<li><code>this</code>: a map.</li>
+<li><code>key</code>: the element key.</li>
+<li><code>value</code>: the element value or a function to evaluate to get a value.</li>
+</ul>
+<p>The fact that <code>value</code> can be a function allows for delayed evaluation which can be useful for
+performance reasons. So instead of:</p>
+<pre><code>map: putIfAbsent(key, expensiveOperation())
+</code></pre>
+<p>one may delay the evaluation as follows:</p>
+<pre><code>map: putIfAbsent(key, -&gt; expensiveOperation())
+</code></pre>
+<p><code>addIfAbsent</code> returns the map.</p>
+
+    </div>
+  
+    
+      <h4>count(this, pred)</h4>
+    
+    <div>
+      <p>Counts the number of elements satisfying a predicate.</p>
+
+    </div>
+  
+    
+      <h4>delete(this, key)</h4>
+    
+    <div>
+      <p>Alias for <code>remove</code> that returns the map.</p>
+
+    </div>
+  
+    
+      <h4>each(this, func)</h4>
+    
+    <div>
+      <p>Iterates over each entry of a map.</p>
+<p><code>func</code> takes 2 arguments: the entry key and its value.</p>
+
+    </div>
+  
+    
+      <h4>exists(this, pred)</h4>
+    
+    <div>
+      <p>Returns <code>true</code> if there is any value satisfying <code>pred</code>, <code>false</code> otherwise.</p>
+
+    </div>
+  
+    
+      <h4>filter(this, pred)</h4>
+    
+    <div>
+      <p>Filters elements using a predicate, and returns a new map.</p>
+<p><code>pred</code> takes 2 arguments: a key and a value, and returns a boolean.</p>
+
+    </div>
+  
+    
+      <h4>find(this, pred)</h4>
+    
+    <div>
+      <p>Returns the first element that satisfies a predicate, or <code>null</code> if none matches.</p>
+<p><code>pred</code> takes 2 arguments: a key and a value, and returns a boolean.</p>
+
+    </div>
+  
+    
+      <h4>getOrElse(this, key, replacement)</h4>
+    
+    <div>
+      <p>Returns a value from a key or a default value if the entry is not defined.</p>
+<ul>
+<li><code>this</code>: a map.</li>
+<li><code>key</code>: the key to look for.</li>
+<li><code>replacement</code>: the default value, or a function giving the default value.</li>
+</ul>
+<p>As it is the case for <code>addIfAbsent</code>, one can take advantage of delayed evaluation:</p>
+<pre><code>println(map: getOrElse(key, "n/a"))
+println(map: getOrElse(key, -&gt; expensiveOperation())
+</code></pre>
+<p>Note that <code>replacement</code> yields the return value also when there is an entry for <code>key</code> but the
+value is <code>null</code>.</p>
+
+    </div>
+  
+    
+      <h4>map(this, func)</h4>
+    
+    <div>
+      <p>Maps entries of the map using a function.</p>
+<p><code>func</code> takes 2 arguments: a key and a value. The returned value must have <code>getKey()</code> and
+getValue()<code>to represent a map entry. We suggest using the predefined</code>mapEntry(key, value)`
+function as it returns such object.</p>
+
+    </div>
+  
+    
+      <h4>newWithSameType(this)</h4>
+    
+    <div>
+      <p>Returns a new empty map of the same type.</p>
+
+    </div>
+  
+    
+      <h4>reduce(this, initialValue, func)</h4>
+    
+    <div>
+      <p>Reduces the entries of a map.</p>
+<p><code>func</code> takes 3 arguments:</p>
+<ul>
+<li>an accumulator whose initial value is <code>initialValue</code>,</li>
+<li>a key for the next entry,</li>
+<li>a value for the next entry.</li>
+</ul>
+
+    </div>
+  
+    
+      <h4>unmodifiableView(this)</h4>
+    
+    <div>
+      <p>Wrapper for <code>java.util.Collections.unmodifiableMap(...)</code>.</p>
+
+    </div>
+  
+
+  <h3>java.util.Set</h3>
+  <div>
+    <p>Augmentations over set collections.</p>
+
+  </div>
+  
+    
+      <h4>exclude(this, element)</h4>
+    
+    <div>
+      <p>Alias for <code>remove</code> that returns the set.</p>
+
+    </div>
+  
+    
+      <h4>exclude(this, first, rest...)</h4>
+    
+    <div>
+      <p>Excludes a variable number of elements, and returns the set.</p>
+
+    </div>
+  
+    
+      <h4>filter(this, pred)</h4>
+    
+    <div>
+      <p>Filters the elements using a predicate, and returns a new collection.</p>
+
+    </div>
+  
+    
+      <h4>find(this, pred)</h4>
+    
+    <div>
+      <p>Finds the first element that satisfies a predicate <code>pred</code>, and returns it, or <code>null</code> if no element
+matches.</p>
+
+    </div>
+  
+    
+      <h4>has(this, element)</h4>
+    
+    <div>
+      <p>Alias for <code>contains</code>.</p>
+
+    </div>
+  
+    
+      <h4>has(this, first, rest...)</h4>
+    
+    <div>
+      <p>Alias for <code>contains</code> over a variable number of elements.</p>
+
+    </div>
+  
+    
+      <h4>include(this, element)</h4>
+    
+    <div>
+      <p>Alias for <code>add</code> that returns the set.</p>
+
+    </div>
+  
+    
+      <h4>include(this, first, rest...)</h4>
+    
+    <div>
+      <p>Includes a variable number of elements, and returns the set.</p>
+
+    </div>
+  
+    
+      <h4>map(this, func)</h4>
+    
+    <div>
+      <p>Transform each value using the <code>func</code> function, and returns a new set.</p>
+
+    </div>
+  
+    
+      <h4>unmodifiableView(this)</h4>
+    
+    <div>
+      <p>Convenience wrapper for <code>java.util.Collections.unmodifiableSet(...)</code>.</p>
+
+    </div>
+  
+
+
+
+
+
+</body>
+</html>
