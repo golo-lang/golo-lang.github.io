@@ -46,6 +46,9 @@ That's why we opted to pursue work on Golo with the following objectives in mind
 
 ## Looking back on 2 years of work
 
+_Thanks to Henri Gomez for the following Gource video!_
+<iframe width="853" height="480" src="//www.youtube-nocookie.com/embed/DeezcUoxMP4?rel=0" frameborder="0" allowfullscreen></iframe>
+
 It took 2 years to reach this `1.0.0` version, but digging through the Git history reveals that the
 active days count is roughly of 1 year and that Golo is nearly a one-man show:
 
@@ -146,7 +149,7 @@ development in the open.
 
 We wouldn't have reached this important milestone without the support of our awesome contributors:
 
-* Philippe Charrière
+* Philippe Charrière (special thanks to you mate, our **awesome** Golo developer advocate!)
 * Daniel Petisme  
 * Kel Cecil        
 * David Festal  
@@ -163,8 +166,8 @@ Guillaume Poyet designed our iconic logo.
 2 companies helped along the way: [Serli](http://www.serli.com/) and [Ninja Squad](http://ninja-squad.com/).
 
 The wider community also includes Marcin Erdmann for the 
-[Gradle plugin](https://github.com/golo-lang/gradle-golo-plugin) and Romain Lespinasse for the 
-[Homebrew integration](https://github.com/TypeUnsafe/homebrew-golo).
+[Gradle plugin](https://github.com/golo-lang/gradle-golo-plugin), Romain Lespinasse for the 
+[Homebrew integration](https://github.com/TypeUnsafe/homebrew-golo) and Henri Gomez for the RPM packaging.
 
 We do not forget our initial testers before we released Golo in the open at Devoxx France 2013:
 Pierre Colomb, Olivier Coupelon, Cédric Exbrayat, Frédéric Le Mouel, Nicolas Stouls, Henri Gomez,
