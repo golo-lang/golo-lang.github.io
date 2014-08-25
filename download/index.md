@@ -45,8 +45,17 @@ Binaries are being released to Maven Central under the `org.golo-lang` group.
 
 ### Native packages
 
-RPM: see the [DevOps Incubator project](https://github.com/hgomez/devops-incubator) by Henri Gomez
+* RPM: see the [DevOps Incubator project](https://github.com/hgomez/devops-incubator) by Henri Gomez
 and look for `golo-lang`.
+* OSX: see the [Homebrew project](http://brew.sh/) and install the `golo` forumula with:
+```sh
+brew install golo
+```
+
+* Windows: see the [Chocolatey project](https://chocolatey.org/) and install the [golo package](https://chocolatey.org/packages/golo) with:
+```sh
+choco install golo
+```
 
 ### Docker
 
