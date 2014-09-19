@@ -1,0 +1,121 @@
+---
+layout: news
+title: "Just released: Golo 1.1.0"
+---
+
+We haven't posted much news over the last summer since Golo 1.0.0 was released. We haven't
+stayed idle, and today we are pleased to share Golo version 1.1.0!
+
+* [Download Golo 1.1.0](/download/)
+* [Play with Golo on Google AppEngine](http://golo-console.appspot.com/)
+* [Read the Golo programming language guide](/documentation/1.1.0)
+* [Fork the project on GitHub](https://github.com/golo-lang/golo-lang)
+* [Get in touch on our mailing-list](http://groups.google.com/group/golo-lang)
+
+## New features
+
+### Python-style decorators
+
+This is probably the major feature of this release, contributed by Sylvain Desgrais and Yannick
+Loiseau.
+
+Golo decorators are not Java annotations, they are higher-order functions like in Python:
+
+```golo
+module tests.LogDeco
+
+function log = |msg| -> |fun| -> |args...| {
+  println(msg)
+  return fun: invokeWithArguments(args)
+}
+
+@log("calling foo")
+function foo = |a| {
+  println("foo got a " + a)
+}
+
+@log("I'am a bar")
+function bar = |a| -> 2*a
+
+function main = |args| {
+  foo("bar")
+  println(bar(21))
+}
+```
+
+which prints:
+
+```
+calling foo
+foo got a bar
+I'am a bar
+42
+```
+
+The new `gololang.Decorators` module provides a set of useful decorators, including `checkArguments`, `checkResult`, `memoizer` and more.
+
+Here is an example of using `memoizer`:
+
+```golo
+# (...)
+
+let memo = memoizer()
+
+@memo
+function fib = |n| {
+  if n <= 1 {
+    return n
+  } else {
+    return fib(n - 1) + fib(n - 2)
+  }
+}
+```
+
+Finally, here is an example checking arguments:
+
+```golo
+function isInteger = |v| {
+  require(v oftype Integer.class, v + "is not an Integer")
+  return v
+}
+
+function isPositive = |v| {
+  require(v > 0, v + "is not > 0")
+  return v
+}
+
+@checkResult(isInteger)
+@checkArguments(isInteger, isInteger)
+function add = |a, b| -> a + b
+
+@checkArguments(isInteger: andThen(isPositive))
+function inv = |v| -> 1.0 / v
+```
+
+### Command-line interface improvements
+
+Romain Lespinasse improved the `golo` command line interface:
+
+* most commands can now support both files and folders, e.g., `golo doc samples/`
+* help on individual commands is now available using the `--usage` flag, such as in: `golo --usage run`.
+
+### ctags generation
+
+Yannick Loiseau improved the `golo doc` command to generate `ctags`, which is useful with certain
+text editors.
+
+This will especially appeal to the fans of the venerable Vim, but people who prefer to hurt their
+brains and fingers with Emacs will also enjoy this feature.
+
+## Fixes and improvements
+
+Many documentation typos have been fixed, and some missing parts have been added, such as small
+sections for standard modules that where already documented in golodocs.
+
+Yannick Loiseau fixed some compilation error message bugs, too.
+
+Alexis Thomas improved some test portions.
+
+## Until next time...
+
+...have fun!
