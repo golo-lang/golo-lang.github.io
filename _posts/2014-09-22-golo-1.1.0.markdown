@@ -21,7 +21,7 @@ Loiseau.
 
 Golo decorators are not Java annotations, they are higher-order functions like in Python:
 
-```golo
+{% highlight golo %}
 module tests.LogDeco
 
 function log = |msg| -> |fun| -> |args...| {
@@ -41,7 +41,7 @@ function main = |args| {
   foo("bar")
   println(bar(21))
 }
-```
+{% endhighlight %}
 
 which prints:
 
@@ -56,7 +56,7 @@ The new `gololang.Decorators` module provides a set of useful decorators, includ
 
 Here is an example of using `memoizer`:
 
-```golo
+{% highlight golo %}
 # (...)
 
 let memo = memoizer()
@@ -69,11 +69,11 @@ function fib = |n| {
     return fib(n - 1) + fib(n - 2)
   }
 }
-```
+{% endhighlight %}
 
 Finally, here is an example checking arguments:
 
-```golo
+{% highlight golo %}
 function isInteger = |v| {
   require(v oftype Integer.class, v + "is not an Integer")
   return v
@@ -90,7 +90,7 @@ function add = |a, b| -> a + b
 
 @checkArguments(isInteger: andThen(isPositive))
 function inv = |v| -> 1.0 / v
-```
+{% endhighlight %}
 
 ### Command-line interface improvements
 
