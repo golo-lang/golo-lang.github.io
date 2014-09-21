@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>Documentation for gololang.Decorators</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      line-height: 1.5;
+      margin: 2em 3em 2em 20%;
+      text-align: left;
+      padding: 0 100px 0 100px;
+    }
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 80%;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    li p {
+      margin: 0.3em;
+    }
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 36px;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 30px;
+    }
+    h3 {
+      color: #666;
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 21px;
+    }
+    h5 {
+      font-size: 18px;
+    }
+
+    #toc {
+      margin: 0;
+      padding: 1em;
+      border-right: 1px solid #aaa;
+      font-size: 80%;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      width: 20%;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    #toc ul {
+      padding-left: 1em;
+    }
+
+    #toc > li {
+      list-style: none;
+      margin-bottom: 1ex;
+    }
+
+    #toc > li > a {
+      font-weight: bold;
+    }
+
+    :target {
+      background-color: yellow;
+    }
+
+    .permalink {
+      margin-left: .3em;
+      font-size: 70%;
+      visibility: hidden;
+    }
+
+    *:hover > .permalink {
+      visibility: visible;
+    }
+
+  </style>
+</head>
+<body>
+
+<h1>Documentation for gololang.Decorators</h1>
+<div>
+  <p>This module defines the set of standard decorators and utilites.</p>
+
+</div>
+
+<ul id="toc">
+  
+
+  
+
+  
+  <li><a href="#functions">Functions</a><ul>
+    
+    <li><a href="#any_">any()</a></li>
+    
+    <li><a href="#asChecker_f_m">asChecker(f, m)</a></li>
+    
+    <li><a href="#checkArguments_preTests">checkArguments(preTests)</a></li>
+    
+    <li><a href="#checkResult_postTest">checkResult(postTest)</a></li>
+    
+    <li><a href="#defaultContext_">defaultContext()</a></li>
+    
+    <li><a href="#greaterThan_m">greaterThan(m)</a></li>
+    
+    <li><a href="#isNegative_">isNegative()</a></li>
+    
+    <li><a href="#isNotNull_">isNotNull()</a></li>
+    
+    <li><a href="#isNumber_">isNumber()</a></li>
+    
+    <li><a href="#isOfType_t">isOfType(t)</a></li>
+    
+    <li><a href="#isPositive_">isPositive()</a></li>
+    
+    <li><a href="#isString_">isString()</a></li>
+    
+    <li><a href="#lengthIs_l">lengthIs(l)</a></li>
+    
+    <li><a href="#lessThan_m">lessThan(m)</a></li>
+    
+    <li><a href="#loggerDecorator_logger">loggerDecorator(logger)</a></li>
+    
+    <li><a href="#memoizer_">memoizer()</a></li>
+    
+    <li><a href="#printLoggerDecorator_prefix_suffix">printLoggerDecorator(prefix, suffix)</a></li>
+    
+    <li><a href="#withContext_context">withContext(context)</a></li>
+    
+  </ul></li>
+  
+</ul>
+
+
+
+
+
+
+
+<h2 id="functions">Functions</h2>
+
+  <h3 id="any_">any()
+    <a class="permalink" href="#any_" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Void checker: does nothing. Useful when one argument should not be checked.</p>
+
+  </div>
+
+  <h3 id="asChecker_f_m">asChecker(f, m)
+    <a class="permalink" href="#asChecker_f_m" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Factory function to create a generic checker from a boolean function.
+Takes a boolean function and an error message.</p>
+
+  </div>
+
+  <h3 id="checkArguments_preTests">checkArguments(preTests)
+    <a class="permalink" href="#checkArguments_preTests" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Checks arguments of the decorated function. Any checker can be used</p>
+
+  </div>
+
+  <h3 id="checkResult_postTest">checkResult(postTest)
+    <a class="permalink" href="#checkResult_postTest" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Checks result of the decorated function. Any checker can be used</p>
+
+  </div>
+
+  <h3 id="defaultContext_">defaultContext()
+    <a class="permalink" href="#defaultContext_" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Returns a void context to be used with the <code>withContext</code> decorator after
+redefinition of some methods.</p>
+<p>A context is an object with 4 defined methods:</p>
+<ul>
+<li><code>entry</code>: takes and returns the function arguments. Can be used to check
+arguments or apply transformation to them</li>
+<li><code>exit</code>: takes and returns the result of the function. Can be used to check
+conditions or transform the result</li>
+<li><code>catcher</code>: deals with exceptions that occurs during function execution.
+Takes
+the exception as parameter</li>
+<li><code>finallizer</code>: is called in a <code>finally</code> clause after function execution.
+No parameter</li>
+</ul>
+<p>In this default version, <code>entry</code> and <code>exit</code> return their parameters unchanged,
+<code>catcher</code> rethrow the exception and <code>finallizer</code> does nothing.</p>
+
+  </div>
+
+  <h3 id="greaterThan_m">greaterThan(m)
+    <a class="permalink" href="#greaterThan_m" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Factory function to create value checker.
+Takes a threshold and returns a checker verifying that the given value is
+greater than the threshold</p>
+<pre><code>let isPositive = greaterThan(0)
+</code></pre>
+
+  </div>
+
+  <h3 id="isNegative_">isNegative()
+    <a class="permalink" href="#isNegative_" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Value checker function</p>
+
+  </div>
+
+  <h3 id="isNotNull_">isNotNull()
+    <a class="permalink" href="#isNotNull_" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Value checker function</p>
+
+  </div>
+
+  <h3 id="isNumber_">isNumber()
+    <a class="permalink" href="#isNumber_" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Type checker function</p>
+
+  </div>
+
+  <h3 id="isOfType_t">isOfType(t)
+    <a class="permalink" href="#isOfType_t" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Factory function to create type checker.
+Takes a type to compare to and returns a checker function.</p>
+<pre><code>let isInteger = isOfType(Integer.class)
+</code></pre>
+
+  </div>
+
+  <h3 id="isPositive_">isPositive()
+    <a class="permalink" href="#isPositive_" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Value checker function</p>
+
+  </div>
+
+  <h3 id="isString_">isString()
+    <a class="permalink" href="#isString_" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Type checker function</p>
+
+  </div>
+
+  <h3 id="lengthIs_l">lengthIs(l)
+    <a class="permalink" href="#lengthIs_l" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Factory function to create a checker asserting that the length of its argument
+is exactly a value</p>
+<pre><code>@checkResult(lengthIs(2))
+function foo |a| -&gt; [a, a]
+</code></pre>
+
+  </div>
+
+  <h3 id="lessThan_m">lessThan(m)
+    <a class="permalink" href="#lessThan_m" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Factory function to create value checker.
+Takes a threshold and returns a checker verifying that the given value is
+less than the threshold</p>
+<pre><code>let isNegative = lessThan(0)
+</code></pre>
+
+  </div>
+
+  <h3 id="loggerDecorator_logger">loggerDecorator(logger)
+    <a class="permalink" href="#loggerDecorator_logger" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Factory function returning a decorator that log messages on entry and exit of
+the function.
+The factory take the logging function (e.g. println).
+The returned decorator takes two strings: the message to log before the call,
+and the message to log after the call. If one of these message is <code>null</code> or
+empty string, nothing is logged.</p>
+<pre><code>let myLogger = loggerDecorator(|msg| {println("# " + msg)})
+
+@myLogger("entering foo", "exiting foo")
+function foo = { println("doing foo") }
+</code></pre>
+
+  </div>
+
+  <h3 id="memoizer_">memoizer()
+    <a class="permalink" href="#memoizer_" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>Factory function for memoization decorator
+Returns a new memoization decorator. The cache key is the decorated function
+and its call arguments, thus the decorator can be used for every module
+functions. It must however be put in a module-level state, since in the current
+implementation, the decoration is invoked at each call.</p>
+<pre><code>let memo = memoizer()
+
+@memo
+function foo = |n| -&gt; ...
+
+@memo
+function bar = |a,b| -&gt; ...
+</code></pre>
+
+  </div>
+
+  <h3 id="printLoggerDecorator_prefix_suffix">printLoggerDecorator(prefix, suffix)
+    <a class="permalink" href="#printLoggerDecorator_prefix_suffix" title="link to this section">&#182;</a></h3>
+  <div>
+    <p>A convenient factory to create a <code>loggerDecorator</code> that <code>println</code> with a prefix
+and a suffix.</p>
+<pre><code>@printLoggerDecorator("# ", " #")("in", "out")
+function bar = { println("bar") }
+</code></pre>
+
+  </div>
+
+  <h3 id="withContext_context">withContext(context)
+    <a class="permalink" href="#withContext_context" title="link to this section">&#182;</a></h3>
+  <div>
+    <p><code>withContext</code> decorator:</p>
+<pre><code>@withContext(myContext)
+function foo = |a| -&gt; 2*a
+</code></pre>
+<p>This decorator is a very generic one, all the customization occurs in the
+context object.</p>
+
+  </div>
+
+
+
+</body>
+</html>
