@@ -3,8 +3,13 @@ layout: news
 title: "Just released: Golo 1.1.0"
 ---
 
+![A picture is worth, well... something.](https://farm4.staticflickr.com/3858/15317894292_5f9c120fda_c_d.jpg)
+
 We haven't posted much news over the last summer since Golo 1.0.0 was released. We haven't
 stayed idle, and today we are pleased to share Golo version 1.1.0!
+
+Golo 1.1.0 is mainly the result of contributions from new community members, and we are very happy
+to see enthusiasts join our effort.
 
 * [Download Golo 1.1.0](/download/)
 * [Play with Golo on Google AppEngine](http://golo-console.appspot.com/)
@@ -52,7 +57,9 @@ I'am a bar
 42
 ```
 
-The new `gololang.Decorators` module provides a set of useful decorators, including `checkArguments`, `checkResult`, `memoizer` and more.
+The new `gololang.Decorators` module provides [a set of useful
+decorators](localhost:4000/documentation/next/golodoc/gololang/Decorators.html), including
+`checkArguments`, `checkResult`, `memoizer` and more.
 
 Here is an example of using `memoizer`:
 
@@ -114,7 +121,7 @@ sections for standard modules that where already documented in golodocs.
 
 Yannick Loiseau fixed some compilation error message bugs, too.
 
-Alexis Thomas improved some test portions.
+Alexis Thomas improved some test portions, and Philippe Charrière contributed his share of goodness.
 
 ## Until next time...
 
