@@ -118,7 +118,6 @@
   </style>
 </head>
 <body>
-
 <h1>Documentation for gololang.Async</h1>
 <div>
   <p>This module offers asynchronous programming helpers, especially execution context agnostic promises
@@ -129,7 +128,9 @@ code from the same thread, from a separate thread, or by pushing new tasks to a 
 
 </div>
 
+<!-- begin table of content -->
 <ul id="toc">
+
   
   <li><a href="#structs">Structs</a><ul>
     
@@ -139,9 +140,11 @@ code from the same thread, from a separate thread, or by pushing new tasks to a 
   
 
   
+
+  
   <li><a href="#augmentations">Augmentations</a><ul>
     
-    <li><a href="#gololang.Async.types.FutureBridge">gololang.Async.types.FutureBridge</a><ul>
+    <li><a href="#augment.gololang.Async.types.FutureBridge">gololang.Async.types.FutureBridge</a><ul>
       
       <li><a href="#gololang.Async.types.FutureBridge.cancel_this_mayInterruptIfRunning">cancel(this, mayInterruptIfRunning)</a></li>
       
@@ -159,7 +162,7 @@ code from the same thread, from a separate thread, or by pushing new tasks to a 
       
     </ul></li>
     
-    <li><a href="#gololang.concurrent.async.Future">gololang.concurrent.async.Future</a><ul>
+    <li><a href="#augment.gololang.concurrent.async.Future">gololang.concurrent.async.Future</a><ul>
       
       <li><a href="#gololang.concurrent.async.Future.fallbackTo_this_future">fallbackTo(this, future)</a></li>
       
@@ -171,7 +174,13 @@ code from the same thread, from a separate thread, or by pushing new tasks to a 
       
     </ul></li>
     
-    <li><a href="#java.util.concurrent.ExecutorService">java.util.concurrent.ExecutorService</a><ul>
+    <li><a href="#augment.gololang.concurrent.async.Promise">gololang.concurrent.async.Promise</a><ul>
+      
+      <li><a href="#gololang.concurrent.async.Promise.initialize_this_closure">initialize(this, closure)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.util.concurrent.ExecutorService">java.util.concurrent.ExecutorService</a><ul>
       
       <li><a href="#java.util.concurrent.ExecutorService.enqueue_this_fun">enqueue(this, fun)</a></li>
       
@@ -198,23 +207,24 @@ code from the same thread, from a separate thread, or by pushing new tasks to a 
   </ul></li>
   
 </ul>
+<!-- end table of content -->
 
 
-
-<h2 id="structs">Structs</h2>
-
-<h3 id="FutureBridge">FutureBridge
+  <h2 id="structs">Structs</h2>
+  
+    <h3 id="FutureBridge">FutureBridge
     <a class="permalink" href="#FutureBridge" title="link to this section">&#182;</a></h3>
-  <p>Members:</p>
-  <ul>
+
+    <h5>Members</h5>
+    <ul>
+    
+      <li><code>_goloFuture</code></li>
   
-    <li><code>_goloFuture</code></li>
+      <li><code>_javaFuture</code></li>
   
-    <li><code>_javaFuture</code></li>
-  
-  </ul>
-  <div>
-    <p>Bridge structure to hold a reference to a Golo future and a Java future.</p>
+    </ul>
+    <div>
+      <p>Bridge structure to hold a reference to a Golo future and a Java future.</p>
 <p>Instances of this struct are being returned by the <code>enqueue</code> augmentation on <code>ExecutorService</code>
 instances. This essentially adds the ability to:</p>
 <ul>
@@ -222,105 +232,111 @@ instances. This essentially adds the ability to:</p>
 <li>use tha Java future to cancel a job.</li>
 </ul>
 
-  </div>
+    </div>
+  
 
 
 
 
-<h2 id="augmentations">Augmentations</h2>
 
-  <h3 id="gololang.Async.types.FutureBridge">gololang.Async.types.FutureBridge
-    <a class="permalink" href="#gololang.Async.types.FutureBridge" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>A set of forwarding augmentations for <code>FutureBridge</code> instances.</p>
+
+
+  <h2 id="augmentations">Augmentations</h2>
+  
+    <h3 id="augment.gololang.Async.types.FutureBridge">gololang.Async.types.FutureBridge
+    <a class="permalink" href="#augment.gololang.Async.types.FutureBridge" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>A set of forwarding augmentations for <code>FutureBridge</code> instances.</p>
 <p>The provided functions all forward to Golo futures, while <code>cancel</code> forwards to a Java future.</p>
 
-  </div>
-  
-    
-      <h4 id="gololang.Async.types.FutureBridge.cancel_this_mayInterruptIfRunning">cancel(this, mayInterruptIfRunning)
-    
-    <a class="permalink" href="#gololang.Async.types.FutureBridge.cancel_this_mayInterruptIfRunning" title="link to this section">&#182;</a></h4>
-    <div>
-      
     </div>
-  
     
-      <h4 id="gololang.Async.types.FutureBridge.fallbackTo_this_future">fallbackTo(this, future)
     
-    <a class="permalink" href="#gololang.Async.types.FutureBridge.fallbackTo_this_future" title="link to this section">&#182;</a></h4>
-    <div>
       
-    </div>
-  
-    
-      <h4 id="gololang.Async.types.FutureBridge.filter_this_pred">filter(this, pred)
-    
-    <a class="permalink" href="#gololang.Async.types.FutureBridge.filter_this_pred" title="link to this section">&#182;</a></h4>
-    <div>
+        <h4 id="gololang.Async.types.FutureBridge.cancel_this_mayInterruptIfRunning">cancel(this, mayInterruptIfRunning)
       
-    </div>
-  
+      <a class="permalink" href="#gololang.Async.types.FutureBridge.cancel_this_mayInterruptIfRunning" title="link to this section">&#182;</a></h4>
+      <div>
+        
+      </div>
     
-      <h4 id="gololang.Async.types.FutureBridge.flatMap_this_fun">flatMap(this, fun)
-    
-    <a class="permalink" href="#gololang.Async.types.FutureBridge.flatMap_this_fun" title="link to this section">&#182;</a></h4>
-    <div>
       
-    </div>
-  
-    
-      <h4 id="gololang.Async.types.FutureBridge.map_this_fun">map(this, fun)
-    
-    <a class="permalink" href="#gololang.Async.types.FutureBridge.map_this_fun" title="link to this section">&#182;</a></h4>
-    <div>
+        <h4 id="gololang.Async.types.FutureBridge.fallbackTo_this_future">fallbackTo(this, future)
       
-    </div>
-  
+      <a class="permalink" href="#gololang.Async.types.FutureBridge.fallbackTo_this_future" title="link to this section">&#182;</a></h4>
+      <div>
+        
+      </div>
     
-      <h4 id="gololang.Async.types.FutureBridge.onFail_this_listener">onFail(this, listener)
-    
-    <a class="permalink" href="#gololang.Async.types.FutureBridge.onFail_this_listener" title="link to this section">&#182;</a></h4>
-    <div>
       
-    </div>
-  
-    
-      <h4 id="gololang.Async.types.FutureBridge.onSet_this_listener">onSet(this, listener)
-    
-    <a class="permalink" href="#gololang.Async.types.FutureBridge.onSet_this_listener" title="link to this section">&#182;</a></h4>
-    <div>
+        <h4 id="gololang.Async.types.FutureBridge.filter_this_pred">filter(this, pred)
       
-    </div>
+      <a class="permalink" href="#gololang.Async.types.FutureBridge.filter_this_pred" title="link to this section">&#182;</a></h4>
+      <div>
+        
+      </div>
+    
+      
+        <h4 id="gololang.Async.types.FutureBridge.flatMap_this_fun">flatMap(this, fun)
+      
+      <a class="permalink" href="#gololang.Async.types.FutureBridge.flatMap_this_fun" title="link to this section">&#182;</a></h4>
+      <div>
+        
+      </div>
+    
+      
+        <h4 id="gololang.Async.types.FutureBridge.map_this_fun">map(this, fun)
+      
+      <a class="permalink" href="#gololang.Async.types.FutureBridge.map_this_fun" title="link to this section">&#182;</a></h4>
+      <div>
+        
+      </div>
+    
+      
+        <h4 id="gololang.Async.types.FutureBridge.onFail_this_listener">onFail(this, listener)
+      
+      <a class="permalink" href="#gololang.Async.types.FutureBridge.onFail_this_listener" title="link to this section">&#182;</a></h4>
+      <div>
+        
+      </div>
+    
+      
+        <h4 id="gololang.Async.types.FutureBridge.onSet_this_listener">onSet(this, listener)
+      
+      <a class="permalink" href="#gololang.Async.types.FutureBridge.onSet_this_listener" title="link to this section">&#182;</a></h4>
+      <div>
+        
+      </div>
+    
   
-
-  <h3 id="gololang.concurrent.async.Future">gololang.concurrent.async.Future
-    <a class="permalink" href="#gololang.concurrent.async.Future" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>Augmentation on the base <code>Future</code> objects provided by the <code>gololang.concurrent.async.Future</code> Java
+    <h3 id="augment.gololang.concurrent.async.Future">gololang.concurrent.async.Future
+    <a class="permalink" href="#augment.gololang.concurrent.async.Future" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Augmentation on the base <code>Future</code> objects provided by the <code>gololang.concurrent.async.Future</code> Java
 class.</p>
 
-  </div>
-  
+    </div>
     
-      <h4 id="gololang.concurrent.async.Future.fallbackTo_this_future">fallbackTo(this, future)
     
-    <a class="permalink" href="#gololang.concurrent.async.Future.fallbackTo_this_future" title="link to this section">&#182;</a></h4>
-    <div>
-      <p>Returns a fallback future:</p>
+      
+        <h4 id="gololang.concurrent.async.Future.fallbackTo_this_future">fallbackTo(this, future)
+      
+      <a class="permalink" href="#gololang.concurrent.async.Future.fallbackTo_this_future" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns a fallback future:</p>
 <ul>
 <li>when this future is set, the returned future is set to the same value,</li>
 <li>when it fails, the returned future matches the success or failure of <code>future</code>.</li>
 </ul>
 
-    </div>
-  
+      </div>
     
-      <h4 id="gololang.concurrent.async.Future.filter_this_pred">filter(this, pred)
-    
-    <a class="permalink" href="#gololang.concurrent.async.Future.filter_this_pred" title="link to this section">&#182;</a></h4>
-    <div>
-      <p>Returns a future that filters this future through the <code>pred</code> predicate function.</p>
+      
+        <h4 id="gololang.concurrent.async.Future.filter_this_pred">filter(this, pred)
+      
+      <a class="permalink" href="#gololang.concurrent.async.Future.filter_this_pred" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns a future that filters this future through the <code>pred</code> predicate function.</p>
 <p>Suppose that this future is set to <code>v</code>:</p>
 <ul>
 <li>if <code>pred(v)</code> is <code>true</code>, then the result future is set to <code>v</code>,</li>
@@ -328,42 +344,79 @@ class.</p>
 </ul>
 <p>If this future fails, so does the returned future.</p>
 
-    </div>
-  
+      </div>
     
-      <h4 id="gololang.concurrent.async.Future.flatMap_this_fun">flatMap(this, fun)
-    
-    <a class="permalink" href="#gololang.concurrent.async.Future.flatMap_this_fun" title="link to this section">&#182;</a></h4>
-    <div>
-      <p>Similar to <code>map</code>, except that <code>fun</code> returns a future, not a value.</p>
+      
+        <h4 id="gololang.concurrent.async.Future.flatMap_this_fun">flatMap(this, fun)
+      
+      <a class="permalink" href="#gololang.concurrent.async.Future.flatMap_this_fun" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Similar to <code>map</code>, except that <code>fun</code> returns a future, not a value.</p>
 
-    </div>
-  
+      </div>
     
-      <h4 id="gololang.concurrent.async.Future.map_this_fun">map(this, fun)
-    
-    <a class="permalink" href="#gololang.concurrent.async.Future.map_this_fun" title="link to this section">&#182;</a></h4>
-    <div>
-      <p>Returns a future whose value is mapped through the <code>fun</code> function.</p>
+      
+        <h4 id="gololang.concurrent.async.Future.map_this_fun">map(this, fun)
+      
+      <a class="permalink" href="#gololang.concurrent.async.Future.map_this_fun" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns a future whose value is mapped through the <code>fun</code> function.</p>
 <p>If this future is set to <code>v</code>, then the returned future is set to <code>fun(v)</code>. If it fails, the
 returned future is also failed with the same exception.</p>
 
-    </div>
-  
-
-  <h3 id="java.util.concurrent.ExecutorService">java.util.concurrent.ExecutorService
-    <a class="permalink" href="#java.util.concurrent.ExecutorService" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>Augmentations for <code>ExecutorService</code>.</p>
-
-  </div>
-  
+      </div>
     
-      <h4 id="java.util.concurrent.ExecutorService.enqueue_this_fun">enqueue(this, fun)
-    
-    <a class="permalink" href="#java.util.concurrent.ExecutorService.enqueue_this_fun" title="link to this section">&#182;</a></h4>
+  
+    <h3 id="augment.gololang.concurrent.async.Promise">gololang.concurrent.async.Promise
+    <a class="permalink" href="#augment.gololang.concurrent.async.Promise" title="link to this section">&#182;</a></h3>
     <div>
-      <p>Submits a function <code>fun</code> to be executed by this scheduler, and returns a <code>FutureBridge</code>.</p>
+      <p>Augmentation on the base <code>Promise</code> objects provided by the <code>gololang.concurrent.async.Promise</code> Java
+class.</p>
+<p>The promise initialize method takes one argument, a callback with two parameters, resolve and reject.
+Do something within the callback, then call resolve if everything worked, otherwise call reject:</p>
+<pre><code>let myPromise = -&gt; promise(): initialize(|resolve, reject| {
+  if everythingTurnedOutFine is true {
+    resolve("Stuff worked!")
+  } else {
+    reject(java.lang.Exception("Failed!"))
+  }
+})
+
+myPromise()
+  : onSet(|result| {
+      println(result) # Stuff worked!
+  })
+  : onFail(|err| {
+      println(err: getMessage()) # Failed!
+  })
+</code></pre>
+
+    </div>
+    
+    
+      
+        <h4 id="gololang.concurrent.async.Promise.initialize_this_closure">initialize(this, closure)
+      
+      <a class="permalink" href="#gololang.concurrent.async.Promise.initialize_this_closure" title="link to this section">&#182;</a></h4>
+      <div>
+        
+      </div>
+    
+  
+    <h3 id="augment.java.util.concurrent.ExecutorService">java.util.concurrent.ExecutorService
+    <a class="permalink" href="#augment.java.util.concurrent.ExecutorService" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Augmentations for <code>ExecutorService</code>.</p>
+
+    </div>
+    
+    
+      
+        <h4 id="java.util.concurrent.ExecutorService.enqueue_this_fun">enqueue(this, fun)
+      
+      <a class="permalink" href="#java.util.concurrent.ExecutorService.enqueue_this_fun" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Submits a function <code>fun</code> to be executed by this scheduler, and returns a <code>FutureBridge</code>.</p>
 <p><code>fun</code> takes no parameters, and its return value is used as a future value.</p>
 <p>The returned <code>FutureBridge</code> behaves both as a composable Golo future and as a Java future that can be
 cancelled.</p>
@@ -382,18 +435,18 @@ f: onSet(|v| -&gt; println(v)):
 f: cancel(true)
 </code></pre>
 
-    </div>
+      </div>
+    
   
 
 
 
-
-<h2 id="functions">Functions</h2>
-
-  <h3 id="all_futures">all(futures)
+  <h2 id="functions">Functions</h2>
+  
+    <h3 id="all_futures">all(futures)
     <a class="permalink" href="#all_futures" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>Given a collection of futures, returns a future whose value is eventually a vector with the
+    <div>
+      <p>Given a collection of futures, returns a future whose value is eventually a vector with the
 results of these futures.</p>
 <p>Given:</p>
 <pre><code>all([ setFuture(1), failedFuture(e) ])
@@ -404,27 +457,27 @@ results of these futures.</p>
 <p>Results are accumulated as futures get resolved. The last completed future triggers the calls to
 <code>onSet</code>-registered listeners on the same thread.</p>
 
-  </div>
-
-  <h3 id="any_futures">any(futures)
+    </div>
+  
+    <h3 id="any_futures">any(futures)
     <a class="permalink" href="#any_futures" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>Given a collection of futures, returns a future whose value is set to the first completing future.</p>
+    <div>
+      <p>Given a collection of futures, returns a future whose value is set to the first completing future.</p>
 <p>If all futures fail, then the returned future fails to a <code>java.util.NoSuchElementException</code>.</p>
 
-  </div>
-
-  <h3 id="failedFuture_throwable">failedFuture(throwable)
+    </div>
+  
+    <h3 id="failedFuture_throwable">failedFuture(throwable)
     <a class="permalink" href="#failedFuture_throwable" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>Returns a failed future to a <code>throwable</code> exception.</p>
+    <div>
+      <p>Returns a failed future to a <code>throwable</code> exception.</p>
 
-  </div>
-
-  <h3 id="promise_">promise()
+    </div>
+  
+    <h3 id="promise_">promise()
     <a class="permalink" href="#promise_" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>Returns a new promise. Promise objects have the following useful methods.</p>
+    <div>
+      <p>Returns a new promise. Promise objects have the following useful methods.</p>
 <ul>
 <li><code>set(value)</code>: sets the promise value. The value is ignored if the promise has already been set.</li>
 <li><code>fail(exception)</code>: set the value to an exception.</li>
@@ -442,12 +495,12 @@ has already been set.</li>
 <li><code>isResolved()</code>, <code>isFailed()</code> <code>get()</code> and <code>blockingGet()</code> delegate to the promise implementation.</li>
 </ul>
 
-  </div>
-
-  <h3 id="reduce_futures_init_reducer">reduce(futures, init, reducer)
+    </div>
+  
+    <h3 id="reduce_futures_init_reducer">reduce(futures, init, reducer)
     <a class="permalink" href="#reduce_futures_init_reducer" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>Returns a future whose value is set to the <em>reduction</em> of a collection of futures.</p>
+    <div>
+      <p>Returns a future whose value is set to the <em>reduction</em> of a collection of futures.</p>
 <ul>
 <li><code>futures</code> is a collection of futures, and</li>
 <li><code>init</code> is the initial value, and</li>
@@ -457,15 +510,15 @@ has already been set.</li>
 accumulation of the values. Listeners callbacks get executed on the thread of the completing future
 which is either the last successful future or the first future to fail.</p>
 
-  </div>
-
-  <h3 id="setFuture_value">setFuture(value)
+    </div>
+  
+    <h3 id="setFuture_value">setFuture(value)
     <a class="permalink" href="#setFuture_value" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>Returns a future set to <code>value</code>.</p>
+    <div>
+      <p>Returns a future set to <code>value</code>.</p>
 
-  </div>
-
+    </div>
+  
 
 
 </body>

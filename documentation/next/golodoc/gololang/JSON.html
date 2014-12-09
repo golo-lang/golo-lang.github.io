@@ -118,7 +118,6 @@
   </style>
 </head>
 <body>
-
 <h1>Documentation for gololang.JSON</h1>
 <div>
   <p>A set of useful APIs for dealing with JSON documents from Golo.</p>
@@ -128,13 +127,17 @@ Golo tuples, dynamic objects and structs.</p>
 
 </div>
 
+<!-- begin table of content -->
 <ul id="toc">
+
+  
+
   
 
   
   <li><a href="#augmentations">Augmentations</a><ul>
     
-    <li><a href="#gololang.GoloStruct">gololang.GoloStruct</a><ul>
+    <li><a href="#augment.gololang.GoloStruct">gololang.GoloStruct</a><ul>
       
       <li><a href="#gololang.GoloStruct.toJSON_this">toJSON(this)</a></li>
       
@@ -159,40 +162,45 @@ Golo tuples, dynamic objects and structs.</p>
   </ul></li>
   
 </ul>
+<!-- end table of content -->
 
 
 
 
 
-<h2 id="augmentations">Augmentations</h2>
 
-  <h3 id="gololang.GoloStruct">gololang.GoloStruct
-    <a class="permalink" href="#gololang.GoloStruct" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>JSON augmentations for structs.</p>
 
-  </div>
+
+  <h2 id="augmentations">Augmentations</h2>
   
-    
-      <h4 id="gololang.GoloStruct.toJSON_this">toJSON(this)
-    
-    <a class="permalink" href="#gololang.GoloStruct.toJSON_this" title="link to this section">&#182;</a></h4>
+    <h3 id="augment.gololang.GoloStruct">gololang.GoloStruct
+    <a class="permalink" href="#augment.gololang.GoloStruct" title="link to this section">&#182;</a></h3>
     <div>
-      <p>Conveniently adds a <code>toJSON()</code> method, which is equivalent to calling <code>JSON.stringify()</code>:</p>
+      <p>JSON augmentations for structs.</p>
+
+    </div>
+    
+    
+      
+        <h4 id="gololang.GoloStruct.toJSON_this">toJSON(this)
+      
+      <a class="permalink" href="#gololang.GoloStruct.toJSON_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Conveniently adds a <code>toJSON()</code> method, which is equivalent to calling <code>JSON.stringify()</code>:</p>
 <pre><code>struct Person = { name, age, email }
 # (...)
 
 Person("Mr Bean", "mrbean@outlook.com", 64): toJSON()
 </code></pre>
 
-    </div>
-  
+      </div>
     
-      <h4 id="gololang.GoloStruct.updateFromJSON_this_str">updateFromJSON(this, str)
-    
-    <a class="permalink" href="#gololang.GoloStruct.updateFromJSON_this_str" title="link to this section">&#182;</a></h4>
-    <div>
-      <p>Populates the elements of a struct based on the values found in a JSON string.</p>
+      
+        <h4 id="gololang.GoloStruct.updateFromJSON_this_str">updateFromJSON(this, str)
+      
+      <a class="permalink" href="#gololang.GoloStruct.updateFromJSON_this_str" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Populates the elements of a struct based on the values found in a JSON string.</p>
 <pre><code>let str = JSON.stringify(map[
   ["name", "Foo"],
   ["email", "foo@gmail.com"],
@@ -203,40 +211,40 @@ let foo = Person(): updateFromJSON(str)
 </code></pre>
 <p>Note that missing entries from the JSON data yield <code>null</code> values in the struct.</p>
 
-    </div>
+      </div>
+    
   
 
 
 
-
-<h2 id="functions">Functions</h2>
-
-  <h3 id="dynamicObjectMixin_">dynamicObjectMixin()
+  <h2 id="functions">Functions</h2>
+  
+    <h3 id="dynamicObjectMixin_">dynamicObjectMixin()
     <a class="permalink" href="#dynamicObjectMixin_" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>Provides a mixin for dynamic objects that includes a <code>toJSON()</code> method:</p>
+    <div>
+      <p>Provides a mixin for dynamic objects that includes a <code>toJSON()</code> method:</p>
 <pre><code>object: mixin(JSON.dynamicObjectMixin()): toJSON()
 </code></pre>
 <p>which is equivalent to:</p>
 <pre><code>JSON.stringify(object)
 </code></pre>
 
-  </div>
-
-  <h3 id="parse_str">parse(str)
+    </div>
+  
+    <h3 id="parse_str">parse(str)
     <a class="permalink" href="#parse_str" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>Parses a JSON string and gives an object representation as a list or map collection:</p>
+    <div>
+      <p>Parses a JSON string and gives an object representation as a list or map collection:</p>
 <pre><code>let data = JSON.parse(text)
 println(data: get("name"))
 </code></pre>
 
-  </div>
-
-  <h3 id="stringify_obj">stringify(obj)
+    </div>
+  
+    <h3 id="stringify_obj">stringify(obj)
     <a class="permalink" href="#stringify_obj" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>Takes any know object, and gives a JSON string representation:</p>
+    <div>
+      <p>Takes any know object, and gives a JSON string representation:</p>
 <pre><code>let data = map[
   ["name", "Somebody"],
   ["age", 69],
@@ -250,12 +258,12 @@ let asText = JSON.stringify(data)
 another type then its string representation is given according to <code>obj: toString()</code> or <code>"null"</code> if
 <code>obj</code> is <code>null</code>.</p>
 
-  </div>
-
-  <h3 id="toDynamicObject_str">toDynamicObject(str)
+    </div>
+  
+    <h3 id="toDynamicObject_str">toDynamicObject(str)
     <a class="permalink" href="#toDynamicObject_str" title="link to this section">&#182;</a></h3>
-  <div>
-    <p>Returns a new dynamic object from a JSON string where each first-level entry is mapped into the
+    <div>
+      <p>Returns a new dynamic object from a JSON string where each first-level entry is mapped into the
 dynamic object:</p>
 <pre><code>let obj = JSON.toDynamicObject(JSON.stringify(map[
   ["a", "1"], ["b", "2"]
@@ -265,8 +273,8 @@ println(obj: a())
 println(obj: b())
 </code></pre>
 
-  </div>
-
+    </div>
+  
 
 
 </body>
