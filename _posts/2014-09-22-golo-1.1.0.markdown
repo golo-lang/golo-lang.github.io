@@ -58,7 +58,7 @@ I'am a bar
 ```
 
 The new `gololang.Decorators` module provides [a set of useful
-decorators](localhost:4000/documentation/next/golodoc/gololang/Decorators.html), including
+decorators](/documentation/next/golodoc/gololang/Decorators.html), including
 `checkArguments`, `checkResult`, `memoizer` and more.
 
 Here is an example of using `memoizer`:
