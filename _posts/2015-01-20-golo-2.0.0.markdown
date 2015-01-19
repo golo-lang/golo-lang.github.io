@@ -1,0 +1,136 @@
+---
+layout: news
+title: "Golo 2.0.0"
+---
+
+    [I]
+    Usage of uninitialized references is reported
+    let a = a + 1
+
+    [I]
+    golodoc improvements
+
+    [I]
+    Method / function resolution refactorings and fixes
+
+    [F]
+    Better range objects, + literal syntax ['a'..'z'], etc
+
+    [F]
+    Number type conversion functions
+
+Golo 2.0.0 is here with new language features, improvements and fixes. This is the result of a great
+community effort, and we are very happy with the result.
+
+As Golo tries to stick to the semantics of [semantic versioning](http://semver.org), we bumped to a
+new major version. Indeed, *named augmentations* are a new language features, and they turn `with`
+into a keyword, which introduces a tiny forward incompatibility.
+
+Before we dive into the highlights of this new release:
+
+* [Download Golo 2.0.0](/download/)
+* [Play with Golo on Google AppEngine](http://golo-console.appspot.com/)
+* [Read the Golo programming language guide](/documentation/2.0.0)
+* [Fork the project on GitHub](https://github.com/golo-lang/golo-lang)
+* [Get in touch on our mailing-list](http://groups.google.com/group/golo-lang)
+* [Chat with us](https://gitter.im/golo-lang/golo-lang)
+
+## Noteworthy changes
+
+### UTF-8 characters (and Emoji)
+
+Yes, one can now have fun with UTF-8 symbols:
+
+{% highlight golo %}
+let ていすう = 1
+var ヘンスウ = 1
+function 関数 = |인수| -> 인수
+struct структура = { عنصر }
+{% endhighlight %}
+
+Even better (or worse), Emoji is possible:
+
+{% highlight golo %}
+module Emoji.Me.IM.Famous
+
+function main = |args| {
+  println("🍻")
+  let 👍 = "Golo"
+  println(👍)
+}
+{% endhighlight %}
+
+which prints:
+    🍻
+    Golo
+
+### Named augmentations
+
+Augmentations can now be given names, as in:
+
+{% highlight golo %}
+augmentation FooBar = {
+  function foo = |this| -> "foo"
+  function bar = |this, a| -> this: length() + a
+}
+
+augmentation Spamable = {
+  function spam = |this| -> "spam"
+}
+{% endhighlight %}
+
+Then, such augmentations can be applied to types as in:
+
+{% highlight golo %}
+augment java.util.Collection with FooBar
+augment MyStruct with Spamable
+augment java.lang.String with FooBar, Spamable
+{% endhighlight %}
+
+### Banged function calls
+
+Banged function calls allow caching the result of a first call:
+
+{% highlight golo %}
+function take_a_while  = {
+  # ... complex computation
+  return 42
+}
+
+# (...)
+foreach i in range(0, 100) {
+  println(take_a_while!())
+}
+{% endhighlight %}
+
+In this contrieved example, `take_a_while` would be called only once, and the value
+would serve as a result for all subsequent calls to this call site.
+
+Banged function calls shall only be used to cache the result of calls to *pure* functions.
+
+The performance improvements done by caching with banged function calls are especially interesting
+when used on decorators. Indeed, Golo decorators are simply high-order functions, and they need to
+be evaluated for each decorated function call. This is not the case for banged decorators:
+
+{% highlight golo %}
+function decorator =  |func| -> |x| -> func(x)
+
+@!decorator
+function identity = |x| -> x
+{% endhighlight %}
+
+which expands to:
+
+{% highlight golo %}
+function decorator =  |func| -> |x| -> func(x)
+
+function identity = |x| -> decorator!(|x| -> x)(x)
+{% endhighlight %}
+
+### New standard library functions
+
+A few additions have been made to the standard library, including:
+
+* `newTypedArray` to build typed JVM arrays (i.e., not just `Object[]` arrays),
+* `uuid` to get a new UUID-generated string,
+* `sleep` as a shortcut to `java.lang.Thread.sleep`.
