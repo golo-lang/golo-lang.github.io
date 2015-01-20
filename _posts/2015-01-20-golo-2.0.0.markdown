@@ -3,6 +3,8 @@ layout: news
 title: "Golo 2.0.0"
 ---
 
+![Auvergne FTW](https://farm9.staticflickr.com/8627/16138075430_03a6458597_c.jpg)
+
 Golo 2.0.0 is here with new language features, improvements and fixes. This is the result of a great
 community effort: we are glad that new contributors joined us, and the new language features are
 contributions developped outside of the [Dynamid](http://dynamid.citi-lab.fr/) research group.
