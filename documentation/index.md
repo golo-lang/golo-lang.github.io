@@ -10,6 +10,11 @@ title: Golo documentation
 
 ## Released versions
 
+### 2.0.0
+
+* [Golo Programming Language Guide](2.0.0/index.html)
+* [Golodoc](2.0.0/golodoc/index.html)
+
 ### 1.1.0
 
 * [Golo Programming Language Guide](1.1.0/index.html)

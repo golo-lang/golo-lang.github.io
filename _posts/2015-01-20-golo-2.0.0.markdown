@@ -11,7 +11,7 @@ contributions developped outside of the [Dynamid](http://dynamid.citi-lab.fr/) r
 
 As Golo tries to stick to the semantics of [semantic versioning](http://semver.org), we bumped to a
 new major version. Indeed, *named augmentations* are a new language feature, and they turn `with`
-into a keyword, which introduces a tiny forward incompatibility.
+into a keyword, which introduces a tiny backwards incompatibility.
 
 Before we dive into the highlights of this new release:
 
@@ -74,6 +74,9 @@ augment MyStruct with Spamable
 augment java.lang.String with FooBar, Spamable
 {% endhighlight %}
 
+See the documentation for more details about
+[named augmentations](/documentation/2.0.0/index.html#_named_augmentations)
+
 ### Banged function calls
 
 Banged function calls allow caching the result of a first call:
@@ -113,6 +116,9 @@ function decorator =  |func| -> |x| -> func(x)
 
 function identity = |x| -> decorator!(|x| -> x)(x)
 {% endhighlight %}
+
+See the documentation for more details about
+[banged function calls](/documentation/2.0.0/index.html#_banged_function_call)
 
 ### Range objects improvements
 
