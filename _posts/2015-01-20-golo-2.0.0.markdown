@@ -3,27 +3,12 @@ layout: news
 title: "Golo 2.0.0"
 ---
 
-    [I]
-    Usage of uninitialized references is reported
-    let a = a + 1
-
-    [I]
-    golodoc improvements
-
-    [I]
-    Method / function resolution refactorings and fixes
-
-    [F]
-    Better range objects, + literal syntax ['a'..'z'], etc
-
-    [F]
-    Number type conversion functions
-
 Golo 2.0.0 is here with new language features, improvements and fixes. This is the result of a great
-community effort, and we are very happy with the result.
+community effort: we are glad that new contributors joined us, and the new language features are
+contributions developped outside of the [Dynamid](http://dynamid.citi-lab.fr/) research group.
 
 As Golo tries to stick to the semantics of [semantic versioning](http://semver.org), we bumped to a
-new major version. Indeed, *named augmentations* are a new language features, and they turn `with`
+new major version. Indeed, *named augmentations* are a new language feature, and they turn `with`
 into a keyword, which introduces a tiny forward incompatibility.
 
 Before we dive into the highlights of this new release:
@@ -31,7 +16,7 @@ Before we dive into the highlights of this new release:
 * [Download Golo 2.0.0](/download/)
 * [Play with Golo on Google AppEngine](http://golo-console.appspot.com/)
 * [Read the Golo programming language guide](/documentation/2.0.0)
-* [Fork the project on GitHub](https://github.com/golo-lang/golo-lang)
+* [Star / fork the project on GitHub](https://github.com/golo-lang/golo-lang)
 * [Get in touch on our mailing-list](http://groups.google.com/group/golo-lang)
 * [Chat with us](https://gitter.im/golo-lang/golo-lang)
 
@@ -127,6 +112,38 @@ function decorator =  |func| -> |x| -> func(x)
 function identity = |x| -> decorator!(|x| -> x)(x)
 {% endhighlight %}
 
+### Range objects improvements
+
+Range objects now have a literal syntax:
+
+{% highlight golo %}
+let r1 = [1..10]
+let r2 = ['a'..'f']
+{% endhighlight %}
+
+Ranges now support `incrementedBy` / `decrementedBy` methods, which allows code such as:
+
+{% highlight golo %}
+foreach i in [0..10]: incrementBy(2) {
+  print(i + " ")
+}
+{% endhighlight %}
+
+### Number type conversion functions
+
+Sometimes one needs to make explicit type conversions in a dynamically-typed language.
+
+The `intValue(n)`, `longValue(n)`, `charValue(n)`, `doubleValue(n)` and `floatValue(n)` functions
+do just that:
+
+{% highlight golo %}
+let i = intValue("666")   # 666 (string to integer)
+let j = intValue(1.234)   # 1 (double to integer)
+let k = intValue(666_L)   # 666 (long to integer)
+# etc
+{% endhighlight %}
+
+
 ### New standard library functions
 
 A few additions have been made to the standard library, including:
@@ -134,3 +151,20 @@ A few additions have been made to the standard library, including:
 * `newTypedArray` to build typed JVM arrays (i.e., not just `Object[]` arrays),
 * `uuid` to get a new UUID-generated string,
 * `sleep` as a shortcut to `java.lang.Thread.sleep`.
+
+### Other changes
+
+The compiler has been tightened to reject referencing uninitialized references, such as in:
+
+{% highlight golo %}
+let a = a + 1
+{% endhighlight %}
+
+The *golodoc* generation has been improved.
+
+Under the hood, the method / function runtime resolution has gone through several refactorings and
+fixes.
+
+## Until next time...
+
+Many thanks again to our community members, and have fun with Golo!
