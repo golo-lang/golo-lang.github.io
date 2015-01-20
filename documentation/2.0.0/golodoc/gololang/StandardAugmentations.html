@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>Documentation for gololang.StandardAugmentations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      line-height: 1.5;
+      margin: 2em 3em 2em 20%;
+      text-align: left;
+      padding: 0 100px 0 100px;
+    }
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 80%;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    li p {
+      margin: 0.3em;
+    }
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 36px;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 30px;
+    }
+    h3 {
+      color: #666;
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 21px;
+    }
+    h5 {
+      font-size: 18px;
+    }
+
+    #toc {
+      margin: 0;
+      padding: 1em;
+      border-right: 1px solid #aaa;
+      font-size: 80%;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      width: 20%;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    #toc ul {
+      padding-left: 1em;
+    }
+
+    #toc > li {
+      list-style: none;
+      margin-bottom: 1ex;
+    }
+
+    #toc > li > a {
+      font-weight: bold;
+    }
+
+    :target {
+      background-color: yellow;
+    }
+
+    .permalink {
+      margin-left: .3em;
+      font-size: 70%;
+      visibility: hidden;
+    }
+
+    *:hover > .permalink {
+      visibility: visible;
+    }
+
+  </style>
+</head>
+<body>
+<h1>Documentation for gololang.StandardAugmentations</h1>
+<div>
+  <p>This module defines the set of standard augmentations.</p>
+
+</div>
+
+<!-- begin table of content -->
+<ul id="toc">
+
+  
+
+  
+
+  
+  <li><a href="#augmentations">Augmentations</a><ul>
+    
+    <li><a href="#augment.gololang.Tuple">gololang.Tuple</a><ul>
+      
+      <li><a href="#gololang.Tuple.filter_this_func">filter(this, func)</a></li>
+      
+      <li><a href="#gololang.Tuple.find_this_pred">find(this, pred)</a></li>
+      
+      <li><a href="#gololang.Tuple.join_this_separator">join(this, separator)</a></li>
+      
+      <li><a href="#gololang.Tuple.map_this_func">map(this, func)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.lang.Iterable">java.lang.Iterable</a><ul>
+      
+      <li><a href="#java.lang.Iterable.count_this_pred">count(this, pred)</a></li>
+      
+      <li><a href="#java.lang.Iterable.each_this_func">each(this, func)</a></li>
+      
+      <li><a href="#java.lang.Iterable.exists_this_pred">exists(this, pred)</a></li>
+      
+      <li><a href="#java.lang.Iterable.reduce_this_initialValue_func">reduce(this, initialValue, func)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.lang.Number">java.lang.Number</a><ul>
+      
+      <li><a href="#java.lang.Number.downTo_high_low_func">downTo(high, low, func)</a></li>
+      
+      <li><a href="#java.lang.Number.times_count_func">times(count, func)</a></li>
+      
+      <li><a href="#java.lang.Number.upTo_low_high_func">upTo(low, high, func)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.lang.String">java.lang.String</a><ul>
+      
+      <li><a href="#java.lang.String.format_this_args">format(this, args)</a></li>
+      
+      <li><a href="#java.lang.String.toDouble_this">toDouble(this)</a></li>
+      
+      <li><a href="#java.lang.String.toFloat_this">toFloat(this)</a></li>
+      
+      <li><a href="#java.lang.String.toInt_this">toInt(this)</a></li>
+      
+      <li><a href="#java.lang.String.toInteger_this">toInteger(this)</a></li>
+      
+      <li><a href="#java.lang.String.toLong_this">toLong(this)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.lang.invoke.MethodHandle">java.lang.invoke.MethodHandle</a><ul>
+      
+      <li><a href="#java.lang.invoke.MethodHandle.andThen_this_filter">andThen(this, filter)</a></li>
+      
+      <li><a href="#java.lang.invoke.MethodHandle.bindAt_this_pos_val">bindAt(this, pos, val)</a></li>
+      
+      <li><a href="#java.lang.invoke.MethodHandle.spread_this_args">spread(this, args)</a></li>
+      
+      <li><a href="#java.lang.invoke.MethodHandle.to_this_interfaceClass">to(this, interfaceClass)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.util.Collection">java.util.Collection</a><ul>
+      
+      <li><a href="#java.util.Collection.newWithSameType_this">newWithSameType(this)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.util.List">java.util.List</a><ul>
+      
+      <li><a href="#java.util.List.append_this_head_tail">append(this, head, tail)</a></li>
+      
+      <li><a href="#java.util.List.append_this_element">append(this, element)</a></li>
+      
+      <li><a href="#java.util.List.filter_this_pred">filter(this, pred)</a></li>
+      
+      <li><a href="#java.util.List.find_this_pred">find(this, pred)</a></li>
+      
+      <li><a href="#java.util.List.head_this">head(this)</a></li>
+      
+      <li><a href="#java.util.List.insert_this_index_element">insert(this, index, element)</a></li>
+      
+      <li><a href="#java.util.List.join_this_separator">join(this, separator)</a></li>
+      
+      <li><a href="#java.util.List.last_this">last(this)</a></li>
+      
+      <li><a href="#java.util.List.map_this_func">map(this, func)</a></li>
+      
+      <li><a href="#java.util.List.order_this_comparator">order(this, comparator)</a></li>
+      
+      <li><a href="#java.util.List.order_this">order(this)</a></li>
+      
+      <li><a href="#java.util.List.ordered_this_comparator">ordered(this, comparator)</a></li>
+      
+      <li><a href="#java.util.List.ordered_this">ordered(this)</a></li>
+      
+      <li><a href="#java.util.List.prepend_this_head_tail">prepend(this, head, tail)</a></li>
+      
+      <li><a href="#java.util.List.prepend_this_element">prepend(this, element)</a></li>
+      
+      <li><a href="#java.util.List.reverse_this">reverse(this)</a></li>
+      
+      <li><a href="#java.util.List.reversed_this">reversed(this)</a></li>
+      
+      <li><a href="#java.util.List.tail_this">tail(this)</a></li>
+      
+      <li><a href="#java.util.List.unmodifiableView_this">unmodifiableView(this)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.util.Map">java.util.Map</a><ul>
+      
+      <li><a href="#java.util.Map.add_this_key_value">add(this, key, value)</a></li>
+      
+      <li><a href="#java.util.Map.addIfAbsent_this_key_value">addIfAbsent(this, key, value)</a></li>
+      
+      <li><a href="#java.util.Map.count_this_pred">count(this, pred)</a></li>
+      
+      <li><a href="#java.util.Map.delete_this_key">delete(this, key)</a></li>
+      
+      <li><a href="#java.util.Map.each_this_func">each(this, func)</a></li>
+      
+      <li><a href="#java.util.Map.exists_this_pred">exists(this, pred)</a></li>
+      
+      <li><a href="#java.util.Map.filter_this_pred">filter(this, pred)</a></li>
+      
+      <li><a href="#java.util.Map.find_this_pred">find(this, pred)</a></li>
+      
+      <li><a href="#java.util.Map.getOrElse_this_key_replacement">getOrElse(this, key, replacement)</a></li>
+      
+      <li><a href="#java.util.Map.map_this_func">map(this, func)</a></li>
+      
+      <li><a href="#java.util.Map.newWithSameType_this">newWithSameType(this)</a></li>
+      
+      <li><a href="#java.util.Map.reduce_this_initialValue_func">reduce(this, initialValue, func)</a></li>
+      
+      <li><a href="#java.util.Map.unmodifiableView_this">unmodifiableView(this)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.util.Set">java.util.Set</a><ul>
+      
+      <li><a href="#java.util.Set.exclude_this_first_rest">exclude(this, first, rest)</a></li>
+      
+      <li><a href="#java.util.Set.exclude_this_element">exclude(this, element)</a></li>
+      
+      <li><a href="#java.util.Set.filter_this_pred">filter(this, pred)</a></li>
+      
+      <li><a href="#java.util.Set.find_this_pred">find(this, pred)</a></li>
+      
+      <li><a href="#java.util.Set.has_this_first_rest">has(this, first, rest)</a></li>
+      
+      <li><a href="#java.util.Set.has_this_element">has(this, element)</a></li>
+      
+      <li><a href="#java.util.Set.include_this_first_rest">include(this, first, rest)</a></li>
+      
+      <li><a href="#java.util.Set.include_this_element">include(this, element)</a></li>
+      
+      <li><a href="#java.util.Set.map_this_func">map(this, func)</a></li>
+      
+      <li><a href="#java.util.Set.unmodifiableView_this">unmodifiableView(this)</a></li>
+      
+    </ul></li>
+    
+  </ul></li>
+  
+
+  
+</ul>
+<!-- end table of content -->
+
+
+
+
+
+
+
+
+  <h2 id="augmentations">Augmentations</h2>
+  
+    <h3 id="augment.gololang.Tuple">gololang.Tuple
+    <a class="permalink" href="#augment.gololang.Tuple" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Augmentations for Golo tuples.</p>
+
+    </div>
+    
+    
+      
+        <h4 id="gololang.Tuple.filter_this_func">filter(this, func)
+      
+      <a class="permalink" href="#gololang.Tuple.filter_this_func" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Filters elements using a predicate, returning a new tuple.</p>
+
+      </div>
+    
+      
+        <h4 id="gololang.Tuple.find_this_pred">find(this, pred)
+      
+      <a class="permalink" href="#gololang.Tuple.find_this_pred" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns the first element that satisfies a predicate, or <code>null</code> if none matches.</p>
+
+      </div>
+    
+      
+        <h4 id="gololang.Tuple.join_this_separator">join(this, separator)
+      
+      <a class="permalink" href="#gololang.Tuple.join_this_separator" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Joins the elements of a tuple into a string and using a separator.</p>
+
+      </div>
+    
+      
+        <h4 id="gololang.Tuple.map_this_func">map(this, func)
+      
+      <a class="permalink" href="#gololang.Tuple.map_this_func" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Maps the elements of a tuple, and returns a tuple with the transformed values.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.lang.Iterable">java.lang.Iterable
+    <a class="permalink" href="#augment.java.lang.Iterable" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Augmentations over iterable collections.</p>
+
+    </div>
+    
+    
+      
+        <h4 id="java.lang.Iterable.count_this_pred">count(this, pred)
+      
+      <a class="permalink" href="#java.lang.Iterable.count_this_pred" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Counts the number of elements that satisfy a predicate:</p>
+<pre><code>println([1, 2, 3, 4]: count(|n| -&gt; (n % 2) == 0))
+</code></pre>
+<ul>
+<li><code>this</code>: an iterable.</li>
+<li><code>pred</code>: a predicate function, taking an element and returning a boolean.</li>
+</ul>
+
+      </div>
+    
+      
+        <h4 id="java.lang.Iterable.each_this_func">each(this, func)
+      
+      <a class="permalink" href="#java.lang.Iterable.each_this_func" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Applies a function over each element:</p>
+<pre><code>[1, 2, 3]: each(|e| -&gt; println(e))
+</code></pre>
+<ul>
+<li><code>this</code>: an iterable.</li>
+<li><code>func</code>: the function to apply, taking the current element as a parameter.</li>
+</ul>
+
+      </div>
+    
+      
+        <h4 id="java.lang.Iterable.exists_this_pred">exists(this, pred)
+      
+      <a class="permalink" href="#java.lang.Iterable.exists_this_pred" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Checks wether any element satisfied a predicate:</p>
+<pre><code>println([1, 2, 3, 4]: exists(|n| -&gt; n &gt; 3))
+</code></pre>
+<ul>
+<li><code>this</code>: an iterable.</li>
+<li><code>pred</code> a predicate function, taking an element and returning a boolean.</li>
+</ul>
+
+      </div>
+    
+      
+        <h4 id="java.lang.Iterable.reduce_this_initialValue_func">reduce(this, initialValue, func)
+      
+      <a class="permalink" href="#java.lang.Iterable.reduce_this_initialValue_func" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>General purpose reducing operation:</p>
+<pre><code>let data = [1, 2, 3, 4, 5]
+println("sum = " + data: reduce(0, |acc, next| -&gt; acc + next))
+</code></pre>
+<ul>
+<li><code>this</code>: an iterable.</li>
+<li><code>initialValue</code>: the initial accumulator value for the reducing operation.</li>
+<li><code>func</code>: the function to apply over an accumulator and the next value.</li>
+</ul>
+
+      </div>
+    
+  
+    <h3 id="augment.java.lang.Number">java.lang.Number
+    <a class="permalink" href="#augment.java.lang.Number" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Number augmentations.</p>
+
+    </div>
+    
+    
+      
+        <h4 id="java.lang.Number.downTo_high_low_func">downTo(high, low, func)
+      
+      <a class="permalink" href="#java.lang.Number.downTo_high_low_func" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Similar to <code>upTo</code>, except that the interval iteration is made from <code>high</code> down to <code>low</code>.</p>
+
+      </div>
+    
+      
+        <h4 id="java.lang.Number.times_count_func">times(count, func)
+      
+      <a class="permalink" href="#java.lang.Number.times_count_func" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Repeats a function many times, as in:</p>
+<pre><code>3: times(-&gt; println("Hey!")
+4: times(|i| -&gt; println(i))
+</code></pre>
+<ul>
+<li><code>count</code>: how many times the <code>func</code> function must be repeated.</li>
+<li><code>func</code>: a function to execute.</li>
+</ul>
+<p>The <code>func</code> function may take 0 or 1 argument. In the later case the argument is the iteration
+count index.</p>
+
+      </div>
+    
+      
+        <h4 id="java.lang.Number.upTo_low_high_func">upTo(low, high, func)
+      
+      <a class="permalink" href="#java.lang.Number.upTo_low_high_func" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Repeats a function over a discrete interval:</p>
+<pre><code>1: upTo(3, -&gt; println("Hello"))
+1: upTo(3, |i| -&gt;println(i))
+</code></pre>
+<ul>
+<li><code>low</code>: the start value (inclusive).</li>
+<li><code>high</code>: the end value (inclusive).</li>
+<li><code>func</code>: the function to execute.</li>
+</ul>
+<p>As in the case of <code>times</code>, <code>func</code> may take an optional index parameter.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.lang.String">java.lang.String
+    <a class="permalink" href="#augment.java.lang.String" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Useful string augmentations.</p>
+
+    </div>
+    
+    
+      
+        <h4 id="java.lang.String.format_this_args">format(this, args...)
+      
+      <a class="permalink" href="#java.lang.String.format_this_args" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Convenience wrapper over <code>java.lang.String.format(...)</code>.</p>
+
+      </div>
+    
+      
+        <h4 id="java.lang.String.toDouble_this">toDouble(this)
+      
+      <a class="permalink" href="#java.lang.String.toDouble_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Wrapper over <code>java.lang.Integer.parseDouble</code>.</p>
+
+      </div>
+    
+      
+        <h4 id="java.lang.String.toFloat_this">toFloat(this)
+      
+      <a class="permalink" href="#java.lang.String.toFloat_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Wrapper over <code>java.lang.Integer.parseFloat</code>.</p>
+
+      </div>
+    
+      
+        <h4 id="java.lang.String.toInt_this">toInt(this)
+      
+      <a class="permalink" href="#java.lang.String.toInt_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Wrapper over <code>java.lang.Integer.parseInt</code>.</p>
+
+      </div>
+    
+      
+        <h4 id="java.lang.String.toInteger_this">toInteger(this)
+      
+      <a class="permalink" href="#java.lang.String.toInteger_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>rapper over <code>java.lang.Integer.parseInt</code>.</p>
+
+      </div>
+    
+      
+        <h4 id="java.lang.String.toLong_this">toLong(this)
+      
+      <a class="permalink" href="#java.lang.String.toLong_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Wrapper over <code>java.lang.Integer.parseLong</code>.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.lang.invoke.MethodHandle">java.lang.invoke.MethodHandle
+    <a class="permalink" href="#augment.java.lang.invoke.MethodHandle" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Augmentations over method handles.</p>
+<p>Given that Golo closures are method handles, these augmentations work on closure references.</p>
+
+    </div>
+    
+    
+      
+        <h4 id="java.lang.invoke.MethodHandle.andThen_this_filter">andThen(this, filter)
+      
+      <a class="permalink" href="#java.lang.invoke.MethodHandle.andThen_this_filter" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Function composition:</p>
+<pre><code>let f = |x| -&gt; x + 1
+let g = |y| -&gt; y * 10
+let h = f: andThen(g)
+println(h(2))
+</code></pre>
+<ul>
+<li><code>this</code>: a function.</li>
+<li><code>filter</code>: a function that takes the return value of <code>this</code> as an argument.</li>
+</ul>
+
+      </div>
+    
+      
+        <h4 id="java.lang.invoke.MethodHandle.bindAt_this_pos_val">bindAt(this, pos, val)
+      
+      <a class="permalink" href="#java.lang.invoke.MethodHandle.bindAt_this_pos_val" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Partial application:</p>
+<pre><code>let adder = |x, y| -&gt; x + y
+let add2 = adder: bindAt(1, 2)    # binds 'y'
+println(add2(1))
+</code></pre>
+<ul>
+<li><code>this</code>: a function.</li>
+<li><code>pos</code>: a 0-based index of the argument to apply.</li>
+<li><code>val</code>: the value to apply.</li>
+</ul>
+
+      </div>
+    
+      
+        <h4 id="java.lang.invoke.MethodHandle.spread_this_args">spread(this, args)
+      
+      <a class="permalink" href="#java.lang.invoke.MethodHandle.spread_this_args" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Arguments spreading.</p>
+<ul>
+<li><code>this</code>: a function.</li>
+<li><code>args</code>: an array of arguments to spread over those of <code>this</code>.</li>
+</ul>
+<p>Returns an argument-spreading function.</p>
+
+      </div>
+    
+      
+        <h4 id="java.lang.invoke.MethodHandle.to_this_interfaceClass">to(this, interfaceClass)
+      
+      <a class="permalink" href="#java.lang.invoke.MethodHandle.to_this_interfaceClass" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Converts a closure to an instance of a single method interface.</p>
+<pre><code>let f = |event| -&gt; println("click")
+let handler = f: to(java.awt.event.ActionListener.class)
+</code></pre>
+<ul>
+<li><code>this</code>: a Golo closure.</li>
+<li><code>interfaceClass</code> a class object.</li>
+</ul>
+
+      </div>
+    
+  
+    <h3 id="augment.java.util.Collection">java.util.Collection
+    <a class="permalink" href="#augment.java.util.Collection" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Java collections augmentations.</p>
+
+    </div>
+    
+    
+      
+        <h4 id="java.util.Collection.newWithSameType_this">newWithSameType(this)
+      
+      <a class="permalink" href="#java.util.Collection.newWithSameType_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns an empty collection of the same type as <code>this</code>.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.util.List">java.util.List
+    <a class="permalink" href="#augment.java.util.List" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Java lists augmentations.</p>
+
+    </div>
+    
+    
+      
+        <h4 id="java.util.List.append_this_head_tail">append(this, head, tail...)
+      
+      <a class="permalink" href="#java.util.List.append_this_head_tail" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Appends a variable number of arguments to a list.</p>
+<ul>
+<li><code>head</code>: an element to append.</li>
+<li><code>tail</code>: a variable number of elements to append.</li>
+</ul>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.append_this_element">append(this, element)
+      
+      <a class="permalink" href="#java.util.List.append_this_element" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Appends an element to a list.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.filter_this_pred">filter(this, pred)
+      
+      <a class="permalink" href="#java.util.List.filter_this_pred" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Filters elements based on a predicate:</p>
+<pre><code>println(list[1, 2, 3, 4]: filter(|n| -&gt; (n % 2) == 0))
+</code></pre>
+<ul>
+<li><code>this</code>: a list.</li>
+<li><code>pred</code>: a predicate function taking an element and returning a boolean.</li>
+</ul>
+<p><code>filter</code> returns a new collection of the same type as the original one, hence the original list is
+kept intact.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.find_this_pred">find(this, pred)
+      
+      <a class="permalink" href="#java.util.List.find_this_pred" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Finds the first element of a list matching a predicate:</p>
+<pre><code>println(list[1, 2, 3, 4]: find(|n| -&gt; n &gt; 3))
+</code></pre>
+<ul>
+<li><code>this</code>: a list.</li>
+<li><code>pred</code>: a predicate function taking an element and returning a boolean.</li>
+</ul>
+<p><code>find</code> returns <code>null</code> when no element satisfies <code>pred</code>.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.head_this">head(this)
+      
+      <a class="permalink" href="#java.util.List.head_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns a list first element.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.insert_this_index_element">insert(this, index, element)
+      
+      <a class="permalink" href="#java.util.List.insert_this_index_element" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Inserts an element at some index.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.join_this_separator">join(this, separator)
+      
+      <a class="permalink" href="#java.util.List.join_this_separator" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Join the elements into a string:</p>
+<pre><code>println(list[1, 2, 3]: join(", "))
+</code></pre>
+<ul>
+<li><code>this</code>: a list.</li>
+<li><code>separator</code>: the element separator string.</li>
+</ul>
+<p>The returned string is <code>""</code> when the list is empty.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.last_this">last(this)
+      
+      <a class="permalink" href="#java.util.List.last_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns a list last element.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.map_this_func">map(this, func)
+      
+      <a class="permalink" href="#java.util.List.map_this_func" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Maps elements of a list using a function:</p>
+<pre><code>println(list[1, 2, 3]: map(|n| -&gt; n * 10))
+</code></pre>
+<ul>
+<li><code>this</code>: a list.</li>
+<li><code>func</code>: a transformation function.</li>
+</ul>
+<p><code>map</code> returns a new list with the same type, keeping the original list intact.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.order_this_comparator">order(this, comparator)
+      
+      <a class="permalink" href="#java.util.List.order_this_comparator" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Sorts the element using a comparator, see <code>java.util.Collections.sort(...)</code>.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.order_this">order(this)
+      
+      <a class="permalink" href="#java.util.List.order_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Sorts the list elements and returns the list.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.ordered_this_comparator">ordered(this, comparator)
+      
+      <a class="permalink" href="#java.util.List.ordered_this_comparator" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns a new list where the elements have been sorted using a comparator.
+See <code>java.util.Collections.sort</code>.:w</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.ordered_this">ordered(this)
+      
+      <a class="permalink" href="#java.util.List.ordered_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns a new list where the elements have been sorted.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.prepend_this_head_tail">prepend(this, head, tail...)
+      
+      <a class="permalink" href="#java.util.List.prepend_this_head_tail" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Prepends a variable number of arguments to a list.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.prepend_this_element">prepend(this, element)
+      
+      <a class="permalink" href="#java.util.List.prepend_this_element" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Prepends an element to a list.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.reverse_this">reverse(this)
+      
+      <a class="permalink" href="#java.util.List.reverse_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Reverse the elements of the list and returns the list.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.reversed_this">reversed(this)
+      
+      <a class="permalink" href="#java.util.List.reversed_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Same as <code>reverse</code>, but the returned list is a new one, leaving the original list order intact.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.tail_this">tail(this)
+      
+      <a class="permalink" href="#java.util.List.tail_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns the rest of a list after its head.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.unmodifiableView_this">unmodifiableView(this)
+      
+      <a class="permalink" href="#java.util.List.unmodifiableView_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Convenience wrapper over <code>java.util.Collections.unmodifiableList</code>.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.util.Map">java.util.Map
+    <a class="permalink" href="#augment.java.util.Map" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Augmentations over maps.</p>
+
+    </div>
+    
+    
+      
+        <h4 id="java.util.Map.add_this_key_value">add(this, key, value)
+      
+      <a class="permalink" href="#java.util.Map.add_this_key_value" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Alias for <code>put</code> that returns the map.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Map.addIfAbsent_this_key_value">addIfAbsent(this, key, value)
+      
+      <a class="permalink" href="#java.util.Map.addIfAbsent_this_key_value" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Adds an element to the map only if there is no entry for that key.</p>
+<ul>
+<li><code>this</code>: a map.</li>
+<li><code>key</code>: the element key.</li>
+<li><code>value</code>: the element value or a function to evaluate to get a value.</li>
+</ul>
+<p>The fact that <code>value</code> can be a function allows for delayed evaluation which can be useful for
+performance reasons. So instead of:</p>
+<pre><code>map: putIfAbsent(key, expensiveOperation())
+</code></pre>
+<p>one may delay the evaluation as follows:</p>
+<pre><code>map: putIfAbsent(key, -&gt; expensiveOperation())
+</code></pre>
+<p><code>addIfAbsent</code> returns the map.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Map.count_this_pred">count(this, pred)
+      
+      <a class="permalink" href="#java.util.Map.count_this_pred" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Counts the number of elements satisfying a predicate.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Map.delete_this_key">delete(this, key)
+      
+      <a class="permalink" href="#java.util.Map.delete_this_key" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Alias for <code>remove</code> that returns the map.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Map.each_this_func">each(this, func)
+      
+      <a class="permalink" href="#java.util.Map.each_this_func" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Iterates over each entry of a map.</p>
+<p><code>func</code> takes 2 arguments: the entry key and its value.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Map.exists_this_pred">exists(this, pred)
+      
+      <a class="permalink" href="#java.util.Map.exists_this_pred" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns <code>true</code> if there is any value satisfying <code>pred</code>, <code>false</code> otherwise.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Map.filter_this_pred">filter(this, pred)
+      
+      <a class="permalink" href="#java.util.Map.filter_this_pred" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Filters elements using a predicate, and returns a new map.</p>
+<p><code>pred</code> takes 2 arguments: a key and a value, and returns a boolean.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Map.find_this_pred">find(this, pred)
+      
+      <a class="permalink" href="#java.util.Map.find_this_pred" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns the first element that satisfies a predicate, or <code>null</code> if none matches.</p>
+<p><code>pred</code> takes 2 arguments: a key and a value, and returns a boolean.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Map.getOrElse_this_key_replacement">getOrElse(this, key, replacement)
+      
+      <a class="permalink" href="#java.util.Map.getOrElse_this_key_replacement" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns a value from a key or a default value if the entry is not defined.</p>
+<ul>
+<li><code>this</code>: a map.</li>
+<li><code>key</code>: the key to look for.</li>
+<li><code>replacement</code>: the default value, or a function giving the default value.</li>
+</ul>
+<p>As it is the case for <code>addIfAbsent</code>, one can take advantage of delayed evaluation:</p>
+<pre><code>println(map: getOrElse(key, "n/a"))
+println(map: getOrElse(key, -&gt; expensiveOperation())
+</code></pre>
+<p>Note that <code>replacement</code> yields the return value also when there is an entry for <code>key</code> but the
+value is <code>null</code>.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Map.map_this_func">map(this, func)
+      
+      <a class="permalink" href="#java.util.Map.map_this_func" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Maps entries of the map using a function.</p>
+<p><code>func</code> takes 2 arguments: a key and a value. The returned value must have <code>getKey()</code> and
+getValue()<code>to represent a map entry. We suggest using the predefined</code>mapEntry(key, value)`
+function as it returns such object.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Map.newWithSameType_this">newWithSameType(this)
+      
+      <a class="permalink" href="#java.util.Map.newWithSameType_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns a new empty map of the same type.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Map.reduce_this_initialValue_func">reduce(this, initialValue, func)
+      
+      <a class="permalink" href="#java.util.Map.reduce_this_initialValue_func" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Reduces the entries of a map.</p>
+<p><code>func</code> takes 3 arguments:</p>
+<ul>
+<li>an accumulator whose initial value is <code>initialValue</code>,</li>
+<li>a key for the next entry,</li>
+<li>a value for the next entry.</li>
+</ul>
+
+      </div>
+    
+      
+        <h4 id="java.util.Map.unmodifiableView_this">unmodifiableView(this)
+      
+      <a class="permalink" href="#java.util.Map.unmodifiableView_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Wrapper for <code>java.util.Collections.unmodifiableMap(...)</code>.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.util.Set">java.util.Set
+    <a class="permalink" href="#augment.java.util.Set" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Augmentations over set collections.</p>
+
+    </div>
+    
+    
+      
+        <h4 id="java.util.Set.exclude_this_first_rest">exclude(this, first, rest...)
+      
+      <a class="permalink" href="#java.util.Set.exclude_this_first_rest" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Excludes a variable number of elements, and returns the set.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Set.exclude_this_element">exclude(this, element)
+      
+      <a class="permalink" href="#java.util.Set.exclude_this_element" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Alias for <code>remove</code> that returns the set.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Set.filter_this_pred">filter(this, pred)
+      
+      <a class="permalink" href="#java.util.Set.filter_this_pred" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Filters the elements using a predicate, and returns a new collection.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Set.find_this_pred">find(this, pred)
+      
+      <a class="permalink" href="#java.util.Set.find_this_pred" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Finds the first element that satisfies a predicate <code>pred</code>, and returns it, or <code>null</code> if no element
+matches.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Set.has_this_first_rest">has(this, first, rest...)
+      
+      <a class="permalink" href="#java.util.Set.has_this_first_rest" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Alias for <code>contains</code> over a variable number of elements.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Set.has_this_element">has(this, element)
+      
+      <a class="permalink" href="#java.util.Set.has_this_element" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Alias for <code>contains</code>.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Set.include_this_first_rest">include(this, first, rest...)
+      
+      <a class="permalink" href="#java.util.Set.include_this_first_rest" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Includes a variable number of elements, and returns the set.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Set.include_this_element">include(this, element)
+      
+      <a class="permalink" href="#java.util.Set.include_this_element" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Alias for <code>add</code> that returns the set.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Set.map_this_func">map(this, func)
+      
+      <a class="permalink" href="#java.util.Set.map_this_func" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Transform each value using the <code>func</code> function, and returns a new set.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Set.unmodifiableView_this">unmodifiableView(this)
+      
+      <a class="permalink" href="#java.util.Set.unmodifiableView_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Convenience wrapper for <code>java.util.Collections.unmodifiableSet(...)</code>.</p>
+
+      </div>
+    
+  
+
+
+
+
+</body>
+</html>
