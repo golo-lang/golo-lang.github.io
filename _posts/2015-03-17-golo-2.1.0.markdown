@@ -7,7 +7,7 @@ title: "Golo 2.1.0"
 
 Welcome to the latest release of Golo!
 
-We are pleased to introduce **Golo 2.1.0**, a new stable release with incremental changes over Golo 2.0.0. We mostly focused our efforts towards behind-the-scenes polishing, so this release is light on features.
+We are pleased to introduce **Golo 2.1.0**, a new stable release with incremental changes over Golo 2.0.0. We mostly focused our efforts towards behind-the-scenes polishing, so this release is relatively light on features.
 
 **Golo 3.0.0 will switch to Java SE 8 as a requirement.**
 This release will include Java functional interfaces interoperability (_a.k.a. lambdas_). We also expect to introduce named parameters thanks to the efforts from Daniel Petisme.
