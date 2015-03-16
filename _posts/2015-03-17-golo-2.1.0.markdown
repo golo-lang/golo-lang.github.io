@@ -73,7 +73,7 @@ $
 
 ### Invalid parser token / Netbeans IDE
 
-Our friends at [Serli](http://www.serli.com/) are contributing to Golo. As they are refreshing the state of the Netbeans plugin, they fixed our parser to introduce an _invalid_ token.
+Our friends at [Serli](http://www.serli.com/) are contributing to Golo. As Guillaume Soldera is refreshing the state of the Netbeans plugin, he fixed our parser to introduce an _invalid_ token.
 
 This is useful for an IDE, because it integrates tightly with the Golo compiler to provide live error feedback.
 
