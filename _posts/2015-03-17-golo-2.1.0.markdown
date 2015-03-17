@@ -1,0 +1,94 @@
+---
+layout: news
+title: "Golo 2.1.0"
+---
+
+![Oléron](https://farm4.staticflickr.com/3845/14180687719_3bc1291ea5_c_d.jpg)
+
+Welcome to the latest release of Golo!
+
+We are pleased to introduce **Golo 2.1.0**, a new stable release with incremental changes over Golo 2.0.0. We mostly focused our efforts towards behind-the-scenes polishing, so this release is relatively light on features.
+
+**Golo 3.0.0 will switch to Java SE 8 as a requirement.**
+This release will include Java functional interfaces interoperability (_a.k.a. lambdas_). We also expect to introduce named parameters thanks to the efforts from Daniel Petisme.
+
+While our developments efforts will shift to `3.x.y`, we _may_ still produce further Java 7 compatible `2.x.y` releases if need be.
+
+* [Download Golo 2.1.0](/download/)
+* [Play with Golo on Google AppEngine](http://golo-console.appspot.com/)
+* [Read the Golo programming language guide](/documentation/2.1.0)
+* [Star / fork the project on GitHub](https://github.com/golo-lang/golo-lang)
+* [Get in touch on our mailing-list](http://groups.google.com/group/golo-lang)
+* [Chat with us](https://gitter.im/golo-lang/golo-lang)
+
+## Noteworthy changes
+
+### `head()`, `tail()` and `isEmpty()` on collection-like objects
+
+Yannick Loiseau is a great fan of functional programming, and he went on to add these methods to further collection-like types:
+
+* `java.lang.CharSequence`,
+* `java.util.List`,
+* Golo tuples,
+* Golo ranges,
+* JVM arrays.
+
+Note that `tail()` produces immutable views of the underlying collection.
+
+### Directly calling anonymous functions
+
+This used to be forbidden:
+
+```golo
+(|x| -> x + 1)(1)
+```
+
+But thanks to Yannick this is a thing from the past, the snippet above is perfectly Golo-proof.
+
+### Comparable tuples
+
+Yannick made Golo tuples comparable, so you can now do just that:
+
+```golo
+let e1 = [1, 2] < [1, 3]
+let e2 = ["b", 5] < ["d", 1]
+```
+
+### Module names escaping
+
+Romain Lespinasse fixed the project creation (`golo new`) so that when a project name contains non-word characters, these are replaces with a dot instead (`'.'`).
+
+This avoids compilation errors due to a bad generation.
+
+### `golo version --full`
+
+The very same Romain tweaked the version command so that the `--full` flag also includes the JVM version being used:
+
+```console
+$ golo version --full
+Golo version : 2.1.0-SNAPSHOT (build 15-03-15-12:34)
+JVM version: 1.8.0_31
+$
+```
+
+### Invalid parser token / Netbeans IDE
+
+Our friends at [Serli](http://www.serli.com/) are contributing to Golo. As Guillaume Soldera is refreshing the state of the Netbeans plugin, he fixed our parser to introduce an _invalid_ token.
+
+This is useful for an IDE, because it integrates tightly with the Golo compiler to provide live error feedback.
+
+![Netbeans and Golo](/images/posts/netbeans-2015-03-16.png)
+
+The recent builds of the Golo Netbeans plugin are not available yet from the Netbeans plugin repository. This will be addressed soon, but meanwhile you can:
+
+* build it from https://github.com/golo-lang/golo-netbeans, or
+* install it manually from https://s3-eu-west-1.amazonaws.com/serli/org-gololang-netbeans.nbm
+
+### Misc.
+
+* We got rid of many compilation warning.
+* We also fixed some documentation mistakes.
+
+## Until next time...
+
+...have fun!

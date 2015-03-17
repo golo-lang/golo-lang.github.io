@@ -7,8 +7,8 @@ title: Download Golo
 
 Standalone distributions can be obtained [from Maven Central](http://search.maven.org/#browse|1246390074):
 
-* [golo-2.0.0-distribution.tar.gz](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/2.0.0/golo-2.0.0-distribution.tar.gz)
-* [golo-2.0.0-distribution.zip](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/2.0.0/golo-2.0.0-distribution.zip)
+* [golo-2.1.0-distribution.tar.gz](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/2.1.0/golo-2.1.0-distribution.tar.gz)
+* [golo-2.1.0-distribution.zip](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/2.1.0/golo-2.1.0-distribution.zip)
 
 <span class="label label-important">Important</span>
 Given that Golo is still a young project, snapshot releases more than often contain important bug
@@ -25,7 +25,7 @@ The Golo library (runtime + compiler) artifact is:
 {% highlight xml %}
 <groupId>org.golo-lang</groupId>
 <artifactId>golo</artifactId>
-<version>2.0.0</version>
+<version>2.1.0</version>
 {% endhighlight %}
 
 The Maven plugin artifact is:
@@ -33,7 +33,7 @@ The Maven plugin artifact is:
 {% highlight xml %}
 <groupId>org.golo-lang</groupId>
 <artifactId>golo-maven-plugin</artifactId>
-<version>2.0.0</version>
+<version>2.1.0</version>
 {% endhighlight %}
 
 ### Gradle
