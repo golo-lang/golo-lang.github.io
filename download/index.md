@@ -54,9 +54,22 @@ and look for `golo-lang`.
 
 [Docker](http://docker.com/) is on top of the hype, and so do we!
 
-[We provide images](https://registry.hub.docker.com/u/jponge/golo-lang/) based on Ubuntu 14.04 and Java SE 8: `docker pull jponge/golo-lang`
-
+[We provide Docker images of Golo](https://registry.hub.docker.com/u/jponge/golo-lang/).
 You can either use them as-is, or derive your own specialized images based on top of them.
+
+If you want to quickly test Golo:
+
+```console
+$ docker pull jponge/golo-lang
+
+    (...)
+
+$ docker run --rm -t -i jponge/golo-lang /bin/bash
+root@cf99d78f22a4:/# golo version --full
+Golo version: 3.0.0-SNAPSHOT (build 15-03-17-09:28)
+JVM version: 1.8.0_31
+root@cf99d78f22a4:/#
+```
 
 ### Source code
 
