@@ -81,8 +81,8 @@ This is useful for an IDE, because it integrates tightly with the Golo compiler 
 
 The recent builds of the Golo Netbeans plugin are not available yet from the Netbeans plugin repository. This will be addressed soon, but meanwhile you can:
 
-* build it from https://github.com/golo-lang/golo-netbeans, or
-* install it manually from https://s3-eu-west-1.amazonaws.com/serli/org-gololang-netbeans.nbm
+* build it from [https://github.com/golo-lang/golo-netbeans](https://github.com/golo-lang/golo-netbeans), or
+* install it manually from [https://s3-eu-west-1.amazonaws.com/serli/org-gololang-netbeans.nbm](https://s3-eu-west-1.amazonaws.com/serli/org-gololang-netbeans.nbm)
 
 ### Misc.
 
