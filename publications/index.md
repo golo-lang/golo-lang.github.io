@@ -4,7 +4,7 @@ title: Publications
 ---
 
 If you want to reference Golo in your publications, you can use the following DOI:
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.14095.svg)](http://dx.doi.org/10.5281/zenodo.14095)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.16110.svg)](http://dx.doi.org/10.5281/zenodo.16110)
 
 ### Research publications
 
