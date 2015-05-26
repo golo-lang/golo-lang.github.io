@@ -10,7 +10,7 @@ If you want to reference Golo in your publications, you can use the following DO
 
 * Baptiste Maingret, Frédéric Le Mouël, Julien Ponge, Nicolas Stouls, Jian Cia and Yannick Loiseau. **Towards a Decoupled Context-Oriented Programming Language for the Internet of Things.** _To appear in the [7th International Workshop on Context-Oriented Programming](http://2015.ecoop.org/track/COP-2015-papers) hosted at ECOOP 2015._ Prague, Czech Republic. July 2015.
 
-* Julien Ponge, Frédéric Le Mouël, Nicolas Stouls, Yannick Loiseau. **Opportunities for a Truffle-based Golo Interpreter.** _Technical report, to appear._
+* Julien Ponge, Frédéric Le Mouël, Nicolas Stouls, Yannick Loiseau. **Opportunities for a Truffle-based Golo Interpreter.** _Technical report._ [arXiv:1505.06003 (cs.PL)](http://arxiv.org/abs/1505.06003) and [HAL-INRIA deposit](https://hal.inria.fr/hal-01151626)
 
 * Julien Ponge, Frédéric Le Mouël and Nicolas Stouls. **Golo, a Dynamic, Light and Efficient Language for Post-Invokedynamic JVM.** In Procs. of [PPPJ'13](http://pppj2013.dhbw.de/conference-pppj2013.html). Stuttgart, Germany. September 2013. [DOI link](http://dx.doi.org/10.1145/2500828.2500844). [HAL-INRIA deposit](http://hal.inria.fr/hal-00848514). [Slides](https://speakerdeck.com/jponge/golo-a-dynamic-light-and-efficient-language-for-post-invokedynamic-jvm).
 
