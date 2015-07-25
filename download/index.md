@@ -5,36 +5,41 @@ title: Download Golo
 
 ### Standalone distribution
 
-Standalone distributions can be obtained [from Maven Central](http://search.maven.org/#browse|1246390074):
+Standalone distributions can be obtained from the Eclipse Foundation and its mirrors network.
 
-* [golo-2.1.0-distribution.tar.gz](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/2.1.0/golo-2.1.0-distribution.tar.gz)
-* [golo-2.1.0-distribution.zip](http://search.maven.org/remotecontent?filepath=org/golo-lang/golo/2.1.0/golo-2.1.0-distribution.zip)
-
-<span class="label label-important">Important</span>
-Given that Golo is still a young project, snapshot releases more than often contain important bug
-fixes and improvements:
-[get the snapshot artefacts](https://oss.sonatype.org/content/repositories/snapshots/org/golo-lang/golo/).
+* [Golo 3.0.0-incubation-M1](https://www.eclipse.org/downloads/download.php?file=/golo/golo-3.0.0-incubation-M1-distribution.zip)
+* [Latest snapshot build](https://www.eclipse.org/downloads/download.php?file=/golo/golo-latest-snapshot-distribution.zip) (if you like the greatest and latest)
 
 ### Maven
 
-Maven release and snapshot artifacts can be downloaded from both Maven Central and the
-[Sonatype OSS Maven Repository](https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide).
+#### Bintray, jCenter and Maven Central
+
+Release and milestone artifacts can be obtained from [Bintray / jCenter](https://bintray.com/golo-lang/golo-lang)
+as well as from [Maven Central](http://search.maven.org/).
 
 The Golo library (runtime + compiler) artifact is:
 
 {% highlight xml %}
-<groupId>org.golo-lang</groupId>
+<groupId>org.eclipse.golo</groupId>
 <artifactId>golo</artifactId>
-<version>2.1.0</version>
+<version>3.0.0-incubation-M1</version>
 {% endhighlight %}
 
-The Maven plugin artifact is:
+The Golo Maven plugin artifact is:
 
 {% highlight xml %}
-<groupId>org.golo-lang</groupId>
+<groupId>org.eclipse.golo</groupId>
 <artifactId>golo-maven-plugin</artifactId>
-<version>2.1.0</version>
+<version>3.0.0-incubation-M1</version>
 {% endhighlight %}
+
+#### Eclipse repositories
+
+We publish our Maven artifacts to the [Eclipse repositories](https://repo.eclipse.org/):
+
+* Releases: [https://repo.eclipse.org/content/repositories/golo-releases/](https://repo.eclipse.org/content/repositories/golo-releases/)
+* Snapshots: [https://repo.eclipse.org/content/repositories/golo-snapshots/](https://repo.eclipse.org/content/repositories/golo-snapshots/)
+* Combined group: [https://repo.eclipse.org/content/groups/golo/](https://repo.eclipse.org/content/groups/golo/)
 
 ### Gradle
 
@@ -73,7 +78,7 @@ root@cf99d78f22a4:/#
 
 ### Source code
 
-The canonical repository is at [https://github.com/golo-lang/golo-lang](https://github.com/golo-lang/golo-lang).
+The canonical repository is at [https://github.com/eclipse/golo-lang](https://github.com/eclipse/golo-lang).
 
 We also have an organization at [https://github.com/golo-lang](https://github.com/golo-lang) where interesting
 projects from the wider community are invited to join.

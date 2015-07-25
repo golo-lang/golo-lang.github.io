@@ -131,6 +131,10 @@
 
   
 
+
+
+  
+
   
   <li><a href="#augmentations">Augmentations</a><ul>
     
@@ -194,19 +198,9 @@
       
     </ul></li>
     
-    <li><a href="#augment.java.lang.invoke.MethodHandle">java.lang.invoke.MethodHandle</a><ul>
-      
-      <li><a href="#java.lang.invoke.MethodHandle.andThen_this_filter">andThen(this, filter)</a></li>
-      
-      <li><a href="#java.lang.invoke.MethodHandle.bindAt_this_pos_val">bindAt(this, pos, val)</a></li>
-      
-      <li><a href="#java.lang.invoke.MethodHandle.spread_this_args">spread(this, args)</a></li>
-      
-      <li><a href="#java.lang.invoke.MethodHandle.to_this_interfaceClass">to(this, interfaceClass)</a></li>
-      
-    </ul></li>
-    
     <li><a href="#augment.java.util.Collection">java.util.Collection</a><ul>
+      
+      <li><a href="#java.util.Collection.destruct_this">destruct(this)</a></li>
       
       <li><a href="#java.util.Collection.newWithSameType_this">newWithSameType(this)</a></li>
       
@@ -243,6 +237,8 @@
       <li><a href="#java.util.List.prepend_this_head_tail">prepend(this, head, tail)</a></li>
       
       <li><a href="#java.util.List.prepend_this_element">prepend(this, element)</a></li>
+      
+      <li><a href="#java.util.List.removeAt_this_idx">removeAt(this, idx)</a></li>
       
       <li><a href="#java.util.List.reverse_this">reverse(this)</a></li>
       
@@ -284,6 +280,12 @@
       
     </ul></li>
     
+    <li><a href="#augment.java.util.Map$Entry">java.util.Map$Entry</a><ul>
+      
+      <li><a href="#java.util.Map$Entry.destruct_this">destruct(this)</a></li>
+      
+    </ul></li>
+    
     <li><a href="#augment.java.util.Set">java.util.Set</a><ul>
       
       <li><a href="#java.util.Set.exclude_this_first_rest">exclude(this, first, rest)</a></li>
@@ -314,6 +316,7 @@
   
 </ul>
 <!-- end table of content -->
+
 
 
 
@@ -593,82 +596,6 @@ count index.</p>
       </div>
     
   
-    <h3 id="augment.java.lang.invoke.MethodHandle">java.lang.invoke.MethodHandle
-    <a class="permalink" href="#augment.java.lang.invoke.MethodHandle" title="link to this section">&#182;</a></h3>
-    <div>
-      <p>Augmentations over method handles.</p>
-<p>Given that Golo closures are method handles, these augmentations work on closure references.</p>
-
-    </div>
-    
-    
-      
-        <h4 id="java.lang.invoke.MethodHandle.andThen_this_filter">andThen(this, filter)
-      
-      <a class="permalink" href="#java.lang.invoke.MethodHandle.andThen_this_filter" title="link to this section">&#182;</a></h4>
-      <div>
-        <p>Function composition:</p>
-<pre><code>let f = |x| -&gt; x + 1
-let g = |y| -&gt; y * 10
-let h = f: andThen(g)
-println(h(2))
-</code></pre>
-<ul>
-<li><code>this</code>: a function.</li>
-<li><code>filter</code>: a function that takes the return value of <code>this</code> as an argument.</li>
-</ul>
-
-      </div>
-    
-      
-        <h4 id="java.lang.invoke.MethodHandle.bindAt_this_pos_val">bindAt(this, pos, val)
-      
-      <a class="permalink" href="#java.lang.invoke.MethodHandle.bindAt_this_pos_val" title="link to this section">&#182;</a></h4>
-      <div>
-        <p>Partial application:</p>
-<pre><code>let adder = |x, y| -&gt; x + y
-let add2 = adder: bindAt(1, 2)    # binds 'y'
-println(add2(1))
-</code></pre>
-<ul>
-<li><code>this</code>: a function.</li>
-<li><code>pos</code>: a 0-based index of the argument to apply.</li>
-<li><code>val</code>: the value to apply.</li>
-</ul>
-
-      </div>
-    
-      
-        <h4 id="java.lang.invoke.MethodHandle.spread_this_args">spread(this, args)
-      
-      <a class="permalink" href="#java.lang.invoke.MethodHandle.spread_this_args" title="link to this section">&#182;</a></h4>
-      <div>
-        <p>Arguments spreading.</p>
-<ul>
-<li><code>this</code>: a function.</li>
-<li><code>args</code>: an array of arguments to spread over those of <code>this</code>.</li>
-</ul>
-<p>Returns an argument-spreading function.</p>
-
-      </div>
-    
-      
-        <h4 id="java.lang.invoke.MethodHandle.to_this_interfaceClass">to(this, interfaceClass)
-      
-      <a class="permalink" href="#java.lang.invoke.MethodHandle.to_this_interfaceClass" title="link to this section">&#182;</a></h4>
-      <div>
-        <p>Converts a closure to an instance of a single method interface.</p>
-<pre><code>let f = |event| -&gt; println("click")
-let handler = f: to(java.awt.event.ActionListener.class)
-</code></pre>
-<ul>
-<li><code>this</code>: a Golo closure.</li>
-<li><code>interfaceClass</code> a class object.</li>
-</ul>
-
-      </div>
-    
-  
     <h3 id="augment.java.util.Collection">java.util.Collection
     <a class="permalink" href="#augment.java.util.Collection" title="link to this section">&#182;</a></h3>
     <div>
@@ -676,6 +603,18 @@ let handler = f: to(java.awt.event.ActionListener.class)
 
     </div>
     
+    
+      
+        <h4 id="java.util.Collection.destruct_this">destruct(this)
+      
+      <a class="permalink" href="#java.util.Collection.destruct_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Destructuration helper.</p>
+<ul>
+<li>return a tuple of the values</li>
+</ul>
+
+      </div>
     
       
         <h4 id="java.util.Collection.newWithSameType_this">newWithSameType(this)
@@ -833,7 +772,7 @@ kept intact.</p>
       <a class="permalink" href="#java.util.List.ordered_this_comparator" title="link to this section">&#182;</a></h4>
       <div>
         <p>Returns a new list where the elements have been sorted using a comparator.
-See <code>java.util.Collections.sort</code>.:w</p>
+See <code>java.util.Collections.sort</code>.</p>
 
       </div>
     
@@ -861,6 +800,17 @@ See <code>java.util.Collections.sort</code>.:w</p>
       <a class="permalink" href="#java.util.List.prepend_this_element" title="link to this section">&#182;</a></h4>
       <div>
         <p>Prepends an element to a list.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.List.removeAt_this_idx">removeAt(this, idx)
+      
+      <a class="permalink" href="#java.util.List.removeAt_this_idx" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Removes the element at the specified position.</p>
+<p>This method has the same behaviour as <code>java.util.List.remove(int)</code>, but is
+needed since for Golo everything is an <code>Object</code> and <code>remove</code> is overloaded.</p>
 
       </div>
     
@@ -1059,6 +1009,23 @@ function as it returns such object.</p>
       <a class="permalink" href="#java.util.Map.unmodifiableView_this" title="link to this section">&#182;</a></h4>
       <div>
         <p>Wrapper for <code>java.util.Collections.unmodifiableMap(...)</code>.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.util.Map$Entry">java.util.Map$Entry
+    <a class="permalink" href="#augment.java.util.Map$Entry" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+    
+    
+      
+        <h4 id="java.util.Map$Entry.destruct_this">destruct(this)
+      
+      <a class="permalink" href="#java.util.Map$Entry.destruct_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Destructurate a map entry in key and value</p>
 
       </div>
     

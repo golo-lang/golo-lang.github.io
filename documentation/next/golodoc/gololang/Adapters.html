@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>Documentation for gololang.Adapters</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      line-height: 1.5;
+      margin: 2em 3em 2em 20%;
+      text-align: left;
+      padding: 0 100px 0 100px;
+    }
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 80%;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    li p {
+      margin: 0.3em;
+    }
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 36px;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 30px;
+    }
+    h3 {
+      color: #666;
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 21px;
+    }
+    h5 {
+      font-size: 18px;
+    }
+
+    #toc {
+      margin: 0;
+      padding: 1em;
+      border-right: 1px solid #aaa;
+      font-size: 80%;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      width: 20%;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    #toc ul {
+      padding-left: 1em;
+    }
+
+    #toc > li {
+      list-style: none;
+      margin-bottom: 1ex;
+    }
+
+    #toc > li > a {
+      font-weight: bold;
+    }
+
+    :target {
+      background-color: yellow;
+    }
+
+    .permalink {
+      margin-left: .3em;
+      font-size: 70%;
+      visibility: hidden;
+    }
+
+    *:hover > .permalink {
+      visibility: visible;
+    }
+
+  </style>
+</head>
+<body>
+<h1>Documentation for gololang.Adapters</h1>
+<div>
+  <p>This module defines an AdapterFabric helper.</p>
+
+</div>
+
+<!-- begin table of content -->
+<ul id="toc">
+
+  
+  <li><a href="#structs">Structs</a><ul>
+    
+    <li><a href="#adapter">adapter</a></li>
+    
+  </ul></li>
+  
+
+  
+
+
+
+  
+
+  
+  <li><a href="#augmentations">Augmentations</a><ul>
+    
+    <li><a href="#augment.gololang.Adapters.types.adapter">gololang.Adapters.types.adapter</a><ul>
+      
+      <li><a href="#gololang.Adapters.types.adapter.extends_this_className">extends(this, className)</a></li>
+      
+      <li><a href="#gololang.Adapters.types.adapter.implements_this_methodName_closure">implements(this, methodName, closure)</a></li>
+      
+      <li><a href="#gololang.Adapters.types.adapter.interfaces_this_interfacesTuple">interfaces(this, interfacesTuple)</a></li>
+      
+      <li><a href="#gololang.Adapters.types.adapter.maker_this">maker(this)</a></li>
+      
+      <li><a href="#gololang.Adapters.types.adapter.newInstance_this_args">newInstance(this, args)</a></li>
+      
+      <li><a href="#gololang.Adapters.types.adapter.newInstance_this">newInstance(this)</a></li>
+      
+      <li><a href="#gololang.Adapters.types.adapter.overrides_this_methodName_closure">overrides(this, methodName, closure)</a></li>
+      
+    </ul></li>
+    
+  </ul></li>
+  
+
+  
+  <li><a href="#functions">Functions</a><ul>
+    
+    <li><a href="#Adapter_">Adapter()</a></li>
+    
+  </ul></li>
+  
+</ul>
+<!-- end table of content -->
+
+
+  <h2 id="structs">Structs</h2>
+  
+    <h3 id="adapter">adapter
+    <a class="permalink" href="#adapter" title="link to this section">&#182;</a></h3>
+
+    <h5>Members</h5>
+    <ul>
+    
+      <li><code>definition</code></li>
+  
+    </ul>
+    <div>
+      
+    </div>
+  
+
+
+
+
+
+
+
+
+  <h2 id="augmentations">Augmentations</h2>
+  
+    <h3 id="augment.gololang.Adapters.types.adapter">gololang.Adapters.types.adapter
+    <a class="permalink" href="#augment.gololang.Adapters.types.adapter" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Adapter augmentations.</p>
+
+    </div>
+    
+    
+      
+        <h4 id="gololang.Adapters.types.adapter.extends_this_className">extends(this, className)
+      
+      <a class="permalink" href="#gololang.Adapters.types.adapter.extends_this_className" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Specifies the name of the parent class (<code>java.lang.Object</code> by default).</p>
+<ul>
+<li>parameter: parent class name</li>
+<li>returns the adapter.</li>
+</ul>
+<p>Usage:</p>
+<pre><code>let arrayListAdapter = Adapter()
+  : extends("java.util.ArrayList")
+</code></pre>
+
+      </div>
+    
+      
+        <h4 id="gololang.Adapters.types.adapter.implements_this_methodName_closure">implements(this, methodName, closure)
+      
+      <a class="permalink" href="#gololang.Adapters.types.adapter.implements_this_methodName_closure" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Provides a method implementation</p>
+<ul>
+<li>parameters: a method name, an implementation function</li>
+<li>returns the adapter.</li>
+</ul>
+<p>Usage:</p>
+<pre><code>let result = array[1,2,3]
+
+let runnerAdapter = Adapter()
+  : interfaces(["java.io.Serializable", "java.lang.Runnable"])
+  : implements("run", |this| {
+      for (var i = 0, i &lt; result: length(), i = i + 1) {
+        result: set(i, result: get(i) + 10)
+      }
+    })
+</code></pre>
+
+      </div>
+    
+      
+        <h4 id="gololang.Adapters.types.adapter.interfaces_this_interfacesTuple">interfaces(this, interfacesTuple)
+      
+      <a class="permalink" href="#gololang.Adapters.types.adapter.interfaces_this_interfacesTuple" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Defines interface(s) for the Adapter:</p>
+<ul>
+<li>parameter(s): a tuple of strings,</li>
+<li>returns the adapter.</li>
+</ul>
+<p>Usage:</p>
+<pre><code>let runnerAdapter = Adapter()
+  : interfaces(["java.io.Serializable", "java.lang.Runnable"])
+</code></pre>
+
+      </div>
+    
+      
+        <h4 id="gololang.Adapters.types.adapter.maker_this">maker(this)
+      
+      <a class="permalink" href="#gololang.Adapters.types.adapter.maker_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns an instance based on a configuration (also see <code>adapter: definition()</code>).</p>
+
+      </div>
+    
+      
+        <h4 id="gololang.Adapters.types.adapter.newInstance_this_args">newInstance(this, args...)
+      
+      <a class="permalink" href="#gololang.Adapters.types.adapter.newInstance_this_args" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns an instance of the adapted Java class.</p>
+<p>The parameters are the parameters of the base class constructor.</p>
+
+      </div>
+    
+      
+        <h4 id="gololang.Adapters.types.adapter.newInstance_this">newInstance(this)
+      
+      <a class="permalink" href="#gololang.Adapters.types.adapter.newInstance_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Returns an instance of the adapted Java class.</p>
+<p>Usage:</p>
+<pre><code>let result = array[1,2,3]
+
+let runnerAdapter = Adapter()
+  : interfaces(["java.io.Serializable", "java.lang.Runnable"])
+  : implements("run", |this| {
+      for (var i = 0, i &lt; result: length(), i = i + 1) {
+        result: set(i, result: get(i) + 10)
+      }
+    })
+
+let runner = runnerAdapter: newInstance()
+
+runner: run()
+</code></pre>
+
+      </div>
+    
+      
+        <h4 id="gololang.Adapters.types.adapter.overrides_this_methodName_closure">overrides(this, methodName, closure)
+      
+      <a class="permalink" href="#gololang.Adapters.types.adapter.overrides_this_methodName_closure" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Provides a method override.</p>
+<ul>
+<li>parameters: method name and an implementation function</li>
+<li>returns the adapter.</li>
+</ul>
+<p>Usage:</p>
+<pre><code>let objectAdapter = Adapter()
+  : overrides("toString", |super, this| -&gt; "&gt;&gt;&gt; " + super(this))
+
+println(objectAdapter: newInstance(): toString())
+</code></pre>
+<p>This prints something like: <code>&gt;&gt;&gt; $Golo$Adapter$0@2aaf7cc2</code>.</p>
+
+      </div>
+    
+  
+
+
+
+  <h2 id="functions">Functions</h2>
+  
+    <h3 id="Adapter_">Adapter()
+    <a class="permalink" href="#Adapter_" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Adapter constructor.</p>
+
+    </div>
+  
+
+
+</body>
+</html>
