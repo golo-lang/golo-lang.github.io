@@ -3,7 +3,7 @@ layout: main
 title: Golo documentation
 ---
 
-## Next version
+## 3.0.0 milestones
 
 * [Golo Programming Language Guide](next/index.html)
 * [Golodoc](next/golodoc/index.html)
