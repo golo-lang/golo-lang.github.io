@@ -703,7 +703,7 @@ table.tableblock.grid-all th.tableblock, table.tableblock.grid-all td.tableblock
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
 <script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
 </head>
-<body class="article toc2 toc-left">
+<body class="book toc2 toc-left">
 <div id="header">
 <h1>The Golo Programming Language</h1>
 <div id="toc" class="toc2">
@@ -723,10 +723,11 @@ table.tableblock.grid-all th.tableblock, table.tableblock.grid-all td.tableblock
 <li><a href="#_variable_and_constant_references">1.10. Variable and constant references</a></li>
 <li><a href="#_data_literals">1.11. Data literals</a></li>
 <li><a href="#_collection_literals">1.12. Collection literals</a></li>
-<li><a href="#_destructuring">1.13. Destructuring</a></li>
-<li><a href="#_operators">1.14. Operators</a></li>
-<li><a href="#_calling_a_method">1.15. Calling a method</a></li>
-<li><a href="#_java_jvm_arrays">1.16. Java / JVM arrays</a></li>
+<li><a href="#_collection_comprehension">1.13. Collection comprehension</a></li>
+<li><a href="#_destructuring">1.14. Destructuring</a></li>
+<li><a href="#_operators">1.15. Operators</a></li>
+<li><a href="#_calling_a_method">1.16. Calling a method</a></li>
+<li><a href="#_java_jvm_arrays">1.17. Java / JVM arrays</a></li>
 </ul>
 </li>
 <li><a href="#_creating_new_project_s">2. Creating new project(s)</a>
@@ -841,7 +842,8 @@ table.tableblock.grid-all th.tableblock, table.tableblock.grid-all td.tableblock
 <li><a href="#_definition_2">11.1. Definition</a></li>
 <li><a href="#_usage_example">11.2. Usage example</a></li>
 <li><a href="#_jvm_existence_2">11.3. JVM existence</a></li>
-<li><a href="#_augmenting_unions">11.4. Augmenting unions</a></li>
+<li><a href="#_special_testing_methods">11.4. Special testing methods</a></li>
+<li><a href="#_augmenting_unions">11.5. Augmenting unions</a></li>
 </ul>
 </li>
 <li><a href="#_dynamic_objects">12. Dynamic objects</a>
@@ -1567,7 +1569,216 @@ let m = map[a(), b()]</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_destructuring">1.13. Destructuring</h3>
+<h3 id="_collection_comprehension">1.13. Collection comprehension</h3>
+<div class="paragraph">
+<p>In addition to literals, collections can be created using collection
+comprehension. This is a simple way to create a new collection based on another
+one (actually on any iterable object), by filtering and transforming its
+content. For instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let l1 = list[1, 2, 3, 4, 5, 6]
+let l2 = list[x * 2 foreach x in l1 when (x % 2) == 0]
+# l2 == list[4, 8, 12]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is a more readable and more powerful version of <code>filter</code>+<code>map</code>. The
+previous example could be rewritten as</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let l2 = l2: filter(|x| -&gt; (x % 2) == 0): map(|x| -&gt; x * 2)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The general syntax is a collection literal containing an expression followed
+by one or more loop-like expression. If more than one loop is given, it is
+equivalent to nested loops. Thus</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let l = list[ [x, y] foreach x in [1..4] foreach y in ["a", "b", "c"] ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>is equivalent to:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let l = list[]
+foreach x in [1..4] {
+  foreach y in ["a", "b", "c"] {
+    l: add([x, y])
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>for</code> loop can be used, as in</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let l = list[ 3 * i + 1 for (var i=0, i &lt; 10, i = i + 2) ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Contrary to the <code>filter</code>+<code>map</code> approach, where the kind on collection is kept,
+comprehension can transform the source collection type, which can be any
+iterable. For instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let dices = set[ x + y foreach x in [1..7] foreach y in [1..7]]
+# dices == set[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However, the result collection can only be of the type of one of the predefined
+collection literal types.</p>
+</div>
+<div class="paragraph">
+<p><a href="#_destructuring">Destructuring</a> can also be used in collection
+comprehension, as in</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let couples = [ [1, 2], [2, 3], [3, 4] ]
+let sums = [ a + b foreach a, b in couples ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Maps can also be created, provided the given expression is either a pair tuple or
+a instance of <code>Map.Entry</code> (you can use the predefined <code>mapEntry(key, value)</code>
+function to create such objects). For instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let myMap = map[ ["key" + i, 2 * i] foreach i in [0..4] ]
+# myMap is {key0=0, key1=2, key2=4, key3=6}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A collection comprehension is a expression, and can thus be used as such. E.g.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">foreach v in [[x,x] foreach x in [0..3]] {
+  println(v)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The analogy can be made between comprehension and SQL queries. As an
+illustration, compare:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-sql" data-lang="sql">select distinct
+    p.name, p.age, c.product
+from
+    persons as p,
+    commands as c
+where p.id == c.customer
+      and p.age &gt; 18</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>with</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let result = set[
+  [p: name(), p: age(), c: product()]
+  foreach p in persons
+  foreach c in commands
+  when p: id() == c: customer()
+       and p: age() &gt; 18
+]</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_collection_comprehension_vs_code_map_code_and_code_filter_code">1.13.1. Collection comprehension vs. <code>map</code> and <code>filter</code></h4>
+<div class="paragraph">
+<p>Collection comprehension is actually quite similar to using <code>map</code> and <code>filter</code>
+higher-order function on a collection. Indeed, a comprehension such as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">list[f(x) foreach x in aList when pred(x)]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>is equivalent to</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">aList: filter(^pred): map(^f)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Thus, should you use collection comprehension or higher-order functions? Despite some
+implementation differences, it&#8217;s above all a matter of taste. Some people
+consider comprehension more readable, since it is more similar to the
+mathematical
+[set-builder notation](<a href="https://en.wikipedia.org/wiki/Set-builder_notation" class="bare">https://en.wikipedia.org/wiki/Set-builder_notation</a>).
+As an example, compare the two functionally equivalent expressions:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">list[ 2 * x for x in aList when (x % 2) == 0 ]
+aList: filter(x -&gt; (x % 2) == 0): map(x -&gt; 2 * x)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The more powerful expressiveness of comprehension shines when using nested
+iterators or <a href="#_destructuring">destructuring</a>. For instance, an expression such as</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">list[ k + ": " + (x * v)
+    foreach x in [1..10] when (x % 2) == 1
+    foreach k, v in aMap:entrySet() when k: startsWith("f") or v &gt;= 42]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>would be cumbersome to write using only <code>map</code> and <code>filter</code>.</p>
+</div>
+<div class="paragraph">
+<p>The comprehension approach has also several advantages. First, while the code
+executed is almost identical when mapping a function and using a comprehension,
+that is something similar to</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let tmp = list[]
+foreach elt in aList {
+  tmp: add(f(elt))
+}
+return tmp</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>the comprehension code is generated at compile time, whereas the <code>map</code>
+application is a function called at runtime.
+As such, when using a filtering clause, the use of <code>filter</code> creates an
+intermediate list that will be fed to <code>map</code>. This is not the case with
+comprehension. Moreover, since the expression used to build the values of the
+new collection is used at compile time, no closure is created, neither for the
+filter.</p>
+</div>
+<div class="paragraph">
+<p>An other advantage of comprehension is the fact that it can be used with any
+iterable, to build a different kind of collection. The <code>map</code> and <code>filter</code> methods are
+not (yet) available for any iterable, and for those that have them, the
+result collection is of the same type as the initial one. This approach is more
+polymorphic, but can be less readable if you need to change the collection type.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_destructuring">1.14. Destructuring</h3>
 <div class="paragraph">
 <p>Golo supports simple destructuring, that is automatic extraction of values
 from an object and assignment to multiple variables in one instruction.</p>
@@ -1642,7 +1853,7 @@ a, b = [b, a]      # a = 2, b = 1</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_operators">1.14. Operators</h3>
+<h3 id="_operators">1.15. Operators</h3>
 <div class="paragraph">
 <p>Golo supports the following <a href="#operators">set of operators</a>.</p>
 </div>
@@ -1790,7 +2001,7 @@ in Java.</p></td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_calling_a_method">1.15. Calling a method</h3>
+<h3 id="_calling_a_method">1.16. Calling a method</h3>
 <div class="paragraph">
 <p>Although we will discuss this in more details later on, you should already know that <code>:</code> is used to
 invoke instance methods.</p>
@@ -1807,7 +2018,7 @@ println(someObject: toString())</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_java_jvm_arrays">1.16. Java / JVM arrays</h3>
+<h3 id="_java_jvm_arrays">1.17. Java / JVM arrays</h3>
 <div class="paragraph">
 <p>As you probably know, arrays on the JVM are special objects. Golo deals with such arrays as being
 instances of <code>Object[]</code> and does not provide a wrapper class like many languages do. A Java / JVM
@@ -4020,14 +4231,14 @@ foreach i in range(0, -6):decrementBy(2) {
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>reversed_range</code> function is an alias for <code>range</code> with an increment of -1,
-such that <code>reversed_range(5, 1)</code> is the same as <code>range(5, 1): decrementBy(1)</code>.</p>
+<p>The <code>reversedRange</code> function is an alias for <code>range</code> with an increment of -1,
+such that <code>reversedRange(5, 1)</code> is the same as <code>range(5, 1): decrementBy(1)</code>.</p>
 </div>
 <div class="paragraph">
 <p>When <code>range</code> is called with only one value, it is used as the upper bound, the
 lower one being a default value (0 for numbers, 'A' for chars). For example,
 <code>range(5) == range(0, 5)</code> and <code>range('Z') == range('A', 'Z')</code>. In the same way,
-<code>reversed_range(5) == reversed_range(5, 0)</code>.</p>
+<code>reversedRange(5) == reversedRange(5, 0)</code>.</p>
 </div>
 <div class="paragraph">
 <p>Two ranges are equals if they have the same bounds and increment.</p>
@@ -4179,7 +4390,7 @@ The <code>fileExists</code> function will return true if the file exists, false 
 <p><code>objectArrayType()</code>: returns <code>Object[].class</code>.</p>
 </li>
 <li>
-<p><code>arrayTypeOf(type)</code>: given <code>type</code> as a <code>java.lang.Class</code>, returns an array of type <code>type[]</code>.</p>
+<p><code>arrayTypeOf(type)</code>: given <code>type</code> as a <code>java.lang.Class</code>, returns <code>type[].class</code>.</p>
 </li>
 </ul>
 </div>
@@ -4195,6 +4406,24 @@ The <code>fileExists</code> function will return true if the file exists, false 
 
 # prints "foo =&gt; bar"
 println(e: getKey() + " =&gt; " + e: getValue())</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>box</code> gives instances of <code>java.util.concurrent.atomic.AtomicReference</code>, and can
+be used to create a mutable reference where not possible otherwise, e.g. in
+closures, as in:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function counter = |init, stepFun| {
+  let current = box(init)
+  return -&gt; current: getAndUpdate(stepFun)
+}
+#...
+let c2 = counter(3, |x| -&gt; x * 2)
+c() # -&gt; 3
+c() # -&gt; 6
+c() # -&gt; 12</code></pre>
 </div>
 </div>
 </div>
@@ -4590,9 +4819,6 @@ method dispacth.</p>
 println("golo": notExistingMethod(1,2))
 # Prints "Dispatch failed for method: notExistingMethod on instance golo, with args: [1, 2]"</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Note: The <code>fallback</code> method must respect the signature and parameter names <code>fallback = |this, name, args&#8230;&#8203;|</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -5127,8 +5353,8 @@ have different fields. A <code>union</code> alternative type is in this respect 
 <h3 id="_jvm_existence_2">11.3. JVM existence</h3>
 <div class="paragraph">
 <p>A <code>union</code> type is compiled to an abstract JVM class. Each alternative value
-type is itself compiled to a final immutable JVM class extending the <code>union</code> abstract class.
-The value classes are member classes of the <code>union</code> one.</p>
+type is itself compiled to a final immutable JVM class extending the abstract class.
+The value classes are member classes of the abstract one.</p>
 </div>
 <div class="paragraph">
 <p>Given:</p>
@@ -5186,7 +5412,80 @@ members.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_augmenting_unions">11.4. Augmenting unions</h3>
+<h3 id="_special_testing_methods">11.4. Special testing methods</h3>
+<div class="paragraph">
+<p>Unions feature special methods to test for the exact type of a value, as well
+as members values if applicable. This allows to write readable tests, more
+specially using the <code>match</code> clause, to look like destructuring match in
+langages like OCaml, Haskell or Scala.</p>
+</div>
+<div class="paragraph">
+<p>For instance, given a union defining a binary tree:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">union Tree = {
+  Node = {left, right}
+  Leaf = {value}
+  Empty
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>one can match a <code>elt</code> value using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">match {
+  when elt: isEmpty() then // we have an empty value
+  when elt: isLeaf(0) then // we have a leaf containing 0
+  when elt: isLeaf()  then // we have a leaf (whatever the value)
+  when elt: isNode(Empty(), Empty()) then // we have a node with empty children
+  when elt: isNode(Leaf(42), Leaf(42)) then // we have a node whose  both children contain 42
+  when elt: isNode() then // we have a node, whatever the values
+  otherwise // default case...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>More precisely, each possible union value provides parameterless methods
+testing its exact type, named <code>is&lt;TypeName&gt;</code>. In the tree example, three
+methods are defined: <code>isEmpty()</code>, <code>isLeaf()</code> and <code>isNode()</code>.
+In addition to these methods, a method with parameters is defined for every
+alternative with members, here <code>isLeaf(x)</code> and <code>isNode(x, y)</code>. The arguments
+are compared (in order) for equality to the members of the union value.
+For instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">Leaf(0): isLeaf(0) # true
+Leaf(42): isLeaf(0) # false</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>allowing readable test and match clauses.</p>
+</div>
+<div class="paragraph">
+<p>A special singleton value is available to make these clauses even more
+readable: the <code>Unknown</code> value. This special singleton is considered equal to
+any other object (except <code>null</code>), and thus can be used is the parametrized test
+methods to ignore some members. For instance, to match a <code>Node</code> with only one
+child, one can use:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let _ = Unknown.get()
+
+function dealWithTree = |elt| -&gt; match {
+  when elt: isNode(Empty(), _) or elt: isNode(_, Empty()) then ...
+    // one of the children is Empty, whatever the other one
+  otherwise ...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_augmenting_unions">11.5. Augmenting unions</h3>
 <div class="paragraph">
 <p>Since the <code>union</code> itself is a abstract class, and each possible value is a
 concrete class extending it, it is possible to augment the whole <code>union</code>, as in:</p>
@@ -5194,8 +5493,8 @@ concrete class extending it, it is possible to augment the whole <code>union</co
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">augment Option {
-  function fmap = |this, func| -&gt; match {
-    when this is Option.None() then this
+  function map = |this, func| -&gt; match {
+    when this: isNone() then this
     otherwise Option.Some(func(this: value()))
   }
 }</code></pre>
@@ -5207,13 +5506,13 @@ concrete class extending it, it is possible to augment the whole <code>union</co
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">augment ConsList$Empty {
-  function isEmpty = |this| -&gt; true
+  function size = |this| -&gt; 0
   function head = |this| -&gt; null
   function tail = |this| -&gt; this
 }
 
 augment ConsList$List {
-  function isEmpty = |this| -&gt; false
+  function size = |this| -&gt; 1 + this: tail(): size()
 }</code></pre>
 </div>
 </div>
@@ -7894,7 +8193,7 @@ println(foo("abc"))</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-24 11:50:34 +02:00
+Last updated 2015-08-10 16:49:42 +02:00
 </div>
 </div>
 </body>
