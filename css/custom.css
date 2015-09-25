@@ -21,10 +21,6 @@ p, ul {
   font-family: 'Lato', serif;
   font-size: 14px;
 }
-.golo-code {
-  font-family: 'Fira Mono', monospace;
-  font-size: 20px;
-}
 pre {
   font-family: 'Fira Mono', monospace;
   font-size: 16px;
@@ -57,4 +53,8 @@ table {
 }
 th, td {
   text-align: left;
+}
+.golo-code span {
+  font-family: 'Fira Mono', monospace;
+  font-size: 18px;
 }
