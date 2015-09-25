@@ -33,13 +33,10 @@ The Golo Maven plugin artifact is:
 <version>3.0.0-incubation-M2</version>
 {% endhighlight %}
 
-#### Eclipse repositories
+#### Snapshots at Eclipse
 
-We publish our Maven artifacts to the [Eclipse repositories](https://repo.eclipse.org/):
-
-* Releases: [https://repo.eclipse.org/content/repositories/golo-releases/](https://repo.eclipse.org/content/repositories/golo-releases/)
-* Snapshots: [https://repo.eclipse.org/content/repositories/golo-snapshots/](https://repo.eclipse.org/content/repositories/golo-snapshots/)
-* Combined group: [https://repo.eclipse.org/content/groups/golo/](https://repo.eclipse.org/content/groups/golo/)
+We publish our Maven `-SNAPSHOT` artifacts to the [Eclipse repositories](https://repo.eclipse.org/):
+[https://repo.eclipse.org/content/repositories/golo-snapshots/](https://repo.eclipse.org/content/repositories/golo-snapshots/)
 
 ### Gradle
 
