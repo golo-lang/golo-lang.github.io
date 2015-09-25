@@ -1,24 +1,33 @@
 body {
   color: #444;
-  font-family: 'Droid Sans', sans-serif;
-}
-h1, h2, h4, h4, h5, .btn, .header > p {
-  font-family: 'Droid Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 code {
   color: #444;
 }
+h1, h2, h3, h4, h4, h5 {
+  font-family: 'Lato', sans-serif;
+}
+h1 > small {
+  font-family: 'Indie Flower', cursive;
+  font-size: 32px;
+  color: rgb(138,87,47);
+}
 p, ul {
-  font-family: 'Droid Serif', serif;
-  font-size: 16px;
+  font-family: 'Lato', serif;
+  font-size: 18px;
 }
 .footer, .footer > p {
-  font-family: 'Droid Serif', serif;
-  font-size: 13px;
+  font-family: 'Lato', serif;
+  font-size: 14px;
 }
 .golo-code {
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Fira Mono', monospace;
   font-size: 20px;
+}
+pre {
+  font-family: 'Fira Mono', monospace;
+  font-size: 16px;
 }
 .keyword {
   font-weight: bold;
