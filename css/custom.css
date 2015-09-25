@@ -58,3 +58,6 @@ th, td {
   font-family: 'Fira Mono', monospace;
   font-size: 18px;
 }
+img {
+  display: block;  height: auto;  max-width: 100%;
+}
