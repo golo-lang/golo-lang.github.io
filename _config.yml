@@ -4,6 +4,10 @@ highlighter: pygments
 permalink: /news/:year/:month/:day/:title
 redcloth:
   hard_breaks: false
+exclude:
+  - LICENSE
+  - notice.html
+  - epl-v10.html
 
 # Custom
 name: Golo news
