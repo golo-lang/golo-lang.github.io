@@ -699,9 +699,9 @@ table.tableblock.grid-all th.tableblock, table.tableblock.grid-all td.tableblock
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
-<script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
@@ -997,7 +997,7 @@ separated with dots, as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">Foo
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">Foo
 foo.Bar
 foo.bar.Baz
 (...)</code></pre>
@@ -1014,7 +1014,7 @@ that takes an argument for the JVM program arguments:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module hello.World
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module hello.World
 
 function main = |args| {
   println("Hello world!")
@@ -1109,7 +1109,7 @@ follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ golo golo --files samples/helloworld.golo
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ golo golo --files samples/helloworld.golo
 Hello world!
 $ golo golo --files samples/ --module hello.World
 Hello world!
@@ -1129,7 +1129,7 @@ as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module EchoArgs
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module EchoArgs
 
 function main = |args| {
   foreach arg in args {
@@ -1143,7 +1143,7 @@ function main = |args| {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ golo golo --files samples/echo-args.golo --args plop da plop
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ golo golo --files samples/echo-args.golo --args plop da plop
 -&gt; plop
 -&gt; da
 -&gt; plop
@@ -1169,7 +1169,7 @@ in the chapter on interoperability with Java.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ golo compile --output classes samples/helloworld.golo
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ golo compile --output classes samples/helloworld.golo
 $</code></pre>
 </div>
 </div>
@@ -1180,7 +1180,7 @@ needed):</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ tree classes/
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ tree classes/
 classes/
 └── hello
     └── World.class
@@ -1197,7 +1197,7 @@ $</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ cd classes
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ cd classes
 $ golo run --module hello.World
 Hello world!
 $</code></pre>
@@ -1218,7 +1218,7 @@ variable.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console"># Exporting an environment variable
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console"># Exporting an environment variable
 $ export JAVA_OPTS=-XX:+PrintCompilation
 $ golo golo --files samples/fibonacci.golo
 
@@ -1258,8 +1258,8 @@ Not sure where your <code>bash_completion.d/</code> folder is? Try <code>/etc/ba
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># This is a comment
-println("WTF?") # it works here, too</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># This is a comment
+println("Plop") # it works here, too</code></pre>
 </div>
 </div>
 </div>
@@ -1283,7 +1283,7 @@ compilation error.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># Ok
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># Ok
 var i = 3
 i = i + 1
 
@@ -1301,7 +1301,7 @@ dollar symbols (<code>$</code>) and numbers. In any case, an identifier must not
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># Ok, but not necessarily great for humans...
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># Ok, but not necessarily great for humans...
 let _$_f_o_$$666 = 666
 
 # Wrong!
@@ -1374,7 +1374,7 @@ API. We give them along with examples in <a href="#data-literals">the data liter
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let text = """This is
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let text = """This is
 a multi-line string.
   How
     cool
@@ -1406,7 +1406,7 @@ collection name, as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let s = set[1, 2, "a", "b"]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let s = set[1, 2, "a", "b"]
 let v = vector[1, 2, 3]
 let m = map[[1, "a"], [2, "b"]]
 # (...)</code></pre>
@@ -1517,7 +1517,7 @@ key, and the second entry is the value. This allows nested structures to be spec
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">map[
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">map[
   ["foo", "bar"],
   ["plop", set[1, 2, 3, 4, 5]],
   ["mrbean", map[
@@ -1548,7 +1548,7 @@ key, and the second entry is the value. This allows nested structures to be spec
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let m1 = map[1, 2, 4, 5]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let m1 = map[1, 2, 4, 5]
 let m2 = map[
   [1],
   ["a", "b"]
@@ -1561,7 +1561,7 @@ functions returning valid tuples:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let a = -&gt; [1, 'a']
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let a = -&gt; [1, 'a']
 let b = -&gt; [2, 'b']
 let m = map[a(), b()]</code></pre>
 </div>
@@ -1578,7 +1578,7 @@ content. For instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let l1 = list[1, 2, 3, 4, 5, 6]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let l1 = list[1, 2, 3, 4, 5, 6]
 let l2 = list[x * 2 foreach x in l1 when (x % 2) == 0]
 # l2 == list[4, 8, 12]</code></pre>
 </div>
@@ -1589,7 +1589,7 @@ previous example could be rewritten as</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let l2 = l2: filter(|x| -&gt; (x % 2) == 0): map(|x| -&gt; x * 2)</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let l2 = l2: filter(|x| -&gt; (x % 2) == 0): map(|x| -&gt; x * 2)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1599,7 +1599,7 @@ equivalent to nested loops. Thus</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let l = list[ [x, y] foreach x in [1..4] foreach y in ["a", "b", "c"] ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let l = list[ [x, y] foreach x in [1..4] foreach y in ["a", "b", "c"] ]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1607,7 +1607,7 @@ equivalent to nested loops. Thus</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let l = list[]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let l = list[]
 foreach x in [1..4] {
   foreach y in ["a", "b", "c"] {
     l: add([x, y])
@@ -1620,7 +1620,7 @@ foreach x in [1..4] {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let l = list[ 3 * i + 1 for (var i=0, i &lt; 10, i = i + 2) ]</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let l = list[ 3 * i + 1 for (var i=0, i &lt; 10, i = i + 2) ]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1630,7 +1630,7 @@ iterable. For instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let dices = set[ x + y foreach x in [1..7] foreach y in [1..7]]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let dices = set[ x + y foreach x in [1..7] foreach y in [1..7]]
 # dices == set[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]</code></pre>
 </div>
 </div>
@@ -1644,7 +1644,7 @@ comprehension, as in</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let couples = [ [1, 2], [2, 3], [3, 4] ]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let couples = [ [1, 2], [2, 3], [3, 4] ]
 let sums = [ a + b foreach a, b in couples ]</code></pre>
 </div>
 </div>
@@ -1655,7 +1655,7 @@ function to create such objects). For instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let myMap = map[ ["key" + i, 2 * i] foreach i in [0..4] ]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let myMap = map[ ["key" + i, 2 * i] foreach i in [0..4] ]
 # myMap is {key0=0, key1=2, key2=4, key3=6}</code></pre>
 </div>
 </div>
@@ -1664,7 +1664,7 @@ function to create such objects). For instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">foreach v in [[x,x] foreach x in [0..3]] {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">foreach v in [[x,x] foreach x in [0..3]] {
   println(v)
 }</code></pre>
 </div>
@@ -1675,7 +1675,7 @@ illustration, compare:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-sql" data-lang="sql">select distinct
+<pre class="highlightjs highlight"><code class="language-sql" data-lang="sql">select distinct
     p.name, p.age, c.product
 from
     persons as p,
@@ -1689,7 +1689,7 @@ where p.id == c.customer
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let result = set[
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let result = set[
   [p: name(), p: age(), c: product()]
   foreach p in persons
   foreach c in commands
@@ -1706,7 +1706,7 @@ higher-order function on a collection. Indeed, a comprehension such as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">list[f(x) foreach x in aList when pred(x)]</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">list[f(x) foreach x in aList when pred(x)]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1714,7 +1714,7 @@ higher-order function on a collection. Indeed, a comprehension such as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">aList: filter(^pred): map(^f)</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">aList: filter(^pred): map(^f)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1727,7 +1727,7 @@ As an example, compare the two functionally equivalent expressions:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">list[ 2 * x for x in aList when (x % 2) == 0 ]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">list[ 2 * x for x in aList when (x % 2) == 0 ]
 aList: filter(x -&gt; (x % 2) == 0): map(x -&gt; 2 * x)</code></pre>
 </div>
 </div>
@@ -1737,7 +1737,7 @@ iterators or <a href="#_destructuring">destructuring</a>. For instance, an expre
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">list[ k + ": " + (x * v)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">list[ k + ": " + (x * v)
     foreach x in [1..10] when (x % 2) == 1
     foreach k, v in aMap:entrySet() when k: startsWith("f") or v &gt;= 42]</code></pre>
 </div>
@@ -1752,7 +1752,7 @@ that is something similar to</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let tmp = list[]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let tmp = list[]
 foreach elt in aList {
   tmp: add(f(elt))
 }
@@ -1788,7 +1788,7 @@ from an object and assignment to multiple variables in one instruction.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let a, b = [1, 2]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let a, b = [1, 2]
 # a = 1, b = 2</code></pre>
 </div>
 </div>
@@ -1799,7 +1799,7 @@ assign the rest of the values, similar to varargs notation. For instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let a, b, c = [1, 2]               # raises an exception
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let a, b, c = [1, 2]               # raises an exception
 let a, b = [1, 2, 3]               # a = 1, b = 2, 3 ignored
 let a, b, c... = [1, 2, 3, 4, 5]   # a = 1, b = 2, c = [3, 4, 5]</code></pre>
 </div>
@@ -1815,7 +1815,7 @@ destructurable.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">struct Point = {x, y}
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">struct Point = {x, y}
 #...
 let p = Point(42, 1337)
 let x, y = p   # x = 42, y = 1337</code></pre>
@@ -1826,7 +1826,7 @@ let x, y = p   # x = 42, y = 1337</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let lst = list[1, 2, 3, 4, 5]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let lst = list[1, 2, 3, 4, 5]
 let head, tail... = lst        # head = 1, tail = [2, 3, 4, 5]</code></pre>
 </div>
 </div>
@@ -1836,7 +1836,7 @@ instance, one can easily swap two variables:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">var a, b = [1, 2]  # a = 1, b = 2
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">var a, b = [1, 2]  # a = 1, b = 2
 a, b = [b, a]      # a = 2, b = 1</code></pre>
 </div>
 </div>
@@ -1846,7 +1846,7 @@ a, b = [b, a]      # a = 2, b = 1</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">foreach key, value in myMap: entrySet() {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">foreach key, value in myMap: entrySet() {
   # do something...
 }</code></pre>
 </div>
@@ -1988,7 +1988,7 @@ in Java.</p></td>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">not foo: bar() orIfNull "yo"</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">not foo: bar() orIfNull "yo"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1996,7 +1996,7 @@ in Java.</p></td>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">(not (foo: bar())) orIfNull "yo"</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">(not (foo: bar())) orIfNull "yo"</code></pre>
 </div>
 </div>
 </div>
@@ -2012,7 +2012,7 @@ follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">println(123: toString())
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">println(123: toString())
 println(someObject: toString())</code></pre>
 </div>
 </div>
@@ -2071,7 +2071,7 @@ array if empty),</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># Gets the element at index 0
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># Gets the element at index 0
 a: get(0)
 
 # Replaces the element at index 1 with "a"
@@ -2101,7 +2101,7 @@ The methods above do <strong>not</strong> perform array bound checks.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let a = Array(1, 2, 3, 4)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let a = Array(1, 2, 3, 4)
 let b = Array("a", "b")</code></pre>
 </div>
 </div>
@@ -2110,7 +2110,7 @@ let b = Array("a", "b")</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let a = array[1, 2, 3, 4]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let a = array[1, 2, 3, 4]
 let b = array["a", "b"]</code></pre>
 </div>
 </div>
@@ -2125,7 +2125,7 @@ let b = array["a", "b"]</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ golo new Foo</code></pre>
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ golo new Foo</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2154,7 +2154,7 @@ named <code>main</code> that takes an argument for the JVM program arguments.</p
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ golo new Foo --type maven</code></pre>
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ golo new Foo --type maven</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2163,7 +2163,7 @@ your project directory elsewhere you can use the <code>--path</code> command arg
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ golo new Bar --path /opt/golo</code></pre>
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ golo new Bar --path /opt/golo</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2176,7 +2176,7 @@ your project directory elsewhere you can use the <code>--path</code> command arg
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ tree Foo
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ tree Foo
 Foo
 ├── imports
 ├── jars
@@ -2191,7 +2191,7 @@ Foo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ tree Foo
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ tree Foo
 Foo
 ├── pom.xml
 └── src
@@ -2205,7 +2205,7 @@ Foo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ mvn package</code></pre>
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ mvn package</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2220,7 +2220,7 @@ Foo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ mvn exec:java</code></pre>
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ mvn exec:java</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -2232,7 +2232,7 @@ Foo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ java -jar target/Foo-*-jar-with-dependencies.jar</code></pre>
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ java -jar target/Foo-*-jar-with-dependencies.jar</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -2244,7 +2244,7 @@ Foo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ cd target/classes
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ cd target/classes
 $ golo run --module Foo</code></pre>
 </div>
 </div>
@@ -2256,7 +2256,7 @@ $ golo run --module Foo</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ tree Foo
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ tree Foo
 Foo
 ├── build.gradle
 └── src
@@ -2270,7 +2270,7 @@ Foo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ gradle build</code></pre>
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ gradle build</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2285,7 +2285,7 @@ Foo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ gradle run</code></pre>
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ gradle run</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -2297,7 +2297,7 @@ Foo
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ cd build/classes/main
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ cd build/classes/main
 $ golo run --module Foo</code></pre>
 </div>
 </div>
@@ -2318,7 +2318,7 @@ call some.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sample
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sample
 
 function hello = {
   return "Hello!"
@@ -2330,7 +2330,7 @@ function hello = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let str = hello()</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let str = hello()</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2345,7 +2345,7 @@ a value:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function printer = {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function printer = {
   println("Hey!")
 }</code></pre>
 </div>
@@ -2356,7 +2356,7 @@ in the next statement is <code>null</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># result will be null
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># result will be null
 let result = printer()</code></pre>
 </div>
 </div>
@@ -2368,7 +2368,7 @@ let result = printer()</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function addition = |a, b| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function addition = |a, b| {
   return a + b
 }</code></pre>
 </div>
@@ -2390,7 +2390,7 @@ Parameters are constant references, hence they cannot be reassigned.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let three = addition(1, 2)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let three = addition(1, 2)
 let hello_world = addition("hello ", "world!")</code></pre>
 </div>
 </div>
@@ -2403,7 +2403,7 @@ add <code>&#8230;&#8203;</code> to the last parameter name:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function foo = |a, b, c...| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function foo = |a, b, c...| {
   # ...
 }</code></pre>
 </div>
@@ -2420,7 +2420,7 @@ following examples are legit:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># a=1, b=2, c=[]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># a=1, b=2, c=[]
 foo(1, 2)
 
 # a=1, b=2, c=[3]
@@ -2436,7 +2436,7 @@ may call array methods. Given:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function elementAt = |index, args...| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function elementAt = |index, args...| {
   return args: get(index)
 }</code></pre>
 </div>
@@ -2446,7 +2446,7 @@ may call array methods. Given:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># prints "2"
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># prints "2"
 println(elementAt(1, 1, 2, 3))</code></pre>
 </div>
 </div>
@@ -2458,7 +2458,7 @@ println(elementAt(1, 1, 2, 3))</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function post = |title, body, promoted, tags...| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function post = |title, body, promoted, tags...| {
   let data = map[
     ["title", title],
     ["body", body],
@@ -2511,7 +2511,7 @@ You must name either or none of the arguments. A compilation error will be raise
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module foo.Bar
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module foo.Bar
 
 function f = {
   return "f()"
@@ -2524,7 +2524,7 @@ name:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let r = foo.Bar.f()</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let r = foo.Bar.f()</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2532,7 +2532,7 @@ name:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module Somewhere.Else
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module Somewhere.Else
 
 import foo.Bar
 
@@ -2565,7 +2565,7 @@ equivalent:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module Somewhere.Else
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module Somewhere.Else
 
 import foo.Bar
 
@@ -2605,7 +2605,7 @@ restrict the visibility of a function by using the <code>local</code> keyword:</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module Foo
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module Foo
 
 local function a = {
   return 666
@@ -2623,7 +2623,7 @@ runtime:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module Bogus
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module Bogus
 
 function i_will_crash = {
   return Foo.a()
@@ -2638,7 +2638,7 @@ function i_will_crash = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module Sample
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module Sample
 
 let a = 1
 
@@ -2697,7 +2697,7 @@ This <code>main</code> method can servers as a JVM entry point.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module mainEntryPoint
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module mainEntryPoint
 
 
 function main = |args| {
@@ -2710,7 +2710,7 @@ function main = |args| {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ golo compile mainEntryPoint.golo
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ golo compile mainEntryPoint.golo
 $ java -cp ".:golo.jar" mainEntryPoint GoloRocks
 -&gt; GoloRocks
 $</code></pre>
@@ -2724,7 +2724,7 @@ $</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sample
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sample
 
 import java.util.Arrays
 
@@ -2748,7 +2748,7 @@ Note that we could equivalently have written a qualified invocation as <code>Arr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">println("&gt;&gt;&gt; " + someObject: toString())</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">println("&gt;&gt;&gt; " + someObject: toString())</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2765,7 +2765,7 @@ from Golo with named arguments.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-java" data-lang="java">package io;
+<pre class="highlightjs highlight"><code class="language-java" data-lang="java">package io;
 
 public class Printer {
  public static Object print(Object prefix, Object what) {
@@ -2777,12 +2777,12 @@ public class Printer {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ javac -parameters Printer.java</code></pre>
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ javac -parameters Printer.java</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module bar
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module bar
 import io.Printer
 
 let obj = DynamicObject()
@@ -2825,7 +2825,7 @@ following example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let person = dao: findByName("Mr Bean")
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let person = dao: findByName("Mr Bean")
 let city = person?: address()?: city() orIfNull "n/a"</code></pre>
 </div>
 </div>
@@ -2834,7 +2834,7 @@ let city = person?: address()?: city() orIfNull "n/a"</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let person = dao: findByName("Mr Bean")
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let person = dao: findByName("Mr Bean")
 var city = "n/a"
 if person isnt null {
   let address = person: address()
@@ -2870,7 +2870,7 @@ calling its constructor is done as if it was just another function.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sample
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sample
 
 import java.util
 
@@ -2884,7 +2884,7 @@ function aList = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function str_build = {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function str_build = {
   return java.lang.StringBuilder("h"):
     append("e"):
     append("l"):
@@ -2906,7 +2906,7 @@ follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module samples.MaxInt
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module samples.MaxInt
 
 local function max_int = {
   return java.lang.Integer.MAX_VALUE()
@@ -2939,7 +2939,7 @@ Java class that looks as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-java" data-lang="java">public class Foo {
+<pre class="highlightjs highlight"><code class="language-java" data-lang="java">public class Foo {
   public String bar;
 }</code></pre>
 </div>
@@ -2949,7 +2949,7 @@ Java class that looks as follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let foo = Foo()
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let foo = Foo()
 
 # Write
 foo: bar("baz")
@@ -2967,7 +2967,7 @@ that you can chain invocations.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-java" data-lang="java">public class Foo {
+<pre class="highlightjs highlight"><code class="language-java" data-lang="java">public class Foo {
   public String bar;
   public String baz;
 }</code></pre>
@@ -2978,7 +2978,7 @@ that you can chain invocations.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let foo = Foo(): bar(1): baz(2)</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let foo = Foo(): bar(1): baz(2)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2998,7 +2998,7 @@ in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-java" data-lang="java">public class Foo {
+<pre class="highlightjs highlight"><code class="language-java" data-lang="java">public class Foo {
   public String bar;
 
   public String bar() {
@@ -3013,7 +3013,7 @@ in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let foo = Foo()
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let foo = Foo()
 
 # Write the field
 foo: bar("baz")
@@ -3052,7 +3052,7 @@ an instance of the enumeration class.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sample.EnumsThreadState
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sample.EnumsThreadState
 
 import java.lang.Thread$State
 
@@ -3074,7 +3074,7 @@ function main = |args| {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ golo golo --files samples/enums-thread-state.golo
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ golo golo --files samples/enums-thread-state.golo
 name=NEW, ordinal=0
 name=NEW, ordinal=0
 name=RUNNABLE, ordinal=1
@@ -3098,7 +3098,7 @@ a Golo operator, such as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># Function call
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># Function call
 is()
 
 # Method call
@@ -3114,7 +3114,7 @@ identifiers.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># Function call
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># Function call
 `is()
 
 # Method call
@@ -3130,7 +3130,7 @@ follows:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-java" data-lang="java">import fr.insalyon.citi.golo.compiler.GoloClassLoader;
+<pre class="highlightjs highlight"><code class="language-java" data-lang="java">import org.eclipse.golo.compiler.GoloClassLoader;
 
 public class Foo {
 
@@ -3148,7 +3148,7 @@ public class Foo {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module foo.Bar
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module foo.Bar
 
 function bar = |wat| -&gt; println(wat)</code></pre>
 </div>
@@ -3199,7 +3199,7 @@ Be patient, it&#8217;s coming in!
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">if goloIsGreat() {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">if goloIsGreat() {
   println("Golo Golo")
 }
 
@@ -3225,7 +3225,7 @@ multiple nested <code>if</code> / <code>else</code> statements, as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function what = |obj| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function what = |obj| {
   case {
     when obj oftype String.class {
       return "String"
@@ -3247,7 +3247,7 @@ chain:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function what = |obj| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function what = |obj| {
   if obj oftype String.class {
     return "String"
   } else if obj oftype Integer.class {
@@ -3284,7 +3284,7 @@ other languages it is not fully equivalent, as Golo does not support destructuri
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let item = "foo@bar.com"
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let item = "foo@bar.com"
 
 let what_it_could_be = -&gt; match {
   when item: contains("@") then "an email?"
@@ -3313,7 +3313,7 @@ clause.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function times = |n| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function times = |n| {
   var times = 0
   while (times &lt; n) { times = times + 1 }
   return times
@@ -3347,7 +3347,7 @@ clause.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function fact = |value, n| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function fact = |value, n| {
   var result = 1
   for (var i = 0, i &lt; n, i = i + 1) {
     result = result * value
@@ -3384,7 +3384,7 @@ of <code>java.lang.Iterable</code> can be used in <code>foreach</code> loops, as
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function concat_to_string = |iterable| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function concat_to_string = |iterable| {
   var result = ""
   foreach item in iterable {
     result = result + item
@@ -3425,7 +3425,7 @@ Golo provides a <code>iterator()</code> method for them.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">foreach item in collection {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">foreach item in collection {
   if item &lt; 10 {
     println(item)
   }
@@ -3437,7 +3437,7 @@ Golo provides a <code>iterator()</code> method for them.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">foreach item in collection when item &lt; 10 {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">foreach item in collection when item &lt; 10 {
   println(item)
 }</code></pre>
 </div>
@@ -3470,7 +3470,7 @@ some loops in imperative languages.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module test
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module test
 
 function main = |args| {
   var i = 0
@@ -3511,7 +3511,7 @@ such as the following code snippet in Scala:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-scala" data-lang="scala">println(if (4 % 2 == 0) "even" else "odd")</code></pre>
+<pre class="highlightjs highlight"><code class="language-scala" data-lang="scala">println(if (4 % 2 == 0) "even" else "odd")</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3555,7 +3555,7 @@ exceptions.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">if somethingIsWrong() {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">if somethingIsWrong() {
   raise("Woops!")
 }</code></pre>
 </div>
@@ -3570,7 +3570,7 @@ specialized type is required, you may simply instantiate a Java exception and th
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module golotest.execution.Exceptions
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module golotest.execution.Exceptions
 
 import java.lang.RuntimeException
 
@@ -3592,7 +3592,7 @@ regarding the handling of <code>finally</code> blocks.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># Good old try / catch
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># Good old try / catch
 try {
   something()
 } catch (e) {
@@ -3659,7 +3659,7 @@ advantage of the <code>case</code> branching statement.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let adder = |a, b| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let adder = |a, b| {
   return a + b
 }</code></pre>
 </div>
@@ -3672,7 +3672,7 @@ example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let adder = |a, b| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let adder = |a, b| {
   return a + b
 }
 println(adder: invoke(1, 2))
@@ -3689,7 +3689,7 @@ println(addToTen: invoke(2))</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let mul = |a, b| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let mul = |a, b| {
   return a * b
 }
 
@@ -3707,7 +3707,7 @@ expression. The example above can be simplified as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let adder = |a, b| -&gt; a + b</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let adder = |a, b| -&gt; a + b</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3715,7 +3715,7 @@ expression. The example above can be simplified as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module Foo
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module Foo
 
 local function sayHello = |who| -&gt; "Hello " + who + "!"
 
@@ -3737,7 +3737,7 @@ function main = |args| {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let adder = |a, b| -&gt; a + b
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let adder = |a, b| -&gt; a + b
 println(adder(1, 2))
 
 let addToTen = adder: bindTo(10)
@@ -3752,7 +3752,7 @@ println(addToTen(2))</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function plus_3 = {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function plus_3 = {
   let foo = 3
   return |x| -&gt; x + foo
 }</code></pre>
@@ -3768,7 +3768,7 @@ following example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">var a = 1
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">var a = 1
 let f = {
   a = 2   # Compilation error!
 }</code></pre>
@@ -3785,7 +3785,7 @@ mutable object is a sensible way to pass data back from a closure as a side-effe
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let list = java.util.LinkedList()
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let list = java.util.LinkedList()
 let pump_it = {
   list: add("I heard you say")
   list: add("Hey!")
@@ -3814,7 +3814,7 @@ to an instance of a specific interface.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let button = JButton("Click me!")
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let button = JButton("Click me!")
 let handler = |event| -&gt; println("Clicked!")
 button: addActionListener(asInterfaceInstance(ActionListener.class, handler))</code></pre>
 </div>
@@ -3825,7 +3825,7 @@ local function as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">local function listener = |handler| -&gt; asInterfaceInstance(ActionListener.class, handler)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">local function listener = |handler| -&gt; asInterfaceInstance(ActionListener.class, handler)
 
 # (...)
 let button = JButton("Click me!")
@@ -3838,7 +3838,7 @@ task, fetch the result with a <code>Future</code> object then shut it down:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function give_me_hey = {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function give_me_hey = {
   let executor = Executors.newSingleThreadExecutor()
   let future = executor: submit(asInterfaceInstance(Callable.class, -&gt; "hey!"))
   let result = future: get()
@@ -3862,7 +3862,7 @@ the <code>asInterfaceInstance</code> function:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let always_true = asFunctionalInterface(java.lang.function.Predicate.class, |obj| -&gt; true)</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let always_true = asFunctionalInterface(java.lang.function.Predicate.class, |obj| -&gt; true)</code></pre>
 </div>
 </div>
 </div>
@@ -3874,7 +3874,7 @@ functional interface, you can pass a closure directly, as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># Swing action listeners, a classic!
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># Swing action listeners, a classic!
 let button = JButton("Click me!")
 button: addActionListener(|event| -&gt; println("Clicked!"))
 
@@ -3900,7 +3900,7 @@ in turn calls <code>asInterfaceInstance</code>. Back to the previous examples, t
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># Calling asInterfaceInstance
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># Calling asInterfaceInstance
 future = executor: submit(asInterfaceInstance(Callable.class, -&gt; "hey!"))
 
 # Using a class augmentation
@@ -3916,7 +3916,7 @@ in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">import golotest.Closures
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">import golotest.Closures
 
 local function local_fun = |x| -&gt; x + 1
 
@@ -3937,7 +3937,7 @@ function call_local_fun = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">import golotest.Closures
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">import golotest.Closures
 
 local function local_fun = |x| -&gt; x + 1
 
@@ -3959,7 +3959,7 @@ instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">list["Foo", null, 42]: filter(^java.util.Objects::nonNull)</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">list["Foo", null, 42]: filter(^java.util.Objects::nonNull)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3968,7 +3968,7 @@ will accept an instance of the class as first argument, as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">list["Foo", "Bar", "Hello", "Goodbye"]: map(^String::length)</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">list["Foo", "Bar", "Hello", "Goodbye"]: map(^String::length)</code></pre>
 </div>
 </div>
 </div>
@@ -3980,7 +3980,7 @@ argument at another position than 0, you may take advantage of <code>bindAt(posi
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let diff = |a, b| -&gt; a - b
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let diff = |a, b| -&gt; a - b
 let minus10 = diff: bindAt(1, 10)
 
 # 10
@@ -3992,7 +3992,7 @@ println(minus10(20))</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let f = (|x| -&gt; x + 1): andThen(|x| -&gt; x - 10): andThen(|x| -&gt; x * 100)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let f = (|x| -&gt; x + 1): andThen(|x| -&gt; x - 10): andThen(|x| -&gt; x * 100)
 
 # -500
 println(f(4))</code></pre>
@@ -4003,7 +4003,7 @@ println(f(4))</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function foo = |x| -&gt; x + 1
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function foo = |x| -&gt; x + 1
 function bar = |x| -&gt; 2 * x
 
 function main = |args| {
@@ -4023,7 +4023,7 @@ return functions, as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let f = |x| -&gt; |y| -&gt; |z| -&gt; x + y + z</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let f = |x| -&gt; |y| -&gt; |z| -&gt; x + y + z</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4031,7 +4031,7 @@ return functions, as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let f1 = f(1)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let f1 = f(1)
 let f2 = f1(2)
 let f3 = f2(3)
 
@@ -4044,7 +4044,7 @@ println(f3())</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># Prints '6'
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># Prints '6'
 println(f(1)(2)(3)())</code></pre>
 </div>
 </div>
@@ -4065,7 +4065,7 @@ useful functions.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">print("Hey")
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">print("Hey")
 println()
 
 println("Hey")</code></pre>
@@ -4085,7 +4085,7 @@ disabled. It always returns a string.  There are also <code>secureReadPassword()
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let name = readln("what's your name? ")
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let name = readln("what's your name? ")
 let value = readln()
 let pwd = readPassword("type your password:")</code></pre>
 </div>
@@ -4102,7 +4102,7 @@ let pwd = readPassword("type your password:")</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let i = intValue("666")   # 666 (string to integer)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let i = intValue("666")   # 666 (string to integer)
 let j = intValue(1.234)   # 1 (double to integer)
 let k = intValue(666_L)   # 666 (long to integer)
 # etc</code></pre>
@@ -4117,7 +4117,7 @@ message as a string, and one with a message and a cause.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">try {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">try {
   ...
   raise("Somehow something is wrong")
 } catch (e) {
@@ -4138,7 +4138,7 @@ throws an <code>AssertionError</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function foo = |a| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function foo = |a| {
   require(a oftype String.class, "a must be a String")
   ...
 }</code></pre>
@@ -4149,7 +4149,7 @@ throws an <code>AssertionError</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function foo = |a| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function foo = |a| {
   requireNotNull(a)
   ...
 }</code></pre>
@@ -4170,7 +4170,7 @@ libraries.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let data = newTypedArray(java.lang.String.class, 3)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let data = newTypedArray(java.lang.String.class, 3)
 data: set(0, "A")
 data: set(1, "B")
 data: set(2, "C")</code></pre>
@@ -4185,7 +4185,7 @@ data: set(2, "C")</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># Prints 1 2 (...) 100
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># Prints 1 2 (...) 100
 foreach i in range(1, 101) {
   print(i + " ")
 }
@@ -4214,7 +4214,7 @@ if the increment is explicitly negative:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># Prints nothing
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># Prints nothing
 foreach i in range(3, 0) {
   print(i + " ")
 }
@@ -4256,7 +4256,7 @@ declaration, as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">local function listener = |handler| -&gt; asInterfaceInstance(ActionListener.class, handler)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">local function listener = |handler| -&gt; asInterfaceInstance(ActionListener.class, handler)
 
 # (...)
 let button = JButton("Click me!")
@@ -4269,7 +4269,7 @@ useful to support values and delayed evaluation, as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">if isClosure(value) {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">if isClosure(value) {
   map: put(key, value())
 } else {
   map: put(key, value)
@@ -4281,7 +4281,7 @@ useful to support values and delayed evaluation, as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">import golotest.Closures
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">import golotest.Closures
 
 local function local_fun = |x| -&gt; x + 1
 
@@ -4297,7 +4297,7 @@ the number of parameters:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">import golotest.Closures
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">import golotest.Closures
 
 local function local_fun = |x| -&gt; x + 1
 
@@ -4317,7 +4317,7 @@ adaptations:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let always_true = asFunctionalInterface(java.lang.function.Predicate.class, |obj| -&gt; true)</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let always_true = asFunctionalInterface(java.lang.function.Predicate.class, |obj| -&gt; true)</code></pre>
 </div>
 </div>
 </div>
@@ -4328,7 +4328,7 @@ adaptations:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let text = fileToText("/some/file.txt", "UTF-8")</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let text = fileToText("/some/file.txt", "UTF-8")</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4340,7 +4340,7 @@ represents the encoding charset, either as a <code>java.lang.String</code> or a 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">textToFile("Hello, world!", "/foo/bar.txt")</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">textToFile("Hello, world!", "/foo/bar.txt")</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4355,7 +4355,7 @@ then we suggest that you look into the <code>java.nio.file</code> package.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">if fileExists("/foo/bar.txt") {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">if fileExists("/foo/bar.txt") {
   println("file found!")
 }</code></pre>
 </div>
@@ -4369,7 +4369,7 @@ The <code>fileExists</code> function will return true if the file exists, false 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">println(currentDir())</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">println(currentDir())</code></pre>
 </div>
 </div>
 </div>
@@ -4402,7 +4402,7 @@ The <code>fileExists</code> function will return true if the file exists, false 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let e = mapEntry("foo", "bar")
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let e = mapEntry("foo", "bar")
 
 # prints "foo =&gt; bar"
 println(e: getKey() + " =&gt; " + e: getValue())</code></pre>
@@ -4415,7 +4415,7 @@ closures, as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function counter = |init, stepFun| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function counter = |init, stepFun| {
   let current = box(init)
   return -&gt; current: getAndUpdate(stepFun)
 }
@@ -4453,7 +4453,7 @@ like a function to wrap a string with a left and right string. We could do that 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function wrap = |left, str, right| -&gt; left + str + right
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function wrap = |left, str, right| -&gt; left + str + right
 
 # (...)
 let str = wrap("(", "foo", ")")
@@ -4472,7 +4472,7 @@ method to all instances of <code>java.lang.String</code> instead?</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module foo
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module foo
 
 augment java.lang.String {
   function wrap = |this, left, right| -&gt; left + this + right
@@ -4509,7 +4509,7 @@ arguments, and</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">augment java.lang.String {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">augment java.lang.String {
 
   function concatWith = |this, args...| {
     var result = this
@@ -4530,7 +4530,7 @@ augmentation to <code>java.util.Collection</code>, which also adds it to concret
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">augment java.util.Collection {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">augment java.util.Collection {
   function plop = |this| -&gt; "plop!"
 }
 
@@ -4558,7 +4558,7 @@ augmentations can make them available through imports.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module my.StringUrlAugmentations
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module my.StringUrlAugmentations
 
 import java.net
 
@@ -4580,7 +4580,7 @@ augment java.lang.String {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module my.App
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module my.App
 
 import my.StringUrlAugmentations
 
@@ -4623,7 +4623,7 @@ as found in Rust, Groovy or Scala.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">augmentation FooBar = {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">augmentation FooBar = {
   function foo = |this| -&gt; "foo"
   function bar = |this, a| -&gt; this: length() + a
 }
@@ -4638,7 +4638,7 @@ augmentation Spamable = {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">augment java.util.Collection with FooBar
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">augment java.util.Collection with FooBar
 
 augment MyStruct with Spamable
 
@@ -4657,7 +4657,7 @@ So, if we create a module</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module MyAugmentations
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module MyAugmentations
 
 augmentation Searchable = {
   function search = |this, value| -&gt; ...
@@ -4671,7 +4671,7 @@ augment java.util.Collection with Searchable</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">import MyAugmentations
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">import MyAugmentations
 
 #...
 list[1, 2, 3, 4]: search(2)</code></pre>
@@ -4683,7 +4683,7 @@ are fully qualified or the module is imported:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">augment java.lang.String with MyAugmentations.Searchable</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">augment java.lang.String with MyAugmentations.Searchable</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4691,7 +4691,7 @@ are fully qualified or the module is imported:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">import MyAugmentations
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">import MyAugmentations
 
 augment java.lang.String with Searchable</code></pre>
 </div>
@@ -4715,7 +4715,7 @@ without importing the coresponding module, as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">augment java.lang.String with Searchable</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">augment java.lang.String with Searchable</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4810,7 +4810,7 @@ method dispacth.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">augment java.lang.String {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">augment java.lang.String {
   function fallback = |this, name, args...| {
     return "Dispatch failed for method: " + name + " on instance " + this + ", with args: " + args: asList(): join(" ")
   }
@@ -4835,7 +4835,7 @@ println("golo": notExistingMethod(1,2))
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let odd = [1, 2, 3, 4, 5]: filter(|n| -&gt; (n % 2) == 0)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let odd = [1, 2, 3, 4, 5]: filter(|n| -&gt; (n % 2) == 0)
 
 let m = map[]
 println(m: getOrElse("foo", -&gt; "bar"))</code></pre>
@@ -4863,7 +4863,7 @@ the set of named entries is fixed.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sample
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sample
 
 struct Person = { name, age, email }
 
@@ -4897,7 +4897,7 @@ while building <code>p2</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sample
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sample
 
 struct Point = { x, y }</code></pre>
 </div>
@@ -4933,7 +4933,7 @@ content.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module test
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module test
 
 struct Point = { x, y }
 
@@ -4947,7 +4947,7 @@ function main = |args| {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">struct Point{x=1, y=2}</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">struct Point{x=1, y=2}</code></pre>
 </div>
 </div>
 </div>
@@ -4959,7 +4959,7 @@ prefix to directly build immutable instances:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module test
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module test
 
 struct Point = { x, y }
 
@@ -5029,7 +5029,7 @@ being used.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module test
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module test
 
 struct Point = { x, y }
 
@@ -5056,7 +5056,7 @@ function main = |args| {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">p1 == p2 false
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">p1 == p2 false
 p1 == p3 false
 p3 == p4 true
 #p1 1555845260
@@ -5115,7 +5115,7 @@ prefixing them with <code>_</code>, as in:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">struct Foo = { a, _b, c }
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">struct Foo = { a, _b, c }
 
 # (...)
 
@@ -5169,7 +5169,7 @@ valid calls only if made from:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module Plop
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module Plop
 
 struct Point = { _id, x, y }
 
@@ -5185,7 +5185,7 @@ type name of the struct:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module Plop
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module Plop
 
 struct Point = { _id, x, y }
 
@@ -5213,7 +5213,7 @@ fully-qualified one:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module Foo
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module Foo
 
 struct Value = { v }
 
@@ -5263,7 +5263,7 @@ The dual algebraic data type, the product type is provided by <code>struct</code
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sample
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sample
 
 union Option = {
  Some = { value }
@@ -5292,7 +5292,7 @@ function main = |args| {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">union Color = {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">union Color = {
   RED
   GREEN
   BLUE
@@ -5311,7 +5311,7 @@ and many other languages (Rust, Scala, etc.)</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">union Option = {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">union Option = {
   Some = {value}
   None
 }</code></pre>
@@ -5329,7 +5329,7 @@ have different fields. A <code>union</code> alternative type is in this respect 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">union ConsList = {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">union ConsList = {
   List = { head, tail }
   Empty
 }</code></pre>
@@ -5340,7 +5340,7 @@ have different fields. A <code>union</code> alternative type is in this respect 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">union Tree = {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">union Tree = {
   Empty
   Leaf = { value }
   Node = { left, right }
@@ -5361,7 +5361,7 @@ The value classes are member classes of the abstract one.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sample
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sample
 
 union Option = {
   Some = { value }
@@ -5424,7 +5424,7 @@ langages like OCaml, Haskell or Scala.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">union Tree = {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">union Tree = {
   Node = {left, right}
   Leaf = {value}
   Empty
@@ -5436,7 +5436,7 @@ langages like OCaml, Haskell or Scala.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">match {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">match {
   when elt: isEmpty() then // we have an empty value
   when elt: isLeaf(0) then // we have a leaf containing 0
   when elt: isLeaf()  then // we have a leaf (whatever the value)
@@ -5458,7 +5458,7 @@ For instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">Leaf(0): isLeaf(0) # true
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">Leaf(0): isLeaf(0) # true
 Leaf(42): isLeaf(0) # false</code></pre>
 </div>
 </div>
@@ -5474,7 +5474,7 @@ child, one can use:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let _ = Unknown.get()
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let _ = Unknown.get()
 
 function dealWithTree = |elt| -&gt; match {
   when elt: isNode(Empty(), _) or elt: isNode(_, Empty()) then ...
@@ -5492,7 +5492,7 @@ concrete class extending it, it is possible to augment the whole <code>union</co
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">augment Option {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">augment Option {
   function map = |this, func| -&gt; match {
     when this: isNone() then this
     otherwise Option.Some(func(this: value()))
@@ -5505,7 +5505,7 @@ concrete class extending it, it is possible to augment the whole <code>union</co
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">augment ConsList$Empty {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">augment ConsList$Empty {
   function size = |this| -&gt; 0
   function head = |this| -&gt; null
   function tail = |this| -&gt; this
@@ -5533,7 +5533,7 @@ think of it as an enhancement over using hash maps and putting closures in them.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let foo = DynamicObject()</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let foo = DynamicObject()</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5585,7 +5585,7 @@ closure, and</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let person = DynamicObject():
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let person = DynamicObject():
   define("name", "MrBean"):
   define("email", "mrbean@gmail.com")
 
@@ -5603,7 +5603,7 @@ rewritten as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let person = DynamicObject(): name("MrBean"): email("mrbean@gmail.com")
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let person = DynamicObject(): name("MrBean"): email("mrbean@gmail.com")
 
 # prints "Mr Bean"
 println(person: name())
@@ -5626,7 +5626,7 @@ as you want.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">local function mrbean = -&gt; DynamicObject():
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">local function mrbean = -&gt; DynamicObject():
   name("Mr Bean"):
   email("mrbean@gmail.com"):
   define("toString", |this| -&gt; this: name() + " &lt;" + this: email() + "&gt;")
@@ -5667,7 +5667,7 @@ Consider the following example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let obj = DynamicObject():
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let obj = DynamicObject():
   plop(|this| -&gt; "Plop!")</code></pre>
 </div>
 </div>
@@ -5680,7 +5680,7 @@ the first call to <code>plop</code> creates a property since it is currently mis
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">obj: plop(|this| -&gt; "Plop it up!")</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">obj: plop(|this| -&gt; "Plop it up!")</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5690,7 +5690,7 @@ that is a function, and it has a different signature. It needs to be updated as 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">obj: define('plop', |this| -&gt; "Plop it up!")</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">obj: define('plop', |this| -&gt; "Plop it up!")</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5712,7 +5712,7 @@ thus write code such as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function dump = |obj| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function dump = |obj| {
   foreach prop in obj: properties() {
     println(prop: getKey() + " -&gt; " + prop: getValue())
   }
@@ -5744,7 +5744,7 @@ Calling a setter method for a non-existent property defines it, thus the fallbac
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let dynob = DynamicObject():
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let dynob = DynamicObject():
   fallback(|this, method, args...| {
     return "Dispatch failed for method: " + method + ", with args: " + args: asList(): join(" ")
   })
@@ -5755,7 +5755,7 @@ println(dynob: casperMethod("foo", "bar"))</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">Dispatch failed for method: casperGetter, with args:
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">Dispatch failed for method: casperGetter, with args:
 Dispatch failed for method: casperMethod, with args: foo bar</code></pre>
 </div>
 </div>
@@ -5790,7 +5790,7 @@ code snippet does just that:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sparky
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sparky
 
 import spark
 import spark.Spark
@@ -5871,7 +5871,7 @@ checks on them a in: <code>(foo oftype gololang.GoloAdapter.class)</code>.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let result = array[1, 2, 3]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let result = array[1, 2, 3]
 let conf = map[
   ["interfaces", ["java.io.Serializable", "java.lang.Runnable"]],
   ["implements", map[
@@ -5907,7 +5907,7 @@ method handle parameter:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let conf = map[
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let conf = map[
   ["overrides", map[
     ["toString", |super, this| -&gt; "&gt;&gt;&gt; " + super(this)]
   ]]
@@ -5948,7 +5948,7 @@ that providing both a star implementation and a star override is an error.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let carbonCopy = list[] <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let carbonCopy = list[] <i class="conum" data-value="1"></i><b>(1)</b>
 let conf = map[
   ["extends", "java.util.ArrayList"],
   ["overrides", map[
@@ -6036,7 +6036,7 @@ third-party APIs.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sparky
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sparky
 
 import gololang.Adapters
 import spark
@@ -6087,7 +6087,7 @@ and provided argument types.</td>
 <h4 id="_implementing_interfaces_2">13.6.2. Implementing interfaces</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let result = array[1, 2, 3]
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let result = array[1, 2, 3]
 let conf = Adapter(): interfaces(["java.io.Serializable", "java.lang.Runnable"])
   : implements("run", |this| {
       for (var i = 0, i &lt; result: length(), i = i + 1) {
@@ -6111,7 +6111,7 @@ runner: run() <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 <h4 id="_overrides_2">13.6.3. Overrides</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let conf = Adapter(): overrides("toString", |super, this| -&gt; "&gt;&gt;&gt; " + super(this))
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let conf = Adapter(): overrides("toString", |super, this| -&gt; "&gt;&gt;&gt; " + super(this))
 println(conf: newInstance(): toString()) <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 </div>
@@ -6128,7 +6128,7 @@ println(conf: newInstance(): toString()) <i class="conum" data-value="1"></i><b>
 <h4 id="_star_implementations_and_overrides_2">13.6.4. Star implementations and overrides</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let carbonCopy = list[] <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let carbonCopy = list[] <i class="conum" data-value="1"></i><b>(1)</b>
 let conf = Adapter(): extends("java.util.ArrayList")
   : overrides("*", |super, name, args| {
       if name == "add" {
@@ -6208,7 +6208,7 @@ being "function" (more precisely a <code>gololang.FunctionReference</code>).</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function deco1 = |fun| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function deco1 = |fun| {
   return |args...| {
     return "deco1 + " + fun: invoke(args)
   }
@@ -6220,7 +6220,7 @@ being "function" (more precisely a <code>gololang.FunctionReference</code>).</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">@deco1
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">@deco1
 function foo = |a| {
   return "foo: " + a
 }</code></pre>
@@ -6240,7 +6240,7 @@ of its arity, as in the previous example.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">@dec
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">@dec
 function add = |a,b| -&gt; a + b</code></pre>
 </div>
 </div>
@@ -6249,7 +6249,7 @@ function add = |a,b| -&gt; a + b</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function dec = |func| -&gt; |a, b| -&gt; func(a, b)</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function dec = |func| -&gt; |a, b| -&gt; func(a, b)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6258,7 +6258,7 @@ On the other hand, you cannot do:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function dec = |func| -&gt; |args...| -&gt; func(args)</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function dec = |func| -&gt; |args...| -&gt; func(args)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6269,7 +6269,7 @@ like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function dec = |func| -&gt; |args...| -&gt; func(args: get(0), args: get(1))</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function dec = |func| -&gt; |args...| -&gt; func(args: get(0), args: get(1))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6278,7 +6278,7 @@ decorator is thus:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function dec = |func| -&gt; |args...| -&gt; func: invoke(args)</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function dec = |func| -&gt; |args...| -&gt; func: invoke(args)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6291,7 +6291,7 @@ as such:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function bar = |a| -&gt; "bar: " + a
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function bar = |a| -&gt; "bar: " + a
 
 function main = |args| {
   println(deco1(^bar)(1))
@@ -6311,7 +6311,7 @@ function main = |args| {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function deco2 = |fun| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function deco2 = |fun| {
   return |args...| {
     return "deco2 + " + fun: invoke(args)
   }
@@ -6330,7 +6330,7 @@ function baz = |a| -&gt; "baz: " + a</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let deco3 = ^deco1: andThen(^deco2)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let deco3 = ^deco1: andThen(^deco2)
 
 @deco3
 function spam = |a| -&gt; "spam: " + a</code></pre>
@@ -6346,7 +6346,7 @@ following listing:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module tests.LogDeco
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module tests.LogDeco
 
 function log = |msg| -&gt; |fun| -&gt; |args...| {
   println(msg)
@@ -6389,7 +6389,7 @@ inner function.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let sayHello = log("Hello")
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let sayHello = log("Hello")
 
 @sayHello
 function baz = -&gt; "Goodbye"</code></pre>
@@ -6411,7 +6411,7 @@ an example, it can be as elaborated as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function log = |msgBefore| -&gt; |msgAfter| -&gt; |func| -&gt; |args...| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function log = |msgBefore| -&gt; |msgAfter| -&gt; |func| -&gt; |args...| {
   println(msgBefore)
   let res = func: invoke(args)
   println(msgAfter)
@@ -6439,7 +6439,7 @@ exit foo</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function logEnterExit = |name| -&gt; log("# enter " + name)("# exit " + name)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function logEnterExit = |name| -&gt; log("# enter " + name)("# exit " + name)
 
 @logEnterExit("bar")
 function bar = { println("doing something...") }</code></pre>
@@ -6460,7 +6460,7 @@ doing something...
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function main = |args| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function main = |args| {
   let strange_use = log("hello")("goodbye")({println(":p")})
   strange_use()
 
@@ -6474,7 +6474,7 @@ have a different arity than the original one:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function curry = |f| -&gt; |a| -&gt; |b| -&gt; f(a, b)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function curry = |f| -&gt; |a| -&gt; |b| -&gt; f(a, b)
 
 @curry
 function add = |a,b| -&gt; a + b
@@ -6517,7 +6517,7 @@ It is possible to create decorator and decorated functions in pure Java:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-java" data-lang="java">package decorators;
+<pre class="highlightjs highlight"><code class="language-java" data-lang="java">package decorators;
 
 import gololang.annotations.DecoratedBy;
 import gololang.FunctionReference;
@@ -6544,7 +6544,7 @@ public class Decorators {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">import decorators.Decorators
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">import decorators.Decorators
 
 function main = |args| {
   println(add(10,32))
@@ -6619,7 +6619,7 @@ integers with:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let isInteger = |v| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let isInteger = |v| {
   require(v oftype Integer.class, v + "is not an Integer")
   return v
 }
@@ -6634,7 +6634,7 @@ function add = |a, b| -&gt; a + b</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let isPositive = |v| {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let isPositive = |v| {
   require(v &gt; 0, v + "is not &gt; 0")
   return v
 }
@@ -6648,7 +6648,7 @@ function inv = |v| -&gt; 1.0 / v</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let isPositiveInt = isInteger: andThen(isPositive)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let isPositiveInt = isInteger: andThen(isPositive)
 
 @checkResult(isPositiveInt)
 @checkArguments(isPositiveInt)
@@ -6660,7 +6660,7 @@ function double = |v| -&gt; 2 * v</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let myCheck = checkArguments(isInteger: andThen(isPositive))
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let myCheck = checkArguments(isInteger: andThen(isPositive))
 
 @myCheck
 function inv = |v| -&gt; 1.0 / v
@@ -6688,7 +6688,7 @@ and returns the corresponding checker. For instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let isPositive = asChecker(|v| -&gt; v &gt; 0, "is not positive")</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let isPositive = asChecker(|v| -&gt; v &gt; 0, "is not positive")</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -6701,7 +6701,7 @@ e.g.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let isInteger = isOfType(Integer.class)</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let isInteger = isOfType(Integer.class)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -6717,7 +6717,7 @@ operation, but also between a lock/unlock in a concurrent context:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">import java.util.concurrent.locks
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">import java.util.concurrent.locks
 
 function withLock = |lock| -&gt; |fun| -&gt; |args...| {
   lock: lock()
@@ -6754,7 +6754,7 @@ here as an example:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function memoizer = {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function memoizer = {
   var cache = map[]
   return |fun| {
     return |args...| {
@@ -6776,7 +6776,7 @@ implementation, the decoration is invoked at each call. For instance:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let memo = memoizer()
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let memo = memoizer()
 
 @memo
 function fib = |n| {
@@ -6870,7 +6870,7 @@ is <code>entry</code> and <code>exit</code> return their parameters unchanged,
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module samples.ContextDecorator
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module samples.ContextDecorator
 
 import gololang.Decorators
 
@@ -7007,7 +7007,7 @@ the result is stored as a constant and will be directly returned for every subse
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sample
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sample
 
 function take_a_while  = {
   # ... complex computation
@@ -7046,7 +7046,7 @@ invocation using <code>invoke</code> of a function reference can&#8217;t use thi
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sample
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sample
 
 function hello = |name| {
   return "Hello " + name + "!"
@@ -7088,7 +7088,7 @@ but different for each call instructions.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sample
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sample
 
 function hello = |name| {
   return "Hello " + name + "!"
@@ -7117,7 +7117,7 @@ different results.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module sample
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module sample
 
 function closure = |x| {
   return |y| {
@@ -7170,7 +7170,7 @@ function main = |args| {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function decorator =  |func| -&gt; |x| -&gt; func(x)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function decorator =  |func| -&gt; |x| -&gt; func(x)
 
 @decorator
 function identity = |x| -&gt; x</code></pre>
@@ -7181,7 +7181,7 @@ function identity = |x| -&gt; x</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function decorator =  |func| -&gt; |x| -&gt; func(x)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function decorator =  |func| -&gt; |x| -&gt; func(x)
 
 function identity = |x| -&gt; decorator(|x| -&gt; x)(x)</code></pre>
 </div>
@@ -7191,7 +7191,7 @@ function identity = |x| -&gt; decorator(|x| -&gt; x)(x)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function decorator =  |func| -&gt; |x| -&gt; func(x)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function decorator =  |func| -&gt; |x| -&gt; func(x)
 
 @!decorator
 function identity = |x| -&gt; x</code></pre>
@@ -7202,7 +7202,7 @@ function identity = |x| -&gt; x</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function decorator =  |func| -&gt; |x| -&gt; func(x)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function decorator =  |func| -&gt; |x| -&gt; func(x)
 
 function identity = |x| -&gt; decorator!(|x| -&gt; x)(x)</code></pre>
 </div>
@@ -7216,7 +7216,7 @@ For every subsequent call, the function reference returned by the decorator is n
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function decorator =  |arg| -&gt; |func| -&gt; |x| -&gt; func(x)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function decorator =  |arg| -&gt; |func| -&gt; |x| -&gt; func(x)
 
 @!decorator(42)
 function identity = |x| -&gt; x</code></pre>
@@ -7227,7 +7227,7 @@ function identity = |x| -&gt; x</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function decorator =  |arg| -&gt; |func| -&gt; |x| -&gt; func(x)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function decorator =  |arg| -&gt; |func| -&gt; |x| -&gt; func(x)
 
 function identity = |x| -&gt; decorator(42)!(|x| -&gt; x)(x)</code></pre>
 </div>
@@ -7250,7 +7250,7 @@ is to think that differents calls share the same <em>"context"</em> regardless w
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">@!deco("a")
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">@!deco("a")
 function foo = |a| -&gt; a
 
 @!deco("b")
@@ -7262,7 +7262,7 @@ function bar = |b| -&gt; b</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function foo = |a| -&gt; deco("a")!(|a| -&gt; a)(a)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function foo = |a| -&gt; deco("a")!(|a| -&gt; a)(a)
 
 function bar = |b| -&gt; deco("b")!(|b| -&gt; b)(b)</code></pre>
 </div>
@@ -7277,7 +7277,7 @@ somehow equivalent to:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function foo = |a| -&gt; func_a(a)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function foo = |a| -&gt; func_a(a)
 
 function bar = |b| -&gt; func_b(b)</code></pre>
 </div>
@@ -7308,7 +7308,7 @@ code, or when used from a polyglot JVM application that embeds Golo.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let env = gololang.EvaluationEnvironment()
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let env = gololang.EvaluationEnvironment()
 let code =
 """
 module foo
@@ -7337,7 +7337,7 @@ class loader cannot load classes with the same name twice.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let env = gololang.EvaluationEnvironment()
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let env = gololang.EvaluationEnvironment()
 let code =
 """
 function a = -&gt; "a!"
@@ -7362,7 +7362,7 @@ suitable in cases where the same code is to be re-evaluated several times.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let env = gololang.EvaluationEnvironment()
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let env = gololang.EvaluationEnvironment()
 let code = "return (a + b) * 2"
 let f = env: asFunction(code, "a", "b")
 println(f(10, 20))</code></pre>
@@ -7374,7 +7374,7 @@ println(f(10, 20))</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">env:
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">env:
   imports("java.util.LinkedList", "java.util.HashMap"):
   asFunction("""let l = LinkedList()
 let m = HashMap()""")</code></pre>
@@ -7385,7 +7385,7 @@ let m = HashMap()""")</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let env = gololang.EvaluationEnvironment()
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let env = gololang.EvaluationEnvironment()
 let code = "|a, b| -&gt; (a + b) * 2"
 let f = env: def(code)
 println(f(10, 20))</code></pre>
@@ -7399,7 +7399,7 @@ println(f(10, 20))</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let env = gololang.EvaluationEnvironment()
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let env = gololang.EvaluationEnvironment()
 let code = """println("&gt;&gt;&gt; run")
 foreach i in range(0, 3) {
   println("w00t")
@@ -7413,7 +7413,7 @@ println(env: run(code)) # =&gt; "w00t"x3 and "666"</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let env = gololang.EvaluationEnvironment()
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let env = gololang.EvaluationEnvironment()
 let code = """println("&gt;&gt;&gt; run_map")
 println(a)
 println(b)
@@ -7510,7 +7510,7 @@ need to call the <code>spawn(target)</code> function of a worker environment, as
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let env = WorkerEnvironment.builder(): withFixedThreadPool()
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let env = WorkerEnvironment.builder(): withFixedThreadPool()
 let port = env: spawn(|message| -&gt; println("&gt;&gt;&gt; " + message))</code></pre>
 </div>
 </div>
@@ -7519,7 +7519,7 @@ let port = env: spawn(|message| -&gt; println("&gt;&gt;&gt; " + message))</code>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">port: send("hello"): send("world")</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">port: send("hello"): send("world")</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7533,7 +7533,7 @@ let port = env: spawn(|message| -&gt; println("&gt;&gt;&gt; " + message))</code>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module SampleWithWorkers
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module SampleWithWorkers
 
 import java.lang.Thread
 import java.util.concurrent
@@ -7634,7 +7634,7 @@ compiles template text into Golo functions.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let template = """
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let template = """
 &lt;%@params posts %&gt;
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -7664,7 +7664,7 @@ compiles template text into Golo functions.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let tpl = gololang.TemplateEngine(): compile(template)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let tpl = gololang.TemplateEngine(): compile(template)
 println(tpl(someDataModel: posts()))</code></pre>
 </div>
 </div>
@@ -7731,7 +7731,7 @@ text.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">----
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">----
 This is a *nice* module that does a bunch of useless things.
 
 See more at [our website](http://www.typeunsafe.org).
@@ -7762,7 +7762,7 @@ function adder = |x, y| -&gt; x + y</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-console" data-lang="console">$ golo doc --output target/documentation src/**/*.golo</code></pre>
+<pre class="highlightjs highlight"><code class="language-console" data-lang="console">$ golo doc --output target/documentation src/**/*.golo</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -7783,7 +7783,7 @@ Documentation blocks erase indentation based on the indentation level of the ope
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">----
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">----
 The most useful augmentation *ever*.
 ----
 augment java.lang.String {
@@ -7826,7 +7826,7 @@ and Golo types. It does not have to be imported explicitely.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">println(list[1, 2, 3, 4]: filter(|n| -&gt; (n % 2) == 0))
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">println(list[1, 2, 3, 4]: filter(|n| -&gt; (n % 2) == 0))
 println(list[1, 2, 3]: map(|n| -&gt; n * 10))</code></pre>
 </div>
 </div>
@@ -7835,7 +7835,7 @@ println(list[1, 2, 3]: map(|n| -&gt; n * 10))</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">map: putIfAbsent(key, -&gt; expensiveOperation())
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">map: putIfAbsent(key, -&gt; expensiveOperation())
 map: getOrElse(key, "n/a")</code></pre>
 </div>
 </div>
@@ -7844,7 +7844,7 @@ map: getOrElse(key, "n/a")</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">3: times(-&gt; println("Hey!")
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">3: times(-&gt; println("Hey!")
 3: times(|i| -&gt; println(i))</code></pre>
 </div>
 </div>
@@ -7864,7 +7864,7 @@ arrays, Golo tuples, dynamic objects and structs.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let data = map[
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let data = map[
   ["name", "Somebody"],
   ["age", 69],
   ["friends", list[
@@ -7879,7 +7879,7 @@ let asText = JSON.stringify(data)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let data = JSON.parse(text)
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let data = JSON.parse(text)
 println(data: get("name"))</code></pre>
 </div>
 </div>
@@ -7902,7 +7902,7 @@ current thread and its future child threads.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let dyn = DynamicVariable("Foo")
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let dyn = DynamicVariable("Foo")
 println(dyn: value())
 
 let t1 = Thread({
@@ -7947,7 +7947,7 @@ constructed from another observable using the <code>map</code> and <code>filter<
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let foo = Observable("Foo")
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let foo = Observable("Foo")
 foo: onChange(|v| -&gt; println("foo = " + v))
 
 let mapped = foo: map(|v| -&gt; v + "!")
@@ -7978,7 +7978,7 @@ code from the same thread, from a separate thread, or by pushing new tasks to a 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">module samples.Concurrency
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module samples.Concurrency
 
 import java.util.concurrent
 import gololang.Async
@@ -8046,7 +8046,7 @@ algorithms.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">function count = |start| -&gt; cons(start, -&gt; count(start + 1_L))
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function count = |start| -&gt; cons(start, -&gt; count(start + 1_L))
 function count = -&gt; count(0_L)</code></pre>
 </div>
 </div>
@@ -8055,7 +8055,7 @@ function count = -&gt; count(0_L)</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let l = count(): map(|x| -&gt; 3 * x): filter(|x| -&gt; (x % 2) == 0)</code></pre>
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let l = count(): map(|x| -&gt; 3 * x): filter(|x| -&gt; (x % 2) == 0)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8093,7 +8093,7 @@ constructor as a function:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># Good
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># Good
 let foo = java.util.LinkedList()
 
 # Compilation fails
@@ -8113,7 +8113,7 @@ a name as-is, then tries to complete with every import until a match is found.</
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">import java.util
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">import java.util
 import java.util.concurrent.AtomicInteger
 
 # (...)
@@ -8140,7 +8140,7 @@ many languages.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo"># Calls toString() on foo
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># Calls toString() on foo
 foo: toString()
 
 # Looks for a function toString() in module foo
@@ -8156,7 +8156,7 @@ want it to.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-golo" data-lang="golo">let foo = match {
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let foo = match {
   case plop then 1
   case ploped then 2
   otherwise -1
@@ -8193,7 +8193,7 @@ println(foo("abc"))</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-08-10 16:49:42 +02:00
+Last updated 2015-10-12 10:17:31 +02:00
 </div>
 </div>
 </body>
