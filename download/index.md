@@ -7,7 +7,7 @@ title: Download Golo
 
 Standalone distributions can be obtained from the Eclipse Foundation and its mirrors network.
 
-* [Golo 3.0.0-incubation-M3](https://www.eclipse.org/downloads/download.php?file=/golo/golo-3.0.0-incubation-M3.zip)
+* [Golo 3.0.0-incubation](https://www.eclipse.org/downloads/download.php?file=/golo/golo-3.0.0-incubation.zip)
 * [Latest snapshot build](https://www.eclipse.org/downloads/download.php?file=/golo/golo-latest-snapshot.zip) (if you like the greatest and latest)
 
 ### Maven
@@ -17,20 +17,33 @@ Standalone distributions can be obtained from the Eclipse Foundation and its mir
 Release and milestone artifacts can be obtained from [Bintray / jCenter](https://bintray.com/golo-lang/golo-lang)
 as well as from [Maven Central](http://search.maven.org/).
 
-The Golo library (runtime + compiler) artifact is:
+The Golo library (runtime + compiler) Maven artifact is:
 
 {% highlight xml %}
-<groupId>org.eclipse.golo</groupId>
-<artifactId>golo</artifactId>
-<version>3.0.0-incubation-M3</version>
+<dependency>
+  <groupId>org.eclipse.golo</groupId>
+  <artifactId>golo</artifactId>
+  <version>3.0.0-incubation</version>
+</dependency>
+{% endhighlight %}
+
+or from Gradle:
+
+{% highlight groovy %}
+dependencies {
+  compile 'org.eclipse.golo:golo:3.0.0-incubation'
+  // ...
+}
 {% endhighlight %}
 
 The Golo Maven plugin artifact is:
 
 {% highlight xml %}
-<groupId>org.eclipse.golo</groupId>
-<artifactId>golo-maven-plugin</artifactId>
-<version>3.0.0-incubation-M3</version>
+<dependency>
+  <groupId>org.eclipse.golo</groupId>
+  <artifactId>golo-maven-plugin</artifactId>
+  <version>3.0.0-incubation</version>
+</dependency>
 {% endhighlight %}
 
 #### Snapshots at Eclipse
