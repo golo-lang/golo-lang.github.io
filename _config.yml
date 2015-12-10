@@ -8,6 +8,8 @@ exclude:
   - LICENSE
   - notice.html
   - epl-v10.html
+  - Gemfile
+  - Gemfile.lock
 
 # Custom
 name: Golo news
