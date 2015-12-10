@@ -3,7 +3,7 @@ layout: news
 title: "Golo Truffle/Graal articles by Stefan Marr"
 ---
 
-[Dr Stefan Marr](http://stefan-marr.de/) recently published a series of blog posts to explain how
+[Stefan Marr](http://stefan-marr.de/) recently published a series of blog posts to explain how
 to use [Truffle](https://github.com/OracleLabs/Truffle) and the
 [Graal VM](http://openjdk.java.net/projects/graal/) to implement and run programming languages.
 Stefan is working at the [Institute for System Software](http://ssw.uni-linz.ac.at/) at the Johannes
