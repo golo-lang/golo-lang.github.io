@@ -5,10 +5,11 @@ title: Download Golo
 
 ### Standalone distribution
 
-Standalone distributions can be obtained from the Eclipse Foundation and its mirrors network.
+Standalone distributions can be obtained from Bintray, the Eclipse Foundation and its mirrors network.
 
-* [Golo 3.0.0-incubation](https://www.eclipse.org/downloads/download.php?file=/golo/golo-3.0.0-incubation.zip)
-* [Latest snapshot build](https://www.eclipse.org/downloads/download.php?file=/golo/golo-latest-snapshot.zip) (if you like the greatest and latest)
+* [Golo 3.0.0-incubation (Bintray)](https://bintray.com/artifact/download/golo-lang/downloads/golo-3.0.0-incubation.zip)
+* [Golo 3.0.0-incubation (Eclipse)](https://www.eclipse.org/downloads/download.php?file=/golo/golo-3.0.0-incubation.zip)
+* [Latest snapshot build (Eclipse)](https://www.eclipse.org/downloads/download.php?file=/golo/golo-latest-snapshot.zip) (if you like the greatest and latest)
 
 ### Maven
 
