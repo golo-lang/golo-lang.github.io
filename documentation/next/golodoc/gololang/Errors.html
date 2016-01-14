@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>Documentation for gololang.Errors</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      line-height: 1.5;
+      margin: 2em 3em 2em 20%;
+      text-align: left;
+      padding: 0 100px 0 100px;
+    }
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 80%;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    li p {
+      margin: 0.3em;
+    }
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 36px;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 30px;
+    }
+    h3 {
+      color: #666;
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 21px;
+    }
+    h5 {
+      font-size: 18px;
+    }
+
+    #toc {
+      margin: 0;
+      padding: 1em;
+      border-right: 1px solid #aaa;
+      font-size: 80%;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      width: 20%;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    #toc ul {
+      padding-left: 1em;
+    }
+
+    #toc > li {
+      list-style: none;
+      margin-bottom: 1ex;
+    }
+
+    #toc > li > a {
+      font-weight: bold;
+    }
+
+    :target {
+      background-color: yellow;
+    }
+
+    .permalink {
+      margin-left: .3em;
+      font-size: 70%;
+      visibility: hidden;
+    }
+
+    *:hover > .permalink {
+      visibility: visible;
+    }
+
+  </style>
+</head>
+<body>
+<h1>Documentation for gololang.Errors</h1>
+<div>
+  <p>Useful augmentations, decorators and function to deal with errors in Golo.</p>
+
+</div>
+
+<!-- begin table of content -->
+<ul id="toc">
+
+  
+
+  
+
+
+
+  
+
+  
+  <li><a href="#augmentations">Augmentations</a><ul>
+    
+    <li><a href="#augment.java.util.Optional">java.util.Optional</a><ul>
+      
+      <li><a href="#java.util.Optional.and_this_other">and(this, other)</a></li>
+      
+      <li><a href="#java.util.Optional.andThen_this_f">andThen(this, f)</a></li>
+      
+      <li><a href="#java.util.Optional.apply_this_arg">apply(this, arg)</a></li>
+      
+      <li><a href="#java.util.Optional.either_this_mapping_default">either(this, mapping, default)</a></li>
+      
+      <li><a href="#java.util.Optional.flattened_this">flattened(this)</a></li>
+      
+      <li><a href="#java.util.Optional.isEmpty_this">isEmpty(this)</a></li>
+      
+      <li><a href="#java.util.Optional.isNone_this">isNone(this)</a></li>
+      
+      <li><a href="#java.util.Optional.isSome_this_value">isSome(this, value)</a></li>
+      
+      <li><a href="#java.util.Optional.isSome_this">isSome(this)</a></li>
+      
+      <li><a href="#java.util.Optional.iterator_this">iterator(this)</a></li>
+      
+      <li><a href="#java.util.Optional.or_this_other">or(this, other)</a></li>
+      
+      <li><a href="#java.util.Optional.reduce_this_init_func">reduce(this, init, func)</a></li>
+      
+      <li><a href="#java.util.Optional.toList_this">toList(this)</a></li>
+      
+      <li><a href="#java.util.Optional.toResult_this">toResult(this)</a></li>
+      
+      <li><a href="#java.util.Optional.toResult_this_param">toResult(this, param)</a></li>
+      
+    </ul></li>
+    
+  </ul></li>
+  
+
+  
+  <li><a href="#functions">Functions</a><ul>
+    
+    <li><a href="#Empty_">Empty()</a></li>
+    
+    <li><a href="#Error_msg">Error(msg)</a></li>
+    
+    <li><a href="#None_">None()</a></li>
+    
+    <li><a href="#Ok_v">Ok(v)</a></li>
+    
+    <li><a href="#Option_v">Option(v)</a></li>
+    
+    <li><a href="#Result_v">Result(v)</a></li>
+    
+    <li><a href="#Some_v">Some(v)</a></li>
+    
+    <li><a href="#catching_default">catching(default)</a></li>
+    
+    <li><a href="#nullify_f">nullify(f)</a></li>
+    
+    <li><a href="#option_f">option(f)</a></li>
+    
+    <li><a href="#raising_f">raising(f)</a></li>
+    
+    <li><a href="#result_f">result(f)</a></li>
+    
+    <li><a href="#trying_f">trying(f)</a></li>
+    
+  </ul></li>
+  
+</ul>
+<!-- end table of content -->
+
+
+
+
+
+
+
+
+
+  <h2 id="augmentations">Augmentations</h2>
+  
+    <h3 id="augment.java.util.Optional">java.util.Optional
+    <a class="permalink" href="#augment.java.util.Optional" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+    
+    
+      
+        <h4 id="java.util.Optional.and_this_other">and(this, other)
+      
+      <a class="permalink" href="#java.util.Optional.and_this_other" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Conjunctive chaining.</p>
+<p>This is equivalent to <code>:flatMap(|_| -&gt; other)</code>,
+i.e. applicative or monadic sequence with discarding.
+(Can also be seen as <code>:map(const(^id)): apply(other)</code>)</p>
+<p>For instance:</p>
+<pre><code>Some(1): `and(None()) == None()
+None(): `and(Some(1)) == None()
+Some(1): `and(Some("2") == Some("2")
+</code></pre>
+<p>Note that this method is eager. If you want laziness, use the <code>flatMap</code>
+equivalent.</p>
+<ul>
+<li><em>param</em> <code>other</code> the other optional</li>
+<li><em>return</em> <code>other</code> if this optional is present, otherwise <code>this</code></li>
+</ul>
+
+      </div>
+    
+      
+        <h4 id="java.util.Optional.andThen_this_f">andThen(this, f)
+      
+      <a class="permalink" href="#java.util.Optional.andThen_this_f" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Same as <code>map</code> or <code>flatMap</code>, depending on the type returned by <code>f</code>.</p>
+<p>This is a generic version for <code>map</code> and <code>flatMap</code>: if <code>f</code> returns an
+<code>Optional</code>, it's equivalent to <code>flatMap</code>, otherwise, it's equivalent to <code>map</code>.</p>
+<p>This allows code such as:</p>
+<pre><code>Some(21): andThen(|x| -&gt; x + 1): andThen(|x| -&gt; Some(2 * x)) == Some(42)
+</code></pre>
+
+      </div>
+    
+      
+        <h4 id="java.util.Optional.apply_this_arg">apply(this, arg)
+      
+      <a class="permalink" href="#java.util.Optional.apply_this_arg" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Apply the function contained is this optional to the given optional. If the
+function has several parameters, an optional containing a partialized version
+is returned, that can be <code>apply</code>ed to subsequent optionals.
+This makes <code>Optional</code> an “applicative functor”.</p>
+<p>For instance:
+let f = Some(|x| -> x + 10)
+f: apply(Some(32)) # Some(42)
+f: apply(None())  # None()</p>
+<pre><code>Some(|a, b| -&gt; a + b): apply(Some(21)): apply(Some(21)) # Some(42)
+</code></pre>
+
+      </div>
+    
+      
+        <h4 id="java.util.Optional.either_this_mapping_default">either(this, mapping, default)
+      
+      <a class="permalink" href="#java.util.Optional.either_this_mapping_default" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Case analysis for the option.</p>
+<p>If the result is not empty, apply the first function (similar to <code>flatMap</code>),
+otherwise invoke the second function (similar to <code>orElseGet</code>). For instance:</p>
+<pre><code>Some(21): either(|x| -&gt; x * 2, -&gt; "plop") == 42
+None(): either(|x| -&gt; x * 2, -&gt; "plop") == "plop"
+</code></pre>
+<p>This is indeed equivalent to</p>
+<pre><code>opt: map(mapping): orElseGet(default)
+</code></pre>
+<ul>
+<li><em>param</em> <code>mapping</code>: the function to apply to the contained value</li>
+<li><em>param</em> <code>default</code>: the function to invoke if the option is empty (takes no arguments)</li>
+<li><em>return</em> the result of applying the corresponding function</li>
+</ul>
+
+      </div>
+    
+      
+        <h4 id="java.util.Optional.flattened_this">flattened(this)
+      
+      <a class="permalink" href="#java.util.Optional.flattened_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Remove one level of optional.</p>
+<p>This is actually equivalent to <code>:flatMap(identity)</code>
+(or <code>:flatMap(f)</code> is equivalent to <code>:map(f): flattened()</code>).</p>
+<p>For instance:</p>
+<pre><code>Some(Some(42)): flattened() == Some(42)
+None(): flattened() == None()
+Some(None()): flattened() == None()
+</code></pre>
+
+      </div>
+    
+      
+        <h4 id="java.util.Optional.isEmpty_this">isEmpty(this)
+      
+      <a class="permalink" href="#java.util.Optional.isEmpty_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Test if this optional is empty.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Optional.isNone_this">isNone(this)
+      
+      <a class="permalink" href="#java.util.Optional.isNone_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Alias for <code>isEmpty</code></p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Optional.isSome_this_value">isSome(this, value)
+      
+      <a class="permalink" href="#java.util.Optional.isSome_this_value" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Test if this optional contains a value equals to the provided one.</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Optional.isSome_this">isSome(this)
+      
+      <a class="permalink" href="#java.util.Optional.isSome_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Alias for <code>isPresent</code></p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Optional.iterator_this">iterator(this)
+      
+      <a class="permalink" href="#java.util.Optional.iterator_this" title="link to this section">&#182;</a></h4>
+      <div>
+        
+      </div>
+    
+      
+        <h4 id="java.util.Optional.or_this_other">or(this, other)
+      
+      <a class="permalink" href="#java.util.Optional.or_this_other" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Disjunctive chaining.</p>
+<p>For instance:</p>
+<pre><code>Some(1): `or(Some(2)) == Some(1)
+None(): `or(Some(1)) == Some(1)
+Some(1): `or(None()) == Some(1)
+None(): `or(None()) == None()
+</code></pre>
+<p>Note that this method is eager.</p>
+<p>Some(1): orElseGet(-> Some(2))
+None(): orElseGet(-> Some(2))</p>
+<ul>
+<li><em>param</em> <code>other</code> the other optional</li>
+<li><em>return</em> <code>other</code> if this optional is empty, otherwise <code>this</code></li>
+</ul>
+
+      </div>
+    
+      
+        <h4 id="java.util.Optional.reduce_this_init_func">reduce(this, init, func)
+      
+      <a class="permalink" href="#java.util.Optional.reduce_this_init_func" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Reduce this option using <code>func</code> with <code>init</code> as initial value.</p>
+<p>For instance:</p>
+<pre><code>Some("b"): reduce("a", |x, y| -&gt; x + y) == "ab"
+None(): reduce(42, |x, y| -&gt; x + y) == 42
+</code></pre>
+<ul>
+<li><em>param</em> <code>init</code> the initial value</li>
+<li><em>param</em> <code>func</code> the aggregation function</li>
+<li><em>return</em> the initial value if this is empty, the aggregated result otherwise</li>
+</ul>
+
+      </div>
+    
+      
+        <h4 id="java.util.Optional.toList_this">toList(this)
+      
+      <a class="permalink" href="#java.util.Optional.toList_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Convert this optional into a list</p>
+<ul>
+<li><em>return</em> a singleton list containing the value if present, otherwise an
+empty list</li>
+</ul>
+
+      </div>
+    
+      
+        <h4 id="java.util.Optional.toResult_this">toResult(this)
+      
+      <a class="permalink" href="#java.util.Optional.toResult_this" title="link to this section">&#182;</a></h4>
+      <div>
+        
+      </div>
+    
+      
+        <h4 id="java.util.Optional.toResult_this_param">toResult(this, param)
+      
+      <a class="permalink" href="#java.util.Optional.toResult_this_param" title="link to this section">&#182;</a></h4>
+      <div>
+        
+      </div>
+    
+  
+
+
+
+  <h2 id="functions">Functions</h2>
+  
+    <h3 id="Empty_">Empty()
+    <a class="permalink" href="#Empty_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="Error_msg">Error(msg)
+    <a class="permalink" href="#Error_msg" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="None_">None()
+    <a class="permalink" href="#None_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="Ok_v">Ok(v)
+    <a class="permalink" href="#Ok_v" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="Option_v">Option(v)
+    <a class="permalink" href="#Option_v" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="Result_v">Result(v)
+    <a class="permalink" href="#Result_v" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="Some_v">Some(v)
+    <a class="permalink" href="#Some_v" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="catching_default">catching(default)
+    <a class="permalink" href="#catching_default" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Allows an unary function to be called with an <code>Optional</code> or a <code>Result</code> value.
+Similar to <code>flatMap</code>, but using <code>default</code> on the exception if the call failed.</p>
+<p>For instance:</p>
+<pre><code>let foo = |x| -&gt; x: toUpperCase()
+
+let safeFoo = catching("plop")(foo)
+
+safeFoo(null)         # "plop"
+safeFoo(None())       # "plop"
+safeFoo(Error("err")) # "plop"
+safeFoo(Ok("a"))      # "A"
+safeFoo(Some("a"))    # "A"
+
+catching(^gololang.error.Result::error)(foo)(null) # Result.error(NullPointerException())
+</code></pre>
+<p>Can be used as a decorator.</p>
+
+    </div>
+  
+    <h3 id="nullify_f">nullify(f)
+    <a class="permalink" href="#nullify_f" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Transform a function into one that can return <code>null</code> if something went wrong
+(i.e. None, Error or exception).</p>
+<p>Can be used as a decorator.</p>
+
+    </div>
+  
+    <h3 id="option_f">option(f)
+    <a class="permalink" href="#option_f" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Transform a function raising an exception into a function returning a option.
+The resulting function returns <code>Option(f(x))</code> if <code>f(x)</code> succeeds and <code>None</code> if
+<code>f(x)</code> raises an exception.</p>
+<p>Can be used as a decorator.</p>
+
+    </div>
+  
+    <h3 id="raising_f">raising(f)
+    <a class="permalink" href="#raising_f" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Transforms a function returning a result or an option into a function returning
+the associated value or raising an exception.</p>
+<p>Can be used as a decorator.</p>
+
+    </div>
+  
+    <h3 id="result_f">result(f)
+    <a class="permalink" href="#result_f" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Transform a function raising an exception into a function returning a <code>Result</code>.
+The resulting function returns <code>Result.ok(f(x))</code> if <code>f(x)</code> succeeds and
+<code>Result.error(e)</code> if <code>f(x)</code> raises <code>e</code>.</p>
+<p>Can be used as a decorator.</p>
+
+    </div>
+  
+    <h3 id="trying_f">trying(f)
+    <a class="permalink" href="#trying_f" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Execute the given block and return a <code>Result</code>.</p>
+<p>This is similar to <code>result</code>, except that the block take no parameter and is
+immediately executed. This is <em>not</em> a decorator, but rather a replacement for a
+<code>try catch</code> block.</p>
+<p>For instance:</p>
+<pre><code>let res = trying({
+  let f = foo()
+  let x = bar()
+  let z = f(x)
+  return z + plop()
+})
+</code></pre>
+<p>If any of the operation in the block raises an exception, <code>res</code> will be a
+<code>Result.error</code> containing the exception, otherwise it will be a <code>Result.ok</code>
+containing the returned value.</p>
+
+    </div>
+  
+
+
+</body>
+</html>

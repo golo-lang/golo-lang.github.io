@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>Documentation for gololang.AnsiCodes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      line-height: 1.5;
+      margin: 2em 3em 2em 20%;
+      text-align: left;
+      padding: 0 100px 0 100px;
+    }
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 80%;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    li p {
+      margin: 0.3em;
+    }
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 36px;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 30px;
+    }
+    h3 {
+      color: #666;
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 21px;
+    }
+    h5 {
+      font-size: 18px;
+    }
+
+    #toc {
+      margin: 0;
+      padding: 1em;
+      border-right: 1px solid #aaa;
+      font-size: 80%;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      width: 20%;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    #toc ul {
+      padding-left: 1em;
+    }
+
+    #toc > li {
+      list-style: none;
+      margin-bottom: 1ex;
+    }
+
+    #toc > li > a {
+      font-weight: bold;
+    }
+
+    :target {
+      background-color: yellow;
+    }
+
+    .permalink {
+      margin-left: .3em;
+      font-size: 70%;
+      visibility: hidden;
+    }
+
+    *:hover > .permalink {
+      visibility: visible;
+    }
+
+  </style>
+</head>
+<body>
+<h1>Documentation for gololang.AnsiCodes</h1>
+<div>
+  <p>This module provides helper functions to deal with ANSI escape codes for console outputs.</p>
+<p>All function names are self-explanatory. Note that <code>likelySupported</code> tests if the current
+operating system is <em>likely</em> to support ANSI codes. It merely checks that the host operating
+system is not MS Windows, which does not support ANSI codes without a 3rd-party driver.</p>
+<p>See also: <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">Wikipedia on ANSI escape codes</a></p>
+
+</div>
+
+<!-- begin table of content -->
+<ul id="toc">
+
+  
+
+  
+
+
+
+  
+
+  
+
+  
+  <li><a href="#functions">Functions</a><ul>
+    
+    <li><a href="#bg_black_">bg_black()</a></li>
+    
+    <li><a href="#bg_blue_">bg_blue()</a></li>
+    
+    <li><a href="#bg_cyan_">bg_cyan()</a></li>
+    
+    <li><a href="#bg_green_">bg_green()</a></li>
+    
+    <li><a href="#bg_magenta_">bg_magenta()</a></li>
+    
+    <li><a href="#bg_red_">bg_red()</a></li>
+    
+    <li><a href="#bg_white_">bg_white()</a></li>
+    
+    <li><a href="#bg_yellow_">bg_yellow()</a></li>
+    
+    <li><a href="#blink_">blink()</a></li>
+    
+    <li><a href="#bold_">bold()</a></li>
+    
+    <li><a href="#concealed_">concealed()</a></li>
+    
+    <li><a href="#cursor_backward_columns">cursor_backward(columns)</a></li>
+    
+    <li><a href="#cursor_down_lines">cursor_down(lines)</a></li>
+    
+    <li><a href="#cursor_forward_columns">cursor_forward(columns)</a></li>
+    
+    <li><a href="#cursor_position_line_column">cursor_position(line, column)</a></li>
+    
+    <li><a href="#cursor_restore_position_">cursor_restore_position()</a></li>
+    
+    <li><a href="#cursor_save_position_">cursor_save_position()</a></li>
+    
+    <li><a href="#cursor_up_lines">cursor_up(lines)</a></li>
+    
+    <li><a href="#erase_display_">erase_display()</a></li>
+    
+    <li><a href="#erase_line_">erase_line()</a></li>
+    
+    <li><a href="#fg_black_">fg_black()</a></li>
+    
+    <li><a href="#fg_blue_">fg_blue()</a></li>
+    
+    <li><a href="#fg_cyan_">fg_cyan()</a></li>
+    
+    <li><a href="#fg_green_">fg_green()</a></li>
+    
+    <li><a href="#fg_magenta_">fg_magenta()</a></li>
+    
+    <li><a href="#fg_red_">fg_red()</a></li>
+    
+    <li><a href="#fg_white_">fg_white()</a></li>
+    
+    <li><a href="#fg_yellow_">fg_yellow()</a></li>
+    
+    <li><a href="#likelySupported_">likelySupported()</a></li>
+    
+    <li><a href="#reset_">reset()</a></li>
+    
+    <li><a href="#reverse_video_">reverse_video()</a></li>
+    
+    <li><a href="#underscore_">underscore()</a></li>
+    
+  </ul></li>
+  
+</ul>
+<!-- end table of content -->
+
+
+
+
+
+
+
+
+
+
+
+  <h2 id="functions">Functions</h2>
+  
+    <h3 id="bg_black_">bg_black()
+    <a class="permalink" href="#bg_black_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="bg_blue_">bg_blue()
+    <a class="permalink" href="#bg_blue_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="bg_cyan_">bg_cyan()
+    <a class="permalink" href="#bg_cyan_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="bg_green_">bg_green()
+    <a class="permalink" href="#bg_green_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="bg_magenta_">bg_magenta()
+    <a class="permalink" href="#bg_magenta_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="bg_red_">bg_red()
+    <a class="permalink" href="#bg_red_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="bg_white_">bg_white()
+    <a class="permalink" href="#bg_white_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="bg_yellow_">bg_yellow()
+    <a class="permalink" href="#bg_yellow_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="blink_">blink()
+    <a class="permalink" href="#blink_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="bold_">bold()
+    <a class="permalink" href="#bold_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="concealed_">concealed()
+    <a class="permalink" href="#concealed_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="cursor_backward_columns">cursor_backward(columns)
+    <a class="permalink" href="#cursor_backward_columns" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="cursor_down_lines">cursor_down(lines)
+    <a class="permalink" href="#cursor_down_lines" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="cursor_forward_columns">cursor_forward(columns)
+    <a class="permalink" href="#cursor_forward_columns" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="cursor_position_line_column">cursor_position(line, column)
+    <a class="permalink" href="#cursor_position_line_column" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="cursor_restore_position_">cursor_restore_position()
+    <a class="permalink" href="#cursor_restore_position_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="cursor_save_position_">cursor_save_position()
+    <a class="permalink" href="#cursor_save_position_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="cursor_up_lines">cursor_up(lines)
+    <a class="permalink" href="#cursor_up_lines" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="erase_display_">erase_display()
+    <a class="permalink" href="#erase_display_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="erase_line_">erase_line()
+    <a class="permalink" href="#erase_line_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="fg_black_">fg_black()
+    <a class="permalink" href="#fg_black_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="fg_blue_">fg_blue()
+    <a class="permalink" href="#fg_blue_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="fg_cyan_">fg_cyan()
+    <a class="permalink" href="#fg_cyan_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="fg_green_">fg_green()
+    <a class="permalink" href="#fg_green_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="fg_magenta_">fg_magenta()
+    <a class="permalink" href="#fg_magenta_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="fg_red_">fg_red()
+    <a class="permalink" href="#fg_red_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="fg_white_">fg_white()
+    <a class="permalink" href="#fg_white_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="fg_yellow_">fg_yellow()
+    <a class="permalink" href="#fg_yellow_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="likelySupported_">likelySupported()
+    <a class="permalink" href="#likelySupported_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="reset_">reset()
+    <a class="permalink" href="#reset_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="reverse_video_">reverse_video()
+    <a class="permalink" href="#reverse_video_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+    <h3 id="underscore_">underscore()
+    <a class="permalink" href="#underscore_" title="link to this section">&#182;</a></h3>
+    <div>
+      
+    </div>
+  
+
+
+</body>
+</html>

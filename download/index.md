@@ -7,8 +7,8 @@ title: Download Golo
 
 Standalone distributions can be obtained from Bintray, the Eclipse Foundation and its mirrors network.
 
-* [Golo 3.0.0-incubation (Bintray)](https://bintray.com/artifact/download/golo-lang/downloads/golo-3.0.0-incubation.zip)
-* [Golo 3.0.0-incubation (Eclipse)](https://www.eclipse.org/downloads/download.php?file=/golo/golo-3.0.0-incubation.zip)
+* [Golo 3.1.0-incubation-M1 (Bintray)](https://bintray.com/artifact/download/golo-lang/downloads/golo-3.1.0-incubation-M1.zip)
+* [Golo 3.1.0-incubation-M1 (Eclipse)](https://www.eclipse.org/downloads/download.php?file=/golo/golo-3.1.0-incubation-M1.zip)
 * [Latest snapshot build (Eclipse)](https://www.eclipse.org/downloads/download.php?file=/golo/golo-latest-snapshot.zip) (if you like the greatest and latest)
 
 ### Maven
@@ -24,7 +24,7 @@ The Golo library (runtime + compiler) Maven artifact is:
 <dependency>
   <groupId>org.eclipse.golo</groupId>
   <artifactId>golo</artifactId>
-  <version>3.0.0-incubation</version>
+  <version>3.1.0-incubation-M1</version>
 </dependency>
 {% endhighlight %}
 
@@ -32,7 +32,7 @@ or from Gradle:
 
 {% highlight groovy %}
 dependencies {
-  compile 'org.eclipse.golo:golo:3.0.0-incubation'
+  compile 'org.eclipse.golo:golo:3.1.0-incubation-M1'
   // ...
 }
 {% endhighlight %}
@@ -43,7 +43,7 @@ The Golo Maven plugin artifact is:
 <dependency>
   <groupId>org.eclipse.golo</groupId>
   <artifactId>golo-maven-plugin</artifactId>
-  <version>3.0.0-incubation</version>
+  <version>3.1.0-incubation-M1</version>
 </dependency>
 {% endhighlight %}
 

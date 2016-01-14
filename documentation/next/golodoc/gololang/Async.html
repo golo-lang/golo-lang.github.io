@@ -444,7 +444,7 @@ let f = executor: enqueue({
 })
 
 # Watch what could happen
-f: onSet(|v| -&gt; println(v)): 
+f: onSet(|v| -&gt; println(v)):
    onFail(|e| -&gt; println(e: getMessage()))
 
 # ...but make it fail unless the CPU was too slow

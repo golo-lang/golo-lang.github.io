@@ -830,11 +830,13 @@ table.tableblock.grid-all th.tableblock, table.tableblock.grid-all td.tableblock
 <li><a href="#_jvm_existence">10.2. JVM existence</a></li>
 <li><a href="#__code_tostring_code_behavior">10.3. <code>toString()</code> behavior</a></li>
 <li><a href="#_immutable_structs">10.4. Immutable structs</a></li>
-<li><a href="#_copying">10.5. Copying</a></li>
-<li><a href="#__code_equals_code_and_code_hashcode_code_semantics">10.6. <code>equals()</code> and <code>hashCode()</code> semantics</a></li>
-<li><a href="#_helper_methods">10.7. Helper methods</a></li>
-<li><a href="#_private_members">10.8. Private members</a></li>
-<li><a href="#_augmenting_structs">10.9. Augmenting structs</a></li>
+<li><a href="#_custom_factories">10.5. Custom factories</a></li>
+<li><a href="#_copying">10.6. Copying</a></li>
+<li><a href="#__code_equals_code_and_code_hashcode_code_semantics">10.7. <code>equals()</code> and <code>hashCode()</code> semantics</a></li>
+<li><a href="#_comparison_semantics">10.8. Comparison semantics</a></li>
+<li><a href="#_helper_methods">10.9. Helper methods</a></li>
+<li><a href="#_private_members">10.10. Private members</a></li>
+<li><a href="#_augmenting_structs">10.11. Augmenting structs</a></li>
 </ul>
 </li>
 <li><a href="#_unions">11. Unions</a>
@@ -915,6 +917,8 @@ table.tableblock.grid-all th.tableblock, table.tableblock.grid-all td.tableblock
 <li><a href="#_observable_references_code_gololang_observable_code">20.4. Observable references (<code>gololang.Observable</code>)</a></li>
 <li><a href="#_asynchronous_programming_helpers_code_gololang_async_code">20.5. Asynchronous programming helpers (<code>gololang.Async</code>)</a></li>
 <li><a href="#_lazy_lists_code_gololang_lazylist_code">20.6. Lazy lists (<code>gololang.lazylist</code>)</a></li>
+<li><a href="#_console_ansi_codes_code_gololang_ansicodes_code">20.7. Console ANSI codes (<code>gololang.AnsiCodes</code>)</a></li>
+<li><a href="#_functional_errors_code_gololang_errors_code">20.8. Functional errors (<code>gololang.Errors</code>)</a></li>
 </ul>
 </li>
 <li><a href="#_common_pitfalls">21. Common pitfalls</a>
@@ -2488,8 +2492,17 @@ Once you are using named parameters in your function call, the order doesn&#8217
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Note: To name varargs argument, you have be box the values into an <code>array[]</code> (just has it&#8217;s done with the <code>tags</code> argument in the above snippet)</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To name varargs argument, you have be box the values into an <code>array[]</code> (just has it&#8217;s done with the <code>tags</code> argument in the above snippet)
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -2577,7 +2590,7 @@ function plop = {
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
+<div id="implicit_imports" class="paragraph">
 <p>Golo modules have a set of implicit imports:</p>
 </div>
 <div class="ulist">
@@ -2595,6 +2608,9 @@ function plop = {
 <p><code>java.lang</code>.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>These modules are imported <strong>after</strong> the module explicitly imported in the module, so that elements defined in these modules (e.g. predefined functions or <a href="#_augmentations_resolution_order">augmentations</a>) can be redefined.</p>
 </div>
 </div>
 <div class="sect2">
@@ -4601,6 +4617,21 @@ taste</strong> (for what it means).
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>To allow building libraries of functions leveraging augmentations, the callstack is also looked up in order to find if a complying augmentation was applied to the function arguments. It is thus possible to create a function like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module MyLib
+
+function sayPlop = |o| {
+  println(o: plop())
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>that can be applied on any object having a <code>plop</code> method, provided this is a native method or it is defined in an augmentation imported in the calling module.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_named_augmentations">9.4. Named augmentations</h3>
@@ -4783,7 +4814,7 @@ using the same order than locally applied ones, in the importation order.</p>
 </div>
 <div class="paragraph">
 <p>The first matching method found is used. It is thus possible to “override” an
-augmentation with a more higher priority one (in the sens of the previous order).</p>
+augmentation with a more higher priority one (in the sens of the previous order). <a href="#implicit_imports">Implicit modules</a> are imported after explicit ones to allow to redefine standard augmentations.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -4876,7 +4907,7 @@ function main = |args| {
 </div>
 </div>
 <div class="paragraph">
-<p>When declaring a structure, it also defines two factory functions: one with no arguments, and one
+<p>When declaring a structure, it also defines two factory functions: one with no argument, and one
 with all arguments in their order of declaration in the <code>struct</code> statement. When not initialized,
 member values are <code>null</code>.</p>
 </div>
@@ -4947,7 +4978,7 @@ function main = |args| {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">struct Point{x=1, y=2}</code></pre>
+<pre>struct Point{x=1, y=2}</pre>
 </div>
 </div>
 </div>
@@ -4979,7 +5010,98 @@ function main = |args| {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_copying">10.5. Copying</h3>
+<h3 id="_custom_factories">10.5. Custom factories</h3>
+<div class="paragraph">
+<p>Golo generates two factories for structures. One for the initial values of each member and
+a second one with no parameters:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module test
+
+struct Point = { x, y }
+
+function main = |args| {
+  println(Point(1, 2))
+  println(Point())
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>running it prints the following console output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>struct Point{x=1, y=2}
+struct Point{x=null, y=null}</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+By default the no-argument factory sets every member to <code>null</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The Factories generated by Golo can be overloaded by custom ones:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module test
+
+struct Point = { x, y }
+
+function Point = -&gt; test.types.Point(0,0)
+
+function main = |args| {
+  println(Point(1, 2))
+  println(Point())
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>running it prints the following console output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>struct Point{x=1, y=2}
+struct Point{x=0, y=0}</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Immutable factories can be easily overloaded by returning a forzen copy.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module test
+
+struct Point = { x, y }
+
+function ImmutablePoint = |a,b| -&gt; test.types.Point(a,b): frozenCopy()
+
+function main = |args| {
+  println(ImmutablePoint(1, 2): isFrozen()) # prints true
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_copying">10.6. Copying</h3>
 <div class="paragraph">
 <p>Instances of a structure provide copying methods:</p>
 </div>
@@ -5012,7 +5134,7 @@ copy.
 </div>
 </div>
 <div class="sect2">
-<h3 id="__code_equals_code_and_code_hashcode_code_semantics">10.6. <code>equals()</code> and <code>hashCode()</code> semantics</h3>
+<h3 id="__code_equals_code_and_code_hashcode_code_semantics">10.7. <code>equals()</code> and <code>hashCode()</code> semantics</h3>
 <div class="paragraph">
 <p>Golo structures honor the contract of Java objects regarding equality and hash codes.</p>
 </div>
@@ -5056,13 +5178,13 @@ function main = |args| {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">p1 == p2 false
+<pre>p1 == p2 false
 p1 == p3 false
 p3 == p4 true
 #p1 1555845260
 #p2 104739310
 #p3 994
-#p4 994</code></pre>
+#p4 994</pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -5080,7 +5202,49 @@ especially when storing values into collections.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_helper_methods">10.7. Helper methods</h3>
+<h3 id="_comparison_semantics">10.8. Comparison semantics</h3>
+<div class="paragraph">
+<p>Golo structures are comparable with structures of the same type, provided that their members are comparable pairwise. Two structure are compared by comparing their members lexicographically, that is pairwise in the order they are defined.</p>
+</div>
+<div class="paragraph">
+<p>For instance, the following listing:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module test
+
+struct Triplet = {x, y, z}
+
+struct Other = {x, y, z}
+
+function main = |args| {
+
+  let t1 = Triplet(1, 2, 3)
+  let t2 = Triplet(1, 3, 2)
+  let o = Other(1, 2, 4)
+
+  println(t1 &lt; t2)
+  println(t1: values() &lt; o: values())
+  println(t1 &lt; o)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>will output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>true
+true
+Exception in thread "main" java.lang.IllegalArgumentException: struct Triplet{x=1, y=2, z=3} and struct Other{x=1, y=2, z=4} can't be compared</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>even if <code>Triplet</code> and <code>Other</code> have the same members.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_helper_methods">10.9. Helper methods</h3>
 <div class="paragraph">
 <p>A number of helper methods are being generated:</p>
 </div>
@@ -5108,7 +5272,7 @@ especially when storing values into collections.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_private_members">10.8. Private members</h3>
+<h3 id="_private_members">10.10. Private members</h3>
 <div class="paragraph">
 <p>By default, all members in a struct can be accessed. It is possible to make some elements private by
 prefixing them with <code>_</code>, as in:</p>
@@ -5160,7 +5324,7 @@ valid calls only if made from:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_augmenting_structs">10.9. Augmenting structs</h3>
+<h3 id="_augmenting_structs">10.11. Augmenting structs</h3>
 <div class="paragraph">
 <p>Structs provide a simple data model, especially with private members for encapsulation.</p>
 </div>
@@ -8072,6 +8236,166 @@ the laziness. They are here for completeness and compatibility with the regular
 lists interface, but you should avoid such methods.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_console_ansi_codes_code_gololang_ansicodes_code">20.7. Console ANSI codes (<code>gololang.AnsiCodes</code>)</h3>
+<div class="paragraph">
+<p>The <code>gololang.AnsiCodes</code> modules offers a set of functions to work with
+<a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI codes</a>.</p>
+</div>
+<div class="paragraph">
+<p>The following would print <code>Hello world!</code> in blinking yellow text:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">import gololang.AnsiCodes
+
+# (...)
+
+function hello = {
+  blink()
+  fg_yellow()
+  println("Hello world!")
+  reset()
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ANSI codes support varies from terminal and operating system capacities. Microsoft Windows
+does not support these codes without a 3rd-party driver. You may use the <code>likelySupported()</code> function
+to test if the host operating system is <em>likely</em> to support ANSI codes.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_functional_errors_code_gololang_errors_code">20.8. Functional errors (<code>gololang.Errors</code>)</h3>
+<div class="paragraph">
+<p>The <code>gololang.Errors</code> module offers types, augmentations and decorators to deal with errors in a more functional way. This is similar for instance to Haskell
+<a href="https://hackage.haskell.org/package/base/docs/Data-Maybe.html"><code>Maybe</code></a> and
+<a href="https://hackage.haskell.org/package/base/docs/Data-Either.html"><code>Either</code></a> or Rust
+<a href="https://doc.rust-lang.org/std/option/"><code>Option</code></a> and
+<a href="https://doc.rust-lang.org/std/result/"><code>Result</code></a>.</p>
+</div>
+<div class="sect3">
+<h4 id="_option">20.8.1. Option</h4>
+<div class="paragraph">
+<p>This is just an augmentation of the java <code>java.util.Optional</code> class together with factory functions and decorators. The added methods allows to better chain optional results and improve matching.</p>
+</div>
+<div class="paragraph">
+<p>This is particularly useful to chain and compose functions that can return no result. Instead of returning <code>null</code>, a <code>None()</code> value can be returned. Such functions can then be chained using the <code>andThen</code> method. The <code>option</code> decorator can be used to transform a regular function into a function returning an <code>Option</code>.</p>
+</div>
+<div class="paragraph">
+<p>For instance, given:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function foo = |arg| {
+  # can return an integer, null or even throw an exception
+}
+
+function bar = -&gt; 42
+
+function plus2 = |x| -&gt; x + 2
+function mult2 = |x| -&gt; x * 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>code such as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">var r
+try {
+  r = foo(x)
+  if r is null {
+    r = bar()
+  } else {
+    r = mult2(plus2(r))
+  }
+} catch (e) {
+ r = bar()
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>can be rewritten:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let optionalFoo = option(foo)
+
+r = optionalFoo(x): andThen(^plus2): either(^mult2, ^bar)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Of course, <code>Optional</code> methods such as <code>flatMap</code> and <code>orElseGet</code> can also be used:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">@option
+function safeGetter = |aMap, aKey| -&gt; aMap: get(aKey)
+
+let m = map[["a", 2], ["answer", 12]]
+
+# (19 + 2) * 2 = 42
+safeGetter(m, "answer"): map(^plus2): map(^mult2): orElseGet(^bar)
+
+# get null, option returns None, bar gives 42
+safeGetter(m, "plop"): map(^plus2): map(^mult2): orElseGet(^bar)
+
+# null pointer exception, option returns None, bar gives 42
+safeGetter(null, "answer"): map(^plus2): map(^mult2): orElseGet(^bar)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See the <a href="./golodoc/gololang/Errors"><code>gololang.Errors</code></a> module documentation for a full description of the added methods.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_result">20.8.2. Result</h4>
+<div class="paragraph">
+<p><code>Result</code> is a similar object, but it keep the errors, meaning that a result can be empty (similar to <code>None</code>), containing an error (a <code>Throwable</code>) or a result. It can be used in a way very similar to <code>Optional</code>, but gives more control on the behavior.</p>
+</div>
+<div class="paragraph">
+<p>The <code>result</code> decorator is the equivalent to <code>option</code>. The <code>trying</code> higher order function takes an anonymous block, executes it and returns a corresponding <code>Result</code>.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="./golodoc/gololang/Errors"><code>gololang.Errors</code></a> module documentation and the javadoc for the <a href="./javadoc/gololang/error/Result.html"><code>gololang.error.Result</code></a> class for more details.</p>
+</div>
+<div class="paragraph">
+<p>As a bonus, <code>Result</code> objects can be destructured into the error and the value. For instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">@result
+function foo = {
+  # can throw an exception, return null or a plain value
+}
+
+let e, v = foo()
+
+let err, val = trying({
+  # statements sequence than can throw an exception
+  ...
+  return somevalue
+})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The error is the left value, the correct one the right (mnemonic: “right” also means “correct”). This allows to deal with error in the same way as Go does for instance.</p>
+</div>
+<div class="paragraph">
+<p>The decorators <code>nullify</code> and <code>raising</code> are the duals of <code>option</code> or <code>result</code></p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -8193,7 +8517,7 @@ println(foo("abc"))</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-11-02 17:07:40 +01:00
+Last updated 2015-12-31 15:59:49 +01:00
 </div>
 </div>
 </body>
