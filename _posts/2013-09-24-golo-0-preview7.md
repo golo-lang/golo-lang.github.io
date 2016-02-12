@@ -1,0 +1,53 @@
+---
+layout: news
+title: "Now available: Golo 0-preview7"
+---
+![](https://farm8.staticflickr.com/7349/9678296029_be70540124_o_d.jpg)
+
+We are quite busy with a new academic year and the avalanche of emergencies that we have to deal with, but we still found a bit of time to craft you a new preview of Golo.
+
+- [Try Golo on Google AppEngine](http://golo-console.appspot.com/)
+- [Download a preview release of Golo](/download/)
+- [Read the Golo programming language guide](/documentation/next/)
+- [Fork the project on GitHub](https://github.com/golo-lang/golo-lang)
+- [Get in touch on our mailing-list](http://groups.google.com/group/golo-lang)
+
+### It’s mostly about fixes, really
+
+This release is mainly about fixing bugs, mainly:
+
+- `golo run` launching programs twice,
+- closure recursive calls,
+- handling of `"` in templates,
+- relaxing parser rules on blanklines in case and match (by Daniel).
+
+There are also some new minor features:
+
+- augmentations in strings to convert to numbers (by Philippe),
+- improvements to the benchmarks suite.
+
+### Golo at PPPJ 2013
+
+We presented Golo at the [PPPJ 2013 research conference.](http://pppj2013.dhbw.de/conference-pppj2013.html)
+
+We received encouraging feedback on Golo following our paper and presentation. Speaking about the paper, you can [download it!](http://dx.doi.org/10.1145/2500828.2500844)
+
+<script async class="speakerdeck-embed" data-id="fa415880fdcf0130f6d8022f0de05eea" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js">
+</script>
+
+### Golo near you
+
+October:
+
+- [Philippe is doing a talk at SoftShake](http://soft-shake.ch/2013/program/sessions/13_java/2013/10/24/06-Golo.html)
+- [Philippe (again and again) is doing a talk for the fine folks at the MarsJUG](http://marsjug.org/)
+
+November:
+
+- [Julien goes to the real Devoxx to promote the virtues of type unsafety](http://devoxx.be/dv13-julien-ponge.html?presId=3475)
+
+### That’s all, folks!
+
+Remember that you don’t need a PhD to help Golo, so do not hesitate to get in touch with us!
+
+In most cases you help us **a lot** just by reporting weird compilation or behavior in simple code snippets that you wrote…
