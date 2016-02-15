@@ -1,9 +1,7 @@
 # Jekyll
-markdown: rdiscount
-highlighter: pygments
+highlighter: rouge
+markdown: kramdown
 permalink: /news/:year/:month/:day/:title
-redcloth:
-  hard_breaks: false
 exclude:
   - LICENSE
   - notice.html
