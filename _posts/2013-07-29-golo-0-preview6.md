@@ -1,0 +1,116 @@
+---
+layout: news
+title: "Now available: Golo 0-preview6"
+---
+
+![](http://farm3.staticflickr.com/2821/9390098325_df3120bdfd_c_d.jpg)
+
+…and here comes a new Golo preview!
+
+### (for the impatient)
+
+Here is what’s new in Golo `0-preview6`.
+
+1.  New collection literals for common data structures (arrays, tuples, lists, sets, maps, vectors).
+2.  The ability to define structured data types through the `struct` keyword.
+3.  Number literals now support underscores (contributed by Franck Verrot).
+4.  Dynamic objects performance is better than ever (`~14x` factor).
+
+#### Links
+
+- [Try Golo on Google AppEngine](http://golo-console.appspot.com/)
+- [Download a preview release of Golo](/download/)
+- [Read the Golo programming language guide](/documentation/next/)
+- [Fork the project on GitHub](https://github.com/golo-lang/golo-lang)
+
+### Collection literals
+
+You can now take advantage of collection literals, as summarized in the following table:
+
+| Collection | Java type                 | Syntax                                  |
+|------------|---------------------------|-----------------------------------------|
+| Tuple      | `gololang.Tuple`          | `tuple[1, 2, 3]`, or simply `[1, 2, 3]` |
+| Array      | `java.lang.Object[]`      | `array[1, 2, 3]`                        |
+| List       | `java.util.LinkedList`    | `list[1, 2, 3]`                         |
+| Vector     | `java.util.ArrayList`     | `vector[1, 2, 3]`                       |
+| Set        | `java.util.LinkedHashSet` | `set[1, 2, 3]`                          |
+| Map        | `java.util.LinkedHashMap` | `map[[1, "a"], [2, "b"]]`               |
+
+Here is a sample usage:
+
+```golo
+let data = map[
+  ["foo", "bar"],
+  ["plop", set[1, 2, 3, 4, 5]],
+  ["mrbean", map[
+    ["name", "Mr Bean"],
+    ["email", "bean@outlook.com"]
+  ]]
+]
+```
+
+### Structs
+
+Structs are great if you need to define data types:
+
+```golo
+module sample
+
+struct Person = { name, age, email }
+
+function main = |args| {
+  let p1 = Person("Mr Bean", 54, "bean@gmail.com")
+  println(p1: name())
+  let p2 = Person(): name("John"): age(32): email("john@b-root.com")
+  println(p2: age())
+}
+```
+
+Structs come with many goodies, including proper `toString()`, `equals()` and `hashCode()` implementations. They are iterable, and immutable copies can be made.
+
+Because structs translate to real JVM classes, you may also take advantage of *augmentations* to add behavior, as the following example shows:
+
+```golo
+module StructDemo
+
+struct Point = { x, y }
+
+augment StructDemo.types.Point {
+
+  function move = |this, offsetX, offsetY| {
+    this: x(this: x() + offsetX)
+    this: y(this: y() + offsetY)
+    return this
+  }
+}
+
+function main = |args| {
+  let p = Point(1, 1)
+  println(p)
+  p: move(10, 5)
+  println(p)
+}
+```
+### Dynamic object performance
+
+The runtime method dispatch logic for dynamic objects has been rewritten. The new `invokedynamic`-based plumbing results in a simpler code with less call site invalidations.
+
+This results in dramatically faster dynamic objects!
+
+### In the community
+
+Our small and fun community is active!
+
+#### Eclipse support
+
+Jeff Maury is making strong progress with the Golo Eclipse tooling, ensuring that it stays current with the additions in the Golo grammar.
+
+#### AppEngine-based console
+
+Philippe Charrière contributed a few improvements to our demonstration web console that runs on Google AppEngine.
+
+He changed the editor component, providing syntax highlighting. He also included the proper metadata so that the page can be saved as an application on iOS devices. You have no more excuses for not trying Golo while in the bus.
+
+#### Wanna work on our NetBeans IDE?
+
+The NetBeans support for Golo is currently behind the language evolutions, so if you are interested in helping out this is a very solid bet!
