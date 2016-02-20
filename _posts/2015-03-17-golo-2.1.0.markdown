@@ -39,9 +39,9 @@ Note that `tail()` produces immutable views of the underlying collection.
 
 This used to be forbidden:
 
-```golo
+{% highlight golo %}
 (|x| -> x + 1)(1)
-```
+{% endhighlight %}
 
 But thanks to Yannick this is a thing from the past, the snippet above is perfectly Golo-proof.
 
@@ -49,10 +49,10 @@ But thanks to Yannick this is a thing from the past, the snippet above is perfec
 
 Yannick made Golo tuples comparable, so you can now do just that:
 
-```golo
+{% highlight golo %}
 let e1 = [1, 2] < [1, 3]
 let e2 = ["b", 5] < ["d", 1]
-```
+{% endhighlight %}
 
 ### Module names escaping
 
@@ -64,12 +64,10 @@ This avoids compilation errors due to a bad generation.
 
 The very same Romain tweaked the version command so that the `--full` flag also includes the JVM version being used:
 
-```console
-$ golo version --full
-Golo version : 2.1.0-SNAPSHOT (build 15-03-15-12:34)
-JVM version: 1.8.0_31
-$
-```
+    $ golo version --full
+    Golo version : 2.1.0-SNAPSHOT (build 15-03-15-12:34)
+    JVM version: 1.8.0_31
+    $
 
 ### Invalid parser token / Netbeans IDE
 

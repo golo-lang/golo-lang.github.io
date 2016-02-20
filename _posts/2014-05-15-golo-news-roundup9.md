@@ -16,7 +16,7 @@ The current Golo `0-preview12` snapshots have some interesting changes.
 The `try/catch` instruction bytecode generation has been reordered so that the following code has
 correct semantics:
 
-```golo 
+{% highlight golo %}
 function nested_try = {
   try {
     try {
@@ -28,7 +28,7 @@ function nested_try = {
     return "failed"
   }
 }
-```
+{% endhighlight %}
 
 It properly returns `"ok"` instead of `"failed"` which is what the previous implementation would yield.
 
@@ -39,7 +39,7 @@ The new `gololang.JSON` module provides JSON marshalling based on
 
 Here is some sample code to JSON-ify some data structures:
 
-```folo
+{% highlight golo %}
 let data = map[
   ["name", "Somebody"],
   ["age", 69],
@@ -49,14 +49,14 @@ let data = map[
 ]
 
 let asText = JSON.stringify(data)
-```
+{% endhighlight %}
 
 The other way around works, of course:
 
-```golo
+{% highlight golo %}
 let data = JSON.parse(text)
 println(data: get("name"))
-```
+{% endhighlight %}
 
 #### Golodoc fixes
 
@@ -68,7 +68,7 @@ We now have `gololang.DynamicVariable` which is a direct port of `DynamicVariabl
 
 We also introduced `gololang.Observable`, a nice and composable abstraction:
 
-```golo
+{% highlight golo %}
 let foo = Observable("Foo")
 foo: onChange(|v| -> println("foo = " + v))
 
@@ -76,7 +76,7 @@ let mapped = foo: map(|v| -> v + "!")
 mapped: onChange(|v| -> println("mapped = " + v))
 
 foo: set("69")
-```
+{% endhighlight %}
 
 #### Pygments
 

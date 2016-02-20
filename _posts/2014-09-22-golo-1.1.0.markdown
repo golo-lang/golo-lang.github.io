@@ -50,12 +50,12 @@ function main = |args| {
 
 which prints:
 
-```
+{% highlight golo %}
 calling foo
 foo got a bar
 I'am a bar
 42
-```
+{% endhighlight %}
 
 The new `gololang.Decorators` module provides [a set of useful
 decorators](/documentation/next/golodoc/gololang/Decorators.html), including

@@ -21,12 +21,12 @@ Here is a short recap of the upcoming changes in Golo `3.0.0`.
 
 Golo now adapts function references to Java 8 lambdas (_a.k.a._ [functional interfaces](https://docs.oracle.com/javase/8/docs/api/java/lang/FunctionalInterface.html)), as in:
 
-```golo
+{% highlight golo %}
 list[1, 2, 3, 4, 5]:
   stream():
   map(|n| -> n * 10):
   reduce(0, |acc, next| -> acc + next)
-```
+{% endhighlight %}
 
 #### Named arguments
 
@@ -34,7 +34,7 @@ list[1, 2, 3, 4, 5]:
 
 Named arguments increase readability, and they are now coming to Golo:
 
-```golo
+{% highlight golo %}
 struct Foo = {x, y}
 
 # (...)
@@ -43,7 +43,7 @@ let f = |x, y| -> x - y
 let r_1 = f(x=10, y=2)
 let r_2 = f(y=10, x=2)
 let foo = Foo(y="b", x="a")
-```
+{% endhighlight %}
 
 Last but not least, named parameters work with Java APIs, too... as long as code has been compiled
 with `javac -parameters`.
@@ -54,7 +54,7 @@ with `javac -parameters`.
 
 There is now a fluent API for those who were less comfortable with nested collections for describing adapters:
 
-```golo
+{% highlight golo %}
 module sparky
 
 import gololang.Adapters
@@ -70,7 +70,7 @@ function main = |args| {
   let route = sparkRouteAdapter: newInstance("/hello")
   get(route)
 }
-```
+{% endhighlight %}
 
 #### Tagged unions
 
@@ -78,7 +78,7 @@ function main = |args| {
 
 Also known as _sum types_, they complement `enum` and `struct` nicely:
 
-```golo
+{% highlight golo %}
 
 # Option monad
 
@@ -113,7 +113,7 @@ augment ConsList$List {
   function isEmpty = |this| -> false
 }
 
-```
+{% endhighlight %}
 
 Note that named arguments support is also interesting in terms of readability...
 

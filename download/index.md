@@ -75,7 +75,7 @@ You can either use them as-is, or derive your own specialized images based on to
 
 If you want to quickly test Golo:
 
-```console
+{% highlight console %}
 $ docker pull jponge/golo-lang
 
     (...)
@@ -85,7 +85,7 @@ root@cf99d78f22a4:/# golo version --full
 Golo version: 3.0.0-SNAPSHOT (build 15-03-17-09:28)
 JVM version: 1.8.0_31
 root@cf99d78f22a4:/#
-```
+{% endhighlight %}
 
 ### Source code
 

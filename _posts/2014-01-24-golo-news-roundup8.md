@@ -43,7 +43,7 @@ Let us now read what our guest writers have to say.
 
 [Golosa Test](https://github.com/danielpetisme/golosa-test) is a behavior-driven development framework for testing mainly inspired by [Jasmine](http://pivotal.github.io/jasmine/) (a JS behavioral testing framework). Since a snippet is worth a thousand words:
 
-```golo
+{% highlight golo %}
 module my.awesome.test
 
 # The only import gather all the Golosa SA API
@@ -54,7 +54,7 @@ function test = {
 
   # Define a Test suite with a description and an executable code block (ie. a lambda)
   describe("A test suite", {
-    
+
     # A lambda can contain any executable code necessary, be careful with Golo   scoping rules
     var aList = null
 
@@ -81,7 +81,7 @@ function test = {
     })
   })
 }
-```
+{% endhighlight %}
 
 Do not trust this snippet, test by yourself! Go to [Golosa Test project page](https://github.com/danielpetisme/golosa-test) and give it a try…
 

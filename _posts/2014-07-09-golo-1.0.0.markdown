@@ -52,28 +52,26 @@ _Thanks to Henri Gomez for the following Gource video!_
 It took 2 years to reach this `1.0.0` version, but digging through the Git history reveals that the
 active days count is roughly of 1 year and that Golo is nearly a one-man show:
 
-```
-$ git summary 
+    $ git summary
 
- project  : gololang
- repo age : 2 years
- active   : 374 days
- commits  : 1404
- files    : 352
- authors  : 
-  1303	Julien Ponge            92.8%
-    28	Philippe Charrière     2.0%
-    18	Daniel Petisme          1.3%
-    16	Kel Cecil               1.1%
-    16	David Festal            1.1%
-     8	Guillaume Grossetie     0.6%
-     5	Jeff Maury              0.4%
-     4	Sylvain                 0.3%
-     3	Yannick Loiseau         0.2%
-     1	Franck Verrot           0.1%
-     1	Thierry Chantier        0.1%
-     1	Dan Allen               0.1%
-```
+     project  : gololang
+     repo age : 2 years
+     active   : 374 days
+     commits  : 1404
+     files    : 352
+     authors  :
+      1303	Julien Ponge            92.8%
+        28	Philippe Charrière     2.0%
+        18	Daniel Petisme          1.3%
+        16	Kel Cecil               1.1%
+        16	David Festal            1.1%
+         8	Guillaume Grossetie     0.6%
+         5	Jeff Maury              0.4%
+         4	Sylvain                 0.3%
+         3	Yannick Loiseau         0.2%
+         1	Franck Verrot           0.1%
+         1	Thierry Chantier        0.1%
+         1	Dan Allen               0.1%
 
 *Note:* while Dynamid members Frédéric Le Mouel and Nicolas Stouls do not appear in the commit
 history, they still have had lots of inputs.
@@ -91,7 +89,7 @@ of experience around what it can do well.
 
 We explored certain language features implementation patterns, both in terms of ability to be
 implemented and performance. This is an area where we gathered significant experience that is worth
-publications for the research community. 
+publications for the research community.
 
 That being said the limited resources that we could allocate to Golo mean that we only found time to
 publish 1 research paper at PPPJ'2013. This is not enough, and we will devote time for writing new
@@ -155,18 +153,18 @@ We wouldn't have reached this important milestone without the support of our awe
 * David Festal  
 * Guillaume Grossetie
 * Jeff Maury
-* Sylvain Desgrais 
+* Sylvain Desgrais
 * Yannick Loiseau  
 * Franck Verrot     
 * Thierry Chantier    
-* Dan Allen 
+* Dan Allen
 
 Guillaume Poyet designed our iconic logo.
 
 2 companies helped along the way: [Serli](http://www.serli.com/) and [Ninja Squad](http://ninja-squad.com/).
 
-The wider community also includes Marcin Erdmann for the 
-[Gradle plugin](https://github.com/golo-lang/gradle-golo-plugin), Romain Lespinasse for the 
+The wider community also includes Marcin Erdmann for the
+[Gradle plugin](https://github.com/golo-lang/gradle-golo-plugin), Romain Lespinasse for the
 [Homebrew integration](https://github.com/TypeUnsafe/homebrew-golo) and Henri Gomez for the RPM packaging.
 
 We do not forget our initial testers before we released Golo in the open at Devoxx France 2013:
@@ -181,4 +179,3 @@ like us :-)
 Until next time, have fun!
 
 <iframe src="//instagram.com/p/o3FId6vpBx/embed/" width="612" height="710" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
-

@@ -11,17 +11,17 @@ title: "Now available: Golo 0-preview6"
 
 Here is what’s new in Golo `0-preview6`.
 
-1.  New collection literals for common data structures (arrays, tuples, lists, sets, maps, vectors).
-2.  The ability to define structured data types through the `struct` keyword.
-3.  Number literals now support underscores (contributed by Franck Verrot).
-4.  Dynamic objects performance is better than ever (`~14x` factor).
+1. New collection literals for common data structures (arrays, tuples, lists, sets, maps, vectors).
+2. The ability to define structured data types through the `struct` keyword.
+3. Number literals now support underscores (contributed by Franck Verrot).
+4. Dynamic objects performance is better than ever (`~14x` factor).
 
 #### Links
 
-- [Try Golo on Google AppEngine](http://golo-console.appspot.com/)
-- [Download a preview release of Golo](/download/)
-- [Read the Golo programming language guide](/documentation/next/)
-- [Fork the project on GitHub](https://github.com/golo-lang/golo-lang)
+* [Try Golo on Google AppEngine](http://golo-console.appspot.com/)
+* [Download a preview release of Golo](/download/)
+* [Read the Golo programming language guide](/documentation/next/)
+* [Fork the project on GitHub](https://github.com/golo-lang/golo-lang)
 
 ### Collection literals
 
@@ -38,7 +38,7 @@ You can now take advantage of collection literals, as summarized in the followin
 
 Here is a sample usage:
 
-```golo
+{% highlight golo %}
 let data = map[
   ["foo", "bar"],
   ["plop", set[1, 2, 3, 4, 5]],
@@ -47,13 +47,13 @@ let data = map[
     ["email", "bean@outlook.com"]
   ]]
 ]
-```
+{% endhighlight %}
 
 ### Structs
 
 Structs are great if you need to define data types:
 
-```golo
+{% highlight golo %}
 module sample
 
 struct Person = { name, age, email }
@@ -64,13 +64,13 @@ function main = |args| {
   let p2 = Person(): name("John"): age(32): email("john@b-root.com")
   println(p2: age())
 }
-```
+{% endhighlight %}
 
 Structs come with many goodies, including proper `toString()`, `equals()` and `hashCode()` implementations. They are iterable, and immutable copies can be made.
 
 Because structs translate to real JVM classes, you may also take advantage of *augmentations* to add behavior, as the following example shows:
 
-```golo
+{% highlight golo %}
 module StructDemo
 
 struct Point = { x, y }
@@ -90,7 +90,8 @@ function main = |args| {
   p: move(10, 5)
   println(p)
 }
-```
+{% endhighlight %}
+
 ### Dynamic object performance
 
 The runtime method dispatch logic for dynamic objects has been rewritten. The new `invokedynamic`-based plumbing results in a simpler code with less call site invalidations.

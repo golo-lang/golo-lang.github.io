@@ -24,7 +24,7 @@ request handlers to subclass `spark.Route` at some point.
 
 Here is how this can be done in Golo:
 
-```golo
+{% highlight golo %}
 module sparky
 
 import spark
@@ -41,7 +41,7 @@ function main = |args| {
       }]
     ]]
   ]
-  
+
   # Adapter "factory"
   let fabric = AdapterFabric()
   let routeMaker = fabric: maker(adaptation)
@@ -49,7 +49,7 @@ function main = |args| {
   # Make Spark happy
   get(routeMaker: newInstance("/"))
 }
-```
+{% endhighlight %}
 
 The API allows for more fancy things, including overriding methods and doing some form of
 proxying.
@@ -57,7 +57,7 @@ proxying.
 The following snippet is an example where we proxy a list to replicate all `add` method calls into
 another list called `carbonCopy`:
 
-```golo
+{% highlight golo %}
 let carbonCopy = list[]
 let conf = map[
   ["extends", "java.util.ArrayList"],
@@ -81,7 +81,7 @@ list: add("baz")
 
 # Guess what is inside carbonCopy...
 println(carbonCopy)
-```
+{% endhighlight %}
 
 #### Classpath flag
 
@@ -113,4 +113,3 @@ Reading passwords from the standard console input (`readPassword`) can now be ma
 - [Read the Golo programming language guide](/documentation/next/)
 - [Fork the project on GitHub](https://github.com/golo-lang/golo-lang)
 - [Get in touch on our mailing-list](http://groups.google.com/group/golo-lang)
-
