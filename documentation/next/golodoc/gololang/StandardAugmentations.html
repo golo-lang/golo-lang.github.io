@@ -286,6 +286,8 @@
       
       <li><a href="#java.util.Map$Entry.destruct_this">destruct(this)</a></li>
       
+      <li><a href="#java.util.Map$Entry.toArray_this">toArray(this)</a></li>
+      
     </ul></li>
     
     <li><a href="#augment.java.util.Set">java.util.Set</a><ul>
@@ -866,7 +868,7 @@ needed since for Golo everything is an <code>Object</code> and <code>remove</cod
       
       <a class="permalink" href="#java.util.Map.add_this_kv" title="link to this section">&#182;</a></h4>
       <div>
-        <p>Adds a tuple [key, value] or a map entry and returns the map.</p>
+        <p>Adds a tuple <code>[key, value]</code> or a map entry and returns the map.</p>
 
       </div>
     
@@ -985,7 +987,7 @@ value is <code>null</code>.</p>
       <div>
         <p>Maps entries of the map using a function.</p>
 <p><code>func</code> takes 2 arguments: a key and a value. The returned value must have <code>getKey()</code> and
-getValue()<code>to represent a map entry. We suggest using the predefined</code>mapEntry(key, value)`
+<code>getValue()</code> to represent a map entry. We suggest using the predefined <code>mapEntry(key, value)</code>
 function as it returns such object.</p>
 
       </div>
@@ -1037,6 +1039,15 @@ function as it returns such object.</p>
       <a class="permalink" href="#java.util.Map$Entry.destruct_this" title="link to this section">&#182;</a></h4>
       <div>
         <p>Destructurate a map entry in key and value</p>
+
+      </div>
+    
+      
+        <h4 id="java.util.Map$Entry.toArray_this">toArray(this)
+      
+      <a class="permalink" href="#java.util.Map$Entry.toArray_this" title="link to this section">&#182;</a></h4>
+      <div>
+        <p>Convert then entry into an array containing the key and the value.</p>
 
       </div>
     

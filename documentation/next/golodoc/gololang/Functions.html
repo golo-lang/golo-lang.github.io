@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>Documentation for gololang.Functions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      line-height: 1.5;
+      margin: 2em 3em 2em 20%;
+      text-align: left;
+      padding: 0 100px 0 100px;
+    }
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 80%;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    li p {
+      margin: 0.3em;
+    }
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 36px;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 30px;
+    }
+    h3 {
+      color: #666;
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 21px;
+    }
+    h5 {
+      font-size: 18px;
+    }
+
+    #toc {
+      margin: 0;
+      padding: 1em;
+      border-right: 1px solid #aaa;
+      font-size: 80%;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      width: 20%;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    #toc ul {
+      padding-left: 1em;
+    }
+
+    #toc > li {
+      list-style: none;
+      margin-bottom: 1ex;
+    }
+
+    #toc > li > a {
+      font-weight: bold;
+    }
+
+    :target {
+      background-color: yellow;
+    }
+
+    .permalink {
+      margin-left: .3em;
+      font-size: 70%;
+      visibility: hidden;
+    }
+
+    *:hover > .permalink {
+      visibility: visible;
+    }
+
+  </style>
+</head>
+<body>
+<h1>Documentation for gololang.Functions</h1>
+<div>
+  <p>This module contains several functions and higher order functions or
+decorators, mostly useful with HOF like <code>map</code>, <code>reduce</code> or in generators.</p>
+<p>Indeed, using HOF often require some classical functions like constants one,
+identity, or classical operators.</p>
+<p>Most of the times, these functions needs to be unary ones, i.e.
+have only one parameter. This module contains, among others, functions helping in the arity
+conversion of such functions:</p>
+<ul>
+<li><a href="#curry_f"><code>curry</code></a> that makes a function automatically partializable,</li>
+<li><a href="#uncurry_f"><code>uncurry</code></a> that is the reverse of <code>curry</code>,</li>
+<li><a href="#unary_f"><code>unary</code></a> and <a href="#spreader_f"><code>spreader</code></a> that convert a polyadic function into a unary
+function taking an array or a tuple of values instead of several
+values,</li>
+<li><a href="#varargs_f"><code>varargs</code></a> which is the reverse of <code>unary</code></li>
+</ul>
+<p>Most of the binary operator functions defined here are curried. To ease
+partialization, the non commutative operators have a reversed version, with
+arguments swapped.
+For example, using the reverse division operator <a href="#rdiv_x_y"><code>rdiv</code></a> with
+<a href="StandardAugmentations.html#java.util.List.map_this_func"><code>map</code></a></p>
+<pre><code>[2, 4, 8]: map(rdiv(2)) == [1, 2, 4]
+</code></pre>
+<p>The identity function <a href="#id_x"><code>id</code></a>, the constant function
+<a href="#const_val"><code>const</code></a>, together with composition (<code>FunctionReference::andThen</code>,
+<a href="#pipe_funcs"><code>pipe</code></a>, <a href="#compose_funcs"><code>compose</code></a>) and <a href="#io_block"><code>io</code></a> can be
+used to create monad-like processing chains.</p>
+
+</div>
+
+<!-- begin table of content -->
+<ul id="toc">
+
+  
+
+  
+
+
+
+  
+
+  
+
+  
+  <li><a href="#functions">Functions</a><ul>
+    
+    <li><a href="#False__">False(_)</a></li>
+    
+    <li><a href="#Null__">Null(_)</a></li>
+    
+    <li><a href="#True__">True(_)</a></li>
+    
+    <li><a href="#add_value_element">add(value, element)</a></li>
+    
+    <li><a href="#addTo_element_value">addTo(element, value)</a></li>
+    
+    <li><a href="#and_a">and(a)</a></li>
+    
+    <li><a href="#compose_funcs">compose(funcs)</a></li>
+    
+    <li><a href="#cond_predicate_ifTrue_ifFalse_x">cond(predicate, ifTrue, ifFalse, x)</a></li>
+    
+    <li><a href="#const_val">const(val)</a></li>
+    
+    <li><a href="#contains_value_collection">contains(value, collection)</a></li>
+    
+    <li><a href="#curry_f">curry(f)</a></li>
+    
+    <li><a href="#div_x_y">div(x, y)</a></li>
+    
+    <li><a href="#eq_a_b">eq(a, b)</a></li>
+    
+    <li><a href="#even_a">even(a)</a></li>
+    
+    <li><a href="#fst_t">fst(t)</a></li>
+    
+    <li><a href="#ge_a_b">ge(a, b)</a></li>
+    
+    <li><a href="#getitem_obj_i">getitem(obj, i)</a></li>
+    
+    <li><a href="#getter_i">getter(i)</a></li>
+    
+    <li><a href="#gt_a_b">gt(a, b)</a></li>
+    
+    <li><a href="#id_x">id(x)</a></li>
+    
+    <li><a href="#invokeWith_args">invokeWith(args)</a></li>
+    
+    <li><a href="#io_block">io(block)</a></li>
+    
+    <li><a href="#is_ref_obj">is(ref, obj)</a></li>
+    
+    <li><a href="#isEmpty_o">isEmpty(o)</a></li>
+    
+    <li><a href="#isnt_ref_obj">isnt(ref, obj)</a></li>
+    
+    <li><a href="#le_a_b">le(a, b)</a></li>
+    
+    <li><a href="#lt_a_b">lt(a, b)</a></li>
+    
+    <li><a href="#mod_a_b">mod(a, b)</a></li>
+    
+    <li><a href="#mul_x_y">mul(x, y)</a></li>
+    
+    <li><a href="#ne_a_b">ne(a, b)</a></li>
+    
+    <li><a href="#neg_x">neg(x)</a></li>
+    
+    <li><a href="#not_a">not(a)</a></li>
+    
+    <li><a href="#odd_a">odd(a)</a></li>
+    
+    <li><a href="#oftype_type_object">oftype(type, object)</a></li>
+    
+    <li><a href="#or_a">or(a)</a></li>
+    
+    <li><a href="#orIfNull_fallback_value">orIfNull(fallback, value)</a></li>
+    
+    <li><a href="#pipe_funcs">pipe(funcs)</a></li>
+    
+    <li><a href="#pow_a_b">pow(a, b)</a></li>
+    
+    <li><a href="#pred_x">pred(x)</a></li>
+    
+    <li><a href="#rdiv_x_y">rdiv(x, y)</a></li>
+    
+    <li><a href="#recur_f">recur(f)</a></li>
+    
+    <li><a href="#rmod_a_b">rmod(a, b)</a></li>
+    
+    <li><a href="#rpow_a_b">rpow(a, b)</a></li>
+    
+    <li><a href="#rsub_x_y">rsub(x, y)</a></li>
+    
+    <li><a href="#setitem_obj_i_v">setitem(obj, i, v)</a></li>
+    
+    <li><a href="#snd_t">snd(t)</a></li>
+    
+    <li><a href="#spreader_f">spreader(f)</a></li>
+    
+    <li><a href="#str_o">str(o)</a></li>
+    
+    <li><a href="#sub_x_y">sub(x, y)</a></li>
+    
+    <li><a href="#succ_x">succ(x)</a></li>
+    
+    <li><a href="#swap_v">swap(v)</a></li>
+    
+    <li><a href="#swapArgs_func">swapArgs(func)</a></li>
+    
+    <li><a href="#swapCouple_couple">swapCouple(couple)</a></li>
+    
+    <li><a href="#swapCurry_func">swapCurry(func)</a></li>
+    
+    <li><a href="#unary_f">unary(f)</a></li>
+    
+    <li><a href="#uncurry_f">uncurry(f)</a></li>
+    
+    <li><a href="#until_predicate_fun">until(predicate, fun)</a></li>
+    
+    <li><a href="#varargs_f">varargs(f)</a></li>
+    
+    <li><a href="#xor_a_b">xor(a, b)</a></li>
+    
+  </ul></li>
+  
+</ul>
+<!-- end table of content -->
+
+
+
+
+
+
+
+
+
+
+
+  <h2 id="functions">Functions</h2>
+  
+    <h3 id="False__">False(_)
+    <a class="permalink" href="#False__" title="link to this section">&#182;</a></h3>
+    <div>
+      <p><code>false</code> constant function.</p>
+
+    </div>
+  
+    <h3 id="Null__">Null(_)
+    <a class="permalink" href="#Null__" title="link to this section">&#182;</a></h3>
+    <div>
+      <p><code>null</code> constant function.</p>
+
+    </div>
+  
+    <h3 id="True__">True(_)
+    <a class="permalink" href="#True__" title="link to this section">&#182;</a></h3>
+    <div>
+      <p><code>true</code> constant function.</p>
+
+    </div>
+  
+    <h3 id="add_value_element">add(value, element)
+    <a class="permalink" href="#add_value_element" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Polymorphic addition and concatenation.</p>
+<p>Adds <code>value</code> to <code>element</code>.
+The behavior depends on the type of <code>element</code>:</p>
+<ul>
+<li>if a number or a string, equivalent to using <code>+</code>;</li>
+<li>if a collection, equivalent to invoking <code>add</code> and returning the collection;</li>
+<li>if an <code>Appendable</code> or a <code>StringBuilder</code>, equivalent to invoking <code>append</code> and
+returning the collection.</li>
+</ul>
+<p>This function is <em>swapped</em> and curried. For instance:</p>
+<pre><code>add("b", "a") == "ab"
+
+list[1, 2, 3]: map(add(3)) == list[4, 5, 6]
+
+add("a", StringBuilder()): toString() == "a"
+
+let f = add(42): andThen(add(1337)): andThen(add(69))
+f(list[]) == list[42, 1337, 69]
+f(0) == 1448
+f(StringBuilder()): toString() == "42133769"
+</code></pre>
+<ul>
+<li><em>param</em> <code>value</code>: the value to add</li>
+<li><em>param</em> <code>element</code>: the element to add the value to</li>
+</ul>
+<p>See also <a href="#addTo_element_value"><code>addTo</code></a></p>
+
+    </div>
+  
+    <h3 id="addTo_element_value">addTo(element, value)
+    <a class="permalink" href="#addTo_element_value" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Not swapped version of <a href="#add_value_element"><code>add</code></a></p>
+
+    </div>
+  
+    <h3 id="and_a">and(a)
+    <a class="permalink" href="#and_a" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried boolean <em>and</em>.</p>
+<p>This implementation is lazy.</p>
+<p>The arguments can be boolean expressions or predicate functions. If called with
+predicate functions, returns a new predicate function.</p>
+<pre><code>`and(a, b) == (a and b)
+`and(gt(10), ^even) == |x| -&gt; a &gt; 10 and x % 2 == 0
+</code></pre>
+<p>See also <a href="#or_a"><code>or</code></a>, <a href="#not_a"><code>not</code></a>, <a href="#xor_a_b"><code>xor</code></a></p>
+
+    </div>
+  
+    <h3 id="compose_funcs">compose(funcs)
+    <a class="permalink" href="#compose_funcs" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Function composition.</p>
+<pre><code>compose(f1, f2, f3)(x) == f1(f2(f3(x)))
+</code></pre>
+<p>This is similar to <a href="#pipe_funcs"><code>pipe</code></a>, but with functions order
+reversed (<em>B</em> combinator).</p>
+
+    </div>
+  
+    <h3 id="cond_predicate_ifTrue_ifFalse_x">cond(predicate, ifTrue, ifFalse, x)
+    <a class="permalink" href="#cond_predicate_ifTrue_ifFalse_x" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Conditional application combinator.</p>
+<p>Equivalent to using the <code>match</code> construct:</p>
+<pre><code>let r = cond(predicate, ifTrue, ifFalse, x)
+
+# equivalent to
+let r = match {
+  when predicate(x) then ifTrue(x)
+  otherwise ifFalse(x)
+}
+</code></pre>
+<p>Since this function is curried, it can be used as:</p>
+<pre><code>let f = cond(predicate, ifTrue, ifFalse)
+
+# equivalent to
+let f = |x| -&gt; match {
+  when predicate(x) then ifTrue(x)
+  otherwise ifFalse(x)
+}
+</code></pre>
+<ul>
+<li><em>param</em> <code>predicate</code> a boolean function</li>
+<li><em>param</em> <code>ifTrue</code> the unary function to apply if <code>predicate</code> holds</li>
+<li><em>param</em> <code>ifFalse</code> the unary function to apply otherwise</li>
+</ul>
+
+    </div>
+  
+    <h3 id="const_val">const(val)
+    <a class="permalink" href="#const_val" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>The constant function.</p>
+<p>Returns a new variadic functions that always returns <code>val</code>, ignoring its
+arguments. For example:</p>
+<pre><code>let theAnswerTo = const(42)
+
+theAnswerTo() == 42
+theAnswerTo(1, 2, 3) == 42
+theAnswerTo("Life, the Universe and Everything") == 42
+</code></pre>
+<p>One interesting use case is to write "pipe" like composition, with the argument
+on the left:</p>
+<pre><code>const(42): andThen(f): andThen(g): andThen(h)() == h(g(f(42)))
+</code></pre>
+<p>This is also the <em>K</em> combinator.</p>
+
+    </div>
+  
+    <h3 id="contains_value_collection">contains(value, collection)
+    <a class="permalink" href="#contains_value_collection" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Swapped curried containment test.</p>
+<p>Checks if <code>collection</code> contains <code>value</code>.
+The collection object can be anything with a <code>contains</code> method.</p>
+<p>For instance:</p>
+<pre><code>let predicate = contains(42)
+if (predicate(collection)) {
+  ...
+}
+</code></pre>
+<ul>
+<li><em>param</em> <code>value</code>: the value to test for containment</li>
+<li><em>param</em> <code>collection</code>: any object having a <code>contains</code> method</li>
+</ul>
+
+    </div>
+  
+    <h3 id="curry_f">curry(f)
+    <a class="permalink" href="#curry_f" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Function to curryfy a function, i.e. transforms a polyadic function into a
+sequence of variadic functions. This allows for automatic partial application.</p>
+<p>This is equivalent to applying <code>invokeOrBind</code> on each call.</p>
+<p>E.g.</p>
+<pre><code>function f = |a, b, c| -&gt; a + b + c
+
+let g = curry(^f)
+
+g(29)(10)(3) == f(29, 10, 3)
+g(29, 10)(3) == 42
+g(29)(10, 3) == 42
+
+let g1 = g(29)
+let g2 = g1(10)
+let g3 = g(29, 10)
+
+g(29, 10, 3) == 42
+g1(10, 3) == 42
+g1(10)(3) == 42
+g2(3) == 42
+g3(3) == 42
+</code></pre>
+<p>This is particularly useful to allow composing polyadic functions. For
+instance, with the previous <code>g</code>:</p>
+<pre><code>let h = g(2, 20): andThen(g("The answer", " is "))
+h(20) == "The answer is 42"
+</code></pre>
+<p>If the function is variadic, only the fixed parameters can be partialized.
+For instance, given:</p>
+<pre><code>@!curry
+function f = |a, b, c...| -&gt; ...
+...
+let g = f(1, 2)
+</code></pre>
+<p>then <code>g</code> is a variadic function that can't be called partially. All the
+following calls are valids:</p>
+<pre><code>g()
+g(1)
+g(1, 2, 3)
+</code></pre>
+<p>but</p>
+<pre><code>g(1)(2)
+</code></pre>
+<p>is not.</p>
+<p>This function can also be used as a decorator.</p>
+<ul>
+<li><em>param</em> <code>f</code> the function to curry</li>
+<li><em>return</em> a variadic function dispatching on <code>f</code> that can be partialized</li>
+</ul>
+<p>See also <a href="#uncurry_f"><code>uncurry</code></a></p>
+
+    </div>
+  
+    <h3 id="div_x_y">div(x, y)
+    <a class="permalink" href="#div_x_y" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried division.</p>
+<pre><code>div(x, y) == x / y
+</code></pre>
+<p>See also <a href="#mul_x_y"><code>mul</code></a>, <a href="#rdiv_x_y"><code>rdiv</code></a></p>
+
+    </div>
+  
+    <h3 id="eq_a_b">eq(a, b)
+    <a class="permalink" href="#eq_a_b" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried <em>equal</em>.</p>
+<pre><code>eq(a, b) == (a == b)
+</code></pre>
+<p>See also <a href="#ne_a_b"><code>ne</code></a></p>
+
+    </div>
+  
+    <h3 id="even_a">even(a)
+    <a class="permalink" href="#even_a" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Checks if the value is even.</p>
+<p>See also <a href="#odd_a"><code>odd</code></a></p>
+
+    </div>
+  
+    <h3 id="fst_t">fst(t)
+    <a class="permalink" href="#fst_t" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>First element of a list, tuple, vector, array.</p>
+<pre><code>fst([a, b]) == a
+</code></pre>
+<ul>
+<li><em>param</em> <code>t</code>: any object with a <code>get</code> method and at least one element.</li>
+<li><em>throws</em> an <code>IndexOutOfBoundsException</code> if the object is empty.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="ge_a_b">ge(a, b)
+    <a class="permalink" href="#ge_a_b" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried swapped <em>greater than or equal</em>.</p>
+<pre><code>ge(a, b) == (b &gt;= a)
+</code></pre>
+<p>Note: this function is swapped to make curried version more readable.</p>
+<p>See also <a href="#lt_a"><code>lt</code></a>, <a href="#le_a"><code>le</code></a>, <a href="#gt_a"><code>gt</code></a></p>
+
+    </div>
+  
+    <h3 id="getitem_obj_i">getitem(obj, i)
+    <a class="permalink" href="#getitem_obj_i" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried indexing.</p>
+<pre><code>getitem(obj, i) == obj: get(i)
+</code></pre>
+<p>Throws an <code>IndexOutOfBoundsException</code> (for a collection-like object) or returns
+<code>null</code> (for a map-like object) if the index is not present.</p>
+<ul>
+<li><em>param</em> <code>obj</code>: any object having a <code>get</code> method</li>
+<li><em>param</em> <code>i</code>: the index to get</li>
+</ul>
+<p>See also <a href="#setitem_obj_i"><code>setitem</code></a>, <a href="#getter_i"><code>getter</code></a></p>
+
+    </div>
+  
+    <h3 id="getter_i">getter(i)
+    <a class="permalink" href="#getter_i" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Indexer factory (curried indexing).</p>
+<pre><code>let third = getter(2)
+third([1, 2, 3, 4]) -&gt; 3
+</code></pre>
+<p>See also <a href="#getitem_obj_i"><code>getitem</code></a></p>
+
+    </div>
+  
+    <h3 id="gt_a_b">gt(a, b)
+    <a class="permalink" href="#gt_a_b" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried swapped <em>greater than</em>.</p>
+<pre><code>gt(a, b) == b &gt; a
+</code></pre>
+<p>Note: this function is swapped to make curried version more readable.</p>
+<p>See also <a href="#lt_a"><code>lt</code></a>, <a href="#le_a"><code>le</code></a>, <a href="#ge_a"><code>ge</code></a></p>
+
+    </div>
+  
+    <h3 id="id_x">id(x)
+    <a class="permalink" href="#id_x" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>The identity function.</p>
+<p>Returns it's argument unchanged. This can be useful with
+<em>higher order functions</em> (<em>I</em> combinator).</p>
+
+    </div>
+  
+    <h3 id="invokeWith_args">invokeWith(args)
+    <a class="permalink" href="#invokeWith_args" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Reversed curried function application.</p>
+<p>Apply the given function to the given value.</p>
+<pre><code>invokeWith("a", "b", "c")(f) == f("a", "b", "c")
+</code></pre>
+<p>For instance, given a list of functions:</p>
+<pre><code>list[f, g, h]: map(invokeWith(42)) == list[f(42), g(42), h(42)]
+</code></pre>
+<p>It can also be used to promote a value in continuation passing style.</p>
+<ul>
+<li><em>param</em> <code>args</code> the values on which apply the function</li>
+</ul>
+
+    </div>
+  
+    <h3 id="io_block">io(block)
+    <a class="permalink" href="#io_block" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Transform a function with side effects (generally IO operations, thus the name)
+into a function applying the side effect and returning its argument.</p>
+<p>The given function can have no parameters, or accept an argument.</p>
+<p>This can be used to insert such a function into a composition chain:</p>
+<pre><code>f1: andThen(io({println("hello")})): andThen(f2)
+f1: andThen(io(|x|{println("got " + x)})): andThen(f2)
+</code></pre>
+<ul>
+<li><em>param</em> <code>block</code> a function with side effects</li>
+</ul>
+<p>See also <a href="#pipe_funcs"><code>pipe</code></a> and <a href="#compose_funcs"><code>compose</code></a></p>
+
+    </div>
+  
+    <h3 id="is_ref_obj">is(ref, obj)
+    <a class="permalink" href="#is_ref_obj" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried identity comparison</p>
+<pre><code>`is(ref, obj) == obj is ref
+</code></pre>
+<p>Parameters are swapped to ease partialization, as in:</p>
+<pre><code>lst: filter(is(ref))
+</code></pre>
+
+    </div>
+  
+    <h3 id="isEmpty_o">isEmpty(o)
+    <a class="permalink" href="#isEmpty_o" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Emptiness test.</p>
+<p>Checks if the collection-like argument is empty.</p>
+
+    </div>
+  
+    <h3 id="isnt_ref_obj">isnt(ref, obj)
+    <a class="permalink" href="#isnt_ref_obj" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried difference comparison</p>
+<pre><code>`isnt(ref, obj) = obj isnt ref
+</code></pre>
+<p>Like <code>is</code>, this is more useful partialized. For instance:</p>
+<pre><code>lst: filter(`isnt(null))
+</code></pre>
+
+    </div>
+  
+    <h3 id="le_a_b">le(a, b)
+    <a class="permalink" href="#le_a_b" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried swapped <em>less than or equal</em>.</p>
+<pre><code>le(a, b) == (a &lt;= b)
+</code></pre>
+<p>Note: this function is swapped to make curried version more readable.</p>
+<p>See also <a href="#lt_a"><code>lt</code></a>, <a href="#ge_a"><code>ge</code></a>, <a href="#gt_a"><code>gt</code></a></p>
+
+    </div>
+  
+    <h3 id="lt_a_b">lt(a, b)
+    <a class="permalink" href="#lt_a_b" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried swapped <em>less than</em>.</p>
+<pre><code>lt(a, b) == b &lt; a
+
+lt(42) == |x| -&gt; x &lt; 42
+</code></pre>
+<p>Note: this function is swapped to make curried version more readable: <code>lt(42)</code>
+is a predicate testing if its argument is "less than 42".</p>
+<p>See also <a href="#le_a"><code>le</code></a>, <a href="#gt_a"><code>gt</code></a>, <a href="#ge_a"><code>ge</code></a></p>
+
+    </div>
+  
+    <h3 id="mod_a_b">mod(a, b)
+    <a class="permalink" href="#mod_a_b" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried modulo.</p>
+<pre><code>mod(a, b) == a % b
+</code></pre>
+<p>See also <a href="#rmod_a_b"><code>rmod</code></a></p>
+
+    </div>
+  
+    <h3 id="mul_x_y">mul(x, y)
+    <a class="permalink" href="#mul_x_y" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried multiplication.</p>
+<pre><code>mul(x, y) == x * y
+</code></pre>
+<p>See also <a href="#div_x_y"><code>div</code></a></p>
+
+    </div>
+  
+    <h3 id="ne_a_b">ne(a, b)
+    <a class="permalink" href="#ne_a_b" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried <em>not equal</em>.</p>
+<pre><code>ne(a, b) == (a != b)
+</code></pre>
+<p>See also <a href="#eq_a_b"><code>eq</code></a></p>
+
+    </div>
+  
+    <h3 id="neg_x">neg(x)
+    <a class="permalink" href="#neg_x" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Opposite (negative value).</p>
+<pre><code>neg(x) == -x
+</code></pre>
+<p>Same as <code>mul(-1)</code></p>
+
+    </div>
+  
+    <h3 id="not_a">not(a)
+    <a class="permalink" href="#not_a" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Polymorphic negation function.</p>
+<ul>
+<li>when given a boolean-like value, returns its negation.</li>
+<li>when given a predicate function, returns a new function returning the
+negated result.</li>
+</ul>
+<p>E.g.</p>
+<pre><code>list[true, false, false]: map(^not) == list[false, true, true]
+
+let even = |a| -&gt; (a % 2) == 0
+let odd = `not(even)
+</code></pre>
+<p>See also <a href="#and_a"><code>and</code></a>, <a href="#or_a"><code>or</code></a></p>
+
+    </div>
+  
+    <h3 id="odd_a">odd(a)
+    <a class="permalink" href="#odd_a" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Checks if the value is odd.</p>
+<p>See also <a href="#even_a"><code>even</code></a></p>
+
+    </div>
+  
+    <h3 id="oftype_type_object">oftype(type, object)
+    <a class="permalink" href="#oftype_type_object" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried type checking</p>
+<pre><code>`oftype(type, obj) = obj oftype type
+</code></pre>
+<p>Partialized version can be used as a predicate, for instance in <code>filter</code>:</p>
+<pre><code>alist: filter(`oftype(String.class))
+</code></pre>
+
+    </div>
+  
+    <h3 id="or_a">or(a)
+    <a class="permalink" href="#or_a" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried boolean <em>or</em>.</p>
+<pre><code>`or(a, b) == (a or b)
+</code></pre>
+<p>This implementation is lazy.</p>
+<p>The arguments can be boolean expressions or predicate functions. If called with
+predicate functions, returns a new predicate function.</p>
+<p>See also <a href="#and_a"><code>and</code></a>, <a href="#not_a"><code>not</code></a>, <a href="#xor_a_b"><code>xor</code></a></p>
+
+    </div>
+  
+    <h3 id="orIfNull_fallback_value">orIfNull(fallback, value)
+    <a class="permalink" href="#orIfNull_fallback_value" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Null value substitution</p>
+<pre><code>`orIfNull(0, 3) == 3
+`orIfNull(0, null) == 0
+</code></pre>
+<p>This function can be useful, for example, to replace <code>null</code> values in a list with
+a map:</p>
+<pre><code>list[1, 2, null, 3]:map(`orIfNull(0)) == list[1, 2, 0, 3]
+</code></pre>
+
+    </div>
+  
+    <h3 id="pipe_funcs">pipe(funcs)
+    <a class="permalink" href="#pipe_funcs" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Function chaining.</p>
+<p>This is similar to Unix pipe:</p>
+<pre><code>pipe(f1, f2, f3)(x) == f3(f2(f1(x))))
+</code></pre>
+<p>i.e. apply <code>f1</code> to <code>x</code>, then pass it to <code>f2</code>, and then <code>f3</code>.
+This is the same as <code>f1: andThen(f2): andThen(f3)(x)</code></p>
+<p>You can insert a side-effect only function in the chain using <a href="#io_block"><code>io</code></a>:</p>
+<pre><code>pipe(f1, io({println("hello")}), f2)(42)
+</code></pre>
+<p>is equivalent to:</p>
+<pre><code>let tmp = f1(x)
+println("hello")
+f2(tmp)
+</code></pre>
+<p>This is similar to <a href="#compose_funcs"><code>compose</code></a>, but with functions order
+reversed.</p>
+<p>Example:</p>
+<pre><code>let cmd = pipe(mul(2), add(4), ^toString, addTo("val: "))
+cmd(19) == "val: 42"
+let other = pipe(^intValue, add(4), mul(2))
+other("17") == 42
+</code></pre>
+<p>If no function is given, returns <a href="#id_x"><code>id</code></a></p>
+<p>For a similar construct that deal with errors, see for instance the
+<a href="Errors.html#java.util.Optional.andThen_this_f"><code>gololang.Errors</code></a> module</p>
+
+    </div>
+  
+    <h3 id="pow_a_b">pow(a, b)
+    <a class="permalink" href="#pow_a_b" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried power.</p>
+<pre><code>pow(a, 2) == a*a
+</code></pre>
+<p>Does an implicit conversion to double.</p>
+<p>See also <a href="#rpow_a_b"><code>rpow</code></a></p>
+
+    </div>
+  
+    <h3 id="pred_x">pred(x)
+    <a class="permalink" href="#pred_x" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Number predecessor (side-effect free decrement).</p>
+<pre><code>pred(x) == x - 1
+</code></pre>
+<p>See also <a href="#succ_x"><code>succ</code></a></p>
+
+    </div>
+  
+    <h3 id="rdiv_x_y">rdiv(x, y)
+    <a class="permalink" href="#rdiv_x_y" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Reverse curried division.</p>
+<pre><code>rdiv(y, x) == x / y
+</code></pre>
+<p>See also  <a href="#mul_x_y"><code>mul</code></a>,  <a href="#div_x_y"><code>div</code></a></p>
+
+    </div>
+  
+    <h3 id="recur_f">recur(f)
+    <a class="permalink" href="#recur_f" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Fixed-point combinator.</p>
+<p>This is an abstraction of recursion.</p>
+<ul>
+<li><em>param</em> <code>f</code> the function that will recur</li>
+<li><em>retun</em> a function that makes recursive call to <code>f</code></li>
+</ul>
+
+    </div>
+  
+    <h3 id="rmod_a_b">rmod(a, b)
+    <a class="permalink" href="#rmod_a_b" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Reverse curried modulo.</p>
+<pre><code>rmod(a, b) == b % a
+</code></pre>
+<p>See also <a href="#mod_a_b"><code>mod</code></a></p>
+
+    </div>
+  
+    <h3 id="rpow_a_b">rpow(a, b)
+    <a class="permalink" href="#rpow_a_b" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Reversed curried power.</p>
+<pre><code>rpow(2, a) == a*a
+</code></pre>
+<p>Does an implicit conversion to double.</p>
+<p>See also <a href="#pow_a_b"><code>pow</code></a></p>
+
+    </div>
+  
+    <h3 id="rsub_x_y">rsub(x, y)
+    <a class="permalink" href="#rsub_x_y" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Reversed curried subtract.</p>
+<pre><code>rsub(x, y) == y - x
+</code></pre>
+<p>See also <a href="#sub_x_y"><code>sub</code></a></p>
+
+    </div>
+  
+    <h3 id="setitem_obj_i_v">setitem(obj, i, v)
+    <a class="permalink" href="#setitem_obj_i_v" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried indexed assignment</p>
+<pre><code>setitem(obj, i, v) == obj: set(i, v)
+</code></pre>
+<ul>
+<li><em>param</em> <code>obj</code>: any object having a <code>set</code> method</li>
+<li><em>param</em> <code>i</code>: the index to set</li>
+<li><em>param</em> <code>v</code>: the value to set</li>
+</ul>
+<p>See also <a href="#getitem_obj_i"><code>getitem</code></a>, <a href="#getter_i"><code>getter</code></a></p>
+
+    </div>
+  
+    <h3 id="snd_t">snd(t)
+    <a class="permalink" href="#snd_t" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Second element of a list, tuple, vector, array.</p>
+<pre><code>snd([a, b]) == b
+</code></pre>
+<ul>
+<li><em>param</em> <code>t</code>: any object with a <code>get</code> method and at least two elements.</li>
+<li><em>throws</em> an <code>IndexOutOfBoundsException</code> if the object has less than 2 elements.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="spreader_f">spreader(f)
+    <a class="permalink" href="#spreader_f" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Convers a polyadic function into an unary function.</p>
+<p>Similar to <a href="#unary_f"><code>unary</code></a> but using <code>spread</code> instead of <code>invoke</code>.</p>
+<p>This function can also be used as a decorator.</p>
+<p>See also <a href="#varargs_f"><code>varargs</code></a></p>
+
+    </div>
+  
+    <h3 id="str_o">str(o)
+    <a class="permalink" href="#str_o" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Converts its argument to a <code>String</code>.</p>
+
+    </div>
+  
+    <h3 id="sub_x_y">sub(x, y)
+    <a class="permalink" href="#sub_x_y" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried subtract.</p>
+<pre><code>sub(x, y) == x - y
+</code></pre>
+<p>See also <a href="#add_value_element"><code>add</code></a>, <a href="#rsub_x_y"><code>rsub</code></a></p>
+
+    </div>
+  
+    <h3 id="succ_x">succ(x)
+    <a class="permalink" href="#succ_x" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Number successor (side-effect free increment).</p>
+<pre><code>succ(x) == x + 1
+</code></pre>
+<p>Equivalent to <code>add(1)</code></p>
+<p>See also <a href="#pred_x"><code>pred</code></a></p>
+
+    </div>
+  
+    <h3 id="swap_v">swap(v)
+    <a class="permalink" href="#swap_v" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Polymorphic swapping.</p>
+<p>This function dispatches on <a href="#swapArgs_func"><code>swapArgs</code></a>,
+<a href="#swapCurry_func"><code>swapCurry</code></a> or <a href="#swapCouple_couple"><code>swapCouple</code></a> according
+to its parameter.</p>
+<p>Note that we have the property that given a binary function <code>f</code> and a
+couple <code>c</code></p>
+<pre><code>unary(f)(swap(c)) == unary(swap(f))(c)
+</code></pre>
+<p>When applied to functions, equivalent to the <em>C</em> combinator.</p>
+
+    </div>
+  
+    <h3 id="swapArgs_func">swapArgs(func)
+    <a class="permalink" href="#swapArgs_func" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Change the signature of the given binary function by swapping its arguments,
+such that:</p>
+<pre><code>swapArgs(f)(b, a) == f(a, b)
+</code></pre>
+<p><em>Warning</em>: when using this function with one previously wrapped in
+<a href="#curry_f"><code>curry</code></a> or <a href="#uncurry_f"><code>uncurry</code></a>, the resulting function can't be
+automatically partialized any more.</p>
+
+    </div>
+  
+    <h3 id="swapCouple_couple">swapCouple(couple)
+    <a class="permalink" href="#swapCouple_couple" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Swap the values of a couple.</p>
+<p>The couple can be a tuple, a vector, a list or an array as long as its size is 2.
+The return value as the same type.</p>
+<p>For example:</p>
+<pre><code>swap([a, b]) == [b, a]
+</code></pre>
+
+    </div>
+  
+    <h3 id="swapCurry_func">swapCurry(func)
+    <a class="permalink" href="#swapCurry_func" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Change the signature of the given curried binary function by swapping its
+arguments, such that:</p>
+<pre><code>swapCurry(f)(a)(b) = f(b)(a)
+</code></pre>
+
+    </div>
+  
+    <h3 id="unary_f">unary(f)
+    <a class="permalink" href="#unary_f" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Convers a polyadic function into an unary function.
+E.g.</p>
+<pre><code>let f = |a, b, c| -&gt; a + b + c
+let g = unary(f)
+
+g([1, 2, 3]) == 6
+</code></pre>
+<p>If the function already takes zero or one argument, it is returned
+unchanged.</p>
+<p>This can be useful in HOF, for example to <code>map</code> a binary function on a list of
+couple:</p>
+<pre><code>let f = |a, b| -&gt; ...
+list[["a", 1], ["b", 2], ["c", 3]]: map(unary(f))
+</code></pre>
+<p>results in <code>list[f("a", 1), f("b", 2), f("c", 3)]</code></p>
+<p>The resulting unary function will accept any object having a <code>toArray</code> method
+(array, tuple, collection, map entry, struct...)</p>
+<p>Thus, <code>unary(func)(arg)</code> is equivalent to <code>func: invoke(arg: toArray())</code></p>
+<p>This function can also be used as a decorator.</p>
+<p>See also <a href="#spreader_f"><code>spreader</code></a> and <a href="#varargs_f"><code>varargs</code></a></p>
+
+    </div>
+  
+    <h3 id="uncurry_f">uncurry(f)
+    <a class="permalink" href="#uncurry_f" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Reverse of <a href="#curry_f"><code>curry</code></a>.</p>
+<p>Take a curried function (e.g. <code>|a| -&gt; |b| -&gt; a + b</code>) and return a polyadic
+function (e.g. <code>|a, b| -&gt; a + b</code>).
+It is actually a variadic function calling the curried one in sequence.</p>
+<p>The two functions defined by</p>
+<pre><code>let f = curry(|a, b, c| -&gt; a + b + c)
+let g = uncurry(|a| -&gt; |b| -&gt; |c| -&gt; a + b + c)
+</code></pre>
+<p>have the same behavior.</p>
+<p>This function can also be used as a decorator.</p>
+<ul>
+<li><em>param</em> <code>f</code> the function to uncurry</li>
+<li><em>return</em> a variadic function dispatching on <code>f</code></li>
+</ul>
+<p>See also <a href="#curry_f"><code>curry</code></a></p>
+
+    </div>
+  
+    <h3 id="until_predicate_fun">until(predicate, fun)
+    <a class="permalink" href="#until_predicate_fun" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Apply the given function until the predicate holds.</p>
+<p>For instance:</p>
+<pre><code>let f = until(gt(10), mul(2))
+f(15) == 15
+f(2) == 16
+f(9) == 18
+</code></pre>
+
+    </div>
+  
+    <h3 id="varargs_f">varargs(f)
+    <a class="permalink" href="#varargs_f" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Convert an unary function taking an array into a variadic function.</p>
+<p>This is the contrary of <a href="#unary_f"><code>unary</code></a>.
+E.g.</p>
+<pre><code>let f = |t| -&gt; t:get(0) + t:get(1) + t:get(2)
+let g = varargs(f)
+
+f([1, 2, 3]) == g(1, 2, 3)
+</code></pre>
+<p>This function can also be used as a decorator.</p>
+<p>See also <a href="#spreader_f"><code>spreader</code></a> and <a href="#unary_f"><code>unary</code></a></p>
+
+    </div>
+  
+    <h3 id="xor_a_b">xor(a, b)
+    <a class="permalink" href="#xor_a_b" title="link to this section">&#182;</a></h3>
+    <div>
+      <p>Curried boolean <em>xor</em>.</p>
+<pre><code>xor(a, b) == (a or b) and not (a and b)
+</code></pre>
+<p>The arguments can be boolean expressions or predicate functions. If called with
+predicate functions, returns a new predicate function.</p>
+<p>See also <a href="#and_a"><code>and</code></a>, <a href="#or_a"><code>or</code></a></p>
+
+    </div>
+  
+
+
+</body>
+</html>
