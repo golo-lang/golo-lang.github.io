@@ -6,6 +6,10 @@ title: Publications
 If you want to reference Golo in your publications, you can use the following DOI:
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.16110.svg)](http://dx.doi.org/10.5281/zenodo.16110)
 
+### Technical articles
+
+* [Golo -- A fast, low-ceremony, easy-to-learn language for the JVM](http://www.javamagazine.mozaicreader.com/MarApr2016#&pageSet=54&page=0&contentItem=0) in Oracle Java Magazine March/April 2016.
+
 ### Research publications
 
 * Baptiste Maingret, Frédéric Le Mouël, Julien Ponge, Nicolas Stouls, Jian Cia and Yannick Loiseau. **Towards a Decoupled Context-Oriented Programming Language for the Internet of Things.** _To appear in the [7th International Workshop on Context-Oriented Programming](http://2015.ecoop.org/track/COP-2015-papers) hosted at ECOOP 2015._ Prague, Czech Republic. July 2015.
