@@ -1080,6 +1080,9 @@ commands, notably:</p>
 <p><code>diagnose</code> to print compiler internal diagnosis information, and</p>
 </li>
 <li>
+<p><code>check</code> to check code for compilation errors (e.g. as an editor hook), and</p>
+</li>
+<li>
 <p><code>doc</code> to generate module(s) documentation, and</p>
 </li>
 <li>
@@ -1371,6 +1374,14 @@ API. We give them along with examples in <a href="#data-literals">the data liter
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.lang.Float</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>1.234_F</code>, <code>-1.234_F</code>, <code>1.234e9_F</code>, &#8230;&#8203;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.math.BigInteger</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1_B</code>, <code>-42_B</code>, <code>1_234_B</code>, &#8230;&#8203;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.math.BigDecimal</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1.0_B</code>, <code>-1_234.56_B</code>, <code>1.234e-4_B</code>, &#8230;&#8203;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.lang.Class</code></p></td>
@@ -1734,8 +1745,7 @@ higher-order function on a collection. Indeed, a comprehension such as:</p>
 <p>Thus, should you use collection comprehension or higher-order functions? Despite some
 implementation differences, it&#8217;s above all a matter of taste. Some people
 consider comprehension more readable, since it is more similar to the
-mathematical
-[set-builder notation](<a href="https://en.wikipedia.org/wiki/Set-builder_notation" class="bare">https://en.wikipedia.org/wiki/Set-builder_notation</a>).
+mathematical <a href="https://en.wikipedia.org/wiki/Set-builder_notation">set-builder notation</a>.
 As an example, compare the two functionally equivalent expressions:</p>
 </div>
 <div class="listingblock">
@@ -1887,7 +1897,7 @@ a, b = [b, a]      # a = 2, b = 1</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>+</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Addition on numbers and strings.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1 + 2</code> gives 3.
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1 + 2</code> gives <code>3</code>.
 </p><p class="tableblock"><code>"foo" + "bar"</code> gives <code>"foobar"</code>.
 </p><p class="tableblock"><code>"foo" + something</code> where <code>something</code> is any object instance is equivalent to
 <code>"foo" + something.toString()</code> in Java.</p></td>
@@ -1943,6 +1953,19 @@ in Java.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The algebraic operators can be used with any numeric type having a literal notation
+(see <a href="#data-literals">the data literals table</a> ), including <code>java.math.BigInteger</code> and <code>java.math.BigDecimal</code>.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>The operator precedence rules are as follows:</p>
 </div>
@@ -8634,7 +8657,7 @@ println(foo("abc"))</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-02-26 11:58:33 +01:00
+Last updated 2016-04-14 12:58:03 +02:00
 </div>
 </div>
 <link rel="stylesheet" href="./styles/github.min.css">
