@@ -713,18 +713,19 @@ table.tableblock.grid-all th.tableblock, table.tableblock.grid-all td.tableblock
 <li><a href="#_running_em_hello_world_em">1.3. Running <em>"Hello world"</em></a></li>
 <li><a href="#_compiling_golo_source_code">1.4. Compiling Golo source code</a></li>
 <li><a href="#_running_compiled_golo_code">1.5. Running compiled Golo code</a></li>
-<li><a href="#_passing_jvm_specific_flags">1.6. Passing JVM-specific flags</a></li>
-<li><a href="#_bash_autocompletion">1.7. Bash autocompletion</a></li>
-<li><a href="#_zsh_autocompletion">1.8. Zsh autocompletion</a></li>
-<li><a href="#_comments">1.9. Comments</a></li>
-<li><a href="#_variable_and_constant_references">1.10. Variable and constant references</a></li>
-<li><a href="#_data_literals">1.11. Data literals</a></li>
-<li><a href="#_collection_literals">1.12. Collection literals</a></li>
-<li><a href="#_collection_comprehension">1.13. Collection comprehension</a></li>
-<li><a href="#_destructuring">1.14. Destructuring</a></li>
-<li><a href="#_operators">1.15. Operators</a></li>
-<li><a href="#_calling_a_method">1.16. Calling a method</a></li>
-<li><a href="#_java_jvm_arrays">1.17. Java / JVM arrays</a></li>
+<li><a href="#_running_golo_script">1.6. Running Golo script</a></li>
+<li><a href="#_passing_jvm_specific_flags">1.7. Passing JVM-specific flags</a></li>
+<li><a href="#_bash_autocompletion">1.8. Bash autocompletion</a></li>
+<li><a href="#_zsh_autocompletion">1.9. Zsh autocompletion</a></li>
+<li><a href="#_comments">1.10. Comments</a></li>
+<li><a href="#_variable_and_constant_references">1.11. Variable and constant references</a></li>
+<li><a href="#_data_literals">1.12. Data literals</a></li>
+<li><a href="#_collection_literals">1.13. Collection literals</a></li>
+<li><a href="#_collection_comprehension">1.14. Collection comprehension</a></li>
+<li><a href="#_destructuring">1.15. Destructuring</a></li>
+<li><a href="#_operators">1.16. Operators</a></li>
+<li><a href="#_calling_a_method">1.17. Calling a method</a></li>
+<li><a href="#_java_jvm_arrays">1.18. Java / JVM arrays</a></li>
 </ul>
 </li>
 <li><a href="#_creating_new_project_s">2. Creating new project(s)</a>
@@ -1224,7 +1225,112 @@ $</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_passing_jvm_specific_flags">1.6. Passing JVM-specific flags</h3>
+<h3 id="_running_golo_script">1.6. Running Golo script</h3>
+<div class="paragraph">
+<p>Golo provides a <code>shebang</code> command for running a Golo file as a simple script.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">module hello
+
+function main = |args| {
+  require(args: length() &gt; 1, "You should set at least one argument!")
+  println("Hello " + args: get(1) + " from '" + args: get(0) + "'!")
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>the script above can be executed with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>$ golo shebang hello.golo World
+Hello World from 'hello.golo'!
+$</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Naturally the main goal is to use this command to make the script self-executable:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">#!/path/to/golo shebang
+module hello
+
+function main = |args| {
+  require(args: length() &gt; 1, "You should set at least one argument!")
+  println("Hello " + args: get(1) + " from '" + args: get(0) + "'!")
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, we can run the script directly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ chmod +x hello.golo
+$ ./hello.golo World
+Hello World from 'hello.golo'!
+$</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Golo also provides <code>golosh</code> script that is a shortcut for the <code>golo shebang</code> command, thus
+a golo script can be hasbanged with <code>env</code>:
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">#!/usr/bin/env golosh
+module hello
+
+function main = |args| {
+  require(args: length() &gt; 1, "You should set at least one argument!")
+  println("Hello " + args: get(1) + " from '" + args: get(0) + "'!")
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Each <code>golo</code> and <code>jar</code> files present in the script file&#8217;s directory or the sub directories
+will be scaned.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>$ tree ./
+./
+└── libs
+    └── libA.jar
+    └── libB.jar
+└── commons
+    └── utils.golo
+    └── others.golo
+    └── vendors
+        └── otherlib.jar
+└── hello.golo
+└── library.golo
+$</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_passing_jvm_specific_flags">1.7. Passing JVM-specific flags</h3>
 <div class="paragraph">
 <p>Both <code>golo</code> and <code>run</code> commands can be given JVM-specific flags using the <code>JAVA_OPTS</code> environment
 variable.</p>
@@ -1244,7 +1350,7 @@ $ JAVA_OPTS=-XX:+PrintCompilation golo golo --files samples/fibonacci.golo</code
 </div>
 </div>
 <div class="sect2">
-<h3 id="_bash_autocompletion">1.7. Bash autocompletion</h3>
+<h3 id="_bash_autocompletion">1.8. Bash autocompletion</h3>
 <div class="paragraph">
 <p>A bash script can be found in <code>share/shell-completion/</code> called <code>golo-bash-completion</code> that will provide autocomplete support for the <code>golo</code> and <code>vanilla-golo</code> CLI scripts. You may either <code>source</code> the script, or drop the script into your <code>bash_completion.d/</code> folder and restart your terminal.</p>
 </div>
@@ -1262,13 +1368,13 @@ Not sure where your <code>bash_completion.d/</code> folder is? Try <code>/etc/ba
 </div>
 </div>
 <div class="sect2">
-<h3 id="_zsh_autocompletion">1.8. Zsh autocompletion</h3>
+<h3 id="_zsh_autocompletion">1.9. Zsh autocompletion</h3>
 <div class="paragraph">
 <p>A zsh script can be found in <code>share/shell-completion/</code> called <code>golo-zsh-completion</code> that works using the <code>golo-bash-completion</code> to provide autocomplete support using the bash autocomplete support provided by zsh. Place both files into the same directory and <code>source golo-zsh-completion</code> from your terminal or <code>.zshrc</code> to give it a try!</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_comments">1.9. Comments</h3>
+<h3 id="_comments">1.10. Comments</h3>
 <div class="paragraph">
 <p>Golo comments start with a <code>#</code>, just like in Bash, Python or Ruby:</p>
 </div>
@@ -1280,7 +1386,7 @@ println("Plop") # it works here, too</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_variable_and_constant_references">1.10. Variable and constant references</h3>
+<h3 id="_variable_and_constant_references">1.11. Variable and constant references</h3>
 <div class="paragraph">
 <p>Golo does not check for types at compile time, and they are not declared. Everything happens at
 runtime in Golo.</p>
@@ -1326,7 +1432,7 @@ let 666_club = 666</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_data_literals">1.11. Data literals</h3>
+<h3 id="_data_literals">1.12. Data literals</h3>
 <div class="paragraph">
 <p>Golo supports a set of data literals. They directly map to their counterparts from the Java Standard
 API. We give them along with examples in <a href="#data-literals">the data literals table</a> below.</p>
@@ -1423,7 +1529,7 @@ a multi-line string.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_collection_literals">1.12. Collection literals</h3>
+<h3 id="_collection_literals">1.13. Collection literals</h3>
 <div class="paragraph">
 <p>Golo support special support for common collections. The syntax uses brackets prefixed by a
 collection name, as in:</p>
@@ -1491,7 +1597,7 @@ let m = map[[1, "a"], [2, "b"]]
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="_a_note_on_lists">1.12.1. A note on lists</h4>
+<h4 id="_a_note_on_lists">1.13.1. A note on lists</h4>
 <div class="paragraph">
 <p>Since in Golo, every value is actually an instance of <code>Object</code>, there is no
 overloading, and thus the <code>remove</code> method on lists can&#8217;t be used to remove an
@@ -1500,7 +1606,7 @@ position, use the <code>removeAt</code> method.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_a_note_on_tuples">1.12.2. A note on tuples</h4>
+<h4 id="_a_note_on_tuples">1.13.2. A note on tuples</h4>
 <div class="paragraph">
 <p>Tuples essentially behave as immutable arrays.</p>
 </div>
@@ -1534,7 +1640,7 @@ position, use the <code>removeAt</code> method.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_a_note_on_maps">1.12.3. A note on maps</h4>
+<h4 id="_a_note_on_maps">1.13.3. A note on maps</h4>
 <div class="paragraph">
 <p>The map collection literal expects entries to be specified as tuples where the first entry is the
 key, and the second entry is the value. This allows nested structures to be specified as in:</p>
@@ -1593,7 +1699,7 @@ let m = map[a(), b()]</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_collection_comprehension">1.13. Collection comprehension</h3>
+<h3 id="_collection_comprehension">1.14. Collection comprehension</h3>
 <div class="paragraph">
 <p>In addition to literals, collections can be created using collection
 comprehension. This is a simple way to create a new collection based on another
@@ -1723,7 +1829,7 @@ where p.id == c.customer
 </div>
 </div>
 <div class="sect3">
-<h4 id="_collection_comprehension_vs_code_map_code_and_code_filter_code">1.13.1. Collection comprehension vs. <code>map</code> and <code>filter</code></h4>
+<h4 id="_collection_comprehension_vs_code_map_code_and_code_filter_code">1.14.1. Collection comprehension vs. <code>map</code> and <code>filter</code></h4>
 <div class="paragraph">
 <p>Collection comprehension is actually quite similar to using <code>map</code> and <code>filter</code>
 higher-order function on a collection. Indeed, a comprehension such as:</p>
@@ -1801,7 +1907,7 @@ polymorphic, but can be less readable if you need to change the collection type.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_destructuring">1.14. Destructuring</h3>
+<h3 id="_destructuring">1.15. Destructuring</h3>
 <div class="paragraph">
 <p>Golo supports simple destructuring, that is automatic extraction of values
 from an object and assignment to multiple variables in one instruction.</p>
@@ -1876,7 +1982,7 @@ a, b = [b, a]      # a = 2, b = 1</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_operators">1.15. Operators</h3>
+<h3 id="_operators">1.16. Operators</h3>
 <div class="paragraph">
 <p>Golo supports the following <a href="#operators">set of operators</a>.</p>
 </div>
@@ -2037,7 +2143,7 @@ The algebraic operators can be used with any numeric type having a literal notat
 </div>
 </div>
 <div class="sect2">
-<h3 id="_calling_a_method">1.16. Calling a method</h3>
+<h3 id="_calling_a_method">1.17. Calling a method</h3>
 <div class="paragraph">
 <p>Although we will discuss this in more details later on, you should already know that <code>:</code> is used to
 invoke instance methods.</p>
@@ -2054,7 +2160,7 @@ println(someObject: toString())</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_java_jvm_arrays">1.17. Java / JVM arrays</h3>
+<h3 id="_java_jvm_arrays">1.18. Java / JVM arrays</h3>
 <div class="paragraph">
 <p>As you probably know, arrays on the JVM are special objects. Golo deals with such arrays as being
 instances of <code>Object[]</code> and does not provide a wrapper class like many languages do. A Java / JVM
@@ -8657,7 +8763,7 @@ println(foo("abc"))</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-04-14 12:58:03 +02:00
+Last updated 2016-04-29 12:51:46 +02:00
 </div>
 </div>
 <link rel="stylesheet" href="./styles/github.min.css">

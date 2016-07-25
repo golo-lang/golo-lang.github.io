@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 
 
+
 <html>
 <head>
   <title>Documentation for gololang.Adapters</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <style>
     body {
       font-family: Helvetica, Arial, sans-serif;
@@ -12,14 +14,14 @@
       background-color: #fff;
       border-color: #999999;
       border-width: 2px;
-      line-height: 1.5;
-      margin: 2em 3em 2em 20%;
+      margin: 1em auto;
+      margin-left: 20em;
+      max-width: 50em;
       text-align: left;
-      padding: 0 100px 0 100px;
+      padding: 0.5em;
     }
     pre {
       background-color: #eee;
-      padding: 10px;
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
@@ -35,9 +37,31 @@
       border-radius: 2px;
     }
     pre code {
+      font-size: 120%;
       padding-left: 0px;
       padding-right: 0px;
     }
+
+    .listing:hover code[data-lang]:before {
+      display: block;
+    }
+
+    .listing code {
+      position: relative;
+    }
+
+    .listing code[data-lang]:before {
+      display: none;
+      content: attr(data-lang);
+      position: absolute;
+      font-size: 0.75em;
+      top: .5rem;
+      right: 0.5rem;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #000;
+    }
+
     li p {
       margin: 0.3em;
     }
@@ -55,50 +79,86 @@
     h1 {
       color: #999;
       font-weight: 400;
-      font-size: 36px;
+      font-size: 250%;
     }
     h2 {
       border-bottom: 1px dotted #aaa;
       margin-bottom: 1em;
       color: #333;
-      font-size: 30px;
+      font-size: 200%;
+      font-style: normal;
+      font-weight: bold;
     }
     h3 {
       color: #666;
-      font-size: 24px;
+      font-size: 180%;
+      font-style: normal;
+      font-weight: bold;
     }
     h4 {
-      font-size: 21px;
+      font-size: 130%;
+      font-style: normal;
+      font-weight: bold;
     }
     h5 {
-      font-size: 18px;
+      font-size: 100%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h6 {
+      font-size: 100%;
+      font-style: italic;
+      font-weight: normal;
     }
 
     #toc {
       margin: 0;
-      padding: 1em;
-      border-right: 1px solid #aaa;
-      font-size: 80%;
+      padding: 0;
       position: fixed;
       top: 0px;
       bottom: 0px;
       left: 0px;
-      width: 20%;
+      width: 20em;
       overflow: auto;
       white-space: nowrap;
+    }
+
+    #toc h1 {
+      margin: .5em;
+      padding: 1ex;
+      font-size: 90%;
+      font-weight: bold;
+      font-style: normal;
+      color: #333;
+      background-color: #eee;
+      text-align: center;
     }
 
     #toc ul {
       padding-left: 1em;
     }
 
-    #toc > li {
-      list-style: none;
-      margin-bottom: 1ex;
+    #toc > ul {
+      font-size: 80%;
+      margin: 0.5em;
     }
 
-    #toc > li > a {
+    #toc > ul > li {
+      list-style: none;
+      margin-bottom: 2ex;
+    }
+
+    #toc > ul > li > a {
       font-weight: bold;
+      color: #333;
+      display: block;
+      padding: 1ex;
+      margin: 0 1em 1ex 0;
+      border-bottom: 1px solid #999;
+    }
+
+    #toc li {
+      list-style-type: none;
     }
 
     :target {
@@ -115,17 +175,35 @@
       visibility: visible;
     }
 
+    .golodoc {
+      margin: 0;
+      padding: 0;
+      padding-left: 1.5em;
+    }
+
+    @media (max-width: 50em) {
+      #toc {
+        display: none;
+      }
+
+      body {
+        margin: 0;
+        padding: 0.5em;
+      }
+
+      h1 {
+        font-size: 200%;
+      }
+    }
+
   </style>
 </head>
 <body>
 <h1>Documentation for gololang.Adapters</h1>
-<div>
-  <p>This module defines an AdapterFabric helper.</p>
-
-</div>
-
 <!-- begin table of content -->
-<ul id="toc">
+<nav id="toc">
+<h1>gololang.Adapters</h1>
+<ul>
 
   
   <li><a href="#structs">Structs</a><ul>
@@ -146,19 +224,19 @@
     
     <li><a href="#augment.gololang.Adapters.types.adapter">gololang.Adapters.types.adapter</a><ul>
       
-      <li><a href="#gololang.Adapters.types.adapter.extends_this_className">extends(this, className)</a></li>
+      <li><a href="#gololang.Adapters.types.adapter.extends_2">extends(this, className)</a></li>
       
-      <li><a href="#gololang.Adapters.types.adapter.implements_this_methodName_closure">implements(this, methodName, closure)</a></li>
+      <li><a href="#gololang.Adapters.types.adapter.implements_3">implements(this, methodName, closure)</a></li>
       
-      <li><a href="#gololang.Adapters.types.adapter.interfaces_this_interfacesTuple">interfaces(this, interfacesTuple)</a></li>
+      <li><a href="#gololang.Adapters.types.adapter.interfaces_2">interfaces(this, interfacesTuple)</a></li>
       
-      <li><a href="#gololang.Adapters.types.adapter.maker_this">maker(this)</a></li>
+      <li><a href="#gololang.Adapters.types.adapter.maker_1">maker(this)</a></li>
       
-      <li><a href="#gololang.Adapters.types.adapter.newInstance_this_args">newInstance(this, args)</a></li>
+      <li><a href="#gololang.Adapters.types.adapter.newInstance_2">newInstance(this, args)</a></li>
       
-      <li><a href="#gololang.Adapters.types.adapter.newInstance_this">newInstance(this)</a></li>
+      <li><a href="#gololang.Adapters.types.adapter.newInstance_1">newInstance(this)</a></li>
       
-      <li><a href="#gololang.Adapters.types.adapter.overrides_this_methodName_closure">overrides(this, methodName, closure)</a></li>
+      <li><a href="#gololang.Adapters.types.adapter.overrides_3">overrides(this, methodName, closure)</a></li>
       
     </ul></li>
     
@@ -168,12 +246,18 @@
   
   <li><a href="#functions">Functions</a><ul>
     
-    <li><a href="#Adapter_">Adapter()</a></li>
+    <li><a href="#Adapter_0">Adapter()</a></li>
     
   </ul></li>
   
 </ul>
+</nav>
 <!-- end table of content -->
+
+<div class="golodoc">
+  <p>This module defines an AdapterFabric helper.</p>
+
+</div>
 
 
   <h2 id="structs">Structs</h2>
@@ -187,7 +271,7 @@
       <li><code>definition</code></li>
   
     </ul>
-    <div>
+    <div class="golodoc">
       
     </div>
   
@@ -203,41 +287,41 @@
   
     <h3 id="augment.gololang.Adapters.types.adapter">gololang.Adapters.types.adapter
     <a class="permalink" href="#augment.gololang.Adapters.types.adapter" title="link to this section">&#182;</a></h3>
-    <div>
+    <div class="golodoc">
       <p>Adapter augmentations.</p>
 
     </div>
     
     
       
-        <h4 id="gololang.Adapters.types.adapter.extends_this_className">extends(this, className)
+        <h4 id="gololang.Adapters.types.adapter.extends_2">extends(this, className)
       
-      <a class="permalink" href="#gololang.Adapters.types.adapter.extends_this_className" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.Adapters.types.adapter.extends_2" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Specifies the name of the parent class (<code>java.lang.Object</code> by default).</p>
 <ul>
 <li>parameter: parent class name</li>
 <li>returns the adapter.</li>
 </ul>
 <p>Usage:</p>
-<pre><code>let arrayListAdapter = Adapter()
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let arrayListAdapter = Adapter()
   : extends("java.util.ArrayList")
 </code></pre>
 
       </div>
     
       
-        <h4 id="gololang.Adapters.types.adapter.implements_this_methodName_closure">implements(this, methodName, closure)
+        <h4 id="gololang.Adapters.types.adapter.implements_3">implements(this, methodName, closure)
       
-      <a class="permalink" href="#gololang.Adapters.types.adapter.implements_this_methodName_closure" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.Adapters.types.adapter.implements_3" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Provides a method implementation</p>
 <ul>
 <li>parameters: a method name, an implementation function</li>
 <li>returns the adapter.</li>
 </ul>
 <p>Usage:</p>
-<pre><code>let result = array[1,2,3]
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let result = array[1,2,3]
 
 let runnerAdapter = Adapter()
   : interfaces(["java.io.Serializable", "java.lang.Runnable"])
@@ -251,49 +335,50 @@ let runnerAdapter = Adapter()
       </div>
     
       
-        <h4 id="gololang.Adapters.types.adapter.interfaces_this_interfacesTuple">interfaces(this, interfacesTuple)
+        <h4 id="gololang.Adapters.types.adapter.interfaces_2">interfaces(this, interfacesTuple)
       
-      <a class="permalink" href="#gololang.Adapters.types.adapter.interfaces_this_interfacesTuple" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.Adapters.types.adapter.interfaces_2" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Defines interface(s) for the Adapter:</p>
 <ul>
 <li>parameter(s): a tuple of strings,</li>
 <li>returns the adapter.</li>
 </ul>
 <p>Usage:</p>
-<pre><code>let runnerAdapter = Adapter()
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let runnerAdapter = Adapter()
   : interfaces(["java.io.Serializable", "java.lang.Runnable"])
 </code></pre>
 
       </div>
     
       
-        <h4 id="gololang.Adapters.types.adapter.maker_this">maker(this)
+        <h4 id="gololang.Adapters.types.adapter.maker_1">maker(this)
       
-      <a class="permalink" href="#gololang.Adapters.types.adapter.maker_this" title="link to this section">&#182;</a></h4>
-      <div>
-        <p>Returns an instance based on a configuration (also see <code>adapter: definition()</code>).</p>
+      <a class="permalink" href="#gololang.Adapters.types.adapter.maker_1" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
+        <p>Returns an instance based on a configuration
+(see also <a href="#adapter"><code>adapter: definition()</code></a>).</p>
 
       </div>
     
       
-        <h4 id="gololang.Adapters.types.adapter.newInstance_this_args">newInstance(this, args...)
+        <h4 id="gololang.Adapters.types.adapter.newInstance_2">newInstance(this, args...)
       
-      <a class="permalink" href="#gololang.Adapters.types.adapter.newInstance_this_args" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.Adapters.types.adapter.newInstance_2" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Returns an instance of the adapted Java class.</p>
 <p>The parameters are the parameters of the base class constructor.</p>
 
       </div>
     
       
-        <h4 id="gololang.Adapters.types.adapter.newInstance_this">newInstance(this)
+        <h4 id="gololang.Adapters.types.adapter.newInstance_1">newInstance(this)
       
-      <a class="permalink" href="#gololang.Adapters.types.adapter.newInstance_this" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.Adapters.types.adapter.newInstance_1" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Returns an instance of the adapted Java class.</p>
 <p>Usage:</p>
-<pre><code>let result = array[1,2,3]
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let result = array[1,2,3]
 
 let runnerAdapter = Adapter()
   : interfaces(["java.io.Serializable", "java.lang.Runnable"])
@@ -311,17 +396,17 @@ runner: run()
       </div>
     
       
-        <h4 id="gololang.Adapters.types.adapter.overrides_this_methodName_closure">overrides(this, methodName, closure)
+        <h4 id="gololang.Adapters.types.adapter.overrides_3">overrides(this, methodName, closure)
       
-      <a class="permalink" href="#gololang.Adapters.types.adapter.overrides_this_methodName_closure" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.Adapters.types.adapter.overrides_3" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Provides a method override.</p>
 <ul>
 <li>parameters: method name and an implementation function</li>
 <li>returns the adapter.</li>
 </ul>
 <p>Usage:</p>
-<pre><code>let objectAdapter = Adapter()
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let objectAdapter = Adapter()
   : overrides("toString", |super, this| -&gt; "&gt;&gt;&gt; " + super(this))
 
 println(objectAdapter: newInstance(): toString())
@@ -336,14 +421,19 @@ println(objectAdapter: newInstance(): toString())
 
   <h2 id="functions">Functions</h2>
   
-    <h3 id="Adapter_">Adapter()
-    <a class="permalink" href="#Adapter_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="Adapter_0">Adapter()
+    <a class="permalink" href="#Adapter_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Adapter constructor.</p>
 
     </div>
   
 
+
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
 
 </body>
 </html>

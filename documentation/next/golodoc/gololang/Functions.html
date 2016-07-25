@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 
 
+
 <html>
 <head>
   <title>Documentation for gololang.Functions</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <style>
     body {
       font-family: Helvetica, Arial, sans-serif;
@@ -12,14 +14,14 @@
       background-color: #fff;
       border-color: #999999;
       border-width: 2px;
-      line-height: 1.5;
-      margin: 2em 3em 2em 20%;
+      margin: 1em auto;
+      margin-left: 20em;
+      max-width: 50em;
       text-align: left;
-      padding: 0 100px 0 100px;
+      padding: 0.5em;
     }
     pre {
       background-color: #eee;
-      padding: 10px;
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
@@ -35,9 +37,31 @@
       border-radius: 2px;
     }
     pre code {
+      font-size: 120%;
       padding-left: 0px;
       padding-right: 0px;
     }
+
+    .listing:hover code[data-lang]:before {
+      display: block;
+    }
+
+    .listing code {
+      position: relative;
+    }
+
+    .listing code[data-lang]:before {
+      display: none;
+      content: attr(data-lang);
+      position: absolute;
+      font-size: 0.75em;
+      top: .5rem;
+      right: 0.5rem;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #000;
+    }
+
     li p {
       margin: 0.3em;
     }
@@ -55,50 +79,86 @@
     h1 {
       color: #999;
       font-weight: 400;
-      font-size: 36px;
+      font-size: 250%;
     }
     h2 {
       border-bottom: 1px dotted #aaa;
       margin-bottom: 1em;
       color: #333;
-      font-size: 30px;
+      font-size: 200%;
+      font-style: normal;
+      font-weight: bold;
     }
     h3 {
       color: #666;
-      font-size: 24px;
+      font-size: 180%;
+      font-style: normal;
+      font-weight: bold;
     }
     h4 {
-      font-size: 21px;
+      font-size: 130%;
+      font-style: normal;
+      font-weight: bold;
     }
     h5 {
-      font-size: 18px;
+      font-size: 100%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h6 {
+      font-size: 100%;
+      font-style: italic;
+      font-weight: normal;
     }
 
     #toc {
       margin: 0;
-      padding: 1em;
-      border-right: 1px solid #aaa;
-      font-size: 80%;
+      padding: 0;
       position: fixed;
       top: 0px;
       bottom: 0px;
       left: 0px;
-      width: 20%;
+      width: 20em;
       overflow: auto;
       white-space: nowrap;
+    }
+
+    #toc h1 {
+      margin: .5em;
+      padding: 1ex;
+      font-size: 90%;
+      font-weight: bold;
+      font-style: normal;
+      color: #333;
+      background-color: #eee;
+      text-align: center;
     }
 
     #toc ul {
       padding-left: 1em;
     }
 
-    #toc > li {
-      list-style: none;
-      margin-bottom: 1ex;
+    #toc > ul {
+      font-size: 80%;
+      margin: 0.5em;
     }
 
-    #toc > li > a {
+    #toc > ul > li {
+      list-style: none;
+      margin-bottom: 2ex;
+    }
+
+    #toc > ul > li > a {
       font-weight: bold;
+      color: #333;
+      display: block;
+      padding: 1ex;
+      margin: 0 1em 1ex 0;
+      border-bottom: 1px solid #999;
+    }
+
+    #toc li {
+      list-style-type: none;
     }
 
     :target {
@@ -115,42 +175,35 @@
       visibility: visible;
     }
 
+    .golodoc {
+      margin: 0;
+      padding: 0;
+      padding-left: 1.5em;
+    }
+
+    @media (max-width: 50em) {
+      #toc {
+        display: none;
+      }
+
+      body {
+        margin: 0;
+        padding: 0.5em;
+      }
+
+      h1 {
+        font-size: 200%;
+      }
+    }
+
   </style>
 </head>
 <body>
 <h1>Documentation for gololang.Functions</h1>
-<div>
-  <p>This module contains several functions and higher order functions or
-decorators, mostly useful with HOF like <code>map</code>, <code>reduce</code> or in generators.</p>
-<p>Indeed, using HOF often require some classical functions like constants one,
-identity, or classical operators.</p>
-<p>Most of the times, these functions needs to be unary ones, i.e.
-have only one parameter. This module contains, among others, functions helping in the arity
-conversion of such functions:</p>
-<ul>
-<li><a href="#curry_f"><code>curry</code></a> that makes a function automatically partializable,</li>
-<li><a href="#uncurry_f"><code>uncurry</code></a> that is the reverse of <code>curry</code>,</li>
-<li><a href="#unary_f"><code>unary</code></a> and <a href="#spreader_f"><code>spreader</code></a> that convert a polyadic function into a unary
-function taking an array or a tuple of values instead of several
-values,</li>
-<li><a href="#varargs_f"><code>varargs</code></a> which is the reverse of <code>unary</code></li>
-</ul>
-<p>Most of the binary operator functions defined here are curried. To ease
-partialization, the non commutative operators have a reversed version, with
-arguments swapped.
-For example, using the reverse division operator <a href="#rdiv_x_y"><code>rdiv</code></a> with
-<a href="StandardAugmentations.html#java.util.List.map_this_func"><code>map</code></a></p>
-<pre><code>[2, 4, 8]: map(rdiv(2)) == [1, 2, 4]
-</code></pre>
-<p>The identity function <a href="#id_x"><code>id</code></a>, the constant function
-<a href="#const_val"><code>const</code></a>, together with composition (<code>FunctionReference::andThen</code>,
-<a href="#pipe_funcs"><code>pipe</code></a>, <a href="#compose_funcs"><code>compose</code></a>) and <a href="#io_block"><code>io</code></a> can be
-used to create monad-like processing chains.</p>
-
-</div>
-
 <!-- begin table of content -->
-<ul id="toc">
+<nav id="toc">
+<h1>gololang.Functions</h1>
+<ul>
 
   
 
@@ -165,128 +218,159 @@ used to create monad-like processing chains.</p>
   
   <li><a href="#functions">Functions</a><ul>
     
-    <li><a href="#False__">False(_)</a></li>
+    <li><a href="#False_1">False(_)</a></li>
     
-    <li><a href="#Null__">Null(_)</a></li>
+    <li><a href="#Null_1">Null(_)</a></li>
     
-    <li><a href="#True__">True(_)</a></li>
+    <li><a href="#True_1">True(_)</a></li>
     
-    <li><a href="#add_value_element">add(value, element)</a></li>
+    <li><a href="#add_2">add(value, element)</a></li>
     
-    <li><a href="#addTo_element_value">addTo(element, value)</a></li>
+    <li><a href="#addTo_2">addTo(element, value)</a></li>
     
-    <li><a href="#and_a">and(a)</a></li>
+    <li><a href="#and_1">and(a)</a></li>
     
-    <li><a href="#compose_funcs">compose(funcs)</a></li>
+    <li><a href="#compose_1">compose(funcs)</a></li>
     
-    <li><a href="#cond_predicate_ifTrue_ifFalse_x">cond(predicate, ifTrue, ifFalse, x)</a></li>
+    <li><a href="#cond_4">cond(predicate, ifTrue, ifFalse, x)</a></li>
     
-    <li><a href="#const_val">const(val)</a></li>
+    <li><a href="#const_1">const(val)</a></li>
     
-    <li><a href="#contains_value_collection">contains(value, collection)</a></li>
+    <li><a href="#contains_2">contains(value, collection)</a></li>
     
-    <li><a href="#curry_f">curry(f)</a></li>
+    <li><a href="#curry_1">curry(f)</a></li>
     
-    <li><a href="#div_x_y">div(x, y)</a></li>
+    <li><a href="#div_2">div(x, y)</a></li>
     
-    <li><a href="#eq_a_b">eq(a, b)</a></li>
+    <li><a href="#eq_2">eq(a, b)</a></li>
     
-    <li><a href="#even_a">even(a)</a></li>
+    <li><a href="#even_1">even(a)</a></li>
     
-    <li><a href="#fst_t">fst(t)</a></li>
+    <li><a href="#fst_1">fst(t)</a></li>
     
-    <li><a href="#ge_a_b">ge(a, b)</a></li>
+    <li><a href="#ge_2">ge(a, b)</a></li>
     
-    <li><a href="#getitem_obj_i">getitem(obj, i)</a></li>
+    <li><a href="#getitem_2">getitem(obj, i)</a></li>
     
-    <li><a href="#getter_i">getter(i)</a></li>
+    <li><a href="#getter_1">getter(i)</a></li>
     
-    <li><a href="#gt_a_b">gt(a, b)</a></li>
+    <li><a href="#gt_2">gt(a, b)</a></li>
     
-    <li><a href="#id_x">id(x)</a></li>
+    <li><a href="#id_1">id(x)</a></li>
     
-    <li><a href="#invokeWith_args">invokeWith(args)</a></li>
+    <li><a href="#invokeWith_1">invokeWith(args)</a></li>
     
-    <li><a href="#io_block">io(block)</a></li>
+    <li><a href="#io_1">io(block)</a></li>
     
-    <li><a href="#is_ref_obj">is(ref, obj)</a></li>
+    <li><a href="#is_2">is(ref, obj)</a></li>
     
-    <li><a href="#isEmpty_o">isEmpty(o)</a></li>
+    <li><a href="#isEmpty_1">isEmpty(o)</a></li>
     
-    <li><a href="#isnt_ref_obj">isnt(ref, obj)</a></li>
+    <li><a href="#isnt_2">isnt(ref, obj)</a></li>
     
-    <li><a href="#le_a_b">le(a, b)</a></li>
+    <li><a href="#le_2">le(a, b)</a></li>
     
-    <li><a href="#lt_a_b">lt(a, b)</a></li>
+    <li><a href="#lt_2">lt(a, b)</a></li>
     
-    <li><a href="#mod_a_b">mod(a, b)</a></li>
+    <li><a href="#mod_2">mod(a, b)</a></li>
     
-    <li><a href="#mul_x_y">mul(x, y)</a></li>
+    <li><a href="#mul_2">mul(x, y)</a></li>
     
-    <li><a href="#ne_a_b">ne(a, b)</a></li>
+    <li><a href="#ne_2">ne(a, b)</a></li>
     
-    <li><a href="#neg_x">neg(x)</a></li>
+    <li><a href="#neg_1">neg(x)</a></li>
     
-    <li><a href="#not_a">not(a)</a></li>
+    <li><a href="#not_1">not(a)</a></li>
     
-    <li><a href="#odd_a">odd(a)</a></li>
+    <li><a href="#odd_1">odd(a)</a></li>
     
-    <li><a href="#oftype_type_object">oftype(type, object)</a></li>
+    <li><a href="#oftype_2">oftype(type, object)</a></li>
     
-    <li><a href="#or_a">or(a)</a></li>
+    <li><a href="#or_1">or(a)</a></li>
     
-    <li><a href="#orIfNull_fallback_value">orIfNull(fallback, value)</a></li>
+    <li><a href="#orIfNull_2">orIfNull(fallback, value)</a></li>
     
-    <li><a href="#pipe_funcs">pipe(funcs)</a></li>
+    <li><a href="#pipe_1">pipe(funcs)</a></li>
     
-    <li><a href="#pow_a_b">pow(a, b)</a></li>
+    <li><a href="#pow_2">pow(a, b)</a></li>
     
-    <li><a href="#pred_x">pred(x)</a></li>
+    <li><a href="#pred_1">pred(x)</a></li>
     
-    <li><a href="#rdiv_x_y">rdiv(x, y)</a></li>
+    <li><a href="#rdiv_2">rdiv(x, y)</a></li>
     
-    <li><a href="#recur_f">recur(f)</a></li>
+    <li><a href="#recur_1">recur(f)</a></li>
     
-    <li><a href="#rmod_a_b">rmod(a, b)</a></li>
+    <li><a href="#rmod_2">rmod(a, b)</a></li>
     
-    <li><a href="#rpow_a_b">rpow(a, b)</a></li>
+    <li><a href="#rpow_2">rpow(a, b)</a></li>
     
-    <li><a href="#rsub_x_y">rsub(x, y)</a></li>
+    <li><a href="#rsub_2">rsub(x, y)</a></li>
     
-    <li><a href="#setitem_obj_i_v">setitem(obj, i, v)</a></li>
+    <li><a href="#setitem_3">setitem(obj, i, v)</a></li>
     
-    <li><a href="#snd_t">snd(t)</a></li>
+    <li><a href="#snd_1">snd(t)</a></li>
     
-    <li><a href="#spreader_f">spreader(f)</a></li>
+    <li><a href="#spreader_1">spreader(f)</a></li>
     
-    <li><a href="#str_o">str(o)</a></li>
+    <li><a href="#str_1">str(o)</a></li>
     
-    <li><a href="#sub_x_y">sub(x, y)</a></li>
+    <li><a href="#sub_2">sub(x, y)</a></li>
     
-    <li><a href="#succ_x">succ(x)</a></li>
+    <li><a href="#succ_1">succ(x)</a></li>
     
-    <li><a href="#swap_v">swap(v)</a></li>
+    <li><a href="#swap_1">swap(v)</a></li>
     
-    <li><a href="#swapArgs_func">swapArgs(func)</a></li>
+    <li><a href="#swapArgs_1">swapArgs(func)</a></li>
     
-    <li><a href="#swapCouple_couple">swapCouple(couple)</a></li>
+    <li><a href="#swapCouple_1">swapCouple(couple)</a></li>
     
-    <li><a href="#swapCurry_func">swapCurry(func)</a></li>
+    <li><a href="#swapCurry_1">swapCurry(func)</a></li>
     
-    <li><a href="#unary_f">unary(f)</a></li>
+    <li><a href="#unary_1">unary(f)</a></li>
     
-    <li><a href="#uncurry_f">uncurry(f)</a></li>
+    <li><a href="#uncurry_1">uncurry(f)</a></li>
     
-    <li><a href="#until_predicate_fun">until(predicate, fun)</a></li>
+    <li><a href="#until_2">until(predicate, fun)</a></li>
     
-    <li><a href="#varargs_f">varargs(f)</a></li>
+    <li><a href="#varargs_1">varargs(f)</a></li>
     
-    <li><a href="#xor_a_b">xor(a, b)</a></li>
+    <li><a href="#xor_2">xor(a, b)</a></li>
     
   </ul></li>
   
 </ul>
+</nav>
 <!-- end table of content -->
+
+<div class="golodoc">
+  <p>This module contains several functions and higher order functions or
+decorators, mostly useful with HOF like <code>map</code>, <code>reduce</code> or in generators.</p>
+<p>Indeed, using HOF often require some classical functions like constants one,
+identity, or classical operators.</p>
+<p>Most of the times, these functions needs to be unary ones, i.e.
+have only one parameter. This module contains, among others, functions helping in the arity
+conversion of such functions:</p>
+<ul>
+<li><a href="#curry_1"><code>curry</code></a> that makes a function automatically partializable,</li>
+<li><a href="#uncurry_1"><code>uncurry</code></a> that is the reverse of <code>curry</code>,</li>
+<li><a href="#unary_1"><code>unary</code></a> and <a href="#spreader_1"><code>spreader</code></a> that convert a polyadic function into a unary
+function taking an array or a tuple of values instead of several
+values,</li>
+<li><a href="#varargs_1"><code>varargs</code></a> which is the reverse of <code>unary</code></li>
+</ul>
+<p>Most of the binary operator functions defined here are curried. To ease
+partialization, the non commutative operators have a reversed version, with
+arguments swapped.
+For example, using the reverse division operator <a href="#rdiv_2"><code>rdiv</code></a> with
+<a href="StandardAugmentations.html#java.util.List.map_2"><code>map</code></a></p>
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">[2, 4, 8]: map(rdiv(2)) == [1, 2, 4]
+</code></pre>
+<p>The identity function <a href="#id_1"><code>id</code></a>, the constant function
+<a href="#const_1"><code>const</code></a>, together with composition (<code>FunctionReference::andThen</code>,
+<a href="#pipe_1"><code>pipe</code></a>, <a href="#compose_1"><code>compose</code></a>) and <a href="#io_1"><code>io</code></a> can be
+used to create monad-like processing chains.</p>
+
+</div>
 
 
 
@@ -300,30 +384,30 @@ used to create monad-like processing chains.</p>
 
   <h2 id="functions">Functions</h2>
   
-    <h3 id="False__">False(_)
-    <a class="permalink" href="#False__" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="False_1">False(_)
+    <a class="permalink" href="#False_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p><code>false</code> constant function.</p>
 
     </div>
   
-    <h3 id="Null__">Null(_)
-    <a class="permalink" href="#Null__" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="Null_1">Null(_)
+    <a class="permalink" href="#Null_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p><code>null</code> constant function.</p>
 
     </div>
   
-    <h3 id="True__">True(_)
-    <a class="permalink" href="#True__" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="True_1">True(_)
+    <a class="permalink" href="#True_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p><code>true</code> constant function.</p>
 
     </div>
   
-    <h3 id="add_value_element">add(value, element)
-    <a class="permalink" href="#add_value_element" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="add_2">add(value, element)
+    <a class="permalink" href="#add_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Polymorphic addition and concatenation.</p>
 <p>Adds <code>value</code> to <code>element</code>.
 The behavior depends on the type of <code>element</code>:</p>
@@ -334,7 +418,7 @@ The behavior depends on the type of <code>element</code>:</p>
 returning the collection.</li>
 </ul>
 <p>This function is <em>swapped</em> and curried. For instance:</p>
-<pre><code>add("b", "a") == "ab"
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">add("b", "a") == "ab"
 
 list[1, 2, 3]: map(add(3)) == list[4, 5, 6]
 
@@ -349,48 +433,48 @@ f(StringBuilder()): toString() == "42133769"
 <li><em>param</em> <code>value</code>: the value to add</li>
 <li><em>param</em> <code>element</code>: the element to add the value to</li>
 </ul>
-<p>See also <a href="#addTo_element_value"><code>addTo</code></a></p>
+<p>See also <a href="#addTo_2"><code>addTo</code></a></p>
 
     </div>
   
-    <h3 id="addTo_element_value">addTo(element, value)
-    <a class="permalink" href="#addTo_element_value" title="link to this section">&#182;</a></h3>
-    <div>
-      <p>Not swapped version of <a href="#add_value_element"><code>add</code></a></p>
+    <h3 id="addTo_2">addTo(element, value)
+    <a class="permalink" href="#addTo_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
+      <p>Not swapped version of <a href="#add_2"><code>add</code></a></p>
 
     </div>
   
-    <h3 id="and_a">and(a)
-    <a class="permalink" href="#and_a" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="and_1">and(a)
+    <a class="permalink" href="#and_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried boolean <em>and</em>.</p>
 <p>This implementation is lazy.</p>
 <p>The arguments can be boolean expressions or predicate functions. If called with
 predicate functions, returns a new predicate function.</p>
-<pre><code>`and(a, b) == (a and b)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">`and(a, b) == (a and b)
 `and(gt(10), ^even) == |x| -&gt; a &gt; 10 and x % 2 == 0
 </code></pre>
-<p>See also <a href="#or_a"><code>or</code></a>, <a href="#not_a"><code>not</code></a>, <a href="#xor_a_b"><code>xor</code></a></p>
+<p>See also <a href="#or_1"><code>or</code></a>, <a href="#not_1"><code>not</code></a>, <a href="#xor_2"><code>xor</code></a></p>
 
     </div>
   
-    <h3 id="compose_funcs">compose(funcs)
-    <a class="permalink" href="#compose_funcs" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="compose_1">compose(funcs)
+    <a class="permalink" href="#compose_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Function composition.</p>
-<pre><code>compose(f1, f2, f3)(x) == f1(f2(f3(x)))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">compose(f1, f2, f3)(x) == f1(f2(f3(x)))
 </code></pre>
-<p>This is similar to <a href="#pipe_funcs"><code>pipe</code></a>, but with functions order
+<p>This is similar to <a href="#pipe_1"><code>pipe</code></a>, but with functions order
 reversed (<em>B</em> combinator).</p>
 
     </div>
   
-    <h3 id="cond_predicate_ifTrue_ifFalse_x">cond(predicate, ifTrue, ifFalse, x)
-    <a class="permalink" href="#cond_predicate_ifTrue_ifFalse_x" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="cond_4">cond(predicate, ifTrue, ifFalse, x)
+    <a class="permalink" href="#cond_4" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Conditional application combinator.</p>
 <p>Equivalent to using the <code>match</code> construct:</p>
-<pre><code>let r = cond(predicate, ifTrue, ifFalse, x)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let r = cond(predicate, ifTrue, ifFalse, x)
 
 # equivalent to
 let r = match {
@@ -399,7 +483,7 @@ let r = match {
 }
 </code></pre>
 <p>Since this function is curried, it can be used as:</p>
-<pre><code>let f = cond(predicate, ifTrue, ifFalse)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let f = cond(predicate, ifTrue, ifFalse)
 
 # equivalent to
 let f = |x| -&gt; match {
@@ -415,34 +499,34 @@ let f = |x| -&gt; match {
 
     </div>
   
-    <h3 id="const_val">const(val)
-    <a class="permalink" href="#const_val" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="const_1">const(val)
+    <a class="permalink" href="#const_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>The constant function.</p>
 <p>Returns a new variadic functions that always returns <code>val</code>, ignoring its
 arguments. For example:</p>
-<pre><code>let theAnswerTo = const(42)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let theAnswerTo = const(42)
 
 theAnswerTo() == 42
 theAnswerTo(1, 2, 3) == 42
 theAnswerTo("Life, the Universe and Everything") == 42
 </code></pre>
-<p>One interesting use case is to write "pipe" like composition, with the argument
+<p>One interesting use case is to write &ldquo;pipe&rdquo; like composition, with the argument
 on the left:</p>
-<pre><code>const(42): andThen(f): andThen(g): andThen(h)() == h(g(f(42)))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">const(42): andThen(f): andThen(g): andThen(h)() == h(g(f(42)))
 </code></pre>
 <p>This is also the <em>K</em> combinator.</p>
 
     </div>
   
-    <h3 id="contains_value_collection">contains(value, collection)
-    <a class="permalink" href="#contains_value_collection" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="contains_2">contains(value, collection)
+    <a class="permalink" href="#contains_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Swapped curried containment test.</p>
 <p>Checks if <code>collection</code> contains <code>value</code>.
 The collection object can be anything with a <code>contains</code> method.</p>
 <p>For instance:</p>
-<pre><code>let predicate = contains(42)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let predicate = contains(42)
 if (predicate(collection)) {
   ...
 }
@@ -454,14 +538,14 @@ if (predicate(collection)) {
 
     </div>
   
-    <h3 id="curry_f">curry(f)
-    <a class="permalink" href="#curry_f" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="curry_1">curry(f)
+    <a class="permalink" href="#curry_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Function to curryfy a function, i.e. transforms a polyadic function into a
 sequence of variadic functions. This allows for automatic partial application.</p>
 <p>This is equivalent to applying <code>invokeOrBind</code> on each call.</p>
 <p>E.g.</p>
-<pre><code>function f = |a, b, c| -&gt; a + b + c
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">function f = |a, b, c| -&gt; a + b + c
 
 let g = curry(^f)
 
@@ -481,24 +565,24 @@ g3(3) == 42
 </code></pre>
 <p>This is particularly useful to allow composing polyadic functions. For
 instance, with the previous <code>g</code>:</p>
-<pre><code>let h = g(2, 20): andThen(g("The answer", " is "))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let h = g(2, 20): andThen(g("The answer", " is "))
 h(20) == "The answer is 42"
 </code></pre>
 <p>If the function is variadic, only the fixed parameters can be partialized.
 For instance, given:</p>
-<pre><code>@!curry
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">@!curry
 function f = |a, b, c...| -&gt; ...
 ...
 let g = f(1, 2)
 </code></pre>
 <p>then <code>g</code> is a variadic function that can't be called partially. All the
 following calls are valids:</p>
-<pre><code>g()
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">g()
 g(1)
 g(1, 2, 3)
 </code></pre>
 <p>but</p>
-<pre><code>g(1)(2)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">g(1)(2)
 </code></pre>
 <p>is not.</p>
 <p>This function can also be used as a decorator.</p>
@@ -506,43 +590,43 @@ g(1, 2, 3)
 <li><em>param</em> <code>f</code> the function to curry</li>
 <li><em>return</em> a variadic function dispatching on <code>f</code> that can be partialized</li>
 </ul>
-<p>See also <a href="#uncurry_f"><code>uncurry</code></a></p>
+<p>See also <a href="#uncurry_1"><code>uncurry</code></a></p>
 
     </div>
   
-    <h3 id="div_x_y">div(x, y)
-    <a class="permalink" href="#div_x_y" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="div_2">div(x, y)
+    <a class="permalink" href="#div_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried division.</p>
-<pre><code>div(x, y) == x / y
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">div(x, y) == x / y
 </code></pre>
-<p>See also <a href="#mul_x_y"><code>mul</code></a>, <a href="#rdiv_x_y"><code>rdiv</code></a></p>
+<p>See also <a href="#mul_2"><code>mul</code></a>, <a href="#rdiv_2"><code>rdiv</code></a></p>
 
     </div>
   
-    <h3 id="eq_a_b">eq(a, b)
-    <a class="permalink" href="#eq_a_b" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="eq_2">eq(a, b)
+    <a class="permalink" href="#eq_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried <em>equal</em>.</p>
-<pre><code>eq(a, b) == (a == b)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">eq(a, b) == (a == b)
 </code></pre>
-<p>See also <a href="#ne_a_b"><code>ne</code></a></p>
+<p>See also <a href="#ne_2"><code>ne</code></a></p>
 
     </div>
   
-    <h3 id="even_a">even(a)
-    <a class="permalink" href="#even_a" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="even_1">even(a)
+    <a class="permalink" href="#even_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Checks if the value is even.</p>
-<p>See also <a href="#odd_a"><code>odd</code></a></p>
+<p>See also <a href="#odd_1"><code>odd</code></a></p>
 
     </div>
   
-    <h3 id="fst_t">fst(t)
-    <a class="permalink" href="#fst_t" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="fst_1">fst(t)
+    <a class="permalink" href="#fst_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>First element of a list, tuple, vector, array.</p>
-<pre><code>fst([a, b]) == a
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">fst([a, b]) == a
 </code></pre>
 <ul>
 <li><em>param</em> <code>t</code>: any object with a <code>get</code> method and at least one element.</li>
@@ -551,22 +635,22 @@ g(1, 2, 3)
 
     </div>
   
-    <h3 id="ge_a_b">ge(a, b)
-    <a class="permalink" href="#ge_a_b" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="ge_2">ge(a, b)
+    <a class="permalink" href="#ge_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried swapped <em>greater than or equal</em>.</p>
-<pre><code>ge(a, b) == (b &gt;= a)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">ge(a, b) == (b &gt;= a)
 </code></pre>
 <p>Note: this function is swapped to make curried version more readable.</p>
-<p>See also <a href="#lt_a"><code>lt</code></a>, <a href="#le_a"><code>le</code></a>, <a href="#gt_a"><code>gt</code></a></p>
+<p>See also <a href="#lt_2"><code>lt</code></a>, <a href="#le_2"><code>le</code></a>, <a href="#gt_2"><code>gt</code></a></p>
 
     </div>
   
-    <h3 id="getitem_obj_i">getitem(obj, i)
-    <a class="permalink" href="#getitem_obj_i" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="getitem_2">getitem(obj, i)
+    <a class="permalink" href="#getitem_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried indexing.</p>
-<pre><code>getitem(obj, i) == obj: get(i)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">getitem(obj, i) == obj: get(i)
 </code></pre>
 <p>Throws an <code>IndexOutOfBoundsException</code> (for a collection-like object) or returns
 <code>null</code> (for a map-like object) if the index is not present.</p>
@@ -574,50 +658,50 @@ g(1, 2, 3)
 <li><em>param</em> <code>obj</code>: any object having a <code>get</code> method</li>
 <li><em>param</em> <code>i</code>: the index to get</li>
 </ul>
-<p>See also <a href="#setitem_obj_i"><code>setitem</code></a>, <a href="#getter_i"><code>getter</code></a></p>
+<p>See also <a href="#setitem_3"><code>setitem</code></a>, <a href="#getter_1"><code>getter</code></a></p>
 
     </div>
   
-    <h3 id="getter_i">getter(i)
-    <a class="permalink" href="#getter_i" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="getter_1">getter(i)
+    <a class="permalink" href="#getter_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Indexer factory (curried indexing).</p>
-<pre><code>let third = getter(2)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let third = getter(2)
 third([1, 2, 3, 4]) -&gt; 3
 </code></pre>
-<p>See also <a href="#getitem_obj_i"><code>getitem</code></a></p>
+<p>See also <a href="#getitem_2"><code>getitem</code></a></p>
 
     </div>
   
-    <h3 id="gt_a_b">gt(a, b)
-    <a class="permalink" href="#gt_a_b" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="gt_2">gt(a, b)
+    <a class="permalink" href="#gt_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried swapped <em>greater than</em>.</p>
-<pre><code>gt(a, b) == b &gt; a
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">gt(a, b) == b &gt; a
 </code></pre>
 <p>Note: this function is swapped to make curried version more readable.</p>
-<p>See also <a href="#lt_a"><code>lt</code></a>, <a href="#le_a"><code>le</code></a>, <a href="#ge_a"><code>ge</code></a></p>
+<p>See also <a href="#lt_2"><code>lt</code></a>, <a href="#le_2"><code>le</code></a>, <a href="#ge_2"><code>ge</code></a></p>
 
     </div>
   
-    <h3 id="id_x">id(x)
-    <a class="permalink" href="#id_x" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="id_1">id(x)
+    <a class="permalink" href="#id_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>The identity function.</p>
 <p>Returns it's argument unchanged. This can be useful with
 <em>higher order functions</em> (<em>I</em> combinator).</p>
 
     </div>
   
-    <h3 id="invokeWith_args">invokeWith(args)
-    <a class="permalink" href="#invokeWith_args" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="invokeWith_1">invokeWith(args)
+    <a class="permalink" href="#invokeWith_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Reversed curried function application.</p>
 <p>Apply the given function to the given value.</p>
-<pre><code>invokeWith("a", "b", "c")(f) == f("a", "b", "c")
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">invokeWith("a", "b", "c")(f) == f("a", "b", "c")
 </code></pre>
 <p>For instance, given a list of functions:</p>
-<pre><code>list[f, g, h]: map(invokeWith(42)) == list[f(42), g(42), h(42)]
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">list[f, g, h]: map(invokeWith(42)) == list[f(42), g(42), h(42)]
 </code></pre>
 <p>It can also be used to promote a value in continuation passing style.</p>
 <ul>
@@ -626,123 +710,123 @@ third([1, 2, 3, 4]) -&gt; 3
 
     </div>
   
-    <h3 id="io_block">io(block)
-    <a class="permalink" href="#io_block" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="io_1">io(block)
+    <a class="permalink" href="#io_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Transform a function with side effects (generally IO operations, thus the name)
 into a function applying the side effect and returning its argument.</p>
 <p>The given function can have no parameters, or accept an argument.</p>
 <p>This can be used to insert such a function into a composition chain:</p>
-<pre><code>f1: andThen(io({println("hello")})): andThen(f2)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">f1: andThen(io({println("hello")})): andThen(f2)
 f1: andThen(io(|x|{println("got " + x)})): andThen(f2)
 </code></pre>
 <ul>
 <li><em>param</em> <code>block</code> a function with side effects</li>
 </ul>
-<p>See also <a href="#pipe_funcs"><code>pipe</code></a> and <a href="#compose_funcs"><code>compose</code></a></p>
+<p>See also <a href="#pipe_1"><code>pipe</code></a> and <a href="#compose_1"><code>compose</code></a></p>
 
     </div>
   
-    <h3 id="is_ref_obj">is(ref, obj)
-    <a class="permalink" href="#is_ref_obj" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="is_2">is(ref, obj)
+    <a class="permalink" href="#is_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried identity comparison</p>
-<pre><code>`is(ref, obj) == obj is ref
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">`is(ref, obj) == obj is ref
 </code></pre>
 <p>Parameters are swapped to ease partialization, as in:</p>
-<pre><code>lst: filter(is(ref))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">lst: filter(is(ref))
 </code></pre>
 
     </div>
   
-    <h3 id="isEmpty_o">isEmpty(o)
-    <a class="permalink" href="#isEmpty_o" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="isEmpty_1">isEmpty(o)
+    <a class="permalink" href="#isEmpty_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Emptiness test.</p>
 <p>Checks if the collection-like argument is empty.</p>
 
     </div>
   
-    <h3 id="isnt_ref_obj">isnt(ref, obj)
-    <a class="permalink" href="#isnt_ref_obj" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="isnt_2">isnt(ref, obj)
+    <a class="permalink" href="#isnt_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried difference comparison</p>
-<pre><code>`isnt(ref, obj) = obj isnt ref
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">`isnt(ref, obj) = obj isnt ref
 </code></pre>
 <p>Like <code>is</code>, this is more useful partialized. For instance:</p>
-<pre><code>lst: filter(`isnt(null))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">lst: filter(`isnt(null))
 </code></pre>
 
     </div>
   
-    <h3 id="le_a_b">le(a, b)
-    <a class="permalink" href="#le_a_b" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="le_2">le(a, b)
+    <a class="permalink" href="#le_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried swapped <em>less than or equal</em>.</p>
-<pre><code>le(a, b) == (a &lt;= b)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">le(a, b) == (a &lt;= b)
 </code></pre>
 <p>Note: this function is swapped to make curried version more readable.</p>
-<p>See also <a href="#lt_a"><code>lt</code></a>, <a href="#ge_a"><code>ge</code></a>, <a href="#gt_a"><code>gt</code></a></p>
+<p>See also <a href="#lt_2"><code>lt</code></a>, <a href="#ge_2"><code>ge</code></a>, <a href="#gt_2"><code>gt</code></a></p>
 
     </div>
   
-    <h3 id="lt_a_b">lt(a, b)
-    <a class="permalink" href="#lt_a_b" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="lt_2">lt(a, b)
+    <a class="permalink" href="#lt_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried swapped <em>less than</em>.</p>
-<pre><code>lt(a, b) == b &lt; a
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">lt(a, b) == b &lt; a
 
 lt(42) == |x| -&gt; x &lt; 42
 </code></pre>
 <p>Note: this function is swapped to make curried version more readable: <code>lt(42)</code>
-is a predicate testing if its argument is "less than 42".</p>
-<p>See also <a href="#le_a"><code>le</code></a>, <a href="#gt_a"><code>gt</code></a>, <a href="#ge_a"><code>ge</code></a></p>
+is a predicate testing if its argument is &ldquo;less than 42&rdquo;.</p>
+<p>See also <a href="#le_2"><code>le</code></a>, <a href="#gt_2"><code>gt</code></a>, <a href="#ge_2"><code>ge</code></a></p>
 
     </div>
   
-    <h3 id="mod_a_b">mod(a, b)
-    <a class="permalink" href="#mod_a_b" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="mod_2">mod(a, b)
+    <a class="permalink" href="#mod_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried modulo.</p>
-<pre><code>mod(a, b) == a % b
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">mod(a, b) == a % b
 </code></pre>
-<p>See also <a href="#rmod_a_b"><code>rmod</code></a></p>
+<p>See also <a href="#rmod_2"><code>rmod</code></a></p>
 
     </div>
   
-    <h3 id="mul_x_y">mul(x, y)
-    <a class="permalink" href="#mul_x_y" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="mul_2">mul(x, y)
+    <a class="permalink" href="#mul_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried multiplication.</p>
-<pre><code>mul(x, y) == x * y
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">mul(x, y) == x * y
 </code></pre>
-<p>See also <a href="#div_x_y"><code>div</code></a></p>
+<p>See also <a href="#div_2"><code>div</code></a></p>
 
     </div>
   
-    <h3 id="ne_a_b">ne(a, b)
-    <a class="permalink" href="#ne_a_b" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="ne_2">ne(a, b)
+    <a class="permalink" href="#ne_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried <em>not equal</em>.</p>
-<pre><code>ne(a, b) == (a != b)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">ne(a, b) == (a != b)
 </code></pre>
-<p>See also <a href="#eq_a_b"><code>eq</code></a></p>
+<p>See also <a href="#eq_2"><code>eq</code></a></p>
 
     </div>
   
-    <h3 id="neg_x">neg(x)
-    <a class="permalink" href="#neg_x" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="neg_1">neg(x)
+    <a class="permalink" href="#neg_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Opposite (negative value).</p>
-<pre><code>neg(x) == -x
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">neg(x) == -x
 </code></pre>
 <p>Same as <code>mul(-1)</code></p>
 
     </div>
   
-    <h3 id="not_a">not(a)
-    <a class="permalink" href="#not_a" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="not_1">not(a)
+    <a class="permalink" href="#not_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Polymorphic negation function.</p>
 <ul>
 <li>when given a boolean-like value, returns its negation.</li>
@@ -750,127 +834,127 @@ is a predicate testing if its argument is "less than 42".</p>
 negated result.</li>
 </ul>
 <p>E.g.</p>
-<pre><code>list[true, false, false]: map(^not) == list[false, true, true]
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">list[true, false, false]: map(^not) == list[false, true, true]
 
 let even = |a| -&gt; (a % 2) == 0
 let odd = `not(even)
 </code></pre>
-<p>See also <a href="#and_a"><code>and</code></a>, <a href="#or_a"><code>or</code></a></p>
+<p>See also <a href="#and_1"><code>and</code></a>, <a href="#or_1"><code>or</code></a></p>
 
     </div>
   
-    <h3 id="odd_a">odd(a)
-    <a class="permalink" href="#odd_a" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="odd_1">odd(a)
+    <a class="permalink" href="#odd_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Checks if the value is odd.</p>
-<p>See also <a href="#even_a"><code>even</code></a></p>
+<p>See also <a href="#even_1"><code>even</code></a></p>
 
     </div>
   
-    <h3 id="oftype_type_object">oftype(type, object)
-    <a class="permalink" href="#oftype_type_object" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="oftype_2">oftype(type, object)
+    <a class="permalink" href="#oftype_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried type checking</p>
-<pre><code>`oftype(type, obj) = obj oftype type
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">`oftype(type, obj) = obj oftype type
 </code></pre>
 <p>Partialized version can be used as a predicate, for instance in <code>filter</code>:</p>
-<pre><code>alist: filter(`oftype(String.class))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">alist: filter(`oftype(String.class))
 </code></pre>
 
     </div>
   
-    <h3 id="or_a">or(a)
-    <a class="permalink" href="#or_a" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="or_1">or(a)
+    <a class="permalink" href="#or_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried boolean <em>or</em>.</p>
-<pre><code>`or(a, b) == (a or b)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">`or(a, b) == (a or b)
 </code></pre>
 <p>This implementation is lazy.</p>
 <p>The arguments can be boolean expressions or predicate functions. If called with
 predicate functions, returns a new predicate function.</p>
-<p>See also <a href="#and_a"><code>and</code></a>, <a href="#not_a"><code>not</code></a>, <a href="#xor_a_b"><code>xor</code></a></p>
+<p>See also <a href="#and_1"><code>and</code></a>, <a href="#not_1"><code>not</code></a>, <a href="#xor_2"><code>xor</code></a></p>
 
     </div>
   
-    <h3 id="orIfNull_fallback_value">orIfNull(fallback, value)
-    <a class="permalink" href="#orIfNull_fallback_value" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="orIfNull_2">orIfNull(fallback, value)
+    <a class="permalink" href="#orIfNull_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Null value substitution</p>
-<pre><code>`orIfNull(0, 3) == 3
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">`orIfNull(0, 3) == 3
 `orIfNull(0, null) == 0
 </code></pre>
 <p>This function can be useful, for example, to replace <code>null</code> values in a list with
 a map:</p>
-<pre><code>list[1, 2, null, 3]:map(`orIfNull(0)) == list[1, 2, 0, 3]
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">list[1, 2, null, 3]:map(`orIfNull(0)) == list[1, 2, 0, 3]
 </code></pre>
 
     </div>
   
-    <h3 id="pipe_funcs">pipe(funcs)
-    <a class="permalink" href="#pipe_funcs" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="pipe_1">pipe(funcs)
+    <a class="permalink" href="#pipe_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Function chaining.</p>
 <p>This is similar to Unix pipe:</p>
-<pre><code>pipe(f1, f2, f3)(x) == f3(f2(f1(x))))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">pipe(f1, f2, f3)(x) == f3(f2(f1(x))))
 </code></pre>
 <p>i.e. apply <code>f1</code> to <code>x</code>, then pass it to <code>f2</code>, and then <code>f3</code>.
 This is the same as <code>f1: andThen(f2): andThen(f3)(x)</code></p>
-<p>You can insert a side-effect only function in the chain using <a href="#io_block"><code>io</code></a>:</p>
-<pre><code>pipe(f1, io({println("hello")}), f2)(42)
+<p>You can insert a side-effect only function in the chain using <a href="#io_1"><code>io</code></a>:</p>
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">pipe(f1, io({println("hello")}), f2)(42)
 </code></pre>
 <p>is equivalent to:</p>
-<pre><code>let tmp = f1(x)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let tmp = f1(x)
 println("hello")
 f2(tmp)
 </code></pre>
-<p>This is similar to <a href="#compose_funcs"><code>compose</code></a>, but with functions order
+<p>This is similar to <a href="#compose_1"><code>compose</code></a>, but with functions order
 reversed.</p>
 <p>Example:</p>
-<pre><code>let cmd = pipe(mul(2), add(4), ^toString, addTo("val: "))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let cmd = pipe(mul(2), add(4), ^toString, addTo("val: "))
 cmd(19) == "val: 42"
 let other = pipe(^intValue, add(4), mul(2))
 other("17") == 42
 </code></pre>
-<p>If no function is given, returns <a href="#id_x"><code>id</code></a></p>
+<p>If no function is given, returns <a href="#id_1"><code>id</code></a></p>
 <p>For a similar construct that deal with errors, see for instance the
 <a href="Errors.html#java.util.Optional.andThen_this_f"><code>gololang.Errors</code></a> module</p>
 
     </div>
   
-    <h3 id="pow_a_b">pow(a, b)
-    <a class="permalink" href="#pow_a_b" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="pow_2">pow(a, b)
+    <a class="permalink" href="#pow_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried power.</p>
-<pre><code>pow(a, 2) == a*a
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">pow(a, 2) == a*a
 </code></pre>
 <p>Does an implicit conversion to double.</p>
-<p>See also <a href="#rpow_a_b"><code>rpow</code></a></p>
+<p>See also <a href="#rpow_2"><code>rpow</code></a></p>
 
     </div>
   
-    <h3 id="pred_x">pred(x)
-    <a class="permalink" href="#pred_x" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="pred_1">pred(x)
+    <a class="permalink" href="#pred_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Number predecessor (side-effect free decrement).</p>
-<pre><code>pred(x) == x - 1
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">pred(x) == x - 1
 </code></pre>
-<p>See also <a href="#succ_x"><code>succ</code></a></p>
+<p>See also <a href="#succ_1"><code>succ</code></a></p>
 
     </div>
   
-    <h3 id="rdiv_x_y">rdiv(x, y)
-    <a class="permalink" href="#rdiv_x_y" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="rdiv_2">rdiv(x, y)
+    <a class="permalink" href="#rdiv_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Reverse curried division.</p>
-<pre><code>rdiv(y, x) == x / y
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">rdiv(y, x) == x / y
 </code></pre>
-<p>See also  <a href="#mul_x_y"><code>mul</code></a>,  <a href="#div_x_y"><code>div</code></a></p>
+<p>See also  <a href="#mul_2"><code>mul</code></a>,  <a href="#div_2"><code>div</code></a></p>
 
     </div>
   
-    <h3 id="recur_f">recur(f)
-    <a class="permalink" href="#recur_f" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="recur_1">recur(f)
+    <a class="permalink" href="#recur_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Fixed-point combinator.</p>
 <p>This is an abstraction of recursion.</p>
 <ul>
@@ -880,57 +964,57 @@ other("17") == 42
 
     </div>
   
-    <h3 id="rmod_a_b">rmod(a, b)
-    <a class="permalink" href="#rmod_a_b" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="rmod_2">rmod(a, b)
+    <a class="permalink" href="#rmod_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Reverse curried modulo.</p>
-<pre><code>rmod(a, b) == b % a
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">rmod(a, b) == b % a
 </code></pre>
-<p>See also <a href="#mod_a_b"><code>mod</code></a></p>
+<p>See also <a href="#mod_2"><code>mod</code></a></p>
 
     </div>
   
-    <h3 id="rpow_a_b">rpow(a, b)
-    <a class="permalink" href="#rpow_a_b" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="rpow_2">rpow(a, b)
+    <a class="permalink" href="#rpow_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Reversed curried power.</p>
-<pre><code>rpow(2, a) == a*a
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">rpow(2, a) == a*a
 </code></pre>
 <p>Does an implicit conversion to double.</p>
-<p>See also <a href="#pow_a_b"><code>pow</code></a></p>
+<p>See also <a href="#pow_2"><code>pow</code></a></p>
 
     </div>
   
-    <h3 id="rsub_x_y">rsub(x, y)
-    <a class="permalink" href="#rsub_x_y" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="rsub_2">rsub(x, y)
+    <a class="permalink" href="#rsub_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Reversed curried subtract.</p>
-<pre><code>rsub(x, y) == y - x
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">rsub(x, y) == y - x
 </code></pre>
-<p>See also <a href="#sub_x_y"><code>sub</code></a></p>
+<p>See also <a href="#sub_2"><code>sub</code></a></p>
 
     </div>
   
-    <h3 id="setitem_obj_i_v">setitem(obj, i, v)
-    <a class="permalink" href="#setitem_obj_i_v" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="setitem_3">setitem(obj, i, v)
+    <a class="permalink" href="#setitem_3" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried indexed assignment</p>
-<pre><code>setitem(obj, i, v) == obj: set(i, v)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">setitem(obj, i, v) == obj: set(i, v)
 </code></pre>
 <ul>
 <li><em>param</em> <code>obj</code>: any object having a <code>set</code> method</li>
 <li><em>param</em> <code>i</code>: the index to set</li>
 <li><em>param</em> <code>v</code>: the value to set</li>
 </ul>
-<p>See also <a href="#getitem_obj_i"><code>getitem</code></a>, <a href="#getter_i"><code>getter</code></a></p>
+<p>See also <a href="#getitem_2"><code>getitem</code></a>, <a href="#getter_1"><code>getter</code></a></p>
 
     </div>
   
-    <h3 id="snd_t">snd(t)
-    <a class="permalink" href="#snd_t" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="snd_1">snd(t)
+    <a class="permalink" href="#snd_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Second element of a list, tuple, vector, array.</p>
-<pre><code>snd([a, b]) == b
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">snd([a, b]) == b
 </code></pre>
 <ul>
 <li><em>param</em> <code>t</code>: any object with a <code>get</code> method and at least two elements.</li>
@@ -939,100 +1023,100 @@ other("17") == 42
 
     </div>
   
-    <h3 id="spreader_f">spreader(f)
-    <a class="permalink" href="#spreader_f" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="spreader_1">spreader(f)
+    <a class="permalink" href="#spreader_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Convers a polyadic function into an unary function.</p>
-<p>Similar to <a href="#unary_f"><code>unary</code></a> but using <code>spread</code> instead of <code>invoke</code>.</p>
+<p>Similar to <a href="#unary_1"><code>unary</code></a> but using <code>spread</code> instead of <code>invoke</code>.</p>
 <p>This function can also be used as a decorator.</p>
-<p>See also <a href="#varargs_f"><code>varargs</code></a></p>
+<p>See also <a href="#varargs_1"><code>varargs</code></a></p>
 
     </div>
   
-    <h3 id="str_o">str(o)
-    <a class="permalink" href="#str_o" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="str_1">str(o)
+    <a class="permalink" href="#str_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Converts its argument to a <code>String</code>.</p>
 
     </div>
   
-    <h3 id="sub_x_y">sub(x, y)
-    <a class="permalink" href="#sub_x_y" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="sub_2">sub(x, y)
+    <a class="permalink" href="#sub_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried subtract.</p>
-<pre><code>sub(x, y) == x - y
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">sub(x, y) == x - y
 </code></pre>
-<p>See also <a href="#add_value_element"><code>add</code></a>, <a href="#rsub_x_y"><code>rsub</code></a></p>
+<p>See also <a href="#add_2"><code>add</code></a>, <a href="#rsub_2"><code>rsub</code></a></p>
 
     </div>
   
-    <h3 id="succ_x">succ(x)
-    <a class="permalink" href="#succ_x" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="succ_1">succ(x)
+    <a class="permalink" href="#succ_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Number successor (side-effect free increment).</p>
-<pre><code>succ(x) == x + 1
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">succ(x) == x + 1
 </code></pre>
 <p>Equivalent to <code>add(1)</code></p>
-<p>See also <a href="#pred_x"><code>pred</code></a></p>
+<p>See also <a href="#pred_1"><code>pred</code></a></p>
 
     </div>
   
-    <h3 id="swap_v">swap(v)
-    <a class="permalink" href="#swap_v" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="swap_1">swap(v)
+    <a class="permalink" href="#swap_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Polymorphic swapping.</p>
-<p>This function dispatches on <a href="#swapArgs_func"><code>swapArgs</code></a>,
-<a href="#swapCurry_func"><code>swapCurry</code></a> or <a href="#swapCouple_couple"><code>swapCouple</code></a> according
+<p>This function dispatches on <a href="#swapArgs_1"><code>swapArgs</code></a>,
+<a href="#swapCurry_1"><code>swapCurry</code></a> or <a href="#swapCouple_1"><code>swapCouple</code></a> according
 to its parameter.</p>
 <p>Note that we have the property that given a binary function <code>f</code> and a
 couple <code>c</code></p>
-<pre><code>unary(f)(swap(c)) == unary(swap(f))(c)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">unary(f)(swap(c)) == unary(swap(f))(c)
 </code></pre>
 <p>When applied to functions, equivalent to the <em>C</em> combinator.</p>
 
     </div>
   
-    <h3 id="swapArgs_func">swapArgs(func)
-    <a class="permalink" href="#swapArgs_func" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="swapArgs_1">swapArgs(func)
+    <a class="permalink" href="#swapArgs_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Change the signature of the given binary function by swapping its arguments,
 such that:</p>
-<pre><code>swapArgs(f)(b, a) == f(a, b)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">swapArgs(f)(b, a) == f(a, b)
 </code></pre>
 <p><em>Warning</em>: when using this function with one previously wrapped in
-<a href="#curry_f"><code>curry</code></a> or <a href="#uncurry_f"><code>uncurry</code></a>, the resulting function can't be
+<a href="#curry_1"><code>curry</code></a> or <a href="#uncurry_1"><code>uncurry</code></a>, the resulting function can't be
 automatically partialized any more.</p>
 
     </div>
   
-    <h3 id="swapCouple_couple">swapCouple(couple)
-    <a class="permalink" href="#swapCouple_couple" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="swapCouple_1">swapCouple(couple)
+    <a class="permalink" href="#swapCouple_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Swap the values of a couple.</p>
 <p>The couple can be a tuple, a vector, a list or an array as long as its size is 2.
 The return value as the same type.</p>
 <p>For example:</p>
-<pre><code>swap([a, b]) == [b, a]
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">swap([a, b]) == [b, a]
 </code></pre>
 
     </div>
   
-    <h3 id="swapCurry_func">swapCurry(func)
-    <a class="permalink" href="#swapCurry_func" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="swapCurry_1">swapCurry(func)
+    <a class="permalink" href="#swapCurry_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Change the signature of the given curried binary function by swapping its
 arguments, such that:</p>
-<pre><code>swapCurry(f)(a)(b) = f(b)(a)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">swapCurry(f)(a)(b) = f(b)(a)
 </code></pre>
 
     </div>
   
-    <h3 id="unary_f">unary(f)
-    <a class="permalink" href="#unary_f" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="unary_1">unary(f)
+    <a class="permalink" href="#unary_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Convers a polyadic function into an unary function.
 E.g.</p>
-<pre><code>let f = |a, b, c| -&gt; a + b + c
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let f = |a, b, c| -&gt; a + b + c
 let g = unary(f)
 
 g([1, 2, 3]) == 6
@@ -1041,27 +1125,27 @@ g([1, 2, 3]) == 6
 unchanged.</p>
 <p>This can be useful in HOF, for example to <code>map</code> a binary function on a list of
 couple:</p>
-<pre><code>let f = |a, b| -&gt; ...
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let f = |a, b| -&gt; ...
 list[["a", 1], ["b", 2], ["c", 3]]: map(unary(f))
 </code></pre>
 <p>results in <code>list[f("a", 1), f("b", 2), f("c", 3)]</code></p>
 <p>The resulting unary function will accept any object having a <code>toArray</code> method
-(array, tuple, collection, map entry, struct...)</p>
+(array, tuple, collection, map entry, struct&hellip;)</p>
 <p>Thus, <code>unary(func)(arg)</code> is equivalent to <code>func: invoke(arg: toArray())</code></p>
 <p>This function can also be used as a decorator.</p>
-<p>See also <a href="#spreader_f"><code>spreader</code></a> and <a href="#varargs_f"><code>varargs</code></a></p>
+<p>See also <a href="#spreader_1"><code>spreader</code></a> and <a href="#varargs_1"><code>varargs</code></a></p>
 
     </div>
   
-    <h3 id="uncurry_f">uncurry(f)
-    <a class="permalink" href="#uncurry_f" title="link to this section">&#182;</a></h3>
-    <div>
-      <p>Reverse of <a href="#curry_f"><code>curry</code></a>.</p>
+    <h3 id="uncurry_1">uncurry(f)
+    <a class="permalink" href="#uncurry_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
+      <p>Reverse of <a href="#curry_1"><code>curry</code></a>.</p>
 <p>Take a curried function (e.g. <code>|a| -&gt; |b| -&gt; a + b</code>) and return a polyadic
 function (e.g. <code>|a, b| -&gt; a + b</code>).
 It is actually a variadic function calling the curried one in sequence.</p>
 <p>The two functions defined by</p>
-<pre><code>let f = curry(|a, b, c| -&gt; a + b + c)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let f = curry(|a, b, c| -&gt; a + b + c)
 let g = uncurry(|a| -&gt; |b| -&gt; |c| -&gt; a + b + c)
 </code></pre>
 <p>have the same behavior.</p>
@@ -1070,16 +1154,16 @@ let g = uncurry(|a| -&gt; |b| -&gt; |c| -&gt; a + b + c)
 <li><em>param</em> <code>f</code> the function to uncurry</li>
 <li><em>return</em> a variadic function dispatching on <code>f</code></li>
 </ul>
-<p>See also <a href="#curry_f"><code>curry</code></a></p>
+<p>See also <a href="#curry_1"><code>curry</code></a></p>
 
     </div>
   
-    <h3 id="until_predicate_fun">until(predicate, fun)
-    <a class="permalink" href="#until_predicate_fun" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="until_2">until(predicate, fun)
+    <a class="permalink" href="#until_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Apply the given function until the predicate holds.</p>
 <p>For instance:</p>
-<pre><code>let f = until(gt(10), mul(2))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let f = until(gt(10), mul(2))
 f(15) == 15
 f(2) == 16
 f(9) == 18
@@ -1087,35 +1171,40 @@ f(9) == 18
 
     </div>
   
-    <h3 id="varargs_f">varargs(f)
-    <a class="permalink" href="#varargs_f" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="varargs_1">varargs(f)
+    <a class="permalink" href="#varargs_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Convert an unary function taking an array into a variadic function.</p>
-<p>This is the contrary of <a href="#unary_f"><code>unary</code></a>.
+<p>This is the contrary of <a href="#unary_1"><code>unary</code></a>.
 E.g.</p>
-<pre><code>let f = |t| -&gt; t:get(0) + t:get(1) + t:get(2)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let f = |t| -&gt; t:get(0) + t:get(1) + t:get(2)
 let g = varargs(f)
 
 f([1, 2, 3]) == g(1, 2, 3)
 </code></pre>
 <p>This function can also be used as a decorator.</p>
-<p>See also <a href="#spreader_f"><code>spreader</code></a> and <a href="#unary_f"><code>unary</code></a></p>
+<p>See also <a href="#spreader_1"><code>spreader</code></a> and <a href="#unary_1"><code>unary</code></a></p>
 
     </div>
   
-    <h3 id="xor_a_b">xor(a, b)
-    <a class="permalink" href="#xor_a_b" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="xor_2">xor(a, b)
+    <a class="permalink" href="#xor_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Curried boolean <em>xor</em>.</p>
-<pre><code>xor(a, b) == (a or b) and not (a and b)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">xor(a, b) == (a or b) and not (a and b)
 </code></pre>
 <p>The arguments can be boolean expressions or predicate functions. If called with
 predicate functions, returns a new predicate function.</p>
-<p>See also <a href="#and_a"><code>and</code></a>, <a href="#or_a"><code>or</code></a></p>
+<p>See also <a href="#and_1"><code>and</code></a>, <a href="#or_1"><code>or</code></a></p>
 
     </div>
   
 
+
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
 
 </body>
 </html>

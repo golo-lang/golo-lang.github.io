@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 
 
+
 <html>
 <head>
   <title>Documentation for gololang.LazyLists</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <style>
     body {
       font-family: Helvetica, Arial, sans-serif;
@@ -12,14 +14,14 @@
       background-color: #fff;
       border-color: #999999;
       border-width: 2px;
-      line-height: 1.5;
-      margin: 2em 3em 2em 20%;
+      margin: 1em auto;
+      margin-left: 20em;
+      max-width: 50em;
       text-align: left;
-      padding: 0 100px 0 100px;
+      padding: 0.5em;
     }
     pre {
       background-color: #eee;
-      padding: 10px;
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
@@ -35,9 +37,31 @@
       border-radius: 2px;
     }
     pre code {
+      font-size: 120%;
       padding-left: 0px;
       padding-right: 0px;
     }
+
+    .listing:hover code[data-lang]:before {
+      display: block;
+    }
+
+    .listing code {
+      position: relative;
+    }
+
+    .listing code[data-lang]:before {
+      display: none;
+      content: attr(data-lang);
+      position: absolute;
+      font-size: 0.75em;
+      top: .5rem;
+      right: 0.5rem;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #000;
+    }
+
     li p {
       margin: 0.3em;
     }
@@ -55,50 +79,86 @@
     h1 {
       color: #999;
       font-weight: 400;
-      font-size: 36px;
+      font-size: 250%;
     }
     h2 {
       border-bottom: 1px dotted #aaa;
       margin-bottom: 1em;
       color: #333;
-      font-size: 30px;
+      font-size: 200%;
+      font-style: normal;
+      font-weight: bold;
     }
     h3 {
       color: #666;
-      font-size: 24px;
+      font-size: 180%;
+      font-style: normal;
+      font-weight: bold;
     }
     h4 {
-      font-size: 21px;
+      font-size: 130%;
+      font-style: normal;
+      font-weight: bold;
     }
     h5 {
-      font-size: 18px;
+      font-size: 100%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h6 {
+      font-size: 100%;
+      font-style: italic;
+      font-weight: normal;
     }
 
     #toc {
       margin: 0;
-      padding: 1em;
-      border-right: 1px solid #aaa;
-      font-size: 80%;
+      padding: 0;
       position: fixed;
       top: 0px;
       bottom: 0px;
       left: 0px;
-      width: 20%;
+      width: 20em;
       overflow: auto;
       white-space: nowrap;
+    }
+
+    #toc h1 {
+      margin: .5em;
+      padding: 1ex;
+      font-size: 90%;
+      font-weight: bold;
+      font-style: normal;
+      color: #333;
+      background-color: #eee;
+      text-align: center;
     }
 
     #toc ul {
       padding-left: 1em;
     }
 
-    #toc > li {
-      list-style: none;
-      margin-bottom: 1ex;
+    #toc > ul {
+      font-size: 80%;
+      margin: 0.5em;
     }
 
-    #toc > li > a {
+    #toc > ul > li {
+      list-style: none;
+      margin-bottom: 2ex;
+    }
+
+    #toc > ul > li > a {
       font-weight: bold;
+      color: #333;
+      display: block;
+      padding: 1ex;
+      margin: 0 1em 1ex 0;
+      border-bottom: 1px solid #999;
+    }
+
+    #toc li {
+      list-style-type: none;
     }
 
     :target {
@@ -115,38 +175,35 @@
       visibility: visible;
     }
 
+    .golodoc {
+      margin: 0;
+      padding: 0;
+      padding-left: 1.5em;
+    }
+
+    @media (max-width: 50em) {
+      #toc {
+        display: none;
+      }
+
+      body {
+        margin: 0;
+        padding: 0.5em;
+      }
+
+      h1 {
+        font-size: 200%;
+      }
+    }
+
   </style>
 </head>
 <body>
 <h1>Documentation for gololang.LazyLists</h1>
-<div>
-  <p>This module defines utility functions and augmentations to ease the use of
-the <code>gololang.LazyList</code> object.</p>
-<p>A lazy list is an <em>immutable</em> list whose elements are evaluated only when needed,
-as can be found in Haskell for example.</p>
-<p>This is very useful when using higher order function such as <code>map</code>. Mapping
-a long lazy list with a function and using only the 3 first elements will only
-apply the function to these elements, as opposed to regular lists.</p>
-<p>Lazy lists can also be used to create infinite lists, also known as generators
-(or anamorphisms).</p>
-<p>Lastly, they allow for elegant recursive implementations of several classical
-algorithms.</p>
-<p>For instance, one can create a infinite lazy list containing integers as:</p>
-<pre><code>function count = |start| -&gt; cons(start, -&gt; count(start + 1_L))
-function count = -&gt; count(0_L)
-</code></pre>
-<p>On the other hand, functions or methods like <code>equals</code>, <code>size</code> or <code>contains</code> are
-not very efficients, since they must evaluate the whole list, and thus negate
-the laziness. They are here for completeness and compatibility with the regular
-lists interface, but you should avoid such methods.</p>
-<p>Some functions in this module are recursive (re)implementation of standard list
-HOF, such as <code>map</code> or <code>filter</code>. The recursive aspect should not be limiting since
-the resulting list is lazy.</p>
-
-</div>
-
 <!-- begin table of content -->
-<ul id="toc">
+<nav id="toc">
+<h1>gololang.LazyLists</h1>
+<ul>
 
   
 
@@ -161,39 +218,39 @@ the resulting list is lazy.</p>
     
     <li><a href="#augment.gololang.LazyList">gololang.LazyList</a><ul>
       
-      <li><a href="#gololang.LazyList.drop_this_nb">drop(this, nb)</a></li>
+      <li><a href="#gololang.LazyList.drop_2">drop(this, nb)</a></li>
       
-      <li><a href="#gololang.LazyList.dropWhile_this_pred">dropWhile(this, pred)</a></li>
+      <li><a href="#gololang.LazyList.dropWhile_2">dropWhile(this, pred)</a></li>
       
-      <li><a href="#gololang.LazyList.filter_this_pred">filter(this, pred)</a></li>
+      <li><a href="#gololang.LazyList.filter_2">filter(this, pred)</a></li>
       
-      <li><a href="#gololang.LazyList.find_this_pred">find(this, pred)</a></li>
+      <li><a href="#gololang.LazyList.find_2">find(this, pred)</a></li>
       
-      <li><a href="#gololang.LazyList.foldl_this_func_zero">foldl(this, func, zero)</a></li>
+      <li><a href="#gololang.LazyList.foldl_3">foldl(this, func, zero)</a></li>
       
-      <li><a href="#gololang.LazyList.foldr_this_func_zero">foldr(this, func, zero)</a></li>
+      <li><a href="#gololang.LazyList.foldr_3">foldr(this, func, zero)</a></li>
       
-      <li><a href="#gololang.LazyList.join_this_separator">join(this, separator)</a></li>
+      <li><a href="#gololang.LazyList.join_2">join(this, separator)</a></li>
       
-      <li><a href="#gololang.LazyList.map_this_func">map(this, func)</a></li>
+      <li><a href="#gololang.LazyList.map_2">map(this, func)</a></li>
       
-      <li><a href="#gololang.LazyList.subList_this_from_to">subList(this, from, to)</a></li>
+      <li><a href="#gololang.LazyList.subList_3">subList(this, from, to)</a></li>
       
-      <li><a href="#gololang.LazyList.take_this_nb">take(this, nb)</a></li>
+      <li><a href="#gololang.LazyList.take_2">take(this, nb)</a></li>
       
-      <li><a href="#gololang.LazyList.takeWhile_this_pred">takeWhile(this, pred)</a></li>
+      <li><a href="#gololang.LazyList.takeWhile_2">takeWhile(this, pred)</a></li>
       
     </ul></li>
     
     <li><a href="#augment.java.lang.Iterable">java.lang.Iterable</a><ul>
       
-      <li><a href="#java.lang.Iterable.asLazyList_this">asLazyList(this)</a></li>
+      <li><a href="#java.lang.Iterable.asLazyList_1">asLazyList(this)</a></li>
       
     </ul></li>
     
     <li><a href="#augment.java.util.Iterator">java.util.Iterator</a><ul>
       
-      <li><a href="#java.util.Iterator.asLazyList_this">asLazyList(this)</a></li>
+      <li><a href="#java.util.Iterator.asLazyList_1">asLazyList(this)</a></li>
       
     </ul></li>
     
@@ -203,26 +260,53 @@ the resulting list is lazy.</p>
   
   <li><a href="#functions">Functions</a><ul>
     
-    <li><a href="#cons_ht">cons(ht)</a></li>
+    <li><a href="#cons_1">cons(ht)</a></li>
     
-    <li><a href="#cons_head_tail">cons(head, tail)</a></li>
+    <li><a href="#cons_2">cons(head, tail)</a></li>
     
-    <li><a href="#emptyList_">emptyList()</a></li>
+    <li><a href="#emptyList_0">emptyList()</a></li>
     
-    <li><a href="#fromIter_it">fromIter(it)</a></li>
+    <li><a href="#fromIter_1">fromIter(it)</a></li>
     
-    <li><a href="#generator_unspool_finished_seed">generator(unspool, finished, seed)</a></li>
+    <li><a href="#generator_3">generator(unspool, finished, seed)</a></li>
     
-    <li><a href="#iterate_zero_func">iterate(zero, func)</a></li>
+    <li><a href="#iterate_2">iterate(zero, func)</a></li>
     
-    <li><a href="#lazyList_values">lazyList(values)</a></li>
+    <li><a href="#lazyList_1">lazyList(values)</a></li>
     
-    <li><a href="#repeat_value">repeat(value)</a></li>
+    <li><a href="#repeat_1">repeat(value)</a></li>
     
   </ul></li>
   
 </ul>
+</nav>
 <!-- end table of content -->
+
+<div class="golodoc">
+  <p>This module defines utility functions and augmentations to ease the use of
+the <code>gololang.LazyList</code> object.</p>
+<p>A lazy list is an <em>immutable</em> list whose elements are evaluated only when needed,
+as can be found in Haskell for example.</p>
+<p>This is very useful when using higher order function such as <code>map</code>. Mapping
+a long lazy list with a function and using only the 3 first elements will only
+apply the function to these elements, as opposed to regular lists.</p>
+<p>Lazy lists can also be used to create infinite lists, also known as generators
+(or anamorphisms).</p>
+<p>Lastly, they allow for elegant recursive implementations of several classical
+algorithms.</p>
+<p>For instance, one can create a infinite lazy list containing integers as:</p>
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">function count = |start| -&gt; cons(start, -&gt; count(start + 1_L))
+function count = -&gt; count(0_L)
+</code></pre>
+<p>On the other hand, functions or methods like <code>equals</code>, <code>size</code> or <code>contains</code> are
+not very efficients, since they must evaluate the whole list, and thus negate
+the laziness. They are here for completeness and compatibility with the regular
+lists interface, but you should avoid such methods.</p>
+<p>Some functions in this module are recursive (re)implementation of standard list
+HOF, such as <code>map</code> or <code>filter</code>. The recursive aspect should not be limiting since
+the resulting list is lazy.</p>
+
+</div>
 
 
 
@@ -236,25 +320,25 @@ the resulting list is lazy.</p>
   
     <h3 id="augment.gololang.LazyList">gololang.LazyList
     <a class="permalink" href="#augment.gololang.LazyList" title="link to this section">&#182;</a></h3>
-    <div>
+    <div class="golodoc">
       
     </div>
     
     
       
-        <h4 id="gololang.LazyList.drop_this_nb">drop(this, nb)
+        <h4 id="gololang.LazyList.drop_2">drop(this, nb)
       
-      <a class="permalink" href="#gololang.LazyList.drop_this_nb" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.LazyList.drop_2" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Remove <code>nb</code> elements from the list and return the rest as a lazy list.</p>
 
       </div>
     
       
-        <h4 id="gololang.LazyList.dropWhile_this_pred">dropWhile(this, pred)
+        <h4 id="gololang.LazyList.dropWhile_2">dropWhile(this, pred)
       
-      <a class="permalink" href="#gololang.LazyList.dropWhile_this_pred" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.LazyList.dropWhile_2" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Remove elements from the list as long as the given predicate is true.</p>
 <ul>
 <li><code>pred</code>: the predicate function used to end the list.</li>
@@ -263,22 +347,22 @@ the resulting list is lazy.</p>
       </div>
     
       
-        <h4 id="gololang.LazyList.filter_this_pred">filter(this, pred)
+        <h4 id="gololang.LazyList.filter_2">filter(this, pred)
       
-      <a class="permalink" href="#gololang.LazyList.filter_this_pred" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.LazyList.filter_2" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Filters elements based on a predicate.</p>
 <p>Returns a new lazy list.</p>
 
       </div>
     
       
-        <h4 id="gololang.LazyList.find_this_pred">find(this, pred)
+        <h4 id="gololang.LazyList.find_2">find(this, pred)
       
-      <a class="permalink" href="#gololang.LazyList.find_this_pred" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.LazyList.find_2" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Finds the first element of a list matching a predicate:</p>
-<pre><code>println(lazyList(1, 2, 3, 4): find(|n| -&gt; n &gt; 3))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">println(lazyList(1, 2, 3, 4): find(|n| -&gt; n &gt; 3))
 </code></pre>
 <ul>
 <li><code>this</code>: a lazy list.</li>
@@ -291,38 +375,38 @@ this method on infinite list, since no check is made.</p>
       </div>
     
       
-        <h4 id="gololang.LazyList.foldl_this_func_zero">foldl(this, func, zero)
+        <h4 id="gololang.LazyList.foldl_3">foldl(this, func, zero)
       
-      <a class="permalink" href="#gololang.LazyList.foldl_this_func_zero" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.LazyList.foldl_3" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Folds left <code>this</code> using <code>func</code> with <code>zero</code> as initial value.
 This is a recursive implementation.</p>
-<pre><code>lazyList(a, b, c): foldl(f, z) == f(f(f(z, a), b), c)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">lazyList(a, b, c): foldl(f, z) == f(f(f(z, a), b), c)
 </code></pre>
 <p>Equivalent to <code>foldr</code> if <code>func</code> is commutative.</p>
 
       </div>
     
       
-        <h4 id="gololang.LazyList.foldr_this_func_zero">foldr(this, func, zero)
+        <h4 id="gololang.LazyList.foldr_3">foldr(this, func, zero)
       
-      <a class="permalink" href="#gololang.LazyList.foldr_this_func_zero" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.LazyList.foldr_3" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Folds right <code>this</code> using <code>func</code> with <code>zero</code> as initial value.
 This is a recursive implementation.</p>
-<pre><code>lazyList(a, b, c): foldr(f, z) == f(a, f(b, f(c, z)))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">lazyList(a, b, c): foldr(f, z) == f(a, f(b, f(c, z)))
 </code></pre>
 <p>Equivalent to <code>foldl</code> if <code>func</code> is commutative.</p>
 
       </div>
     
       
-        <h4 id="gololang.LazyList.join_this_separator">join(this, separator)
+        <h4 id="gololang.LazyList.join_2">join(this, separator)
       
-      <a class="permalink" href="#gololang.LazyList.join_this_separator" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.LazyList.join_2" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Joins the elements into a string:</p>
-<pre><code>println(list[1, 2, 3]: join(", "))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">println(list[1, 2, 3]: join(", "))
 </code></pre>
 <ul>
 <li><code>this</code>: a list.</li>
@@ -333,12 +417,12 @@ This is a recursive implementation.</p>
       </div>
     
       
-        <h4 id="gololang.LazyList.map_this_func">map(this, func)
+        <h4 id="gololang.LazyList.map_2">map(this, func)
       
-      <a class="permalink" href="#gololang.LazyList.map_this_func" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.LazyList.map_2" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Maps elements of a list using a function:</p>
-<pre><code>lazyList(1, 2, 3):map(|x| -&gt; 2 * x)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">lazyList(1, 2, 3):map(|x| -&gt; 2 * x)
 </code></pre>
 <p><code>map</code> returns a new lazy list, i.e. <code>func</code> is applied only
 when necessary.</p>
@@ -347,10 +431,10 @@ when necessary.</p>
       </div>
     
       
-        <h4 id="gololang.LazyList.subList_this_from_to">subList(this, from, to)
+        <h4 id="gololang.LazyList.subList_3">subList(this, from, to)
       
-      <a class="permalink" href="#gololang.LazyList.subList_this_from_to" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.LazyList.subList_3" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Extract a lazy sublist.</p>
 <p>This is just a convenient method for <code>list: drop(from):take(to - from)</code>, so
 the list remains lazy.</p>
@@ -362,10 +446,10 @@ the list remains lazy.</p>
       </div>
     
       
-        <h4 id="gololang.LazyList.take_this_nb">take(this, nb)
+        <h4 id="gololang.LazyList.take_2">take(this, nb)
       
-      <a class="permalink" href="#gololang.LazyList.take_this_nb" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.LazyList.take_2" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Takes the <code>nb</code> first elements of the lazy list, as a lazy list.
 This is a wrapper, the underlying list is resolved on demand, such that
 everything remains lazy. <code>take</code> can thus be used on infinite lists.</p>
@@ -373,10 +457,10 @@ everything remains lazy. <code>take</code> can thus be used on infinite lists.</
       </div>
     
       
-        <h4 id="gololang.LazyList.takeWhile_this_pred">takeWhile(this, pred)
+        <h4 id="gololang.LazyList.takeWhile_2">takeWhile(this, pred)
       
-      <a class="permalink" href="#gololang.LazyList.takeWhile_this_pred" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.LazyList.takeWhile_2" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Takes elements from the list as long as the given predicate is true.</p>
 <ul>
 <li><code>pred</code>: the predicate function used to end the list.</li>
@@ -387,16 +471,16 @@ everything remains lazy. <code>take</code> can thus be used on infinite lists.</
   
     <h3 id="augment.java.lang.Iterable">java.lang.Iterable
     <a class="permalink" href="#augment.java.lang.Iterable" title="link to this section">&#182;</a></h3>
-    <div>
+    <div class="golodoc">
       
     </div>
     
     
       
-        <h4 id="java.lang.Iterable.asLazyList_this">asLazyList(this)
+        <h4 id="java.lang.Iterable.asLazyList_1">asLazyList(this)
       
-      <a class="permalink" href="#java.lang.Iterable.asLazyList_this" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#java.lang.Iterable.asLazyList_1" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Returns a lazy list from this <code>Iterable</code>. Can be used for instance to lazily
 map a list.</p>
 
@@ -405,16 +489,16 @@ map a list.</p>
   
     <h3 id="augment.java.util.Iterator">java.util.Iterator
     <a class="permalink" href="#augment.java.util.Iterator" title="link to this section">&#182;</a></h3>
-    <div>
+    <div class="golodoc">
       
     </div>
     
     
       
-        <h4 id="java.util.Iterator.asLazyList_this">asLazyList(this)
+        <h4 id="java.util.Iterator.asLazyList_1">asLazyList(this)
       
-      <a class="permalink" href="#java.util.Iterator.asLazyList_this" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#java.util.Iterator.asLazyList_1" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Returns a lazy list view of this <code>Iterator</code>.</p>
 
       </div>
@@ -425,37 +509,37 @@ map a list.</p>
 
   <h2 id="functions">Functions</h2>
   
-    <h3 id="cons_ht">cons(ht)
-    <a class="permalink" href="#cons_ht" title="link to this section">&#182;</a></h3>
-    <div>
-      <p>Unary version of <a href="#cons_head_tail"><code>cons(head, tail)</code></a>.</p>
+    <h3 id="cons_1">cons(ht)
+    <a class="permalink" href="#cons_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
+      <p>Unary version of <a href="#cons_2"><code>cons(head, tail)</code></a>.</p>
 <p>Its parameter is assumed to be a tuple (or any object having a <code>get(idx)</code> method)
 of the form <code>[head, tail]</code>.</p>
 
     </div>
   
-    <h3 id="cons_head_tail">cons(head, tail)
-    <a class="permalink" href="#cons_head_tail" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="cons_2">cons(head, tail)
+    <a class="permalink" href="#cons_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Create a new lazy list from a head and tail values. Automatically wraps the
 tail in a closure if its not already one.</p>
 <p>For example:</p>
-<pre><code>let myList = cons(1, cons(2, cons(3, emptyList())))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let myList = cons(1, cons(2, cons(3, emptyList())))
 </code></pre>
 <p>gives a lazy list equivalent to <code>list[1, 2, 3]</code></p>
 
     </div>
   
-    <h3 id="emptyList_">emptyList()
-    <a class="permalink" href="#emptyList_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="emptyList_0">emptyList()
+    <a class="permalink" href="#emptyList_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Returns the empty list.</p>
 
     </div>
   
-    <h3 id="fromIter_it">fromIter(it)
-    <a class="permalink" href="#fromIter_it" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="fromIter_1">fromIter(it)
+    <a class="permalink" href="#fromIter_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Wraps any object implementing <code>Iterable</code> or <code>Iterator</code> in a lazy list.
 The <code>next()</code> method of the underlying iterator is only called when the tail is
 used.</p>
@@ -466,9 +550,9 @@ iterator.</p>
 
     </div>
   
-    <h3 id="generator_unspool_finished_seed">generator(unspool, finished, seed)
-    <a class="permalink" href="#generator_unspool_finished_seed" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="generator_3">generator(unspool, finished, seed)
+    <a class="permalink" href="#generator_3" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Generator function on lazy lists (anamorphism).</p>
 <p>This function generates a (possibly infinite) lazy list. Starting with the
 <code>seed</code> value, if <code>finished(seed)</code> is <code>true</code>, the generation stops and an empty
@@ -476,7 +560,7 @@ list is returned. Otherwise, <code>unspool</code> is called on <code>seed</code>
 two values: the head of the list (current value) and the next seed that will be
 used to generate the tail.</p>
 <p>As an example, one can write a simple <code>range</code> function as:</p>
-<pre><code>let range = |start, end| -&gt; generator(
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let range = |start, end| -&gt; generator(
   |seed| -&gt; [seed, seed + 1],
   |seed| -&gt; seed &gt;= end,
   start
@@ -490,14 +574,14 @@ used to generate the tail.</p>
 
     </div>
   
-    <h3 id="iterate_zero_func">iterate(zero, func)
-    <a class="permalink" href="#iterate_zero_func" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="iterate_2">iterate(zero, func)
+    <a class="permalink" href="#iterate_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Returns an infinite lazy list produced by iterative application of a function
 to an initial element.
 <code>iterate(z, f)</code> thus yields <code>z, f(z), f(f(z)), ...</code></p>
 <p>For instance, one can create a infinite list of integers using:</p>
-<pre><code>iterate(0, |x| -&gt; x + 1)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">iterate(0, |x| -&gt; x + 1)
 </code></pre>
 <ul>
 <li><code>zero</code>: the initial element of the list</li>
@@ -506,27 +590,27 @@ to an initial element.
 
     </div>
   
-    <h3 id="lazyList_values">lazyList(values)
-    <a class="permalink" href="#lazyList_values" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="lazyList_1">lazyList(values)
+    <a class="permalink" href="#lazyList_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Variadic function to create lazy lists from values.</p>
-<pre><code>let myList = lazyList(1, 2, 3, 4)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let myList = lazyList(1, 2, 3, 4)
 </code></pre>
 <p>is the equivalent to</p>
-<pre><code>let myList = cons(1, cons(2, cons(3, cons(4, emptyList()))))
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let myList = cons(1, cons(2, cons(3, cons(4, emptyList()))))
 </code></pre>
 
     </div>
   
-    <h3 id="repeat_value">repeat(value)
-    <a class="permalink" href="#repeat_value" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="repeat_1">repeat(value)
+    <a class="permalink" href="#repeat_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Produces a infinite list of values. If the argument is a closure, it must have
 no parameters, and it's used to produce the values (called for each <code>tail</code>
 access).</p>
 <p>For instance, <code>repeat(5)</code> will return an infinite lazy list of <code>5</code>s, and
 <code>repeat(^f)</code> will return a infinite lazy list of calls to <code>f</code>
-([f(), f(), f(), ...])</p>
+([f(), f(), f(), &hellip;])</p>
 <ul>
 <li><code>value</code>: a value or a closure</li>
 </ul>
@@ -534,6 +618,11 @@ access).</p>
     </div>
   
 
+
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
 
 </body>
 </html>

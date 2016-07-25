@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 
 
+
 <html>
 <head>
   <title>Documentation for gololang.AnsiCodes</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <style>
     body {
       font-family: Helvetica, Arial, sans-serif;
@@ -12,14 +14,14 @@
       background-color: #fff;
       border-color: #999999;
       border-width: 2px;
-      line-height: 1.5;
-      margin: 2em 3em 2em 20%;
+      margin: 1em auto;
+      margin-left: 20em;
+      max-width: 50em;
       text-align: left;
-      padding: 0 100px 0 100px;
+      padding: 0.5em;
     }
     pre {
       background-color: #eee;
-      padding: 10px;
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
@@ -35,9 +37,31 @@
       border-radius: 2px;
     }
     pre code {
+      font-size: 120%;
       padding-left: 0px;
       padding-right: 0px;
     }
+
+    .listing:hover code[data-lang]:before {
+      display: block;
+    }
+
+    .listing code {
+      position: relative;
+    }
+
+    .listing code[data-lang]:before {
+      display: none;
+      content: attr(data-lang);
+      position: absolute;
+      font-size: 0.75em;
+      top: .5rem;
+      right: 0.5rem;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #000;
+    }
+
     li p {
       margin: 0.3em;
     }
@@ -55,50 +79,86 @@
     h1 {
       color: #999;
       font-weight: 400;
-      font-size: 36px;
+      font-size: 250%;
     }
     h2 {
       border-bottom: 1px dotted #aaa;
       margin-bottom: 1em;
       color: #333;
-      font-size: 30px;
+      font-size: 200%;
+      font-style: normal;
+      font-weight: bold;
     }
     h3 {
       color: #666;
-      font-size: 24px;
+      font-size: 180%;
+      font-style: normal;
+      font-weight: bold;
     }
     h4 {
-      font-size: 21px;
+      font-size: 130%;
+      font-style: normal;
+      font-weight: bold;
     }
     h5 {
-      font-size: 18px;
+      font-size: 100%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h6 {
+      font-size: 100%;
+      font-style: italic;
+      font-weight: normal;
     }
 
     #toc {
       margin: 0;
-      padding: 1em;
-      border-right: 1px solid #aaa;
-      font-size: 80%;
+      padding: 0;
       position: fixed;
       top: 0px;
       bottom: 0px;
       left: 0px;
-      width: 20%;
+      width: 20em;
       overflow: auto;
       white-space: nowrap;
+    }
+
+    #toc h1 {
+      margin: .5em;
+      padding: 1ex;
+      font-size: 90%;
+      font-weight: bold;
+      font-style: normal;
+      color: #333;
+      background-color: #eee;
+      text-align: center;
     }
 
     #toc ul {
       padding-left: 1em;
     }
 
-    #toc > li {
-      list-style: none;
-      margin-bottom: 1ex;
+    #toc > ul {
+      font-size: 80%;
+      margin: 0.5em;
     }
 
-    #toc > li > a {
+    #toc > ul > li {
+      list-style: none;
+      margin-bottom: 2ex;
+    }
+
+    #toc > ul > li > a {
       font-weight: bold;
+      color: #333;
+      display: block;
+      padding: 1ex;
+      margin: 0 1em 1ex 0;
+      border-bottom: 1px solid #999;
+    }
+
+    #toc li {
+      list-style-type: none;
     }
 
     :target {
@@ -115,21 +175,35 @@
       visibility: visible;
     }
 
+    .golodoc {
+      margin: 0;
+      padding: 0;
+      padding-left: 1.5em;
+    }
+
+    @media (max-width: 50em) {
+      #toc {
+        display: none;
+      }
+
+      body {
+        margin: 0;
+        padding: 0.5em;
+      }
+
+      h1 {
+        font-size: 200%;
+      }
+    }
+
   </style>
 </head>
 <body>
 <h1>Documentation for gololang.AnsiCodes</h1>
-<div>
-  <p>This module provides helper functions to deal with ANSI escape codes for console outputs.</p>
-<p>All function names are self-explanatory. Note that <code>likelySupported</code> tests if the current
-operating system is <em>likely</em> to support ANSI codes. It merely checks that the host operating
-system is not MS Windows, which does not support ANSI codes without a 3rd-party driver.</p>
-<p>See also: <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">Wikipedia on ANSI escape codes</a></p>
-
-</div>
-
 <!-- begin table of content -->
-<ul id="toc">
+<nav id="toc">
+<h1>gololang.AnsiCodes</h1>
+<ul>
 
   
 
@@ -144,74 +218,85 @@ system is not MS Windows, which does not support ANSI codes without a 3rd-party 
   
   <li><a href="#functions">Functions</a><ul>
     
-    <li><a href="#bg_black_">bg_black()</a></li>
+    <li><a href="#bg_black_0">bg_black()</a></li>
     
-    <li><a href="#bg_blue_">bg_blue()</a></li>
+    <li><a href="#bg_blue_0">bg_blue()</a></li>
     
-    <li><a href="#bg_cyan_">bg_cyan()</a></li>
+    <li><a href="#bg_cyan_0">bg_cyan()</a></li>
     
-    <li><a href="#bg_green_">bg_green()</a></li>
+    <li><a href="#bg_green_0">bg_green()</a></li>
     
-    <li><a href="#bg_magenta_">bg_magenta()</a></li>
+    <li><a href="#bg_magenta_0">bg_magenta()</a></li>
     
-    <li><a href="#bg_red_">bg_red()</a></li>
+    <li><a href="#bg_red_0">bg_red()</a></li>
     
-    <li><a href="#bg_white_">bg_white()</a></li>
+    <li><a href="#bg_white_0">bg_white()</a></li>
     
-    <li><a href="#bg_yellow_">bg_yellow()</a></li>
+    <li><a href="#bg_yellow_0">bg_yellow()</a></li>
     
-    <li><a href="#blink_">blink()</a></li>
+    <li><a href="#blink_0">blink()</a></li>
     
-    <li><a href="#bold_">bold()</a></li>
+    <li><a href="#bold_0">bold()</a></li>
     
-    <li><a href="#concealed_">concealed()</a></li>
+    <li><a href="#concealed_0">concealed()</a></li>
     
-    <li><a href="#cursor_backward_columns">cursor_backward(columns)</a></li>
+    <li><a href="#cursor_backward_1">cursor_backward(columns)</a></li>
     
-    <li><a href="#cursor_down_lines">cursor_down(lines)</a></li>
+    <li><a href="#cursor_down_1">cursor_down(lines)</a></li>
     
-    <li><a href="#cursor_forward_columns">cursor_forward(columns)</a></li>
+    <li><a href="#cursor_forward_1">cursor_forward(columns)</a></li>
     
-    <li><a href="#cursor_position_line_column">cursor_position(line, column)</a></li>
+    <li><a href="#cursor_position_2">cursor_position(line, column)</a></li>
     
-    <li><a href="#cursor_restore_position_">cursor_restore_position()</a></li>
+    <li><a href="#cursor_restore_position_0">cursor_restore_position()</a></li>
     
-    <li><a href="#cursor_save_position_">cursor_save_position()</a></li>
+    <li><a href="#cursor_save_position_0">cursor_save_position()</a></li>
     
-    <li><a href="#cursor_up_lines">cursor_up(lines)</a></li>
+    <li><a href="#cursor_up_1">cursor_up(lines)</a></li>
     
-    <li><a href="#erase_display_">erase_display()</a></li>
+    <li><a href="#erase_display_0">erase_display()</a></li>
     
-    <li><a href="#erase_line_">erase_line()</a></li>
+    <li><a href="#erase_line_0">erase_line()</a></li>
     
-    <li><a href="#fg_black_">fg_black()</a></li>
+    <li><a href="#fg_black_0">fg_black()</a></li>
     
-    <li><a href="#fg_blue_">fg_blue()</a></li>
+    <li><a href="#fg_blue_0">fg_blue()</a></li>
     
-    <li><a href="#fg_cyan_">fg_cyan()</a></li>
+    <li><a href="#fg_cyan_0">fg_cyan()</a></li>
     
-    <li><a href="#fg_green_">fg_green()</a></li>
+    <li><a href="#fg_green_0">fg_green()</a></li>
     
-    <li><a href="#fg_magenta_">fg_magenta()</a></li>
+    <li><a href="#fg_magenta_0">fg_magenta()</a></li>
     
-    <li><a href="#fg_red_">fg_red()</a></li>
+    <li><a href="#fg_red_0">fg_red()</a></li>
     
-    <li><a href="#fg_white_">fg_white()</a></li>
+    <li><a href="#fg_white_0">fg_white()</a></li>
     
-    <li><a href="#fg_yellow_">fg_yellow()</a></li>
+    <li><a href="#fg_yellow_0">fg_yellow()</a></li>
     
-    <li><a href="#likelySupported_">likelySupported()</a></li>
+    <li><a href="#likelySupported_0">likelySupported()</a></li>
     
-    <li><a href="#reset_">reset()</a></li>
+    <li><a href="#reset_0">reset()</a></li>
     
-    <li><a href="#reverse_video_">reverse_video()</a></li>
+    <li><a href="#reverse_video_0">reverse_video()</a></li>
     
-    <li><a href="#underscore_">underscore()</a></li>
+    <li><a href="#underscore_0">underscore()</a></li>
     
   </ul></li>
   
 </ul>
+</nav>
 <!-- end table of content -->
+
+<div class="golodoc">
+  <p>This module provides helper functions to deal with ANSI escape codes for console outputs.</p>
+<p>All function names are self-explanatory. They <em>print</em> the corresponding ANSI code.</p>
+<p>Note that <a href="#likelySupported_0"><code>likelySupported</code></a> tests if the current
+operating system is <em>likely</em> to support ANSI codes. It merely checks that the host operating
+system is not MS Windows, which does not support ANSI codes without a 3rd-party driver.</p>
+<p>See also: <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">Wikipedia on ANSI escape codes</a></p>
+
+</div>
 
 
 
@@ -225,199 +310,204 @@ system is not MS Windows, which does not support ANSI codes without a 3rd-party 
 
   <h2 id="functions">Functions</h2>
   
-    <h3 id="bg_black_">bg_black()
-    <a class="permalink" href="#bg_black_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="bg_black_0">bg_black()
+    <a class="permalink" href="#bg_black_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="bg_blue_">bg_blue()
-    <a class="permalink" href="#bg_blue_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="bg_blue_0">bg_blue()
+    <a class="permalink" href="#bg_blue_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="bg_cyan_">bg_cyan()
-    <a class="permalink" href="#bg_cyan_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="bg_cyan_0">bg_cyan()
+    <a class="permalink" href="#bg_cyan_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="bg_green_">bg_green()
-    <a class="permalink" href="#bg_green_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="bg_green_0">bg_green()
+    <a class="permalink" href="#bg_green_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="bg_magenta_">bg_magenta()
-    <a class="permalink" href="#bg_magenta_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="bg_magenta_0">bg_magenta()
+    <a class="permalink" href="#bg_magenta_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="bg_red_">bg_red()
-    <a class="permalink" href="#bg_red_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="bg_red_0">bg_red()
+    <a class="permalink" href="#bg_red_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="bg_white_">bg_white()
-    <a class="permalink" href="#bg_white_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="bg_white_0">bg_white()
+    <a class="permalink" href="#bg_white_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="bg_yellow_">bg_yellow()
-    <a class="permalink" href="#bg_yellow_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="bg_yellow_0">bg_yellow()
+    <a class="permalink" href="#bg_yellow_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="blink_">blink()
-    <a class="permalink" href="#blink_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="blink_0">blink()
+    <a class="permalink" href="#blink_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="bold_">bold()
-    <a class="permalink" href="#bold_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="bold_0">bold()
+    <a class="permalink" href="#bold_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="concealed_">concealed()
-    <a class="permalink" href="#concealed_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="concealed_0">concealed()
+    <a class="permalink" href="#concealed_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="cursor_backward_columns">cursor_backward(columns)
-    <a class="permalink" href="#cursor_backward_columns" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="cursor_backward_1">cursor_backward(columns)
+    <a class="permalink" href="#cursor_backward_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="cursor_down_lines">cursor_down(lines)
-    <a class="permalink" href="#cursor_down_lines" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="cursor_down_1">cursor_down(lines)
+    <a class="permalink" href="#cursor_down_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="cursor_forward_columns">cursor_forward(columns)
-    <a class="permalink" href="#cursor_forward_columns" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="cursor_forward_1">cursor_forward(columns)
+    <a class="permalink" href="#cursor_forward_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="cursor_position_line_column">cursor_position(line, column)
-    <a class="permalink" href="#cursor_position_line_column" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="cursor_position_2">cursor_position(line, column)
+    <a class="permalink" href="#cursor_position_2" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="cursor_restore_position_">cursor_restore_position()
-    <a class="permalink" href="#cursor_restore_position_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="cursor_restore_position_0">cursor_restore_position()
+    <a class="permalink" href="#cursor_restore_position_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="cursor_save_position_">cursor_save_position()
-    <a class="permalink" href="#cursor_save_position_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="cursor_save_position_0">cursor_save_position()
+    <a class="permalink" href="#cursor_save_position_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="cursor_up_lines">cursor_up(lines)
-    <a class="permalink" href="#cursor_up_lines" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="cursor_up_1">cursor_up(lines)
+    <a class="permalink" href="#cursor_up_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="erase_display_">erase_display()
-    <a class="permalink" href="#erase_display_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="erase_display_0">erase_display()
+    <a class="permalink" href="#erase_display_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="erase_line_">erase_line()
-    <a class="permalink" href="#erase_line_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="erase_line_0">erase_line()
+    <a class="permalink" href="#erase_line_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="fg_black_">fg_black()
-    <a class="permalink" href="#fg_black_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="fg_black_0">fg_black()
+    <a class="permalink" href="#fg_black_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="fg_blue_">fg_blue()
-    <a class="permalink" href="#fg_blue_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="fg_blue_0">fg_blue()
+    <a class="permalink" href="#fg_blue_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="fg_cyan_">fg_cyan()
-    <a class="permalink" href="#fg_cyan_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="fg_cyan_0">fg_cyan()
+    <a class="permalink" href="#fg_cyan_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="fg_green_">fg_green()
-    <a class="permalink" href="#fg_green_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="fg_green_0">fg_green()
+    <a class="permalink" href="#fg_green_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="fg_magenta_">fg_magenta()
-    <a class="permalink" href="#fg_magenta_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="fg_magenta_0">fg_magenta()
+    <a class="permalink" href="#fg_magenta_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="fg_red_">fg_red()
-    <a class="permalink" href="#fg_red_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="fg_red_0">fg_red()
+    <a class="permalink" href="#fg_red_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="fg_white_">fg_white()
-    <a class="permalink" href="#fg_white_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="fg_white_0">fg_white()
+    <a class="permalink" href="#fg_white_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="fg_yellow_">fg_yellow()
-    <a class="permalink" href="#fg_yellow_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="fg_yellow_0">fg_yellow()
+    <a class="permalink" href="#fg_yellow_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="likelySupported_">likelySupported()
-    <a class="permalink" href="#likelySupported_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="likelySupported_0">likelySupported()
+    <a class="permalink" href="#likelySupported_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="reset_">reset()
-    <a class="permalink" href="#reset_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="reset_0">reset()
+    <a class="permalink" href="#reset_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="reverse_video_">reverse_video()
-    <a class="permalink" href="#reverse_video_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="reverse_video_0">reverse_video()
+    <a class="permalink" href="#reverse_video_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
-    <h3 id="underscore_">underscore()
-    <a class="permalink" href="#underscore_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="underscore_0">underscore()
+    <a class="permalink" href="#underscore_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       
     </div>
   
 
+
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
 
 </body>
 </html>

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 
 
+
 <html>
 <head>
   <title>Documentation for gololang.JSON</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <style>
     body {
       font-family: Helvetica, Arial, sans-serif;
@@ -12,14 +14,14 @@
       background-color: #fff;
       border-color: #999999;
       border-width: 2px;
-      line-height: 1.5;
-      margin: 2em 3em 2em 20%;
+      margin: 1em auto;
+      margin-left: 20em;
+      max-width: 50em;
       text-align: left;
-      padding: 0 100px 0 100px;
+      padding: 0.5em;
     }
     pre {
       background-color: #eee;
-      padding: 10px;
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
       border-radius: 5px;
@@ -35,9 +37,31 @@
       border-radius: 2px;
     }
     pre code {
+      font-size: 120%;
       padding-left: 0px;
       padding-right: 0px;
     }
+
+    .listing:hover code[data-lang]:before {
+      display: block;
+    }
+
+    .listing code {
+      position: relative;
+    }
+
+    .listing code[data-lang]:before {
+      display: none;
+      content: attr(data-lang);
+      position: absolute;
+      font-size: 0.75em;
+      top: .5rem;
+      right: 0.5rem;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #000;
+    }
+
     li p {
       margin: 0.3em;
     }
@@ -55,50 +79,86 @@
     h1 {
       color: #999;
       font-weight: 400;
-      font-size: 36px;
+      font-size: 250%;
     }
     h2 {
       border-bottom: 1px dotted #aaa;
       margin-bottom: 1em;
       color: #333;
-      font-size: 30px;
+      font-size: 200%;
+      font-style: normal;
+      font-weight: bold;
     }
     h3 {
       color: #666;
-      font-size: 24px;
+      font-size: 180%;
+      font-style: normal;
+      font-weight: bold;
     }
     h4 {
-      font-size: 21px;
+      font-size: 130%;
+      font-style: normal;
+      font-weight: bold;
     }
     h5 {
-      font-size: 18px;
+      font-size: 100%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h6 {
+      font-size: 100%;
+      font-style: italic;
+      font-weight: normal;
     }
 
     #toc {
       margin: 0;
-      padding: 1em;
-      border-right: 1px solid #aaa;
-      font-size: 80%;
+      padding: 0;
       position: fixed;
       top: 0px;
       bottom: 0px;
       left: 0px;
-      width: 20%;
+      width: 20em;
       overflow: auto;
       white-space: nowrap;
+    }
+
+    #toc h1 {
+      margin: .5em;
+      padding: 1ex;
+      font-size: 90%;
+      font-weight: bold;
+      font-style: normal;
+      color: #333;
+      background-color: #eee;
+      text-align: center;
     }
 
     #toc ul {
       padding-left: 1em;
     }
 
-    #toc > li {
-      list-style: none;
-      margin-bottom: 1ex;
+    #toc > ul {
+      font-size: 80%;
+      margin: 0.5em;
     }
 
-    #toc > li > a {
+    #toc > ul > li {
+      list-style: none;
+      margin-bottom: 2ex;
+    }
+
+    #toc > ul > li > a {
       font-weight: bold;
+      color: #333;
+      display: block;
+      padding: 1ex;
+      margin: 0 1em 1ex 0;
+      border-bottom: 1px solid #999;
+    }
+
+    #toc li {
+      list-style-type: none;
     }
 
     :target {
@@ -115,20 +175,35 @@
       visibility: visible;
     }
 
+    .golodoc {
+      margin: 0;
+      padding: 0;
+      padding-left: 1.5em;
+    }
+
+    @media (max-width: 50em) {
+      #toc {
+        display: none;
+      }
+
+      body {
+        margin: 0;
+        padding: 0.5em;
+      }
+
+      h1 {
+        font-size: 200%;
+      }
+    }
+
   </style>
 </head>
 <body>
 <h1>Documentation for gololang.JSON</h1>
-<div>
-  <p>A set of useful APIs for dealing with JSON documents from Golo.</p>
-<p>The implementation is backed by <a href="https://code.google.com/p/json-simple/">json-simple</a>. While
-<code>json-simple</code> only supports encoding from lists and maps, this API brings support for sets, arrays,
-Golo tuples, dynamic objects and structs.</p>
-
-</div>
-
 <!-- begin table of content -->
-<ul id="toc">
+<nav id="toc">
+<h1>gololang.JSON</h1>
+<ul>
 
   
 
@@ -143,9 +218,9 @@ Golo tuples, dynamic objects and structs.</p>
     
     <li><a href="#augment.gololang.GoloStruct">gololang.GoloStruct</a><ul>
       
-      <li><a href="#gololang.GoloStruct.toJSON_this">toJSON(this)</a></li>
+      <li><a href="#gololang.GoloStruct.toJSON_1">toJSON(this)</a></li>
       
-      <li><a href="#gololang.GoloStruct.updateFromJSON_this_str">updateFromJSON(this, str)</a></li>
+      <li><a href="#gololang.GoloStruct.updateFromJSON_2">updateFromJSON(this, str)</a></li>
       
     </ul></li>
     
@@ -155,18 +230,27 @@ Golo tuples, dynamic objects and structs.</p>
   
   <li><a href="#functions">Functions</a><ul>
     
-    <li><a href="#dynamicObjectMixin_">dynamicObjectMixin()</a></li>
+    <li><a href="#dynamicObjectMixin_0">dynamicObjectMixin()</a></li>
     
-    <li><a href="#parse_str">parse(str)</a></li>
+    <li><a href="#parse_1">parse(str)</a></li>
     
-    <li><a href="#stringify_obj">stringify(obj)</a></li>
+    <li><a href="#stringify_1">stringify(obj)</a></li>
     
-    <li><a href="#toDynamicObject_str">toDynamicObject(str)</a></li>
+    <li><a href="#toDynamicObject_1">toDynamicObject(str)</a></li>
     
   </ul></li>
   
 </ul>
+</nav>
 <!-- end table of content -->
+
+<div class="golodoc">
+  <p>A set of useful APIs for dealing with JSON documents from Golo.</p>
+<p>The implementation is backed by <a href="https://code.google.com/p/json-simple/">json-simple</a>. While
+<code>json-simple</code> only supports encoding from lists and maps, this API brings support for sets, arrays,
+Golo tuples, dynamic objects and structs.</p>
+
+</div>
 
 
 
@@ -180,19 +264,19 @@ Golo tuples, dynamic objects and structs.</p>
   
     <h3 id="augment.gololang.GoloStruct">gololang.GoloStruct
     <a class="permalink" href="#augment.gololang.GoloStruct" title="link to this section">&#182;</a></h3>
-    <div>
+    <div class="golodoc">
       <p>JSON augmentations for structs.</p>
 
     </div>
     
     
       
-        <h4 id="gololang.GoloStruct.toJSON_this">toJSON(this)
+        <h4 id="gololang.GoloStruct.toJSON_1">toJSON(this)
       
-      <a class="permalink" href="#gololang.GoloStruct.toJSON_this" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.GoloStruct.toJSON_1" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Conveniently adds a <code>toJSON()</code> method, which is equivalent to calling <code>JSON.stringify()</code>:</p>
-<pre><code>struct Person = { name, age, email }
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">struct Person = { name, age, email }
 # (...)
 
 Person("Mr Bean", "mrbean@outlook.com", 64): toJSON()
@@ -201,12 +285,12 @@ Person("Mr Bean", "mrbean@outlook.com", 64): toJSON()
       </div>
     
       
-        <h4 id="gololang.GoloStruct.updateFromJSON_this_str">updateFromJSON(this, str)
+        <h4 id="gololang.GoloStruct.updateFromJSON_2">updateFromJSON(this, str)
       
-      <a class="permalink" href="#gololang.GoloStruct.updateFromJSON_this_str" title="link to this section">&#182;</a></h4>
-      <div>
+      <a class="permalink" href="#gololang.GoloStruct.updateFromJSON_2" title="link to this section">&#182;</a></h4>
+      <div class="golodoc">
         <p>Populates the elements of a struct based on the values found in a JSON string.</p>
-<pre><code>let str = JSON.stringify(map[
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let str = JSON.stringify(map[
   ["name", "Foo"],
   ["email", "foo@gmail.com"],
   ["age", 99],
@@ -224,33 +308,33 @@ let foo = Person(): updateFromJSON(str)
 
   <h2 id="functions">Functions</h2>
   
-    <h3 id="dynamicObjectMixin_">dynamicObjectMixin()
-    <a class="permalink" href="#dynamicObjectMixin_" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="dynamicObjectMixin_0">dynamicObjectMixin()
+    <a class="permalink" href="#dynamicObjectMixin_0" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Provides a mixin for dynamic objects that includes a <code>toJSON()</code> method:</p>
-<pre><code>object: mixin(JSON.dynamicObjectMixin()): toJSON()
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">object: mixin(JSON.dynamicObjectMixin()): toJSON()
 </code></pre>
 <p>which is equivalent to:</p>
-<pre><code>JSON.stringify(object)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">JSON.stringify(object)
 </code></pre>
 
     </div>
   
-    <h3 id="parse_str">parse(str)
-    <a class="permalink" href="#parse_str" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="parse_1">parse(str)
+    <a class="permalink" href="#parse_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Parses a JSON string and gives an object representation as a list or map collection:</p>
-<pre><code>let data = JSON.parse(text)
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let data = JSON.parse(text)
 println(data: get("name"))
 </code></pre>
 
     </div>
   
-    <h3 id="stringify_obj">stringify(obj)
-    <a class="permalink" href="#stringify_obj" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="stringify_1">stringify(obj)
+    <a class="permalink" href="#stringify_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Takes any know object, and gives a JSON string representation:</p>
-<pre><code>let data = map[
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let data = map[
   ["name", "Somebody"],
   ["age", 69],
   ["friends", list[
@@ -265,12 +349,12 @@ another type then its string representation is given according to <code>obj: toS
 
     </div>
   
-    <h3 id="toDynamicObject_str">toDynamicObject(str)
-    <a class="permalink" href="#toDynamicObject_str" title="link to this section">&#182;</a></h3>
-    <div>
+    <h3 id="toDynamicObject_1">toDynamicObject(str)
+    <a class="permalink" href="#toDynamicObject_1" title="link to this section">&#182;</a></h3>
+    <div class="golodoc">
       <p>Returns a new dynamic object from a JSON string where each first-level entry is mapped into the
 dynamic object:</p>
-<pre><code>let obj = JSON.toDynamicObject(JSON.stringify(map[
+<pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">let obj = JSON.toDynamicObject(JSON.stringify(map[
   ["a", "1"], ["b", "2"]
 ]))
 
@@ -281,6 +365,11 @@ println(obj: b())
     </div>
   
 
+
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
 
 </body>
 </html>
