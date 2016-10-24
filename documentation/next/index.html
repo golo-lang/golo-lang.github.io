@@ -760,6 +760,7 @@ table.tableblock.grid-all th.tableblock, table.tableblock.grid-all td.tableblock
 <li><a href="#_inner_classes_and_enumerations">4.10. Inner classes and enumerations</a></li>
 <li><a href="#_clashes_with_golo_operators_and_escaping">4.11. Clashes with Golo operators and escaping</a></li>
 <li><a href="#_golo_class_loader">4.12. Golo class loader</a></li>
+<li><a href="#_primitive_data_types">4.13. Primitive Data Types</a></li>
 </ul>
 </li>
 <li><a href="#_control_flow">5. Control flow</a>
@@ -1497,7 +1498,7 @@ API. We give them along with examples in <a href="#data-literals">the data liter
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>java.lang.Class</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String.class</code>, <code>java.lang.String.class</code>, <code>gololang.Predef.module</code>, &#8230;&#8203;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String.class</code>, <code>java.lang.String.class</code>, <code>gololang.Predef.module</code>, <code>byte.class</code>, &#8230;&#8203;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>gololang.FunctionReference</code></p></td>
@@ -3420,6 +3421,34 @@ attempt to redefine an already defined class.
 <td class="content">
 Later in the glorious and glamorous future, Golo will have objects and not just functions.
 Be patient, it&#8217;s coming in!
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_primitive_data_types">4.13. Primitive Data Types</h3>
+<div class="paragraph">
+<p><code>java.lang.Class</code> instances of primitive data types can be obtained as in Java way: <code>byte.class</code>, <code>short.class</code>, <code>int.class</code>, <code>long.class</code>, <code>float.class</code>, <code>double.class</code>, <code>boolean.class</code> and <code>char.class</code>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This could be useful for example to deal with primitive arrays:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo"># ...
+let buffer = newTypedArray(byte.class, 1024)
+let read = inputstream: read(buffer)
+# ...</code></pre>
+</div>
+</div>
 </td>
 </tr>
 </table>
