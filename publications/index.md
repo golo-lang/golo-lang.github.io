@@ -8,6 +8,8 @@ If you want to reference Golo in your publications, you can use the following DO
 
 ### Technical articles
 
+* [Quick tour: Eclipse Golo JVM Programming Language](https://www.eclipse.org/community/eclipse_newsletter/2016/october/article2.php) in the October 2016 Eclipse Newsletter.
+
 * [Golo -- A fast, low-ceremony, easy-to-learn language for the JVM](http://www.javamagazine.mozaicreader.com/MarApr2016#&pageSet=54&page=0&contentItem=0) in Oracle Java Magazine March/April 2016.
 
 ### Research publications
