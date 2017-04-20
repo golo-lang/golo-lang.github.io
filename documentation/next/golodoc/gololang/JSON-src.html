@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>gololang.JSON source</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    pre {
+        font-family: monospace;
+        font-size: 90%;
+        background-color: #eee;
+        padding: 0;
+        margin: 0;
+    }
+
+    pre code {
+        font-family: monospace;
+        font-size: inherit;
+        padding: 0.5em ;
+        margin: 0;
+    }
+
+    :target {
+        background-color: yellow;
+    }
+
+    #line-numbers {
+        float: left;
+        position: relative;
+        padding: 0.5em;
+    }
+
+    #src {
+        float: left;
+        position: relative;
+    }
+  </style>
+</head>
+<body>
+<pre id="line-numbers">
+<span class="line-number" id="l-1">1</span>
+<span class="line-number" id="l-2">2</span>
+<span class="line-number" id="l-3">3</span>
+<span class="line-number" id="l-4">4</span>
+<span class="line-number" id="l-5">5</span>
+<span class="line-number" id="l-6">6</span>
+<span class="line-number" id="l-7">7</span>
+<span class="line-number" id="l-8">8</span>
+<span class="line-number" id="l-9">9</span>
+<span class="line-number" id="l-10">10</span>
+<span class="line-number" id="l-11">11</span>
+<span class="line-number" id="l-12">12</span>
+<span class="line-number" id="l-13">13</span>
+<span class="line-number" id="l-14">14</span>
+<span class="line-number" id="l-15">15</span>
+<span class="line-number" id="l-16">16</span>
+<span class="line-number" id="l-17">17</span>
+<span class="line-number" id="l-18">18</span>
+<span class="line-number" id="l-19">19</span>
+<span class="line-number" id="l-20">20</span>
+<span class="line-number" id="l-21">21</span>
+<span class="line-number" id="l-22">22</span>
+<span class="line-number" id="l-23">23</span>
+<span class="line-number" id="l-24">24</span>
+<span class="line-number" id="l-25">25</span>
+<span class="line-number" id="l-26">26</span>
+<span class="line-number" id="l-27">27</span>
+<span class="line-number" id="l-28">28</span>
+<span class="line-number" id="l-29">29</span>
+<span class="line-number" id="l-30">30</span>
+<span class="line-number" id="l-31">31</span>
+<span class="line-number" id="l-32">32</span>
+<span class="line-number" id="l-33">33</span>
+<span class="line-number" id="l-34">34</span>
+<span class="line-number" id="l-35">35</span>
+<span class="line-number" id="l-36">36</span>
+<span class="line-number" id="l-37">37</span>
+<span class="line-number" id="l-38">38</span>
+<span class="line-number" id="l-39">39</span>
+<span class="line-number" id="l-40">40</span>
+<span class="line-number" id="l-41">41</span>
+<span class="line-number" id="l-42">42</span>
+<span class="line-number" id="l-43">43</span>
+<span class="line-number" id="l-44">44</span>
+<span class="line-number" id="l-45">45</span>
+<span class="line-number" id="l-46">46</span>
+<span class="line-number" id="l-47">47</span>
+<span class="line-number" id="l-48">48</span>
+<span class="line-number" id="l-49">49</span>
+<span class="line-number" id="l-50">50</span>
+<span class="line-number" id="l-51">51</span>
+<span class="line-number" id="l-52">52</span>
+<span class="line-number" id="l-53">53</span>
+<span class="line-number" id="l-54">54</span>
+<span class="line-number" id="l-55">55</span>
+<span class="line-number" id="l-56">56</span>
+<span class="line-number" id="l-57">57</span>
+<span class="line-number" id="l-58">58</span>
+<span class="line-number" id="l-59">59</span>
+<span class="line-number" id="l-60">60</span>
+<span class="line-number" id="l-61">61</span>
+<span class="line-number" id="l-62">62</span>
+<span class="line-number" id="l-63">63</span>
+<span class="line-number" id="l-64">64</span>
+<span class="line-number" id="l-65">65</span>
+<span class="line-number" id="l-66">66</span>
+<span class="line-number" id="l-67">67</span>
+<span class="line-number" id="l-68">68</span>
+<span class="line-number" id="l-69">69</span>
+<span class="line-number" id="l-70">70</span>
+<span class="line-number" id="l-71">71</span>
+<span class="line-number" id="l-72">72</span>
+<span class="line-number" id="l-73">73</span>
+<span class="line-number" id="l-74">74</span>
+<span class="line-number" id="l-75">75</span>
+<span class="line-number" id="l-76">76</span>
+<span class="line-number" id="l-77">77</span>
+<span class="line-number" id="l-78">78</span>
+<span class="line-number" id="l-79">79</span>
+<span class="line-number" id="l-80">80</span>
+<span class="line-number" id="l-81">81</span>
+<span class="line-number" id="l-82">82</span>
+<span class="line-number" id="l-83">83</span>
+<span class="line-number" id="l-84">84</span>
+<span class="line-number" id="l-85">85</span>
+<span class="line-number" id="l-86">86</span>
+<span class="line-number" id="l-87">87</span>
+<span class="line-number" id="l-88">88</span>
+<span class="line-number" id="l-89">89</span>
+<span class="line-number" id="l-90">90</span>
+<span class="line-number" id="l-91">91</span>
+<span class="line-number" id="l-92">92</span>
+<span class="line-number" id="l-93">93</span>
+<span class="line-number" id="l-94">94</span>
+<span class="line-number" id="l-95">95</span>
+<span class="line-number" id="l-96">96</span>
+<span class="line-number" id="l-97">97</span>
+<span class="line-number" id="l-98">98</span>
+<span class="line-number" id="l-99">99</span>
+<span class="line-number" id="l-100">100</span>
+<span class="line-number" id="l-101">101</span>
+<span class="line-number" id="l-102">102</span>
+<span class="line-number" id="l-103">103</span>
+<span class="line-number" id="l-104">104</span>
+<span class="line-number" id="l-105">105</span>
+<span class="line-number" id="l-106">106</span>
+<span class="line-number" id="l-107">107</span>
+<span class="line-number" id="l-108">108</span>
+<span class="line-number" id="l-109">109</span>
+<span class="line-number" id="l-110">110</span>
+<span class="line-number" id="l-111">111</span>
+<span class="line-number" id="l-112">112</span>
+<span class="line-number" id="l-113">113</span>
+<span class="line-number" id="l-114">114</span>
+<span class="line-number" id="l-115">115</span>
+<span class="line-number" id="l-116">116</span>
+<span class="line-number" id="l-117">117</span>
+<span class="line-number" id="l-118">118</span>
+<span class="line-number" id="l-119">119</span>
+<span class="line-number" id="l-120">120</span>
+<span class="line-number" id="l-121">121</span>
+<span class="line-number" id="l-122">122</span>
+<span class="line-number" id="l-123">123</span>
+<span class="line-number" id="l-124">124</span>
+<span class="line-number" id="l-125">125</span>
+<span class="line-number" id="l-126">126</span>
+<span class="line-number" id="l-127">127</span>
+<span class="line-number" id="l-128">128</span>
+<span class="line-number" id="l-129">129</span>
+<span class="line-number" id="l-130">130</span>
+<span class="line-number" id="l-131">131</span>
+<span class="line-number" id="l-132">132</span>
+<span class="line-number" id="l-133">133</span>
+<span class="line-number" id="l-134">134</span>
+<span class="line-number" id="l-135">135</span>
+<span class="line-number" id="l-136">136</span>
+<span class="line-number" id="l-137">137</span>
+<span class="line-number" id="l-138">138</span>
+<span class="line-number" id="l-139">139</span>
+<span class="line-number" id="l-140">140</span>
+<span class="line-number" id="l-141">141</span>
+<span class="line-number" id="l-142">142</span>
+<span class="line-number" id="l-143">143</span>
+<span class="line-number" id="l-144">144</span>
+<span class="line-number" id="l-145">145</span>
+<span class="line-number" id="l-146">146</span>
+<span class="line-number" id="l-147">147</span>
+<span class="line-number" id="l-148">148</span>
+<span class="line-number" id="l-149">149</span>
+<span class="line-number" id="l-150">150</span>
+<span class="line-number" id="l-151">151</span>
+<span class="line-number" id="l-152">152</span>
+<span class="line-number" id="l-153">153</span>
+<span class="line-number" id="l-154">154</span>
+<span class="line-number" id="l-155">155</span>
+<span class="line-number" id="l-156">156</span>
+<span class="line-number" id="l-157">157</span>
+<span class="line-number" id="l-158">158</span>
+<span class="line-number" id="l-159">159</span>
+<span class="line-number" id="l-160">160</span>
+<span class="line-number" id="l-161">161</span>
+<span class="line-number" id="l-162">162</span>
+<span class="line-number" id="l-163">163</span>
+<span class="line-number" id="l-164">164</span>
+<span class="line-number" id="l-165">165</span>
+<span class="line-number" id="l-166">166</span>
+<span class="line-number" id="l-167">167</span>
+</pre>
+<pre id="src" class="highlight highlightjs">
+<code class="language-golo" data-lang="golo"># ............................................................................................... #
+#
+# Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA-Lyon)
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+#
+# ............................................................................................... #
+
+----
+A set of useful APIs for dealing with JSON documents from Golo.
+
+The implementation is backed by [json-simple](https://code.google.com/p/json-simple/). While
+`json-simple` only supports encoding from lists and maps, this API brings support for sets, arrays,
+Golo tuples, dynamic objects and structs.
+----
+module gololang.JSON
+
+# ............................................................................................... #
+
+----
+Takes any know object, and gives a JSON string representation:
+
+    let data = map[
+      ["name", "Somebody"],
+      ["age", 69],
+      ["friends", list[
+        "Mr Bean", "John B", "Larry"
+      ]]
+    ]
+    let asText = JSON.stringify(data)
+
+`obj` may be a list, an array, a set, a map, a tuple, a dynamic object or a struct. If `obj` is from
+another type then its string representation is given according to `obj: toString()` or `"null"` if
+`obj` is `null`.
+----
+function stringify = |obj| {
+  let res = stringify_walk(obj)
+  if (res is null) {
+    return "null"
+  } else {
+    return res: toString()
+  }
+}
+
+local function isSeq = |obj| ->
+  (obj oftype java.util.List.class) or
+  (obj oftype java.util.Set.class) or
+  (obj oftype gololang.Tuple.class) or
+  (isArray(obj))
+
+local function stringify_walk = |obj| {
+  if obj oftype java.util.Map.class {
+    let json = org.json.simple.JSONObject()
+    foreach key in obj: keySet() {
+      json: put(key, stringify_walk(obj: get(key)))
+    }
+    return json
+  } else if isSeq(obj) {
+    let json = org.json.simple.JSONArray()
+    foreach value in obj {
+      json: add(stringify_walk(value))
+    }
+    return json
+  } else if obj oftype gololang.DynamicObject.class {
+    let json = org.json.simple.JSONObject()
+    foreach prop in obj: properties() {
+      let value = prop: getValue()
+      if not(isClosure(value)) {
+        json: put(prop: getKey(), stringify_walk(value))
+      }
+    }
+    return json
+  } else if (obj oftype gololang.GoloStruct.class) {
+    let json = org.json.simple.JSONObject()
+    foreach member in obj: members() {
+      json: put(member, stringify_walk(obj: get(member)))
+    }
+    return json
+  }
+  return obj
+}
+
+----
+Parses a JSON string and gives an object representation as a list or map collection:
+
+    let data = JSON.parse(text)
+    println(data: get("name"))
+----
+function parse = |str| -> org.json.simple.JSONValue.parseWithException(str)
+
+# ............................................................................................... #
+
+----
+Provides a mixin for dynamic objects that includes a `toJSON()` method:
+
+    object: mixin(JSON.dynamicObjectMixin()): toJSON()
+
+which is equivalent to:
+
+    JSON.stringify(object)
+----
+function dynamicObjectMixin = ->
+  DynamicObject(): define("toJSON", |this| -> stringify(this))
+
+----
+Returns a new dynamic object from a JSON string where each first-level entry is mapped into the
+dynamic object:
+
+    let obj = JSON.toDynamicObject(JSON.stringify(map[
+      ["a", "1"], ["b", "2"]
+    ]))
+
+    println(obj: a())
+    println(obj: b())
+----
+function toDynamicObject = |str| {
+  let obj = DynamicObject()
+  let map = parse(str)
+  foreach key in map: keySet() {
+    obj: define(key, map: get(key))
+  }
+  return obj
+}
+
+# ............................................................................................... #
+
+----
+JSON augmentations for structs.
+----
+augment gololang.GoloStruct {
+
+  ----
+  Conveniently adds a `toJSON()` method, which is equivalent to calling `JSON.stringify()`:
+
+      struct Person = { name, age, email }
+      # (...)
+
+      Person("Mr Bean", "mrbean@outlook.com", 64): toJSON()
+  ----
+  function toJSON = |this| -> stringify(this)
+
+  ----
+  Populates the elements of a struct based on the values found in a JSON string.
+
+      let str = JSON.stringify(map[
+        ["name", "Foo"],
+        ["email", "foo@gmail.com"],
+        ["age", 99],
+        ["gender", "N/A"]
+      ])
+      let foo = Person(): updateFromJSON(str)
+
+  Note that missing entries from the JSON data yield `null` values in the struct.
+  ----
+  function updateFromJSON = |this, str| {
+    let map = parse(str)
+    foreach member in this: members() {
+      this: set(member, map: get(member))
+    }
+    return this
+  }
+}
+
+# ............................................................................................... #
+</code>
+</pre>
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>
+hljs.initHighlighting();
+</script>
+</body>
+</html>
