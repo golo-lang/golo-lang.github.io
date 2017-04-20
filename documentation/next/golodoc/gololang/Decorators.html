@@ -4,9 +4,11 @@
 
 <html>
 <head>
-  <title>Documentation for gololang.Decorators</title>
+  <title>gololang.Decorators (Golo 3.2.0-M6)</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon"
+        href="data:image/x-icon;base64,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"/>
   <style>
     body {
       font-family: Helvetica, Arial, sans-serif;
@@ -111,6 +113,11 @@
       font-weight: normal;
     }
 
+    #global-nav {
+      display: block;
+      font-size: 80%;
+    }
+
     #toc {
       margin: 0;
       padding: 0;
@@ -181,6 +188,18 @@
       padding-left: 1.5em;
     }
 
+    .srclink {
+      float:  right;
+      text-align: right;
+      color: #999;
+      font-size: 75%;
+      margin-top: -2em;
+    }
+
+    .srclink a {
+      color: inherit;
+    }
+
     @media (max-width: 50em) {
       #toc {
         display: none;
@@ -203,13 +222,14 @@
 <!-- begin table of content -->
 <nav id="toc">
 <h1>gololang.Decorators</h1>
+  <section id="global-nav">
+  <a href="../index.html" rel="home">Module Index</a>
+<a href="../index-all.html" rel="index">Global Index</a>
+  </section>
 <ul>
-
   
 
   
-
-
 
   
 
@@ -222,7 +242,7 @@
     
     <li><a href="#asChecker_2">asChecker(f, m)</a></li>
     
-    <li><a href="#checkArguments_1">checkArguments(preTests)</a></li>
+    <li><a href="#checkArguments_1v">checkArguments(preTests...)</a></li>
     
     <li><a href="#checkResult_1">checkResult(postTest)</a></li>
     
@@ -277,37 +297,32 @@
 
   <h2 id="functions">Functions</h2>
   
-    <h3 id="any_0">any()
-    <a class="permalink" href="#any_0" title="link to this section">&#182;</a></h3>
+    <h3 id="any_0">any()<a class="permalink" href="#any_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-159" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Void checker: does nothing. Useful when one argument should not be checked.</p>
 
     </div>
   
-    <h3 id="asChecker_2">asChecker(f, m)
-    <a class="permalink" href="#asChecker_2" title="link to this section">&#182;</a></h3>
+    <h3 id="asChecker_2">asChecker(f, m)<a class="permalink" href="#asChecker_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-98" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Factory function to create a generic checker from a boolean function.
 Takes a boolean function and an error message.</p>
 
     </div>
   
-    <h3 id="checkArguments_1">checkArguments(preTests)
-    <a class="permalink" href="#checkArguments_1" title="link to this section">&#182;</a></h3>
+    <h3 id="checkArguments_1v">checkArguments(preTests...)<a class="permalink" href="#checkArguments_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-79" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Checks arguments of the decorated function. Any checker can be used</p>
 
     </div>
   
-    <h3 id="checkResult_1">checkResult(postTest)
-    <a class="permalink" href="#checkResult_1" title="link to this section">&#182;</a></h3>
+    <h3 id="checkResult_1">checkResult(postTest)<a class="permalink" href="#checkResult_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-87" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Checks result of the decorated function. Any checker can be used</p>
 
     </div>
   
-    <h3 id="defaultContext_0">defaultContext()
-    <a class="permalink" href="#defaultContext_0" title="link to this section">&#182;</a></h3>
+    <h3 id="defaultContext_0">defaultContext()<a class="permalink" href="#defaultContext_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-39" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Returns a void context to be used with the <a href="#withContext_1"><code>withContext</code></a>
 decorator after redefinition of some methods.</p>
@@ -327,8 +342,7 @@ No parameter</li>
 
     </div>
   
-    <h3 id="greaterThan_1">greaterThan(m)
-    <a class="permalink" href="#greaterThan_1" title="link to this section">&#182;</a></h3>
+    <h3 id="greaterThan_1">greaterThan(m)<a class="permalink" href="#greaterThan_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-121" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Factory function to create value checker.
 Takes a threshold and returns a checker verifying that the given value is
@@ -338,29 +352,25 @@ greater than the threshold</p>
 
     </div>
   
-    <h3 id="isNegative_0">isNegative()
-    <a class="permalink" href="#isNegative_0" title="link to this section">&#182;</a></h3>
+    <h3 id="isNegative_0">isNegative()<a class="permalink" href="#isNegative_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-195" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Value checker function</p>
 
     </div>
   
-    <h3 id="isNotNull_0">isNotNull()
-    <a class="permalink" href="#isNotNull_0" title="link to this section">&#182;</a></h3>
+    <h3 id="isNotNull_0">isNotNull()<a class="permalink" href="#isNotNull_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-181" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Value checker function</p>
 
     </div>
   
-    <h3 id="isNumber_0">isNumber()
-    <a class="permalink" href="#isNumber_0" title="link to this section">&#182;</a></h3>
+    <h3 id="isNumber_0">isNumber()<a class="permalink" href="#isNumber_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-164" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Type checker function</p>
 
     </div>
   
-    <h3 id="isOfType_1">isOfType(t)
-    <a class="permalink" href="#isOfType_1" title="link to this section">&#182;</a></h3>
+    <h3 id="isOfType_1">isOfType(t)<a class="permalink" href="#isOfType_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-109" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Factory function to create type checker.
 Takes a type to compare to and returns a checker function.</p>
@@ -369,22 +379,19 @@ Takes a type to compare to and returns a checker function.</p>
 
     </div>
   
-    <h3 id="isPositive_0">isPositive()
-    <a class="permalink" href="#isPositive_0" title="link to this section">&#182;</a></h3>
+    <h3 id="isPositive_0">isPositive()<a class="permalink" href="#isPositive_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-189" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Value checker function</p>
 
     </div>
   
-    <h3 id="isString_0">isString()
-    <a class="permalink" href="#isString_0" title="link to this section">&#182;</a></h3>
+    <h3 id="isString_0">isString()<a class="permalink" href="#isString_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-175" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Type checker function</p>
 
     </div>
   
-    <h3 id="lengthIs_1">lengthIs(l)
-    <a class="permalink" href="#lengthIs_1" title="link to this section">&#182;</a></h3>
+    <h3 id="lengthIs_1">lengthIs(l)<a class="permalink" href="#lengthIs_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-145" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Factory function to create a checker asserting that the length of its argument
 is exactly a value</p>
@@ -394,8 +401,7 @@ function foo |a| -&gt; [a, a]
 
     </div>
   
-    <h3 id="lessThan_1">lessThan(m)
-    <a class="permalink" href="#lessThan_1" title="link to this section">&#182;</a></h3>
+    <h3 id="lessThan_1">lessThan(m)<a class="permalink" href="#lessThan_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-133" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Factory function to create value checker.
 Takes a threshold and returns a checker verifying that the given value is
@@ -405,8 +411,7 @@ less than the threshold</p>
 
     </div>
   
-    <h3 id="loggerDecorator_1">loggerDecorator(logger)
-    <a class="permalink" href="#loggerDecorator_1" title="link to this section">&#182;</a></h3>
+    <h3 id="loggerDecorator_1">loggerDecorator(logger)<a class="permalink" href="#loggerDecorator_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-243" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Factory function returning a decorator that log messages on entry and exit of
 the function.
@@ -422,8 +427,7 @@ function foo = { println("doing foo") }
 
     </div>
   
-    <h3 id="memoizer_0">memoizer()
-    <a class="permalink" href="#memoizer_0" title="link to this section">&#182;</a></h3>
+    <h3 id="memoizer_0">memoizer()<a class="permalink" href="#memoizer_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-216" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Factory function for memoization decorator
 Returns a new memoization decorator. The cache key is the decorated function
@@ -441,8 +445,7 @@ function bar = |a,b| -&gt; ...
 
     </div>
   
-    <h3 id="printLoggerDecorator_2">printLoggerDecorator(prefix, suffix)
-    <a class="permalink" href="#printLoggerDecorator_2" title="link to this section">&#182;</a></h3>
+    <h3 id="printLoggerDecorator_2">printLoggerDecorator(prefix, suffix)<a class="permalink" href="#printLoggerDecorator_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-259" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>A convenient factory to create a <a href="#loggerDecorator_1"><code>loggerDecorator</code></a>
 that <code>println</code> with a prefix and a suffix.</p>
@@ -452,8 +455,7 @@ function bar = { println("bar") }
 
     </div>
   
-    <h3 id="withContext_1">withContext(context)
-    <a class="permalink" href="#withContext_1" title="link to this section">&#182;</a></h3>
+    <h3 id="withContext_1">withContext(context)<a class="permalink" href="#withContext_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Decorators-src.html#l-55" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p><code>withContext</code> decorator:</p>
 <pre class="listing highlight highlightjs"><code class="language-golo" data-lang="golo">@withContext(myContext)
@@ -469,7 +471,6 @@ context object.</p>
 <link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
 <script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
 <script>hljs.initHighlighting()</script>
-</body>
 
 </body>
 </html>
