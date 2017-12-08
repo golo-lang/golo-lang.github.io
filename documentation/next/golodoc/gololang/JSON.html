@@ -4,7 +4,7 @@
 
 <html>
 <head>
-  <title>gololang.JSON (Golo 3.2.0)</title>
+  <title>gololang.JSON (Golo 3.3.0-M1)</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="icon"
@@ -339,14 +339,14 @@ Golo tuples, dynamic objects and structs.</p>
 
   <h2 id="augmentations">Augmentations</h2>
   
-    <h3 id="augment.gololang.GoloStruct">gololang.GoloStruct<a class="permalink" href="#augment.gololang.GoloStruct" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-279" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="augment.gololang.GoloStruct">gololang.GoloStruct<a class="permalink" href="#augment.gololang.GoloStruct" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-280" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>JSON augmentations for structs.</p>
 
     </div>
     
     
-      <h4 id="augment.gololang.GoloStruct.toJSON_1">toJSON(this)<a class="permalink" href="#augment.gololang.GoloStruct.toJSON_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="JSON-src.html#l-289" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.GoloStruct.toJSON_1">toJSON(this)<a class="permalink" href="#augment.gololang.GoloStruct.toJSON_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="JSON-src.html#l-290" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Conveniently adds a <code>toJSON()</code> method, which is equivalent to calling <code>JSON.stringify()</code>:</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">struct Person = { name, age, email }
@@ -357,7 +357,7 @@ Person("Mr Bean", "mrbean@outlook.com", 64): toJSON()
 
       </div>
     
-      <h4 id="augment.gololang.GoloStruct.updateFromJSON_2">updateFromJSON(this, str)<a class="permalink" href="#augment.gololang.GoloStruct.updateFromJSON_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="JSON-src.html#l-304" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.GoloStruct.updateFromJSON_2">updateFromJSON(this, str)<a class="permalink" href="#augment.gololang.GoloStruct.updateFromJSON_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="JSON-src.html#l-305" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Populates the elements of a struct based on the values found in a JSON string.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">let str = JSON.stringify(map[
@@ -378,7 +378,7 @@ let foo = Person(): updateFromJSON(str)
 
   <h2 id="functions">Functions</h2>
   
-    <h3 id="dynamicObjectMixin_0">dynamicObjectMixin()<a class="permalink" href="#dynamicObjectMixin_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-105" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="dynamicObjectMixin_0">dynamicObjectMixin()<a class="permalink" href="#dynamicObjectMixin_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-106" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Provides a mixin for dynamic objects that includes a <code>toJSON()</code> method:</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">object: mixin(JSON.dynamicObjectMixin()): toJSON()
@@ -389,7 +389,7 @@ let foo = Person(): updateFromJSON(str)
 
     </div>
   
-    <h3 id="parse_1">parse(str)<a class="permalink" href="#parse_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-92" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="parse_1">parse(str)<a class="permalink" href="#parse_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-93" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Parses a JSON string and gives an object representation as a list or map collection:</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">let data = JSON.parse(text)
@@ -398,7 +398,7 @@ println(data: get("name"))
 
     </div>
   
-    <h3 id="stringify_1">stringify(obj)<a class="permalink" href="#stringify_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-39" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="stringify_1">stringify(obj)<a class="permalink" href="#stringify_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-40" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Takes any know object, and gives a JSON string representation:</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">let data = map[
@@ -416,7 +416,7 @@ another type then its string representation is given according to <code>obj: toS
 
     </div>
   
-    <h3 id="toDynamicObject_1">toDynamicObject(str)<a class="permalink" href="#toDynamicObject_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-119" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="toDynamicObject_1">toDynamicObject(str)<a class="permalink" href="#toDynamicObject_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-120" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Returns a new dynamic object from a JSON string where each first-level entry is mapped into the
 dynamic object:</p>
@@ -430,7 +430,7 @@ println(obj: b())
 
     </div>
   
-    <h3 id="toDynamicObjectFromJSONString_1">toDynamicObjectFromJSONString(str)<a class="permalink" href="#toDynamicObjectFromJSONString_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-196" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="toDynamicObjectFromJSONString_1">toDynamicObjectFromJSONString(str)<a class="permalink" href="#toDynamicObjectFromJSONString_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-197" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Returns a new dynamic object from a JSON string where each level entry is mapped into the
 dynamic object or an array of dynamic objects:</p>
@@ -455,7 +455,7 @@ obj: address(): city(): equals("Villeurbanne") # true
 
     </div>
   
-    <h3 id="toDynamicObjectFromMap_1">toDynamicObjectFromMap(mapInstance)<a class="permalink" href="#toDynamicObjectFromMap_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-245" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="toDynamicObjectFromMap_1">toDynamicObjectFromMap(mapInstance)<a class="permalink" href="#toDynamicObjectFromMap_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-246" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Returns a new dynamic object from a map where each level entry is mapped into the
 dynamic object or an array of dynamic objects:</p>
@@ -480,7 +480,7 @@ println(obj: address(): city(): equals("Villeurbanne")) # true
 
     </div>
   
-    <h3 id="toDynamicObjectsListFromJSONString_1">toDynamicObjectsListFromJSONString(str)<a class="permalink" href="#toDynamicObjectsListFromJSONString_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-221" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="toDynamicObjectsListFromJSONString_1">toDynamicObjectsListFromJSONString(str)<a class="permalink" href="#toDynamicObjectsListFromJSONString_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-222" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Returns a list of dynamic objects from a JSON string where each level entry is mapped into the
 dynamic object or an array of dynamic objects:</p>
@@ -506,7 +506,7 @@ println(objects: get(1): address(): city(): equals("Villeurbanne")) # true
 
     </div>
   
-    <h3 id="toDynamicObjectsListFromMapsCollection_1">toDynamicObjectsListFromMapsCollection(mapInstance)<a class="permalink" href="#toDynamicObjectsListFromMapsCollection_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-272" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="toDynamicObjectsListFromMapsCollection_1">toDynamicObjectsListFromMapsCollection(mapInstance)<a class="permalink" href="#toDynamicObjectsListFromMapsCollection_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="JSON-src.html#l-273" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Returns a list of dynamic objects from a collection of maps where each level entry is mapped into the
 dynamic object or an array of dynamic objects:</p>

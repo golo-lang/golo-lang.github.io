@@ -4,7 +4,7 @@
 
 <html>
 <head>
-  <title>gololang.Errors (Golo 3.2.0)</title>
+  <title>gololang.Errors (Golo 3.3.0-M1)</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="icon"
@@ -374,14 +374,13 @@
 
   <h2 id="augmentations">Augmentations</h2>
   
-    <h3 id="augment.java.util.Optional">java.util.Optional<a class="permalink" href="#augment.java.util.Optional" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-79" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="augment.java.util.Optional">java.util.Optional<a class="permalink" href="#augment.java.util.Optional" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-80" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
-      <p>null</p>
-
+      
     </div>
     
     
-      <h4 id="augment.java.util.Optional.and_2">and(this, other)<a class="permalink" href="#augment.java.util.Optional.and_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-192" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.and_2">and(this, other)<a class="permalink" href="#augment.java.util.Optional.and_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-193" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Conjunctive chaining.</p>
 <p>This is equivalent to <code>:flatMap(|_| -&gt; other)</code>,
@@ -401,7 +400,7 @@ equivalent.</p>
 
       </div>
     
-      <h4 id="augment.java.util.Optional.andThen_2">andThen(this, f)<a class="permalink" href="#augment.java.util.Optional.andThen_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-158" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.andThen_2">andThen(this, f)<a class="permalink" href="#augment.java.util.Optional.andThen_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-159" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Same as <code>map</code> or <code>flatMap</code>, depending on the type returned by <code>f</code>.</p>
 <p>This is a generic version for <code>map</code> and <code>flatMap</code>: if <code>f</code> returns an
@@ -412,7 +411,7 @@ equivalent.</p>
 
       </div>
     
-      <h4 id="augment.java.util.Optional.apply_2">apply(this, arg)<a class="permalink" href="#augment.java.util.Optional.apply_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-245" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.apply_2">apply(this, arg)<a class="permalink" href="#augment.java.util.Optional.apply_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-246" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Apply the function contained is this optional to the given optional. If the
 function has several parameters, an optional containing a partialized version
@@ -428,7 +427,7 @@ Some(|a, b| -&gt; a + b): apply(Some(21)): apply(Some(21)) # Some(42)
 
       </div>
     
-      <h4 id="augment.java.util.Optional.either_3">either(this, mapping, default)<a class="permalink" href="#augment.java.util.Optional.either_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-279" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.either_3">either(this, mapping, default)<a class="permalink" href="#augment.java.util.Optional.either_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-280" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Case analysis for the option.</p>
 <p>If the result is not empty, apply the first function (similar to <code>flatMap</code>),
@@ -447,7 +446,7 @@ None(): either(|x| -&gt; x * 2, -&gt; "plop") == "plop"
 
       </div>
     
-      <h4 id="augment.java.util.Optional.flattened_1">flattened(this)<a class="permalink" href="#augment.java.util.Optional.flattened_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-135" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.flattened_1">flattened(this)<a class="permalink" href="#augment.java.util.Optional.flattened_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-136" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Remove one level of optional.</p>
 <p>This is actually equivalent to <code>:flatMap(identity)</code>
@@ -460,36 +459,36 @@ Some(None()): flattened() == None()
 
       </div>
     
-      <h4 id="augment.java.util.Optional.isEmpty_1">isEmpty(this)<a class="permalink" href="#augment.java.util.Optional.isEmpty_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-83" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.isEmpty_1">isEmpty(this)<a class="permalink" href="#augment.java.util.Optional.isEmpty_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-84" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Test if this optional is empty.</p>
 
       </div>
     
-      <h4 id="augment.java.util.Optional.isNone_1">isNone(this)<a class="permalink" href="#augment.java.util.Optional.isNone_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-88" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.isNone_1">isNone(this)<a class="permalink" href="#augment.java.util.Optional.isNone_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-89" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Alias for <code>isEmpty</code></p>
 
       </div>
     
-      <h4 id="augment.java.util.Optional.isSome_1">isSome(this)<a class="permalink" href="#augment.java.util.Optional.isSome_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-93" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.isSome_1">isSome(this)<a class="permalink" href="#augment.java.util.Optional.isSome_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-94" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Alias for <code>isPresent</code></p>
 
       </div>
     
-      <h4 id="augment.java.util.Optional.isSome_2">isSome(this, value)<a class="permalink" href="#augment.java.util.Optional.isSome_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-98" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.isSome_2">isSome(this, value)<a class="permalink" href="#augment.java.util.Optional.isSome_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-99" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Test if this optional contains a value equals to the provided one.</p>
 
       </div>
     
-      <h4 id="augment.java.util.Optional.iterator_1">iterator(this)<a class="permalink" href="#augment.java.util.Optional.iterator_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-101" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.iterator_1">iterator(this)<a class="permalink" href="#augment.java.util.Optional.iterator_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-102" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         
       </div>
     
-      <h4 id="augment.java.util.Optional.or_2">or(this, other)<a class="permalink" href="#augment.java.util.Optional.or_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-215" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.or_2">or(this, other)<a class="permalink" href="#augment.java.util.Optional.or_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-216" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Disjunctive chaining.</p>
 <p>For instance:</p>
@@ -508,7 +507,7 @@ None(): orElseGet(-> Some(2))</p>
 
       </div>
     
-      <h4 id="augment.java.util.Optional.reduce_3">reduce(this, init, func)<a class="permalink" href="#augment.java.util.Optional.reduce_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-118" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.reduce_3">reduce(this, init, func)<a class="permalink" href="#augment.java.util.Optional.reduce_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-119" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Reduce this option using <code>func</code> with <code>init</code> as initial value.</p>
 <p>For instance:</p>
@@ -523,7 +522,7 @@ None(): reduce(42, |x, y| -&gt; x + y) == 42
 
       </div>
     
-      <h4 id="augment.java.util.Optional.toList_1">toList(this)<a class="permalink" href="#augment.java.util.Optional.toList_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-143" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.toList_1">toList(this)<a class="permalink" href="#augment.java.util.Optional.toList_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-144" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Convert this optional into a list</p>
 <ul>
@@ -533,12 +532,12 @@ empty list</li>
 
       </div>
     
-      <h4 id="augment.java.util.Optional.toResult_1">toResult(this)<a class="permalink" href="#augment.java.util.Optional.toResult_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-229" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.toResult_1">toResult(this)<a class="permalink" href="#augment.java.util.Optional.toResult_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-230" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         
       </div>
     
-      <h4 id="augment.java.util.Optional.toResult_2">toResult(this, param)<a class="permalink" href="#augment.java.util.Optional.toResult_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-220" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Optional.toResult_2">toResult(this, param)<a class="permalink" href="#augment.java.util.Optional.toResult_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-221" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         
       </div>
@@ -549,7 +548,7 @@ empty list</li>
 
   <h2 id="functions">Functions</h2>
   
-    <h3 id="catcher_1">catcher(recover)<a class="permalink" href="#catcher_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-467" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="catcher_1">catcher(recover)<a class="permalink" href="#catcher_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-468" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Create a catcher that execute the given block dealing with exceptions.</p>
 <p>This is similar to <a href="#trying_1"><code>trying</code></a>, but encapsulate the <code>catch</code> function
@@ -598,7 +597,7 @@ to apply to the exception.</li>
 
     </div>
   
-    <h3 id="catching_1">catching(default)<a class="permalink" href="#catching_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-407" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="catching_1">catching(default)<a class="permalink" href="#catching_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-408" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Allows an unary function to be called with an <code>Optional</code> or a <code>Result</code> value.
 Similar to <code>flatMap</code>, but using <code>default</code> on the exception if the call failed.</p>
@@ -624,13 +623,13 @@ to apply to the exception.</li>
 
     </div>
   
-    <h3 id="Empty_0">Empty()<a class="permalink" href="#Empty_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-40" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="Empty_0">Empty()<a class="permalink" href="#Empty_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-41" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Constructor for an empty <code>gololang.error.Result</code>.</p>
 
     </div>
   
-    <h3 id="Error_1">Error(message)<a class="permalink" href="#Error_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-35" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="Error_1">Error(message)<a class="permalink" href="#Error_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-36" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Constructor for <code>gololang.error.Result</code> errors.</p>
 <ul>
@@ -639,13 +638,13 @@ to apply to the exception.</li>
 
     </div>
   
-    <h3 id="None_0">None()<a class="permalink" href="#None_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-45" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="None_0">None()<a class="permalink" href="#None_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-46" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Constructor for an empty <code>java.util.Optional</code>.</p>
 
     </div>
   
-    <h3 id="nullify_1">nullify(f)<a class="permalink" href="#nullify_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-369" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="nullify_1">nullify(f)<a class="permalink" href="#nullify_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-370" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Transform a function into one that can return <code>null</code> if something went wrong
 (i.e. None, Error or exception).</p>
@@ -653,7 +652,7 @@ to apply to the exception.</li>
 
     </div>
   
-    <h3 id="Ok_1">Ok(value)<a class="permalink" href="#Ok_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-28" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="Ok_1">Ok(value)<a class="permalink" href="#Ok_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-29" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Constructor for <code>gololang.error.Result</code> values.</p>
 <ul>
@@ -662,7 +661,7 @@ to apply to the exception.</li>
 
     </div>
   
-    <h3 id="Option_1">Option(v)<a class="permalink" href="#Option_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-61" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="Option_1">Option(v)<a class="permalink" href="#Option_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-62" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>“Smart” constructor for <code>java.util.Optional</code>.</p>
 <p>If the given value is already an <code>Optional</code>, returns it unchanged; if it's a
@@ -671,7 +670,7 @@ to apply to the exception.</li>
 
     </div>
   
-    <h3 id="option_1">option(f)<a class="permalink" href="#option_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-312" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="option_1">option(f)<a class="permalink" href="#option_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-313" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Transform a function raising an exception into a function returning a option.
 The resulting function returns <code>Option(f(x))</code> if <code>f(x)</code> succeeds and <code>None</code> if
@@ -681,7 +680,7 @@ The resulting function returns <code>Option(f(x))</code> if <code>f(x)</code> su
 
     </div>
   
-    <h3 id="raising_1">raising(f)<a class="permalink" href="#raising_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-361" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="raising_1">raising(f)<a class="permalink" href="#raising_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-362" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Transforms a function returning a result or an option into a function returning
 the associated value or raising an exception.</p>
@@ -691,7 +690,7 @@ the associated value or raising an exception.</p>
 
     </div>
   
-    <h3 id="Result_1">Result(v)<a class="permalink" href="#Result_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-73" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="Result_1">Result(v)<a class="permalink" href="#Result_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-74" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>“Smart” constructor for <code>gololang.error.Result</code>.</p>
 <p>If the given value is already a <code>Result</code>, returns it unchanged
@@ -699,7 +698,7 @@ and create an <code>Optional</code> otherwise.</p>
 
     </div>
   
-    <h3 id="result_1">result(f)<a class="permalink" href="#result_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-295" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="result_1">result(f)<a class="permalink" href="#result_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-296" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Transform a function raising an exception into a function returning a <code>Result</code>.
 The resulting function returns <code>Result.ok(f(x))</code> if <code>f(x)</code> succeeds and
@@ -708,7 +707,7 @@ The resulting function returns <code>Result.ok(f(x))</code> if <code>f(x)</code>
 
     </div>
   
-    <h3 id="Some_1">Some(value)<a class="permalink" href="#Some_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-52" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="Some_1">Some(value)<a class="permalink" href="#Some_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-53" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Constructor <code>java.util.Optional</code> values.</p>
 <ul>
@@ -717,7 +716,7 @@ The resulting function returns <code>Result.ok(f(x))</code> if <code>f(x)</code>
 
     </div>
   
-    <h3 id="trying_1">trying(f)<a class="permalink" href="#trying_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-342" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="trying_1">trying(f)<a class="permalink" href="#trying_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-343" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Execute the given block and return a <code>Result</code>.</p>
 <p>This is similar to <a href="#result_1"><code>result</code></a>, except that the block take no parameter and is

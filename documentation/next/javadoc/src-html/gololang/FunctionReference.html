@@ -7,326 +7,352 @@
 <body>
 <div class="sourceContainer">
 <pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
-<span class="sourceLineNo">002</span> * Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA-Lyon)<a name="line.2"></a>
+<span class="sourceLineNo">002</span> * Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
 <span class="sourceLineNo">003</span> *<a name="line.3"></a>
-<span class="sourceLineNo">004</span> * All rights reserved. This program and the accompanying materials<a name="line.4"></a>
-<span class="sourceLineNo">005</span> * are made available under the terms of the Eclipse Public License v1.0<a name="line.5"></a>
-<span class="sourceLineNo">006</span> * which accompanies this distribution, and is available at<a name="line.6"></a>
-<span class="sourceLineNo">007</span> * http://www.eclipse.org/legal/epl-v10.html<a name="line.7"></a>
-<span class="sourceLineNo">008</span> */<a name="line.8"></a>
-<span class="sourceLineNo">009</span><a name="line.9"></a>
-<span class="sourceLineNo">010</span>package gololang;<a name="line.10"></a>
-<span class="sourceLineNo">011</span><a name="line.11"></a>
-<span class="sourceLineNo">012</span>import java.lang.invoke.MethodHandle;<a name="line.12"></a>
-<span class="sourceLineNo">013</span>import java.lang.invoke.MethodHandles;<a name="line.13"></a>
-<span class="sourceLineNo">014</span>import java.lang.invoke.MethodType;<a name="line.14"></a>
-<span class="sourceLineNo">015</span>import java.util.Arrays;<a name="line.15"></a>
-<span class="sourceLineNo">016</span><a name="line.16"></a>
-<span class="sourceLineNo">017</span>import static java.lang.invoke.MethodHandles.filterReturnValue;<a name="line.17"></a>
-<span class="sourceLineNo">018</span><a name="line.18"></a>
-<span class="sourceLineNo">019</span>/**<a name="line.19"></a>
-<span class="sourceLineNo">020</span> * A reference to a function / closure.<a name="line.20"></a>
-<span class="sourceLineNo">021</span> *<a name="line.21"></a>
-<span class="sourceLineNo">022</span> * This class essentially boxes {@code MethodHandle} references, and provides as many delegations as possible.<a name="line.22"></a>
-<span class="sourceLineNo">023</span> * Previous versions of Golo used direct {@code MethodHandle} objects to deal with functions by reference, but that<a name="line.23"></a>
-<span class="sourceLineNo">024</span> * class does not provide any mean to attach local state, as required for, say, implementing named arguments.<a name="line.24"></a>
-<span class="sourceLineNo">025</span> *<a name="line.25"></a>
-<span class="sourceLineNo">026</span> * This boxed representation provides a sound abstraction while not hurting performance, as<a name="line.26"></a>
-<span class="sourceLineNo">027</span> * {@code org.eclipse.golo.runtime.ClosureCallSupport} still dispatches through a method handle.<a name="line.27"></a>
-<span class="sourceLineNo">028</span> *<a name="line.28"></a>
-<span class="sourceLineNo">029</span> * @see java.lang.invoke.MethodHandle<a name="line.29"></a>
-<span class="sourceLineNo">030</span> * @see org.eclipse.golo.runtime.ClosureCallSupport<a name="line.30"></a>
-<span class="sourceLineNo">031</span> */<a name="line.31"></a>
-<span class="sourceLineNo">032</span>public class FunctionReference {<a name="line.32"></a>
-<span class="sourceLineNo">033</span><a name="line.33"></a>
-<span class="sourceLineNo">034</span>  private final MethodHandle handle;<a name="line.34"></a>
-<span class="sourceLineNo">035</span><a name="line.35"></a>
-<span class="sourceLineNo">036</span>  private final String[] parameterNames;<a name="line.36"></a>
-<span class="sourceLineNo">037</span><a name="line.37"></a>
-<span class="sourceLineNo">038</span>  /**<a name="line.38"></a>
-<span class="sourceLineNo">039</span>   * Makes a function reference from a method handle.<a name="line.39"></a>
-<span class="sourceLineNo">040</span>   *<a name="line.40"></a>
-<span class="sourceLineNo">041</span>   * @param handle the method handle.<a name="line.41"></a>
-<span class="sourceLineNo">042</span>   * @param parameterNames the target method parameter's names.<a name="line.42"></a>
-<span class="sourceLineNo">043</span>   * @throws IllegalArgumentException if {@code handle} is {@code null}.<a name="line.43"></a>
-<span class="sourceLineNo">044</span>   */<a name="line.44"></a>
-<span class="sourceLineNo">045</span>  public FunctionReference(MethodHandle handle, String[] parameterNames) {<a name="line.45"></a>
-<span class="sourceLineNo">046</span>    if (handle == null) {<a name="line.46"></a>
-<span class="sourceLineNo">047</span>      throw new IllegalArgumentException("A method handle cannot be null");<a name="line.47"></a>
-<span class="sourceLineNo">048</span>    }<a name="line.48"></a>
-<span class="sourceLineNo">049</span>    this.handle = handle;<a name="line.49"></a>
-<span class="sourceLineNo">050</span>    this.parameterNames = parameterNames;<a name="line.50"></a>
-<span class="sourceLineNo">051</span>  }<a name="line.51"></a>
-<span class="sourceLineNo">052</span><a name="line.52"></a>
-<span class="sourceLineNo">053</span>  /**<a name="line.53"></a>
-<span class="sourceLineNo">054</span>   * Makes a function reference from a method handle.<a name="line.54"></a>
-<span class="sourceLineNo">055</span>   * The parameter names will be {@code null}.<a name="line.55"></a>
-<span class="sourceLineNo">056</span>   *<a name="line.56"></a>
-<span class="sourceLineNo">057</span>   * @param handle the method handle.<a name="line.57"></a>
-<span class="sourceLineNo">058</span>   * @throws IllegalArgumentException if {@code handle} is {@code null}.<a name="line.58"></a>
-<span class="sourceLineNo">059</span>   */<a name="line.59"></a>
-<span class="sourceLineNo">060</span>  public FunctionReference(MethodHandle handle) {<a name="line.60"></a>
-<span class="sourceLineNo">061</span>    this(handle, null);<a name="line.61"></a>
-<span class="sourceLineNo">062</span>  }<a name="line.62"></a>
-<span class="sourceLineNo">063</span><a name="line.63"></a>
-<span class="sourceLineNo">064</span>  /**<a name="line.64"></a>
-<span class="sourceLineNo">065</span>   * Unboxes the method handle.<a name="line.65"></a>
-<span class="sourceLineNo">066</span>   *<a name="line.66"></a>
-<span class="sourceLineNo">067</span>   * @return the (boxed) method handle.<a name="line.67"></a>
-<span class="sourceLineNo">068</span>   */<a name="line.68"></a>
-<span class="sourceLineNo">069</span>  public MethodHandle handle() {<a name="line.69"></a>
-<span class="sourceLineNo">070</span>    return handle;<a name="line.70"></a>
-<span class="sourceLineNo">071</span>  }<a name="line.71"></a>
-<span class="sourceLineNo">072</span><a name="line.72"></a>
-<span class="sourceLineNo">073</span>  /**<a name="line.73"></a>
-<span class="sourceLineNo">074</span>   * Get the target function parameter's names<a name="line.74"></a>
-<span class="sourceLineNo">075</span>   *<a name="line.75"></a>
-<span class="sourceLineNo">076</span>   * @return the array of parameter's names<a name="line.76"></a>
-<span class="sourceLineNo">077</span>   */<a name="line.77"></a>
-<span class="sourceLineNo">078</span>  public String[] parameterNames() {<a name="line.78"></a>
-<span class="sourceLineNo">079</span>    return Arrays.copyOf(parameterNames, parameterNames.length);<a name="line.79"></a>
-<span class="sourceLineNo">080</span>  }<a name="line.80"></a>
-<span class="sourceLineNo">081</span><a name="line.81"></a>
-<span class="sourceLineNo">082</span>  public MethodType type() {<a name="line.82"></a>
-<span class="sourceLineNo">083</span>    return handle.type();<a name="line.83"></a>
-<span class="sourceLineNo">084</span>  }<a name="line.84"></a>
-<span class="sourceLineNo">085</span><a name="line.85"></a>
-<span class="sourceLineNo">086</span>  public FunctionReference asCollector(Class&lt;?&gt; arrayType, int arrayLength) {<a name="line.86"></a>
-<span class="sourceLineNo">087</span>    return new FunctionReference(handle.asCollector(arrayType, arrayLength), this.parameterNames);<a name="line.87"></a>
-<span class="sourceLineNo">088</span>  }<a name="line.88"></a>
-<span class="sourceLineNo">089</span><a name="line.89"></a>
-<span class="sourceLineNo">090</span>  public FunctionReference asCollector(int arrayLength) {<a name="line.90"></a>
-<span class="sourceLineNo">091</span>    return asCollector(Object[].class, arrayLength);<a name="line.91"></a>
-<span class="sourceLineNo">092</span>  }<a name="line.92"></a>
-<span class="sourceLineNo">093</span><a name="line.93"></a>
-<span class="sourceLineNo">094</span>  public FunctionReference asFixedArity() {<a name="line.94"></a>
-<span class="sourceLineNo">095</span>    return new FunctionReference(handle.asFixedArity(), this.parameterNames);<a name="line.95"></a>
-<span class="sourceLineNo">096</span>  }<a name="line.96"></a>
-<span class="sourceLineNo">097</span><a name="line.97"></a>
-<span class="sourceLineNo">098</span>  public FunctionReference asType(MethodType newType) {<a name="line.98"></a>
-<span class="sourceLineNo">099</span>    return new FunctionReference(handle.asType(newType), this.parameterNames);<a name="line.99"></a>
-<span class="sourceLineNo">100</span>  }<a name="line.100"></a>
-<span class="sourceLineNo">101</span><a name="line.101"></a>
-<span class="sourceLineNo">102</span>  public FunctionReference asVarargsCollector(Class&lt;?&gt; arrayType) {<a name="line.102"></a>
-<span class="sourceLineNo">103</span>    return new FunctionReference(handle.asVarargsCollector(arrayType), this.parameterNames);<a name="line.103"></a>
-<span class="sourceLineNo">104</span>  }<a name="line.104"></a>
-<span class="sourceLineNo">105</span><a name="line.105"></a>
-<span class="sourceLineNo">106</span>  public FunctionReference asVarargsCollector() {<a name="line.106"></a>
-<span class="sourceLineNo">107</span>    return asVarargsCollector(Object[].class);<a name="line.107"></a>
+<span class="sourceLineNo">004</span> * This program and the accompanying materials are made available under the<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * terms of the Eclipse Public License 2.0 which is available at<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * http://www.eclipse.org/legal/epl-2.0.<a name="line.6"></a>
+<span class="sourceLineNo">007</span> *<a name="line.7"></a>
+<span class="sourceLineNo">008</span> * SPDX-License-Identifier: EPL-2.0<a name="line.8"></a>
+<span class="sourceLineNo">009</span> */<a name="line.9"></a>
+<span class="sourceLineNo">010</span><a name="line.10"></a>
+<span class="sourceLineNo">011</span>package gololang;<a name="line.11"></a>
+<span class="sourceLineNo">012</span><a name="line.12"></a>
+<span class="sourceLineNo">013</span>import java.lang.invoke.MethodHandle;<a name="line.13"></a>
+<span class="sourceLineNo">014</span>import java.lang.invoke.MethodHandles;<a name="line.14"></a>
+<span class="sourceLineNo">015</span>import java.lang.invoke.MethodType;<a name="line.15"></a>
+<span class="sourceLineNo">016</span>import java.util.Arrays;<a name="line.16"></a>
+<span class="sourceLineNo">017</span><a name="line.17"></a>
+<span class="sourceLineNo">018</span>import static java.lang.invoke.MethodHandles.filterReturnValue;<a name="line.18"></a>
+<span class="sourceLineNo">019</span><a name="line.19"></a>
+<span class="sourceLineNo">020</span>/**<a name="line.20"></a>
+<span class="sourceLineNo">021</span> * A reference to a function / closure.<a name="line.21"></a>
+<span class="sourceLineNo">022</span> *<a name="line.22"></a>
+<span class="sourceLineNo">023</span> * This class essentially boxes {@code MethodHandle} references, and provides as many delegations as possible.<a name="line.23"></a>
+<span class="sourceLineNo">024</span> * Previous versions of Golo used direct {@code MethodHandle} objects to deal with functions by reference, but that<a name="line.24"></a>
+<span class="sourceLineNo">025</span> * class does not provide any mean to attach local state, as required for, say, implementing named arguments.<a name="line.25"></a>
+<span class="sourceLineNo">026</span> *<a name="line.26"></a>
+<span class="sourceLineNo">027</span> * This boxed representation provides a sound abstraction while not hurting performance, as<a name="line.27"></a>
+<span class="sourceLineNo">028</span> * {@code org.eclipse.golo.runtime.ClosureCallSupport} still dispatches through a method handle.<a name="line.28"></a>
+<span class="sourceLineNo">029</span> *<a name="line.29"></a>
+<span class="sourceLineNo">030</span> * @see java.lang.invoke.MethodHandle<a name="line.30"></a>
+<span class="sourceLineNo">031</span> * @see org.eclipse.golo.runtime.ClosureCallSupport<a name="line.31"></a>
+<span class="sourceLineNo">032</span> */<a name="line.32"></a>
+<span class="sourceLineNo">033</span>public class FunctionReference {<a name="line.33"></a>
+<span class="sourceLineNo">034</span><a name="line.34"></a>
+<span class="sourceLineNo">035</span>  private final MethodHandle handle;<a name="line.35"></a>
+<span class="sourceLineNo">036</span><a name="line.36"></a>
+<span class="sourceLineNo">037</span>  private final String[] parameterNames;<a name="line.37"></a>
+<span class="sourceLineNo">038</span><a name="line.38"></a>
+<span class="sourceLineNo">039</span>  /**<a name="line.39"></a>
+<span class="sourceLineNo">040</span>   * Makes a function reference from a method handle.<a name="line.40"></a>
+<span class="sourceLineNo">041</span>   *<a name="line.41"></a>
+<span class="sourceLineNo">042</span>   * @param handle the method handle.<a name="line.42"></a>
+<span class="sourceLineNo">043</span>   * @param parameterNames the target method parameter's names.<a name="line.43"></a>
+<span class="sourceLineNo">044</span>   * @throws IllegalArgumentException if {@code handle} is {@code null}.<a name="line.44"></a>
+<span class="sourceLineNo">045</span>   */<a name="line.45"></a>
+<span class="sourceLineNo">046</span>  public FunctionReference(MethodHandle handle, String[] parameterNames) {<a name="line.46"></a>
+<span class="sourceLineNo">047</span>    if (handle == null) {<a name="line.47"></a>
+<span class="sourceLineNo">048</span>      throw new IllegalArgumentException("A method handle cannot be null");<a name="line.48"></a>
+<span class="sourceLineNo">049</span>    }<a name="line.49"></a>
+<span class="sourceLineNo">050</span>    this.handle = handle;<a name="line.50"></a>
+<span class="sourceLineNo">051</span>    this.parameterNames = parameterNames;<a name="line.51"></a>
+<span class="sourceLineNo">052</span>  }<a name="line.52"></a>
+<span class="sourceLineNo">053</span><a name="line.53"></a>
+<span class="sourceLineNo">054</span>  /**<a name="line.54"></a>
+<span class="sourceLineNo">055</span>   * Makes a function reference from a method handle.<a name="line.55"></a>
+<span class="sourceLineNo">056</span>   * The parameter names will be {@code null}.<a name="line.56"></a>
+<span class="sourceLineNo">057</span>   *<a name="line.57"></a>
+<span class="sourceLineNo">058</span>   * @param handle the method handle.<a name="line.58"></a>
+<span class="sourceLineNo">059</span>   * @throws IllegalArgumentException if {@code handle} is {@code null}.<a name="line.59"></a>
+<span class="sourceLineNo">060</span>   */<a name="line.60"></a>
+<span class="sourceLineNo">061</span>  public FunctionReference(MethodHandle handle) {<a name="line.61"></a>
+<span class="sourceLineNo">062</span>    this(handle, null);<a name="line.62"></a>
+<span class="sourceLineNo">063</span>  }<a name="line.63"></a>
+<span class="sourceLineNo">064</span><a name="line.64"></a>
+<span class="sourceLineNo">065</span>  /**<a name="line.65"></a>
+<span class="sourceLineNo">066</span>   * Unboxes the method handle.<a name="line.66"></a>
+<span class="sourceLineNo">067</span>   *<a name="line.67"></a>
+<span class="sourceLineNo">068</span>   * @return the (boxed) method handle.<a name="line.68"></a>
+<span class="sourceLineNo">069</span>   */<a name="line.69"></a>
+<span class="sourceLineNo">070</span>  public MethodHandle handle() {<a name="line.70"></a>
+<span class="sourceLineNo">071</span>    return handle;<a name="line.71"></a>
+<span class="sourceLineNo">072</span>  }<a name="line.72"></a>
+<span class="sourceLineNo">073</span><a name="line.73"></a>
+<span class="sourceLineNo">074</span>  /**<a name="line.74"></a>
+<span class="sourceLineNo">075</span>   * Get the target function parameter's names<a name="line.75"></a>
+<span class="sourceLineNo">076</span>   *<a name="line.76"></a>
+<span class="sourceLineNo">077</span>   * @return the array of parameter's names<a name="line.77"></a>
+<span class="sourceLineNo">078</span>   */<a name="line.78"></a>
+<span class="sourceLineNo">079</span>  public String[] parameterNames() {<a name="line.79"></a>
+<span class="sourceLineNo">080</span>    return Arrays.copyOf(parameterNames, parameterNames.length);<a name="line.80"></a>
+<span class="sourceLineNo">081</span>  }<a name="line.81"></a>
+<span class="sourceLineNo">082</span><a name="line.82"></a>
+<span class="sourceLineNo">083</span>  public MethodType type() {<a name="line.83"></a>
+<span class="sourceLineNo">084</span>    return handle.type();<a name="line.84"></a>
+<span class="sourceLineNo">085</span>  }<a name="line.85"></a>
+<span class="sourceLineNo">086</span><a name="line.86"></a>
+<span class="sourceLineNo">087</span>  public FunctionReference asCollector(Class&lt;?&gt; arrayType, int arrayLength) {<a name="line.87"></a>
+<span class="sourceLineNo">088</span>    return new FunctionReference(handle.asCollector(arrayType, arrayLength), this.parameterNames);<a name="line.88"></a>
+<span class="sourceLineNo">089</span>  }<a name="line.89"></a>
+<span class="sourceLineNo">090</span><a name="line.90"></a>
+<span class="sourceLineNo">091</span>  public FunctionReference asCollector(int arrayLength) {<a name="line.91"></a>
+<span class="sourceLineNo">092</span>    return asCollector(Object[].class, arrayLength);<a name="line.92"></a>
+<span class="sourceLineNo">093</span>  }<a name="line.93"></a>
+<span class="sourceLineNo">094</span><a name="line.94"></a>
+<span class="sourceLineNo">095</span>  public FunctionReference asFixedArity() {<a name="line.95"></a>
+<span class="sourceLineNo">096</span>    return new FunctionReference(handle.asFixedArity(), this.parameterNames);<a name="line.96"></a>
+<span class="sourceLineNo">097</span>  }<a name="line.97"></a>
+<span class="sourceLineNo">098</span><a name="line.98"></a>
+<span class="sourceLineNo">099</span>  public FunctionReference asType(MethodType newType) {<a name="line.99"></a>
+<span class="sourceLineNo">100</span>    return new FunctionReference(handle.asType(newType), this.parameterNames);<a name="line.100"></a>
+<span class="sourceLineNo">101</span>  }<a name="line.101"></a>
+<span class="sourceLineNo">102</span><a name="line.102"></a>
+<span class="sourceLineNo">103</span>  public FunctionReference asVarargsCollector(Class&lt;?&gt; arrayType) {<a name="line.103"></a>
+<span class="sourceLineNo">104</span>    if (this.isVarargsCollector()) {<a name="line.104"></a>
+<span class="sourceLineNo">105</span>      return this;<a name="line.105"></a>
+<span class="sourceLineNo">106</span>    }<a name="line.106"></a>
+<span class="sourceLineNo">107</span>    return new FunctionReference(handle.asVarargsCollector(arrayType), this.parameterNames);<a name="line.107"></a>
 <span class="sourceLineNo">108</span>  }<a name="line.108"></a>
 <span class="sourceLineNo">109</span><a name="line.109"></a>
-<span class="sourceLineNo">110</span>  public FunctionReference bindTo(Object x) {<a name="line.110"></a>
-<span class="sourceLineNo">111</span>    return new FunctionReference(handle.bindTo(x), dropParameterNames(0, 1));<a name="line.111"></a>
+<span class="sourceLineNo">110</span>  public FunctionReference asVarargsCollector() {<a name="line.110"></a>
+<span class="sourceLineNo">111</span>    return asVarargsCollector(Object[].class);<a name="line.111"></a>
 <span class="sourceLineNo">112</span>  }<a name="line.112"></a>
 <span class="sourceLineNo">113</span><a name="line.113"></a>
-<span class="sourceLineNo">114</span>  public boolean isVarargsCollector() {<a name="line.114"></a>
-<span class="sourceLineNo">115</span>    return handle.isVarargsCollector();<a name="line.115"></a>
-<span class="sourceLineNo">116</span>  }<a name="line.116"></a>
-<span class="sourceLineNo">117</span><a name="line.117"></a>
-<span class="sourceLineNo">118</span>  public FunctionReference asSpreader(Class&lt;?&gt; arrayType, int arrayLength) {<a name="line.118"></a>
-<span class="sourceLineNo">119</span>    return new FunctionReference(handle.asSpreader(arrayType, arrayLength));<a name="line.119"></a>
+<span class="sourceLineNo">114</span>  public FunctionReference bindTo(Object x) {<a name="line.114"></a>
+<span class="sourceLineNo">115</span>    MethodHandle mh = this.handle.bindTo(x);<a name="line.115"></a>
+<span class="sourceLineNo">116</span>    if (isVarargsCollector() &amp;&amp; arity() &gt; 1) {<a name="line.116"></a>
+<span class="sourceLineNo">117</span>      mh = mh.asVarargsCollector(Object[].class);<a name="line.117"></a>
+<span class="sourceLineNo">118</span>    }<a name="line.118"></a>
+<span class="sourceLineNo">119</span>    return new FunctionReference(mh, dropParameterNames(0, 1));<a name="line.119"></a>
 <span class="sourceLineNo">120</span>  }<a name="line.120"></a>
 <span class="sourceLineNo">121</span><a name="line.121"></a>
-<span class="sourceLineNo">122</span>  public FunctionReference asSpreader(int arrayLength) {<a name="line.122"></a>
-<span class="sourceLineNo">123</span>    return asSpreader(Object[].class, arrayLength);<a name="line.123"></a>
+<span class="sourceLineNo">122</span>  public boolean isVarargsCollector() {<a name="line.122"></a>
+<span class="sourceLineNo">123</span>    return handle.isVarargsCollector();<a name="line.123"></a>
 <span class="sourceLineNo">124</span>  }<a name="line.124"></a>
 <span class="sourceLineNo">125</span><a name="line.125"></a>
-<span class="sourceLineNo">126</span>  public FunctionReference asSpreader() {<a name="line.126"></a>
-<span class="sourceLineNo">127</span>    return asSpreader(Object[].class, arity());<a name="line.127"></a>
+<span class="sourceLineNo">126</span>  public FunctionReference asSpreader(Class&lt;?&gt; arrayType, int arrayLength) {<a name="line.126"></a>
+<span class="sourceLineNo">127</span>    return new FunctionReference(handle.asSpreader(arrayType, arrayLength));<a name="line.127"></a>
 <span class="sourceLineNo">128</span>  }<a name="line.128"></a>
 <span class="sourceLineNo">129</span><a name="line.129"></a>
-<span class="sourceLineNo">130</span>  /**<a name="line.130"></a>
-<span class="sourceLineNo">131</span>   * Returns the arity of the function.<a name="line.131"></a>
-<span class="sourceLineNo">132</span>   *<a name="line.132"></a>
-<span class="sourceLineNo">133</span>   * The arity is the number of declared parameter in the function signature.<a name="line.133"></a>
-<span class="sourceLineNo">134</span>   *<a name="line.134"></a>
-<span class="sourceLineNo">135</span>   * @return the number of declared parameter<a name="line.135"></a>
-<span class="sourceLineNo">136</span>   */<a name="line.136"></a>
-<span class="sourceLineNo">137</span>  public int arity() {<a name="line.137"></a>
-<span class="sourceLineNo">138</span>    return handle.type().parameterCount();<a name="line.138"></a>
-<span class="sourceLineNo">139</span>  }<a name="line.139"></a>
-<span class="sourceLineNo">140</span><a name="line.140"></a>
-<span class="sourceLineNo">141</span>  /**<a name="line.141"></a>
-<span class="sourceLineNo">142</span>   * Check if this function can be invoked with the given number of arguments.<a name="line.142"></a>
-<span class="sourceLineNo">143</span>   */<a name="line.143"></a>
-<span class="sourceLineNo">144</span>  public boolean acceptArity(int nb) {<a name="line.144"></a>
-<span class="sourceLineNo">145</span>    return arity() == nb || (arity() == nb + 1 &amp;&amp; isVarargsCollector());<a name="line.145"></a>
-<span class="sourceLineNo">146</span>  }<a name="line.146"></a>
-<span class="sourceLineNo">147</span><a name="line.147"></a>
-<span class="sourceLineNo">148</span>  public Object invoke(Object... args) throws Throwable {<a name="line.148"></a>
-<span class="sourceLineNo">149</span>    return handle.invokeWithArguments(args);<a name="line.149"></a>
-<span class="sourceLineNo">150</span>  }<a name="line.150"></a>
-<span class="sourceLineNo">151</span><a name="line.151"></a>
-<span class="sourceLineNo">152</span>  /**<a name="line.152"></a>
-<span class="sourceLineNo">153</span>   * Apply the function to the provided arguments.<a name="line.153"></a>
-<span class="sourceLineNo">154</span>   *<a name="line.154"></a>
-<span class="sourceLineNo">155</span>   * If the number of arguments corresponds to the function arity, the function is applied.<a name="line.155"></a>
-<span class="sourceLineNo">156</span>   * Otherwise, a function partialized with the given arguments is returned.<a name="line.156"></a>
-<span class="sourceLineNo">157</span>   * @return the result of the function or a partialized version of the function<a name="line.157"></a>
-<span class="sourceLineNo">158</span>   */<a name="line.158"></a>
-<span class="sourceLineNo">159</span>  public Object invokeOrBind(Object... args) throws Throwable {<a name="line.159"></a>
-<span class="sourceLineNo">160</span>    if (args.length &lt; arity()) {<a name="line.160"></a>
-<span class="sourceLineNo">161</span>      return insertArguments(0, args);<a name="line.161"></a>
-<span class="sourceLineNo">162</span>    }<a name="line.162"></a>
-<span class="sourceLineNo">163</span>    return handle.invokeWithArguments(args);<a name="line.163"></a>
-<span class="sourceLineNo">164</span>  }<a name="line.164"></a>
-<span class="sourceLineNo">165</span><a name="line.165"></a>
-<span class="sourceLineNo">166</span>  @Override<a name="line.166"></a>
-<span class="sourceLineNo">167</span>  public String toString() {<a name="line.167"></a>
-<span class="sourceLineNo">168</span>    return "FunctionReference{" +<a name="line.168"></a>
-<span class="sourceLineNo">169</span>        "handle=" + (handle.isVarargsCollector() ? "(varargs)" : "") + handle +<a name="line.169"></a>
-<span class="sourceLineNo">170</span>        ", parameterNames=" + Arrays.toString(parameterNames) +<a name="line.170"></a>
-<span class="sourceLineNo">171</span>        '}';<a name="line.171"></a>
+<span class="sourceLineNo">130</span>  public FunctionReference asSpreader(int arrayLength) {<a name="line.130"></a>
+<span class="sourceLineNo">131</span>    return asSpreader(Object[].class, arrayLength);<a name="line.131"></a>
+<span class="sourceLineNo">132</span>  }<a name="line.132"></a>
+<span class="sourceLineNo">133</span><a name="line.133"></a>
+<span class="sourceLineNo">134</span>  public FunctionReference asSpreader() {<a name="line.134"></a>
+<span class="sourceLineNo">135</span>    return asSpreader(Object[].class, arity());<a name="line.135"></a>
+<span class="sourceLineNo">136</span>  }<a name="line.136"></a>
+<span class="sourceLineNo">137</span><a name="line.137"></a>
+<span class="sourceLineNo">138</span>  /**<a name="line.138"></a>
+<span class="sourceLineNo">139</span>   * Returns the arity of the function.<a name="line.139"></a>
+<span class="sourceLineNo">140</span>   *<a name="line.140"></a>
+<span class="sourceLineNo">141</span>   * The arity is the number of declared parameter in the function signature.<a name="line.141"></a>
+<span class="sourceLineNo">142</span>   *<a name="line.142"></a>
+<span class="sourceLineNo">143</span>   * @return the number of declared parameter<a name="line.143"></a>
+<span class="sourceLineNo">144</span>   */<a name="line.144"></a>
+<span class="sourceLineNo">145</span>  public int arity() {<a name="line.145"></a>
+<span class="sourceLineNo">146</span>    return handle.type().parameterCount();<a name="line.146"></a>
+<span class="sourceLineNo">147</span>  }<a name="line.147"></a>
+<span class="sourceLineNo">148</span><a name="line.148"></a>
+<span class="sourceLineNo">149</span>  /**<a name="line.149"></a>
+<span class="sourceLineNo">150</span>   * Check if this function can be invoked with the given number of arguments.<a name="line.150"></a>
+<span class="sourceLineNo">151</span>   */<a name="line.151"></a>
+<span class="sourceLineNo">152</span>  public boolean acceptArity(int nb) {<a name="line.152"></a>
+<span class="sourceLineNo">153</span>    return arity() == nb || (arity() == nb + 1 &amp;&amp; isVarargsCollector());<a name="line.153"></a>
+<span class="sourceLineNo">154</span>  }<a name="line.154"></a>
+<span class="sourceLineNo">155</span><a name="line.155"></a>
+<span class="sourceLineNo">156</span>  public Object invoke(Object... args) throws Throwable {<a name="line.156"></a>
+<span class="sourceLineNo">157</span>    return handle.invokeWithArguments(args);<a name="line.157"></a>
+<span class="sourceLineNo">158</span>  }<a name="line.158"></a>
+<span class="sourceLineNo">159</span><a name="line.159"></a>
+<span class="sourceLineNo">160</span>  /**<a name="line.160"></a>
+<span class="sourceLineNo">161</span>   * Apply the function to the provided arguments.<a name="line.161"></a>
+<span class="sourceLineNo">162</span>   *<a name="line.162"></a>
+<span class="sourceLineNo">163</span>   * If the number of arguments corresponds to the function arity, the function is applied.<a name="line.163"></a>
+<span class="sourceLineNo">164</span>   * Otherwise, a function partialized with the given arguments is returned.<a name="line.164"></a>
+<span class="sourceLineNo">165</span>   * @return the result of the function or a partialized version of the function<a name="line.165"></a>
+<span class="sourceLineNo">166</span>   */<a name="line.166"></a>
+<span class="sourceLineNo">167</span>  public Object invokeOrBind(Object... args) throws Throwable {<a name="line.167"></a>
+<span class="sourceLineNo">168</span>    if (args.length &lt; arity()) {<a name="line.168"></a>
+<span class="sourceLineNo">169</span>      return insertArguments(0, args);<a name="line.169"></a>
+<span class="sourceLineNo">170</span>    }<a name="line.170"></a>
+<span class="sourceLineNo">171</span>    return handle.invokeWithArguments(args);<a name="line.171"></a>
 <span class="sourceLineNo">172</span>  }<a name="line.172"></a>
 <span class="sourceLineNo">173</span><a name="line.173"></a>
 <span class="sourceLineNo">174</span>  @Override<a name="line.174"></a>
-<span class="sourceLineNo">175</span>  public boolean equals(Object obj) {<a name="line.175"></a>
-<span class="sourceLineNo">176</span>    if (this == obj) {<a name="line.176"></a>
-<span class="sourceLineNo">177</span>      return true;<a name="line.177"></a>
-<span class="sourceLineNo">178</span>    }<a name="line.178"></a>
-<span class="sourceLineNo">179</span>    if (obj == null || getClass() != obj.getClass()) {<a name="line.179"></a>
-<span class="sourceLineNo">180</span>      return false;<a name="line.180"></a>
-<span class="sourceLineNo">181</span>    }<a name="line.181"></a>
-<span class="sourceLineNo">182</span>    FunctionReference that = (FunctionReference) obj;<a name="line.182"></a>
-<span class="sourceLineNo">183</span>    return handle.equals(that.handle);<a name="line.183"></a>
-<span class="sourceLineNo">184</span>  }<a name="line.184"></a>
-<span class="sourceLineNo">185</span><a name="line.185"></a>
-<span class="sourceLineNo">186</span>  @Override<a name="line.186"></a>
-<span class="sourceLineNo">187</span>  public int hashCode() {<a name="line.187"></a>
-<span class="sourceLineNo">188</span>    return handle.hashCode();<a name="line.188"></a>
-<span class="sourceLineNo">189</span>  }<a name="line.189"></a>
-<span class="sourceLineNo">190</span><a name="line.190"></a>
-<span class="sourceLineNo">191</span>  /**<a name="line.191"></a>
-<span class="sourceLineNo">192</span>   * Converts a function reference to an instance of an interface.<a name="line.192"></a>
-<span class="sourceLineNo">193</span>   *<a name="line.193"></a>
-<span class="sourceLineNo">194</span>   * @param interfaceClass the interface,<a name="line.194"></a>
-<span class="sourceLineNo">195</span>   * @return a proxy object that satisfies {@code interfaceClass} and delegates to {@code this}.<a name="line.195"></a>
-<span class="sourceLineNo">196</span>   */<a name="line.196"></a>
-<span class="sourceLineNo">197</span>  public Object to(Class&lt;?&gt; interfaceClass) {<a name="line.197"></a>
-<span class="sourceLineNo">198</span>    return Predefined.asInterfaceInstance(interfaceClass, this);<a name="line.198"></a>
-<span class="sourceLineNo">199</span>  }<a name="line.199"></a>
-<span class="sourceLineNo">200</span><a name="line.200"></a>
-<span class="sourceLineNo">201</span>  /**<a name="line.201"></a>
-<span class="sourceLineNo">202</span>   * Compose a function with another function.<a name="line.202"></a>
-<span class="sourceLineNo">203</span>   *<a name="line.203"></a>
-<span class="sourceLineNo">204</span>   * @param fun the function that processes the results of {@code this} function.<a name="line.204"></a>
-<span class="sourceLineNo">205</span>   * @return a composed function.<a name="line.205"></a>
-<span class="sourceLineNo">206</span>   */<a name="line.206"></a>
-<span class="sourceLineNo">207</span>  public FunctionReference andThen(FunctionReference fun) {<a name="line.207"></a>
-<span class="sourceLineNo">208</span>    MethodHandle other = null;<a name="line.208"></a>
-<span class="sourceLineNo">209</span>    if (fun.isVarargsCollector() &amp;&amp; fun.arity() == 1) {<a name="line.209"></a>
-<span class="sourceLineNo">210</span>      other = fun.handle.asCollector(Object[].class, 1);<a name="line.210"></a>
-<span class="sourceLineNo">211</span>    } else if (fun.isVarargsCollector() &amp;&amp; fun.arity() == 2) {<a name="line.211"></a>
-<span class="sourceLineNo">212</span>      other = MethodHandles.insertArguments(fun.handle, 1, new Object[]{new Object[0]});<a name="line.212"></a>
-<span class="sourceLineNo">213</span>    } else if (fun.arity() == 1) {<a name="line.213"></a>
-<span class="sourceLineNo">214</span>      other = fun.handle;<a name="line.214"></a>
-<span class="sourceLineNo">215</span>    } else {<a name="line.215"></a>
-<span class="sourceLineNo">216</span>      throw new IllegalArgumentException("`andThen` requires a function that can be applied to 1 parameter");<a name="line.216"></a>
-<span class="sourceLineNo">217</span>    }<a name="line.217"></a>
-<span class="sourceLineNo">218</span>    return new FunctionReference(filterReturnValue(this.handle, other), this.parameterNames);<a name="line.218"></a>
-<span class="sourceLineNo">219</span>  }<a name="line.219"></a>
-<span class="sourceLineNo">220</span><a name="line.220"></a>
-<span class="sourceLineNo">221</span>  /*<a name="line.221"></a>
-<span class="sourceLineNo">222</span>   * Compose a function with another function.<a name="line.222"></a>
-<span class="sourceLineNo">223</span>   *<a name="line.223"></a>
-<span class="sourceLineNo">224</span>   * &lt;p&gt;This is equivalent to {@code fun.andThen(this)}.<a name="line.224"></a>
-<span class="sourceLineNo">225</span>   *<a name="line.225"></a>
-<span class="sourceLineNo">226</span>   * @param fun the function to apply before {@code this} function.<a name="line.226"></a>
-<span class="sourceLineNo">227</span>   * @return a composed function.<a name="line.227"></a>
-<span class="sourceLineNo">228</span>   */<a name="line.228"></a>
-<span class="sourceLineNo">229</span>  public FunctionReference compose(FunctionReference fun) {<a name="line.229"></a>
-<span class="sourceLineNo">230</span>    if (!acceptArity(1)) {<a name="line.230"></a>
-<span class="sourceLineNo">231</span>      throw new UnsupportedOperationException("`compose` must be called on function accepting 1 parameter");<a name="line.231"></a>
-<span class="sourceLineNo">232</span>    }<a name="line.232"></a>
-<span class="sourceLineNo">233</span>    return fun.andThen(this);<a name="line.233"></a>
-<span class="sourceLineNo">234</span>  }<a name="line.234"></a>
-<span class="sourceLineNo">235</span><a name="line.235"></a>
-<span class="sourceLineNo">236</span>  /**<a name="line.236"></a>
-<span class="sourceLineNo">237</span>   * Partial application.<a name="line.237"></a>
-<span class="sourceLineNo">238</span>   *<a name="line.238"></a>
-<span class="sourceLineNo">239</span>   * @param position the argument position (0-indexed).<a name="line.239"></a>
-<span class="sourceLineNo">240</span>   * @param value the argument value.<a name="line.240"></a>
-<span class="sourceLineNo">241</span>   * @return a partially applied function.<a name="line.241"></a>
-<span class="sourceLineNo">242</span>   */<a name="line.242"></a>
-<span class="sourceLineNo">243</span>  public FunctionReference bindAt(int position, Object value) {<a name="line.243"></a>
-<span class="sourceLineNo">244</span>    return new FunctionReference(MethodHandles.insertArguments(this.handle, position, value), dropParameterNames(position, 1));<a name="line.244"></a>
-<span class="sourceLineNo">245</span>  }<a name="line.245"></a>
-<span class="sourceLineNo">246</span><a name="line.246"></a>
-<span class="sourceLineNo">247</span>  /**<a name="line.247"></a>
-<span class="sourceLineNo">248</span>   * Partial application based on parameter's names.<a name="line.248"></a>
-<span class="sourceLineNo">249</span>   *<a name="line.249"></a>
-<span class="sourceLineNo">250</span>   * @param parameterName the parameter to bind.<a name="line.250"></a>
-<span class="sourceLineNo">251</span>   * @param value the argument value.<a name="line.251"></a>
-<span class="sourceLineNo">252</span>   * @return a partially applied function.<a name="line.252"></a>
-<span class="sourceLineNo">253</span>   */<a name="line.253"></a>
-<span class="sourceLineNo">254</span>  public FunctionReference bindAt(String parameterName, Object value) {<a name="line.254"></a>
-<span class="sourceLineNo">255</span>    int position = -1;<a name="line.255"></a>
-<span class="sourceLineNo">256</span>    if (this.parameterNames == null) {<a name="line.256"></a>
-<span class="sourceLineNo">257</span>      throw new RuntimeException("Can't bind on parameter name, " + this.toString() + " has none");<a name="line.257"></a>
-<span class="sourceLineNo">258</span>    }<a name="line.258"></a>
-<span class="sourceLineNo">259</span>    for (int i = 0; i &lt; this.parameterNames.length; i++) {<a name="line.259"></a>
-<span class="sourceLineNo">260</span>      if (this.parameterNames[i].equals(parameterName)) {<a name="line.260"></a>
-<span class="sourceLineNo">261</span>        position = i;<a name="line.261"></a>
-<span class="sourceLineNo">262</span>        break;<a name="line.262"></a>
-<span class="sourceLineNo">263</span>      }<a name="line.263"></a>
-<span class="sourceLineNo">264</span>    }<a name="line.264"></a>
-<span class="sourceLineNo">265</span>    if (position == -1) {<a name="line.265"></a>
-<span class="sourceLineNo">266</span>      throw new IllegalArgumentException("'" + parameterName + "' not in the parameter list " + Arrays.toString(parameterNames));<a name="line.266"></a>
-<span class="sourceLineNo">267</span>    }<a name="line.267"></a>
-<span class="sourceLineNo">268</span>    return bindAt(position, value);<a name="line.268"></a>
-<span class="sourceLineNo">269</span>  }<a name="line.269"></a>
-<span class="sourceLineNo">270</span><a name="line.270"></a>
-<span class="sourceLineNo">271</span>  /**<a name="line.271"></a>
-<span class="sourceLineNo">272</span>   * Partial application.<a name="line.272"></a>
-<span class="sourceLineNo">273</span>   *<a name="line.273"></a>
-<span class="sourceLineNo">274</span>   * @param position the first argument position.<a name="line.274"></a>
-<span class="sourceLineNo">275</span>   * @param values the values of the arguments from {@code position}.<a name="line.275"></a>
-<span class="sourceLineNo">276</span>   * @return a partially applied function.<a name="line.276"></a>
-<span class="sourceLineNo">277</span>   * @see java.lang.invoke.MethodHandles#insertArguments(MethodHandle, int, Object...)<a name="line.277"></a>
-<span class="sourceLineNo">278</span>   */<a name="line.278"></a>
-<span class="sourceLineNo">279</span>  public FunctionReference insertArguments(int position, Object... values) {<a name="line.279"></a>
-<span class="sourceLineNo">280</span>    if (values.length == 0) {<a name="line.280"></a>
-<span class="sourceLineNo">281</span>      return this;<a name="line.281"></a>
-<span class="sourceLineNo">282</span>    }<a name="line.282"></a>
-<span class="sourceLineNo">283</span>    MethodHandle bounded = MethodHandles.insertArguments(handle, position, values);<a name="line.283"></a>
-<span class="sourceLineNo">284</span>    if (handle.isVarargsCollector()) {<a name="line.284"></a>
-<span class="sourceLineNo">285</span>      bounded = bounded.asVarargsCollector(Object[].class);<a name="line.285"></a>
-<span class="sourceLineNo">286</span>    }<a name="line.286"></a>
-<span class="sourceLineNo">287</span>    return new FunctionReference(bounded, dropParameterNames(position, values.length));<a name="line.287"></a>
-<span class="sourceLineNo">288</span>  }<a name="line.288"></a>
-<span class="sourceLineNo">289</span><a name="line.289"></a>
-<span class="sourceLineNo">290</span>  /**<a name="line.290"></a>
-<span class="sourceLineNo">291</span>   * Spread arguments over this function parameters.<a name="line.291"></a>
-<span class="sourceLineNo">292</span>   *<a name="line.292"></a>
-<span class="sourceLineNo">293</span>   * @param arguments arguments as an array.<a name="line.293"></a>
-<span class="sourceLineNo">294</span>   * @return a return value.<a name="line.294"></a>
-<span class="sourceLineNo">295</span>   * @throws Throwable ...because an exception can be thrown.<a name="line.295"></a>
-<span class="sourceLineNo">296</span>   */<a name="line.296"></a>
-<span class="sourceLineNo">297</span>  public Object spread(Object... arguments) throws Throwable {<a name="line.297"></a>
-<span class="sourceLineNo">298</span>    int arity = arity();<a name="line.298"></a>
-<span class="sourceLineNo">299</span>    if (this.handle.isVarargsCollector() &amp;&amp; (arity &gt; 0) &amp;&amp; (arguments[arity - 1] instanceof Object[])) {<a name="line.299"></a>
-<span class="sourceLineNo">300</span>      return this.handle<a name="line.300"></a>
-<span class="sourceLineNo">301</span>          .asFixedArity()<a name="line.301"></a>
-<span class="sourceLineNo">302</span>          .asSpreader(Object[].class, arguments.length)<a name="line.302"></a>
-<span class="sourceLineNo">303</span>          .invoke(arguments);<a name="line.303"></a>
-<span class="sourceLineNo">304</span>    }<a name="line.304"></a>
-<span class="sourceLineNo">305</span>    return this.handle<a name="line.305"></a>
-<span class="sourceLineNo">306</span>        .asSpreader(Object[].class, arguments.length)<a name="line.306"></a>
-<span class="sourceLineNo">307</span>        .invoke(arguments);<a name="line.307"></a>
-<span class="sourceLineNo">308</span>  }<a name="line.308"></a>
-<span class="sourceLineNo">309</span><a name="line.309"></a>
-<span class="sourceLineNo">310</span>  private String[] dropParameterNames(int from, int size) {<a name="line.310"></a>
-<span class="sourceLineNo">311</span>    if (this.parameterNames == null) {<a name="line.311"></a>
-<span class="sourceLineNo">312</span>      return null;<a name="line.312"></a>
-<span class="sourceLineNo">313</span>    }<a name="line.313"></a>
-<span class="sourceLineNo">314</span>    String[] filtered = new String[this.parameterNames.length - size];<a name="line.314"></a>
-<span class="sourceLineNo">315</span>    if (filtered.length &gt; 0) {<a name="line.315"></a>
-<span class="sourceLineNo">316</span>      System.arraycopy(parameterNames, 0, filtered, 0, from);<a name="line.316"></a>
-<span class="sourceLineNo">317</span>      System.arraycopy(parameterNames, from + size, filtered, from, this.parameterNames.length - size - from);<a name="line.317"></a>
-<span class="sourceLineNo">318</span>    }<a name="line.318"></a>
-<span class="sourceLineNo">319</span>    return filtered;<a name="line.319"></a>
-<span class="sourceLineNo">320</span>  }<a name="line.320"></a>
-<span class="sourceLineNo">321</span>}<a name="line.321"></a>
+<span class="sourceLineNo">175</span>  public String toString() {<a name="line.175"></a>
+<span class="sourceLineNo">176</span>    return "FunctionReference{" +<a name="line.176"></a>
+<span class="sourceLineNo">177</span>        "handle=" + (handle.isVarargsCollector() ? "(varargs)" : "") + handle +<a name="line.177"></a>
+<span class="sourceLineNo">178</span>        ", parameterNames=" + Arrays.toString(parameterNames) +<a name="line.178"></a>
+<span class="sourceLineNo">179</span>        '}';<a name="line.179"></a>
+<span class="sourceLineNo">180</span>  }<a name="line.180"></a>
+<span class="sourceLineNo">181</span><a name="line.181"></a>
+<span class="sourceLineNo">182</span>  @Override<a name="line.182"></a>
+<span class="sourceLineNo">183</span>  public boolean equals(Object obj) {<a name="line.183"></a>
+<span class="sourceLineNo">184</span>    if (this == obj) {<a name="line.184"></a>
+<span class="sourceLineNo">185</span>      return true;<a name="line.185"></a>
+<span class="sourceLineNo">186</span>    }<a name="line.186"></a>
+<span class="sourceLineNo">187</span>    if (obj == null || getClass() != obj.getClass()) {<a name="line.187"></a>
+<span class="sourceLineNo">188</span>      return false;<a name="line.188"></a>
+<span class="sourceLineNo">189</span>    }<a name="line.189"></a>
+<span class="sourceLineNo">190</span>    FunctionReference that = (FunctionReference) obj;<a name="line.190"></a>
+<span class="sourceLineNo">191</span>    return handle.equals(that.handle);<a name="line.191"></a>
+<span class="sourceLineNo">192</span>  }<a name="line.192"></a>
+<span class="sourceLineNo">193</span><a name="line.193"></a>
+<span class="sourceLineNo">194</span>  @Override<a name="line.194"></a>
+<span class="sourceLineNo">195</span>  public int hashCode() {<a name="line.195"></a>
+<span class="sourceLineNo">196</span>    return handle.hashCode();<a name="line.196"></a>
+<span class="sourceLineNo">197</span>  }<a name="line.197"></a>
+<span class="sourceLineNo">198</span><a name="line.198"></a>
+<span class="sourceLineNo">199</span>  /**<a name="line.199"></a>
+<span class="sourceLineNo">200</span>   * Converts a function reference to an instance of an interface.<a name="line.200"></a>
+<span class="sourceLineNo">201</span>   *<a name="line.201"></a>
+<span class="sourceLineNo">202</span>   * @param interfaceClass the interface,<a name="line.202"></a>
+<span class="sourceLineNo">203</span>   * @return a proxy object that satisfies {@code interfaceClass} and delegates to {@code this}.<a name="line.203"></a>
+<span class="sourceLineNo">204</span>   */<a name="line.204"></a>
+<span class="sourceLineNo">205</span>  public Object to(Class&lt;?&gt; interfaceClass) {<a name="line.205"></a>
+<span class="sourceLineNo">206</span>    return Predefined.asInterfaceInstance(interfaceClass, this);<a name="line.206"></a>
+<span class="sourceLineNo">207</span>  }<a name="line.207"></a>
+<span class="sourceLineNo">208</span><a name="line.208"></a>
+<span class="sourceLineNo">209</span>  /**<a name="line.209"></a>
+<span class="sourceLineNo">210</span>   * Compose a function with another function.<a name="line.210"></a>
+<span class="sourceLineNo">211</span>   *<a name="line.211"></a>
+<span class="sourceLineNo">212</span>   * The {@code fun} function must accept 1 parameter that will be the value returned by this function, or no parameter, in<a name="line.212"></a>
+<span class="sourceLineNo">213</span>   * which case the returned value will be ignored.<a name="line.213"></a>
+<span class="sourceLineNo">214</span>   *<a name="line.214"></a>
+<span class="sourceLineNo">215</span>   * The resulting function may throw a {@code ClassCastException} on invocation if the return type of this function<a name="line.215"></a>
+<span class="sourceLineNo">216</span>   * does not match the type of the {@code fun} parameter.<a name="line.216"></a>
+<span class="sourceLineNo">217</span>   *<a name="line.217"></a>
+<span class="sourceLineNo">218</span>   * @param fun the function that processes the results of {@code this} function.<a name="line.218"></a>
+<span class="sourceLineNo">219</span>   * @return a composed function.<a name="line.219"></a>
+<span class="sourceLineNo">220</span>   */<a name="line.220"></a>
+<span class="sourceLineNo">221</span>  public FunctionReference andThen(FunctionReference fun) {<a name="line.221"></a>
+<span class="sourceLineNo">222</span>    MethodHandle other = null;<a name="line.222"></a>
+<span class="sourceLineNo">223</span>    if (fun.isVarargsCollector() &amp;&amp; fun.arity() == 1) {<a name="line.223"></a>
+<span class="sourceLineNo">224</span>      other = fun.handle.asCollector(Object[].class, 1);<a name="line.224"></a>
+<span class="sourceLineNo">225</span>    } else if (fun.isVarargsCollector() &amp;&amp; fun.arity() == 2) {<a name="line.225"></a>
+<span class="sourceLineNo">226</span>      other = MethodHandles.insertArguments(fun.handle, 1, new Object[]{new Object[0]});<a name="line.226"></a>
+<span class="sourceLineNo">227</span>    } else if (fun.arity() == 0) {<a name="line.227"></a>
+<span class="sourceLineNo">228</span>      other = MethodHandles.dropArguments(fun.handle, 0, Object.class);<a name="line.228"></a>
+<span class="sourceLineNo">229</span>    } else if (fun.arity() == 1) {<a name="line.229"></a>
+<span class="sourceLineNo">230</span>      other = fun.handle;<a name="line.230"></a>
+<span class="sourceLineNo">231</span>    } else {<a name="line.231"></a>
+<span class="sourceLineNo">232</span>      throw new IllegalArgumentException("`andThen` requires a function that can be applied to 0 or 1 parameter");<a name="line.232"></a>
+<span class="sourceLineNo">233</span>    }<a name="line.233"></a>
+<span class="sourceLineNo">234</span>    MethodHandle mh = filterReturnValue(<a name="line.234"></a>
+<span class="sourceLineNo">235</span>        this.handle.asType(this.handle.type().changeReturnType(Object.class)),<a name="line.235"></a>
+<span class="sourceLineNo">236</span>        other.asType(other.type().changeParameterType(0, Object.class)));<a name="line.236"></a>
+<span class="sourceLineNo">237</span>    if (isVarargsCollector()) {<a name="line.237"></a>
+<span class="sourceLineNo">238</span>      mh = mh.asVarargsCollector(Object[].class);<a name="line.238"></a>
+<span class="sourceLineNo">239</span>    }<a name="line.239"></a>
+<span class="sourceLineNo">240</span>    return new FunctionReference(mh, this.parameterNames);<a name="line.240"></a>
+<span class="sourceLineNo">241</span>  }<a name="line.241"></a>
+<span class="sourceLineNo">242</span><a name="line.242"></a>
+<span class="sourceLineNo">243</span>  /*<a name="line.243"></a>
+<span class="sourceLineNo">244</span>   * Compose a function with another function.<a name="line.244"></a>
+<span class="sourceLineNo">245</span>   *<a name="line.245"></a>
+<span class="sourceLineNo">246</span>   * &lt;p&gt;This is equivalent to {@code fun.andThen(this)}.<a name="line.246"></a>
+<span class="sourceLineNo">247</span>   *<a name="line.247"></a>
+<span class="sourceLineNo">248</span>   * @param fun the function to apply before {@code this} function.<a name="line.248"></a>
+<span class="sourceLineNo">249</span>   * @return a composed function.<a name="line.249"></a>
+<span class="sourceLineNo">250</span>   */<a name="line.250"></a>
+<span class="sourceLineNo">251</span>  public FunctionReference compose(FunctionReference fun) {<a name="line.251"></a>
+<span class="sourceLineNo">252</span>    if (!acceptArity(1) &amp;&amp; !acceptArity(0)) {<a name="line.252"></a>
+<span class="sourceLineNo">253</span>      throw new UnsupportedOperationException("`compose` must be called on function accepting 0 or 1 parameter");<a name="line.253"></a>
+<span class="sourceLineNo">254</span>    }<a name="line.254"></a>
+<span class="sourceLineNo">255</span>    return fun.andThen(this);<a name="line.255"></a>
+<span class="sourceLineNo">256</span>  }<a name="line.256"></a>
+<span class="sourceLineNo">257</span><a name="line.257"></a>
+<span class="sourceLineNo">258</span>  /**<a name="line.258"></a>
+<span class="sourceLineNo">259</span>   * Partial application.<a name="line.259"></a>
+<span class="sourceLineNo">260</span>   *<a name="line.260"></a>
+<span class="sourceLineNo">261</span>   * @param position the argument position (0-indexed).<a name="line.261"></a>
+<span class="sourceLineNo">262</span>   * @param value the argument value.<a name="line.262"></a>
+<span class="sourceLineNo">263</span>   * @return a partially applied function.<a name="line.263"></a>
+<span class="sourceLineNo">264</span>   */<a name="line.264"></a>
+<span class="sourceLineNo">265</span>  public FunctionReference bindAt(int position, Object value) {<a name="line.265"></a>
+<span class="sourceLineNo">266</span>    MethodHandle mh = MethodHandles.insertArguments(this.handle, position, value);<a name="line.266"></a>
+<span class="sourceLineNo">267</span>    if (isVarargsCollector() &amp;&amp; position &lt; arity() - 1) {<a name="line.267"></a>
+<span class="sourceLineNo">268</span>      mh = mh.asVarargsCollector(Object[].class);<a name="line.268"></a>
+<span class="sourceLineNo">269</span>    }<a name="line.269"></a>
+<span class="sourceLineNo">270</span>    return new FunctionReference(mh, dropParameterNames(position, 1));<a name="line.270"></a>
+<span class="sourceLineNo">271</span>  }<a name="line.271"></a>
+<span class="sourceLineNo">272</span><a name="line.272"></a>
+<span class="sourceLineNo">273</span>  /**<a name="line.273"></a>
+<span class="sourceLineNo">274</span>   * Partial application based on parameter's names.<a name="line.274"></a>
+<span class="sourceLineNo">275</span>   *<a name="line.275"></a>
+<span class="sourceLineNo">276</span>   * @param parameterName the parameter to bind.<a name="line.276"></a>
+<span class="sourceLineNo">277</span>   * @param value the argument value.<a name="line.277"></a>
+<span class="sourceLineNo">278</span>   * @return a partially applied function.<a name="line.278"></a>
+<span class="sourceLineNo">279</span>   */<a name="line.279"></a>
+<span class="sourceLineNo">280</span>  public FunctionReference bindAt(String parameterName, Object value) {<a name="line.280"></a>
+<span class="sourceLineNo">281</span>    int position = -1;<a name="line.281"></a>
+<span class="sourceLineNo">282</span>    if (this.parameterNames == null) {<a name="line.282"></a>
+<span class="sourceLineNo">283</span>      throw new RuntimeException("Can't bind on parameter name, " + this.toString() + " has none");<a name="line.283"></a>
+<span class="sourceLineNo">284</span>    }<a name="line.284"></a>
+<span class="sourceLineNo">285</span>    for (int i = 0; i &lt; this.parameterNames.length; i++) {<a name="line.285"></a>
+<span class="sourceLineNo">286</span>      if (this.parameterNames[i].equals(parameterName)) {<a name="line.286"></a>
+<span class="sourceLineNo">287</span>        position = i;<a name="line.287"></a>
+<span class="sourceLineNo">288</span>        break;<a name="line.288"></a>
+<span class="sourceLineNo">289</span>      }<a name="line.289"></a>
+<span class="sourceLineNo">290</span>    }<a name="line.290"></a>
+<span class="sourceLineNo">291</span>    if (position == -1) {<a name="line.291"></a>
+<span class="sourceLineNo">292</span>      throw new IllegalArgumentException("'" + parameterName + "' not in the parameter list " + Arrays.toString(parameterNames));<a name="line.292"></a>
+<span class="sourceLineNo">293</span>    }<a name="line.293"></a>
+<span class="sourceLineNo">294</span>    return bindAt(position, value);<a name="line.294"></a>
+<span class="sourceLineNo">295</span>  }<a name="line.295"></a>
+<span class="sourceLineNo">296</span><a name="line.296"></a>
+<span class="sourceLineNo">297</span>  /**<a name="line.297"></a>
+<span class="sourceLineNo">298</span>   * Partial application.<a name="line.298"></a>
+<span class="sourceLineNo">299</span>   *<a name="line.299"></a>
+<span class="sourceLineNo">300</span>   * @param position the first argument position.<a name="line.300"></a>
+<span class="sourceLineNo">301</span>   * @param values the values of the arguments from {@code position}.<a name="line.301"></a>
+<span class="sourceLineNo">302</span>   * @return a partially applied function.<a name="line.302"></a>
+<span class="sourceLineNo">303</span>   * @see java.lang.invoke.MethodHandles#insertArguments(MethodHandle, int, Object...)<a name="line.303"></a>
+<span class="sourceLineNo">304</span>   */<a name="line.304"></a>
+<span class="sourceLineNo">305</span>  public FunctionReference insertArguments(int position, Object... values) {<a name="line.305"></a>
+<span class="sourceLineNo">306</span>    if (values.length == 0) {<a name="line.306"></a>
+<span class="sourceLineNo">307</span>      return this;<a name="line.307"></a>
+<span class="sourceLineNo">308</span>    }<a name="line.308"></a>
+<span class="sourceLineNo">309</span>    MethodHandle mh = MethodHandles.insertArguments(this.handle, position, values);<a name="line.309"></a>
+<span class="sourceLineNo">310</span>    if (isVarargsCollector() &amp;&amp; position &lt; arity() - 1) {<a name="line.310"></a>
+<span class="sourceLineNo">311</span>      mh = mh.asVarargsCollector(Object[].class);<a name="line.311"></a>
+<span class="sourceLineNo">312</span>    }<a name="line.312"></a>
+<span class="sourceLineNo">313</span>    return new FunctionReference(mh, dropParameterNames(position, values.length));<a name="line.313"></a>
+<span class="sourceLineNo">314</span>  }<a name="line.314"></a>
+<span class="sourceLineNo">315</span><a name="line.315"></a>
+<span class="sourceLineNo">316</span>  /**<a name="line.316"></a>
+<span class="sourceLineNo">317</span>   * Spread arguments over this function parameters.<a name="line.317"></a>
+<span class="sourceLineNo">318</span>   *<a name="line.318"></a>
+<span class="sourceLineNo">319</span>   * @param arguments arguments as an array.<a name="line.319"></a>
+<span class="sourceLineNo">320</span>   * @return a return value.<a name="line.320"></a>
+<span class="sourceLineNo">321</span>   * @throws Throwable ...because an exception can be thrown.<a name="line.321"></a>
+<span class="sourceLineNo">322</span>   */<a name="line.322"></a>
+<span class="sourceLineNo">323</span>  public Object spread(Object... arguments) throws Throwable {<a name="line.323"></a>
+<span class="sourceLineNo">324</span>    int arity = arity();<a name="line.324"></a>
+<span class="sourceLineNo">325</span>    if (this.handle.isVarargsCollector() &amp;&amp; (arity &gt; 0) &amp;&amp; (arguments[arity - 1] instanceof Object[])) {<a name="line.325"></a>
+<span class="sourceLineNo">326</span>      return this.handle<a name="line.326"></a>
+<span class="sourceLineNo">327</span>          .asFixedArity()<a name="line.327"></a>
+<span class="sourceLineNo">328</span>          .asSpreader(Object[].class, arguments.length)<a name="line.328"></a>
+<span class="sourceLineNo">329</span>          .invoke(arguments);<a name="line.329"></a>
+<span class="sourceLineNo">330</span>    }<a name="line.330"></a>
+<span class="sourceLineNo">331</span>    return this.handle<a name="line.331"></a>
+<span class="sourceLineNo">332</span>        .asSpreader(Object[].class, arguments.length)<a name="line.332"></a>
+<span class="sourceLineNo">333</span>        .invoke(arguments);<a name="line.333"></a>
+<span class="sourceLineNo">334</span>  }<a name="line.334"></a>
+<span class="sourceLineNo">335</span><a name="line.335"></a>
+<span class="sourceLineNo">336</span>  private String[] dropParameterNames(int from, int size) {<a name="line.336"></a>
+<span class="sourceLineNo">337</span>    if (this.parameterNames == null) {<a name="line.337"></a>
+<span class="sourceLineNo">338</span>      return null;<a name="line.338"></a>
+<span class="sourceLineNo">339</span>    }<a name="line.339"></a>
+<span class="sourceLineNo">340</span>    String[] filtered = new String[this.parameterNames.length - size];<a name="line.340"></a>
+<span class="sourceLineNo">341</span>    if (filtered.length &gt; 0) {<a name="line.341"></a>
+<span class="sourceLineNo">342</span>      System.arraycopy(parameterNames, 0, filtered, 0, from);<a name="line.342"></a>
+<span class="sourceLineNo">343</span>      System.arraycopy(parameterNames, from + size, filtered, from, this.parameterNames.length - size - from);<a name="line.343"></a>
+<span class="sourceLineNo">344</span>    }<a name="line.344"></a>
+<span class="sourceLineNo">345</span>    return filtered;<a name="line.345"></a>
+<span class="sourceLineNo">346</span>  }<a name="line.346"></a>
+<span class="sourceLineNo">347</span>}<a name="line.347"></a>
 
 
 

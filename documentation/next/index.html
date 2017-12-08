@@ -751,13 +751,14 @@ B+AQAIPwEACB+BAAwAAwAMAAcADgAPAA+AHwAP4H8AA="/>
 <li><a href="#_zsh_autocompletion">1.9. Zsh autocompletion</a></li>
 <li><a href="#_comments">1.10. Comments</a></li>
 <li><a href="#_variable_and_constant_references">1.11. Variable and constant references</a></li>
-<li><a href="#_data_literals">1.12. Data literals</a></li>
-<li><a href="#_collection_literals">1.13. Collection literals</a></li>
-<li><a href="#_collection_comprehension">1.14. Collection comprehension</a></li>
-<li><a href="#_destructuring">1.15. Destructuring</a></li>
-<li><a href="#_operators">1.16. Operators</a></li>
-<li><a href="#_calling_a_method">1.17. Calling a method</a></li>
-<li><a href="#_java_jvm_arrays">1.18. Java / JVM arrays</a></li>
+<li><a href="#_local_definitions">1.12. Local definitions</a></li>
+<li><a href="#_data_literals">1.13. Data literals</a></li>
+<li><a href="#_collection_literals">1.14. Collection literals</a></li>
+<li><a href="#_collection_comprehension">1.15. Collection comprehension</a></li>
+<li><a href="#_destructuring">1.16. Destructuring</a></li>
+<li><a href="#_operators">1.17. Operators</a></li>
+<li><a href="#_calling_a_method">1.18. Calling a method</a></li>
+<li><a href="#_java_jvm_arrays">1.19. Java / JVM arrays</a></li>
 </ul>
 </li>
 <li><a href="#_creating_new_project_s">2. Creating new project(s)</a>
@@ -786,22 +787,23 @@ B+AQAIPwEACB+BAAwAAwAMAAcADgAPAA+AHwAP4H8AA="/>
 <li><a href="#_calling_static_methods">4.2. Calling static methods</a></li>
 <li><a href="#_calling_instance_methods">4.3. Calling instance methods</a></li>
 <li><a href="#_named_arguments">4.4. Named arguments</a></li>
-<li><a href="#__code_null_code_safe_instance_method_invocations">4.5. <code>null</code>-safe instance method invocations</a></li>
-<li><a href="#_creating_objects">4.6. Creating objects</a></li>
-<li><a href="#_static_fields">4.7. Static fields</a></li>
-<li><a href="#_instance_fields">4.8. Instance fields</a></li>
-<li><a href="#_properties_support">4.9. Properties support</a></li>
-<li><a href="#_inner_classes_and_enumerations">4.10. Inner classes and enumerations</a></li>
-<li><a href="#_clashes_with_golo_operators_and_escaping">4.11. Clashes with Golo operators and escaping</a></li>
-<li><a href="#_golo_class_loader">4.12. Golo class loader</a></li>
-<li><a href="#_primitive_data_types">4.13. Primitive Data Types</a></li>
+<li><a href="#warning-deprecate">4.5. Deprecated method</a></li>
+<li><a href="#__code_null_code_safe_instance_method_invocations">4.6. <code>null</code>-safe instance method invocations</a></li>
+<li><a href="#_creating_objects">4.7. Creating objects</a></li>
+<li><a href="#_static_fields">4.8. Static fields</a></li>
+<li><a href="#_instance_fields">4.9. Instance fields</a></li>
+<li><a href="#_properties_support">4.10. Properties support</a></li>
+<li><a href="#_inner_classes_and_enumerations">4.11. Inner classes and enumerations</a></li>
+<li><a href="#_clashes_with_golo_operators_and_escaping">4.12. Clashes with Golo operators and escaping</a></li>
+<li><a href="#_golo_class_loader">4.13. Golo class loader</a></li>
+<li><a href="#_primitive_data_types">4.14. Primitive Data Types</a></li>
 </ul>
 </li>
 <li><a href="#_control_flow">5. Control flow</a>
 <ul class="sectlevel2">
 <li><a href="#_conditional_branching">5.1. Conditional branching</a></li>
 <li><a href="#__code_case_code_branching">5.2. <code>case</code> branching</a></li>
-<li><a href="#__code_match_code_statements">5.3. <code>match</code> statements</a></li>
+<li><a href="#match_expressions">5.3. <code>match</code> expressions</a></li>
 <li><a href="#__code_while_code_loops">5.4. <code>while</code> loops</a></li>
 <li><a href="#__code_for_code_loops">5.5. <code>for</code> loops</a></li>
 <li><a href="#__code_foreach_code_loops">5.6. <code>foreach</code> loops</a></li>
@@ -836,13 +838,13 @@ B+AQAIPwEACB+BAAwAAwAMAAcADgAPAA+AHwAP4H8AA="/>
 <ul class="sectlevel2">
 <li><a href="#_console_output">8.1. Console output</a></li>
 <li><a href="#_console_input">8.2. Console input</a></li>
-<li><a href="#_number_type_conversions">8.3. Number type conversions</a></li>
-<li><a href="#_exceptions_2">8.4. Exceptions</a></li>
-<li><a href="#_preconditions">8.5. Preconditions</a></li>
-<li><a href="#_arrays">8.6. Arrays</a></li>
-<li><a href="#_ranges">8.7. Ranges</a></li>
-<li><a href="#_closures_2">8.8. Closures</a></li>
-<li><a href="#_file_i_o">8.9. File I/O</a></li>
+<li><a href="#_file_i_o">8.3. File I/O</a></li>
+<li><a href="#_number_type_conversions">8.4. Number type conversions</a></li>
+<li><a href="#_exceptions_2">8.5. Exceptions</a></li>
+<li><a href="#_preconditions">8.6. Preconditions</a></li>
+<li><a href="#_arrays">8.7. Arrays</a></li>
+<li><a href="#_ranges">8.8. Ranges</a></li>
+<li><a href="#_closures_2">8.9. Closures</a></li>
 <li><a href="#_array_types">8.10. Array types</a></li>
 <li><a href="#_misc">8.11. Misc.</a></li>
 </ul>
@@ -977,18 +979,19 @@ B+AQAIPwEACB+BAAwAAwAMAAcADgAPAA+AHwAP4H8AA="/>
 <div class="listingblock">
 <div class="title">Copyright and License Notice</div>
 <div class="content">
-<pre>Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA-Lyon)
+<pre>Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others
 
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html</pre>
+This program and the accompanying materials are made available under the
+terms of the Eclipse Public License 2.0 which is available at
+http://www.eclipse.org/legal/epl-2.0.
+
+SPDX-License-Identifier: EPL-2.0</pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Copyright and License Notice for the short code snippets and samples provided in this documentation.</div>
 <div class="content">
-<pre>Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA-Lyon)
+<pre>Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA Lyon)
 
 All rights reserved. This Example Content is intended to demonstrate
 usage of Eclipse technology. It is provided to you under the terms and
@@ -1476,7 +1479,45 @@ let 666_club = 666</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_data_literals">1.12. Data literals</h3>
+<h3 id="_local_definitions">1.12. Local definitions</h3>
+<div class="paragraph">
+<p>It is possible to define a constant reference locally to the evaluation of an expression using the <code>with</code> keyword.</p>
+</div>
+<div class="paragraph">
+<p>For instance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let r = [a + 1, a - 1] with { a = 42 }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>is functionally equivalent to</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let a = 42
+let r = [a + 1, a - 1]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>However, the <code>a</code> variable exists only in the scope of the expression evaluation. Indeed, code like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let r = [a + 1, a - 1] with { a = 42 }
+println(a)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>will not compile since <code>a</code> is unknown in the outer scope.</p>
+</div>
+<div class="paragraph">
+<p>Besides the locality, this construct is really interesting when constructing other expressions (e.g. <a href="#match_expressions"><code>match</code> constructs</a>), and can help to keep a functional style form of writing functions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_literals">1.13. Data literals</h3>
 <div class="paragraph">
 <p>Golo supports a set of data literals. They directly map to their counterparts from the Java Standard
 API. We give them along with examples in <a href="#data-literals">the data literals table</a> below.</p>
@@ -1573,7 +1614,7 @@ a multi-line string.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_collection_literals">1.13. Collection literals</h3>
+<h3 id="_collection_literals">1.14. Collection literals</h3>
 <div class="paragraph">
 <p>Golo support special support for common collections. The syntax uses brackets prefixed by a
 collection name, as in:</p>
@@ -1641,7 +1682,7 @@ let m = map[[1, "a"], [2, "b"]]
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="_a_note_on_lists">1.13.1. A note on lists</h4>
+<h4 id="_a_note_on_lists">1.14.1. A note on lists</h4>
 <div class="paragraph">
 <p>Since in Golo, every value is actually an instance of <code>Object</code>, there is no
 overloading, and thus the <code>remove</code> method on lists can&#8217;t be used to remove an
@@ -1650,7 +1691,7 @@ position, use the <code>removeAt</code> method.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_a_note_on_tuples">1.13.2. A note on tuples</h4>
+<h4 id="_a_note_on_tuples">1.14.2. A note on tuples</h4>
 <div class="paragraph">
 <p>Tuples essentially behave as comparable and immutable arrays.</p>
 </div>
@@ -1693,7 +1734,7 @@ position, use the <code>removeAt</code> method.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_a_note_on_maps">1.13.3. A note on maps</h4>
+<h4 id="_a_note_on_maps">1.14.3. A note on maps</h4>
 <div class="paragraph">
 <p>The map collection literal expects entries to be specified as tuples where the first entry is the
 key, and the second entry is the value. This allows nested structures to be specified as in:</p>
@@ -1752,7 +1793,7 @@ let m = map[a(), b()]</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_collection_comprehension">1.14. Collection comprehension</h3>
+<h3 id="_collection_comprehension">1.15. Collection comprehension</h3>
 <div class="paragraph">
 <p>In addition to literals, collections can be created using collection
 comprehension. This is a simple way to create a new collection based on another
@@ -1882,7 +1923,7 @@ where p.id == c.customer
 </div>
 </div>
 <div class="sect3">
-<h4 id="_collection_comprehension_vs_code_map_code_and_code_filter_code">1.14.1. Collection comprehension vs. <code>map</code> and <code>filter</code></h4>
+<h4 id="_collection_comprehension_vs_code_map_code_and_code_filter_code">1.15.1. Collection comprehension vs. <code>map</code> and <code>filter</code></h4>
 <div class="paragraph">
 <p>Collection comprehension is actually quite similar to using <code>map</code> and <code>filter</code>
 higher-order function on a collection. Indeed, a comprehension such as:</p>
@@ -1960,7 +2001,7 @@ polymorphic, but can be less readable if you need to change the collection type.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_destructuring">1.15. Destructuring</h3>
+<h3 id="_destructuring">1.16. Destructuring</h3>
 <div class="paragraph">
 <p>Golo supports simple destructuring, that is automatic extraction of values
 from an object and assignment to multiple variables in one instruction.</p>
@@ -2035,7 +2076,7 @@ a, b = [b, a]      # a = 2, b = 1</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_operators">1.16. Operators</h3>
+<h3 id="_operators">1.17. Operators</h3>
 <div class="paragraph">
 <p>Golo supports the following <a href="#operators">set of operators</a>.</p>
 </div>
@@ -2196,7 +2237,7 @@ The algebraic operators can be used with any numeric type having a literal notat
 </div>
 </div>
 <div class="sect2">
-<h3 id="_calling_a_method">1.17. Calling a method</h3>
+<h3 id="_calling_a_method">1.18. Calling a method</h3>
 <div class="paragraph">
 <p>Although we will discuss this in more details later on, you should already know that <code>:</code> is used to
 invoke instance methods.</p>
@@ -2213,7 +2254,7 @@ println(someObject: toString())</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_java_jvm_arrays">1.18. Java / JVM arrays</h3>
+<h3 id="_java_jvm_arrays">1.19. Java / JVM arrays</h3>
 <div class="paragraph">
 <p>As you probably know, arrays on the JVM are special objects. Golo deals with such arrays as being
 instances of <code>Object[]</code> and does not provide a wrapper class like many languages do. A Java / JVM
@@ -3162,7 +3203,13 @@ function main = |args...| {
 </div>
 </div>
 <div class="sect2">
-<h3 id="__code_null_code_safe_instance_method_invocations">4.5. <code>null</code>-safe instance method invocations</h3>
+<h3 id="warning-deprecate">4.5. Deprecated method</h3>
+<div class="paragraph">
+<p>When calling a deprecated method or function, a warning is displayed. It can be disabled by setting the <code>golo.warnings.deprecated</code> system property to <code>false</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="__code_null_code_safe_instance_method_invocations">4.6. <code>null</code>-safe instance method invocations</h3>
 <div class="paragraph">
 <p>Golo supports <strong><code>null</code>-safe</strong> methods invocations using the <strong>"Elvis"</strong> symbol: <code>?:</code>.</p>
 </div>
@@ -3225,7 +3272,7 @@ happen to be on <code>null</code>, in which case using <code>?:</code> is probab
 </div>
 </div>
 <div class="sect2">
-<h3 id="_creating_objects">4.6. Creating objects</h3>
+<h3 id="_creating_objects">4.7. Creating objects</h3>
 <div class="paragraph">
 <p>Golo doesn&#8217;t have an instantiation operator like <code>new</code> in Java. Instead, creating an object and
 calling its constructor is done as if it was just another function.</p>
@@ -3264,7 +3311,7 @@ function aList = {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_static_fields">4.7. Static fields</h3>
+<h3 id="_static_fields">4.8. Static fields</h3>
 <div class="paragraph">
 <p>Golo treats public static fields as function, so one could get the maximum value for an <code>Integer</code> as
 follows:</p>
@@ -3297,7 +3344,7 @@ change their values. This may change in the future if compelling general-interes
 </div>
 </div>
 <div class="sect2">
-<h3 id="_instance_fields">4.8. Instance fields</h3>
+<h3 id="_instance_fields">4.9. Instance fields</h3>
 <div class="paragraph">
 <p>Instance fields can be accessed as functions, both for reading and writing. Suppose that we have a
 Java class that looks as follows:</p>
@@ -3393,7 +3440,7 @@ println(foo: bar())</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_properties_support">4.9. Properties support</h3>
+<h3 id="_properties_support">4.10. Properties support</h3>
 <div class="paragraph">
 <p>Golo support property-style method calls.</p>
 </div>
@@ -3474,7 +3521,7 @@ require(ducke: score(100) is 100, "setScore returns a value, the method isn't fl
 </div>
 </div>
 <div class="sect2">
-<h3 id="_inner_classes_and_enumerations">4.10. Inner classes and enumerations</h3>
+<h3 id="_inner_classes_and_enumerations">4.11. Inner classes and enumerations</h3>
 <div class="paragraph">
 <p>We will illustrate both how to deal with public static inner classes and enumerations at once.</p>
 </div>
@@ -3533,7 +3580,7 @@ $</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_clashes_with_golo_operators_and_escaping">4.11. Clashes with Golo operators and escaping</h3>
+<h3 id="_clashes_with_golo_operators_and_escaping">4.12. Clashes with Golo operators and escaping</h3>
 <div class="paragraph">
 <p>Because Golo provides a few named operators such as <code>is</code>, <code>and</code> or <code>not</code>, they are recognized as
 operator tokens.</p>
@@ -3569,7 +3616,7 @@ someObject: foo(): `is(): `not(): bar()</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_golo_class_loader">4.12. Golo class loader</h3>
+<h3 id="_golo_class_loader">4.13. Golo class loader</h3>
 <div class="paragraph">
 <p>Golo provides a class loader for directly loading and compiling Golo modules. You may use it as
 follows:</p>
@@ -3631,7 +3678,7 @@ Be patient, it&#8217;s coming in!
 </div>
 </div>
 <div class="sect2">
-<h3 id="_primitive_data_types">4.13. Primitive Data Types</h3>
+<h3 id="_primitive_data_types">4.14. Primitive Data Types</h3>
 <div class="paragraph">
 <p><code>java.lang.Class</code> instances of primitive data types can be obtained as in Java way: <code>byte.class</code>, <code>short.class</code>, <code>int.class</code>, <code>long.class</code>, <code>float.class</code>, <code>double.class</code>, <code>boolean.class</code> and <code>char.class</code>.</p>
 </div>
@@ -3747,11 +3794,11 @@ one is being executed.
 </div>
 </div>
 <div class="sect2">
-<h3 id="__code_match_code_statements">5.3. <code>match</code> statements</h3>
+<h3 id="match_expressions">5.3. <code>match</code> expressions</h3>
 <div class="paragraph">
-<p>The <code>match</code> statement is a convenient shortcut for cases where a <code>case</code> statement would be used to
+<p>The <code>match</code> expression is a convenient shortcut for cases where a <code>case</code> statement would be used to
 match a value, and give back a result. While it may resemble <strong>pattern matching</strong> operators in some
-other languages it is not fully equivalent, as Golo does not support destructuring.</p>
+other languages it is not fully equivalent, as Golo does not support full destructuring matching (but <code>with</code> can help here).</p>
 </div>
 <div class="paragraph">
 <p><code>match</code> is a great addition to the Golo programmer:</p>
@@ -4591,9 +4638,85 @@ let value = readln()
 let pwd = readPassword("type your password:")</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As of Golo 3.3, these functions are in the <code>gololang.IO</code> module, and those in <code>gololang.Predefined</code> are deprecated. They will be removed in Golo 4.0.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_number_type_conversions">8.3. Number type conversions</h3>
+<h3 id="_file_i_o">8.3. File I/O</h3>
+<div class="paragraph">
+<p>Sometimes it is very desirable to read the content of a text file. The <code>fileToText</code> function does just that:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let text = fileToText("/some/file.txt", "UTF-8")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first parameter is either a <code>java.lang.String</code>, a <code>java.io.File</code> or a <code>java.nio.file.Path</code>. The second parameter
+represents the encoding charset, either as a <code>java.lang.String</code> or a <code>java.nio.charset.Charset</code>.</p>
+</div>
+<div class="paragraph">
+<p>We can write some text to a file, too:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">textToFile("Hello, world!", "/foo/bar.txt")</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>textToFile</code> function overwrites existing files, and creates new ones if needed.</p>
+</div>
+<div class="paragraph">
+<p>These functions are provided for convenience, so if you need more fine-grained control over reading and writing text
+then we suggest that you look into the <code>java.nio.file</code> package.</p>
+</div>
+<div class="paragraph">
+<p>In addition, if you need to verify that a file exists, you can use the <code>fileExists</code> function.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">if fileExists("/foo/bar.txt") {
+  println("file found!")
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As in the other File I/O methods, the parameter is either a <code>java.lang.String</code>, a <code>java.io.File</code> or a <code>java.nio.file.Path</code>.
+The <code>fileExists</code> function will return true if the file exists, false if it doesn&#8217;t.</p>
+</div>
+<div class="paragraph">
+<p>If you need the current path of execution, you can use the <code>currentDir</code> function.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">println(currentDir())</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As of Golo 3.3, these functions are in the <code>gololang.IO</code> module, and those in <code>gololang.Predefined</code> are deprecated.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_number_type_conversions">8.4. Number type conversions</h3>
 <div class="paragraph">
 <p>The following functions convert any number of string value to another number type:
 <code>intValue(n)</code>, <code>longValue(n)</code>, <code>charValue(n)</code>, <code>doubleValue(n)</code> and <code>floatValue(n)</code>.</p>
@@ -4611,7 +4734,7 @@ let k = intValue(666_L)   # 666 (long to integer)
 </div>
 </div>
 <div class="sect2">
-<h3 id="_exceptions_2">8.4. Exceptions</h3>
+<h3 id="_exceptions_2">8.5. Exceptions</h3>
 <div class="paragraph">
 <p><code>raise</code> can be used to throw a <code>java.lang.RuntimeException</code>. It comes in two forms: one with a
 message as a string, and one with a message and a cause.</p>
@@ -4629,7 +4752,7 @@ message as a string, and one with a message and a cause.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_preconditions">8.5. Preconditions</h3>
+<h3 id="_preconditions">8.6. Preconditions</h3>
 <div class="paragraph">
 <p>Preconditions are useful, especially in a dynamically-typed language.</p>
 </div>
@@ -4658,7 +4781,7 @@ throws an <code>AssertionError</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_arrays">8.6. Arrays</h3>
+<h3 id="_arrays">8.7. Arrays</h3>
 <div class="paragraph">
 <p>Golo arrays can be created using the <code>array[&#8230;&#8203;]</code> literal syntax. Such arrays are of JVM type <code>Object[]</code>.</p>
 </div>
@@ -4679,7 +4802,7 @@ data: set(2, "C")</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ranges">8.7. Ranges</h3>
+<h3 id="_ranges">8.8. Ranges</h3>
 <div class="paragraph">
 <p>The <code>range</code> function yields an iterable range over either <code>Integer</code>, <code>Long</code> or
 <code>Character</code> bounds:</p>
@@ -4750,7 +4873,7 @@ equivalent to <code>range(begin, end)</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_closures_2">8.8. Closures</h3>
+<h3 id="_closures_2">8.9. Closures</h3>
 <div class="paragraph">
 <p>Given a function reference, one can convert it to an instance of an interface with a single method
 declaration, as in:</p>
@@ -4819,58 +4942,6 @@ adaptations:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let always_true = asFunctionalInterface(java.lang.function.Predicate.class, |obj| -&gt; true)</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_file_i_o">8.9. File I/O</h3>
-<div class="paragraph">
-<p>Sometimes it is very desirable to read the content of a text file. The <code>fileToText</code> function does just that:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let text = fileToText("/some/file.txt", "UTF-8")</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The first parameter is either a <code>java.lang.String</code>, a <code>java.io.File</code> or a <code>java.nio.file.Path</code>. The second parameter
-represents the encoding charset, either as a <code>java.lang.String</code> or a <code>java.nio.charset.Charset</code>.</p>
-</div>
-<div class="paragraph">
-<p>We can write some text to a file, too:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">textToFile("Hello, world!", "/foo/bar.txt")</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>textToFile</code> function overwrites existing files, and creates new ones if needed.</p>
-</div>
-<div class="paragraph">
-<p>These functions are provided for convenience, so if you need more fine-grained control over reading and writing text
-then we suggest that you look into the <code>java.nio.file</code> package.</p>
-</div>
-<div class="paragraph">
-<p>In addition, if you need to verify that a file exists, you can use the <code>fileExists</code> function.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">if fileExists("/foo/bar.txt") {
-  println("file found!")
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As in the other File I/O methods, the parameter is either a <code>java.lang.String</code>, a <code>java.io.File</code> or a <code>java.nio.file.Path</code>.
-The <code>fileExists</code> function will return true if the file exists, false if it doesn&#8217;t.</p>
-</div>
-<div class="paragraph">
-<p>If you need the current path of execution, you can use the <code>currentDir</code> function.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">println(currentDir())</code></pre>
 </div>
 </div>
 </div>
@@ -9119,7 +9190,7 @@ This is useful for automatically:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-07 14:45:48 +02:00
+Last updated 2017-12-08 09:32:46 +01:00
 </div>
 </div>
 <link rel="stylesheet" href="./styles/github.min.css">

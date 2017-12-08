@@ -4,7 +4,7 @@
 
 <html>
 <head>
-  <title>gololang.LazyLists (Golo 3.2.0)</title>
+  <title>gololang.LazyLists (Golo 3.3.0-M1)</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="icon"
@@ -387,20 +387,19 @@ the resulting list is lazy.</p>
 
   <h2 id="augmentations">Augmentations</h2>
   
-    <h3 id="augment.gololang.LazyList">gololang.LazyList<a class="permalink" href="#augment.gololang.LazyList" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-135" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="augment.gololang.LazyList">gololang.LazyList<a class="permalink" href="#augment.gololang.LazyList" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-136" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
-      <p>null</p>
-
+      
     </div>
     
     
-      <h4 id="augment.gololang.LazyList.drop_2">drop(this, nb)<a class="permalink" href="#augment.gololang.LazyList.drop_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-261" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.LazyList.drop_2">drop(this, nb)<a class="permalink" href="#augment.gololang.LazyList.drop_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-262" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Remove <code>nb</code> elements from the list and return the rest as a lazy list.</p>
 
       </div>
     
-      <h4 id="augment.gololang.LazyList.dropWhile_2">dropWhile(this, pred)<a class="permalink" href="#augment.gololang.LazyList.dropWhile_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-272" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.LazyList.dropWhile_2">dropWhile(this, pred)<a class="permalink" href="#augment.gololang.LazyList.dropWhile_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-273" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Remove elements from the list as long as the given predicate is true.</p>
 <ul>
@@ -409,14 +408,14 @@ the resulting list is lazy.</p>
 
       </div>
     
-      <h4 id="augment.gololang.LazyList.filter_2">filter(this, pred)<a class="permalink" href="#augment.gololang.LazyList.filter_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-159" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.LazyList.filter_2">filter(this, pred)<a class="permalink" href="#augment.gololang.LazyList.filter_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-160" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Filters elements based on a predicate.</p>
 <p>Returns a new lazy list.</p>
 
       </div>
     
-      <h4 id="augment.gololang.LazyList.find_2">find(this, pred)<a class="permalink" href="#augment.gololang.LazyList.find_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-179" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.LazyList.find_2">find(this, pred)<a class="permalink" href="#augment.gololang.LazyList.find_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-180" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Finds the first element of a list matching a predicate:</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">println(lazyList(1, 2, 3, 4): find(|n| -&gt; n &gt; 3))
@@ -431,7 +430,7 @@ this method on infinite list, since no check is made.</p>
 
       </div>
     
-      <h4 id="augment.gololang.LazyList.foldl_3">foldl(this, func, zero)<a class="permalink" href="#augment.gololang.LazyList.foldl_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-216" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.LazyList.foldl_3">foldl(this, func, zero)<a class="permalink" href="#augment.gololang.LazyList.foldl_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-217" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Folds left <code>this</code> using <code>func</code> with <code>zero</code> as initial value.
 This is a recursive implementation.</p>
@@ -441,7 +440,7 @@ This is a recursive implementation.</p>
 
       </div>
     
-      <h4 id="augment.gololang.LazyList.foldr_3">foldr(this, func, zero)<a class="permalink" href="#augment.gololang.LazyList.foldr_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-229" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.LazyList.foldr_3">foldr(this, func, zero)<a class="permalink" href="#augment.gololang.LazyList.foldr_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-230" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Folds right <code>this</code> using <code>func</code> with <code>zero</code> as initial value.
 This is a recursive implementation.</p>
@@ -451,7 +450,7 @@ This is a recursive implementation.</p>
 
       </div>
     
-      <h4 id="augment.gololang.LazyList.join_2">join(this, separator)<a class="permalink" href="#augment.gololang.LazyList.join_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-195" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.LazyList.join_2">join(this, separator)<a class="permalink" href="#augment.gololang.LazyList.join_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-196" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Joins the elements into a string:</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">println(list[1, 2, 3]: join(", "))
@@ -464,7 +463,7 @@ This is a recursive implementation.</p>
 
       </div>
     
-      <h4 id="augment.gololang.LazyList.map_2">map(this, func)<a class="permalink" href="#augment.gololang.LazyList.map_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-147" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.LazyList.map_2">map(this, func)<a class="permalink" href="#augment.gololang.LazyList.map_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-148" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Maps elements of a list using a function:</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">lazyList(1, 2, 3):map(|x| -&gt; 2 * x)
@@ -475,7 +474,7 @@ when necessary.</p>
 
       </div>
     
-      <h4 id="augment.gololang.LazyList.subList_3">subList(this, from, to)<a class="permalink" href="#augment.gololang.LazyList.subList_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-287" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.LazyList.subList_3">subList(this, from, to)<a class="permalink" href="#augment.gololang.LazyList.subList_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-288" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Extract a lazy sublist.</p>
 <p>This is just a convenient method for <code>list: drop(from):take(to - from)</code>, so
@@ -487,7 +486,7 @@ the list remains lazy.</p>
 
       </div>
     
-      <h4 id="augment.gololang.LazyList.take_2">take(this, nb)<a class="permalink" href="#augment.gololang.LazyList.take_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-240" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.LazyList.take_2">take(this, nb)<a class="permalink" href="#augment.gololang.LazyList.take_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-241" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Takes the <code>nb</code> first elements of the lazy list, as a lazy list.
 This is a wrapper, the underlying list is resolved on demand, such that
@@ -495,7 +494,7 @@ everything remains lazy. <code>take</code> can thus be used on infinite lists.</
 
       </div>
     
-      <h4 id="augment.gololang.LazyList.takeWhile_2">takeWhile(this, pred)<a class="permalink" href="#augment.gololang.LazyList.takeWhile_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-253" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.LazyList.takeWhile_2">takeWhile(this, pred)<a class="permalink" href="#augment.gololang.LazyList.takeWhile_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-254" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Takes elements from the list as long as the given predicate is true.</p>
 <ul>
@@ -505,14 +504,13 @@ everything remains lazy. <code>take</code> can thus be used on infinite lists.</
       </div>
     
   
-    <h3 id="augment.java.lang.Iterable">java.lang.Iterable<a class="permalink" href="#augment.java.lang.Iterable" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-109" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="augment.java.lang.Iterable">java.lang.Iterable<a class="permalink" href="#augment.java.lang.Iterable" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-110" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
-      <p>null</p>
-
+      
     </div>
     
     
-      <h4 id="augment.java.lang.Iterable.asLazyList_1">asLazyList(this)<a class="permalink" href="#augment.java.lang.Iterable.asLazyList_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-114" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.lang.Iterable.asLazyList_1">asLazyList(this)<a class="permalink" href="#augment.java.lang.Iterable.asLazyList_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-115" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Returns a lazy list from this <code>Iterable</code>. Can be used for instance to lazily
 map a list.</p>
@@ -520,14 +518,13 @@ map a list.</p>
       </div>
     
   
-    <h3 id="augment.java.util.Iterator">java.util.Iterator<a class="permalink" href="#augment.java.util.Iterator" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-117" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="augment.java.util.Iterator">java.util.Iterator<a class="permalink" href="#augment.java.util.Iterator" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-118" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
-      <p>null</p>
-
+      
     </div>
     
     
-      <h4 id="augment.java.util.Iterator.asLazyList_1">asLazyList(this)<a class="permalink" href="#augment.java.util.Iterator.asLazyList_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-121" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.Iterator.asLazyList_1">asLazyList(this)<a class="permalink" href="#augment.java.util.Iterator.asLazyList_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="LazyLists-src.html#l-122" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Returns a lazy list view of this <code>Iterator</code>.</p>
 
@@ -539,7 +536,7 @@ map a list.</p>
 
   <h2 id="functions">Functions</h2>
   
-    <h3 id="cons_1">cons(ht)<a class="permalink" href="#cons_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-78" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="cons_1">cons(ht)<a class="permalink" href="#cons_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-79" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Unary version of <a href="#cons_2"><code>cons(head, tail)</code></a>.</p>
 <p>Its parameter is assumed to be a tuple (or any object having a <code>get(idx)</code> method)
@@ -547,7 +544,7 @@ of the form <code>[head, tail]</code>.</p>
 
     </div>
   
-    <h3 id="cons_2">cons(head, tail)<a class="permalink" href="#cons_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-66" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="cons_2">cons(head, tail)<a class="permalink" href="#cons_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-67" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Create a new lazy list from a head and tail values. Automatically wraps the
 tail in a closure if its not already one.</p>
@@ -558,13 +555,13 @@ tail in a closure if its not already one.</p>
 
     </div>
   
-    <h3 id="emptyList_0">emptyList()<a class="permalink" href="#emptyList_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-53" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="emptyList_0">emptyList()<a class="permalink" href="#emptyList_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-54" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Returns the empty list.</p>
 
     </div>
   
-    <h3 id="fromIter_1">fromIter(it)<a class="permalink" href="#fromIter_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-101" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="fromIter_1">fromIter(it)<a class="permalink" href="#fromIter_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-102" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Wraps any object implementing <code>Iterable</code> or <code>Iterator</code> in a lazy list.
 The <code>next()</code> method of the underlying iterator is only called when the tail is
@@ -576,7 +573,7 @@ iterator.</p>
 
     </div>
   
-    <h3 id="generator_3">generator(unspool, finished, seed)<a class="permalink" href="#generator_3" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-312" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="generator_3">generator(unspool, finished, seed)<a class="permalink" href="#generator_3" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-313" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Generator function on lazy lists (anamorphism).</p>
 <p>This function generates a (possibly infinite) lazy list. Starting with the
@@ -599,7 +596,7 @@ used to generate the tail.</p>
 
     </div>
   
-    <h3 id="iterate_2">iterate(zero, func)<a class="permalink" href="#iterate_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-354" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="iterate_2">iterate(zero, func)<a class="permalink" href="#iterate_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-355" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Returns an infinite lazy list produced by iterative application of a function
 to an initial element.
@@ -614,7 +611,7 @@ to an initial element.
 
     </div>
   
-    <h3 id="lazyList_1v">lazyList(values...)<a class="permalink" href="#lazyList_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-89" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="lazyList_1v">lazyList(values...)<a class="permalink" href="#lazyList_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-90" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Variadic function to create lazy lists from values.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">let myList = lazyList(1, 2, 3, 4)
@@ -625,7 +622,7 @@ to an initial element.
 
     </div>
   
-    <h3 id="repeat_1">repeat(value)<a class="permalink" href="#repeat_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-336" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="repeat_1">repeat(value)<a class="permalink" href="#repeat_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="LazyLists-src.html#l-337" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Produces a infinite list of values. If the argument is a closure, it must have
 no parameters, and it's used to produce the values (called for each <code>tail</code>

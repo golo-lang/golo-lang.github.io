@@ -1,0 +1,351 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
+<span class="sourceLineNo">003</span> *<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * This program and the accompanying materials are made available under the<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * terms of the Eclipse Public License 2.0 which is available at<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * http://www.eclipse.org/legal/epl-2.0.<a name="line.6"></a>
+<span class="sourceLineNo">007</span> *<a name="line.7"></a>
+<span class="sourceLineNo">008</span> * SPDX-License-Identifier: EPL-2.0<a name="line.8"></a>
+<span class="sourceLineNo">009</span> */<a name="line.9"></a>
+<span class="sourceLineNo">010</span>package gololang;<a name="line.10"></a>
+<span class="sourceLineNo">011</span><a name="line.11"></a>
+<span class="sourceLineNo">012</span>import java.io.BufferedOutputStream;<a name="line.12"></a>
+<span class="sourceLineNo">013</span>import java.io.File;<a name="line.13"></a>
+<span class="sourceLineNo">014</span>import java.io.IOException;<a name="line.14"></a>
+<span class="sourceLineNo">015</span>import java.io.OutputStream;<a name="line.15"></a>
+<span class="sourceLineNo">016</span>import java.io.PrintStream;<a name="line.16"></a>
+<span class="sourceLineNo">017</span>import java.net.MalformedURLException;<a name="line.17"></a>
+<span class="sourceLineNo">018</span>import java.net.URI;<a name="line.18"></a>
+<span class="sourceLineNo">019</span>import java.net.URL;<a name="line.19"></a>
+<span class="sourceLineNo">020</span>import java.nio.charset.Charset;<a name="line.20"></a>
+<span class="sourceLineNo">021</span>import java.nio.file.Files;<a name="line.21"></a>
+<span class="sourceLineNo">022</span>import java.nio.file.Path;<a name="line.22"></a>
+<span class="sourceLineNo">023</span>import java.nio.file.Paths;<a name="line.23"></a>
+<span class="sourceLineNo">024</span>import java.nio.file.StandardOpenOption;<a name="line.24"></a>
+<span class="sourceLineNo">025</span><a name="line.25"></a>
+<span class="sourceLineNo">026</span>import static gololang.Predefined.require;<a name="line.26"></a>
+<span class="sourceLineNo">027</span><a name="line.27"></a>
+<span class="sourceLineNo">028</span>/**<a name="line.28"></a>
+<span class="sourceLineNo">029</span> * Module providing IO related utility functions.<a name="line.29"></a>
+<span class="sourceLineNo">030</span> */<a name="line.30"></a>
+<span class="sourceLineNo">031</span>public final class IO {<a name="line.31"></a>
+<span class="sourceLineNo">032</span>  private IO() {<a name="line.32"></a>
+<span class="sourceLineNo">033</span>    // utility class<a name="line.33"></a>
+<span class="sourceLineNo">034</span>  }<a name="line.34"></a>
+<span class="sourceLineNo">035</span><a name="line.35"></a>
+<span class="sourceLineNo">036</span>  /**<a name="line.36"></a>
+<span class="sourceLineNo">037</span>   * Returns the default charset.<a name="line.37"></a>
+<span class="sourceLineNo">038</span>   */<a name="line.38"></a>
+<span class="sourceLineNo">039</span>  public static Charset defaultCharset() {<a name="line.39"></a>
+<span class="sourceLineNo">040</span>    return Charset.defaultCharset();<a name="line.40"></a>
+<span class="sourceLineNo">041</span>  }<a name="line.41"></a>
+<span class="sourceLineNo">042</span><a name="line.42"></a>
+<span class="sourceLineNo">043</span>  /**<a name="line.43"></a>
+<span class="sourceLineNo">044</span>   * Convert the given String or Charset object into a Charset.<a name="line.44"></a>
+<span class="sourceLineNo">045</span>   */<a name="line.45"></a>
+<span class="sourceLineNo">046</span>  public static Charset toCharset(Object encoding) {<a name="line.46"></a>
+<span class="sourceLineNo">047</span>    if (encoding == null) {<a name="line.47"></a>
+<span class="sourceLineNo">048</span>      return defaultCharset();<a name="line.48"></a>
+<span class="sourceLineNo">049</span>    }<a name="line.49"></a>
+<span class="sourceLineNo">050</span>    Charset charset = null;<a name="line.50"></a>
+<span class="sourceLineNo">051</span>    if (encoding instanceof String) {<a name="line.51"></a>
+<span class="sourceLineNo">052</span>      charset = Charset.forName((String) encoding);<a name="line.52"></a>
+<span class="sourceLineNo">053</span>    } else if (encoding instanceof Charset) {<a name="line.53"></a>
+<span class="sourceLineNo">054</span>      charset = (Charset) encoding;<a name="line.54"></a>
+<span class="sourceLineNo">055</span>    } else {<a name="line.55"></a>
+<span class="sourceLineNo">056</span>      throw new IllegalArgumentException("Can't get a charset from a "<a name="line.56"></a>
+<span class="sourceLineNo">057</span>          + encoding.getClass().getName());<a name="line.57"></a>
+<span class="sourceLineNo">058</span>    }<a name="line.58"></a>
+<span class="sourceLineNo">059</span>    return charset;<a name="line.59"></a>
+<span class="sourceLineNo">060</span>  }<a name="line.60"></a>
+<span class="sourceLineNo">061</span><a name="line.61"></a>
+<span class="sourceLineNo">062</span>  /**<a name="line.62"></a>
+<span class="sourceLineNo">063</span>   * Reads the content of a text file.<a name="line.63"></a>
+<span class="sourceLineNo">064</span>   *<a name="line.64"></a>
+<span class="sourceLineNo">065</span>   * @param file     the file to read from as an instance of either {@link String}, {@link File} or {@link Path}.<a name="line.65"></a>
+<span class="sourceLineNo">066</span>   * @param encoding the file encoding as a {@link String} or {@link Charset}.<a name="line.66"></a>
+<span class="sourceLineNo">067</span>   * @return the content as a {@link String}.<a name="line.67"></a>
+<span class="sourceLineNo">068</span>   */<a name="line.68"></a>
+<span class="sourceLineNo">069</span>  public static String fileToText(Object file, Object encoding) throws Throwable {<a name="line.69"></a>
+<span class="sourceLineNo">070</span>    return new String(Files.readAllBytes(toPath(file)), toCharset(encoding));<a name="line.70"></a>
+<span class="sourceLineNo">071</span>  }<a name="line.71"></a>
+<span class="sourceLineNo">072</span><a name="line.72"></a>
+<span class="sourceLineNo">073</span>  /**<a name="line.73"></a>
+<span class="sourceLineNo">074</span>   * Polymorphic {@link java.nio.file.Path} creation.<a name="line.74"></a>
+<span class="sourceLineNo">075</span>   *<a name="line.75"></a>
+<span class="sourceLineNo">076</span>   * @param file the file descriptor as an instance of either {@link String}, {@link File} or {@link Path}.<a name="line.76"></a>
+<span class="sourceLineNo">077</span>   * @return the corresponding {@link java.nio.file.Path} object.<a name="line.77"></a>
+<span class="sourceLineNo">078</span>   */<a name="line.78"></a>
+<span class="sourceLineNo">079</span>  public static Path toPath(Object file) {<a name="line.79"></a>
+<span class="sourceLineNo">080</span>    if (file == null) {<a name="line.80"></a>
+<span class="sourceLineNo">081</span>      return null;<a name="line.81"></a>
+<span class="sourceLineNo">082</span>    } else if (file instanceof String) {<a name="line.82"></a>
+<span class="sourceLineNo">083</span>      return Paths.get((String) file);<a name="line.83"></a>
+<span class="sourceLineNo">084</span>    } else if (file instanceof File) {<a name="line.84"></a>
+<span class="sourceLineNo">085</span>      return ((File) file).toPath();<a name="line.85"></a>
+<span class="sourceLineNo">086</span>    } else if (file instanceof Path) {<a name="line.86"></a>
+<span class="sourceLineNo">087</span>      return (Path) file;<a name="line.87"></a>
+<span class="sourceLineNo">088</span>    }<a name="line.88"></a>
+<span class="sourceLineNo">089</span>    throw new IllegalArgumentException("file must be a string, a file or a path");<a name="line.89"></a>
+<span class="sourceLineNo">090</span>  }<a name="line.90"></a>
+<span class="sourceLineNo">091</span><a name="line.91"></a>
+<span class="sourceLineNo">092</span>  /**<a name="line.92"></a>
+<span class="sourceLineNo">093</span>   * Polymorphic {@link java.net.URL} creation.<a name="line.93"></a>
+<span class="sourceLineNo">094</span>   *<a name="line.94"></a>
+<span class="sourceLineNo">095</span>   * @param ref the url descriptor as a {@link String}, {@link URL}, {@link URI}, {@link File} or {@link Path}.<a name="line.95"></a>
+<span class="sourceLineNo">096</span>   * @return the corresponding {@link java.net.URL} object.<a name="line.96"></a>
+<span class="sourceLineNo">097</span>   */<a name="line.97"></a>
+<span class="sourceLineNo">098</span>  public static URL toURL(Object ref) throws MalformedURLException {<a name="line.98"></a>
+<span class="sourceLineNo">099</span>    if (ref == null) {<a name="line.99"></a>
+<span class="sourceLineNo">100</span>      return null;<a name="line.100"></a>
+<span class="sourceLineNo">101</span>    } else if (ref instanceof String) {<a name="line.101"></a>
+<span class="sourceLineNo">102</span>      return new URL((String) ref);<a name="line.102"></a>
+<span class="sourceLineNo">103</span>    } else if (ref instanceof URL) {<a name="line.103"></a>
+<span class="sourceLineNo">104</span>      return (URL) ref;<a name="line.104"></a>
+<span class="sourceLineNo">105</span>    } else if (ref instanceof URI) {<a name="line.105"></a>
+<span class="sourceLineNo">106</span>      return ((URI) ref).toURL();<a name="line.106"></a>
+<span class="sourceLineNo">107</span>    } else if (ref instanceof Path) {<a name="line.107"></a>
+<span class="sourceLineNo">108</span>      return ((Path) ref).toUri().toURL();<a name="line.108"></a>
+<span class="sourceLineNo">109</span>    } else if (ref instanceof File) {<a name="line.109"></a>
+<span class="sourceLineNo">110</span>      return ((File) ref).toURI().toURL();<a name="line.110"></a>
+<span class="sourceLineNo">111</span>    }<a name="line.111"></a>
+<span class="sourceLineNo">112</span>    throw new IllegalArgumentException(String.format("Can't convert a %s into a URL", ref.getClass().getName()));<a name="line.112"></a>
+<span class="sourceLineNo">113</span>  }<a name="line.113"></a>
+<span class="sourceLineNo">114</span><a name="line.114"></a>
+<span class="sourceLineNo">115</span><a name="line.115"></a>
+<span class="sourceLineNo">116</span>  /**<a name="line.116"></a>
+<span class="sourceLineNo">117</span>   * Writes some text to a file.<a name="line.117"></a>
+<span class="sourceLineNo">118</span>   *<a name="line.118"></a>
+<span class="sourceLineNo">119</span>   * The file and parents directories are created if they does not exist. The file is overwritten if it already exists. If the file is {@code "-"}, the content is written to standard output.<a name="line.119"></a>
+<span class="sourceLineNo">120</span>   *<a name="line.120"></a>
+<span class="sourceLineNo">121</span>   * @param text the text to write.<a name="line.121"></a>
+<span class="sourceLineNo">122</span>   * @param file the file to write to as an instance of either {@link String}, {@link File} or {@link Path}.<a name="line.122"></a>
+<span class="sourceLineNo">123</span>   */<a name="line.123"></a>
+<span class="sourceLineNo">124</span>  public static void textToFile(Object text, Object file) throws Throwable {<a name="line.124"></a>
+<span class="sourceLineNo">125</span>    textToFile(text, file, null);<a name="line.125"></a>
+<span class="sourceLineNo">126</span>  }<a name="line.126"></a>
+<span class="sourceLineNo">127</span><a name="line.127"></a>
+<span class="sourceLineNo">128</span>  /**<a name="line.128"></a>
+<span class="sourceLineNo">129</span>   * Writes some text to a file using the given {@link Charset}.<a name="line.129"></a>
+<span class="sourceLineNo">130</span>   *<a name="line.130"></a>
+<span class="sourceLineNo">131</span>   * The file and parents directories are created if they does not exist. The file is overwritten if it already exists. If the file is {@code "-"}, the content is written to standard output.<a name="line.131"></a>
+<span class="sourceLineNo">132</span>   *<a name="line.132"></a>
+<span class="sourceLineNo">133</span>   * @param text the text to write.<a name="line.133"></a>
+<span class="sourceLineNo">134</span>   * @param file the file to write to as an instance of either {@link String}, {@link File} or {@link Path}.<a name="line.134"></a>
+<span class="sourceLineNo">135</span>   * @param charset the charset to encode the text in.<a name="line.135"></a>
+<span class="sourceLineNo">136</span>   */<a name="line.136"></a>
+<span class="sourceLineNo">137</span>  public static void textToFile(Object text, Object file, Object charset) throws Throwable {<a name="line.137"></a>
+<span class="sourceLineNo">138</span>    require(text instanceof String, "text must be a string");<a name="line.138"></a>
+<span class="sourceLineNo">139</span>    Charset encoding = toCharset(charset);<a name="line.139"></a>
+<span class="sourceLineNo">140</span>    String str = (String) text;<a name="line.140"></a>
+<span class="sourceLineNo">141</span>    if ("-".equals(file.toString())) {<a name="line.141"></a>
+<span class="sourceLineNo">142</span>      System.out.write(str.getBytes(encoding));<a name="line.142"></a>
+<span class="sourceLineNo">143</span>    } else {<a name="line.143"></a>
+<span class="sourceLineNo">144</span>      Path path = toPath(file);<a name="line.144"></a>
+<span class="sourceLineNo">145</span>      if (path.getParent() != null) {<a name="line.145"></a>
+<span class="sourceLineNo">146</span>        Files.createDirectories(path.getParent());<a name="line.146"></a>
+<span class="sourceLineNo">147</span>      }<a name="line.147"></a>
+<span class="sourceLineNo">148</span>      Files.write(<a name="line.148"></a>
+<span class="sourceLineNo">149</span>          path,<a name="line.149"></a>
+<span class="sourceLineNo">150</span>          str.getBytes(encoding),<a name="line.150"></a>
+<span class="sourceLineNo">151</span>          StandardOpenOption.WRITE,<a name="line.151"></a>
+<span class="sourceLineNo">152</span>          StandardOpenOption.CREATE,<a name="line.152"></a>
+<span class="sourceLineNo">153</span>          StandardOpenOption.TRUNCATE_EXISTING);<a name="line.153"></a>
+<span class="sourceLineNo">154</span>    }<a name="line.154"></a>
+<span class="sourceLineNo">155</span>  }<a name="line.155"></a>
+<span class="sourceLineNo">156</span><a name="line.156"></a>
+<span class="sourceLineNo">157</span>  /**<a name="line.157"></a>
+<span class="sourceLineNo">158</span>   * Check if a file exists.<a name="line.158"></a>
+<span class="sourceLineNo">159</span>   *<a name="line.159"></a>
+<span class="sourceLineNo">160</span>   * @param file the file to read from as an instance of either {@link String}, {@link File} or {@link Path}.<a name="line.160"></a>
+<span class="sourceLineNo">161</span>   * @return true if the file exists, false if it doesn't<a name="line.161"></a>
+<span class="sourceLineNo">162</span>   */<a name="line.162"></a>
+<span class="sourceLineNo">163</span>  public static boolean fileExists(Object file) {<a name="line.163"></a>
+<span class="sourceLineNo">164</span>    return Files.exists(toPath(file));<a name="line.164"></a>
+<span class="sourceLineNo">165</span>  }<a name="line.165"></a>
+<span class="sourceLineNo">166</span><a name="line.166"></a>
+<span class="sourceLineNo">167</span>  /**<a name="line.167"></a>
+<span class="sourceLineNo">168</span>   * Reads the next line of characters from the console.<a name="line.168"></a>
+<span class="sourceLineNo">169</span>   *<a name="line.169"></a>
+<span class="sourceLineNo">170</span>   * @return a String.<a name="line.170"></a>
+<span class="sourceLineNo">171</span>   */<a name="line.171"></a>
+<span class="sourceLineNo">172</span>  public static String readln() throws IOException {<a name="line.172"></a>
+<span class="sourceLineNo">173</span>    return System.console().readLine();<a name="line.173"></a>
+<span class="sourceLineNo">174</span>  }<a name="line.174"></a>
+<span class="sourceLineNo">175</span><a name="line.175"></a>
+<span class="sourceLineNo">176</span>  /**<a name="line.176"></a>
+<span class="sourceLineNo">177</span>   * Reads the next line of characters from the console.<a name="line.177"></a>
+<span class="sourceLineNo">178</span>   *<a name="line.178"></a>
+<span class="sourceLineNo">179</span>   * @param message displays a prompt message.<a name="line.179"></a>
+<span class="sourceLineNo">180</span>   * @return a String.<a name="line.180"></a>
+<span class="sourceLineNo">181</span>   */<a name="line.181"></a>
+<span class="sourceLineNo">182</span>  public static String readln(String message) throws IOException {<a name="line.182"></a>
+<span class="sourceLineNo">183</span>    System.out.print(message);<a name="line.183"></a>
+<span class="sourceLineNo">184</span>    return readln();<a name="line.184"></a>
+<span class="sourceLineNo">185</span>  }<a name="line.185"></a>
+<span class="sourceLineNo">186</span><a name="line.186"></a>
+<span class="sourceLineNo">187</span>  /**<a name="line.187"></a>
+<span class="sourceLineNo">188</span>   * Reads a password from the console with echoing disabled.<a name="line.188"></a>
+<span class="sourceLineNo">189</span>   *<a name="line.189"></a>
+<span class="sourceLineNo">190</span>   * @return a String.<a name="line.190"></a>
+<span class="sourceLineNo">191</span>   */<a name="line.191"></a>
+<span class="sourceLineNo">192</span>  public static String readPassword() throws IOException {<a name="line.192"></a>
+<span class="sourceLineNo">193</span>    return String.valueOf(System.console().readPassword());<a name="line.193"></a>
+<span class="sourceLineNo">194</span>  }<a name="line.194"></a>
+<span class="sourceLineNo">195</span><a name="line.195"></a>
+<span class="sourceLineNo">196</span>  /**<a name="line.196"></a>
+<span class="sourceLineNo">197</span>   * Reads a password from the console with echoing disabled.<a name="line.197"></a>
+<span class="sourceLineNo">198</span>   *<a name="line.198"></a>
+<span class="sourceLineNo">199</span>   * @param message displays a prompt message.<a name="line.199"></a>
+<span class="sourceLineNo">200</span>   * @return a String.<a name="line.200"></a>
+<span class="sourceLineNo">201</span>   */<a name="line.201"></a>
+<span class="sourceLineNo">202</span>  public static String readPassword(String message) throws IOException {<a name="line.202"></a>
+<span class="sourceLineNo">203</span>    System.out.print(message);<a name="line.203"></a>
+<span class="sourceLineNo">204</span>    return readPassword();<a name="line.204"></a>
+<span class="sourceLineNo">205</span>  }<a name="line.205"></a>
+<span class="sourceLineNo">206</span><a name="line.206"></a>
+<span class="sourceLineNo">207</span>  /**<a name="line.207"></a>
+<span class="sourceLineNo">208</span>   * Reads a password from the console with echoing disabled, returning an {@code char[]} array.<a name="line.208"></a>
+<span class="sourceLineNo">209</span>   *<a name="line.209"></a>
+<span class="sourceLineNo">210</span>   * @return a character array.<a name="line.210"></a>
+<span class="sourceLineNo">211</span>   */<a name="line.211"></a>
+<span class="sourceLineNo">212</span>  public static char[] secureReadPassword() throws IOException {<a name="line.212"></a>
+<span class="sourceLineNo">213</span>    return System.console().readPassword();<a name="line.213"></a>
+<span class="sourceLineNo">214</span>  }<a name="line.214"></a>
+<span class="sourceLineNo">215</span><a name="line.215"></a>
+<span class="sourceLineNo">216</span>  /**<a name="line.216"></a>
+<span class="sourceLineNo">217</span>   * Reads a password from the console with echoing disabled, returning an {@code char[]} array.<a name="line.217"></a>
+<span class="sourceLineNo">218</span>   *<a name="line.218"></a>
+<span class="sourceLineNo">219</span>   * @param message displays a prompt message.<a name="line.219"></a>
+<span class="sourceLineNo">220</span>   * @return a character array.<a name="line.220"></a>
+<span class="sourceLineNo">221</span>   */<a name="line.221"></a>
+<span class="sourceLineNo">222</span>  public static char[] secureReadPassword(String message) throws IOException {<a name="line.222"></a>
+<span class="sourceLineNo">223</span>    System.out.print(message);<a name="line.223"></a>
+<span class="sourceLineNo">224</span>    return secureReadPassword();<a name="line.224"></a>
+<span class="sourceLineNo">225</span>  }<a name="line.225"></a>
+<span class="sourceLineNo">226</span><a name="line.226"></a>
+<span class="sourceLineNo">227</span>  /**<a name="line.227"></a>
+<span class="sourceLineNo">228</span>   * Create an {@code PrintStream} from the specified value.<a name="line.228"></a>
+<span class="sourceLineNo">229</span>   * &lt;p&gt;<a name="line.229"></a>
+<span class="sourceLineNo">230</span>   * Same as {@code printStreamFrom(output, defaultCharset())}<a name="line.230"></a>
+<span class="sourceLineNo">231</span>   *<a name="line.231"></a>
+<span class="sourceLineNo">232</span>   * @param output the file to use; "-" means standard output<a name="line.232"></a>
+<span class="sourceLineNo">233</span>   * @return a buffered {@code PrintStream} or {@code java.lang.System.out}<a name="line.233"></a>
+<span class="sourceLineNo">234</span>   * @see #defaultCharset()<a name="line.234"></a>
+<span class="sourceLineNo">235</span>   * @see #printStreamFrom(Object, Object)<a name="line.235"></a>
+<span class="sourceLineNo">236</span>   */<a name="line.236"></a>
+<span class="sourceLineNo">237</span>  public static PrintStream printStreamFrom(Object output) throws IOException {<a name="line.237"></a>
+<span class="sourceLineNo">238</span>    return printStreamFrom(output, defaultCharset());<a name="line.238"></a>
+<span class="sourceLineNo">239</span>  }<a name="line.239"></a>
+<span class="sourceLineNo">240</span><a name="line.240"></a>
+<span class="sourceLineNo">241</span>  /**<a name="line.241"></a>
+<span class="sourceLineNo">242</span>   * Create an {@code PrintStream} from the specified value.<a name="line.242"></a>
+<span class="sourceLineNo">243</span>   * &lt;p&gt;<a name="line.243"></a>
+<span class="sourceLineNo">244</span>   * If the given string is "-", {@code java.lang.System.out} is used. Otherwise, a {@code java.nio.file.Path} is<a name="line.244"></a>
+<span class="sourceLineNo">245</span>   * created with {@link #toPath(Object)}.<a name="line.245"></a>
+<span class="sourceLineNo">246</span>   * The returned {@code PrintStream} is buffered and uses the given charset. Parent directory is created. If the file<a name="line.246"></a>
+<span class="sourceLineNo">247</span>   * exists, it is overwritten.<a name="line.247"></a>
+<span class="sourceLineNo">248</span>   *<a name="line.248"></a>
+<span class="sourceLineNo">249</span>   * @param output the file to use; "-" means standard output<a name="line.249"></a>
+<span class="sourceLineNo">250</span>   * @param charset the charset to use, as a {@code java.lang.String} or a {@code java.nio.charset.Charset}<a name="line.250"></a>
+<span class="sourceLineNo">251</span>   * @return a buffered {@code PrintStream} or {@code java.lang.System.out}<a name="line.251"></a>
+<span class="sourceLineNo">252</span>   * @see #toPath(Object)<a name="line.252"></a>
+<span class="sourceLineNo">253</span>   * @see #toCharset(Object)<a name="line.253"></a>
+<span class="sourceLineNo">254</span>   */<a name="line.254"></a>
+<span class="sourceLineNo">255</span>  public static PrintStream printStreamFrom(Object output, Object charset) throws IOException {<a name="line.255"></a>
+<span class="sourceLineNo">256</span>    if ("-".equals(output)) {<a name="line.256"></a>
+<span class="sourceLineNo">257</span>      return System.out;<a name="line.257"></a>
+<span class="sourceLineNo">258</span>    }<a name="line.258"></a>
+<span class="sourceLineNo">259</span>    if (output instanceof PrintStream) {<a name="line.259"></a>
+<span class="sourceLineNo">260</span>      return (PrintStream) output;<a name="line.260"></a>
+<span class="sourceLineNo">261</span>    }<a name="line.261"></a>
+<span class="sourceLineNo">262</span>    OutputStream out;<a name="line.262"></a>
+<span class="sourceLineNo">263</span>    if (output instanceof OutputStream) {<a name="line.263"></a>
+<span class="sourceLineNo">264</span>      out = (OutputStream) output;<a name="line.264"></a>
+<span class="sourceLineNo">265</span>    } else {<a name="line.265"></a>
+<span class="sourceLineNo">266</span>      Path outputPath = toPath(output);<a name="line.266"></a>
+<span class="sourceLineNo">267</span>      if (outputPath.getParent() != null) {<a name="line.267"></a>
+<span class="sourceLineNo">268</span>        Files.createDirectories(outputPath.getParent());<a name="line.268"></a>
+<span class="sourceLineNo">269</span>      }<a name="line.269"></a>
+<span class="sourceLineNo">270</span>      out = Files.newOutputStream(outputPath);<a name="line.270"></a>
+<span class="sourceLineNo">271</span>    }<a name="line.271"></a>
+<span class="sourceLineNo">272</span>    return new PrintStream(<a name="line.272"></a>
+<span class="sourceLineNo">273</span>        new BufferedOutputStream(out),<a name="line.273"></a>
+<span class="sourceLineNo">274</span>        true,<a name="line.274"></a>
+<span class="sourceLineNo">275</span>        toCharset(charset).name());<a name="line.275"></a>
+<span class="sourceLineNo">276</span>  }<a name="line.276"></a>
+<span class="sourceLineNo">277</span><a name="line.277"></a>
+<span class="sourceLineNo">278</span><a name="line.278"></a>
+<span class="sourceLineNo">279</span>}<a name="line.279"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>

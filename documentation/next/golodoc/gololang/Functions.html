@@ -4,7 +4,7 @@
 
 <html>
 <head>
-  <title>gololang.Functions (Golo 3.2.0)</title>
+  <title>gololang.Functions (Golo 3.3.0-M1)</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="icon"
@@ -453,7 +453,7 @@ used to create monad-like processing chains.</p>
 
   <h2 id="functions">Functions</h2>
   
-    <h3 id="add_2">add(value, element)<a class="permalink" href="#add_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-82" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="add_2">add(value, element)<a class="permalink" href="#add_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-83" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Polymorphic addition and concatenation.</p>
 <p>Adds <code>value</code> to <code>element</code>.
@@ -484,13 +484,13 @@ f(StringBuilder()): toString() == "42133769"
 
     </div>
   
-    <h3 id="addTo_2">addTo(element, value)<a class="permalink" href="#addTo_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-117" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="addTo_2">addTo(element, value)<a class="permalink" href="#addTo_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-118" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Not swapped version of <a href="#add_2"><code>add</code></a></p>
 
     </div>
   
-    <h3 id="and_1">and(a)<a class="permalink" href="#and_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-337" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="and_1">and(a)<a class="permalink" href="#and_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-338" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried boolean <em>and</em>.</p>
 <p>This implementation is lazy.</p>
@@ -503,7 +503,7 @@ predicate functions, returns a new predicate function.</p>
 
     </div>
   
-    <h3 id="compose_1v">compose(funcs...)<a class="permalink" href="#compose_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-931" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="compose_1v">compose(funcs...)<a class="permalink" href="#compose_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-932" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Function composition.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">compose(f1, f2, f3)(x) == f1(f2(f3(x)))
@@ -513,7 +513,7 @@ reversed (<em>B</em> combinator).</p>
 
     </div>
   
-    <h3 id="cond_4">cond(predicate, ifTrue, ifFalse, x)<a class="permalink" href="#cond_4" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-1051" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="cond_4">cond(predicate, ifTrue, ifFalse, x)<a class="permalink" href="#cond_4" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-1052" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Conditional application combinator.</p>
 <p>Equivalent to using the <code>match</code> construct:</p>
@@ -542,7 +542,7 @@ let f = |x| -&gt; match {
 
     </div>
   
-    <h3 id="const_1">const(val)<a class="permalink" href="#const_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-587" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="const_1">const(val)<a class="permalink" href="#const_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-588" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>The constant function.</p>
 <p>Returns a new variadic functions that always returns <code>val</code>, ignoring its
@@ -561,7 +561,7 @@ on the left:</p>
 
     </div>
   
-    <h3 id="contains_2">contains(value, collection)<a class="permalink" href="#contains_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-432" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="contains_2">contains(value, collection)<a class="permalink" href="#contains_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-433" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Swapped curried containment test.</p>
 <p>Checks if <code>collection</code> contains <code>value</code>.
@@ -579,7 +579,7 @@ if (predicate(collection)) {
 
     </div>
   
-    <h3 id="curry_1">curry(f)<a class="permalink" href="#curry_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-666" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="curry_1">curry(f)<a class="permalink" href="#curry_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-667" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Function to curryfy a function, i.e. transforms a polyadic function into a
 sequence of variadic functions. This allows for automatic partial application.</p>
@@ -634,7 +634,7 @@ g(1, 2, 3)
 
     </div>
   
-    <h3 id="div_2">div(x, y)<a class="permalink" href="#div_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-187" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="div_2">div(x, y)<a class="permalink" href="#div_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-188" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried division.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">div(x, y) == x / y
@@ -643,7 +643,7 @@ g(1, 2, 3)
 
     </div>
   
-    <h3 id="eq_2">eq(a, b)<a class="permalink" href="#eq_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-287" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="eq_2">eq(a, b)<a class="permalink" href="#eq_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-288" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried <em>equal</em>.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">eq(a, b) == (a == b)
@@ -652,20 +652,20 @@ g(1, 2, 3)
 
     </div>
   
-    <h3 id="even_1">even(a)<a class="permalink" href="#even_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-406" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="even_1">even(a)<a class="permalink" href="#even_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-407" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Checks if the value is even.</p>
 <p>See also <a href="#odd_1"><code>odd</code></a></p>
 
     </div>
   
-    <h3 id="False_1v">False(_...)<a class="permalink" href="#False_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-592" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="False_1v">False(_...)<a class="permalink" href="#False_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-593" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p><code>false</code> constant function.</p>
 
     </div>
   
-    <h3 id="fst_1">fst(t)<a class="permalink" href="#fst_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-503" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="fst_1">fst(t)<a class="permalink" href="#fst_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-504" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>First element of a list, tuple, vector, array.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">fst([a, b]) == a
@@ -677,7 +677,7 @@ g(1, 2, 3)
 
     </div>
   
-    <h3 id="ge_2">ge(a, b)<a class="permalink" href="#ge_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-309" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="ge_2">ge(a, b)<a class="permalink" href="#ge_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-310" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried swapped <em>greater than or equal</em>.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">ge(a, b) == (b &gt;= a)
@@ -687,7 +687,7 @@ g(1, 2, 3)
 
     </div>
   
-    <h3 id="getitem_2">getitem(obj, i)<a class="permalink" href="#getitem_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-529" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="getitem_2">getitem(obj, i)<a class="permalink" href="#getitem_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-530" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried indexing.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">getitem(obj, i) == obj: get(i)
@@ -702,7 +702,7 @@ g(1, 2, 3)
 
     </div>
   
-    <h3 id="getter_1">getter(i)<a class="permalink" href="#getter_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-556" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="getter_1">getter(i)<a class="permalink" href="#getter_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-557" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Indexer factory (curried indexing).</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">let third = getter(2)
@@ -712,7 +712,7 @@ third([1, 2, 3, 4]) -&gt; 3
 
     </div>
   
-    <h3 id="gt_2">gt(a, b)<a class="permalink" href="#gt_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-277" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="gt_2">gt(a, b)<a class="permalink" href="#gt_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-278" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried swapped <em>greater than</em>.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">gt(a, b) == b &gt; a
@@ -722,7 +722,7 @@ third([1, 2, 3, 4]) -&gt; 3
 
     </div>
   
-    <h3 id="id_1">id(x)<a class="permalink" href="#id_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-566" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="id_1">id(x)<a class="permalink" href="#id_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-567" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>The identity function.</p>
 <p>Returns it's argument unchanged. This can be useful with
@@ -730,7 +730,7 @@ third([1, 2, 3, 4]) -&gt; 3
 
     </div>
   
-    <h3 id="invokeWith_1v">invokeWith(args...)<a class="permalink" href="#invokeWith_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-878" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="invokeWith_1v">invokeWith(args...)<a class="permalink" href="#invokeWith_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-879" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Reversed curried function application.</p>
 <p>Apply the given function to the given value.</p>
@@ -746,7 +746,7 @@ third([1, 2, 3, 4]) -&gt; 3
 
     </div>
   
-    <h3 id="io_1">io(block)<a class="permalink" href="#io_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-990" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="io_1">io(block)<a class="permalink" href="#io_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-991" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Transform a function with side effects (generally IO operations, thus the name)
 into a function applying the side effect. If the wrapped function returns
@@ -793,7 +793,7 @@ into a function applying the side effect. If the wrapped function returns
 
     </div>
   
-    <h3 id="is_2">is(ref, obj)<a class="permalink" href="#is_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-451" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="is_2">is(ref, obj)<a class="permalink" href="#is_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-452" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried identity comparison</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">`is(ref, obj) == obj is ref
@@ -804,14 +804,14 @@ into a function applying the side effect. If the wrapped function returns
 
     </div>
   
-    <h3 id="isEmpty_1">isEmpty(o)<a class="permalink" href="#isEmpty_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-439" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="isEmpty_1">isEmpty(o)<a class="permalink" href="#isEmpty_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-440" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Emptiness test.</p>
 <p>Checks if the collection-like argument is empty.</p>
 
     </div>
   
-    <h3 id="isnt_2">isnt(ref, obj)<a class="permalink" href="#isnt_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-463" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="isnt_2">isnt(ref, obj)<a class="permalink" href="#isnt_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-464" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried difference comparison</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">`isnt(ref, obj) = obj isnt ref
@@ -822,7 +822,7 @@ into a function applying the side effect. If the wrapped function returns
 
     </div>
   
-    <h3 id="le_2">le(a, b)<a class="permalink" href="#le_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-321" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="le_2">le(a, b)<a class="permalink" href="#le_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-322" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried swapped <em>less than or equal</em>.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">le(a, b) == (a &lt;= b)
@@ -832,7 +832,7 @@ into a function applying the side effect. If the wrapped function returns
 
     </div>
   
-    <h3 id="lt_2">lt(a, b)<a class="permalink" href="#lt_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-265" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="lt_2">lt(a, b)<a class="permalink" href="#lt_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-266" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried swapped <em>less than</em>.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">lt(a, b) == b &lt; a
@@ -845,7 +845,7 @@ is a predicate testing if its argument is &ldquo;less than 42&rdquo;.</p>
 
     </div>
   
-    <h3 id="mod_2">mod(a, b)<a class="permalink" href="#mod_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-207" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="mod_2">mod(a, b)<a class="permalink" href="#mod_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-208" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried modulo.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">mod(a, b) == a % b
@@ -854,7 +854,7 @@ is a predicate testing if its argument is &ldquo;less than 42&rdquo;.</p>
 
     </div>
   
-    <h3 id="mul_2">mul(x, y)<a class="permalink" href="#mul_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-147" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="mul_2">mul(x, y)<a class="permalink" href="#mul_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-148" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried multiplication.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">mul(x, y) == x * y
@@ -863,7 +863,7 @@ is a predicate testing if its argument is &ldquo;less than 42&rdquo;.</p>
 
     </div>
   
-    <h3 id="ne_2">ne(a, b)<a class="permalink" href="#ne_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-297" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="ne_2">ne(a, b)<a class="permalink" href="#ne_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-298" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried <em>not equal</em>.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">ne(a, b) == (a != b)
@@ -872,7 +872,7 @@ is a predicate testing if its argument is &ldquo;less than 42&rdquo;.</p>
 
     </div>
   
-    <h3 id="neg_1">neg(x)<a class="permalink" href="#neg_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-157" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="neg_1">neg(x)<a class="permalink" href="#neg_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-158" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Opposite (negative value).</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">neg(x) == -x
@@ -881,7 +881,7 @@ is a predicate testing if its argument is &ldquo;less than 42&rdquo;.</p>
 
     </div>
   
-    <h3 id="not_1">not(a)<a class="permalink" href="#not_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-378" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="not_1">not(a)<a class="permalink" href="#not_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-379" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Polymorphic negation function.</p>
 <ul>
@@ -899,20 +899,20 @@ let odd = `not(even)
 
     </div>
   
-    <h3 id="Null_1v">Null(_...)<a class="permalink" href="#Null_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-602" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="Null_1v">Null(_...)<a class="permalink" href="#Null_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-603" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p><code>null</code> constant function.</p>
 
     </div>
   
-    <h3 id="odd_1">odd(a)<a class="permalink" href="#odd_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-413" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="odd_1">odd(a)<a class="permalink" href="#odd_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-414" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Checks if the value is odd.</p>
 <p>See also <a href="#even_1"><code>even</code></a></p>
 
     </div>
   
-    <h3 id="oftype_2">oftype(type, object)<a class="permalink" href="#oftype_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-476" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="oftype_2">oftype(type, object)<a class="permalink" href="#oftype_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-477" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried type checking</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">`oftype(type, obj) = obj oftype type
@@ -923,7 +923,7 @@ let odd = `not(even)
 
     </div>
   
-    <h3 id="or_1">or(a)<a class="permalink" href="#or_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-356" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="or_1">or(a)<a class="permalink" href="#or_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-357" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried boolean <em>or</em>.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">`or(a, b) == (a or b)
@@ -935,7 +935,7 @@ predicate functions, returns a new predicate function.</p>
 
     </div>
   
-    <h3 id="orIfNull_2">orIfNull(fallback, value)<a class="permalink" href="#orIfNull_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-490" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="orIfNull_2">orIfNull(fallback, value)<a class="permalink" href="#orIfNull_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-491" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Null value substitution</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">`orIfNull(0, 3) == 3
@@ -948,7 +948,7 @@ a map:</p>
 
     </div>
   
-    <h3 id="pipe_1v">pipe(funcs...)<a class="permalink" href="#pipe_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-915" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="pipe_1v">pipe(funcs...)<a class="permalink" href="#pipe_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-916" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Function chaining.</p>
 <p>This is similar to Unix pipe:</p>
@@ -978,7 +978,7 @@ other("17") == 42
 
     </div>
   
-    <h3 id="pow_2">pow(a, b)<a class="permalink" href="#pow_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-229" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="pow_2">pow(a, b)<a class="permalink" href="#pow_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-230" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried power.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">pow(a, 2) == a*a
@@ -988,7 +988,7 @@ other("17") == 42
 
     </div>
   
-    <h3 id="pred_1">pred(x)<a class="permalink" href="#pred_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-137" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="pred_1">pred(x)<a class="permalink" href="#pred_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-138" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Number predecessor (side-effect free decrement).</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">pred(x) == x - 1
@@ -997,7 +997,7 @@ other("17") == 42
 
     </div>
   
-    <h3 id="rdiv_2">rdiv(x, y)<a class="permalink" href="#rdiv_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-197" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="rdiv_2">rdiv(x, y)<a class="permalink" href="#rdiv_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-198" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Reverse curried division.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">rdiv(y, x) == x / y
@@ -1006,7 +1006,7 @@ other("17") == 42
 
     </div>
   
-    <h3 id="recur_1">recur(f)<a class="permalink" href="#recur_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-1021" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="recur_1">recur(f)<a class="permalink" href="#recur_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-1022" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Fixed-point combinator.</p>
 <p>This is an abstraction of recursion.</p>
@@ -1017,7 +1017,7 @@ other("17") == 42
 
     </div>
   
-    <h3 id="rmod_2">rmod(a, b)<a class="permalink" href="#rmod_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-217" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="rmod_2">rmod(a, b)<a class="permalink" href="#rmod_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-218" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Reverse curried modulo.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">rmod(a, b) == b % a
@@ -1026,7 +1026,7 @@ other("17") == 42
 
     </div>
   
-    <h3 id="rpow_2">rpow(a, b)<a class="permalink" href="#rpow_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-241" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="rpow_2">rpow(a, b)<a class="permalink" href="#rpow_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-242" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Reversed curried power.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">rpow(2, a) == a*a
@@ -1036,7 +1036,7 @@ other("17") == 42
 
     </div>
   
-    <h3 id="rsub_2">rsub(x, y)<a class="permalink" href="#rsub_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-177" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="rsub_2">rsub(x, y)<a class="permalink" href="#rsub_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-178" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Reversed curried subtract.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">rsub(x, y) == y - x
@@ -1045,7 +1045,7 @@ other("17") == 42
 
     </div>
   
-    <h3 id="setitem_3">setitem(obj, i, v)<a class="permalink" href="#setitem_3" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-543" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="setitem_3">setitem(obj, i, v)<a class="permalink" href="#setitem_3" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-544" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried indexed assignment</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">setitem(obj, i, v) == obj: set(i, v)
@@ -1059,7 +1059,7 @@ other("17") == 42
 
     </div>
   
-    <h3 id="snd_1">snd(t)<a class="permalink" href="#snd_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-513" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="snd_1">snd(t)<a class="permalink" href="#snd_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-514" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Second element of a list, tuple, vector, array.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">snd([a, b]) == b
@@ -1071,7 +1071,7 @@ other("17") == 42
 
     </div>
   
-    <h3 id="spreader_1">spreader(f)<a class="permalink" href="#spreader_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-756" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="spreader_1">spreader(f)<a class="permalink" href="#spreader_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-757" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Convers a polyadic function into an unary function.</p>
 <p>Similar to <a href="#unary_1"><code>unary</code></a> but using <code>spread</code> instead of <code>invoke</code>.</p>
@@ -1080,13 +1080,13 @@ other("17") == 42
 
     </div>
   
-    <h3 id="str_1">str(o)<a class="permalink" href="#str_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-247" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="str_1">str(o)<a class="permalink" href="#str_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-248" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Converts its argument to a <code>String</code>.</p>
 
     </div>
   
-    <h3 id="sub_2">sub(x, y)<a class="permalink" href="#sub_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-167" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="sub_2">sub(x, y)<a class="permalink" href="#sub_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-168" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried subtract.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">sub(x, y) == x - y
@@ -1095,7 +1095,7 @@ other("17") == 42
 
     </div>
   
-    <h3 id="succ_1">succ(x)<a class="permalink" href="#succ_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-128" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="succ_1">succ(x)<a class="permalink" href="#succ_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-129" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Number successor (side-effect free increment).</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">succ(x) == x + 1
@@ -1105,7 +1105,7 @@ other("17") == 42
 
     </div>
   
-    <h3 id="swap_1">swap(v)<a class="permalink" href="#swap_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-852" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="swap_1">swap(v)<a class="permalink" href="#swap_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-853" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Polymorphic swapping.</p>
 <p>This function dispatches on <a href="#swapArgs_1"><code>swapArgs</code></a>,
@@ -1119,7 +1119,7 @@ couple <code>c</code></p>
 
     </div>
   
-    <h3 id="swapArgs_1">swapArgs(func)<a class="permalink" href="#swapArgs_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-787" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="swapArgs_1">swapArgs(func)<a class="permalink" href="#swapArgs_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-788" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Change the signature of the given binary function by swapping its arguments,
 such that:</p>
@@ -1131,7 +1131,7 @@ automatically partialized any more.</p>
 
     </div>
   
-    <h3 id="swapCouple_1">swapCouple(couple)<a class="permalink" href="#swapCouple_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-824" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="swapCouple_1">swapCouple(couple)<a class="permalink" href="#swapCouple_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-825" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Swap the values of a couple.</p>
 <p>The couple can be a tuple, a vector, a list or an array as long as its size is 2.
@@ -1142,7 +1142,7 @@ The return value as the same type.</p>
 
     </div>
   
-    <h3 id="swapCurry_1">swapCurry(func)<a class="permalink" href="#swapCurry_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-804" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="swapCurry_1">swapCurry(func)<a class="permalink" href="#swapCurry_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-805" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Change the signature of the given curried binary function by swapping its
 arguments, such that:</p>
@@ -1151,13 +1151,13 @@ arguments, such that:</p>
 
     </div>
   
-    <h3 id="True_1v">True(_...)<a class="permalink" href="#True_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-597" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="True_1v">True(_...)<a class="permalink" href="#True_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-598" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p><code>true</code> constant function.</p>
 
     </div>
   
-    <h3 id="unary_1">unary(f)<a class="permalink" href="#unary_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-745" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="unary_1">unary(f)<a class="permalink" href="#unary_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-746" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Convers a polyadic function into an unary function.
 E.g.</p>
@@ -1182,7 +1182,7 @@ list[["a", 1], ["b", 2], ["c", 3]]: map(unary(f))
 
     </div>
   
-    <h3 id="uncurry_1">uncurry(f)<a class="permalink" href="#uncurry_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-698" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="uncurry_1">uncurry(f)<a class="permalink" href="#uncurry_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-699" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Reverse of <a href="#curry_1"><code>curry</code></a>.</p>
 <p>Take a curried function (e.g. <code>|a| -&gt; |b| -&gt; a + b</code>) and return a polyadic
@@ -1202,7 +1202,7 @@ let g = uncurry(|a| -&gt; |b| -&gt; |c| -&gt; a + b + c)
 
     </div>
   
-    <h3 id="until_2">until(predicate, fun)<a class="permalink" href="#until_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-1005" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="until_2">until(predicate, fun)<a class="permalink" href="#until_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-1006" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Apply the given function until the predicate holds.</p>
 <p>For instance:</p>
@@ -1214,7 +1214,7 @@ f(9) == 18
 
     </div>
   
-    <h3 id="varargs_1">varargs(f)<a class="permalink" href="#varargs_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-773" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="varargs_1">varargs(f)<a class="permalink" href="#varargs_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-774" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Convert an unary function taking an array into a variadic function.</p>
 <p>This is the contrary of <a href="#unary_1"><code>unary</code></a>.
@@ -1229,7 +1229,7 @@ f([1, 2, 3]) == g(1, 2, 3)
 
     </div>
   
-    <h3 id="xor_2">xor(a, b)<a class="permalink" href="#xor_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-394" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="xor_2">xor(a, b)<a class="permalink" href="#xor_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Functions-src.html#l-395" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Curried boolean <em>xor</em>.</p>
 <pre class="listing"><code class="lang-golo" data-lang="golo">xor(a, b) == (a or b) and not (a and b)

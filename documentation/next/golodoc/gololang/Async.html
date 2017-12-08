@@ -4,7 +4,7 @@
 
 <html>
 <head>
-  <title>gololang.Async (Golo 3.2.0)</title>
+  <title>gololang.Async (Golo 3.3.0-M1)</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="icon"
@@ -371,7 +371,7 @@ code from the same thread, from a separate thread, or by pushing new tasks to a 
 
   <h2 id="structs">Structs</h2>
   
-    <h3 id="FutureBridge">FutureBridge<a class="permalink" href="#FutureBridge" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-258" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="FutureBridge">FutureBridge<a class="permalink" href="#FutureBridge" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-259" rel="source" title="Link to the corresponding source">Source</a></nav>
 
     <div class="golodoc">
       <p>Bridge structure to hold a reference to a Golo future and a Java future.</p>
@@ -406,7 +406,7 @@ on <code>ExecutorService</code> instances. This essentially adds the ability to:
 
   <h2 id="augmentations">Augmentations</h2>
   
-    <h3 id="augment.gololang.Async.types.FutureBridge">gololang.Async.types.FutureBridge<a class="permalink" href="#augment.gololang.Async.types.FutureBridge" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-270" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="augment.gololang.Async.types.FutureBridge">gololang.Async.types.FutureBridge<a class="permalink" href="#augment.gololang.Async.types.FutureBridge" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-271" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>A set of forwarding augmentations for <a href="#FutureBridge"><code>FutureBridge</code></a> instances.</p>
 <p>The provided functions all forward to Golo futures, while
@@ -416,43 +416,43 @@ forwards to a Java future.</p>
     </div>
     
     
-      <h4 id="augment.gololang.Async.types.FutureBridge.cancel_2">cancel(this, mayInterruptIfRunning)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.cancel_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-290" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.Async.types.FutureBridge.cancel_2">cancel(this, mayInterruptIfRunning)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.cancel_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-291" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         
       </div>
     
-      <h4 id="augment.gololang.Async.types.FutureBridge.fallbackTo_2">fallbackTo(this, future)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.fallbackTo_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-287" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.Async.types.FutureBridge.fallbackTo_2">fallbackTo(this, future)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.fallbackTo_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-288" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         
       </div>
     
-      <h4 id="augment.gololang.Async.types.FutureBridge.filter_2">filter(this, pred)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.filter_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-284" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.Async.types.FutureBridge.filter_2">filter(this, pred)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.filter_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-285" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         
       </div>
     
-      <h4 id="augment.gololang.Async.types.FutureBridge.flatMap_2">flatMap(this, fun)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.flatMap_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-281" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.Async.types.FutureBridge.flatMap_2">flatMap(this, fun)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.flatMap_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-282" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         
       </div>
     
-      <h4 id="augment.gololang.Async.types.FutureBridge.map_2">map(this, fun)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.map_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-278" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.Async.types.FutureBridge.map_2">map(this, fun)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.map_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-279" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         
       </div>
     
-      <h4 id="augment.gololang.Async.types.FutureBridge.onFail_2">onFail(this, listener)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.onFail_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-275" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.Async.types.FutureBridge.onFail_2">onFail(this, listener)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.onFail_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-276" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         
       </div>
     
-      <h4 id="augment.gololang.Async.types.FutureBridge.onSet_2">onSet(this, listener)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.onSet_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-272" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.Async.types.FutureBridge.onSet_2">onSet(this, listener)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.onSet_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-273" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         
       </div>
     
   
-    <h3 id="augment.gololang.concurrent.async.Future">gololang.concurrent.async.Future<a class="permalink" href="#augment.gololang.concurrent.async.Future" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-99" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="augment.gololang.concurrent.async.Future">gololang.concurrent.async.Future<a class="permalink" href="#augment.gololang.concurrent.async.Future" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-100" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Augmentation on the base <code>Future</code> objects provided by the <code>gololang.concurrent.async.Future</code> Java
 class.</p>
@@ -460,7 +460,7 @@ class.</p>
     </div>
     
     
-      <h4 id="augment.gololang.concurrent.async.Future.fallbackTo_2">fallbackTo(this, future)<a class="permalink" href="#augment.gololang.concurrent.async.Future.fallbackTo_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-153" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.concurrent.async.Future.fallbackTo_2">fallbackTo(this, future)<a class="permalink" href="#augment.gololang.concurrent.async.Future.fallbackTo_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-154" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Returns a fallback future:</p>
 <ul>
@@ -470,7 +470,7 @@ class.</p>
 
       </div>
     
-      <h4 id="augment.gololang.concurrent.async.Future.filter_2">filter(this, pred)<a class="permalink" href="#augment.gololang.concurrent.async.Future.filter_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-135" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.concurrent.async.Future.filter_2">filter(this, pred)<a class="permalink" href="#augment.gololang.concurrent.async.Future.filter_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-136" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Returns a future that filters this future through the <code>pred</code> predicate function.</p>
 <p>Suppose that this future is set to <code>v</code>:</p>
@@ -482,14 +482,14 @@ class.</p>
 
       </div>
     
-      <h4 id="augment.gololang.concurrent.async.Future.flatMap_2">flatMap(this, fun)<a class="permalink" href="#augment.gololang.concurrent.async.Future.flatMap_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-117" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.concurrent.async.Future.flatMap_2">flatMap(this, fun)<a class="permalink" href="#augment.gololang.concurrent.async.Future.flatMap_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-118" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Similar to <a href="#gololang.concurrent.async.Future.map_2"><code>map</code></a>,
 except that <code>fun</code> returns a future, not a value.</p>
 
       </div>
     
-      <h4 id="augment.gololang.concurrent.async.Future.map_2">map(this, fun)<a class="permalink" href="#augment.gololang.concurrent.async.Future.map_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-107" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.concurrent.async.Future.map_2">map(this, fun)<a class="permalink" href="#augment.gololang.concurrent.async.Future.map_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-108" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Returns a future whose value is mapped through the <code>fun</code> function.</p>
 <p>If this future is set to <code>v</code>, then the returned future is set to <code>fun(v)</code>. If it fails, the
@@ -498,7 +498,7 @@ returned future is also failed with the same exception.</p>
       </div>
     
   
-    <h3 id="augment.gololang.concurrent.async.Promise">gololang.concurrent.async.Promise<a class="permalink" href="#augment.gololang.concurrent.async.Promise" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-66" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="augment.gololang.concurrent.async.Promise">gololang.concurrent.async.Promise<a class="permalink" href="#augment.gololang.concurrent.async.Promise" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-67" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Augmentation on the base <code>Promise</code> objects provided by the <code>gololang.concurrent.async.Promise</code> Java
 class.</p>
@@ -524,26 +524,26 @@ myPromise()
     </div>
     
     
-      <h4 id="augment.gololang.concurrent.async.Promise.initialize_2">initialize(this, closure)<a class="permalink" href="#augment.gololang.concurrent.async.Promise.initialize_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-67" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.concurrent.async.Promise.initialize_2">initialize(this, closure)<a class="permalink" href="#augment.gololang.concurrent.async.Promise.initialize_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-68" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         
       </div>
     
-      <h4 id="augment.gololang.concurrent.async.Promise.initializeWithinThread_2">initializeWithinThread(this, closure)<a class="permalink" href="#augment.gololang.concurrent.async.Promise.initializeWithinThread_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-75" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.gololang.concurrent.async.Promise.initializeWithinThread_2">initializeWithinThread(this, closure)<a class="permalink" href="#augment.gololang.concurrent.async.Promise.initializeWithinThread_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-76" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>You can define a promise which runs &ldquo;stuff&rdquo; inside a Thread</p>
 
       </div>
     
   
-    <h3 id="augment.java.util.concurrent.ExecutorService">java.util.concurrent.ExecutorService<a class="permalink" href="#augment.java.util.concurrent.ExecutorService" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-297" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="augment.java.util.concurrent.ExecutorService">java.util.concurrent.ExecutorService<a class="permalink" href="#augment.java.util.concurrent.ExecutorService" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-298" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Augmentations for <code>ExecutorService</code>.</p>
 
     </div>
     
     
-      <h4 id="augment.java.util.concurrent.ExecutorService.enqueue_2">enqueue(this, fun)<a class="permalink" href="#augment.java.util.concurrent.ExecutorService.enqueue_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-323" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <h4 id="augment.java.util.concurrent.ExecutorService.enqueue_2">enqueue(this, fun)<a class="permalink" href="#augment.java.util.concurrent.ExecutorService.enqueue_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-324" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
         <p>Submits a function <code>fun</code> to be executed by this scheduler, and returns a
 <a href="#FutureBridge"><code>FutureBridge</code></a>.</p>
@@ -573,7 +573,7 @@ f: cancel(true)
 
   <h2 id="functions">Functions</h2>
   
-    <h3 id="all_1">all(futures)<a class="permalink" href="#all_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-177" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="all_1">all(futures)<a class="permalink" href="#all_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-178" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Given a collection of futures, returns a future whose value is eventually a vector with the
 results of these futures.</p>
@@ -588,20 +588,20 @@ results of these futures.</p>
 
     </div>
   
-    <h3 id="any_1">any(futures)<a class="permalink" href="#any_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-206" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="any_1">any(futures)<a class="permalink" href="#any_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-207" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Given a collection of futures, returns a future whose value is set to the first completing future.</p>
 <p>If all futures fail, then the returned future fails to a <code>java.util.NoSuchElementException</code>.</p>
 
     </div>
   
-    <h3 id="failedFuture_1">failedFuture(throwable)<a class="permalink" href="#failedFuture_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-92" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="failedFuture_1">failedFuture(throwable)<a class="permalink" href="#failedFuture_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-93" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Returns a failed future to a <code>throwable</code> exception.</p>
 
     </div>
   
-    <h3 id="promise_0">promise()<a class="permalink" href="#promise_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-40" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="promise_0">promise()<a class="permalink" href="#promise_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-41" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Returns a new promise. Promise objects have the following useful methods.</p>
 <ul>
@@ -623,7 +623,7 @@ has already been set.</li>
 
     </div>
   
-    <h3 id="reduce_3">reduce(futures, init, reducer)<a class="permalink" href="#reduce_3" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-231" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="reduce_3">reduce(futures, init, reducer)<a class="permalink" href="#reduce_3" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-232" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Returns a future whose value is set to the <em>reduction</em> of a collection of futures.</p>
 <ul>
@@ -637,7 +637,7 @@ which is either the last successful future or the first future to fail.</p>
 
     </div>
   
-    <h3 id="setFuture_1">setFuture(value)<a class="permalink" href="#setFuture_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-86" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <h3 id="setFuture_1">setFuture(value)<a class="permalink" href="#setFuture_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-87" rel="source" title="Link to the corresponding source">Source</a></nav>
     <div class="golodoc">
       <p>Returns a future set to <code>value</code>.</p>
 
