@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Copyright (c) 2012-2018 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
+<span class="sourceLineNo">003</span> *<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * This program and the accompanying materials are made available under the<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * terms of the Eclipse Public License 2.0 which is available at<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * http://www.eclipse.org/legal/epl-2.0.<a name="line.6"></a>
+<span class="sourceLineNo">007</span> *<a name="line.7"></a>
+<span class="sourceLineNo">008</span> * SPDX-License-Identifier: EPL-2.0<a name="line.8"></a>
+<span class="sourceLineNo">009</span> */<a name="line.9"></a>
+<span class="sourceLineNo">010</span><a name="line.10"></a>
+<span class="sourceLineNo">011</span>package org.eclipse.golo.runtime;<a name="line.11"></a>
+<span class="sourceLineNo">012</span><a name="line.12"></a>
+<span class="sourceLineNo">013</span>import gololang.Tuple;<a name="line.13"></a>
+<span class="sourceLineNo">014</span><a name="line.14"></a>
+<span class="sourceLineNo">015</span>import java.util.Arrays;<a name="line.15"></a>
+<span class="sourceLineNo">016</span>import java.util.HashSet;<a name="line.16"></a>
+<span class="sourceLineNo">017</span><a name="line.17"></a>
+<span class="sourceLineNo">018</span>import static gololang.Messages.message;<a name="line.18"></a>
+<span class="sourceLineNo">019</span>import static gololang.Messages.warning;<a name="line.19"></a>
+<span class="sourceLineNo">020</span>import static org.eclipse.golo.cli.command.Metadata.GUIDE_BASE;<a name="line.20"></a>
+<span class="sourceLineNo">021</span><a name="line.21"></a>
+<span class="sourceLineNo">022</span>/**<a name="line.22"></a>
+<span class="sourceLineNo">023</span> * A static class to deal with several kinds of warnings.<a name="line.23"></a>
+<span class="sourceLineNo">024</span> */<a name="line.24"></a>
+<span class="sourceLineNo">025</span>public final class Warnings {<a name="line.25"></a>
+<span class="sourceLineNo">026</span>  private Warnings() {<a name="line.26"></a>
+<span class="sourceLineNo">027</span>    // utility class<a name="line.27"></a>
+<span class="sourceLineNo">028</span>  }<a name="line.28"></a>
+<span class="sourceLineNo">029</span><a name="line.29"></a>
+<span class="sourceLineNo">030</span>  private static final boolean NO_PARAMETER_NAMES = load("golo.warnings.no-parameter-names", "true");<a name="line.30"></a>
+<span class="sourceLineNo">031</span>  private static final boolean UNAVAILABLE_CLASS = load("golo.warnings.unavailable-class", "false");<a name="line.31"></a>
+<span class="sourceLineNo">032</span>  private static final boolean DEPRECATED = load("golo.warnings.deprecated", "true");<a name="line.32"></a>
+<span class="sourceLineNo">033</span>  private static final boolean MULTIPLE_PACKAGE_DESCRIPTION = load("golo.warnings.doc.multiple-package-desc", "true");<a name="line.33"></a>
+<span class="sourceLineNo">034</span>  private static final HashSet&lt;Tuple&gt; SEEN_DEPRECATIONS = new HashSet&lt;&gt;();<a name="line.34"></a>
+<span class="sourceLineNo">035</span><a name="line.35"></a>
+<span class="sourceLineNo">036</span>  private static boolean load(String property, String def) {<a name="line.36"></a>
+<span class="sourceLineNo">037</span>    return Boolean.valueOf(System.getProperty(property, def));<a name="line.37"></a>
+<span class="sourceLineNo">038</span>  }<a name="line.38"></a>
+<span class="sourceLineNo">039</span><a name="line.39"></a>
+<span class="sourceLineNo">040</span>  public static void multiplePackageDescription(String packageName) {<a name="line.40"></a>
+<span class="sourceLineNo">041</span>    if (MULTIPLE_PACKAGE_DESCRIPTION) {<a name="line.41"></a>
+<span class="sourceLineNo">042</span>      warning(message("multiple_package_desc", packageName, GUIDE_BASE));<a name="line.42"></a>
+<span class="sourceLineNo">043</span>    }<a name="line.43"></a>
+<span class="sourceLineNo">044</span>  }<a name="line.44"></a>
+<span class="sourceLineNo">045</span><a name="line.45"></a>
+<span class="sourceLineNo">046</span>  public static void noParameterNames(String methodName, String[] argumentNames) {<a name="line.46"></a>
+<span class="sourceLineNo">047</span>    if (NO_PARAMETER_NAMES || gololang.Runtime.debugMode()) {<a name="line.47"></a>
+<span class="sourceLineNo">048</span>      warning(message("no_parameter_names", methodName, Arrays.toString(argumentNames), GUIDE_BASE));<a name="line.48"></a>
+<span class="sourceLineNo">049</span>    }<a name="line.49"></a>
+<span class="sourceLineNo">050</span>  }<a name="line.50"></a>
+<span class="sourceLineNo">051</span><a name="line.51"></a>
+<span class="sourceLineNo">052</span>  public static void unavailableClass(String className, String callerModule) {<a name="line.52"></a>
+<span class="sourceLineNo">053</span>    if ((UNAVAILABLE_CLASS || gololang.Runtime.debugMode()) &amp;&amp; !className.startsWith("java.lang") &amp;&amp; !className.startsWith("gololang")) {<a name="line.53"></a>
+<span class="sourceLineNo">054</span>      warning(message("unavailable_class", className, callerModule, GUIDE_BASE));<a name="line.54"></a>
+<span class="sourceLineNo">055</span>    }<a name="line.55"></a>
+<span class="sourceLineNo">056</span>  }<a name="line.56"></a>
+<span class="sourceLineNo">057</span><a name="line.57"></a>
+<span class="sourceLineNo">058</span>  public static void deprecatedElement(String object, String caller) {<a name="line.58"></a>
+<span class="sourceLineNo">059</span>    if (DEPRECATED) {<a name="line.59"></a>
+<span class="sourceLineNo">060</span>      Tuple seen = new Tuple(object, caller);<a name="line.60"></a>
+<span class="sourceLineNo">061</span>      if (!SEEN_DEPRECATIONS.contains(seen)) {<a name="line.61"></a>
+<span class="sourceLineNo">062</span>        SEEN_DEPRECATIONS.add(seen);<a name="line.62"></a>
+<span class="sourceLineNo">063</span>        warning(message("deprecated_element", object, caller, GUIDE_BASE));<a name="line.63"></a>
+<span class="sourceLineNo">064</span>      }<a name="line.64"></a>
+<span class="sourceLineNo">065</span>    }<a name="line.65"></a>
+<span class="sourceLineNo">066</span>  }<a name="line.66"></a>
+<span class="sourceLineNo">067</span>}<a name="line.67"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>

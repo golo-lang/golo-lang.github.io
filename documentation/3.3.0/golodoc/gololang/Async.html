@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>gololang.Async (Golo 3.3.0)</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon"
+        href="data:image/x-icon;base64,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"/>
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      margin: 1em auto;
+      margin-left: 20em;
+      max-width: 50em;
+      text-align: left;
+      padding: 0.5em;
+    }
+    pre {
+      background-color: #eee;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .listing:hover code[data-lang]:before {
+      display: block;
+    }
+
+    .listing code {
+      position: relative;
+    }
+
+    .listing code[data-lang]:before {
+      display: none;
+      content: attr(data-lang);
+      position: absolute;
+      font-size: 0.75em;
+      top: .5rem;
+      right: 0.5rem;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    li p {
+      margin: 0.3em;
+    }
+
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 250%;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 200%;
+      font-style: normal;
+      font-weight: bold;
+    }
+
+    h3 {
+      color: #666;
+      font-size: 180%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h4 {
+      font-size: 130%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h5 {
+      font-size: 100%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h6 {
+      font-size: 100%;
+      font-style: italic;
+      font-weight: normal;
+    }
+
+    #global-nav {
+      display: block;
+      font-size: 80%;
+    }
+
+    #global-nav > a {
+      margin: 0em;
+      padding: 0 0.5em;
+    }
+
+    #toc {
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      width: 20em;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    #toc h1 {
+      margin: .5em;
+      padding: 1ex;
+      font-size: 90%;
+      font-weight: bold;
+      font-style: normal;
+      color: #333;
+      background-color: #eee;
+      text-align: center;
+    }
+
+    #toc ul {
+      padding-left: 1em;
+    }
+
+    #toc > ul {
+      font-size: 80%;
+      margin: 0.5em;
+    }
+
+    #toc > ul > li {
+      list-style: none;
+      margin-bottom: 2ex;
+    }
+
+    #toc > ul > li > a {
+      font-weight: bold;
+      color: #333;
+      display: block;
+      padding: 1ex;
+      margin: 0 1em 1ex 0;
+      border-bottom: 1px solid #999;
+    }
+
+    #toc li {
+      list-style-type: none;
+    }
+
+    :target {
+      background-color: yellow;
+    }
+
+    .permalink {
+      margin-left: .3em;
+      font-size: 70%;
+      visibility: hidden;
+    }
+
+    *:hover > .permalink {
+      visibility: visible;
+    }
+
+    .golodoc {
+      margin: 0;
+      padding: 0;
+      padding-left: 1.5em;
+    }
+
+    .srclink {
+      float:  right;
+      text-align: right;
+      color: #999;
+      font-size: 75%;
+      margin-top: -2em;
+    }
+
+    .srclink a {
+      color: inherit;
+    }
+
+    .modules-list li p {
+      display: inline-block;
+      margin: 0 0.5em;
+    }
+
+    @media (max-width: 50em) {
+      #toc {
+        margin: auto;
+        position: static;
+        width: 100%;
+        overflow: visible;
+        white-space: normal;
+      }
+
+      #toc ul {
+        padding-left: 1em;
+        margin: 0;
+      }
+
+      #toc > ul {
+        font-size: 100%;
+        margin: 0em;
+        padding: 0;
+      }
+
+      #toc > ul > li {
+        list-style: none;
+        margin-bottom: 1ex;
+      }
+
+      #toc > ul > li > a {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        padding: 0ex;
+        margin: 0;
+        border-bottom: none;
+      }
+
+      #toc h1 {
+        display: none;
+      }
+
+      #global-nav {
+        display: block;
+        font-size: 100%;
+        z-index: 1000;
+        background-color: #fff;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 1.5rem;
+      }
+
+      :target {
+        padding-top: 1.5rem;
+      }
+
+      body {
+        margin: 0;
+        padding: 0.5em;
+      }
+
+      h1 {
+        font-size: 200%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<h1>Documentation for gololang.Async</h1>
+
+
+<div class="golodoc">
+  <p>This module offers asynchronous programming helpers, especially execution context agnostic promises
+and futures. The provided APIs are orthogonal to the execution strategy: it is up to you to execute
+code from the same thread, from a separate thread, or by pushing new tasks to a service executor.</p>
+<p>The functions and augmentations in this module often delegate to Java classes from
+<code>gololang.concurrent.async</code>.</p>
+
+</div>
+
+
+<!-- begin table of content -->
+<nav id="toc">
+<h1>gololang.Async</h1>
+  <section id="global-nav">
+    <a href="../index.html" rel="home">Module Index</a>
+    <a href="../index-all.html" rel="index">Global Index</a>
+    
+    <a href="../gololang.html" rel="up">Package Index</a>
+    
+  </section>
+<ul>
+  
+  <li><a href="#structs">Structs</a><ul>
+    
+    <li><a href="#FutureBridge">FutureBridge</a></li>
+    
+  </ul></li>
+  
+
+  
+
+  
+
+  
+  <li><a href="#augmentations">Augmentations</a><ul>
+    
+    <li><a href="#augment.gololang.Async.types.FutureBridge">gololang.Async.types.FutureBridge</a><ul>
+      
+      <li><a href="#augment.gololang.Async.types.FutureBridge.cancel_2">cancel(this, mayInterruptIfRunning)</a></li>
+      
+      <li><a href="#augment.gololang.Async.types.FutureBridge.fallbackTo_2">fallbackTo(this, future)</a></li>
+      
+      <li><a href="#augment.gololang.Async.types.FutureBridge.filter_2">filter(this, pred)</a></li>
+      
+      <li><a href="#augment.gololang.Async.types.FutureBridge.flatMap_2">flatMap(this, fun)</a></li>
+      
+      <li><a href="#augment.gololang.Async.types.FutureBridge.map_2">map(this, fun)</a></li>
+      
+      <li><a href="#augment.gololang.Async.types.FutureBridge.onFail_2">onFail(this, listener)</a></li>
+      
+      <li><a href="#augment.gololang.Async.types.FutureBridge.onSet_2">onSet(this, listener)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.gololang.concurrent.async.Future">gololang.concurrent.async.Future</a><ul>
+      
+      <li><a href="#augment.gololang.concurrent.async.Future.fallbackTo_2">fallbackTo(this, future)</a></li>
+      
+      <li><a href="#augment.gololang.concurrent.async.Future.filter_2">filter(this, pred)</a></li>
+      
+      <li><a href="#augment.gololang.concurrent.async.Future.flatMap_2">flatMap(this, fun)</a></li>
+      
+      <li><a href="#augment.gololang.concurrent.async.Future.map_2">map(this, fun)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.gololang.concurrent.async.Promise">gololang.concurrent.async.Promise</a><ul>
+      
+      <li><a href="#augment.gololang.concurrent.async.Promise.initialize_2">initialize(this, closure)</a></li>
+      
+      <li><a href="#augment.gololang.concurrent.async.Promise.initializeWithinThread_2">initializeWithinThread(this, closure)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.util.concurrent.ExecutorService">java.util.concurrent.ExecutorService</a><ul>
+      
+      <li><a href="#augment.java.util.concurrent.ExecutorService.enqueue_2">enqueue(this, fun)</a></li>
+      
+    </ul></li>
+    
+  </ul></li>
+  
+
+  
+  <li><a href="#functions">Functions</a><ul>
+    
+    <li><a href="#all_1">all(futures)</a></li>
+    
+    <li><a href="#any_1">any(futures)</a></li>
+    
+    <li><a href="#failedFuture_1">failedFuture(throwable)</a></li>
+    
+    <li><a href="#promise_0">promise()</a></li>
+    
+    <li><a href="#reduce_3">reduce(futures, init, reducer)</a></li>
+    
+    <li><a href="#setFuture_1">setFuture(value)</a></li>
+    
+  </ul></li>
+  
+</ul>
+</nav>
+<!-- end table of content -->
+
+
+
+
+  <h2 id="structs">Structs</h2>
+  
+    <h3 id="FutureBridge">FutureBridge<a class="permalink" href="#FutureBridge" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-259" rel="source" title="Link to the corresponding source">Source</a></nav>
+
+    <div class="golodoc">
+      <p>Bridge structure to hold a reference to a Golo future and a Java future.</p>
+<p>Instances of this struct are being returned by the
+<a href="#java.util.concurrent.ExecutorService.enqueue_2"><code>enqueue</code></a> augmentation
+on <code>ExecutorService</code> instances. This essentially adds the ability to:</p>
+<ul>
+<li>use the Golo future for its composability, and</li>
+<li>use tha Java future to cancel a job.</li>
+</ul>
+
+    </div>
+
+    <h5>Members</h5>
+    <ul>
+    
+    <li><code id="FutureBridge._goloFuture">_goloFuture</code> 
+      </li>
+  
+    <li><code id="FutureBridge._javaFuture">_javaFuture</code> 
+      </li>
+  
+    </ul>
+  
+
+
+
+
+
+
+
+
+  <h2 id="augmentations">Augmentations</h2>
+  
+    <h3 id="augment.gololang.Async.types.FutureBridge">gololang.Async.types.FutureBridge<a class="permalink" href="#augment.gololang.Async.types.FutureBridge" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-271" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>A set of forwarding augmentations for <a href="#FutureBridge"><code>FutureBridge</code></a> instances.</p>
+<p>The provided functions all forward to Golo futures, while
+<a href="#gololang.Async.types.FutureBridge.cancel_2"><code>cancel</code></a>
+forwards to a Java future.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.gololang.Async.types.FutureBridge.cancel_2">cancel(this, mayInterruptIfRunning)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.cancel_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-291" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        
+      </div>
+    
+      <h4 id="augment.gololang.Async.types.FutureBridge.fallbackTo_2">fallbackTo(this, future)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.fallbackTo_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-288" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        
+      </div>
+    
+      <h4 id="augment.gololang.Async.types.FutureBridge.filter_2">filter(this, pred)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.filter_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-285" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        
+      </div>
+    
+      <h4 id="augment.gololang.Async.types.FutureBridge.flatMap_2">flatMap(this, fun)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.flatMap_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-282" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        
+      </div>
+    
+      <h4 id="augment.gololang.Async.types.FutureBridge.map_2">map(this, fun)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.map_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-279" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        
+      </div>
+    
+      <h4 id="augment.gololang.Async.types.FutureBridge.onFail_2">onFail(this, listener)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.onFail_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-276" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        
+      </div>
+    
+      <h4 id="augment.gololang.Async.types.FutureBridge.onSet_2">onSet(this, listener)<a class="permalink" href="#augment.gololang.Async.types.FutureBridge.onSet_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-273" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        
+      </div>
+    
+  
+    <h3 id="augment.gololang.concurrent.async.Future">gololang.concurrent.async.Future<a class="permalink" href="#augment.gololang.concurrent.async.Future" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-100" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Augmentation on the base <code>Future</code> objects provided by the <code>gololang.concurrent.async.Future</code> Java
+class.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.gololang.concurrent.async.Future.fallbackTo_2">fallbackTo(this, future)<a class="permalink" href="#augment.gololang.concurrent.async.Future.fallbackTo_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-154" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns a fallback future:</p>
+<ul>
+<li>when this future is set, the returned future is set to the same value,</li>
+<li>when it fails, the returned future matches the success or failure of <code>future</code>.</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.gololang.concurrent.async.Future.filter_2">filter(this, pred)<a class="permalink" href="#augment.gololang.concurrent.async.Future.filter_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-136" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns a future that filters this future through the <code>pred</code> predicate function.</p>
+<p>Suppose that this future is set to <code>v</code>:</p>
+<ul>
+<li>if <code>pred(v)</code> is <code>true</code>, then the result future is set to <code>v</code>,</li>
+<li>if <code>pred(v)</code> is <code>false</code>, then the result is failed to a <code>java.util.NoSuchElementException</code>.</li>
+</ul>
+<p>If this future fails, so does the returned future.</p>
+
+      </div>
+    
+      <h4 id="augment.gololang.concurrent.async.Future.flatMap_2">flatMap(this, fun)<a class="permalink" href="#augment.gololang.concurrent.async.Future.flatMap_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-118" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Similar to <a href="#gololang.concurrent.async.Future.map_2"><code>map</code></a>,
+except that <code>fun</code> returns a future, not a value.</p>
+
+      </div>
+    
+      <h4 id="augment.gololang.concurrent.async.Future.map_2">map(this, fun)<a class="permalink" href="#augment.gololang.concurrent.async.Future.map_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-108" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns a future whose value is mapped through the <code>fun</code> function.</p>
+<p>If this future is set to <code>v</code>, then the returned future is set to <code>fun(v)</code>. If it fails, the
+returned future is also failed with the same exception.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.gololang.concurrent.async.Promise">gololang.concurrent.async.Promise<a class="permalink" href="#augment.gololang.concurrent.async.Promise" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-67" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Augmentation on the base <code>Promise</code> objects provided by the <code>gololang.concurrent.async.Promise</code> Java
+class.</p>
+<p>The promise initialize method takes one argument, a callback with two parameters, resolve and reject.
+Do something within the callback, then call resolve if everything worked, otherwise call reject:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let myPromise = -&gt; promise(): initialize(|resolve, reject| {
+  if everythingTurnedOutFine is true {
+    resolve("Stuff worked!")
+  } else {
+    reject(java.lang.Exception("Failed!"))
+  }
+})
+
+myPromise()
+  : onSet(|result| {
+      println(result) # Stuff worked!
+  })
+  : onFail(|err| {
+      println(err: getMessage()) # Failed!
+  })
+</code></pre>
+
+    </div>
+    
+    
+      <h4 id="augment.gololang.concurrent.async.Promise.initialize_2">initialize(this, closure)<a class="permalink" href="#augment.gololang.concurrent.async.Promise.initialize_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-68" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        
+      </div>
+    
+      <h4 id="augment.gololang.concurrent.async.Promise.initializeWithinThread_2">initializeWithinThread(this, closure)<a class="permalink" href="#augment.gololang.concurrent.async.Promise.initializeWithinThread_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-76" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>You can define a promise which runs &ldquo;stuff&rdquo; inside a Thread</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.util.concurrent.ExecutorService">java.util.concurrent.ExecutorService<a class="permalink" href="#augment.java.util.concurrent.ExecutorService" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-298" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Augmentations for <code>ExecutorService</code>.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.java.util.concurrent.ExecutorService.enqueue_2">enqueue(this, fun)<a class="permalink" href="#augment.java.util.concurrent.ExecutorService.enqueue_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Async-src.html#l-324" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Submits a function <code>fun</code> to be executed by this scheduler, and returns a
+<a href="#FutureBridge"><code>FutureBridge</code></a>.</p>
+<p><code>fun</code> takes no parameters, and its return value is used as a future value.</p>
+<p>The returned <a href="#FutureBridge"><code>FutureBridge</code></a>` behaves both as a composable
+Golo future and as a Java future that can be cancelled.</p>
+<p>Here is a sample usage:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo"># Enqueue some elaborated work
+let f = executor: enqueue({
+  Thread.sleep(1000_L)
+  return 666
+})
+
+# Watch what could happen
+f: onSet(|v| -&gt; println(v)):
+   onFail(|e| -&gt; println(e: getMessage()))
+
+# ...but make it fail unless the CPU was too slow
+f: cancel(true)
+</code></pre>
+
+      </div>
+    
+  
+
+
+
+  <h2 id="functions">Functions</h2>
+  
+    <h3 id="all_1">all(futures)<a class="permalink" href="#all_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-178" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Given a collection of futures, returns a future whose value is eventually a vector with the
+results of these futures.</p>
+<p>Given:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">all([ setFuture(1), failedFuture(e) ])
+</code></pre>
+<p>this yields a future whose eventual value is:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">vector[1, e]
+</code></pre>
+<p>Results are accumulated as futures get resolved. The last completed future triggers the calls to
+<code>onSet</code>-registered listeners on the same thread.</p>
+
+    </div>
+  
+    <h3 id="any_1">any(futures)<a class="permalink" href="#any_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-207" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Given a collection of futures, returns a future whose value is set to the first completing future.</p>
+<p>If all futures fail, then the returned future fails to a <code>java.util.NoSuchElementException</code>.</p>
+
+    </div>
+  
+    <h3 id="failedFuture_1">failedFuture(throwable)<a class="permalink" href="#failedFuture_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-93" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Returns a failed future to a <code>throwable</code> exception.</p>
+
+    </div>
+  
+    <h3 id="promise_0">promise()<a class="permalink" href="#promise_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-41" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Returns a new promise. Promise objects have the following useful methods.</p>
+<ul>
+<li><code>set(value)</code>: sets the promise value. The value is ignored if the promise has already been set.</li>
+<li><code>fail(exception)</code>: set the value to an exception.</li>
+<li><code>get()</code>: returns the promise value. It returns a bogus <code>null</code> value if the promise is still
+undefined.</li>
+<li><code>blockingGet()</code>: waits until the promise is set or failed, and returns the value.</li>
+<li><code>future()</code>: returns a new future object on a promise.</li>
+<li><code>isResolved()</code> and <code>isFailed()</code> query the promise status.</li>
+</ul>
+<p>Future objects have the following methods.</p>
+<ul>
+<li><code>onSet(|v| {...})</code>: registers a callback when the value is set, or executes it right now if it
+has already been set.</li>
+<li><code>onFail(|e| {...})</code>: registers a callback when the corresponding promise fails with an exception.</li>
+<li><code>isResolved()</code>, <code>isFailed()</code> <code>get()</code> and <code>blockingGet()</code> delegate to the promise implementation.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="reduce_3">reduce(futures, init, reducer)<a class="permalink" href="#reduce_3" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-232" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Returns a future whose value is set to the <em>reduction</em> of a collection of futures.</p>
+<ul>
+<li><code>futures</code> is a collection of futures, and</li>
+<li><code>init</code> is the initial value, and</li>
+<li><code>reducer</code> is the reducing function of the form <code>|acc, next| {...}</code>.</li>
+</ul>
+<p>If any future fails, then the result future fails, too. Otherwise, the returned future is set to the
+accumulation of the values. Listeners callbacks get executed on the thread of the completing future
+which is either the last successful future or the first future to fail.</p>
+
+    </div>
+  
+    <h3 id="setFuture_1">setFuture(value)<a class="permalink" href="#setFuture_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Async-src.html#l-87" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Returns a future set to <code>value</code>.</p>
+
+    </div>
+  
+
+
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
+</html>

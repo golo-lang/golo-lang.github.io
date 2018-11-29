@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Copyright (c) 2012-2018 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
+<span class="sourceLineNo">003</span> *<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * This program and the accompanying materials are made available under the<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * terms of the Eclipse Public License 2.0 which is available at<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * http://www.eclipse.org/legal/epl-2.0.<a name="line.6"></a>
+<span class="sourceLineNo">007</span> *<a name="line.7"></a>
+<span class="sourceLineNo">008</span> * SPDX-License-Identifier: EPL-2.0<a name="line.8"></a>
+<span class="sourceLineNo">009</span> */<a name="line.9"></a>
+<span class="sourceLineNo">010</span><a name="line.10"></a>
+<span class="sourceLineNo">011</span>package gololang;<a name="line.11"></a>
+<span class="sourceLineNo">012</span><a name="line.12"></a>
+<span class="sourceLineNo">013</span>import org.eclipse.golo.compiler.GoloClassLoader;<a name="line.13"></a>
+<span class="sourceLineNo">014</span>import org.eclipse.golo.compiler.GoloCompilationException;<a name="line.14"></a>
+<span class="sourceLineNo">015</span><a name="line.15"></a>
+<span class="sourceLineNo">016</span>import java.io.ByteArrayInputStream;<a name="line.16"></a>
+<span class="sourceLineNo">017</span>import java.io.IOException;<a name="line.17"></a>
+<span class="sourceLineNo">018</span>import java.io.InputStream;<a name="line.18"></a>
+<span class="sourceLineNo">019</span>import java.nio.charset.StandardCharsets;<a name="line.19"></a>
+<span class="sourceLineNo">020</span>import java.lang.reflect.InvocationTargetException;<a name="line.20"></a>
+<span class="sourceLineNo">021</span>import java.util.*;<a name="line.21"></a>
+<span class="sourceLineNo">022</span><a name="line.22"></a>
+<span class="sourceLineNo">023</span>/**<a name="line.23"></a>
+<span class="sourceLineNo">024</span> * An evaluation environment offers facilities for dynamic code compilation, loading and execution from Golo code as<a name="line.24"></a>
+<span class="sourceLineNo">025</span> * strings.<a name="line.25"></a>
+<span class="sourceLineNo">026</span> * &lt;p&gt;<a name="line.26"></a>
+<span class="sourceLineNo">027</span> * An evaluation environment is reusable across several executions. The only exception is when using {@code asModule()},<a name="line.27"></a>
+<span class="sourceLineNo">028</span> * as attempts to load a module with the same name as an already loaded one fails.<a name="line.28"></a>
+<span class="sourceLineNo">029</span> * &lt;p&gt;<a name="line.29"></a>
+<span class="sourceLineNo">030</span> * Each instance of this class uses a dedicated {@link GoloClassLoader}, hence usual rules about classloader delegation<a name="line.30"></a>
+<span class="sourceLineNo">031</span> * and isolation apply to evaluation environments.<a name="line.31"></a>
+<span class="sourceLineNo">032</span> * &lt;p&gt;<a name="line.32"></a>
+<span class="sourceLineNo">033</span> * While dynamic code evaluation is useful, it shall still be used with care and parsimony. It is especially important<a name="line.33"></a>
+<span class="sourceLineNo">034</span> * not to abuse {@code run()}, as each invocation triggers the generation of a one-shot class.<a name="line.34"></a>
+<span class="sourceLineNo">035</span> * &lt;p&gt;<a name="line.35"></a>
+<span class="sourceLineNo">036</span> * Here is an example usage of this API:<a name="line.36"></a>
+<span class="sourceLineNo">037</span> * &lt;pre class="listing"&gt;&lt;code class="lang-golo" data-lang="golo"&gt;<a name="line.37"></a>
+<span class="sourceLineNo">038</span> * let env = EvaluationEnvironment()<a name="line.38"></a>
+<span class="sourceLineNo">039</span> * let code =<a name="line.39"></a>
+<span class="sourceLineNo">040</span> * """<a name="line.40"></a>
+<span class="sourceLineNo">041</span> * function a = -&gt; "a."<a name="line.41"></a>
+<span class="sourceLineNo">042</span> * function b = -&gt; "b."<a name="line.42"></a>
+<span class="sourceLineNo">043</span> * """<a name="line.43"></a>
+<span class="sourceLineNo">044</span> * let mod = env: anonymousModule(code)<a name="line.44"></a>
+<span class="sourceLineNo">045</span> * let a = fun("a", mod)<a name="line.45"></a>
+<span class="sourceLineNo">046</span> * let b = fun("b", mod)<a name="line.46"></a>
+<span class="sourceLineNo">047</span> * println(a())<a name="line.47"></a>
+<span class="sourceLineNo">048</span> * println(b())<a name="line.48"></a>
+<span class="sourceLineNo">049</span> * &lt;/code&gt;&lt;/pre&gt;<a name="line.49"></a>
+<span class="sourceLineNo">050</span> * &lt;p&gt;<a name="line.50"></a>
+<span class="sourceLineNo">051</span> * While this class is expected to be used from Golo code, it can also be used as a convenient way to embed Golo into<a name="line.51"></a>
+<span class="sourceLineNo">052</span> * polyglot JVM applications.<a name="line.52"></a>
+<span class="sourceLineNo">053</span> */<a name="line.53"></a>
+<span class="sourceLineNo">054</span>public class EvaluationEnvironment {<a name="line.54"></a>
+<span class="sourceLineNo">055</span><a name="line.55"></a>
+<span class="sourceLineNo">056</span>  private final GoloClassLoader goloClassLoader;<a name="line.56"></a>
+<span class="sourceLineNo">057</span>  private final List&lt;String&gt; imports = new LinkedList&lt;&gt;();<a name="line.57"></a>
+<span class="sourceLineNo">058</span><a name="line.58"></a>
+<span class="sourceLineNo">059</span>  private static String anonymousFilename() {<a name="line.59"></a>
+<span class="sourceLineNo">060</span>    return "$Anonymous$_" + System.nanoTime() + ".golo";<a name="line.60"></a>
+<span class="sourceLineNo">061</span>  }<a name="line.61"></a>
+<span class="sourceLineNo">062</span><a name="line.62"></a>
+<span class="sourceLineNo">063</span>  private static String anonymousModuleName() {<a name="line.63"></a>
+<span class="sourceLineNo">064</span>    return "module anonymous" + System.nanoTime();<a name="line.64"></a>
+<span class="sourceLineNo">065</span>  }<a name="line.65"></a>
+<span class="sourceLineNo">066</span><a name="line.66"></a>
+<span class="sourceLineNo">067</span>  /**<a name="line.67"></a>
+<span class="sourceLineNo">068</span>   * Creates an evaluation environment using the current thread context classloader.<a name="line.68"></a>
+<span class="sourceLineNo">069</span>   */<a name="line.69"></a>
+<span class="sourceLineNo">070</span>  public EvaluationEnvironment() {<a name="line.70"></a>
+<span class="sourceLineNo">071</span>    this(Thread.currentThread().getContextClassLoader());<a name="line.71"></a>
+<span class="sourceLineNo">072</span>  }<a name="line.72"></a>
+<span class="sourceLineNo">073</span><a name="line.73"></a>
+<span class="sourceLineNo">074</span>  /**<a name="line.74"></a>
+<span class="sourceLineNo">075</span>   * Creates an evaluation environment using a parent classloader.<a name="line.75"></a>
+<span class="sourceLineNo">076</span>   *<a name="line.76"></a>
+<span class="sourceLineNo">077</span>   * @param parentClassLoader the parent classloader.<a name="line.77"></a>
+<span class="sourceLineNo">078</span>   */<a name="line.78"></a>
+<span class="sourceLineNo">079</span>  public EvaluationEnvironment(ClassLoader parentClassLoader) {<a name="line.79"></a>
+<span class="sourceLineNo">080</span>    goloClassLoader = new GoloClassLoader(parentClassLoader);<a name="line.80"></a>
+<span class="sourceLineNo">081</span>  }<a name="line.81"></a>
+<span class="sourceLineNo">082</span><a name="line.82"></a>
+<span class="sourceLineNo">083</span>  /**<a name="line.83"></a>
+<span class="sourceLineNo">084</span>   * Imports symbols.<a name="line.84"></a>
+<span class="sourceLineNo">085</span>   * &lt;p&gt;<a name="line.85"></a>
+<span class="sourceLineNo">086</span>   * Each symbol generates an equivalent {@code import} statement in the corresponding Golo code. Calling<a name="line.86"></a>
+<span class="sourceLineNo">087</span>   * {@code imports("foo.Bar", "bar.Baz")} means that the subsequent code evaluations have {@code import foo.Bar} and<a name="line.87"></a>
+<span class="sourceLineNo">088</span>   * {@code import bar.Baz} statements.<a name="line.88"></a>
+<span class="sourceLineNo">089</span>   * &lt;p&gt;<a name="line.89"></a>
+<span class="sourceLineNo">090</span>   * Note that this has no effect for {@link #asModule(String)}. Also, calling this method several times accumulates<a name="line.90"></a>
+<span class="sourceLineNo">091</span>   * the imports, in order.<a name="line.91"></a>
+<span class="sourceLineNo">092</span>   *<a name="line.92"></a>
+<span class="sourceLineNo">093</span>   * @param head the first imported symbol.<a name="line.93"></a>
+<span class="sourceLineNo">094</span>   * @param tail the next imported symbols.<a name="line.94"></a>
+<span class="sourceLineNo">095</span>   * @return this evaluation environment.<a name="line.95"></a>
+<span class="sourceLineNo">096</span>   */<a name="line.96"></a>
+<span class="sourceLineNo">097</span>  public EvaluationEnvironment imports(String head, String... tail) {<a name="line.97"></a>
+<span class="sourceLineNo">098</span>    imports.add(head);<a name="line.98"></a>
+<span class="sourceLineNo">099</span>    Collections.addAll(imports, tail);<a name="line.99"></a>
+<span class="sourceLineNo">100</span>    return this;<a name="line.100"></a>
+<span class="sourceLineNo">101</span>  }<a name="line.101"></a>
+<span class="sourceLineNo">102</span><a name="line.102"></a>
+<span class="sourceLineNo">103</span>  /**<a name="line.103"></a>
+<span class="sourceLineNo">104</span>   * Clears all import symbols for the next code evaluation requests.<a name="line.104"></a>
+<span class="sourceLineNo">105</span>   *<a name="line.105"></a>
+<span class="sourceLineNo">106</span>   * @return this evaluation environment.<a name="line.106"></a>
+<span class="sourceLineNo">107</span>   */<a name="line.107"></a>
+<span class="sourceLineNo">108</span>  public EvaluationEnvironment clearImports() {<a name="line.108"></a>
+<span class="sourceLineNo">109</span>    imports.clear();<a name="line.109"></a>
+<span class="sourceLineNo">110</span>    return this;<a name="line.110"></a>
+<span class="sourceLineNo">111</span>  }<a name="line.111"></a>
+<span class="sourceLineNo">112</span><a name="line.112"></a>
+<span class="sourceLineNo">113</span>  /**<a name="line.113"></a>
+<span class="sourceLineNo">114</span>   * Evaluates a complete module string.<a name="line.114"></a>
+<span class="sourceLineNo">115</span>   *&lt;p&gt;<a name="line.115"></a>
+<span class="sourceLineNo">116</span>   * For instance:<a name="line.116"></a>
+<span class="sourceLineNo">117</span>   * &lt;pre class="listing"&gt;&lt;code class="lang-golo" data-lang="golo"&gt;<a name="line.117"></a>
+<span class="sourceLineNo">118</span>   * let code =<a name="line.118"></a>
+<span class="sourceLineNo">119</span>   * """<a name="line.119"></a>
+<span class="sourceLineNo">120</span>   * module foo<a name="line.120"></a>
+<span class="sourceLineNo">121</span>   *<a name="line.121"></a>
+<span class="sourceLineNo">122</span>   * function a = -&gt; "a!"<a name="line.122"></a>
+<span class="sourceLineNo">123</span>   * function b = -&gt; "b!"<a name="line.123"></a>
+<span class="sourceLineNo">124</span>   * """<a name="line.124"></a>
+<span class="sourceLineNo">125</span>   * let mod = env: asModule(code)<a name="line.125"></a>
+<span class="sourceLineNo">126</span>   * let a = fun("a", mod)<a name="line.126"></a>
+<span class="sourceLineNo">127</span>   * let b = fun("b", mod)<a name="line.127"></a>
+<span class="sourceLineNo">128</span>   * println(a())<a name="line.128"></a>
+<span class="sourceLineNo">129</span>   * println(b())<a name="line.129"></a>
+<span class="sourceLineNo">130</span>   * &lt;/code&gt;&lt;/pre&gt;<a name="line.130"></a>
+<span class="sourceLineNo">131</span>   *<a name="line.131"></a>
+<span class="sourceLineNo">132</span>   * @param source the module Golo source code as a string.<a name="line.132"></a>
+<span class="sourceLineNo">133</span>   * @return the corresponding module, as a {@link Class}.<a name="line.133"></a>
+<span class="sourceLineNo">134</span>   * @see gololang.Predefined#fun(Class, Object, Object)<a name="line.134"></a>
+<span class="sourceLineNo">135</span>   */<a name="line.135"></a>
+<span class="sourceLineNo">136</span>  public Object asModule(String source) {<a name="line.136"></a>
+<span class="sourceLineNo">137</span>    try (InputStream in = new ByteArrayInputStream(source.getBytes(StandardCharsets.UTF_8))) {<a name="line.137"></a>
+<span class="sourceLineNo">138</span>      return goloClassLoader.load(anonymousFilename(), in);<a name="line.138"></a>
+<span class="sourceLineNo">139</span>    } catch (IOException e) {<a name="line.139"></a>
+<span class="sourceLineNo">140</span>      throw new RuntimeException(e);<a name="line.140"></a>
+<span class="sourceLineNo">141</span>    } catch (GoloCompilationException e) {<a name="line.141"></a>
+<span class="sourceLineNo">142</span>      e.setSourceCode(source);<a name="line.142"></a>
+<span class="sourceLineNo">143</span>      throw e;<a name="line.143"></a>
+<span class="sourceLineNo">144</span>    }<a name="line.144"></a>
+<span class="sourceLineNo">145</span>  }<a name="line.145"></a>
+<span class="sourceLineNo">146</span><a name="line.146"></a>
+<span class="sourceLineNo">147</span>  /**<a name="line.147"></a>
+<span class="sourceLineNo">148</span>   * Loads an anonymous module. This is the same as {@link #asModule(String)}, except that the code does not contain<a name="line.148"></a>
+<span class="sourceLineNo">149</span>   * a {@code module} declaration.<a name="line.149"></a>
+<span class="sourceLineNo">150</span>   *<a name="line.150"></a>
+<span class="sourceLineNo">151</span>   * &lt;pre class="listing"&gt;&lt;code class="lang-golo" data-lang="golo"&gt;<a name="line.151"></a>
+<span class="sourceLineNo">152</span>   * let code =<a name="line.152"></a>
+<span class="sourceLineNo">153</span>   * """<a name="line.153"></a>
+<span class="sourceLineNo">154</span>   * function a = -&gt; "a!"<a name="line.154"></a>
+<span class="sourceLineNo">155</span>   * function b = -&gt; "b!"<a name="line.155"></a>
+<span class="sourceLineNo">156</span>   * """<a name="line.156"></a>
+<span class="sourceLineNo">157</span>   * let mod = env: anonymousModule(code)<a name="line.157"></a>
+<span class="sourceLineNo">158</span>   * let a = fun("a", mod)<a name="line.158"></a>
+<span class="sourceLineNo">159</span>   * let b = fun("b", mod)<a name="line.159"></a>
+<span class="sourceLineNo">160</span>   * println(a())<a name="line.160"></a>
+<span class="sourceLineNo">161</span>   * println(b())<a name="line.161"></a>
+<span class="sourceLineNo">162</span>   * &lt;/code&gt;&lt;/pre&gt;<a name="line.162"></a>
+<span class="sourceLineNo">163</span>   *<a name="line.163"></a>
+<span class="sourceLineNo">164</span>   * @param source the module Golo source code as a string.<a name="line.164"></a>
+<span class="sourceLineNo">165</span>   * @return the corresponding module, as a {@link Class}.<a name="line.165"></a>
+<span class="sourceLineNo">166</span>   * @see gololang.Predefined#fun(Class, Object, Object)<a name="line.166"></a>
+<span class="sourceLineNo">167</span>   */<a name="line.167"></a>
+<span class="sourceLineNo">168</span>  public Object anonymousModule(String source) {<a name="line.168"></a>
+<span class="sourceLineNo">169</span>    return asModule(anonymousModuleName() + "\n\n" + source);<a name="line.169"></a>
+<span class="sourceLineNo">170</span>  }<a name="line.170"></a>
+<span class="sourceLineNo">171</span><a name="line.171"></a>
+<span class="sourceLineNo">172</span>  /**<a name="line.172"></a>
+<span class="sourceLineNo">173</span>   * Defines a function, and returns it.<a name="line.173"></a>
+<span class="sourceLineNo">174</span>   *<a name="line.174"></a>
+<span class="sourceLineNo">175</span>   * &lt;pre class="listing"&gt;&lt;code class="lang-golo" data-lang="golo"&gt;<a name="line.175"></a>
+<span class="sourceLineNo">176</span>   * let code = "|a, b| -&gt; (a + b) * 2"<a name="line.176"></a>
+<span class="sourceLineNo">177</span>   * let f = env: def(code)<a name="line.177"></a>
+<span class="sourceLineNo">178</span>   * println(f(10, 20))<a name="line.178"></a>
+<span class="sourceLineNo">179</span>   * &lt;/code&gt;&lt;/pre&gt;<a name="line.179"></a>
+<span class="sourceLineNo">180</span>   *<a name="line.180"></a>
+<span class="sourceLineNo">181</span>   * @param source the function code.<a name="line.181"></a>
+<span class="sourceLineNo">182</span>   * @return the function as a {@link gololang.FunctionReference} instance.<a name="line.182"></a>
+<span class="sourceLineNo">183</span>   */<a name="line.183"></a>
+<span class="sourceLineNo">184</span>  public Object def(String source) {<a name="line.184"></a>
+<span class="sourceLineNo">185</span>    return loadAndRun("return " + source, "$_code");<a name="line.185"></a>
+<span class="sourceLineNo">186</span>  }<a name="line.186"></a>
+<span class="sourceLineNo">187</span><a name="line.187"></a>
+<span class="sourceLineNo">188</span>  /**<a name="line.188"></a>
+<span class="sourceLineNo">189</span>   * Evaluates some code as the body of a function and returns it.<a name="line.189"></a>
+<span class="sourceLineNo">190</span>   *<a name="line.190"></a>
+<span class="sourceLineNo">191</span>   * &lt;pre class="listing"&gt;&lt;code class="lang-golo" data-lang="golo"&gt;<a name="line.191"></a>
+<span class="sourceLineNo">192</span>   * let code = "return (a + b) * 2"<a name="line.192"></a>
+<span class="sourceLineNo">193</span>   * let f = env: asFunction(code, "a", "b")<a name="line.193"></a>
+<span class="sourceLineNo">194</span>   * println(f(10, 20))<a name="line.194"></a>
+<span class="sourceLineNo">195</span>   * &lt;/code&gt;&lt;/pre&gt;<a name="line.195"></a>
+<span class="sourceLineNo">196</span>   *<a name="line.196"></a>
+<span class="sourceLineNo">197</span>   * @param source        the function body source code.<a name="line.197"></a>
+<span class="sourceLineNo">198</span>   * @param argumentNames the argument names.<a name="line.198"></a>
+<span class="sourceLineNo">199</span>   * @return the function as a {@link gololang.FunctionReference} instance.<a name="line.199"></a>
+<span class="sourceLineNo">200</span>   */<a name="line.200"></a>
+<span class="sourceLineNo">201</span>  public Object asFunction(String source, String... argumentNames) {<a name="line.201"></a>
+<span class="sourceLineNo">202</span>    return loadAndRun(source, "$_code_ref", argumentNames);<a name="line.202"></a>
+<span class="sourceLineNo">203</span>  }<a name="line.203"></a>
+<span class="sourceLineNo">204</span><a name="line.204"></a>
+<span class="sourceLineNo">205</span>  /**<a name="line.205"></a>
+<span class="sourceLineNo">206</span>   * Runs some code as the body of a function and returns the value. The code shall use {@code return} statements<a name="line.206"></a>
+<span class="sourceLineNo">207</span>   * to provide return values, if any.<a name="line.207"></a>
+<span class="sourceLineNo">208</span>   *<a name="line.208"></a>
+<span class="sourceLineNo">209</span>   * &lt;pre class="listing"&gt;&lt;code class="lang-golo" data-lang="golo"&gt;<a name="line.209"></a>
+<span class="sourceLineNo">210</span>   * let code = """println("&gt;&gt;&gt; run")<a name="line.210"></a>
+<span class="sourceLineNo">211</span>   * foreach (i in range(0, 3)) {<a name="line.211"></a>
+<span class="sourceLineNo">212</span>   *   println("w00t")<a name="line.212"></a>
+<span class="sourceLineNo">213</span>   * }<a name="line.213"></a>
+<span class="sourceLineNo">214</span>   * return 666"""<a name="line.214"></a>
+<span class="sourceLineNo">215</span>   * env: run(code)<a name="line.215"></a>
+<span class="sourceLineNo">216</span>   *<a name="line.216"></a>
+<span class="sourceLineNo">217</span>   * &lt;/code&gt;&lt;/pre&gt;<a name="line.217"></a>
+<span class="sourceLineNo">218</span>   *<a name="line.218"></a>
+<span class="sourceLineNo">219</span>   * @param source the source to run.<a name="line.219"></a>
+<span class="sourceLineNo">220</span>   * @return the return value, or {@code null} if no {@code return} statement is used.<a name="line.220"></a>
+<span class="sourceLineNo">221</span>   */<a name="line.221"></a>
+<span class="sourceLineNo">222</span>  public Object run(String source) {<a name="line.222"></a>
+<span class="sourceLineNo">223</span>    return loadAndRun(source, "$_code");<a name="line.223"></a>
+<span class="sourceLineNo">224</span>  }<a name="line.224"></a>
+<span class="sourceLineNo">225</span><a name="line.225"></a>
+<span class="sourceLineNo">226</span>  /**<a name="line.226"></a>
+<span class="sourceLineNo">227</span>   * Runs some code as the body of a function and returns the value. This is the same as {@link #run(String)}, but it<a name="line.227"></a>
+<span class="sourceLineNo">228</span>   * takes a set of reference bindings in a map. Each reference is equivalent to a {@code let} statement.<a name="line.228"></a>
+<span class="sourceLineNo">229</span>   *<a name="line.229"></a>
+<span class="sourceLineNo">230</span>   * &lt;pre class="listing"&gt;&lt;code class="lang-golo" data-lang="golo"&gt;<a name="line.230"></a>
+<span class="sourceLineNo">231</span>   * let code = """println("&gt;&gt;&gt; run_map")<a name="line.231"></a>
+<span class="sourceLineNo">232</span>   * println(a)<a name="line.232"></a>
+<span class="sourceLineNo">233</span>   * println(b)<a name="line.233"></a>
+<span class="sourceLineNo">234</span>   * """<a name="line.234"></a>
+<span class="sourceLineNo">235</span>   * let values = java.util.TreeMap(): add("a", 1): add("b", 2)<a name="line.235"></a>
+<span class="sourceLineNo">236</span>   * env: run(code, values)<a name="line.236"></a>
+<span class="sourceLineNo">237</span>   * &lt;/code&gt;&lt;/pre&gt;<a name="line.237"></a>
+<span class="sourceLineNo">238</span>   *<a name="line.238"></a>
+<span class="sourceLineNo">239</span>   * @param source  the source to run.<a name="line.239"></a>
+<span class="sourceLineNo">240</span>   * @param context a map of bindings from name to values.<a name="line.240"></a>
+<span class="sourceLineNo">241</span>   * @return the return value, or {@code null} if no {@code return} statement is used.<a name="line.241"></a>
+<span class="sourceLineNo">242</span>   */<a name="line.242"></a>
+<span class="sourceLineNo">243</span>  public Object run(String source, Map&lt;String, Object&gt; context) {<a name="line.243"></a>
+<span class="sourceLineNo">244</span>    StringBuilder builder = new StringBuilder();<a name="line.244"></a>
+<span class="sourceLineNo">245</span>    for (String param : context.keySet()) {<a name="line.245"></a>
+<span class="sourceLineNo">246</span>      builder<a name="line.246"></a>
+<span class="sourceLineNo">247</span>          .append("let ")<a name="line.247"></a>
+<span class="sourceLineNo">248</span>          .append(param)<a name="line.248"></a>
+<span class="sourceLineNo">249</span>          .append(" = $_env: get(\"")<a name="line.249"></a>
+<span class="sourceLineNo">250</span>          .append(param)<a name="line.250"></a>
+<span class="sourceLineNo">251</span>          .append("\")\n");<a name="line.251"></a>
+<span class="sourceLineNo">252</span>    }<a name="line.252"></a>
+<span class="sourceLineNo">253</span>    builder.append(source);<a name="line.253"></a>
+<span class="sourceLineNo">254</span>    return loadAndRun(builder.toString(), "$_code", new String[]{"$_env"}, new Object[]{context});<a name="line.254"></a>
+<span class="sourceLineNo">255</span>  }<a name="line.255"></a>
+<span class="sourceLineNo">256</span><a name="line.256"></a>
+<span class="sourceLineNo">257</span>  private Class&lt;?&gt; wrapAndLoad(String source, String... argumentNames) {<a name="line.257"></a>
+<span class="sourceLineNo">258</span>    StringBuilder builder = new StringBuilder()<a name="line.258"></a>
+<span class="sourceLineNo">259</span>        .append(anonymousModuleName())<a name="line.259"></a>
+<span class="sourceLineNo">260</span>        .append("\n");<a name="line.260"></a>
+<span class="sourceLineNo">261</span>    for (String importSymbol : imports) {<a name="line.261"></a>
+<span class="sourceLineNo">262</span>      builder.append("import ").append(importSymbol).append("\n");<a name="line.262"></a>
+<span class="sourceLineNo">263</span>    }<a name="line.263"></a>
+<span class="sourceLineNo">264</span>    builder.append("\nfunction $_code = ");<a name="line.264"></a>
+<span class="sourceLineNo">265</span>    if (argumentNames.length &gt; 0) {<a name="line.265"></a>
+<span class="sourceLineNo">266</span>      builder.append("| ");<a name="line.266"></a>
+<span class="sourceLineNo">267</span>      final int lastIndex = argumentNames.length - 1;<a name="line.267"></a>
+<span class="sourceLineNo">268</span>      for (int i = 0; i &lt; argumentNames.length; i++) {<a name="line.268"></a>
+<span class="sourceLineNo">269</span>        builder.append(argumentNames[i]);<a name="line.269"></a>
+<span class="sourceLineNo">270</span>        if (i &lt; lastIndex) {<a name="line.270"></a>
+<span class="sourceLineNo">271</span>          builder.append(", ");<a name="line.271"></a>
+<span class="sourceLineNo">272</span>        }<a name="line.272"></a>
+<span class="sourceLineNo">273</span>      }<a name="line.273"></a>
+<span class="sourceLineNo">274</span>      builder.append(" |");<a name="line.274"></a>
+<span class="sourceLineNo">275</span>    }<a name="line.275"></a>
+<span class="sourceLineNo">276</span>    builder<a name="line.276"></a>
+<span class="sourceLineNo">277</span>        .append(" {\n")<a name="line.277"></a>
+<span class="sourceLineNo">278</span>        .append(source)<a name="line.278"></a>
+<span class="sourceLineNo">279</span>        .append("\n}\n\n")<a name="line.279"></a>
+<span class="sourceLineNo">280</span>        .append("function $_code_ref = -&gt; ^$_code\n\n");<a name="line.280"></a>
+<span class="sourceLineNo">281</span>    return (Class&lt;?&gt;) asModule(builder.toString());<a name="line.281"></a>
+<span class="sourceLineNo">282</span>  }<a name="line.282"></a>
+<span class="sourceLineNo">283</span><a name="line.283"></a>
+<span class="sourceLineNo">284</span>  private Object loadAndRun(String source, String target, String... argumentNames) {<a name="line.284"></a>
+<span class="sourceLineNo">285</span>    try {<a name="line.285"></a>
+<span class="sourceLineNo">286</span>      Class&lt;?&gt; module = wrapAndLoad(source, argumentNames);<a name="line.286"></a>
+<span class="sourceLineNo">287</span>      return module.getMethod(target).invoke(null);<a name="line.287"></a>
+<span class="sourceLineNo">288</span>    } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {<a name="line.288"></a>
+<span class="sourceLineNo">289</span>      throw new RuntimeException(e);<a name="line.289"></a>
+<span class="sourceLineNo">290</span>    }<a name="line.290"></a>
+<span class="sourceLineNo">291</span>  }<a name="line.291"></a>
+<span class="sourceLineNo">292</span><a name="line.292"></a>
+<span class="sourceLineNo">293</span>  private Object loadAndRun(String source, String target, String[] argumentNames, Object[] arguments) {<a name="line.293"></a>
+<span class="sourceLineNo">294</span>    try {<a name="line.294"></a>
+<span class="sourceLineNo">295</span>      Class&lt;?&gt; module = wrapAndLoad(source, argumentNames);<a name="line.295"></a>
+<span class="sourceLineNo">296</span>      Class&lt;?&gt;[] type = new Class&lt;?&gt;[argumentNames.length];<a name="line.296"></a>
+<span class="sourceLineNo">297</span>      Arrays.fill(type, Object.class);<a name="line.297"></a>
+<span class="sourceLineNo">298</span>      return module.getMethod(target, type).invoke(null, arguments);<a name="line.298"></a>
+<span class="sourceLineNo">299</span>    } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {<a name="line.299"></a>
+<span class="sourceLineNo">300</span>      throw new RuntimeException(e);<a name="line.300"></a>
+<span class="sourceLineNo">301</span>    }<a name="line.301"></a>
+<span class="sourceLineNo">302</span>  }<a name="line.302"></a>
+<span class="sourceLineNo">303</span>}<a name="line.303"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>

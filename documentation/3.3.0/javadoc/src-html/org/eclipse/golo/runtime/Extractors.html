@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Copyright (c) 2012-2018 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
+<span class="sourceLineNo">003</span> *<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * This program and the accompanying materials are made available under the<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * terms of the Eclipse Public License 2.0 which is available at<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * http://www.eclipse.org/legal/epl-2.0.<a name="line.6"></a>
+<span class="sourceLineNo">007</span> *<a name="line.7"></a>
+<span class="sourceLineNo">008</span> * SPDX-License-Identifier: EPL-2.0<a name="line.8"></a>
+<span class="sourceLineNo">009</span> */<a name="line.9"></a>
+<span class="sourceLineNo">010</span><a name="line.10"></a>
+<span class="sourceLineNo">011</span>package org.eclipse.golo.runtime;<a name="line.11"></a>
+<span class="sourceLineNo">012</span><a name="line.12"></a>
+<span class="sourceLineNo">013</span>import java.lang.reflect.*;<a name="line.13"></a>
+<span class="sourceLineNo">014</span>import java.util.function.Predicate;<a name="line.14"></a>
+<span class="sourceLineNo">015</span>import java.util.stream.Stream;<a name="line.15"></a>
+<span class="sourceLineNo">016</span><a name="line.16"></a>
+<span class="sourceLineNo">017</span>import static org.eclipse.golo.runtime.TypeMatching.compareTypes;<a name="line.17"></a>
+<span class="sourceLineNo">018</span>import static org.eclipse.golo.runtime.DecoratorsHelper.isMethodDecorated;<a name="line.18"></a>
+<span class="sourceLineNo">019</span>import static org.eclipse.golo.runtime.TypeMatching.argumentsNumberMatches;<a name="line.19"></a>
+<span class="sourceLineNo">020</span><a name="line.20"></a>
+<span class="sourceLineNo">021</span>public final class Extractors {<a name="line.21"></a>
+<span class="sourceLineNo">022</span>  private Extractors() {<a name="line.22"></a>
+<span class="sourceLineNo">023</span>    throw new UnsupportedOperationException("don't instantiate");<a name="line.23"></a>
+<span class="sourceLineNo">024</span>  }<a name="line.24"></a>
+<span class="sourceLineNo">025</span><a name="line.25"></a>
+<span class="sourceLineNo">026</span>  public static Stream&lt;Constructor&lt;?&gt;&gt; getConstructors(Class&lt;?&gt; klass) {<a name="line.26"></a>
+<span class="sourceLineNo">027</span>    if (klass == null) {<a name="line.27"></a>
+<span class="sourceLineNo">028</span>      return Stream.empty();<a name="line.28"></a>
+<span class="sourceLineNo">029</span>    }<a name="line.29"></a>
+<span class="sourceLineNo">030</span>    return Stream.of(klass.getConstructors());<a name="line.30"></a>
+<span class="sourceLineNo">031</span>  }<a name="line.31"></a>
+<span class="sourceLineNo">032</span><a name="line.32"></a>
+<span class="sourceLineNo">033</span>  public static Stream&lt;Method&gt; getFunctions(Class&lt;?&gt; klass) {<a name="line.33"></a>
+<span class="sourceLineNo">034</span>    return getMethods(klass).filter(Extractors::isFunction);<a name="line.34"></a>
+<span class="sourceLineNo">035</span>  }<a name="line.35"></a>
+<span class="sourceLineNo">036</span><a name="line.36"></a>
+<span class="sourceLineNo">037</span>  public static Stream&lt;Method&gt; getMethods(Class&lt;?&gt; klass) {<a name="line.37"></a>
+<span class="sourceLineNo">038</span>    if (klass == null) {<a name="line.38"></a>
+<span class="sourceLineNo">039</span>      return Stream.empty();<a name="line.39"></a>
+<span class="sourceLineNo">040</span>    }<a name="line.40"></a>
+<span class="sourceLineNo">041</span>    return Stream.concat(<a name="line.41"></a>
+<span class="sourceLineNo">042</span>        Stream.of(klass.getDeclaredMethods()),<a name="line.42"></a>
+<span class="sourceLineNo">043</span>        Stream.of(klass.getMethods()))<a name="line.43"></a>
+<span class="sourceLineNo">044</span>      .distinct()<a name="line.44"></a>
+<span class="sourceLineNo">045</span>      .sorted((m1, m2) -&gt; {<a name="line.45"></a>
+<span class="sourceLineNo">046</span>        if (m1.isVarArgs() &amp;&amp; !m2.isVarArgs()) {<a name="line.46"></a>
+<span class="sourceLineNo">047</span>          return 1;<a name="line.47"></a>
+<span class="sourceLineNo">048</span>        }<a name="line.48"></a>
+<span class="sourceLineNo">049</span>        if (m2.isVarArgs() &amp;&amp; !m1.isVarArgs()) {<a name="line.49"></a>
+<span class="sourceLineNo">050</span>          return -1;<a name="line.50"></a>
+<span class="sourceLineNo">051</span>        }<a name="line.51"></a>
+<span class="sourceLineNo">052</span>        return compareTypes(m1.getParameterTypes(), m2.getParameterTypes());<a name="line.52"></a>
+<span class="sourceLineNo">053</span>      });<a name="line.53"></a>
+<span class="sourceLineNo">054</span>  }<a name="line.54"></a>
+<span class="sourceLineNo">055</span><a name="line.55"></a>
+<span class="sourceLineNo">056</span>  public static Stream&lt;Field&gt; getFields(Class&lt;?&gt; klass) {<a name="line.56"></a>
+<span class="sourceLineNo">057</span>    if (klass == null) {<a name="line.57"></a>
+<span class="sourceLineNo">058</span>      return Stream.empty();<a name="line.58"></a>
+<span class="sourceLineNo">059</span>    }<a name="line.59"></a>
+<span class="sourceLineNo">060</span>    return Stream.concat(<a name="line.60"></a>
+<span class="sourceLineNo">061</span>        Stream.of(klass.getDeclaredFields()),<a name="line.61"></a>
+<span class="sourceLineNo">062</span>        Stream.of(klass.getFields()))<a name="line.62"></a>
+<span class="sourceLineNo">063</span>      .distinct();<a name="line.63"></a>
+<span class="sourceLineNo">064</span>  }<a name="line.64"></a>
+<span class="sourceLineNo">065</span><a name="line.65"></a>
+<span class="sourceLineNo">066</span>  public static Stream&lt;String&gt; getImportedNames(Class&lt;?&gt; klass) {<a name="line.66"></a>
+<span class="sourceLineNo">067</span>    if (klass == null) {<a name="line.67"></a>
+<span class="sourceLineNo">068</span>      return Stream.empty();<a name="line.68"></a>
+<span class="sourceLineNo">069</span>    }<a name="line.69"></a>
+<span class="sourceLineNo">070</span>    return Stream.of(Module.imports(klass));<a name="line.70"></a>
+<span class="sourceLineNo">071</span>  }<a name="line.71"></a>
+<span class="sourceLineNo">072</span><a name="line.72"></a>
+<span class="sourceLineNo">073</span>  public static Stream&lt;Member&gt; getMembers(Class&lt;?&gt; klass) {<a name="line.73"></a>
+<span class="sourceLineNo">074</span>    if (klass == null) {<a name="line.74"></a>
+<span class="sourceLineNo">075</span>      return Stream.empty();<a name="line.75"></a>
+<span class="sourceLineNo">076</span>    }<a name="line.76"></a>
+<span class="sourceLineNo">077</span>    return Stream.concat(getMethods(klass), getFields(klass));<a name="line.77"></a>
+<span class="sourceLineNo">078</span>  }<a name="line.78"></a>
+<span class="sourceLineNo">079</span><a name="line.79"></a>
+<span class="sourceLineNo">080</span>  public static boolean isPublic(Member m) {<a name="line.80"></a>
+<span class="sourceLineNo">081</span>    return Modifier.isPublic(m.getModifiers());<a name="line.81"></a>
+<span class="sourceLineNo">082</span>  }<a name="line.82"></a>
+<span class="sourceLineNo">083</span><a name="line.83"></a>
+<span class="sourceLineNo">084</span>  public static boolean isStatic(Member m) {<a name="line.84"></a>
+<span class="sourceLineNo">085</span>    return Modifier.isStatic(m.getModifiers());<a name="line.85"></a>
+<span class="sourceLineNo">086</span>  }<a name="line.86"></a>
+<span class="sourceLineNo">087</span><a name="line.87"></a>
+<span class="sourceLineNo">088</span>  public static boolean isConcrete(Member m) {<a name="line.88"></a>
+<span class="sourceLineNo">089</span>    return !Modifier.isAbstract(m.getModifiers());<a name="line.89"></a>
+<span class="sourceLineNo">090</span>  }<a name="line.90"></a>
+<span class="sourceLineNo">091</span><a name="line.91"></a>
+<span class="sourceLineNo">092</span>  public static boolean isFunction(Method m) {<a name="line.92"></a>
+<span class="sourceLineNo">093</span>    return isConcrete(m) &amp;&amp; isPublic(m) &amp;&amp; isStatic(m);<a name="line.93"></a>
+<span class="sourceLineNo">094</span>  }<a name="line.94"></a>
+<span class="sourceLineNo">095</span><a name="line.95"></a>
+<span class="sourceLineNo">096</span>  public static Predicate&lt;Member&gt; isNamed(String name) {<a name="line.96"></a>
+<span class="sourceLineNo">097</span>    return m -&gt; m.getName().equals(name);<a name="line.97"></a>
+<span class="sourceLineNo">098</span>  }<a name="line.98"></a>
+<span class="sourceLineNo">099</span><a name="line.99"></a>
+<span class="sourceLineNo">100</span>  public static Predicate&lt;Method&gt; matchFunctionReference(String name, int arity, boolean varargs) {<a name="line.100"></a>
+<span class="sourceLineNo">101</span>    return m -&gt;<a name="line.101"></a>
+<span class="sourceLineNo">102</span>      m.getName().equals(name)<a name="line.102"></a>
+<span class="sourceLineNo">103</span>      &amp;&amp; (isMethodDecorated(m) || argumentsNumberMatches(m.getParameterCount(), arity, varargs))<a name="line.103"></a>
+<span class="sourceLineNo">104</span>      &amp;&amp; (arity &lt; 0 || m.isVarArgs() == varargs);<a name="line.104"></a>
+<span class="sourceLineNo">105</span>  }<a name="line.105"></a>
+<span class="sourceLineNo">106</span><a name="line.106"></a>
+<span class="sourceLineNo">107</span>  public static &lt;T extends AnnotatedElement &amp; Member&gt; T checkDeprecation(Class&lt;?&gt; caller, T object) {<a name="line.107"></a>
+<span class="sourceLineNo">108</span>    if (object.isAnnotationPresent(Deprecated.class)) {<a name="line.108"></a>
+<span class="sourceLineNo">109</span>      Warnings.deprecatedElement(<a name="line.109"></a>
+<span class="sourceLineNo">110</span>          (object instanceof Executable ? ((Executable) object).toGenericString()<a name="line.110"></a>
+<span class="sourceLineNo">111</span>           : object instanceof Field ? ((Field) object).toGenericString()<a name="line.111"></a>
+<span class="sourceLineNo">112</span>           : object.getName()),<a name="line.112"></a>
+<span class="sourceLineNo">113</span>          caller.getName());<a name="line.113"></a>
+<span class="sourceLineNo">114</span>    }<a name="line.114"></a>
+<span class="sourceLineNo">115</span>    return object;<a name="line.115"></a>
+<span class="sourceLineNo">116</span>  }<a name="line.116"></a>
+<span class="sourceLineNo">117</span><a name="line.117"></a>
+<span class="sourceLineNo">118</span>}<a name="line.118"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>
