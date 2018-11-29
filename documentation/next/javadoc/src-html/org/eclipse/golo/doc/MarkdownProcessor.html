@@ -7,7 +7,7 @@
 <body>
 <div class="sourceContainer">
 <pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
-<span class="sourceLineNo">002</span> * Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
+<span class="sourceLineNo">002</span> * Copyright (c) 2012-2018 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
 <span class="sourceLineNo">003</span> *<a name="line.3"></a>
 <span class="sourceLineNo">004</span> * This program and the accompanying materials are made available under the<a name="line.4"></a>
 <span class="sourceLineNo">005</span> * terms of the Eclipse Public License 2.0 which is available at<a name="line.5"></a>
@@ -22,7 +22,7 @@
 <span class="sourceLineNo">014</span>import gololang.IO;<a name="line.14"></a>
 <span class="sourceLineNo">015</span><a name="line.15"></a>
 <span class="sourceLineNo">016</span>import java.nio.file.Path;<a name="line.16"></a>
-<span class="sourceLineNo">017</span>import java.util.Map;<a name="line.17"></a>
+<span class="sourceLineNo">017</span>import java.util.Collection;<a name="line.17"></a>
 <span class="sourceLineNo">018</span><a name="line.18"></a>
 <span class="sourceLineNo">019</span>public class MarkdownProcessor extends AbstractProcessor {<a name="line.19"></a>
 <span class="sourceLineNo">020</span><a name="line.20"></a>
@@ -39,9 +39,9 @@
 <span class="sourceLineNo">031</span>  }<a name="line.31"></a>
 <span class="sourceLineNo">032</span><a name="line.32"></a>
 <span class="sourceLineNo">033</span>  @Override<a name="line.33"></a>
-<span class="sourceLineNo">034</span>  public void process(Map&lt;String, ModuleDocumentation&gt; modules, Path targetFolder) throws Throwable {<a name="line.34"></a>
+<span class="sourceLineNo">034</span>  public void process(Collection&lt;ModuleDocumentation&gt; modules, Path targetFolder) throws Throwable {<a name="line.34"></a>
 <span class="sourceLineNo">035</span>    setTargetFolder(targetFolder);<a name="line.35"></a>
-<span class="sourceLineNo">036</span>    for (ModuleDocumentation doc : modules.values()) {<a name="line.36"></a>
+<span class="sourceLineNo">036</span>    for (ModuleDocumentation doc : modules) {<a name="line.36"></a>
 <span class="sourceLineNo">037</span>      IO.textToFile(render(doc), outputFile(doc.moduleName()));<a name="line.37"></a>
 <span class="sourceLineNo">038</span>    }<a name="line.38"></a>
 <span class="sourceLineNo">039</span>    renderIndex("index");<a name="line.39"></a>

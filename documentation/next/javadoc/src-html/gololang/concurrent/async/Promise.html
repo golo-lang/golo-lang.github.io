@@ -7,7 +7,7 @@
 <body>
 <div class="sourceContainer">
 <pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
-<span class="sourceLineNo">002</span> * Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
+<span class="sourceLineNo">002</span> * Copyright (c) 2012-2018 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
 <span class="sourceLineNo">003</span> *<a name="line.3"></a>
 <span class="sourceLineNo">004</span> * This program and the accompanying materials are made available under the<a name="line.4"></a>
 <span class="sourceLineNo">005</span> * terms of the Eclipse Public License 2.0 which is available at<a name="line.5"></a>
@@ -168,12 +168,9 @@
 <span class="sourceLineNo">160</span><a name="line.160"></a>
 <span class="sourceLineNo">161</span>  @Override<a name="line.161"></a>
 <span class="sourceLineNo">162</span>  public String toString() {<a name="line.162"></a>
-<span class="sourceLineNo">163</span>    return "Promise{" +<a name="line.163"></a>
-<span class="sourceLineNo">164</span>        "resolved=" + resolved +<a name="line.164"></a>
-<span class="sourceLineNo">165</span>        ", value=" + value +<a name="line.165"></a>
-<span class="sourceLineNo">166</span>        '}';<a name="line.166"></a>
-<span class="sourceLineNo">167</span>  }<a name="line.167"></a>
-<span class="sourceLineNo">168</span>}<a name="line.168"></a>
+<span class="sourceLineNo">163</span>    return String.format("Promise{resolved=%s, value=%s}", resolved, value);<a name="line.163"></a>
+<span class="sourceLineNo">164</span>  }<a name="line.164"></a>
+<span class="sourceLineNo">165</span>}<a name="line.165"></a>
 
 
 

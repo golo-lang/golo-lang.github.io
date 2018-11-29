@@ -7,7 +7,7 @@
 <body>
 <div class="sourceContainer">
 <pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
-<span class="sourceLineNo">002</span> * Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
+<span class="sourceLineNo">002</span> * Copyright (c) 2012-2018 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
 <span class="sourceLineNo">003</span> *<a name="line.3"></a>
 <span class="sourceLineNo">004</span> * This program and the accompanying materials are made available under the<a name="line.4"></a>
 <span class="sourceLineNo">005</span> * terms of the Eclipse Public License 2.0 which is available at<a name="line.5"></a>
@@ -58,7 +58,7 @@
 <span class="sourceLineNo">050</span>    int i = 0;<a name="line.50"></a>
 <span class="sourceLineNo">051</span>    for (String iface : interfaces) {<a name="line.51"></a>
 <span class="sourceLineNo">052</span>      types[i] = jvmType(iface);<a name="line.52"></a>
-<span class="sourceLineNo">053</span>      i = i + 1;<a name="line.53"></a>
+<span class="sourceLineNo">053</span>      i++;<a name="line.53"></a>
 <span class="sourceLineNo">054</span>    }<a name="line.54"></a>
 <span class="sourceLineNo">055</span>    return types;<a name="line.55"></a>
 <span class="sourceLineNo">056</span>  }<a name="line.56"></a>
@@ -101,7 +101,7 @@
 <span class="sourceLineNo">093</span>    for (Method method : getAllVirtualMethods(adapterDefinition)) {<a name="line.93"></a>
 <span class="sourceLineNo">094</span>      int access = isPublic(method.getModifiers()) ? ACC_PUBLIC : ACC_PROTECTED;<a name="line.94"></a>
 <span class="sourceLineNo">095</span>      if (method.isVarArgs()) {<a name="line.95"></a>
-<span class="sourceLineNo">096</span>        access = access &amp; ACC_VARARGS;<a name="line.96"></a>
+<span class="sourceLineNo">096</span>        access &amp;= ACC_VARARGS;<a name="line.96"></a>
 <span class="sourceLineNo">097</span>      }<a name="line.97"></a>
 <span class="sourceLineNo">098</span>      String name = method.getName();<a name="line.98"></a>
 <span class="sourceLineNo">099</span>      String descriptor = Type.getMethodDescriptor(method);<a name="line.99"></a>
@@ -154,9 +154,9 @@
 <span class="sourceLineNo">146</span>  private void makeConstructors(ClassWriter classWriter, AdapterDefinition adapterDefinition) {<a name="line.146"></a>
 <span class="sourceLineNo">147</span>    try {<a name="line.147"></a>
 <span class="sourceLineNo">148</span>      Class&lt;?&gt; parentClass = Class.forName(adapterDefinition.getParent(), true, adapterDefinition.getClassLoader());<a name="line.148"></a>
-<span class="sourceLineNo">149</span>      for (Constructor constructor : parentClass.getDeclaredConstructors()) {<a name="line.149"></a>
+<span class="sourceLineNo">149</span>      for (Constructor&lt;?&gt; constructor : parentClass.getDeclaredConstructors()) {<a name="line.149"></a>
 <span class="sourceLineNo">150</span>        if (Modifier.isPublic(constructor.getModifiers()) || Modifier.isProtected(constructor.getModifiers())) {<a name="line.150"></a>
-<span class="sourceLineNo">151</span>          Class[] parameterTypes = constructor.getParameterTypes();<a name="line.151"></a>
+<span class="sourceLineNo">151</span>          Class&lt;?&gt;[] parameterTypes = constructor.getParameterTypes();<a name="line.151"></a>
 <span class="sourceLineNo">152</span>          Type[] adapterParameterTypes = new Type[parameterTypes.length + 1];<a name="line.152"></a>
 <span class="sourceLineNo">153</span>          adapterParameterTypes[0] = Type.getType(AdapterDefinition.class);<a name="line.153"></a>
 <span class="sourceLineNo">154</span>          for (int i = 1; i &lt; adapterParameterTypes.length; i++) {<a name="line.154"></a>
@@ -171,7 +171,7 @@
 <span class="sourceLineNo">163</span>              "Lorg/eclipse/golo/runtime/adapters/AdapterDefinition;");<a name="line.163"></a>
 <span class="sourceLineNo">164</span>          methodVisitor.visitVarInsn(ALOAD, 0);<a name="line.164"></a>
 <span class="sourceLineNo">165</span>          int argIndex = 2;<a name="line.165"></a>
-<span class="sourceLineNo">166</span>          for (Class parameterType : parameterTypes) {<a name="line.166"></a>
+<span class="sourceLineNo">166</span>          for (Class&lt;?&gt; parameterType : parameterTypes) {<a name="line.166"></a>
 <span class="sourceLineNo">167</span>            argIndex = loadArgument(methodVisitor, parameterType, argIndex);<a name="line.167"></a>
 <span class="sourceLineNo">168</span>          }<a name="line.168"></a>
 <span class="sourceLineNo">169</span>          methodVisitor.visitMethodInsn(INVOKESPECIAL, Type.getInternalName(parentClass), "&lt;init&gt;", Type.getConstructorDescriptor(constructor), false);<a name="line.169"></a>

@@ -7,7 +7,7 @@
 <body>
 <div class="sourceContainer">
 <pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
-<span class="sourceLineNo">002</span> * Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
+<span class="sourceLineNo">002</span> * Copyright (c) 2012-2018 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
 <span class="sourceLineNo">003</span> *<a name="line.3"></a>
 <span class="sourceLineNo">004</span> * This program and the accompanying materials are made available under the<a name="line.4"></a>
 <span class="sourceLineNo">005</span> * terms of the Eclipse Public License 2.0 which is available at<a name="line.5"></a>
@@ -446,7 +446,7 @@
 <span class="sourceLineNo">438</span>   * Ok(21): andThen(|x| -&gt; x + 1): andThen(|x| -&gt; Ok(2 * x)) == Ok(42)<a name="line.438"></a>
 <span class="sourceLineNo">439</span>   * &lt;/code&gt;&lt;/pre&gt;<a name="line.439"></a>
 <span class="sourceLineNo">440</span>   */<a name="line.440"></a>
-<span class="sourceLineNo">441</span>  public Result&lt;? extends Object, ? extends Throwable&gt; andThen(FunctionReference mapper) {<a name="line.441"></a>
+<span class="sourceLineNo">441</span>  public Result&lt;?, ? extends Throwable&gt; andThen(FunctionReference mapper) {<a name="line.441"></a>
 <span class="sourceLineNo">442</span>    Objects.requireNonNull(mapper);<a name="line.442"></a>
 <span class="sourceLineNo">443</span>    if (isEmpty() || isError()) {<a name="line.443"></a>
 <span class="sourceLineNo">444</span>      return this;<a name="line.444"></a>

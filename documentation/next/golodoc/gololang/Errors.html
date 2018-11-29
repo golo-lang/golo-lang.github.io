@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 
 
-
 <html>
 <head>
-  <title>gololang.Errors (Golo 3.3.0-M1)</title>
+  <title>gololang.Errors (Golo 3.3.0)</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="icon"
@@ -31,7 +30,6 @@
     }
     code {
       font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-      font-size: 80%;
       background-color: #eee;
       padding: 1px 3px;
       -webkit-border-radius: 2px;
@@ -39,7 +37,6 @@
       border-radius: 2px;
     }
     pre code {
-      font-size: 120%;
       padding-left: 0px;
       padding-right: 0px;
     }
@@ -67,6 +64,7 @@
     li p {
       margin: 0.3em;
     }
+
     ul > li {
       list-style-type: disc;
     }
@@ -91,6 +89,7 @@
       font-style: normal;
       font-weight: bold;
     }
+
     h3 {
       color: #666;
       font-size: 180%;
@@ -116,6 +115,11 @@
     #global-nav {
       display: block;
       font-size: 80%;
+    }
+
+    #global-nav > a {
+      margin: 0em;
+      padding: 0 0.5em;
     }
 
     #toc {
@@ -200,6 +204,11 @@
       color: inherit;
     }
 
+    .modules-list li p {
+      display: inline-block;
+      margin: 0 0.5em;
+    }
+
     @media (max-width: 50em) {
       #toc {
         margin: auto;
@@ -268,17 +277,22 @@
 <body>
 <h1>Documentation for gololang.Errors</h1>
 
+
 <div class="golodoc">
   <p>Useful augmentations, decorators and function to deal with errors in Golo.</p>
 
 </div>
 
+
 <!-- begin table of content -->
 <nav id="toc">
 <h1>gololang.Errors</h1>
   <section id="global-nav">
-  <a href="../index.html" rel="home">Module Index</a>
-<a href="../index-all.html" rel="index">Global Index</a>
+    <a href="../index.html" rel="home">Module Index</a>
+    <a href="../index-all.html" rel="index">Global Index</a>
+    
+    <a href="../gololang.html" rel="up">Package Index</a>
+    
   </section>
 <ul>
   
@@ -363,6 +377,8 @@
 </ul>
 </nav>
 <!-- end table of content -->
+
+
 
 
 
@@ -485,7 +501,8 @@ Some(None()): flattened() == None()
     
       <h4 id="augment.java.util.Optional.iterator_1">iterator(this)<a class="permalink" href="#augment.java.util.Optional.iterator_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-102" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
-        
+        <p>Test if this optional contains a value equals to the provided one.</p>
+
       </div>
     
       <h4 id="augment.java.util.Optional.or_2">or(this, other)<a class="permalink" href="#augment.java.util.Optional.or_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-216" rel="source" title="Link to the corresponding source">Source</a></nav>
@@ -534,12 +551,40 @@ empty list</li>
     
       <h4 id="augment.java.util.Optional.toResult_1">toResult(this)<a class="permalink" href="#augment.java.util.Optional.toResult_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-230" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
-        
+        <p>Disjunctive chaining.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">Some(1): `or(Some(2)) == Some(1)
+None(): `or(Some(1)) == Some(1)
+Some(1): `or(None()) == Some(1)
+None(): `or(None()) == None()
+</code></pre>
+<p>Note that this method is eager.</p>
+<p>Some(1): orElseGet(-> Some(2))
+None(): orElseGet(-> Some(2))</p>
+<ul>
+<li><em>param</em> <code>other</code> the other optional</li>
+<li><em>return</em> <code>other</code> if this optional is empty, otherwise <code>this</code></li>
+</ul>
+
       </div>
     
       <h4 id="augment.java.util.Optional.toResult_2">toResult(this, param)<a class="permalink" href="#augment.java.util.Optional.toResult_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-221" rel="source" title="Link to the corresponding source">Source</a></nav>
       <div class="golodoc">
-        
+        <p>Disjunctive chaining.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">Some(1): `or(Some(2)) == Some(1)
+None(): `or(Some(1)) == Some(1)
+Some(1): `or(None()) == Some(1)
+None(): `or(None()) == None()
+</code></pre>
+<p>Note that this method is eager.</p>
+<p>Some(1): orElseGet(-> Some(2))
+None(): orElseGet(-> Some(2))</p>
+<ul>
+<li><em>param</em> <code>other</code> the other optional</li>
+<li><em>return</em> <code>other</code> if this optional is empty, otherwise <code>this</code></li>
+</ul>
+
       </div>
     
   
@@ -742,6 +787,5 @@ containing the returned value.</p>
 <link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
 <script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
 <script>hljs.initHighlighting()</script>
-
 </body>
 </html>

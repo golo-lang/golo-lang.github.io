@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 
 
-
 <html>
 <head>
-  <title>gololang.AnsiCodes (Golo 3.3.0-M1)</title>
+  <title>gololang.AnsiCodes (Golo 3.3.0)</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="icon"
@@ -31,7 +30,6 @@
     }
     code {
       font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-      font-size: 80%;
       background-color: #eee;
       padding: 1px 3px;
       -webkit-border-radius: 2px;
@@ -39,7 +37,6 @@
       border-radius: 2px;
     }
     pre code {
-      font-size: 120%;
       padding-left: 0px;
       padding-right: 0px;
     }
@@ -67,6 +64,7 @@
     li p {
       margin: 0.3em;
     }
+
     ul > li {
       list-style-type: disc;
     }
@@ -91,6 +89,7 @@
       font-style: normal;
       font-weight: bold;
     }
+
     h3 {
       color: #666;
       font-size: 180%;
@@ -116,6 +115,11 @@
     #global-nav {
       display: block;
       font-size: 80%;
+    }
+
+    #global-nav > a {
+      margin: 0em;
+      padding: 0 0.5em;
     }
 
     #toc {
@@ -200,6 +204,11 @@
       color: inherit;
     }
 
+    .modules-list li p {
+      display: inline-block;
+      margin: 0 0.5em;
+    }
+
     @media (max-width: 50em) {
       #toc {
         margin: auto;
@@ -268,6 +277,7 @@
 <body>
 <h1>Documentation for gololang.AnsiCodes</h1>
 
+
 <div class="golodoc">
   <p>This module provides helper functions to deal with ANSI escape codes for console outputs.</p>
 <p>All function names are self-explanatory. They <em>print</em> the corresponding ANSI code.</p>
@@ -278,12 +288,16 @@ system is not MS Windows, which does not support ANSI codes without a 3rd-party 
 
 </div>
 
+
 <!-- begin table of content -->
 <nav id="toc">
 <h1>gololang.AnsiCodes</h1>
   <section id="global-nav">
-  <a href="../index.html" rel="home">Module Index</a>
-<a href="../index-all.html" rel="index">Global Index</a>
+    <a href="../index.html" rel="home">Module Index</a>
+    <a href="../index-all.html" rel="index">Global Index</a>
+    
+    <a href="../gololang.html" rel="up">Package Index</a>
+    
   </section>
 <ul>
   
@@ -366,6 +380,8 @@ system is not MS Windows, which does not support ANSI codes without a 3rd-party 
 </ul>
 </nav>
 <!-- end table of content -->
+
+
 
 
 
@@ -544,6 +560,5 @@ system is not MS Windows, which does not support ANSI codes without a 3rd-party 
 <link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
 <script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
 <script>hljs.initHighlighting()</script>
-
 </body>
 </html>

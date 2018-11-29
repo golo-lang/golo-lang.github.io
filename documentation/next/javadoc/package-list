@@ -3,11 +3,11 @@ gololang.annotations
 gololang.concurrent.async
 gololang.concurrent.workers
 gololang.error
+gololang.ir
 org.eclipse.golo.cli
 org.eclipse.golo.cli.command
 org.eclipse.golo.cli.command.spi
 org.eclipse.golo.compiler
-org.eclipse.golo.compiler.ir
 org.eclipse.golo.compiler.parser
 org.eclipse.golo.compiler.utils
 org.eclipse.golo.doc

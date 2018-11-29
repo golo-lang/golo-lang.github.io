@@ -7,7 +7,7 @@
 <body>
 <div class="sourceContainer">
 <pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
-<span class="sourceLineNo">002</span> * Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
+<span class="sourceLineNo">002</span> * Copyright (c) 2012-2018 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
 <span class="sourceLineNo">003</span> *<a name="line.3"></a>
 <span class="sourceLineNo">004</span> * This program and the accompanying materials are made available under the<a name="line.4"></a>
 <span class="sourceLineNo">005</span> * terms of the Eclipse Public License 2.0 which is available at<a name="line.5"></a>
@@ -915,7 +915,7 @@
 <span class="sourceLineNo">907</span>   * @return a {@code java.util.concurrent.atomic.AtomicReference} instance wrapping the object<a name="line.907"></a>
 <span class="sourceLineNo">908</span>   */<a name="line.908"></a>
 <span class="sourceLineNo">909</span>  public static Object box(Object obj) {<a name="line.909"></a>
-<span class="sourceLineNo">910</span>    return new java.util.concurrent.atomic.AtomicReference&lt;Object&gt;(obj);<a name="line.910"></a>
+<span class="sourceLineNo">910</span>    return new java.util.concurrent.atomic.AtomicReference&lt;&gt;(obj);<a name="line.910"></a>
 <span class="sourceLineNo">911</span>  }<a name="line.911"></a>
 <span class="sourceLineNo">912</span><a name="line.912"></a>
 <span class="sourceLineNo">913</span>  // ...................................................................................................................<a name="line.913"></a>
@@ -925,7 +925,7 @@
 <span class="sourceLineNo">917</span>   * @return a list of the given values.<a name="line.917"></a>
 <span class="sourceLineNo">918</span>   */<a name="line.918"></a>
 <span class="sourceLineNo">919</span>  public static List&lt;Object&gt; list(Object... values) {<a name="line.919"></a>
-<span class="sourceLineNo">920</span>    return new LinkedList&lt;Object&gt;(Arrays.asList(values));<a name="line.920"></a>
+<span class="sourceLineNo">920</span>    return new LinkedList&lt;&gt;(Arrays.asList(values));<a name="line.920"></a>
 <span class="sourceLineNo">921</span>  }<a name="line.921"></a>
 <span class="sourceLineNo">922</span><a name="line.922"></a>
 <span class="sourceLineNo">923</span>  /**<a name="line.923"></a>
@@ -934,7 +934,7 @@
 <span class="sourceLineNo">926</span>   * @return a set of the given values.<a name="line.926"></a>
 <span class="sourceLineNo">927</span>   */<a name="line.927"></a>
 <span class="sourceLineNo">928</span>  public static Set&lt;Object&gt; set(Object... values) {<a name="line.928"></a>
-<span class="sourceLineNo">929</span>    return new LinkedHashSet&lt;Object&gt;(Arrays.asList(values));<a name="line.929"></a>
+<span class="sourceLineNo">929</span>    return new LinkedHashSet&lt;&gt;(Arrays.asList(values));<a name="line.929"></a>
 <span class="sourceLineNo">930</span>  }<a name="line.930"></a>
 <span class="sourceLineNo">931</span><a name="line.931"></a>
 <span class="sourceLineNo">932</span>  /**<a name="line.932"></a>
@@ -952,7 +952,7 @@
 <span class="sourceLineNo">944</span>   * @return a vector of the give values.<a name="line.944"></a>
 <span class="sourceLineNo">945</span>   */<a name="line.945"></a>
 <span class="sourceLineNo">946</span>  public static List&lt;Object&gt; vector(Object... values) {<a name="line.946"></a>
-<span class="sourceLineNo">947</span>    return new ArrayList&lt;Object&gt;(Arrays.asList(values));<a name="line.947"></a>
+<span class="sourceLineNo">947</span>    return new ArrayList&lt;&gt;(Arrays.asList(values));<a name="line.947"></a>
 <span class="sourceLineNo">948</span>  }<a name="line.948"></a>
 <span class="sourceLineNo">949</span><a name="line.949"></a>
 <span class="sourceLineNo">950</span>  /**<a name="line.950"></a>

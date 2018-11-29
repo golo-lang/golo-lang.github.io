@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.4">
+<meta name="generator" content="Asciidoctor 1.5.5">
 <title>The Golo Programming Language</title>
 <style>
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
@@ -698,7 +698,7 @@ table.tableblock.grid-all th.tableblock, table.tableblock.grid-all td.tableblock
 #footer-text { color: #eee; font-size: 0.8em; text-align: center; }
 
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="icon"
       href="data:image/x-icon;base64,AAABAAEAFBQAAAEAIAC4BgAAFgAAACgAAAAUAAAAKAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmd/wAAAAAAmZmZDaWlpUSpqalbqampWqWlpT6SkpIF
@@ -778,7 +778,8 @@ B+AQAIPwEACB+BAAwAAwAMAAcADgAPAA+AHwAP4H8AA="/>
 <li><a href="#_named_parameters">3.4. Named parameters</a></li>
 <li><a href="#_functions_from_other_modules_and_imports">3.5. Functions from other modules and imports</a></li>
 <li><a href="#_local_functions">3.6. Local functions</a></li>
-<li><a href="#_module_level_state">3.7. Module-level state</a></li>
+<li><a href="#_recursive_tail_call_optimization">3.7. Recursive Tail Call Optimization</a></li>
+<li><a href="#_module_level_state">3.8. Module-level state</a></li>
 </ul>
 </li>
 <li><a href="#_java_interoperability">4. Java interoperability</a>
@@ -904,7 +905,7 @@ B+AQAIPwEACB+BAAwAAwAMAAcADgAPAA+AHwAP4H8AA="/>
 <li><a href="#_adapters_helper">13.6. Adapters helper</a></li>
 </ul>
 </li>
-<li><a href="#_decorators">14. Decorators</a>
+<li><a href="#decorators">14. Decorators</a>
 <ul class="sectlevel2">
 <li><a href="#_presentation">14.1. Presentation</a></li>
 <li><a href="#_principles_and_syntax">14.2. Principles and syntax</a></li>
@@ -942,8 +943,9 @@ B+AQAIPwEACB+BAAwAAwAMAAcADgAPAA+AHwAP4H8AA="/>
 <li><a href="#_documenting_golo_code">19. Documenting Golo code</a>
 <ul class="sectlevel2">
 <li><a href="#_documentation_blocks">19.1. Documentation blocks</a></li>
-<li><a href="#_rendering_documentation">19.2. Rendering documentation</a></li>
-<li><a href="#_alignment">19.3. Alignment</a></li>
+<li><a href="#_package_documentation">19.2. Package documentation</a></li>
+<li><a href="#_rendering_documentation">19.3. Rendering documentation</a></li>
+<li><a href="#_alignment">19.4. Alignment</a></li>
 </ul>
 </li>
 <li><a href="#_misc_modules">20. Misc. modules</a>
@@ -979,7 +981,7 @@ B+AQAIPwEACB+BAAwAAwAMAAcADgAPAA+AHwAP4H8AA="/>
 <div class="listingblock">
 <div class="title">Copyright and License Notice</div>
 <div class="content">
-<pre>Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others
+<pre>Copyright (c) 2012-2018 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
@@ -991,7 +993,7 @@ SPDX-License-Identifier: EPL-2.0</pre>
 <div class="listingblock">
 <div class="title">Copyright and License Notice for the short code snippets and samples provided in this documentation.</div>
 <div class="content">
-<pre>Copyright (c) 2012-2017 Institut National des Sciences Appliquées de Lyon (INSA Lyon)
+<pre>Copyright (c) 2012-2018 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others
 
 All rights reserved. This Example Content is intended to demonstrate
 usage of Eclipse technology. It is provided to you under the terms and
@@ -3021,7 +3023,206 @@ function i_will_crash = {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_module_level_state">3.7. Module-level state</h3>
+<h3 id="_recursive_tail_call_optimization">3.7. Recursive Tail Call Optimization</h3>
+<div class="paragraph">
+<p>Golo feature recursive <a href="https://en.wikipedia.org/wiki/Tail_call">tail call</a> optimization. If a function last action is to return the result of a recursive call, it is optimized to not stack a new call and is compiled in code equivalent to a loop. For instance, a function like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function fact = |acc, v| -&gt; match {
+  when v == 0 then acc
+  otherwise fact(acc * v, v - 1)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>is compiled into something roughly equivalent to :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function fact = |acc, v| {
+  var acc_ = acc
+  var v_ = v
+  while v_ != 0 {
+    acc_ = acc_ * v_
+    v_ = v_ - 1
+  }
+  return acc_
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This allows to create recursive functions that will not throw a <code>StackOverflowError</code> even in the presence of a large number or recursive call.
+The optimization can be disabled by setting the <code>golo.optimize.tce</code> system property to <code>false</code> (e.g. <code>export GOLO_OPTS='-Dgolo.optimize.tce=false</code>).</p>
+</div>
+<div class="paragraph">
+<p>A call is tail recursive when the function returns the result of calling itself directly. Indeed, since no evaluation nor flow analysis is done, many effectively tail recursive calls can&#8217;t be identified as such, and thus are not optimized. It is recommended to rewrite the code to make the tail call more direct. For instance, the following two functions are not optimized:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function foo = |a, v| {
+  let r = ^foo
+  if v == 0 {
+    return a
+  }
+  return r(a + v, v - 1)
+}
+
+function bar = |a, v| {
+  var r = null
+  if v == 0 {
+    r = a
+  } else {
+    r = bar(a + v, v - 1)
+  }
+  return r
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>while the following one is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function ref = |a, v| {
+  if v == 0 {
+    return a
+  }
+  return ref(a + v, v - 1)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that returning a <code>match</code> expression that may evaluate to a tail call will be optimized, such that the function</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function baz = |a, v| -&gt; match {
+  when v == 0 then a
+  otherwise ref(a + v, v - 1)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>will be strictly equivalent to the previous one. A consequence of this behavior is that mutual recursions are not optimized.</p>
+</div>
+<div class="sect3">
+<h4 id="_on_augmentations">3.7.1. On augmentations</h4>
+<div class="paragraph">
+<p>Functions defined in augmentations can be optimized if written in a tail call style. For instance, in the following sample, the <code>reduce</code> function is not optimized since it is viewed as a method call:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">struct Cons = {head, tail}
+
+augment Cons {
+  function reduce = |this, f, z| -&gt; match {
+    when this: isEmpty() then z
+    otherwise this: tail(): reduce(f, f(this: head(), z))
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>On the other hand, the following one is optimized and works as expected:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">augment Cons {
+  function reduce = |this, f, z| -&gt; match {
+    when this: isEmpty() then z
+    otherwise reduce(this: tail(), f, f(this: head(), z))
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_limitations_on_decorators">3.7.2. Limitations on decorators</h4>
+<div class="paragraph">
+<p>Since the optimization is done at compile time, most of dynamic features are not available. For instance, <a href="#decorators">decorated functions</a>
+can&#8217;t be optimized. Indeed, in that case, the decorator would not be applied on each call but only on the first one, which could lead to unexpected results.</p>
+</div>
+<div class="paragraph">
+<p>For instance, the code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function log = |f| -&gt; |a, v| {
+  println("function called with " + a + ", " + v)
+  return f(a, v)
+}
+
+@log
+function fact = |acc, v| -&gt; match {
+  when v == 0 then acc
+  otherwise fact(acc * v, v - 1)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>when optimised would print the message only for the first call. The tail call optimization is thus disabled for decorated functions. If the desired behavior is to optimize the function and apply the decorator only for the first call, one can create an undecorated version, and decorate explicitly direct calls or create a decorated wrapper, as in:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function log = |f| -&gt; |a, v| {
+  println("function called with " + a + ", " + v)
+  return f(a, v)
+}
+
+function fact = |acc, v| -&gt; match {
+  when v == 0 then acc
+  otherwise fact(acc * v, v - 1)
+}
+
+@log
+function decoratedFact = |acc, v| -&gt; fact(acc, v)
+
+#(...)
+
+let direclyDecorated = log(^fact)
+directlyDecorated(1, 5)
+log(^fact)(1, 5)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that this approach is not as cumbersome, since most of the time, tail recursive functions introduce an “artificial” accumulator that is hidden by a function calling the recursive one with the default accumulator value.
+For instance, in the factorial case, one would write:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">local function fact = |acc, v| -&gt; match {
+  when v == 0 then acc
+  otherwise fact(acc * v, v - 1)
+}
+
+function fact = |v| -&gt; fact(1, v)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or equivalently:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function fact = |n| {
+  let _fact = |acc, v| -&gt; match {
+    when v == 0 then acc
+    otherwise _fact(acc * v, v - 1)
+  }
+  return _fact(1, n)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case, the both the local <code>fact</code> and the <code>_fact</code> closure are optimized, while the public one can be decorated.</p>
+</div>
+<div class="paragraph">
+<p>Similarly, variadic functions are not optimized, since we can&#8217;t know at compile-time if the last argument is already an array or a simple value that must be collected. The same kind of approach is recommended, by defining a (local) fixed arguments recursive version that is optimized and a variadic one that delegates on it.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_module_level_state">3.8. Module-level state</h3>
 <div class="paragraph">
 <p>You can declare <code>let</code> and <code>var</code> references at the module level, as in:</p>
 </div>
@@ -4977,7 +5178,7 @@ adaptations:</p>
 <pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">let e = mapEntry("foo", "bar")
 
 # prints "foo =&gt; bar"
-println(e: getKey() + " =&gt; " + e: getValue())</code></pre>
+println(e: key() + " =&gt; " + e: value())</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5415,7 +5616,7 @@ println("golo": notExistingMethod(1,2))
 </div>
 <div class="paragraph">
 <p>These augmentation do not require a special import, and they are defined in the
-<a href="./golodoc/gololang/StandardAugmentations"><code>gololang.StandardAugmentations</code></a> module.</p>
+<a href="./golodoc/gololang/StandardAugmentations.html"><code>gololang.StandardAugmentations</code></a> module.</p>
 </div>
 <div class="paragraph">
 <p>Here is an example:</p>
@@ -6451,7 +6652,7 @@ thus write code such as:</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">function dump = |obj| {
   foreach prop in obj: properties() {
-    println(prop: getKey() + " -&gt; " + prop: getValue())
+    println(prop: key() + " -&gt; " + prop: value())
   }
 }</code></pre>
 </div>
@@ -6937,7 +7138,7 @@ list: add("baz")  <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_decorators">14. Decorators</h2>
+<h2 id="decorators">14. Decorators</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Golo features Python-like decorators.</p>
@@ -7341,7 +7542,7 @@ function main = |args| {
 <div class="paragraph">
 <p>Let&#8217;s now illustrate with some use cases and examples, with a presentation of
 some decorators of the standard module
-<a href="./golodoc/gololang/Decorators"><code>gololang.Decorators</code></a>.</p>
+<a href="./golodoc/gololang/Decorators.html"><code>gololang.Decorators</code></a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -7373,7 +7574,7 @@ returned values, of a function.</p>
 function, of after the delegation.</p>
 </div>
 <div class="paragraph">
-<p>The module <a href="./golodoc/gololang/Decorators"><code>gololang.Decorators</code></a> provide two
+<p>The module <a href="./golodoc/gololang/Decorators.html"><code>gololang.Decorators</code></a> provide two
 decorators and several utility functions to check pre and post conditions.</p>
 </div>
 <div class="paragraph">
@@ -7449,7 +7650,7 @@ function mul = |v| -&gt; 10 * v</code></pre>
 </div>
 <div class="paragraph">
 <p>Several factory functions are available in
-<a href="./golodoc/gololang/Decorators"><code>gololang.Decorators</code></a> to ease the creation
+<a href="./golodoc/gololang/Decorators.html"><code>gololang.Decorators</code></a> to ease the creation
 of checkers:</p>
 </div>
 <div class="ulist">
@@ -7527,7 +7728,7 @@ needed.</p>
 </div>
 <div class="paragraph">
 <p>Such a decorator is provided in the
-<a href="./golodoc/gololang/Decorators"><code>gololang.Decorators</code></a> module, presented
+<a href="./golodoc/gololang/Decorators.html"><code>gololang.Decorators</code></a> module, presented
 here as an example:</p>
 </div>
 <div class="listingblock">
@@ -7582,9 +7783,9 @@ function fact = |n| {
 <p>Decorators can be used to define a generic wrapper around a function, that
 extends the previous example (and can be used to implement most of them).
 This functionality is provided by the
-<a href="./golodoc/gololang/Decorators#withContext_context"><code>gololang.Decorators.withContext</code></a>
+<a href="./golodoc/gololang/Decorators.html#withContext_context"><code>gololang.Decorators.withContext</code></a>
 standard decorator. This decorator take a context, such as the one returned by
-<a href="./golodoc/gololang/Decorators#defaultContext_"><code>gololang.Decorators.defaultContext</code></a>
+<a href="./golodoc/gololang/Decorators.html#defaultContext_"><code>gololang.Decorators.defaultContext</code></a>
 function.</p>
 </div>
 <div class="paragraph">
@@ -8571,9 +8772,35 @@ union List = {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>The first sentence of a module documentation is displayed in module indexes.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_rendering_documentation">19.2. Rendering documentation</h3>
+<h3 id="_package_documentation">19.2. Package documentation</h3>
+<div class="paragraph">
+<p>Packages does not exists per se in Golo, but are represented in the form of module qualified names. However, it is common practice to group the modules of the same namespace into a common directory. There exists several ways to document such packages. The first is to create an empty golo module named after the package, containing the documentation. This file can have any name and be in any directory. For instance, given several modules <code>pkg.MyModule</code> and <code>pkg.OtherModule</code>, one can document the <code>pkg</code> package by creating a module containing:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-golo" data-lang="golo">----
+Here goes the package documentation
+----
+module pkg</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>No class will be compiled from this module, only a documentation page.</p>
+</div>
+<div class="paragraph">
+<p>The other way to document the <code>pkg</code> package, assuming that both modules are in <code>src/pkg/MyModule.golo</code> and <code>src/pkg/OtherModule.golo</code> respectively, is to create pure markdown file, containing the documentation for the package. This file <strong>must</strong> be named either <code>src/pkg/README.md</code>, <code>src/pkg/package.md</code> or <code>src/pkg.md</code>. If a golo file corresponding to the package exists, these files are ignored.</p>
+</div>
+<div id="warning-multiple-package-desc" class="paragraph">
+<p>If several candidates are found, only the <strong>first one</strong> is used, and a warning is printed. It can be disabled by setting the <code>golo.warnings.doc.multiple-package-desc</code> system property to <code>false</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rendering_documentation">19.3. Rendering documentation</h3>
 <div class="paragraph">
 <p>The <code>golo doc</code> command can render documentation in <code>html</code> (the default) or <code>markdown</code> format:</p>
 </div>
@@ -8589,11 +8816,11 @@ be used to print the tags on standard output, which is needed by some editors
 or extensions.</p>
 </div>
 <div class="paragraph">
-<p>Please consult <code>golo help</code> for more details.</p>
+<p>Please consult <code>golo --usage doc</code> for more details.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_alignment">19.3. Alignment</h3>
+<h3 id="_alignment">19.4. Alignment</h3>
 <div class="paragraph">
 <p>It is sometimes necessary to indent documentation blocks to match the surrounding code format.
 Documentation blocks erase indentation based on the indentation level of the opening block:</p>
@@ -9008,7 +9235,7 @@ safeGetter(null, "answer"): map(^plus2): map(^mult2): orElseGet(^bar)</code></pr
 </div>
 </div>
 <div class="paragraph">
-<p>See the <a href="./golodoc/gololang/Errors"><code>gololang.Errors</code></a> module documentation for a full description of the added methods.</p>
+<p>See the <a href="./golodoc/gololang/Errors.html"><code>gololang.Errors</code></a> module documentation for a full description of the added methods.</p>
 </div>
 </div>
 <div class="sect3">
@@ -9020,7 +9247,7 @@ safeGetter(null, "answer"): map(^plus2): map(^mult2): orElseGet(^bar)</code></pr
 <p>The <code>result</code> decorator is the equivalent to <code>option</code>. The <code>trying</code> higher order function takes an anonymous block, executes it and returns a corresponding <code>Result</code>.</p>
 </div>
 <div class="paragraph">
-<p>See the <a href="./golodoc/gololang/Errors"><code>gololang.Errors</code></a> module documentation and the javadoc for the <a href="./javadoc/gololang/error/Result.html"><code>gololang.error.Result</code></a> class for more details.</p>
+<p>See the <a href="./golodoc/gololang/Errors.html"><code>gololang.Errors</code></a> module documentation and the javadoc for the <a href="./javadoc/gololang/error/Result.html"><code>gololang.error.Result</code></a> class for more details.</p>
 </div>
 <div class="paragraph">
 <p>As a bonus, <code>Result</code> objects can be destructured into the error and the value. For instance:</p>
@@ -9190,7 +9417,7 @@ This is useful for automatically:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-12-08 09:32:46 +01:00
+Last updated 2018-06-04 15:04:47 CEST
 </div>
 </div>
 <link rel="stylesheet" href="./styles/github.min.css">
