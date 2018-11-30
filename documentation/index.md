@@ -3,7 +3,7 @@ layout: main
 title: Golo documentation
 ---
 
-## 3.3.0 milestones
+## Next version milestones
 
 * [Golo Programming Language Guide](next/index.html)
 * [Golodoc](next/golodoc/index.html)
@@ -11,13 +11,19 @@ title: Golo documentation
 
 ## Released versions
 
-## 3.2.0 milestones
+## 3.3.0
+
+* [Golo Programming Language Guide](3.3.0/index.html)
+* [Golodoc](3.3.0/golodoc/index.html)
+* [Javadoc](3.3.0/javadoc/index.html)
+
+## 3.2.0 
 
 * [Golo Programming Language Guide](3.2.0/index.html)
 * [Golodoc](3.2.0/golodoc/index.html)
 * [Javadoc](3.2.0/javadoc/index.html)
 
-## 3.1.0 milestones
+## 3.1.0 
 
 * [Golo Programming Language Guide](3.1.0/index.html)
 * [Golodoc](3.1.0/golodoc/index.html)
