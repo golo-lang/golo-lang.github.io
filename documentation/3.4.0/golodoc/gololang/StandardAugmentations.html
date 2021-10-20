@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>gololang.StandardAugmentations (Golo 3.4.0)</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon"
+        href="data:image/x-icon;base64,AAABAAEAFBQAAAEAIAC4BgAAFgAAACgAAAAUAAAAKAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmd/wAAAAAA/34ADf+LAET/gwBb/4MAWv+LAD7/kQAFAAAAAAOW9AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaX9AAAAAAA/4kAOv+GAMn/dAD/1l8A/6xRAP+pTwD/y1sA//9xAP//hgC0/4sAJgAAAAAAjvEAAAAAAAAAAAAAAAAAAAAAAAAAAAAImfQAAAAAAP+MAJ72aQD/a0EA/3REAP92RAD/cUIA/3FCAP92RAD/dEQA/25BAP//cwD//5AAeQAAAAAHlvEAAAAAAAAAAAAAAAAADJnzAAAAAAD/iwDBmVIA/3lHAP90RgD/k08A/81fAP//bwD/+24A/8VhAP+LSgD/d0cA/3RGAP/JXAD//44AmgAAAAAAgP8AAAAAAAAAAAAAAAAA/4gAmZxWAP9+SQD/gUoA//93AP//kQDw/44ArP+LAGb/jABt/44Auv+TAPjeaQD/fEoA/3xKAP/YZgD//5MAagAAAAAAAAAAHpT3AP+TAC/zbgD/gUwA/39OAP//hgD//5EAqgAAAAAAAAAAAAAAAACA/wAAAAAAAAAAAP+TAM//dAD/fkwA/3lOAP//fgD//4MACA+d9AAAAAAA/5kAuYFPAP+BTwD//3sA//+TAKQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJofYAAAAAAP+YANPBYwD/hFIA/65eAP//mQCMAAAAAAAAAAD/fgD/hFIA/5RZAP//kQD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASnfQA/5AAHP+LAP9/VAD/fFEA//+QAOsAAAAA/44ANup2AP+LWQH/2GwA//+TAJwAAAAAAAAAAAAAAAAlSnoAAAAAAIxbAgIAAAAAAAAAAAAAAAAAAAAA/5QAzJxcAP+IVgH//4QA//+DAAj/mABV0G8A/5FeBP/4dwD//5YAZRea7wAAAAAAAAAAAAAAAACUXASFlF8E/5BZAiMAAAAAAAAAAAAAAAD/lgCXxmsA/5FeBP/+ewD//5sAJP+TAFfQcQL/lGEH//qBAP//mQBhF6LoAAAAAAAAAAAAAAAAAJhjB6qUYQf/mGMH/5hhBB8mTn8AAAAAAP+YAJPQcQL/lGEH//p7AP//kwAm/5QAQO18Av+ZZAn/1nYF//+ZAJAAAAAAAAAAAAAAAAAySG4AAAAAAJtmCtOZZAn/mWQJ/5RhBx0AAAAA/5wAwLVpB/+WYwn//4YB//+QAA//kwAL/4sE/5ZkDP+ZZgz//5wB8wAAAAAAAAAAAAAAAAAAAAAnT4EAAAAAAJ5pDdacZwz/nGcM/85zByT/mAH/kGMM/5NkDP//lAT2AAAAAAAAAAD/oQfUnmsR/55uEf//hgn//6AJfQAAAAAAAAAAAAAAAAAAAAApUoMAAAAAAKNsD9qhbBH+oWwR/t5+Df+hbBH/rG8P//+ZBZ8AAAAAAAAAAP+jClb+hA3/pG8U/6FxFP//mwz//6EMcgAAAAAqrPcAAAAAAAAAAAAtiMUAAAAAALN0Eu+kcxT/pHMU/6FxFP//kA3//5wFHSSq9AAAAAAAAAAAAP+kDce9dxX/qHMX/6hzF///kRL//6gP3P+kEW3/ng0k/6APKf+jD4P/ow/p/6ER/7l2Ff+ocxf/yXsV//+oD5IAAAAAAAAAAAAAAAAprfcA/6MXBf+hEu21fBr+rnca/6h3Gv/Gfhn//5EU//+mFP//pBX//6MU//+jFP//oxT//6MU//+OFP//oxTHAAAAACuu9wAAAAAAAAAAAAAAAAAutf8A/6YZCv+mGdfoiRr/pnsf/7F7Hf+jeR///6gX//+kFf//pBX//6QV//+kFf//pBX//6gXtgAAAAAtrvgAAAAAAAAAAAAAAAAAAAAAAAAAAAAusvkAAAAAAP+cGWf/nh33/5Mf//+UHf//qRr//6ka//+pGv//ox3//6ka8P+jGVYAAAAALrH3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/phw0/6gfav+rHYX/qx2H/6wfbP+sHzQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/gfwAPgB8ADwAPAA4ABwAMAAMACB+BAAg/wQAIf8EAAH3gAAB44AAAeGAAAHwgAAB+AQAIPwEACB+BAAwAAwAMAAcADgAPAA+AHwAP4H8AA="/>
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      margin: 1em auto;
+      margin-left: 20em;
+      max-width: 50em;
+      text-align: left;
+      padding: 0.5em;
+    }
+    pre {
+      background-color: #eee;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .listing:hover code[data-lang]:before {
+      display: block;
+    }
+
+    .listing code {
+      position: relative;
+    }
+
+    .listing code[data-lang]:before {
+      display: none;
+      content: attr(data-lang);
+      position: absolute;
+      font-size: 0.75em;
+      top: .5rem;
+      right: 0.5rem;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    li p {
+      margin: 0.3em;
+    }
+
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 250%;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 200%;
+      font-style: normal;
+      font-weight: bold;
+    }
+
+    h3 {
+      color: #666;
+      font-size: 180%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h4 {
+      font-size: 130%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h5 {
+      font-size: 100%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h6 {
+      font-size: 100%;
+      font-style: italic;
+      font-weight: normal;
+    }
+
+    #global-nav {
+      display: block;
+      font-size: 80%;
+    }
+
+    #global-nav > a {
+      margin: 0em;
+      padding: 0 0.5em;
+    }
+
+    #toc {
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      width: 20em;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    #toc h1 {
+      margin: .5em;
+      padding: 1ex;
+      font-size: 90%;
+      font-weight: bold;
+      font-style: normal;
+      color: #333;
+      background-color: #eee;
+      text-align: center;
+    }
+
+    #toc ul {
+      padding-left: 1em;
+    }
+
+    #toc > ul {
+      font-size: 80%;
+      margin: 0.5em;
+    }
+
+    #toc > ul > li {
+      list-style: none;
+      margin-bottom: 2ex;
+    }
+
+    #toc > ul > li > a {
+      font-weight: bold;
+      color: #333;
+      display: block;
+      padding: 1ex;
+      margin: 0 1em 1ex 0;
+      border-bottom: 1px solid #999;
+    }
+
+    #toc li {
+      list-style-type: none;
+    }
+
+    :target {
+      background-color: yellow;
+    }
+
+    .permalink {
+      margin-left: .3em;
+      font-size: 70%;
+      visibility: hidden;
+    }
+
+    *:hover > .permalink {
+      visibility: visible;
+    }
+
+    .golodoc {
+      margin: 0;
+      padding: 0;
+      padding-left: 1.5em;
+    }
+
+    .srclink {
+      float:  right;
+      text-align: right;
+      color: #999;
+      font-size: 75%;
+      margin-top: -2em;
+    }
+
+    .srclink a {
+      color: inherit;
+    }
+
+    .modules-list li p {
+      display: inline-block;
+      margin: 0 0.5em;
+    }
+
+    @media (max-width: 50em) {
+      #toc {
+        margin: auto;
+        position: static;
+        width: 100%;
+        overflow: visible;
+        white-space: normal;
+      }
+
+      #toc ul {
+        padding-left: 1em;
+        margin: 0;
+      }
+
+      #toc > ul {
+        font-size: 100%;
+        margin: 0em;
+        padding: 0;
+      }
+
+      #toc > ul > li {
+        list-style: none;
+        margin-bottom: 1ex;
+      }
+
+      #toc > ul > li > a {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        padding: 0ex;
+        margin: 0;
+        border-bottom: none;
+      }
+
+      #toc h1 {
+        display: none;
+      }
+
+      #global-nav {
+        display: block;
+        font-size: 100%;
+        z-index: 1000;
+        background-color: #fff;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 1.5rem;
+      }
+
+      :target {
+        padding-top: 1.5rem;
+      }
+
+      body {
+        margin: 0;
+        padding: 0.5em;
+      }
+
+      h1 {
+        font-size: 200%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<h1>Documentation for gololang.StandardAugmentations</h1>
+
+
+<div class="golodoc">
+  <p>This module defines the set of standard augmentations imported by default.</p>
+
+</div>
+
+
+<!-- begin table of content -->
+<nav id="toc">
+<h1>gololang.StandardAugmentations</h1>
+  <section id="global-nav">
+    <a href="../index.html" rel="home">Module Index</a>
+    <a href="../index-all.html" rel="index">Global Index</a>
+    
+    <a href="../gololang.html" rel="up">Package Index</a>
+    
+  </section>
+<ul>
+  
+
+  
+
+  
+
+  
+  <li><a href="#augmentations">Augmentations</a><ul>
+    
+    <li><a href="#augment.gololang.FunctionReference">gololang.FunctionReference</a><ul>
+      
+      <li><a href="#augment.gololang.FunctionReference.accept_2v">accept(this, args...)</a></li>
+      
+      <li><a href="#augment.gololang.FunctionReference.apply_2v">apply(this, args...)</a></li>
+      
+      <li><a href="#augment.gololang.FunctionReference.get_1">get(this)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.gololang.Tuple">gololang.Tuple</a><ul>
+      
+      <li><a href="#augment.gololang.Tuple.filter_2">filter(this, func)</a></li>
+      
+      <li><a href="#augment.gololang.Tuple.find_2">find(this, pred)</a></li>
+      
+      <li><a href="#augment.gololang.Tuple.join_2">join(this, separator)</a></li>
+      
+      <li><a href="#augment.gololang.Tuple.map_2">map(this, func)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.io.BufferedReader">java.io.BufferedReader</a><ul>
+      
+      <li><a href="#augment.java.io.BufferedReader.iterator_1">iterator(this)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.lang.CharSequence">java.lang.CharSequence</a><ul>
+      
+      <li><a href="#augment.java.lang.CharSequence.head_1">head(this)</a></li>
+      
+      <li><a href="#augment.java.lang.CharSequence.isEmpty_1">isEmpty(this)</a></li>
+      
+      <li><a href="#augment.java.lang.CharSequence.tail_1">tail(this)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.lang.Iterable">java.lang.Iterable</a><ul>
+      
+      <li><a href="#augment.java.lang.Iterable.__$$_destruct_4">__$$_destruct(this, number, substruct, toSkip)</a></li>
+      
+      <li><a href="#augment.java.lang.Iterable.count_2">count(this, pred)</a></li>
+      
+      <li><a href="#augment.java.lang.Iterable.each_2">each(this, func)</a></li>
+      
+      <li><a href="#augment.java.lang.Iterable.exists_2">exists(this, pred)</a></li>
+      
+      <li><a href="#augment.java.lang.Iterable.reduce_3">reduce(this, initialValue, func)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.lang.Number">java.lang.Number</a><ul>
+      
+      <li><a href="#augment.java.lang.Number.downTo_3">downTo(high, low, func)</a></li>
+      
+      <li><a href="#augment.java.lang.Number.times_2">times(count, func)</a></li>
+      
+      <li><a href="#augment.java.lang.Number.upTo_3">upTo(low, high, func)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.lang.Object">java.lang.Object</a><ul>
+      
+      <li><a href="#augment.java.lang.Object.isOneOf_2v">isOneOf(this, classes...)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.lang.String">java.lang.String</a><ul>
+      
+      <li><a href="#augment.java.lang.String.format_2v">format(this, args...)</a></li>
+      
+      <li><a href="#augment.java.lang.String.toDouble_1">toDouble(this)</a></li>
+      
+      <li><a href="#augment.java.lang.String.toFloat_1">toFloat(this)</a></li>
+      
+      <li><a href="#augment.java.lang.String.toInt_1">toInt(this)</a></li>
+      
+      <li><a href="#augment.java.lang.String.toInteger_1">toInteger(this)</a></li>
+      
+      <li><a href="#augment.java.lang.String.toLong_1">toLong(this)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.util.Collection">java.util.Collection</a><ul>
+      
+      <li><a href="#augment.java.util.Collection.__$$_destruct_4">__$$_destruct(this, number, substruct, toSkip)</a></li>
+      
+      <li><a href="#augment.java.util.Collection.destruct_1">destruct(this)</a></li>
+      
+      <li><a href="#augment.java.util.Collection.flatMap_2">flatMap(this, func)</a></li>
+      
+      <li><a href="#augment.java.util.Collection.newWithSameType_1">newWithSameType(this)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.util.Iterator">java.util.Iterator</a><ul>
+      
+      <li><a href="#augment.java.util.Iterator.__$$_destruct_4">__$$_destruct(this, number, substruct, toSkip)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.util.List">java.util.List</a><ul>
+      
+      <li><a href="#augment.java.util.List.append_2">append(this, element)</a></li>
+      
+      <li><a href="#augment.java.util.List.append_3v">append(this, head, tail...)</a></li>
+      
+      <li><a href="#augment.java.util.List.filter_2">filter(this, pred)</a></li>
+      
+      <li><a href="#augment.java.util.List.find_2">find(this, pred)</a></li>
+      
+      <li><a href="#augment.java.util.List.head_1">head(this)</a></li>
+      
+      <li><a href="#augment.java.util.List.insert_3">insert(this, index, element)</a></li>
+      
+      <li><a href="#augment.java.util.List.join_2">join(this, separator)</a></li>
+      
+      <li><a href="#augment.java.util.List.last_1">last(this)</a></li>
+      
+      <li><a href="#augment.java.util.List.map_2">map(this, func)</a></li>
+      
+      <li><a href="#augment.java.util.List.order_1">order(this)</a></li>
+      
+      <li><a href="#augment.java.util.List.order_2">order(this, comparator)</a></li>
+      
+      <li><a href="#augment.java.util.List.ordered_1">ordered(this)</a></li>
+      
+      <li><a href="#augment.java.util.List.ordered_2">ordered(this, comparator)</a></li>
+      
+      <li><a href="#augment.java.util.List.prepend_2">prepend(this, element)</a></li>
+      
+      <li><a href="#augment.java.util.List.prepend_3v">prepend(this, head, tail...)</a></li>
+      
+      <li><a href="#augment.java.util.List.removeAt_2">removeAt(this, idx)</a></li>
+      
+      <li><a href="#augment.java.util.List.reverse_1">reverse(this)</a></li>
+      
+      <li><a href="#augment.java.util.List.reversed_1">reversed(this)</a></li>
+      
+      <li><a href="#augment.java.util.List.tail_1">tail(this)</a></li>
+      
+      <li><a href="#augment.java.util.List.unmodifiableView_1">unmodifiableView(this)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.util.Map">java.util.Map</a><ul>
+      
+      <li><a href="#augment.java.util.Map.add_2">add(this, kv)</a></li>
+      
+      <li><a href="#augment.java.util.Map.add_3">add(this, key, value)</a></li>
+      
+      <li><a href="#augment.java.util.Map.addIfAbsent_3">addIfAbsent(this, key, value)</a></li>
+      
+      <li><a href="#augment.java.util.Map.count_2">count(this, pred)</a></li>
+      
+      <li><a href="#augment.java.util.Map.delete_2">delete(this, key)</a></li>
+      
+      <li><a href="#augment.java.util.Map.each_2">each(this, func)</a></li>
+      
+      <li><a href="#augment.java.util.Map.exists_2">exists(this, pred)</a></li>
+      
+      <li><a href="#augment.java.util.Map.filter_2">filter(this, pred)</a></li>
+      
+      <li><a href="#augment.java.util.Map.find_2">find(this, pred)</a></li>
+      
+      <li><a href="#augment.java.util.Map.getOrElse_3">getOrElse(this, key, replacement)</a></li>
+      
+      <li><a href="#augment.java.util.Map.map_2">map(this, func)</a></li>
+      
+      <li><a href="#augment.java.util.Map.newWithSameType_1">newWithSameType(this)</a></li>
+      
+      <li><a href="#augment.java.util.Map.reduce_3">reduce(this, initialValue, func)</a></li>
+      
+      <li><a href="#augment.java.util.Map.unmodifiableView_1">unmodifiableView(this)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.util.Map$Entry">java.util.Map$Entry</a><ul>
+      
+      <li><a href="#augment.java.util.Map$Entry.__$$_destruct_4">__$$_destruct(this, number, substruct, toSkip)</a></li>
+      
+      <li><a href="#augment.java.util.Map$Entry.destruct_1">destruct(this)</a></li>
+      
+      <li><a href="#augment.java.util.Map$Entry.toArray_1">toArray(this)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.util.Set">java.util.Set</a><ul>
+      
+      <li><a href="#augment.java.util.Set.exclude_2">exclude(this, element)</a></li>
+      
+      <li><a href="#augment.java.util.Set.exclude_3v">exclude(this, first, rest...)</a></li>
+      
+      <li><a href="#augment.java.util.Set.filter_2">filter(this, pred)</a></li>
+      
+      <li><a href="#augment.java.util.Set.find_2">find(this, pred)</a></li>
+      
+      <li><a href="#augment.java.util.Set.has_2">has(this, element)</a></li>
+      
+      <li><a href="#augment.java.util.Set.has_3v">has(this, first, rest...)</a></li>
+      
+      <li><a href="#augment.java.util.Set.include_2">include(this, element)</a></li>
+      
+      <li><a href="#augment.java.util.Set.include_3v">include(this, first, rest...)</a></li>
+      
+      <li><a href="#augment.java.util.Set.map_2">map(this, func)</a></li>
+      
+      <li><a href="#augment.java.util.Set.unmodifiableView_1">unmodifiableView(this)</a></li>
+      
+    </ul></li>
+    
+  </ul></li>
+  
+
+
+  
+
+  
+</ul>
+</nav>
+<!-- end table of content -->
+
+
+
+
+
+
+
+
+
+
+
+  <h2 id="augmentations">Augmentations</h2>
+  
+    <h3 id="augment.gololang.FunctionReference">gololang.FunctionReference<a class="permalink" href="#augment.gololang.FunctionReference" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-1022" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Augment functions to make them behave more like objects from java.util.function</p>
+
+    </div>
+    
+    
+      <h4 id="augment.gololang.FunctionReference.accept_2v">accept(this, args...)<a class="permalink" href="#augment.gololang.FunctionReference.accept_2v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-1042" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Alias for <code>FunctionReference::invoke</code></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.FunctionReference.apply_2v">apply(this, args...)<a class="permalink" href="#augment.gololang.FunctionReference.apply_2v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-1037" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Alias for <code>FunctionReference::invoke</code></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.FunctionReference.get_1">get(this)<a class="permalink" href="#augment.gololang.FunctionReference.get_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-1026" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Call this function with no arguments.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.gololang.Tuple">gololang.Tuple<a class="permalink" href="#augment.gololang.Tuple" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-973" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Augmentations for Golo tuples.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.gololang.Tuple.filter_2">filter(this, func)<a class="permalink" href="#augment.gololang.Tuple.filter_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-990" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Filters elements using a predicate, returning a new tuple.</p>
+
+      </div>
+    
+      <h4 id="augment.gololang.Tuple.find_2">find(this, pred)<a class="permalink" href="#augment.gololang.Tuple.find_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-978" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns the first element that satisfies a predicate, or <code>null</code> if none matches.</p>
+
+      </div>
+    
+      <h4 id="augment.gololang.Tuple.join_2">join(this, separator)<a class="permalink" href="#augment.gololang.Tuple.join_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-1014" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Joins the elements of a tuple into a string and using a separator.</p>
+
+      </div>
+    
+      <h4 id="augment.gololang.Tuple.map_2">map(this, func)<a class="permalink" href="#augment.gololang.Tuple.map_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-1003" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Maps the elements of a tuple, and returns a tuple with the transformed values.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.io.BufferedReader">java.io.BufferedReader<a class="permalink" href="#augment.java.io.BufferedReader" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-1046" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      
+    </div>
+    
+    
+      <h4 id="augment.java.io.BufferedReader.iterator_1">iterator(this)<a class="permalink" href="#augment.java.io.BufferedReader.iterator_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-1051" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Makes a <code>BufferedReader</code> an Iterable on its lines.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.lang.CharSequence">java.lang.CharSequence<a class="permalink" href="#augment.java.lang.CharSequence" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-193" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Augmentations over <code>CharSequence</code> to view it as a &ldquo;real&rdquo; <code>char</code> collection.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.java.lang.CharSequence.head_1">head(this)<a class="permalink" href="#augment.java.lang.CharSequence.head_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-198" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns the first <code>char</code> of the sequence, of <code>null</code> if empty.</p>
+
+      </div>
+    
+      <h4 id="augment.java.lang.CharSequence.isEmpty_1">isEmpty(this)<a class="permalink" href="#augment.java.lang.CharSequence.isEmpty_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-214" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Checks if the sequence is empty.</p>
+
+      </div>
+    
+      <h4 id="augment.java.lang.CharSequence.tail_1">tail(this)<a class="permalink" href="#augment.java.lang.CharSequence.tail_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-206" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns the remaining subsequence as a String (i.e. an immutable sequence)</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.lang.Iterable">java.lang.Iterable<a class="permalink" href="#augment.java.lang.Iterable" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-223" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Augmentations over iterable collections.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.java.lang.Iterable.__$$_destruct_4">__$$_destruct(this, number, substruct, toSkip)<a class="permalink" href="#augment.java.lang.Iterable.__$$_destruct_4" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-303" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>New style destructuring helper</p>
+<p>If a remainer is included, it will be an iterable reusing the underlying iterator.</p>
+<ul>
+<li><em>param</em> <code>number</code>: number of variable that will be affected.</li>
+<li><em>param</em> <code>substruct</code>: whether the destructuring is complete or should contains a remainer.</li>
+<li><em>param</em> <code>toSkip</code>: a boolean array indicating the elements to skip.</li>
+<li><em>returns</em> an array containing the values to assign.</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.lang.Iterable.count_2">count(this, pred)<a class="permalink" href="#augment.java.lang.Iterable.count_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-266" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Counts the number of elements that satisfy a predicate:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">println([1, 2, 3, 4]: count(|n| -&gt; (n % 2) == 0))
+</code></pre>
+<ul>
+<li><code>this</code>: an iterable.</li>
+<li><code>pred</code>: a predicate function, taking an element and returning a boolean.</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.lang.Iterable.each_2">each(this, func)<a class="permalink" href="#augment.java.lang.Iterable.each_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-251" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Applies a function over each element:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">[1, 2, 3]: each(|e| -&gt; println(e))
+</code></pre>
+<ul>
+<li><code>this</code>: an iterable.</li>
+<li><code>func</code>: the function to apply, taking the current element as a parameter.</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.lang.Iterable.exists_2">exists(this, pred)<a class="permalink" href="#augment.java.lang.Iterable.exists_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-284" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Checks whether any element satisfied a predicate:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">println([1, 2, 3, 4]: exists(|n| -&gt; n &gt; 3))
+</code></pre>
+<ul>
+<li><code>this</code>: an iterable.</li>
+<li><code>pred</code> a predicate function, taking an element and returning a boolean.</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.lang.Iterable.reduce_3">reduce(this, initialValue, func)<a class="permalink" href="#augment.java.lang.Iterable.reduce_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-235" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>General purpose reducing operation:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let data = [1, 2, 3, 4, 5]
+println("sum = " + data: reduce(0, |acc, next| -&gt; acc + next))
+</code></pre>
+<ul>
+<li><code>this</code>: an iterable.</li>
+<li><code>initialValue</code>: the initial accumulator value for the reducing operation.</li>
+<li><code>func</code>: the function to apply over an accumulator and the next value.</li>
+</ul>
+
+      </div>
+    
+  
+    <h3 id="augment.java.lang.Number">java.lang.Number<a class="permalink" href="#augment.java.lang.Number" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-88" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Number augmentations.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.java.lang.Number.downTo_3">downTo(high, low, func)<a class="permalink" href="#augment.java.lang.Number.downTo_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-132" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Similar to <a href="#upTo_3"><code>upTo</code></a>, except that the interval iteration is made from <code>high</code> down to <code>low</code>.</p>
+
+      </div>
+    
+      <h4 id="augment.java.lang.Number.times_2">times(count, func)<a class="permalink" href="#augment.java.lang.Number.times_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-102" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Repeats a function many times, as in:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">3: times(-&gt; println("Hey!")
+4: times(|i| -&gt; println(i))
+</code></pre>
+<ul>
+<li><code>count</code>: how many times the <code>func</code> function must be repeated.</li>
+<li><code>func</code>: a function to execute.</li>
+</ul>
+<p>The <code>func</code> function may take 0 or 1 argument. In the later case the argument is the iteration
+count index.</p>
+
+      </div>
+    
+      <h4 id="augment.java.lang.Number.upTo_3">upTo(low, high, func)<a class="permalink" href="#augment.java.lang.Number.upTo_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-122" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Repeats a function over a discrete interval:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">1: upTo(3, -&gt; println("Hello"))
+1: upTo(3, |i| -&gt;println(i))
+</code></pre>
+<ul>
+<li><code>low</code>: the start value (inclusive).</li>
+<li><code>high</code>: the end value (inclusive).</li>
+<li><code>func</code>: the function to execute.</li>
+</ul>
+<p>As in the case of <a href="#times_2"><code>times</code></a>, <code>func</code> may take an optional index parameter.
+See also <a href="#downTo_3"><code>downTo</code></a>.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.lang.Object">java.lang.Object<a class="permalink" href="#augment.java.lang.Object" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-70" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Objects augmentations.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.java.lang.Object.isOneOf_2v">isOneOf(this, classes...)<a class="permalink" href="#augment.java.lang.Object.isOneOf_2v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-75" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Checks if this object is an instance of one of the given class.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.lang.String">java.lang.String<a class="permalink" href="#augment.java.lang.String" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-145" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Useful string augmentations.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.java.lang.String.format_2v">format(this, args...)<a class="permalink" href="#augment.java.lang.String.format_2v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-150" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Convenience wrapper over <code>java.lang.String.format(...)</code>.</p>
+
+      </div>
+    
+      <h4 id="augment.java.lang.String.toDouble_1">toDouble(this)<a class="permalink" href="#augment.java.lang.String.toDouble_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-173" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Wrapper over <code>java.lang.Integer.parseDouble</code>.</p>
+
+      </div>
+    
+      <h4 id="augment.java.lang.String.toFloat_1">toFloat(this)<a class="permalink" href="#augment.java.lang.String.toFloat_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-179" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Wrapper over <code>java.lang.Integer.parseFloat</code>.</p>
+
+      </div>
+    
+      <h4 id="augment.java.lang.String.toInt_1">toInt(this)<a class="permalink" href="#augment.java.lang.String.toInt_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-161" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Wrapper over <code>java.lang.Integer.parseInt</code>.</p>
+
+      </div>
+    
+      <h4 id="augment.java.lang.String.toInteger_1">toInteger(this)<a class="permalink" href="#augment.java.lang.String.toInteger_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-167" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>rapper over <code>java.lang.Integer.parseInt</code>.</p>
+
+      </div>
+    
+      <h4 id="augment.java.lang.String.toLong_1">toLong(this)<a class="permalink" href="#augment.java.lang.String.toLong_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-185" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Wrapper over <code>java.lang.Integer.parseLong</code>.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.util.Collection">java.util.Collection<a class="permalink" href="#augment.java.util.Collection" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-318" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Java collections augmentations.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.java.util.Collection.__$$_destruct_4">__$$_destruct(this, number, substruct, toSkip)<a class="permalink" href="#augment.java.util.Collection.__$$_destruct_4" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-347" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>New style destructuring helper</p>
+<p>If a remainer is included, it will be a new collection of the same type.</p>
+<ul>
+<li><em>param</em> <code>number</code>: number of variable that will be affected.</li>
+<li><em>param</em> <code>substruct</code>: whether the destructuring is complete or should contains a remainer.</li>
+<li><em>param</em> <code>toSkip</code>: a boolean array indicating the elements to skip.</li>
+<li><em>returns</em> an array containing the values to assign.</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.util.Collection.destruct_1">destruct(this)<a class="permalink" href="#augment.java.util.Collection.destruct_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-332" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Destructuration helper.</p>
+<ul>
+<li>returns a tuple of the values</li>
+</ul>
+<p>*Deprecated since 3.4. This method should not be called directly and is no more used by new style destructuring.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Collection.flatMap_2">flatMap(this, func)<a class="permalink" href="#augment.java.util.Collection.flatMap_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-398" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Maps a function returning a collection and flatten the result (a.k.a bind)</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let l = list[1, 2, 3]: flatMap(|e| -&gt; list[e, e, e])
+require(l == list[1, 1, 1, 2, 2, 2, 3, 3, 3], "err")
+</code></pre>
+<ul>
+<li><em>param</em> <code>this</code>: a collection</li>
+<li><em>param</em> <code>func</code>: a mapping function returning a collection</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.util.Collection.newWithSameType_1">newWithSameType(this)<a class="permalink" href="#augment.java.util.Collection.newWithSameType_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-323" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns an empty collection of the same type as <code>this</code>.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.util.Iterator">java.util.Iterator<a class="permalink" href="#augment.java.util.Iterator" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-1084" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      
+    </div>
+    
+    
+      <h4 id="augment.java.util.Iterator.__$$_destruct_4">__$$_destruct(this, number, substruct, toSkip)<a class="permalink" href="#augment.java.util.Iterator.__$$_destruct_4" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-1096" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>New style destructuring helper</p>
+<p>If a remainer is included, it will contain the iterator itself.</p>
+<ul>
+<li><em>param</em> <code>number</code>: number of variable that will be affected.</li>
+<li><em>param</em> <code>substruct</code>: whether the destructuring is complete or should contains a remainer.</li>
+<li><em>param</em> <code>toSkip</code>: a boolean array indicating the elements to skip.</li>
+<li><em>returns</em> an array containing the values to assign.</li>
+</ul>
+
+      </div>
+    
+  
+    <h3 id="augment.java.util.List">java.util.List<a class="permalink" href="#augment.java.util.List" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-412" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Java lists augmentations.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.java.util.List.append_2">append(this, element)<a class="permalink" href="#augment.java.util.List.append_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-417" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Appends an element to a list.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.append_3v">append(this, head, tail...)<a class="permalink" href="#augment.java.util.List.append_3v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-444" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Appends a variable number of arguments to a list.</p>
+<ul>
+<li><code>head</code>: an element to append.</li>
+<li><code>tail</code>: a variable number of elements to append.</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.filter_2">filter(this, pred)<a class="permalink" href="#augment.java.util.List.filter_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-518" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Filters elements based on a predicate:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">println(list[1, 2, 3, 4]: filter(|n| -&gt; (n % 2) == 0))
+</code></pre>
+<ul>
+<li><code>this</code>: a list.</li>
+<li><code>pred</code>: a predicate function taking an element and returning a boolean.</li>
+</ul>
+<p><code>filter</code> returns a new collection of the same type as the original one, hence the original list is
+kept intact.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.find_2">find(this, pred)<a class="permalink" href="#augment.java.util.List.find_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-498" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Finds the first element of a list matching a predicate:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">println(list[1, 2, 3, 4]: find(|n| -&gt; n &gt; 3))
+</code></pre>
+<ul>
+<li><code>this</code>: a list.</li>
+<li><code>pred</code>: a predicate function taking an element and returning a boolean.</li>
+</ul>
+<p><code>find</code> returns <code>null</code> when no element satisfies <code>pred</code>.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.head_1">head(this)<a class="permalink" href="#augment.java.util.List.head_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-465" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns a list first element, of <code>null</code> if empty.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.insert_3">insert(this, index, element)<a class="permalink" href="#augment.java.util.List.insert_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-433" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Inserts an element at some index.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.join_2">join(this, separator)<a class="permalink" href="#augment.java.util.List.join_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-556" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Join the elements into a string:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">println(list[1, 2, 3]: join(", "))
+</code></pre>
+<ul>
+<li><code>this</code>: a list.</li>
+<li><code>separator</code>: the element separator string.</li>
+</ul>
+<p>The returned string is <code>""</code> when the list is empty.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.last_1">last(this)<a class="permalink" href="#augment.java.util.List.last_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-473" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns a list last element.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.map_2">map(this, func)<a class="permalink" href="#augment.java.util.List.map_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-538" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Maps elements of a list using a function:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">println(list[1, 2, 3]: map(|n| -&gt; n * 10))
+</code></pre>
+<ul>
+<li><code>this</code>: a list.</li>
+<li><code>func</code>: a transformation function.</li>
+</ul>
+<p><code>map</code> returns a new list with the same type, keeping the original list intact.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.order_1">order(this)<a class="permalink" href="#augment.java.util.List.order_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-580" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Sorts the list elements and returns the list.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.order_2">order(this, comparator)<a class="permalink" href="#augment.java.util.List.order_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-597" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Sorts the element using a comparator, see <code>java.util.Collections.sort(...)</code>.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.ordered_1">ordered(this)<a class="permalink" href="#augment.java.util.List.ordered_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-588" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns a new list where the elements have been sorted.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.ordered_2">ordered(this, comparator)<a class="permalink" href="#augment.java.util.List.ordered_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-606" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns a new list where the elements have been sorted using a comparator.
+See <code>java.util.Collections.sort</code>.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.prepend_2">prepend(this, element)<a class="permalink" href="#augment.java.util.List.prepend_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-425" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Prepends an element to a list.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.prepend_3v">prepend(this, head, tail...)<a class="permalink" href="#augment.java.util.List.prepend_3v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-455" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Prepends a variable number of arguments to a list.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.removeAt_2">removeAt(this, idx)<a class="permalink" href="#augment.java.util.List.removeAt_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-618" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Removes the element at the specified position.</p>
+<p>This method has the same behaviour as <code>java.util.List.remove(int)</code>, but is
+needed since for Golo everything is an <code>Object</code> and <code>remove</code> is overloaded.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.reverse_1">reverse(this)<a class="permalink" href="#augment.java.util.List.reverse_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-563" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Reverse the elements of the list and returns the list.</p>
+<p>See also <a href="#java.util.List.reversed_1"><code>reversed</code></a>.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.reversed_1">reversed(this)<a class="permalink" href="#augment.java.util.List.reversed_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-571" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Same as <a href="#java.util.List.reverse_1"><code>reverse</code></a>, but the returned list is a new one, leaving the original list order intact.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.tail_1">tail(this)<a class="permalink" href="#augment.java.util.List.tail_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-478" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns the rest of a list after its head, as an unmodifiable list.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.List.unmodifiableView_1">unmodifiableView(this)<a class="permalink" href="#augment.java.util.List.unmodifiableView_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-486" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Convenience wrapper over <code>java.util.Collections.unmodifiableList</code>.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.util.Map">java.util.Map<a class="permalink" href="#augment.java.util.Map" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-735" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Augmentations over maps.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.java.util.Map.add_2">add(this, kv)<a class="permalink" href="#augment.java.util.Map.add_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-748" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Adds a tuple <code>[key, value]</code> or a map entry and returns the map.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map.add_3">add(this, key, value)<a class="permalink" href="#augment.java.util.Map.add_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-740" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Alias for <code>put</code> that returns the map.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map.addIfAbsent_3">addIfAbsent(this, key, value)<a class="permalink" href="#augment.java.util.Map.addIfAbsent_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-790" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Adds an element to the map only if there is no entry for that key.</p>
+<ul>
+<li><code>this</code>: a map.</li>
+<li><code>key</code>: the element key.</li>
+<li><code>value</code>: the element value or a function to evaluate to get a value.</li>
+</ul>
+<p>The fact that <code>value</code> can be a function allows for delayed evaluation which can be useful for
+performance reasons. So instead of:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">map: addIfAbsent(key, expensiveOperation())
+</code></pre>
+<p>one may delay the evaluation as follows:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">map: addIfAbsent(key, -&gt; expensiveOperation())
+</code></pre>
+<p><code>addIfAbsent</code> returns the map.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map.count_2">count(this, pred)<a class="permalink" href="#augment.java.util.Map.count_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-924" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Counts the number of elements satisfying a predicate.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map.delete_2">delete(this, key)<a class="permalink" href="#augment.java.util.Map.delete_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-767" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Alias for <code>remove</code> that returns the map.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map.each_2">each(this, func)<a class="permalink" href="#augment.java.util.Map.each_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-914" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Iterates over each entry of a map.</p>
+<p><code>func</code> takes 2 arguments: the entry key and its value.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map.exists_2">exists(this, pred)<a class="permalink" href="#augment.java.util.Map.exists_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-930" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns <code>true</code> if there is any value satisfying <code>pred</code>, <code>false</code> otherwise.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map.filter_2">filter(this, pred)<a class="permalink" href="#augment.java.util.Map.filter_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-860" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Filters elements using a predicate, and returns a new map.</p>
+<p><code>pred</code> takes 2 arguments: a key and a value, and returns a boolean.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map.find_2">find(this, pred)<a class="permalink" href="#augment.java.util.Map.find_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-844" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns the first element that satisfies a predicate, or <code>null</code> if none matches.</p>
+<p><code>pred</code> takes 2 arguments: a key and a value, and returns a boolean.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map.getOrElse_3">getOrElse(this, key, replacement)<a class="permalink" href="#augment.java.util.Map.getOrElse_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-817" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns a value from a key or a default value if the entry is not defined.</p>
+<ul>
+<li><code>this</code>: a map.</li>
+<li><code>key</code>: the key to look for.</li>
+<li><code>replacement</code>: the default value, or a function giving the default value.</li>
+</ul>
+<p>As it is the case for <a href="#java.util.Map.addifAbsent_3"><code>addIfAbsent</code></a>,
+one can take advantage of delayed evaluation:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">println(map: getOrElse(key, "n/a"))
+println(map: getOrElse(key, -&gt; expensiveOperation())
+</code></pre>
+<p>Note that <code>replacement</code> yields the return value also when there is an entry for <code>key</code> but the
+value is <code>null</code>.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map.map_2">map(this, func)<a class="permalink" href="#augment.java.util.Map.map_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-879" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Maps entries of the map using a function.</p>
+<p><code>func</code> takes 2 arguments: a key and a value. The returned value must have <code>getKey()</code> and
+<code>getValue()</code> to represent a map entry. We suggest using the predefined <code>mapEntry(key, value)</code>
+function as it returns such object.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map.newWithSameType_1">newWithSameType(this)<a class="permalink" href="#augment.java.util.Map.newWithSameType_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-837" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns a new empty map of the same type.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map.reduce_3">reduce(this, initialValue, func)<a class="permalink" href="#augment.java.util.Map.reduce_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-899" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Reduces the entries of a map.</p>
+<p><code>func</code> takes 3 arguments:</p>
+<ul>
+<li>an accumulator whose initial value is <code>initialValue</code>,</li>
+<li>a key for the next entry,</li>
+<li>a value for the next entry.</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map.unmodifiableView_1">unmodifiableView(this)<a class="permalink" href="#augment.java.util.Map.unmodifiableView_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-832" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Wrapper for <code>java.util.Collections.unmodifiableMap(...)</code>.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.util.Map$Entry">java.util.Map$Entry<a class="permalink" href="#augment.java.util.Map$Entry" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-935" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      
+    </div>
+    
+    
+      <h4 id="augment.java.util.Map$Entry.__$$_destruct_4">__$$_destruct(this, number, substruct, toSkip)<a class="permalink" href="#augment.java.util.Map$Entry.__$$_destruct_4" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-956" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>New style destructuring helper</p>
+<p>The destructuring must be to exactly two values. No remainer syntax is allowed.</p>
+<ul>
+<li><em>param</em> <code>number</code>: number of variable that will be affected.</li>
+<li><em>param</em> <code>substruct</code>: whether the destructuring is complete or should contains a remainer.</li>
+<li><em>param</em> <code>toSkip</code>: a boolean array indicating the elements to skip.</li>
+<li><em>returns</em> an array containing the values to assign.</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map$Entry.destruct_1">destruct(this)<a class="permalink" href="#augment.java.util.Map$Entry.destruct_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-941" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Destructurate a map entry in key and value</p>
+<p>*Deprecated since 3.4. This method should not be called directly and is no more used by new style destructuring.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Map$Entry.toArray_1">toArray(this)<a class="permalink" href="#augment.java.util.Map$Entry.toArray_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-966" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Convert then entry into an array containing the key and the value.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.util.Set">java.util.Set<a class="permalink" href="#augment.java.util.Set" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="StandardAugmentations-src.html#l-626" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Augmentations over set collections.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.java.util.Set.exclude_2">exclude(this, element)<a class="permalink" href="#augment.java.util.Set.exclude_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-639" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Alias for <code>remove</code> that returns the set.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Set.exclude_3v">exclude(this, first, rest...)<a class="permalink" href="#augment.java.util.Set.exclude_3v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-658" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Excludes a variable number of elements, and returns the set.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Set.filter_2">filter(this, pred)<a class="permalink" href="#augment.java.util.Set.filter_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-708" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Filters the elements using a predicate, and returns a new collection.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Set.find_2">find(this, pred)<a class="permalink" href="#augment.java.util.Set.find_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-696" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Finds the first element that satisfies a predicate <code>pred</code>, and returns it, or <code>null</code> if no element
+matches.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Set.has_2">has(this, element)<a class="permalink" href="#augment.java.util.Set.has_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-669" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Alias for <code>contains</code>.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Set.has_3v">has(this, first, rest...)<a class="permalink" href="#augment.java.util.Set.has_3v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-674" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Alias for <code>contains</code> over a variable number of elements.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Set.include_2">include(this, element)<a class="permalink" href="#augment.java.util.Set.include_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-631" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Alias for <code>add</code> that returns the set.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Set.include_3v">include(this, first, rest...)<a class="permalink" href="#augment.java.util.Set.include_3v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-647" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Includes a variable number of elements, and returns the set.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Set.map_2">map(this, func)<a class="permalink" href="#augment.java.util.Set.map_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-721" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Transform each value using the <code>func</code> function, and returns a new set.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Set.unmodifiableView_1">unmodifiableView(this)<a class="permalink" href="#augment.java.util.Set.unmodifiableView_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="StandardAugmentations-src.html#l-690" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Convenience wrapper for <code>java.util.Collections.unmodifiableSet(...)</code>.</p>
+
+      </div>
+    
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
+</html>

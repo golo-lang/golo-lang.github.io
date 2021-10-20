@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>gololang.ir.Quote (Golo 3.4.0)</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon"
+        href="data:image/x-icon;base64,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"/>
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      margin: 1em auto;
+      margin-left: 20em;
+      max-width: 50em;
+      text-align: left;
+      padding: 0.5em;
+    }
+    pre {
+      background-color: #eee;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .listing:hover code[data-lang]:before {
+      display: block;
+    }
+
+    .listing code {
+      position: relative;
+    }
+
+    .listing code[data-lang]:before {
+      display: none;
+      content: attr(data-lang);
+      position: absolute;
+      font-size: 0.75em;
+      top: .5rem;
+      right: 0.5rem;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    li p {
+      margin: 0.3em;
+    }
+
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 250%;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 200%;
+      font-style: normal;
+      font-weight: bold;
+    }
+
+    h3 {
+      color: #666;
+      font-size: 180%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h4 {
+      font-size: 130%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h5 {
+      font-size: 100%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h6 {
+      font-size: 100%;
+      font-style: italic;
+      font-weight: normal;
+    }
+
+    #global-nav {
+      display: block;
+      font-size: 80%;
+    }
+
+    #global-nav > a {
+      margin: 0em;
+      padding: 0 0.5em;
+    }
+
+    #toc {
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      width: 20em;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    #toc h1 {
+      margin: .5em;
+      padding: 1ex;
+      font-size: 90%;
+      font-weight: bold;
+      font-style: normal;
+      color: #333;
+      background-color: #eee;
+      text-align: center;
+    }
+
+    #toc ul {
+      padding-left: 1em;
+    }
+
+    #toc > ul {
+      font-size: 80%;
+      margin: 0.5em;
+    }
+
+    #toc > ul > li {
+      list-style: none;
+      margin-bottom: 2ex;
+    }
+
+    #toc > ul > li > a {
+      font-weight: bold;
+      color: #333;
+      display: block;
+      padding: 1ex;
+      margin: 0 1em 1ex 0;
+      border-bottom: 1px solid #999;
+    }
+
+    #toc li {
+      list-style-type: none;
+    }
+
+    :target {
+      background-color: yellow;
+    }
+
+    .permalink {
+      margin-left: .3em;
+      font-size: 70%;
+      visibility: hidden;
+    }
+
+    *:hover > .permalink {
+      visibility: visible;
+    }
+
+    .golodoc {
+      margin: 0;
+      padding: 0;
+      padding-left: 1.5em;
+    }
+
+    .srclink {
+      float:  right;
+      text-align: right;
+      color: #999;
+      font-size: 75%;
+      margin-top: -2em;
+    }
+
+    .srclink a {
+      color: inherit;
+    }
+
+    .modules-list li p {
+      display: inline-block;
+      margin: 0 0.5em;
+    }
+
+    @media (max-width: 50em) {
+      #toc {
+        margin: auto;
+        position: static;
+        width: 100%;
+        overflow: visible;
+        white-space: normal;
+      }
+
+      #toc ul {
+        padding-left: 1em;
+        margin: 0;
+      }
+
+      #toc > ul {
+        font-size: 100%;
+        margin: 0em;
+        padding: 0;
+      }
+
+      #toc > ul > li {
+        list-style: none;
+        margin-bottom: 1ex;
+      }
+
+      #toc > ul > li > a {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        padding: 0ex;
+        margin: 0;
+        border-bottom: none;
+      }
+
+      #toc h1 {
+        display: none;
+      }
+
+      #global-nav {
+        display: block;
+        font-size: 100%;
+        z-index: 1000;
+        background-color: #fff;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 1.5rem;
+      }
+
+      :target {
+        padding-top: 1.5rem;
+      }
+
+      body {
+        margin: 0;
+        padding: 0.5em;
+      }
+
+      h1 {
+        font-size: 200%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<h1>Documentation for gololang.ir.Quote</h1>
+
+
+<div class="golodoc">
+  <p>This module provides the <a href="#quote_1v"><code>quote</code></a> and <a href="#unquote_1"><code>unquote</code></a> macros
+to ease the creation of IR node.</p>
+<p>Using this macros is an alternative to creating IR nodes from scratch with the
+fluent API. It can be seen as an equivalent of string interpolation for IR
+nodes.</p>
+<p>For instance, to create a node representing the following code:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">|a, b| -&gt; a + b
+</code></pre>
+<p>one can use the <a href="../ir.html">fluent builder API</a>, as in:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let node = lambda("a", "b"): returns(
+            plus(refLookup("a"), refLookup("b")))
+</code></pre>
+<p>or the <a href="#quote_1v"><code>quote</code></a> macro, as in:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let node = &amp;quote(|a, b| -&gt; a + b)
+</code></pre>
+<p>Variable declared in the quoted code are mangled to prevent name clashes. For
+instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let node = &amp;quote {
+  let tmp = 42
+}
+</code></pre>
+<p>creates a code equivalent to:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let node = define("__$$_quoted_tmp"): as(constant(42))
+</code></pre>
+<p>Since the mangling function use a
+<a href="../../../javadoc/org/eclipse/golo/compiler/SymbolGenerator.html"><code>SymbolGenerator</code></a>,
+variables and references whose name starts with <code>$</code> are not mangled (but the <code>$</code> is removed).</p>
+<p>Unquoting can be compared to string interpolation. Unquoted variables containing
+IR nodes are injected as is, without being quoted. For instance, to create a
+<code>do while</code> macro, one can use:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">macro doWhile = |condition, block| -&gt; &amp;quote {
+  $(block)
+  while $(condition) {
+    $(block)
+  }
+}
+</code></pre>
+<p>It is obviously possible to mix the API approach with the quoting one, as in:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">`augment(String.class): `with(&amp;quote {
+  function foo = |this| -&gt; 42
+})
+</code></pre>
+
+</div>
+
+
+<!-- begin table of content -->
+<nav id="toc">
+<h1>gololang.ir.Quote</h1>
+  <section id="global-nav">
+    <a href="../../index.html" rel="home">Module Index</a>
+    <a href="../../index-all.html" rel="index">Global Index</a>
+    
+    <a href="../ir.html" rel="up">Package Index</a>
+    
+  </section>
+<ul>
+  
+
+  
+
+  
+
+  
+
+
+  
+  <li><a href="#macros">Macros</a><ul>
+    
+    <li><a href="#$_1">$(node)</a></li>
+    
+    <li><a href="#quote_2v">quote(self, nodes...)</a></li>
+    
+    <li><a href="#quoteNoMangle_1v">quoteNoMangle(nodes...)</a></li>
+    
+    <li><a href="#unquote_1">unquote(node)</a></li>
+    
+  </ul></li>
+  
+
+  
+  <li><a href="#functions">Functions</a><ul>
+    
+    <li><a href="#isUnquoted_1">isUnquoted(node)</a></li>
+    
+    <li><a href="#quoteNode_2">quoteNode(node, p)</a></li>
+    
+  </ul></li>
+  
+</ul>
+</nav>
+<!-- end table of content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 id="macros">Macros</h2>
+  
+    <h3 id="$_1">$(node)<a class="permalink" href="#$_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Quote-src.html#l-485" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Alias for <a href="#unquote_1"><code>unquote</code></a></p>
+
+    </div>
+  
+    <h3 id="quote_2v">quote(self, nodes...)<a class="permalink" href="#quote_2v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Quote-src.html#l-447" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Converts the given nodes to calls to builder functions.</p>
+<p>This macro should &ldquo;just work&rdquo;. If applied to a single statement, a single node is returned.
+When applied to several statements, a block is returned, unless the statements are top-level ones, in which case a
+<code>ToplevelElements</code> is returned.</p>
+<p>See <a href="#quoteNode_2"><code>quoteNode</code></a>.</p>
+
+    </div>
+  
+    <h3 id="quoteNoMangle_1v">quoteNoMangle(nodes...)<a class="permalink" href="#quoteNoMangle_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Quote-src.html#l-474" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Converts the given nodes to calls to builder functions.</p>
+<p>Contrary to <a href="#quote_1v"><code>quote</code></a>, no name is mangled by this macro.</p>
+<p>See <a href="#quoteNode_2"><code>quoteNode</code></a>.</p>
+
+    </div>
+  
+    <h3 id="unquote_1">unquote(node)<a class="permalink" href="#unquote_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Quote-src.html#l-480" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Marks the node as unquoted so that it will be returned unchanged by the
+<a href="#quote_1v"><code>quote</code></a> macro.</p>
+
+    </div>
+  
+
+
+
+  <h2 id="functions">Functions</h2>
+  
+    <h3 id="isUnquoted_1">isUnquoted(node)<a class="permalink" href="#isUnquoted_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Quote-src.html#l-423" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Checks if the node is unquoted.</p>
+
+    </div>
+  
+    <h3 id="quoteNode_2">quoteNode(node, p)<a class="permalink" href="#quoteNode_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Quote-src.html#l-380" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Quotes the given node by converting it into calls to <a href="../ir.html">IR API</a>.</p>
+<p>This function should mainly be used by the <a href="#quote_1v"><code>quote</code></a> macro and not
+called directly.</p>
+<ul>
+<li><em>param</em> <code>node</code>: the node to quote</li>
+<li><em>param</em> <code>p</code>: a set of names that must not be mangled, or <code>null</code> if no name
+must be mangled</li>
+<li><em>returns</em> an expression that evaluate to the quoted node.</li>
+</ul>
+
+    </div>
+  
+
+
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
+</html>

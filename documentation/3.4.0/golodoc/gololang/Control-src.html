@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>gololang.Control source</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    pre {
+        font-family: monospace;
+        font-size: 90%;
+        background-color: #eee;
+        padding: 0;
+        margin: 0;
+    }
+
+    pre code {
+        font-family: monospace;
+        font-size: inherit;
+        padding: 0.5em ;
+        margin: 0;
+    }
+
+    :target {
+        background-color: yellow;
+    }
+
+    #line-numbers {
+        float: left;
+        position: relative;
+        padding: 0.5em;
+    }
+
+    #src {
+        float: left;
+        position: relative;
+    }
+  </style>
+</head>
+<body>
+<pre id="line-numbers">
+<span class="line-number" id="l-1">1</span>
+<span class="line-number" id="l-2">2</span>
+<span class="line-number" id="l-3">3</span>
+<span class="line-number" id="l-4">4</span>
+<span class="line-number" id="l-5">5</span>
+<span class="line-number" id="l-6">6</span>
+<span class="line-number" id="l-7">7</span>
+<span class="line-number" id="l-8">8</span>
+<span class="line-number" id="l-9">9</span>
+<span class="line-number" id="l-10">10</span>
+<span class="line-number" id="l-11">11</span>
+<span class="line-number" id="l-12">12</span>
+<span class="line-number" id="l-13">13</span>
+<span class="line-number" id="l-14">14</span>
+<span class="line-number" id="l-15">15</span>
+<span class="line-number" id="l-16">16</span>
+<span class="line-number" id="l-17">17</span>
+<span class="line-number" id="l-18">18</span>
+<span class="line-number" id="l-19">19</span>
+<span class="line-number" id="l-20">20</span>
+<span class="line-number" id="l-21">21</span>
+<span class="line-number" id="l-22">22</span>
+<span class="line-number" id="l-23">23</span>
+<span class="line-number" id="l-24">24</span>
+<span class="line-number" id="l-25">25</span>
+<span class="line-number" id="l-26">26</span>
+<span class="line-number" id="l-27">27</span>
+<span class="line-number" id="l-28">28</span>
+<span class="line-number" id="l-29">29</span>
+<span class="line-number" id="l-30">30</span>
+<span class="line-number" id="l-31">31</span>
+<span class="line-number" id="l-32">32</span>
+<span class="line-number" id="l-33">33</span>
+<span class="line-number" id="l-34">34</span>
+<span class="line-number" id="l-35">35</span>
+<span class="line-number" id="l-36">36</span>
+<span class="line-number" id="l-37">37</span>
+<span class="line-number" id="l-38">38</span>
+<span class="line-number" id="l-39">39</span>
+<span class="line-number" id="l-40">40</span>
+<span class="line-number" id="l-41">41</span>
+<span class="line-number" id="l-42">42</span>
+<span class="line-number" id="l-43">43</span>
+<span class="line-number" id="l-44">44</span>
+<span class="line-number" id="l-45">45</span>
+<span class="line-number" id="l-46">46</span>
+<span class="line-number" id="l-47">47</span>
+<span class="line-number" id="l-48">48</span>
+<span class="line-number" id="l-49">49</span>
+<span class="line-number" id="l-50">50</span>
+<span class="line-number" id="l-51">51</span>
+<span class="line-number" id="l-52">52</span>
+<span class="line-number" id="l-53">53</span>
+<span class="line-number" id="l-54">54</span>
+<span class="line-number" id="l-55">55</span>
+<span class="line-number" id="l-56">56</span>
+<span class="line-number" id="l-57">57</span>
+<span class="line-number" id="l-58">58</span>
+<span class="line-number" id="l-59">59</span>
+<span class="line-number" id="l-60">60</span>
+<span class="line-number" id="l-61">61</span>
+<span class="line-number" id="l-62">62</span>
+<span class="line-number" id="l-63">63</span>
+<span class="line-number" id="l-64">64</span>
+<span class="line-number" id="l-65">65</span>
+<span class="line-number" id="l-66">66</span>
+<span class="line-number" id="l-67">67</span>
+<span class="line-number" id="l-68">68</span>
+<span class="line-number" id="l-69">69</span>
+<span class="line-number" id="l-70">70</span>
+<span class="line-number" id="l-71">71</span>
+<span class="line-number" id="l-72">72</span>
+<span class="line-number" id="l-73">73</span>
+<span class="line-number" id="l-74">74</span>
+<span class="line-number" id="l-75">75</span>
+<span class="line-number" id="l-76">76</span>
+<span class="line-number" id="l-77">77</span>
+<span class="line-number" id="l-78">78</span>
+<span class="line-number" id="l-79">79</span>
+<span class="line-number" id="l-80">80</span>
+<span class="line-number" id="l-81">81</span>
+<span class="line-number" id="l-82">82</span>
+<span class="line-number" id="l-83">83</span>
+<span class="line-number" id="l-84">84</span>
+<span class="line-number" id="l-85">85</span>
+<span class="line-number" id="l-86">86</span>
+<span class="line-number" id="l-87">87</span>
+<span class="line-number" id="l-88">88</span>
+<span class="line-number" id="l-89">89</span>
+<span class="line-number" id="l-90">90</span>
+<span class="line-number" id="l-91">91</span>
+<span class="line-number" id="l-92">92</span>
+<span class="line-number" id="l-93">93</span>
+<span class="line-number" id="l-94">94</span>
+<span class="line-number" id="l-95">95</span>
+<span class="line-number" id="l-96">96</span>
+<span class="line-number" id="l-97">97</span>
+<span class="line-number" id="l-98">98</span>
+<span class="line-number" id="l-99">99</span>
+<span class="line-number" id="l-100">100</span>
+<span class="line-number" id="l-101">101</span>
+<span class="line-number" id="l-102">102</span>
+<span class="line-number" id="l-103">103</span>
+<span class="line-number" id="l-104">104</span>
+<span class="line-number" id="l-105">105</span>
+<span class="line-number" id="l-106">106</span>
+<span class="line-number" id="l-107">107</span>
+<span class="line-number" id="l-108">108</span>
+<span class="line-number" id="l-109">109</span>
+<span class="line-number" id="l-110">110</span>
+<span class="line-number" id="l-111">111</span>
+<span class="line-number" id="l-112">112</span>
+<span class="line-number" id="l-113">113</span>
+<span class="line-number" id="l-114">114</span>
+<span class="line-number" id="l-115">115</span>
+<span class="line-number" id="l-116">116</span>
+<span class="line-number" id="l-117">117</span>
+<span class="line-number" id="l-118">118</span>
+<span class="line-number" id="l-119">119</span>
+<span class="line-number" id="l-120">120</span>
+<span class="line-number" id="l-121">121</span>
+<span class="line-number" id="l-122">122</span>
+<span class="line-number" id="l-123">123</span>
+<span class="line-number" id="l-124">124</span>
+<span class="line-number" id="l-125">125</span>
+<span class="line-number" id="l-126">126</span>
+<span class="line-number" id="l-127">127</span>
+<span class="line-number" id="l-128">128</span>
+<span class="line-number" id="l-129">129</span>
+<span class="line-number" id="l-130">130</span>
+<span class="line-number" id="l-131">131</span>
+<span class="line-number" id="l-132">132</span>
+<span class="line-number" id="l-133">133</span>
+<span class="line-number" id="l-134">134</span>
+<span class="line-number" id="l-135">135</span>
+<span class="line-number" id="l-136">136</span>
+<span class="line-number" id="l-137">137</span>
+<span class="line-number" id="l-138">138</span>
+<span class="line-number" id="l-139">139</span>
+<span class="line-number" id="l-140">140</span>
+<span class="line-number" id="l-141">141</span>
+<span class="line-number" id="l-142">142</span>
+<span class="line-number" id="l-143">143</span>
+<span class="line-number" id="l-144">144</span>
+<span class="line-number" id="l-145">145</span>
+<span class="line-number" id="l-146">146</span>
+<span class="line-number" id="l-147">147</span>
+<span class="line-number" id="l-148">148</span>
+<span class="line-number" id="l-149">149</span>
+<span class="line-number" id="l-150">150</span>
+<span class="line-number" id="l-151">151</span>
+<span class="line-number" id="l-152">152</span>
+<span class="line-number" id="l-153">153</span>
+<span class="line-number" id="l-154">154</span>
+<span class="line-number" id="l-155">155</span>
+<span class="line-number" id="l-156">156</span>
+<span class="line-number" id="l-157">157</span>
+<span class="line-number" id="l-158">158</span>
+<span class="line-number" id="l-159">159</span>
+<span class="line-number" id="l-160">160</span>
+<span class="line-number" id="l-161">161</span>
+<span class="line-number" id="l-162">162</span>
+<span class="line-number" id="l-163">163</span>
+<span class="line-number" id="l-164">164</span>
+<span class="line-number" id="l-165">165</span>
+<span class="line-number" id="l-166">166</span>
+<span class="line-number" id="l-167">167</span>
+<span class="line-number" id="l-168">168</span>
+<span class="line-number" id="l-169">169</span>
+<span class="line-number" id="l-170">170</span>
+<span class="line-number" id="l-171">171</span>
+<span class="line-number" id="l-172">172</span>
+<span class="line-number" id="l-173">173</span>
+<span class="line-number" id="l-174">174</span>
+<span class="line-number" id="l-175">175</span>
+<span class="line-number" id="l-176">176</span>
+<span class="line-number" id="l-177">177</span>
+<span class="line-number" id="l-178">178</span>
+<span class="line-number" id="l-179">179</span>
+<span class="line-number" id="l-180">180</span>
+<span class="line-number" id="l-181">181</span>
+<span class="line-number" id="l-182">182</span>
+<span class="line-number" id="l-183">183</span>
+<span class="line-number" id="l-184">184</span>
+<span class="line-number" id="l-185">185</span>
+<span class="line-number" id="l-186">186</span>
+<span class="line-number" id="l-187">187</span>
+<span class="line-number" id="l-188">188</span>
+<span class="line-number" id="l-189">189</span>
+<span class="line-number" id="l-190">190</span>
+<span class="line-number" id="l-191">191</span>
+<span class="line-number" id="l-192">192</span>
+<span class="line-number" id="l-193">193</span>
+<span class="line-number" id="l-194">194</span>
+<span class="line-number" id="l-195">195</span>
+<span class="line-number" id="l-196">196</span>
+<span class="line-number" id="l-197">197</span>
+<span class="line-number" id="l-198">198</span>
+<span class="line-number" id="l-199">199</span>
+<span class="line-number" id="l-200">200</span>
+<span class="line-number" id="l-201">201</span>
+<span class="line-number" id="l-202">202</span>
+<span class="line-number" id="l-203">203</span>
+<span class="line-number" id="l-204">204</span>
+<span class="line-number" id="l-205">205</span>
+<span class="line-number" id="l-206">206</span>
+<span class="line-number" id="l-207">207</span>
+<span class="line-number" id="l-208">208</span>
+<span class="line-number" id="l-209">209</span>
+<span class="line-number" id="l-210">210</span>
+<span class="line-number" id="l-211">211</span>
+<span class="line-number" id="l-212">212</span>
+<span class="line-number" id="l-213">213</span>
+<span class="line-number" id="l-214">214</span>
+<span class="line-number" id="l-215">215</span>
+<span class="line-number" id="l-216">216</span>
+<span class="line-number" id="l-217">217</span>
+<span class="line-number" id="l-218">218</span>
+<span class="line-number" id="l-219">219</span>
+<span class="line-number" id="l-220">220</span>
+<span class="line-number" id="l-221">221</span>
+<span class="line-number" id="l-222">222</span>
+<span class="line-number" id="l-223">223</span>
+<span class="line-number" id="l-224">224</span>
+<span class="line-number" id="l-225">225</span>
+<span class="line-number" id="l-226">226</span>
+<span class="line-number" id="l-227">227</span>
+<span class="line-number" id="l-228">228</span>
+<span class="line-number" id="l-229">229</span>
+<span class="line-number" id="l-230">230</span>
+<span class="line-number" id="l-231">231</span>
+<span class="line-number" id="l-232">232</span>
+<span class="line-number" id="l-233">233</span>
+<span class="line-number" id="l-234">234</span>
+<span class="line-number" id="l-235">235</span>
+<span class="line-number" id="l-236">236</span>
+<span class="line-number" id="l-237">237</span>
+<span class="line-number" id="l-238">238</span>
+<span class="line-number" id="l-239">239</span>
+<span class="line-number" id="l-240">240</span>
+<span class="line-number" id="l-241">241</span>
+<span class="line-number" id="l-242">242</span>
+<span class="line-number" id="l-243">243</span>
+<span class="line-number" id="l-244">244</span>
+<span class="line-number" id="l-245">245</span>
+<span class="line-number" id="l-246">246</span>
+<span class="line-number" id="l-247">247</span>
+<span class="line-number" id="l-248">248</span>
+<span class="line-number" id="l-249">249</span>
+<span class="line-number" id="l-250">250</span>
+<span class="line-number" id="l-251">251</span>
+<span class="line-number" id="l-252">252</span>
+<span class="line-number" id="l-253">253</span>
+<span class="line-number" id="l-254">254</span>
+<span class="line-number" id="l-255">255</span>
+<span class="line-number" id="l-256">256</span>
+<span class="line-number" id="l-257">257</span>
+<span class="line-number" id="l-258">258</span>
+<span class="line-number" id="l-259">259</span>
+<span class="line-number" id="l-260">260</span>
+<span class="line-number" id="l-261">261</span>
+<span class="line-number" id="l-262">262</span>
+<span class="line-number" id="l-263">263</span>
+<span class="line-number" id="l-264">264</span>
+<span class="line-number" id="l-265">265</span>
+<span class="line-number" id="l-266">266</span>
+<span class="line-number" id="l-267">267</span>
+<span class="line-number" id="l-268">268</span>
+<span class="line-number" id="l-269">269</span>
+<span class="line-number" id="l-270">270</span>
+<span class="line-number" id="l-271">271</span>
+<span class="line-number" id="l-272">272</span>
+<span class="line-number" id="l-273">273</span>
+<span class="line-number" id="l-274">274</span>
+<span class="line-number" id="l-275">275</span>
+<span class="line-number" id="l-276">276</span>
+<span class="line-number" id="l-277">277</span>
+<span class="line-number" id="l-278">278</span>
+<span class="line-number" id="l-279">279</span>
+<span class="line-number" id="l-280">280</span>
+<span class="line-number" id="l-281">281</span>
+<span class="line-number" id="l-282">282</span>
+<span class="line-number" id="l-283">283</span>
+<span class="line-number" id="l-284">284</span>
+<span class="line-number" id="l-285">285</span>
+<span class="line-number" id="l-286">286</span>
+<span class="line-number" id="l-287">287</span>
+<span class="line-number" id="l-288">288</span>
+<span class="line-number" id="l-289">289</span>
+<span class="line-number" id="l-290">290</span>
+<span class="line-number" id="l-291">291</span>
+<span class="line-number" id="l-292">292</span>
+<span class="line-number" id="l-293">293</span>
+<span class="line-number" id="l-294">294</span>
+<span class="line-number" id="l-295">295</span>
+<span class="line-number" id="l-296">296</span>
+<span class="line-number" id="l-297">297</span>
+<span class="line-number" id="l-298">298</span>
+<span class="line-number" id="l-299">299</span>
+<span class="line-number" id="l-300">300</span>
+<span class="line-number" id="l-301">301</span>
+<span class="line-number" id="l-302">302</span>
+<span class="line-number" id="l-303">303</span>
+<span class="line-number" id="l-304">304</span>
+<span class="line-number" id="l-305">305</span>
+<span class="line-number" id="l-306">306</span>
+<span class="line-number" id="l-307">307</span>
+<span class="line-number" id="l-308">308</span>
+<span class="line-number" id="l-309">309</span>
+<span class="line-number" id="l-310">310</span>
+<span class="line-number" id="l-311">311</span>
+<span class="line-number" id="l-312">312</span>
+<span class="line-number" id="l-313">313</span>
+<span class="line-number" id="l-314">314</span>
+<span class="line-number" id="l-315">315</span>
+<span class="line-number" id="l-316">316</span>
+<span class="line-number" id="l-317">317</span>
+<span class="line-number" id="l-318">318</span>
+<span class="line-number" id="l-319">319</span>
+<span class="line-number" id="l-320">320</span>
+<span class="line-number" id="l-321">321</span>
+<span class="line-number" id="l-322">322</span>
+<span class="line-number" id="l-323">323</span>
+<span class="line-number" id="l-324">324</span>
+<span class="line-number" id="l-325">325</span>
+<span class="line-number" id="l-326">326</span>
+<span class="line-number" id="l-327">327</span>
+<span class="line-number" id="l-328">328</span>
+<span class="line-number" id="l-329">329</span>
+<span class="line-number" id="l-330">330</span>
+<span class="line-number" id="l-331">331</span>
+<span class="line-number" id="l-332">332</span>
+<span class="line-number" id="l-333">333</span>
+<span class="line-number" id="l-334">334</span>
+<span class="line-number" id="l-335">335</span>
+<span class="line-number" id="l-336">336</span>
+<span class="line-number" id="l-337">337</span>
+<span class="line-number" id="l-338">338</span>
+<span class="line-number" id="l-339">339</span>
+<span class="line-number" id="l-340">340</span>
+<span class="line-number" id="l-341">341</span>
+<span class="line-number" id="l-342">342</span>
+<span class="line-number" id="l-343">343</span>
+<span class="line-number" id="l-344">344</span>
+<span class="line-number" id="l-345">345</span>
+<span class="line-number" id="l-346">346</span>
+<span class="line-number" id="l-347">347</span>
+<span class="line-number" id="l-348">348</span>
+<span class="line-number" id="l-349">349</span>
+<span class="line-number" id="l-350">350</span>
+<span class="line-number" id="l-351">351</span>
+<span class="line-number" id="l-352">352</span>
+<span class="line-number" id="l-353">353</span>
+<span class="line-number" id="l-354">354</span>
+<span class="line-number" id="l-355">355</span>
+<span class="line-number" id="l-356">356</span>
+<span class="line-number" id="l-357">357</span>
+<span class="line-number" id="l-358">358</span>
+<span class="line-number" id="l-359">359</span>
+<span class="line-number" id="l-360">360</span>
+<span class="line-number" id="l-361">361</span>
+<span class="line-number" id="l-362">362</span>
+<span class="line-number" id="l-363">363</span>
+<span class="line-number" id="l-364">364</span>
+<span class="line-number" id="l-365">365</span>
+<span class="line-number" id="l-366">366</span>
+<span class="line-number" id="l-367">367</span>
+<span class="line-number" id="l-368">368</span>
+<span class="line-number" id="l-369">369</span>
+<span class="line-number" id="l-370">370</span>
+<span class="line-number" id="l-371">371</span>
+<span class="line-number" id="l-372">372</span>
+<span class="line-number" id="l-373">373</span>
+<span class="line-number" id="l-374">374</span>
+<span class="line-number" id="l-375">375</span>
+<span class="line-number" id="l-376">376</span>
+<span class="line-number" id="l-377">377</span>
+<span class="line-number" id="l-378">378</span>
+<span class="line-number" id="l-379">379</span>
+<span class="line-number" id="l-380">380</span>
+<span class="line-number" id="l-381">381</span>
+<span class="line-number" id="l-382">382</span>
+<span class="line-number" id="l-383">383</span>
+<span class="line-number" id="l-384">384</span>
+<span class="line-number" id="l-385">385</span>
+<span class="line-number" id="l-386">386</span>
+<span class="line-number" id="l-387">387</span>
+<span class="line-number" id="l-388">388</span>
+<span class="line-number" id="l-389">389</span>
+<span class="line-number" id="l-390">390</span>
+<span class="line-number" id="l-391">391</span>
+<span class="line-number" id="l-392">392</span>
+<span class="line-number" id="l-393">393</span>
+<span class="line-number" id="l-394">394</span>
+<span class="line-number" id="l-395">395</span>
+<span class="line-number" id="l-396">396</span>
+<span class="line-number" id="l-397">397</span>
+<span class="line-number" id="l-398">398</span>
+<span class="line-number" id="l-399">399</span>
+<span class="line-number" id="l-400">400</span>
+<span class="line-number" id="l-401">401</span>
+<span class="line-number" id="l-402">402</span>
+<span class="line-number" id="l-403">403</span>
+<span class="line-number" id="l-404">404</span>
+<span class="line-number" id="l-405">405</span>
+<span class="line-number" id="l-406">406</span>
+<span class="line-number" id="l-407">407</span>
+<span class="line-number" id="l-408">408</span>
+<span class="line-number" id="l-409">409</span>
+<span class="line-number" id="l-410">410</span>
+<span class="line-number" id="l-411">411</span>
+<span class="line-number" id="l-412">412</span>
+<span class="line-number" id="l-413">413</span>
+<span class="line-number" id="l-414">414</span>
+<span class="line-number" id="l-415">415</span>
+<span class="line-number" id="l-416">416</span>
+<span class="line-number" id="l-417">417</span>
+<span class="line-number" id="l-418">418</span>
+<span class="line-number" id="l-419">419</span>
+<span class="line-number" id="l-420">420</span>
+<span class="line-number" id="l-421">421</span>
+<span class="line-number" id="l-422">422</span>
+<span class="line-number" id="l-423">423</span>
+<span class="line-number" id="l-424">424</span>
+<span class="line-number" id="l-425">425</span>
+<span class="line-number" id="l-426">426</span>
+<span class="line-number" id="l-427">427</span>
+<span class="line-number" id="l-428">428</span>
+<span class="line-number" id="l-429">429</span>
+<span class="line-number" id="l-430">430</span>
+<span class="line-number" id="l-431">431</span>
+<span class="line-number" id="l-432">432</span>
+<span class="line-number" id="l-433">433</span>
+<span class="line-number" id="l-434">434</span>
+<span class="line-number" id="l-435">435</span>
+<span class="line-number" id="l-436">436</span>
+<span class="line-number" id="l-437">437</span>
+<span class="line-number" id="l-438">438</span>
+<span class="line-number" id="l-439">439</span>
+<span class="line-number" id="l-440">440</span>
+<span class="line-number" id="l-441">441</span>
+<span class="line-number" id="l-442">442</span>
+<span class="line-number" id="l-443">443</span>
+<span class="line-number" id="l-444">444</span>
+<span class="line-number" id="l-445">445</span>
+<span class="line-number" id="l-446">446</span>
+<span class="line-number" id="l-447">447</span>
+<span class="line-number" id="l-448">448</span>
+<span class="line-number" id="l-449">449</span>
+<span class="line-number" id="l-450">450</span>
+<span class="line-number" id="l-451">451</span>
+<span class="line-number" id="l-452">452</span>
+<span class="line-number" id="l-453">453</span>
+<span class="line-number" id="l-454">454</span>
+<span class="line-number" id="l-455">455</span>
+<span class="line-number" id="l-456">456</span>
+<span class="line-number" id="l-457">457</span>
+<span class="line-number" id="l-458">458</span>
+<span class="line-number" id="l-459">459</span>
+<span class="line-number" id="l-460">460</span>
+<span class="line-number" id="l-461">461</span>
+<span class="line-number" id="l-462">462</span>
+<span class="line-number" id="l-463">463</span>
+<span class="line-number" id="l-464">464</span>
+<span class="line-number" id="l-465">465</span>
+<span class="line-number" id="l-466">466</span>
+<span class="line-number" id="l-467">467</span>
+<span class="line-number" id="l-468">468</span>
+<span class="line-number" id="l-469">469</span>
+<span class="line-number" id="l-470">470</span>
+<span class="line-number" id="l-471">471</span>
+<span class="line-number" id="l-472">472</span>
+<span class="line-number" id="l-473">473</span>
+<span class="line-number" id="l-474">474</span>
+<span class="line-number" id="l-475">475</span>
+<span class="line-number" id="l-476">476</span>
+<span class="line-number" id="l-477">477</span>
+<span class="line-number" id="l-478">478</span>
+<span class="line-number" id="l-479">479</span>
+<span class="line-number" id="l-480">480</span>
+<span class="line-number" id="l-481">481</span>
+<span class="line-number" id="l-482">482</span>
+<span class="line-number" id="l-483">483</span>
+<span class="line-number" id="l-484">484</span>
+<span class="line-number" id="l-485">485</span>
+<span class="line-number" id="l-486">486</span>
+<span class="line-number" id="l-487">487</span>
+<span class="line-number" id="l-488">488</span>
+<span class="line-number" id="l-489">489</span>
+<span class="line-number" id="l-490">490</span>
+<span class="line-number" id="l-491">491</span>
+<span class="line-number" id="l-492">492</span>
+<span class="line-number" id="l-493">493</span>
+<span class="line-number" id="l-494">494</span>
+<span class="line-number" id="l-495">495</span>
+<span class="line-number" id="l-496">496</span>
+<span class="line-number" id="l-497">497</span>
+</pre>
+<pre id="src" class="highlight highlightjs">
+<code class="language-golo" data-lang="golo">----
+This module contains utilities to control execution flow.
+
+## Contexts
+
+Contexts are very similar to Python's
+[`with` statement](https://docs.python.org/3/reference/compound_stmts.html#with)
+and can be seen as a more generic version of Java's
+[try with resource](https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html)
+
+A *context* is any object exposing two special methods.
+The first one, `__$$_enter`, is a parameterless method that must be called when entering the context.
+The second one, `__$$_exit`, is a method that must be called when exiting the context.
+A context can be created using the provided [`Context`](#Context) structure, a `DynamicObject`, or by augmenting existing
+Java objects (e.g. [`CloseableContext`](#CloseableContext))
+
+A context is meant to be used with the [`within`](#within_1v) macro, that wraps the execution of its block with these
+*enter* and *exit* methods. This allows to abstract `try...catch...finally` patterns.
+Indeed, the given block is wrapped inside a `try...catch...finally` to ensure that the `__$$_exit` method of the context is called.
+The result of the `__$$_enter` method of the context can be bound to the given name to be used inside the block.
+
+For instance, given:
+```golo
+&within(name = expression) {
+  block
+}
+```
+
+1. The `expression` is evaluated. It is expected to return a context.
+2. The context `__$$_enter` method is invoked without arguments.
+   Its result (the target) is bound to `name` if present, and is ignored otherwise.
+5. The `block` is executed (in a `try` clause).
+6. Depending on the exception thrown by `block`:
+
+    - If `block` raised an exception, the `__$$_exit` method is called with the target and this exception.
+      If the method *returns* an exception, it is thrown.
+      Must the exception raised by the `block` be rethrown, the `__$$_exit` must *return* it.
+      If the `__$$_exit` returns `null`, no exception will be raised.
+      Any exception raised by the `__$$_exit` method is
+      [suppressed](https://docs.oracle.com/javase/8/docs/api/java/lang/Throwable.html#addSuppressed-java.lang.Throwable-).
+    - If the `block` does not raise an exception, the `__$$_exit` method is called with the target and `null` and its returned value is ignored.
+      Any exception raised by the `__$$_exit` method is rethrown.
+
+Since the result of the `__$$_enter` method is given to the `__$$_exit` method, the context is not required to keep it as an attribute, should `__$$_exit` act on it.
+The context can therefore be stateless. It may however keep the target as an internal attribute, or a closed variable when using [`Context`](#Context) for instance.
+
+Since the `__$$_exit` method is given the exception raised by the block and can prevent its rethrow, the exception can be dealt with directly inside this method.
+Moreover, since the exception *returned* by `__$$_exit` is raised, the exception can be wrapped in a higher level exception.
+
+For instance, one can create a transactional context as:
+```golo
+function transaction = |params...| -> context(
+  -> createConnection(params),
+  |connection, err| {
+    case {
+      when err is null {
+        connection: commit()
+      }
+      when err oftype MyException.class {
+        connection: rollback()
+        dealWithIt(err)
+      }
+      otherwise {
+        connection: rollback()
+        return WrapperException("Transaction failed", err)
+      }
+    }
+  }
+)
+
+
+...
+&within(connection = transaction(connectionParams)) {
+  doSomethingWith(connection)
+}
+```
+
+More than one context can be used, which is the same as nesting contexts, as:
+
+```golo
+&within(x = context, generateContext()) {
+  work(x)
+}
+```
+is expanded into
+```golo
+&within(x = context) {
+  &within(generateContext()) {
+    work(x)
+  }
+}
+```
+----
+module gololang.Control
+
+import gololang.ir
+import gololang.ir.DSL
+import gololang.macros.Utils
+
+
+#== Contexts ========================================================
+----
+This structure encapsulate two functions that will be used as context and enter and exit functions.
+
+See also the applied [augmentation](#augment.gololang.Control.types.Context) to provide the corresponding context
+methods.
+
+This structure must not be instanciated directly, use [`context`](#context_2) instead.
+----
+struct Context = {
+  ----
+  A closure executed when entering the context.
+  This closure takes no argument and return the value that will be bound to the context variable.
+  Can also be a value (e.g. `null` if no action is to be executed on entry).
+  ----
+  enter,
+
+  ----
+  A closure executed when exiting the context.
+  This closure has two parameters: the target (as returned by `enter`) and the exception raised by the wrapped block.
+  Can also be a value.
+  ----
+  exit
+}
+local function Context = -> null
+local function Context = |e, i| -> null
+local function ImmutableContext = |e, i| -> null
+
+function context = |enter, exit| -> gololang.Control.types.Context.$_immutable(enter, exit)
+
+----
+Makes the [`Context`](#Context) structure a context by providing `__$$_enter` and `__$$_exit` methods that delegate on
+the corresponding closures.
+
+In both cases, if the field value is not a closure, it is used as the method's return value.
+----
+augment Context {
+  ----
+  Delegates on the `enter` field.
+  ----
+  function __$$_enter = |this| -> match {
+    when isClosure(enter) then enter()
+    otherwise enter
+  } with { enter = this: enter() }
+
+  ----
+  Delegates on the `exit` field.
+  ----
+  function __$$_exit = |this, target, error| -> match {
+    when isClosure(exit) then exit(target, error)
+    otherwise exit
+  } with { exit = this: exit() }
+}
+
+----
+Execute a block within a context.
+
+This macro must be called with at least a context and a block to execute.
+The contexts may be given a name that will be bound to the result of `__$$_enter`.
+Several context may be given, which is equivalent to nested contexts.
+
+For instance:
+```golo
+&within(x = context1, generateContext(), y = otheContext()) {
+  work(x, y)
+}
+```
+is expanded into
+```golo
+&within(x = context) {
+  &within(generateContext()) {
+    &within(y = otherContext()) {
+      work(x, y)
+    }
+  }
+}
+```
+
+The `__$$_exit` method of each context will be called accordingly, even if the block fails with an exception.
+----
+macro within = |args...| {
+  var exprs, suite = extractLastArgument(args)
+  for (var i = exprs: size() - 1, i >= 0, i = i - 1) {
+    suite = wrapInContext(suite, match {
+        when expr oftype NamedArgument.class then expr
+        otherwise [null, expr]
+      } with { expr = exprs: get(i) })
+  }
+  return suite
+}
+
+----
+Generates the corresponding IR.
+----
+local function wrapInContext = |suite, expr| {
+  let targetName, context = expr
+  if context oftype ConstantStatement.class and context: value() is null {
+    return suite
+  }
+  enterSymScope("gololang.Control.within")
+  let _context = gensym("context")
+  let target = targetName orIfNull gensym("target")
+  let catched = gensym("catched")
+  let innerCatched = gensym("innerCatched")
+  let exception = gensym("exception")
+  let rethrow = gensym("rethrow")
+  exitSymScope()
+  return block(
+    `let(_context, context),
+    `var(exception, constant(null)),
+    `let(target, invoke("__$$_enter"): nullSafe(): on(refLookup(_context))),
+    `try(suite)
+    :`catch(catched,
+      assign(exception, refLookup(catched))
+    ): `finally(
+      `if(`and(`isnt(refLookup(_context), constant(null)), `is(refLookup(exception), constant(null)))): `then(
+            invoke("__$$_exit")
+            : withArgs(refLookup(target), constant(null))
+            : on(refLookup(_context))
+      ): `else(
+        `var(rethrow, refLookup(exception)),
+        `try(
+          `if(`isnt(refLookup(_context), constant(null))): `then(
+            assign(rethrow,
+              invoke("__$$_exit")
+              : withArgs(refLookup(target), refLookup(exception))
+              : on(refLookup(_context))))
+        ): `catch(innerCatched,
+          invoke("addSuppressed")
+          : withArgs(refLookup(innerCatched))
+          : on(refLookup(rethrow))
+        ),
+        `if(`isnt(refLookup(rethrow), constant(null)))
+          : `then(`throw(refLookup(rethrow)))
+      )
+    )
+  )
+}
+
+----
+Creates a context for resources that must be closed.
+
+For instance:
+```golo
+&within(resource=closing(createCloseable())) {
+  doSomethingWith(resource)
+}
+```
+
+- *param* `resource`: the resource to close on exit. The only constraints is that the resource must have a `close()` method.
+- *returns* a context whose enter value is the resource itself and the exit function closes the resource and returns the
+            exception unchanged
+
+See also [`CloseableContext`](#CloseableContext) to augment existing classes instead.
+----
+function closing = |resource| -> context(resource, ^_closeTarget)
+
+local function _closeTarget = |target, error| {
+  target: close()
+  return error
+}
+
+----
+Augmentation to create a context from objects with a `close` method.
+
+Classes with a `close()` method can be augmented with this augmentation to behave as a context.
+The enter value is the object itself, and the exit method call its `close` method and returns the exception unchanged.
+This allows a behavior similar to the Java *try with resource*.
+
+See also [`closing`](#closing_1) to use a wrapping function instead.
+
+`AutoCloseable` are [augmented](augment.java.io.AutoCloseable) using this augmentation.
+----
+augmentation CloseableContext = {
+  function __$$_enter = |this| -> this
+  function __$$_exit = |this, target, error| -> _closeTarget(target, error)
+}
+
+----
+Java `AutoCloseable` objects are augmented to be a closing context.
+
+For instance, to read the lines of a file, one can use:
+```golo
+&within(f=openFile("somefile.txt")) {
+  foreach line in f {
+    println(line)
+  }
+}
+```
+
+See also [`closing`](#closing_1).
+----
+augment java.lang.AutoCloseable with CloseableContext
+
+----
+Creates a context for locking objects.
+
+For instance:
+```golo
+&within(locking(createLock()) {
+  doSomething()
+}
+```
+
+- *param* `lock`: any object with `lock()` and `unlock()` methods.
+- *return* a context whose enter method locks the object using its `lock()` method (and returns it) and the exit method
+  unlocks it using its `unlock()` method and returns the exception unchanged.
+
+See also [`LockContext`](#LockContext) to augment existing classes instead.
+----
+function locking = |lock| -> context(-> _lockTarget(lock), ^_unlockTarget)
+
+----
+Convenient function to create a [`locking`](#locking_1) context from a `java.util.concurrent.locks.ReentrantLock`.
+----
+function locking = -> locking(java.util.concurrent.locks.ReentrantLock())
+
+local function _lockTarget = |l| {
+  l: lock()
+  return l
+}
+
+local function _unlockTarget = |t, e| {
+  t: unlock()
+  return e
+}
+
+----
+Augmentation to create a context from objects with `lock()` and `unlock()` methods.
+
+Classes with `lock()` and `unlock()` methods can be augmented with this augmentation to behave as a context.
+The enter value is the object itself, after it was locked, and the exit method unlocks it and returns the exception
+unchanged.
+
+See also [`locking`](#locking_1)
+----
+augmentation LockContext = {
+  function __$$_enter = |this| -> _lockTarget(this)
+  function __$$_exit = |this, target, error| -> _unlockTarget(target, error)
+}
+
+----
+Java `Locks` objects are augmented to be a locking context.
+
+For instance:
+```golo
+let lock = ReentrantLock()
+
+&within(lock) {
+  doSomeWork()
+}
+```
+
+See also [`locking`](#locking_1)
+----
+augment java.util.concurrent.locks.Lock with LockContext
+
+----
+Creates a context for unlocking objects.
+
+This context can be used to temporally release a previously acquired lock.
+
+For instance:
+```golo
+let l = createLock()
+&within(l) {
+  doSometing()
+  &within(unlocking(l)) {
+    doTaskWithLockReleased()
+  }
+  workWithLockHeld()
+}
+```
+
+- *param* `lock`: an object with `lock()` and `unlock()` methods.
+- *return* a context whose enter method unlocks the object using its `unlock()` method (and returns it) and the exit method
+  locks it again using its `lock()` method and returns the exception unchanged.
+----
+function unlocking = |lock| -> context(
+  {
+    lock: unlock()
+    return lock
+  },
+  |t, e| {
+    t: lock()
+    return e
+  }
+)
+
+----
+Creates a null context.
+
+This null context does nothing on exit, and return the given value on entry.
+It can be used as a fallback value when the context to use is changed dynamically.
+
+It's a [Null Object Pattern](https://en.wikipedia.org/wiki/Null_object_pattern) instance.
+
+This function should be banged.
+
+- *param* `val`: the value to assign on entry.
+----
+function nullContext = |val| -> Context(val, |_, e| -> e)
+
+----
+Creates a null context returning `null`.
+
+This is a singleton.
+
+See also [`nullContext`](#nullContext_1)
+----
+function nullContext = -> nullContext!(null)
+
+----
+Creates a context redirecting standard output.
+
+- *param* `out`: a `java.io.PrintStream` that will be used as standard output.
+----
+function stdout = |out| -> context(
+  { System.setOut(out) },
+  |_, e| {
+    System.setOut(old)
+    return e
+  }
+) with { old = System.out() }
+
+----
+Creates a context redirecting standard error.
+
+- *param* `err`: a `java.io.PrintStream` that will be used as standard error.
+----
+function stderr = |err| -> context(
+  { System.setErr(err) },
+  |_, e| {
+    System.setErr(old)
+    return e
+  }
+) with { old = System.err() }
+
+
+----
+Generic context to deal with exceptions.
+
+The created context returns `null` on entry. The exit function ignores the target, and apply the given `mapper` function
+to the exception.
+
+For instance, to just log a message and ignore the exception, one can use:
+```golo
+let errorLog = exceptionFilter(|e| { Messages.error(e: localizedMessage()) })
+
+&within(errorLog) {
+  somethingThatMayRaise()
+}
+```
+
+- *param* `mapper`: an unary function whose parameter is an exception (may be `null`) and returns an exception to raise
+or `null` if no exception must be raised.
+----
+function exceptionFilter = |mapper| -> context(
+  null,
+  |_, e| -> mapper(e)
+)
+
+
+----
+Creates a context that wraps exceptions
+
+If an exception is raised inside the context, it will be wrapped in the given exception (as its cause).
+
+For instance, given:
+```golo
+&within(wrapped(MyException.class)) {
+  doSomething()
+}
+```
+
+If `doSomething` throws an exception `e`, a `MyException` instance will be raised instead, whose cause will be set to
+`e`.
+----
+function wrapped = |cls| -> exceptionFilter(|e| {
+  if e oftype cls {
+    return e
+  }
+  let w = cls: newInstance()
+  w: initCause(e)
+  return w
+})
+
+
+----
+Creates a context that ignores exceptions.
+
+- *param* `exceptions` : the exceptions to ignore
+----
+function suppress = |exceptions...| -> exceptionFilter(|e| -> match {
+  when e: isOneOf(exceptions) then null
+  otherwise e
+})
+</code>
+</pre>
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>
+hljs.initHighlighting();
+</script>
+</body>
+</html>

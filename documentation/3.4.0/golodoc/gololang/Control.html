@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>gololang.Control (Golo 3.4.0)</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon"
+        href="data:image/x-icon;base64,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"/>
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      margin: 1em auto;
+      margin-left: 20em;
+      max-width: 50em;
+      text-align: left;
+      padding: 0.5em;
+    }
+    pre {
+      background-color: #eee;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .listing:hover code[data-lang]:before {
+      display: block;
+    }
+
+    .listing code {
+      position: relative;
+    }
+
+    .listing code[data-lang]:before {
+      display: none;
+      content: attr(data-lang);
+      position: absolute;
+      font-size: 0.75em;
+      top: .5rem;
+      right: 0.5rem;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    li p {
+      margin: 0.3em;
+    }
+
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 250%;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 200%;
+      font-style: normal;
+      font-weight: bold;
+    }
+
+    h3 {
+      color: #666;
+      font-size: 180%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h4 {
+      font-size: 130%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h5 {
+      font-size: 100%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h6 {
+      font-size: 100%;
+      font-style: italic;
+      font-weight: normal;
+    }
+
+    #global-nav {
+      display: block;
+      font-size: 80%;
+    }
+
+    #global-nav > a {
+      margin: 0em;
+      padding: 0 0.5em;
+    }
+
+    #toc {
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      width: 20em;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    #toc h1 {
+      margin: .5em;
+      padding: 1ex;
+      font-size: 90%;
+      font-weight: bold;
+      font-style: normal;
+      color: #333;
+      background-color: #eee;
+      text-align: center;
+    }
+
+    #toc ul {
+      padding-left: 1em;
+    }
+
+    #toc > ul {
+      font-size: 80%;
+      margin: 0.5em;
+    }
+
+    #toc > ul > li {
+      list-style: none;
+      margin-bottom: 2ex;
+    }
+
+    #toc > ul > li > a {
+      font-weight: bold;
+      color: #333;
+      display: block;
+      padding: 1ex;
+      margin: 0 1em 1ex 0;
+      border-bottom: 1px solid #999;
+    }
+
+    #toc li {
+      list-style-type: none;
+    }
+
+    :target {
+      background-color: yellow;
+    }
+
+    .permalink {
+      margin-left: .3em;
+      font-size: 70%;
+      visibility: hidden;
+    }
+
+    *:hover > .permalink {
+      visibility: visible;
+    }
+
+    .golodoc {
+      margin: 0;
+      padding: 0;
+      padding-left: 1.5em;
+    }
+
+    .srclink {
+      float:  right;
+      text-align: right;
+      color: #999;
+      font-size: 75%;
+      margin-top: -2em;
+    }
+
+    .srclink a {
+      color: inherit;
+    }
+
+    .modules-list li p {
+      display: inline-block;
+      margin: 0 0.5em;
+    }
+
+    @media (max-width: 50em) {
+      #toc {
+        margin: auto;
+        position: static;
+        width: 100%;
+        overflow: visible;
+        white-space: normal;
+      }
+
+      #toc ul {
+        padding-left: 1em;
+        margin: 0;
+      }
+
+      #toc > ul {
+        font-size: 100%;
+        margin: 0em;
+        padding: 0;
+      }
+
+      #toc > ul > li {
+        list-style: none;
+        margin-bottom: 1ex;
+      }
+
+      #toc > ul > li > a {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        padding: 0ex;
+        margin: 0;
+        border-bottom: none;
+      }
+
+      #toc h1 {
+        display: none;
+      }
+
+      #global-nav {
+        display: block;
+        font-size: 100%;
+        z-index: 1000;
+        background-color: #fff;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 1.5rem;
+      }
+
+      :target {
+        padding-top: 1.5rem;
+      }
+
+      body {
+        margin: 0;
+        padding: 0.5em;
+      }
+
+      h1 {
+        font-size: 200%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<h1>Documentation for gololang.Control</h1>
+
+
+<div class="golodoc">
+  <p>This module contains utilities to control execution flow.</p>
+<h3>Contexts</h3>
+<p>Contexts are very similar to Python's
+<a href="https://docs.python.org/3/reference/compound_stmts.html#with"><code>with</code> statement</a>
+and can be seen as a more generic version of Java's
+<a href="https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html">try with resource</a></p>
+<p>A <em>context</em> is any object exposing two special methods.
+The first one, <code>__$$_enter</code>, is a parameterless method that must be called when entering the context.
+The second one, <code>__$$_exit</code>, is a method that must be called when exiting the context.
+A context can be created using the provided <a href="#Context"><code>Context</code></a> structure, a <code>DynamicObject</code>, or by augmenting existing
+Java objects (e.g. <a href="#CloseableContext"><code>CloseableContext</code></a>)</p>
+<p>A context is meant to be used with the <a href="#within_1v"><code>within</code></a> macro, that wraps the execution of its block with these
+<em>enter</em> and <em>exit</em> methods. This allows to abstract <code>try...catch...finally</code> patterns.
+Indeed, the given block is wrapped inside a <code>try...catch...finally</code> to ensure that the <code>__$$_exit</code> method of the context is called.
+The result of the <code>__$$_enter</code> method of the context can be bound to the given name to be used inside the block.</p>
+<p>For instance, given:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">&amp;within(name = expression) {
+  block
+}
+</code></pre>
+<ol>
+<li><p>The <code>expression</code> is evaluated. It is expected to return a context.</p>
+</li>
+<li><p>The context <code>__$$_enter</code> method is invoked without arguments.
+Its result (the target) is bound to <code>name</code> if present, and is ignored otherwise.</p>
+</li>
+<li><p>The <code>block</code> is executed (in a <code>try</code> clause).</p>
+</li>
+<li><p>Depending on the exception thrown by <code>block</code>:</p>
+<ul>
+<li>If <code>block</code> raised an exception, the <code>__$$_exit</code> method is called with the target and this exception.
+If the method <em>returns</em> an exception, it is thrown.
+Must the exception raised by the <code>block</code> be rethrown, the <code>__$$_exit</code> must <em>return</em> it.
+If the <code>__$$_exit</code> returns <code>null</code>, no exception will be raised.
+Any exception raised by the <code>__$$_exit</code> method is
+<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Throwable.html#addSuppressed-java.lang.Throwable-">suppressed</a>.</li>
+<li>If the <code>block</code> does not raise an exception, the <code>__$$_exit</code> method is called with the target and <code>null</code> and its returned value is ignored.
+Any exception raised by the <code>__$$_exit</code> method is rethrown.</li>
+</ul>
+</li>
+</ol>
+<p>Since the result of the <code>__$$_enter</code> method is given to the <code>__$$_exit</code> method, the context is not required to keep it as an attribute, should <code>__$$_exit</code> act on it.
+The context can therefore be stateless. It may however keep the target as an internal attribute, or a closed variable when using <a href="#Context"><code>Context</code></a> for instance.</p>
+<p>Since the <code>__$$_exit</code> method is given the exception raised by the block and can prevent its rethrow, the exception can be dealt with directly inside this method.
+Moreover, since the exception <em>returned</em> by <code>__$$_exit</code> is raised, the exception can be wrapped in a higher level exception.</p>
+<p>For instance, one can create a transactional context as:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">function transaction = |params...| -&gt; context(
+  -&gt; createConnection(params),
+  |connection, err| {
+    case {
+      when err is null {
+        connection: commit()
+      }
+      when err oftype MyException.class {
+        connection: rollback()
+        dealWithIt(err)
+      }
+      otherwise {
+        connection: rollback()
+        return WrapperException("Transaction failed", err)
+      }
+    }
+  }
+)
+
+
+...
+&amp;within(connection = transaction(connectionParams)) {
+  doSomethingWith(connection)
+}
+</code></pre>
+<p>More than one context can be used, which is the same as nesting contexts, as:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">&amp;within(x = context, generateContext()) {
+  work(x)
+}
+</code></pre>
+<p>is expanded into</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">&amp;within(x = context) {
+  &amp;within(generateContext()) {
+    work(x)
+  }
+}
+</code></pre>
+
+</div>
+
+
+<!-- begin table of content -->
+<nav id="toc">
+<h1>gololang.Control</h1>
+  <section id="global-nav">
+    <a href="../index.html" rel="home">Module Index</a>
+    <a href="../index-all.html" rel="index">Global Index</a>
+    
+    <a href="../gololang.html" rel="up">Package Index</a>
+    
+  </section>
+<ul>
+  
+  <li><a href="#structs">Structs</a><ul>
+    
+    <li><a href="#Context">Context</a></li>
+    
+  </ul></li>
+  
+
+  
+
+  
+  <li><a href="#namedAugmentations">Named Augmentations</a><ul>
+    
+    <li><a href="#CloseableContext">CloseableContext</a><ul>
+      
+      <li><a href="#CloseableContext.__$$_enter_1">__$$_enter(this)</a></li>
+      
+      <li><a href="#CloseableContext.__$$_exit_3">__$$_exit(this, target, error)</a></li>
+      
+      </ul></li>
+    
+    <li><a href="#LockContext">LockContext</a><ul>
+      
+      <li><a href="#LockContext.__$$_enter_1">__$$_enter(this)</a></li>
+      
+      <li><a href="#LockContext.__$$_exit_3">__$$_exit(this, target, error)</a></li>
+      
+      </ul></li>
+    
+  </ul></li>
+  
+
+  
+  <li><a href="#augmentations">Augmentations</a><ul>
+    
+    <li><a href="#augment.gololang.Control.types.Context">gololang.Control.types.Context</a><ul>
+      
+      <li><a href="#augment.gololang.Control.types.Context.__$$_enter_1">__$$_enter(this)</a></li>
+      
+      <li><a href="#augment.gololang.Control.types.Context.__$$_exit_3">__$$_exit(this, target, error)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.lang.AutoCloseable">java.lang.AutoCloseable</a><ul>
+      
+    </ul></li>
+    
+    <li><a href="#augment.java.util.concurrent.locks.Lock">java.util.concurrent.locks.Lock</a><ul>
+      
+    </ul></li>
+    
+  </ul></li>
+  
+
+
+  
+  <li><a href="#macros">Macros</a><ul>
+    
+    <li><a href="#within_1v">within(args...)</a></li>
+    
+  </ul></li>
+  
+
+  
+  <li><a href="#functions">Functions</a><ul>
+    
+    <li><a href="#closing_1">closing(resource)</a></li>
+    
+    <li><a href="#context_2">context(enter, exit)</a></li>
+    
+    <li><a href="#exceptionFilter_1">exceptionFilter(mapper)</a></li>
+    
+    <li><a href="#locking_0">locking()</a></li>
+    
+    <li><a href="#locking_1">locking(lock)</a></li>
+    
+    <li><a href="#nullContext_0">nullContext()</a></li>
+    
+    <li><a href="#nullContext_1">nullContext(val)</a></li>
+    
+    <li><a href="#stderr_1">stderr(err)</a></li>
+    
+    <li><a href="#stdout_1">stdout(out)</a></li>
+    
+    <li><a href="#suppress_1v">suppress(exceptions...)</a></li>
+    
+    <li><a href="#unlocking_1">unlocking(lock)</a></li>
+    
+    <li><a href="#wrapped_1">wrapped(cls)</a></li>
+    
+  </ul></li>
+  
+</ul>
+</nav>
+<!-- end table of content -->
+
+
+
+
+  <h2 id="structs">Structs</h2>
+  
+    <h3 id="Context">Context<a class="permalink" href="#Context" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-110" rel="source" title="Link to the corresponding source">Source</a></nav>
+
+    <div class="golodoc">
+      <p>This structure encapsulate two functions that will be used as context and enter and exit functions.</p>
+<p>See also the applied <a href="#augment.gololang.Control.types.Context">augmentation</a> to provide the corresponding context
+methods.</p>
+<p>This structure must not be instanciated directly, use <a href="#context_2"><code>context</code></a> instead.</p>
+
+    </div>
+
+    <h5>Members</h5>
+    <ul>
+    
+    <li><code id="Context.enter">enter</code> <p>A closure executed when entering the context.
+This closure takes no argument and return the value that will be bound to the context variable.
+Can also be a value (e.g. <code>null</code> if no action is to be executed on entry).</p>
+
+      </li>
+  
+    <li><code id="Context.exit">exit</code> <p>A closure executed when exiting the context.
+This closure has two parameters: the target (as returned by <code>enter</code>) and the exception raised by the wrapped block.
+Can also be a value.</p>
+
+      </li>
+  
+    </ul>
+  
+
+
+
+
+
+  <h2 id="namedAugmentations">Named Augmentations</h2>
+  
+    <h3 id="CloseableContext">CloseableContext<a class="permalink" href="#CloseableContext" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-274" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Augmentation to create a context from objects with a <code>close</code> method.</p>
+<p>Classes with a <code>close()</code> method can be augmented with this augmentation to behave as a context.
+The enter value is the object itself, and the exit method call its <code>close</code> method and returns the exception unchanged.
+This allows a behavior similar to the Java <em>try with resource</em>.</p>
+<p>See also <a href="#closing_1"><code>closing</code></a> to use a wrapping function instead.</p>
+<p><code>AutoCloseable</code> are <a href="augment.java.io.AutoCloseable">augmented</a> using this augmentation.</p>
+
+    </div>
+    
+      <h4 id="CloseableContext.__$$_enter_1">__$$_enter(this)<a class="permalink" href="#CloseableContext.__$$_enter_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Control-src.html#l-275" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        
+      </div>
+    
+      <h4 id="CloseableContext.__$$_exit_3">__$$_exit(this, target, error)<a class="permalink" href="#CloseableContext.__$$_exit_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Control-src.html#l-276" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        
+      </div>
+    
+  
+    <h3 id="LockContext">LockContext<a class="permalink" href="#LockContext" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-337" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Augmentation to create a context from objects with <code>lock()</code> and <code>unlock()</code> methods.</p>
+<p>Classes with <code>lock()</code> and <code>unlock()</code> methods can be augmented with this augmentation to behave as a context.
+The enter value is the object itself, after it was locked, and the exit method unlocks it and returns the exception
+unchanged.</p>
+<p>See also <a href="#locking_1"><code>locking</code></a></p>
+
+    </div>
+    
+      <h4 id="LockContext.__$$_enter_1">__$$_enter(this)<a class="permalink" href="#LockContext.__$$_enter_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Control-src.html#l-338" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        
+      </div>
+    
+      <h4 id="LockContext.__$$_exit_3">__$$_exit(this, target, error)<a class="permalink" href="#LockContext.__$$_exit_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Control-src.html#l-339" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        
+      </div>
+    
+  
+
+
+
+
+  <h2 id="augmentations">Augmentations</h2>
+  
+    <h3 id="augment.gololang.Control.types.Context">gololang.Control.types.Context<a class="permalink" href="#augment.gololang.Control.types.Context" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-137" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Makes the <a href="#Context"><code>Context</code></a> structure a context by providing <code>__$$_enter</code> and <code>__$$_exit</code> methods that delegate on
+the corresponding closures.</p>
+<p>In both cases, if the field value is not a closure, it is used as the method's return value.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.gololang.Control.types.Context.__$$_enter_1">__$$_enter(this)<a class="permalink" href="#augment.gololang.Control.types.Context.__$$_enter_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Control-src.html#l-141" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Delegates on the <code>enter</code> field.</p>
+
+      </div>
+    
+      <h4 id="augment.gololang.Control.types.Context.__$$_exit_3">__$$_exit(this, target, error)<a class="permalink" href="#augment.gololang.Control.types.Context.__$$_exit_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Control-src.html#l-149" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Delegates on the <code>exit</code> field.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.java.lang.AutoCloseable">java.lang.AutoCloseable<a class="permalink" href="#augment.java.lang.AutoCloseable" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-293" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Java <code>AutoCloseable</code> objects are augmented to be a closing context.</p>
+<p>For instance, to read the lines of a file, one can use:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">&amp;within(f=openFile("somefile.txt")) {
+  foreach line in f {
+    println(line)
+  }
+}
+</code></pre>
+<p>See also <a href="#closing_1"><code>closing</code></a>.</p>
+
+    </div>
+    
+      <h5>Named augmentations applied</h5>
+      <ul>
+      
+      <li>
+        
+          <a href="#CloseableContext">CloseableContext</a>
+        
+      </li>
+      
+      </ul>
+    
+    
+  
+    <h3 id="augment.java.util.concurrent.locks.Lock">java.util.concurrent.locks.Lock<a class="permalink" href="#augment.java.util.concurrent.locks.Lock" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-356" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Java <code>Locks</code> objects are augmented to be a locking context.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let lock = ReentrantLock()
+
+&amp;within(lock) {
+  doSomeWork()
+}
+</code></pre>
+<p>See also <a href="#locking_1"><code>locking</code></a></p>
+
+    </div>
+    
+      <h5>Named augmentations applied</h5>
+      <ul>
+      
+      <li>
+        
+          <a href="#LockContext">LockContext</a>
+        
+      </li>
+      
+      </ul>
+    
+    
+  
+
+
+
+  <h2 id="macros">Macros</h2>
+  
+    <h3 id="within_1v">within(args...)<a class="permalink" href="#within_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-181" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Execute a block within a context.</p>
+<p>This macro must be called with at least a context and a block to execute.
+The contexts may be given a name that will be bound to the result of <code>__$$_enter</code>.
+Several context may be given, which is equivalent to nested contexts.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">&amp;within(x = context1, generateContext(), y = otheContext()) {
+  work(x, y)
+}
+</code></pre>
+<p>is expanded into</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">&amp;within(x = context) {
+  &amp;within(generateContext()) {
+    &amp;within(y = otherContext()) {
+      work(x, y)
+    }
+  }
+}
+</code></pre>
+<p>The <code>__$$_exit</code> method of each context will be called accordingly, even if the block fails with an exception.</p>
+
+    </div>
+  
+
+
+
+  <h2 id="functions">Functions</h2>
+  
+    <h3 id="closing_1">closing(resource)<a class="permalink" href="#closing_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-256" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a context for resources that must be closed.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">&amp;within(resource=closing(createCloseable())) {
+  doSomethingWith(resource)
+}
+</code></pre>
+<ul>
+<li><em>param</em> <code>resource</code>: the resource to close on exit. The only constraints is that the resource must have a <code>close()</code> method.</li>
+<li><em>returns</em> a context whose enter value is the resource itself and the exit function closes the resource and returns the<pre class="listing"><code class="lang-golo" data-lang="golo">    exception unchanged
+</code></pre>
+</li>
+</ul>
+<p>See also <a href="#CloseableContext"><code>CloseableContext</code></a> to augment existing classes instead.</p>
+
+    </div>
+  
+    <h3 id="context_2">context(enter, exit)<a class="permalink" href="#context_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-129" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      
+    </div>
+  
+    <h3 id="exceptionFilter_1">exceptionFilter(mapper)<a class="permalink" href="#exceptionFilter_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-458" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Generic context to deal with exceptions.</p>
+<p>The created context returns <code>null</code> on entry. The exit function ignores the target, and apply the given <code>mapper</code> function
+to the exception.</p>
+<p>For instance, to just log a message and ignore the exception, one can use:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let errorLog = exceptionFilter(|e| { Messages.error(e: localizedMessage()) })
+
+&amp;within(errorLog) {
+  somethingThatMayRaise()
+}
+</code></pre>
+<ul>
+<li><em>param</em> <code>mapper</code>: an unary function whose parameter is an exception (may be <code>null</code>) and returns an exception to raise
+or <code>null</code> if no exception must be raised.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="locking_0">locking()<a class="permalink" href="#locking_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-316" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Convenient function to create a <a href="#locking_1"><code>locking</code></a> context from a <code>java.util.concurrent.locks.ReentrantLock</code>.</p>
+
+    </div>
+  
+    <h3 id="locking_1">locking(lock)<a class="permalink" href="#locking_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-311" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a context for locking objects.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">&amp;within(locking(createLock()) {
+  doSomething()
+}
+</code></pre>
+<ul>
+<li><em>param</em> <code>lock</code>: any object with <code>lock()</code> and <code>unlock()</code> methods.</li>
+<li><em>return</em> a context whose enter method locks the object using its <code>lock()</code> method (and returns it) and the exit method
+unlocks it using its <code>unlock()</code> method and returns the exception unchanged.</li>
+</ul>
+<p>See also <a href="#LockContext"><code>LockContext</code></a> to augment existing classes instead.</p>
+
+    </div>
+  
+    <h3 id="nullContext_0">nullContext()<a class="permalink" href="#nullContext_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-411" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a null context returning <code>null</code>.</p>
+<p>This is a singleton.</p>
+<p>See also <a href="#nullContext_1"><code>nullContext</code></a></p>
+
+    </div>
+  
+    <h3 id="nullContext_1">nullContext(val)<a class="permalink" href="#nullContext_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-402" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a null context.</p>
+<p>This null context does nothing on exit, and return the given value on entry.
+It can be used as a fallback value when the context to use is changed dynamically.</p>
+<p>It's a <a href="https://en.wikipedia.org/wiki/Null_object_pattern">Null Object Pattern</a> instance.</p>
+<p>This function should be banged.</p>
+<ul>
+<li><em>param</em> <code>val</code>: the value to assign on entry.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="stderr_1">stderr(err)<a class="permalink" href="#stderr_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-431" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a context redirecting standard error.</p>
+<ul>
+<li><em>param</em> <code>err</code>: a <code>java.io.PrintStream</code> that will be used as standard error.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="stdout_1">stdout(out)<a class="permalink" href="#stdout_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-418" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a context redirecting standard output.</p>
+<ul>
+<li><em>param</em> <code>out</code>: a <code>java.io.PrintStream</code> that will be used as standard output.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="suppress_1v">suppress(exceptions...)<a class="permalink" href="#suppress_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-494" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a context that ignores exceptions.</p>
+<ul>
+<li><em>param</em> <code>exceptions</code> : the exceptions to ignore</li>
+</ul>
+
+    </div>
+  
+    <h3 id="unlocking_1">unlocking(lock)<a class="permalink" href="#unlocking_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-379" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a context for unlocking objects.</p>
+<p>This context can be used to temporally release a previously acquired lock.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let l = createLock()
+&amp;within(l) {
+  doSometing()
+  &amp;within(unlocking(l)) {
+    doTaskWithLockReleased()
+  }
+  workWithLockHeld()
+}
+</code></pre>
+<ul>
+<li><em>param</em> <code>lock</code>: an object with <code>lock()</code> and <code>unlock()</code> methods.</li>
+<li><em>return</em> a context whose enter method unlocks the object using its <code>unlock()</code> method (and returns it) and the exit method
+locks it again using its <code>lock()</code> method and returns the exception unchanged.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="wrapped_1">wrapped(cls)<a class="permalink" href="#wrapped_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Control-src.html#l-479" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a context that wraps exceptions</p>
+<p>If an exception is raised inside the context, it will be wrapped in the given exception (as its cause).</p>
+<p>For instance, given:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">&amp;within(wrapped(MyException.class)) {
+  doSomething()
+}
+</code></pre>
+<p>If <code>doSomething</code> throws an exception <code>e</code>, a <code>MyException</code> instance will be raised instead, whose cause will be set to
+<code>e</code>.</p>
+
+    </div>
+  
+
+
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
+</html>

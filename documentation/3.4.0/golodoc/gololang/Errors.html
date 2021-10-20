@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>gololang.Errors (Golo 3.4.0)</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon"
+        href="data:image/x-icon;base64,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"/>
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      margin: 1em auto;
+      margin-left: 20em;
+      max-width: 50em;
+      text-align: left;
+      padding: 0.5em;
+    }
+    pre {
+      background-color: #eee;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .listing:hover code[data-lang]:before {
+      display: block;
+    }
+
+    .listing code {
+      position: relative;
+    }
+
+    .listing code[data-lang]:before {
+      display: none;
+      content: attr(data-lang);
+      position: absolute;
+      font-size: 0.75em;
+      top: .5rem;
+      right: 0.5rem;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    li p {
+      margin: 0.3em;
+    }
+
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 250%;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 200%;
+      font-style: normal;
+      font-weight: bold;
+    }
+
+    h3 {
+      color: #666;
+      font-size: 180%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h4 {
+      font-size: 130%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h5 {
+      font-size: 100%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h6 {
+      font-size: 100%;
+      font-style: italic;
+      font-weight: normal;
+    }
+
+    #global-nav {
+      display: block;
+      font-size: 80%;
+    }
+
+    #global-nav > a {
+      margin: 0em;
+      padding: 0 0.5em;
+    }
+
+    #toc {
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      width: 20em;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    #toc h1 {
+      margin: .5em;
+      padding: 1ex;
+      font-size: 90%;
+      font-weight: bold;
+      font-style: normal;
+      color: #333;
+      background-color: #eee;
+      text-align: center;
+    }
+
+    #toc ul {
+      padding-left: 1em;
+    }
+
+    #toc > ul {
+      font-size: 80%;
+      margin: 0.5em;
+    }
+
+    #toc > ul > li {
+      list-style: none;
+      margin-bottom: 2ex;
+    }
+
+    #toc > ul > li > a {
+      font-weight: bold;
+      color: #333;
+      display: block;
+      padding: 1ex;
+      margin: 0 1em 1ex 0;
+      border-bottom: 1px solid #999;
+    }
+
+    #toc li {
+      list-style-type: none;
+    }
+
+    :target {
+      background-color: yellow;
+    }
+
+    .permalink {
+      margin-left: .3em;
+      font-size: 70%;
+      visibility: hidden;
+    }
+
+    *:hover > .permalink {
+      visibility: visible;
+    }
+
+    .golodoc {
+      margin: 0;
+      padding: 0;
+      padding-left: 1.5em;
+    }
+
+    .srclink {
+      float:  right;
+      text-align: right;
+      color: #999;
+      font-size: 75%;
+      margin-top: -2em;
+    }
+
+    .srclink a {
+      color: inherit;
+    }
+
+    .modules-list li p {
+      display: inline-block;
+      margin: 0 0.5em;
+    }
+
+    @media (max-width: 50em) {
+      #toc {
+        margin: auto;
+        position: static;
+        width: 100%;
+        overflow: visible;
+        white-space: normal;
+      }
+
+      #toc ul {
+        padding-left: 1em;
+        margin: 0;
+      }
+
+      #toc > ul {
+        font-size: 100%;
+        margin: 0em;
+        padding: 0;
+      }
+
+      #toc > ul > li {
+        list-style: none;
+        margin-bottom: 1ex;
+      }
+
+      #toc > ul > li > a {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        padding: 0ex;
+        margin: 0;
+        border-bottom: none;
+      }
+
+      #toc h1 {
+        display: none;
+      }
+
+      #global-nav {
+        display: block;
+        font-size: 100%;
+        z-index: 1000;
+        background-color: #fff;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 1.5rem;
+      }
+
+      :target {
+        padding-top: 1.5rem;
+      }
+
+      body {
+        margin: 0;
+        padding: 0.5em;
+      }
+
+      h1 {
+        font-size: 200%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<h1>Documentation for gololang.Errors</h1>
+
+
+<div class="golodoc">
+  <p>Useful augmentations, decorators and function to deal with errors in Golo.</p>
+
+</div>
+
+
+<!-- begin table of content -->
+<nav id="toc">
+<h1>gololang.Errors</h1>
+  <section id="global-nav">
+    <a href="../index.html" rel="home">Module Index</a>
+    <a href="../index-all.html" rel="index">Global Index</a>
+    
+    <a href="../gololang.html" rel="up">Package Index</a>
+    
+  </section>
+<ul>
+  
+
+  
+
+  
+
+  
+  <li><a href="#augmentations">Augmentations</a><ul>
+    
+    <li><a href="#augment.java.util.Optional">java.util.Optional</a><ul>
+      
+      <li><a href="#augment.java.util.Optional.and_2">and(this, other)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.andThen_2">andThen(this, f)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.apply_2">apply(this, arg)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.either_3">either(this, mapping, default)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.flattened_1">flattened(this)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.isEmpty_1">isEmpty(this)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.isNone_1">isNone(this)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.isSome_1">isSome(this)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.isSome_2">isSome(this, value)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.iterator_1">iterator(this)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.or_2">or(this, other)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.reduce_3">reduce(this, init, func)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.toList_1">toList(this)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.toResult_1">toResult(this)</a></li>
+      
+      <li><a href="#augment.java.util.Optional.toResult_2">toResult(this, param)</a></li>
+      
+    </ul></li>
+    
+  </ul></li>
+  
+
+
+  
+
+  
+  <li><a href="#functions">Functions</a><ul>
+    
+    <li><a href="#catcher_1">catcher(recover)</a></li>
+    
+    <li><a href="#catching_1">catching(default)</a></li>
+    
+    <li><a href="#Empty_0">Empty()</a></li>
+    
+    <li><a href="#Error_1">Error(message)</a></li>
+    
+    <li><a href="#None_0">None()</a></li>
+    
+    <li><a href="#nullify_1">nullify(f)</a></li>
+    
+    <li><a href="#Ok_1">Ok(value)</a></li>
+    
+    <li><a href="#Option_1">Option(v)</a></li>
+    
+    <li><a href="#option_1">option(f)</a></li>
+    
+    <li><a href="#raising_1">raising(f)</a></li>
+    
+    <li><a href="#Result_1">Result(v)</a></li>
+    
+    <li><a href="#result_1">result(f)</a></li>
+    
+    <li><a href="#Some_1">Some(value)</a></li>
+    
+    <li><a href="#trying_1">trying(f)</a></li>
+    
+  </ul></li>
+  
+</ul>
+</nav>
+<!-- end table of content -->
+
+
+
+
+
+
+
+
+
+
+
+  <h2 id="augmentations">Augmentations</h2>
+  
+    <h3 id="augment.java.util.Optional">java.util.Optional<a class="permalink" href="#augment.java.util.Optional" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-80" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      
+    </div>
+    
+    
+      <h4 id="augment.java.util.Optional.and_2">and(this, other)<a class="permalink" href="#augment.java.util.Optional.and_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-193" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Conjunctive chaining.</p>
+<p>This is equivalent to <code>:flatMap(|_| -&gt; other)</code>,
+i.e. applicative or monadic sequence with discarding.
+(Can also be seen as <code>:map(const(^id)): apply(other)</code>)</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">Some(1): `and(None()) == None()
+None(): `and(Some(1)) == None()
+Some(1): `and(Some("2")) == Some("2")
+</code></pre>
+<p>Note that this method is eager. If you want laziness, use the <code>flatMap</code>
+equivalent.</p>
+<ul>
+<li><em>param</em> <code>other</code> the other optional</li>
+<li><em>return</em> <code>other</code> if this optional is present, otherwise <code>this</code></li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.andThen_2">andThen(this, f)<a class="permalink" href="#augment.java.util.Optional.andThen_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-159" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Same as <code>map</code> or <code>flatMap</code>, depending on the type returned by <code>f</code>.</p>
+<p>This is a generic version for <code>map</code> and <code>flatMap</code>: if <code>f</code> returns an
+<code>Optional</code>, it's equivalent to <code>flatMap</code>, otherwise, it's equivalent to <code>map</code>.</p>
+<p>This allows code such as:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">Some(21): andThen(|x| -&gt; x + 1): andThen(|x| -&gt; Some(2 * x)) == Some(42)
+</code></pre>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.apply_2">apply(this, arg)<a class="permalink" href="#augment.java.util.Optional.apply_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-246" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Apply the function contained is this optional to the given optional. If the
+function has several parameters, an optional containing a partialized version
+is returned, that can be <code>apply</code>ed to subsequent optionals.
+This makes <code>Optional</code> an “applicative functor”.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let f = Some(|x| -&gt; x + 10)
+f: apply(Some(32)) # Some(42)
+f: apply(None())  # None()
+
+Some(|a, b| -&gt; a + b): apply(Some(21)): apply(Some(21)) # Some(42)
+</code></pre>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.either_3">either(this, mapping, default)<a class="permalink" href="#augment.java.util.Optional.either_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-280" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Case analysis for the option.</p>
+<p>If the result is not empty, apply the first function (similar to <code>flatMap</code>),
+otherwise invoke the second function (similar to <code>orElseGet</code>). For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">Some(21): either(|x| -&gt; x * 2, -&gt; "plop") == 42
+None(): either(|x| -&gt; x * 2, -&gt; "plop") == "plop"
+</code></pre>
+<p>This is indeed equivalent to</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">opt: map(mapping): orElseGet(default)
+</code></pre>
+<ul>
+<li><em>param</em> <code>mapping</code>: the function to apply to the contained value</li>
+<li><em>param</em> <code>default</code>: the function to invoke if the option is empty (takes no arguments)</li>
+<li><em>return</em> the result of applying the corresponding function</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.flattened_1">flattened(this)<a class="permalink" href="#augment.java.util.Optional.flattened_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-136" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Remove one level of optional.</p>
+<p>This is actually equivalent to <code>:flatMap(identity)</code>
+(or <code>:flatMap(f)</code> is equivalent to <code>:map(f): flattened()</code>).</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">Some(Some(42)): flattened() == Some(42)
+None(): flattened() == None()
+Some(None()): flattened() == None()
+</code></pre>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.isEmpty_1">isEmpty(this)<a class="permalink" href="#augment.java.util.Optional.isEmpty_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-84" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Test if this optional is empty.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.isNone_1">isNone(this)<a class="permalink" href="#augment.java.util.Optional.isNone_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-89" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Alias for <code>isEmpty</code></p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.isSome_1">isSome(this)<a class="permalink" href="#augment.java.util.Optional.isSome_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-94" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Alias for <code>isPresent</code></p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.isSome_2">isSome(this, value)<a class="permalink" href="#augment.java.util.Optional.isSome_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-99" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Test if this optional contains a value equals to the provided one.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.iterator_1">iterator(this)<a class="permalink" href="#augment.java.util.Optional.iterator_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-102" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Test if this optional contains a value equals to the provided one.</p>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.or_2">or(this, other)<a class="permalink" href="#augment.java.util.Optional.or_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-216" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Disjunctive chaining.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">Some(1): `or(Some(2)) == Some(1)
+None(): `or(Some(1)) == Some(1)
+Some(1): `or(None()) == Some(1)
+None(): `or(None()) == None()
+</code></pre>
+<p>Note that this method is eager.</p>
+<p>Some(1): orElseGet(-> Some(2))
+None(): orElseGet(-> Some(2))</p>
+<ul>
+<li><em>param</em> <code>other</code> the other optional</li>
+<li><em>return</em> <code>other</code> if this optional is empty, otherwise <code>this</code></li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.reduce_3">reduce(this, init, func)<a class="permalink" href="#augment.java.util.Optional.reduce_3" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-119" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Reduce this option using <code>func</code> with <code>init</code> as initial value.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">Some("b"): reduce("a", |x, y| -&gt; x + y) == "ab"
+None(): reduce(42, |x, y| -&gt; x + y) == 42
+</code></pre>
+<ul>
+<li><em>param</em> <code>init</code> the initial value</li>
+<li><em>param</em> <code>func</code> the aggregation function</li>
+<li><em>return</em> the initial value if this is empty, the aggregated result otherwise</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.toList_1">toList(this)<a class="permalink" href="#augment.java.util.Optional.toList_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-144" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Convert this optional into a list</p>
+<ul>
+<li><em>return</em> a singleton list containing the value if present, otherwise an
+empty list</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.toResult_1">toResult(this)<a class="permalink" href="#augment.java.util.Optional.toResult_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-230" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Disjunctive chaining.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">Some(1): `or(Some(2)) == Some(1)
+None(): `or(Some(1)) == Some(1)
+Some(1): `or(None()) == Some(1)
+None(): `or(None()) == None()
+</code></pre>
+<p>Note that this method is eager.</p>
+<p>Some(1): orElseGet(-> Some(2))
+None(): orElseGet(-> Some(2))</p>
+<ul>
+<li><em>param</em> <code>other</code> the other optional</li>
+<li><em>return</em> <code>other</code> if this optional is empty, otherwise <code>this</code></li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.java.util.Optional.toResult_2">toResult(this, param)<a class="permalink" href="#augment.java.util.Optional.toResult_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="Errors-src.html#l-221" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Disjunctive chaining.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">Some(1): `or(Some(2)) == Some(1)
+None(): `or(Some(1)) == Some(1)
+Some(1): `or(None()) == Some(1)
+None(): `or(None()) == None()
+</code></pre>
+<p>Note that this method is eager.</p>
+<p>Some(1): orElseGet(-> Some(2))
+None(): orElseGet(-> Some(2))</p>
+<ul>
+<li><em>param</em> <code>other</code> the other optional</li>
+<li><em>return</em> <code>other</code> if this optional is empty, otherwise <code>this</code></li>
+</ul>
+
+      </div>
+    
+  
+
+
+
+
+
+  <h2 id="functions">Functions</h2>
+  
+    <h3 id="catcher_1">catcher(recover)<a class="permalink" href="#catcher_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-468" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Create a catcher that execute the given block dealing with exceptions.</p>
+<p>This is similar to <a href="#trying_1"><code>trying</code></a>, but encapsulate the <code>catch</code> function
+instead of returning a <code>Result</code>. It is also similar to <a href="#catching"><code>catching</code></a>,
+but the block is the block take no parameter and is immediately executed.</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let recover = catcher(|ex| -&gt; match {
+  when ex oftype IllegalArgumentException.class then "default"
+  otherwise ""
+})
+
+let result = recover({
+  let a = bar()
+  let r = foo(42)
+  return "foo: " + r
+)}
+</code></pre>
+<p>This function can be used as a decorator:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">@!catcher
+function recoverIAE = |ex| -&gt; match {
+  when ex oftype IllegalArgumentException.class then "default"
+  otherwise ""
+}
+
+let result = recoverIAE({
+  let a = bar()
+  let r = foo(42)
+  return "foo: " + r
+})
+</code></pre>
+<p>It is somewhat equivalent to a <code>trying</code> followed by <code>either</code> as in:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let recover = |ex| -&gt; match { ... }
+
+result = catcher(recover)({
+  // some code that can fail
+})
+
+result = trying({
+  // some code that can fail
+}): either(^gololang.Functions::id, recover)
+</code></pre>
+<ul>
+<li><em>param</em> <code>recover</code>: the value to return if a exception occurred, or the function
+to apply to the exception.</li>
+</ul>
+<p>See also <a href="#trying_1"><code>trying</code></a>, <a href="#catching"><code>catching</code></a></p>
+
+    </div>
+  
+    <h3 id="catching_1">catching(default)<a class="permalink" href="#catching_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-408" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Allows an unary function to be called with an <code>Optional</code> or a <code>Result</code> value.
+Similar to <code>flatMap</code>, but using <code>default</code> on the exception if the call failed.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let foo = |x| -&gt; x: toUpperCase()
+
+let safeFoo = catching("plop")(foo)
+
+safeFoo(null)         # "plop"
+safeFoo(None())       # "plop"
+safeFoo(Error("err")) # "plop"
+safeFoo(Ok("a"))      # "A"
+safeFoo(Some("a"))    # "A"
+
+catching(^gololang.error.Result::error)(foo)(null) # Result.error(NullPointerException())
+</code></pre>
+<p>Can be used as a decorator.</p>
+<ul>
+<li><em>param</em> <code>default</code>: the value to return if a exception occurred, or the function
+to apply to the exception.</li>
+</ul>
+<p>See also <a href="#trying_1"><code>trying</code></a>, <a href="#result_1"><code>result</code></a>, <a href="#option_1"><code>option</code></a></p>
+
+    </div>
+  
+    <h3 id="Empty_0">Empty()<a class="permalink" href="#Empty_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-41" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Constructor for an empty <code>gololang.error.Result</code>.</p>
+
+    </div>
+  
+    <h3 id="Error_1">Error(message)<a class="permalink" href="#Error_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-36" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Constructor for <code>gololang.error.Result</code> errors.</p>
+<ul>
+<li><em>param</em> <code>message</code>: the message for the error in the <code>Result</code></li>
+</ul>
+
+    </div>
+  
+    <h3 id="None_0">None()<a class="permalink" href="#None_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-46" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Constructor for an empty <code>java.util.Optional</code>.</p>
+
+    </div>
+  
+    <h3 id="nullify_1">nullify(f)<a class="permalink" href="#nullify_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-370" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Transform a function into one that can return <code>null</code> if something went wrong
+(i.e. None, Error or exception).</p>
+<p>Can be used as a decorator.</p>
+
+    </div>
+  
+    <h3 id="Ok_1">Ok(value)<a class="permalink" href="#Ok_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-29" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Constructor for <code>gololang.error.Result</code> values.</p>
+<ul>
+<li><em>param</em> <code>value</code>: the value to encapsulate in the <code>Result</code></li>
+</ul>
+
+    </div>
+  
+    <h3 id="Option_1">Option(v)<a class="permalink" href="#Option_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-62" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>“Smart” constructor for <code>java.util.Optional</code>.</p>
+<p>If the given value is already an <code>Optional</code>, returns it unchanged; if it's a
+<code>Result</code>, converts it into an <code>Optional</code>, and create an <code>Optional</code> otherwise
+(using <code>ofNullable</code>)</p>
+
+    </div>
+  
+    <h3 id="option_1">option(f)<a class="permalink" href="#option_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-313" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Transform a function raising an exception into a function returning a option.
+The resulting function returns <code>Option(f(x))</code> if <code>f(x)</code> succeeds and <code>None</code> if
+<code>f(x)</code> raises an exception.</p>
+<p>Can be used as a decorator.</p>
+<p>See also <a href="#raising_1"><code>raising</code></a></p>
+
+    </div>
+  
+    <h3 id="raising_1">raising(f)<a class="permalink" href="#raising_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-362" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Transforms a function returning a result or an option into a function returning
+the associated value or raising an exception.</p>
+<p>This is the inverse behavior of <a href="#result_1"><code>result</code></a> and <a href="#option_1"><code>option</code></a></p>
+<p>Can be used as a decorator.</p>
+<p>See also <a href="#result_1"><code>result</code></a>, <a href="#option_1"><code>option</code></a></p>
+
+    </div>
+  
+    <h3 id="Result_1">Result(v)<a class="permalink" href="#Result_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-74" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>“Smart” constructor for <code>gololang.error.Result</code>.</p>
+<p>If the given value is already a <code>Result</code>, returns it unchanged
+and create an <code>Optional</code> otherwise.</p>
+
+    </div>
+  
+    <h3 id="result_1">result(f)<a class="permalink" href="#result_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-296" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Transform a function raising an exception into a function returning a <code>Result</code>.
+The resulting function returns <code>Result.ok(f(x))</code> if <code>f(x)</code> succeeds and
+<code>Result.error(e)</code> if <code>f(x)</code> raises <code>e</code>.</p>
+<p>Can be used as a decorator.</p>
+
+    </div>
+  
+    <h3 id="Some_1">Some(value)<a class="permalink" href="#Some_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-53" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Constructor <code>java.util.Optional</code> values.</p>
+<ul>
+<li><em>param</em> <code>value</code>: the value to encapsulate in the <code>Optional</code></li>
+</ul>
+
+    </div>
+  
+    <h3 id="trying_1">trying(f)<a class="permalink" href="#trying_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Errors-src.html#l-343" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Execute the given block and return a <code>Result</code>.</p>
+<p>This is similar to <a href="#result_1"><code>result</code></a>, except that the block take no parameter and is
+immediately executed. This is <em>not</em> a decorator, but rather a replacement for a
+<code>try catch</code> block.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let res = trying({
+  let f = foo()
+  let x = bar()
+  let z = f(x)
+  return z + plop()
+})
+</code></pre>
+<p>If any of the operation in the block raises an exception, <code>res</code> will be a
+<code>Result.error</code> containing the exception, otherwise it will be a <code>Result.ok</code>
+containing the returned value.</p>
+<p>See also <a href="#result_1"><code>result</code></a>, <a href="#catching_1"><code>catching</code></a></p>
+
+    </div>
+  
+
+
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
+</html>

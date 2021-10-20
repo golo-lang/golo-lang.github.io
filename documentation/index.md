@@ -3,13 +3,13 @@ layout: main
 title: Golo documentation
 ---
 
-## Next version milestones
-
-* [Golo Programming Language Guide](next/index.html)
-* [Golodoc](next/golodoc/index.html)
-* [Javadoc](next/javadoc/index.html)
-
 ## Released versions
+
+## 3.4.0
+
+* [Golo Programming Language Guide](3.4.0/index.html)
+* [Golodoc](3.4.0/golodoc/index.html)
+* [Javadoc](3.4.0/javadoc/index.html)
 
 ## 3.3.0
 

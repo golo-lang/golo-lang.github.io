@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<title>Source code</title>
+<link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<div class="sourceContainer">
+<pre><span class="sourceLineNo">001</span>/*<a name="line.1"></a>
+<span class="sourceLineNo">002</span> * Copyright (c) 2012-2021 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others<a name="line.2"></a>
+<span class="sourceLineNo">003</span> *<a name="line.3"></a>
+<span class="sourceLineNo">004</span> * This program and the accompanying materials are made available under the<a name="line.4"></a>
+<span class="sourceLineNo">005</span> * terms of the Eclipse Public License 2.0 which is available at<a name="line.5"></a>
+<span class="sourceLineNo">006</span> * http://www.eclipse.org/legal/epl-2.0.<a name="line.6"></a>
+<span class="sourceLineNo">007</span> *<a name="line.7"></a>
+<span class="sourceLineNo">008</span> * SPDX-License-Identifier: EPL-2.0<a name="line.8"></a>
+<span class="sourceLineNo">009</span> */<a name="line.9"></a>
+<span class="sourceLineNo">010</span><a name="line.10"></a>
+<span class="sourceLineNo">011</span>package org.eclipse.golo.compiler;<a name="line.11"></a>
+<span class="sourceLineNo">012</span><a name="line.12"></a>
+<span class="sourceLineNo">013</span>import java.util.Deque;<a name="line.13"></a>
+<span class="sourceLineNo">014</span>import java.util.LinkedList;<a name="line.14"></a>
+<span class="sourceLineNo">015</span>import java.util.concurrent.atomic.AtomicLong;<a name="line.15"></a>
+<span class="sourceLineNo">016</span><a name="line.16"></a>
+<span class="sourceLineNo">017</span>/**<a name="line.17"></a>
+<span class="sourceLineNo">018</span> * Name generator for synthetic objects.<a name="line.18"></a>
+<span class="sourceLineNo">019</span> * &lt;p&gt;<a name="line.19"></a>
+<span class="sourceLineNo">020</span> * The generated name follows the patter {@code __$$_&lt;name&gt;_&lt;counter&gt;}.<a name="line.20"></a>
+<span class="sourceLineNo">021</span> * The default name is {@code symbol}.<a name="line.21"></a>
+<span class="sourceLineNo">022</span> * &lt;p&gt;<a name="line.22"></a>
+<span class="sourceLineNo">023</span> * The generator maintains a stack of scope names, to generate hierarchical names.<a name="line.23"></a>
+<span class="sourceLineNo">024</span> * &lt;pre class="listing"&gt;&lt;code class="lang-java" data-lang="java"&gt;<a name="line.24"></a>
+<span class="sourceLineNo">025</span> * SymbolGenerator sym = new SymbolGenerator("closure");<a name="line.25"></a>
+<span class="sourceLineNo">026</span> * sym.current(); // __$$_closure_0<a name="line.26"></a>
+<span class="sourceLineNo">027</span> * sym.next(); // __$$_closure_1<a name="line.27"></a>
+<span class="sourceLineNo">028</span> * sym.current(); // __$$_closure_1<a name="line.28"></a>
+<span class="sourceLineNo">029</span> * sym.enter("scope");<a name="line.29"></a>
+<span class="sourceLineNo">030</span> * sym.next(); // __$$_closure_scope_2<a name="line.30"></a>
+<span class="sourceLineNo">031</span> * sym.enter("subscope");<a name="line.31"></a>
+<span class="sourceLineNo">032</span> * sym.next(); // __$$_closure_scope_subscope_3<a name="line.32"></a>
+<span class="sourceLineNo">033</span> * sym.exit().exit();<a name="line.33"></a>
+<span class="sourceLineNo">034</span> * sym.next(); // __$$_closure_4<a name="line.34"></a>
+<span class="sourceLineNo">035</span> * &lt;/code&gt;&lt;/pre&gt;<a name="line.35"></a>
+<span class="sourceLineNo">036</span> * &lt;p&gt;<a name="line.36"></a>
+<span class="sourceLineNo">037</span> * Since the counter maintains uniqueness, the name and scopes only purpose is to give<a name="line.37"></a>
+<span class="sourceLineNo">038</span> * somewhat readable names to help debugging.<a name="line.38"></a>
+<span class="sourceLineNo">039</span> * &lt;p&gt;<a name="line.39"></a>
+<span class="sourceLineNo">040</span> * Be warned that the uniqueness is only preserved in the context of a single generator.<a name="line.40"></a>
+<span class="sourceLineNo">041</span> * Two independent generators with the same name (and scope) can produce identical names.<a name="line.41"></a>
+<span class="sourceLineNo">042</span> * &lt;p&gt;<a name="line.42"></a>
+<span class="sourceLineNo">043</span> * A counter is used instead of e.g. the generation timestamp or a random number to guarantee stability across<a name="line.43"></a>
+<span class="sourceLineNo">044</span> * compilations to ease debugging.<a name="line.44"></a>
+<span class="sourceLineNo">045</span> * &lt;p&gt;If a true uniqueness is require, or if the somewhat predictability of the symbol is a concern, one can use<a name="line.45"></a>
+<span class="sourceLineNo">046</span> * {@link #getFor(String)} or even {@link #next(String)} in conjunction with {@code System.nanoTime()} or<a name="line.46"></a>
+<span class="sourceLineNo">047</span> * {@code Random.nextLong()} (for instance &lt;code class="lang-java"&gt;sym.next(String.valueOf(System.nanoTime()))&lt;/code&gt;<a name="line.47"></a>
+<span class="sourceLineNo">048</span> */<a name="line.48"></a>
+<span class="sourceLineNo">049</span>public final class SymbolGenerator {<a name="line.49"></a>
+<span class="sourceLineNo">050</span>  public static final String PREFIX = "__$$_";<a name="line.50"></a>
+<span class="sourceLineNo">051</span>  public static final String DEFAULT_NAME = "symbol";<a name="line.51"></a>
+<span class="sourceLineNo">052</span>  public static final String ESCAPE_MANGLE = "$";<a name="line.52"></a>
+<span class="sourceLineNo">053</span>  public static final String JOIN = "_";<a name="line.53"></a>
+<span class="sourceLineNo">054</span>  private final AtomicLong counter = new AtomicLong();<a name="line.54"></a>
+<span class="sourceLineNo">055</span>  private final Deque&lt;String&gt; prefixes = new LinkedList&lt;&gt;();<a name="line.55"></a>
+<span class="sourceLineNo">056</span><a name="line.56"></a>
+<span class="sourceLineNo">057</span>  public SymbolGenerator(String name) {<a name="line.57"></a>
+<span class="sourceLineNo">058</span>    this.prefixes.addLast(name == null ? DEFAULT_NAME : name.replace('.', '$'));<a name="line.58"></a>
+<span class="sourceLineNo">059</span>  }<a name="line.59"></a>
+<span class="sourceLineNo">060</span><a name="line.60"></a>
+<span class="sourceLineNo">061</span>  public SymbolGenerator() {<a name="line.61"></a>
+<span class="sourceLineNo">062</span>    this.prefixes.addLast(DEFAULT_NAME);<a name="line.62"></a>
+<span class="sourceLineNo">063</span>  }<a name="line.63"></a>
+<span class="sourceLineNo">064</span><a name="line.64"></a>
+<span class="sourceLineNo">065</span>  private String name(String localName, long idx) {<a name="line.65"></a>
+<span class="sourceLineNo">066</span>    return name(<a name="line.66"></a>
+<span class="sourceLineNo">067</span>        (localName == null || "".equals(localName)<a name="line.67"></a>
+<span class="sourceLineNo">068</span>          ? ""<a name="line.68"></a>
+<span class="sourceLineNo">069</span>          : (localName + JOIN))<a name="line.69"></a>
+<span class="sourceLineNo">070</span>        + idx);<a name="line.70"></a>
+<span class="sourceLineNo">071</span>  }<a name="line.71"></a>
+<span class="sourceLineNo">072</span><a name="line.72"></a>
+<span class="sourceLineNo">073</span>  private String name(String localName) {<a name="line.73"></a>
+<span class="sourceLineNo">074</span>    String name = PREFIX + String.join(JOIN, prefixes);<a name="line.74"></a>
+<span class="sourceLineNo">075</span>    if (localName != null &amp;&amp; !"".equals(localName)) {<a name="line.75"></a>
+<span class="sourceLineNo">076</span>      name += JOIN + localName;<a name="line.76"></a>
+<span class="sourceLineNo">077</span>    }<a name="line.77"></a>
+<span class="sourceLineNo">078</span>    return name;<a name="line.78"></a>
+<span class="sourceLineNo">079</span>  }<a name="line.79"></a>
+<span class="sourceLineNo">080</span><a name="line.80"></a>
+<span class="sourceLineNo">081</span>  /**<a name="line.81"></a>
+<span class="sourceLineNo">082</span>   * Generates the next name for the current context.<a name="line.82"></a>
+<span class="sourceLineNo">083</span>   * &lt;p&gt;<a name="line.83"></a>
+<span class="sourceLineNo">084</span>   * Increments the counter and returns the name generated by the current scope and counter.<a name="line.84"></a>
+<span class="sourceLineNo">085</span>   *<a name="line.85"></a>
+<span class="sourceLineNo">086</span>   * @return the next name<a name="line.86"></a>
+<span class="sourceLineNo">087</span>   */<a name="line.87"></a>
+<span class="sourceLineNo">088</span>  public String next() {<a name="line.88"></a>
+<span class="sourceLineNo">089</span>    return next(null);<a name="line.89"></a>
+<span class="sourceLineNo">090</span>  }<a name="line.90"></a>
+<span class="sourceLineNo">091</span><a name="line.91"></a>
+<span class="sourceLineNo">092</span>  /**<a name="line.92"></a>
+<span class="sourceLineNo">093</span>   * Generates the next name for the current context and given simple name.<a name="line.93"></a>
+<span class="sourceLineNo">094</span>   * &lt;p&gt;<a name="line.94"></a>
+<span class="sourceLineNo">095</span>   * Increments the counter and returns the name generated by the given name and the current scope and counter, and increment<a name="line.95"></a>
+<span class="sourceLineNo">096</span>   * it.<a name="line.96"></a>
+<span class="sourceLineNo">097</span>   *<a name="line.97"></a>
+<span class="sourceLineNo">098</span>   * &lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;: no check is made that the given name will produce a valid language symbol.<a name="line.98"></a>
+<span class="sourceLineNo">099</span>   * @param name the simple name to derive the unique name from<a name="line.99"></a>
+<span class="sourceLineNo">100</span>   * @return the corresponding next name<a name="line.100"></a>
+<span class="sourceLineNo">101</span>   */<a name="line.101"></a>
+<span class="sourceLineNo">102</span>  public String next(String name) {<a name="line.102"></a>
+<span class="sourceLineNo">103</span>    return name(name, counter.incrementAndGet());<a name="line.103"></a>
+<span class="sourceLineNo">104</span>  }<a name="line.104"></a>
+<span class="sourceLineNo">105</span><a name="line.105"></a>
+<span class="sourceLineNo">106</span>  /**<a name="line.106"></a>
+<span class="sourceLineNo">107</span>   * Mangles the given name without using the counter.<a name="line.107"></a>
+<span class="sourceLineNo">108</span>   *<a name="line.108"></a>
+<span class="sourceLineNo">109</span>   * &lt;p&gt;This can be used in macros to provide hygiene by mangling the local variable names. Mangling is escaped for<a name="line.109"></a>
+<span class="sourceLineNo">110</span>   * names beginning by {@code ESCAPE_MANGLE}.<a name="line.110"></a>
+<span class="sourceLineNo">111</span>   *<a name="line.111"></a>
+<span class="sourceLineNo">112</span>   * &lt;p&gt;For instance:<a name="line.112"></a>
+<span class="sourceLineNo">113</span>   * &lt;pre class="listing"&gt;&lt;code class="lang-golo" data-lang="golo"&gt;<a name="line.113"></a>
+<span class="sourceLineNo">114</span>   * let symb = SymbolGenerator("foo")<a name="line.114"></a>
+<span class="sourceLineNo">115</span>   * symb: getFor("bar")  # __$$_foo_bar<a name="line.115"></a>
+<span class="sourceLineNo">116</span>   * symb: getFor("$bar") # bar<a name="line.116"></a>
+<span class="sourceLineNo">117</span>   * &lt;/code&gt;&lt;/pre&gt;<a name="line.117"></a>
+<span class="sourceLineNo">118</span>   * &lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;: no check is made that the given name will produce a valid language symbol.<a name="line.118"></a>
+<span class="sourceLineNo">119</span>   */<a name="line.119"></a>
+<span class="sourceLineNo">120</span>  public String getFor(String localName) {<a name="line.120"></a>
+<span class="sourceLineNo">121</span>    if (localName.startsWith(ESCAPE_MANGLE)) {<a name="line.121"></a>
+<span class="sourceLineNo">122</span>      return localName.substring(ESCAPE_MANGLE.length());<a name="line.122"></a>
+<span class="sourceLineNo">123</span>    }<a name="line.123"></a>
+<span class="sourceLineNo">124</span>    return name(localName);<a name="line.124"></a>
+<span class="sourceLineNo">125</span>  }<a name="line.125"></a>
+<span class="sourceLineNo">126</span><a name="line.126"></a>
+<span class="sourceLineNo">127</span>  /**<a name="line.127"></a>
+<span class="sourceLineNo">128</span>   * Generate the name for the current context and given simple name.<a name="line.128"></a>
+<span class="sourceLineNo">129</span>   * &lt;p&gt;<a name="line.129"></a>
+<span class="sourceLineNo">130</span>   * Returns the name generated by the given name and the current scope and counter, without<a name="line.130"></a>
+<span class="sourceLineNo">131</span>   * incrementing it.<a name="line.131"></a>
+<span class="sourceLineNo">132</span>   * &lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;: no check is made that the given name will produce a valid language symbol.<a name="line.132"></a>
+<span class="sourceLineNo">133</span>   *<a name="line.133"></a>
+<span class="sourceLineNo">134</span>   * @param name the simple name to derive the unique name from<a name="line.134"></a>
+<span class="sourceLineNo">135</span>   * @return the corresponding generated name<a name="line.135"></a>
+<span class="sourceLineNo">136</span>   */<a name="line.136"></a>
+<span class="sourceLineNo">137</span>  public String current(String name) {<a name="line.137"></a>
+<span class="sourceLineNo">138</span>    return name(name, counter.get());<a name="line.138"></a>
+<span class="sourceLineNo">139</span>  }<a name="line.139"></a>
+<span class="sourceLineNo">140</span><a name="line.140"></a>
+<span class="sourceLineNo">141</span>  /**<a name="line.141"></a>
+<span class="sourceLineNo">142</span>   * Generate the name for the current context.<a name="line.142"></a>
+<span class="sourceLineNo">143</span>   * &lt;p&gt;<a name="line.143"></a>
+<span class="sourceLineNo">144</span>   * Returns the name generated by the current scope and counter, without<a name="line.144"></a>
+<span class="sourceLineNo">145</span>   * incrementing it.<a name="line.145"></a>
+<span class="sourceLineNo">146</span>   *<a name="line.146"></a>
+<span class="sourceLineNo">147</span>   * @return the generated name<a name="line.147"></a>
+<span class="sourceLineNo">148</span>   */<a name="line.148"></a>
+<span class="sourceLineNo">149</span>  public String current() {<a name="line.149"></a>
+<span class="sourceLineNo">150</span>    return name(null, counter.get());<a name="line.150"></a>
+<span class="sourceLineNo">151</span>  }<a name="line.151"></a>
+<span class="sourceLineNo">152</span><a name="line.152"></a>
+<span class="sourceLineNo">153</span>  /**<a name="line.153"></a>
+<span class="sourceLineNo">154</span>   * Exit from a scope.<a name="line.154"></a>
+<span class="sourceLineNo">155</span>   */<a name="line.155"></a>
+<span class="sourceLineNo">156</span>  public SymbolGenerator exit() {<a name="line.156"></a>
+<span class="sourceLineNo">157</span>    if (this.prefixes.size() &gt; 1) {<a name="line.157"></a>
+<span class="sourceLineNo">158</span>      this.prefixes.removeLast();<a name="line.158"></a>
+<span class="sourceLineNo">159</span>    }<a name="line.159"></a>
+<span class="sourceLineNo">160</span>    return this;<a name="line.160"></a>
+<span class="sourceLineNo">161</span>  }<a name="line.161"></a>
+<span class="sourceLineNo">162</span><a name="line.162"></a>
+<span class="sourceLineNo">163</span>  /**<a name="line.163"></a>
+<span class="sourceLineNo">164</span>   * Enter a hierarchical scope.<a name="line.164"></a>
+<span class="sourceLineNo">165</span>   *<a name="line.165"></a>
+<span class="sourceLineNo">166</span>   * &lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;: no check is made that the given name will produce a valid language symbol.<a name="line.166"></a>
+<span class="sourceLineNo">167</span>   * @param scopeName the name of the scope.<a name="line.167"></a>
+<span class="sourceLineNo">168</span>   */<a name="line.168"></a>
+<span class="sourceLineNo">169</span>  public SymbolGenerator enter(String scopeName) {<a name="line.169"></a>
+<span class="sourceLineNo">170</span>    if (scopeName == null || scopeName.isEmpty()) {<a name="line.170"></a>
+<span class="sourceLineNo">171</span>      return this;<a name="line.171"></a>
+<span class="sourceLineNo">172</span>    }<a name="line.172"></a>
+<span class="sourceLineNo">173</span>    this.prefixes.addLast(scopeName.replace('.', '$'));<a name="line.173"></a>
+<span class="sourceLineNo">174</span>    return this;<a name="line.174"></a>
+<span class="sourceLineNo">175</span>  }<a name="line.175"></a>
+<span class="sourceLineNo">176</span><a name="line.176"></a>
+<span class="sourceLineNo">177</span>}<a name="line.177"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</div>
+</body>
+</html>

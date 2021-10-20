@@ -1,0 +1,2162 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>gololang.Functions source</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    pre {
+        font-family: monospace;
+        font-size: 90%;
+        background-color: #eee;
+        padding: 0;
+        margin: 0;
+    }
+
+    pre code {
+        font-family: monospace;
+        font-size: inherit;
+        padding: 0.5em ;
+        margin: 0;
+    }
+
+    :target {
+        background-color: yellow;
+    }
+
+    #line-numbers {
+        float: left;
+        position: relative;
+        padding: 0.5em;
+    }
+
+    #src {
+        float: left;
+        position: relative;
+    }
+  </style>
+</head>
+<body>
+<pre id="line-numbers">
+<span class="line-number" id="l-1">1</span>
+<span class="line-number" id="l-2">2</span>
+<span class="line-number" id="l-3">3</span>
+<span class="line-number" id="l-4">4</span>
+<span class="line-number" id="l-5">5</span>
+<span class="line-number" id="l-6">6</span>
+<span class="line-number" id="l-7">7</span>
+<span class="line-number" id="l-8">8</span>
+<span class="line-number" id="l-9">9</span>
+<span class="line-number" id="l-10">10</span>
+<span class="line-number" id="l-11">11</span>
+<span class="line-number" id="l-12">12</span>
+<span class="line-number" id="l-13">13</span>
+<span class="line-number" id="l-14">14</span>
+<span class="line-number" id="l-15">15</span>
+<span class="line-number" id="l-16">16</span>
+<span class="line-number" id="l-17">17</span>
+<span class="line-number" id="l-18">18</span>
+<span class="line-number" id="l-19">19</span>
+<span class="line-number" id="l-20">20</span>
+<span class="line-number" id="l-21">21</span>
+<span class="line-number" id="l-22">22</span>
+<span class="line-number" id="l-23">23</span>
+<span class="line-number" id="l-24">24</span>
+<span class="line-number" id="l-25">25</span>
+<span class="line-number" id="l-26">26</span>
+<span class="line-number" id="l-27">27</span>
+<span class="line-number" id="l-28">28</span>
+<span class="line-number" id="l-29">29</span>
+<span class="line-number" id="l-30">30</span>
+<span class="line-number" id="l-31">31</span>
+<span class="line-number" id="l-32">32</span>
+<span class="line-number" id="l-33">33</span>
+<span class="line-number" id="l-34">34</span>
+<span class="line-number" id="l-35">35</span>
+<span class="line-number" id="l-36">36</span>
+<span class="line-number" id="l-37">37</span>
+<span class="line-number" id="l-38">38</span>
+<span class="line-number" id="l-39">39</span>
+<span class="line-number" id="l-40">40</span>
+<span class="line-number" id="l-41">41</span>
+<span class="line-number" id="l-42">42</span>
+<span class="line-number" id="l-43">43</span>
+<span class="line-number" id="l-44">44</span>
+<span class="line-number" id="l-45">45</span>
+<span class="line-number" id="l-46">46</span>
+<span class="line-number" id="l-47">47</span>
+<span class="line-number" id="l-48">48</span>
+<span class="line-number" id="l-49">49</span>
+<span class="line-number" id="l-50">50</span>
+<span class="line-number" id="l-51">51</span>
+<span class="line-number" id="l-52">52</span>
+<span class="line-number" id="l-53">53</span>
+<span class="line-number" id="l-54">54</span>
+<span class="line-number" id="l-55">55</span>
+<span class="line-number" id="l-56">56</span>
+<span class="line-number" id="l-57">57</span>
+<span class="line-number" id="l-58">58</span>
+<span class="line-number" id="l-59">59</span>
+<span class="line-number" id="l-60">60</span>
+<span class="line-number" id="l-61">61</span>
+<span class="line-number" id="l-62">62</span>
+<span class="line-number" id="l-63">63</span>
+<span class="line-number" id="l-64">64</span>
+<span class="line-number" id="l-65">65</span>
+<span class="line-number" id="l-66">66</span>
+<span class="line-number" id="l-67">67</span>
+<span class="line-number" id="l-68">68</span>
+<span class="line-number" id="l-69">69</span>
+<span class="line-number" id="l-70">70</span>
+<span class="line-number" id="l-71">71</span>
+<span class="line-number" id="l-72">72</span>
+<span class="line-number" id="l-73">73</span>
+<span class="line-number" id="l-74">74</span>
+<span class="line-number" id="l-75">75</span>
+<span class="line-number" id="l-76">76</span>
+<span class="line-number" id="l-77">77</span>
+<span class="line-number" id="l-78">78</span>
+<span class="line-number" id="l-79">79</span>
+<span class="line-number" id="l-80">80</span>
+<span class="line-number" id="l-81">81</span>
+<span class="line-number" id="l-82">82</span>
+<span class="line-number" id="l-83">83</span>
+<span class="line-number" id="l-84">84</span>
+<span class="line-number" id="l-85">85</span>
+<span class="line-number" id="l-86">86</span>
+<span class="line-number" id="l-87">87</span>
+<span class="line-number" id="l-88">88</span>
+<span class="line-number" id="l-89">89</span>
+<span class="line-number" id="l-90">90</span>
+<span class="line-number" id="l-91">91</span>
+<span class="line-number" id="l-92">92</span>
+<span class="line-number" id="l-93">93</span>
+<span class="line-number" id="l-94">94</span>
+<span class="line-number" id="l-95">95</span>
+<span class="line-number" id="l-96">96</span>
+<span class="line-number" id="l-97">97</span>
+<span class="line-number" id="l-98">98</span>
+<span class="line-number" id="l-99">99</span>
+<span class="line-number" id="l-100">100</span>
+<span class="line-number" id="l-101">101</span>
+<span class="line-number" id="l-102">102</span>
+<span class="line-number" id="l-103">103</span>
+<span class="line-number" id="l-104">104</span>
+<span class="line-number" id="l-105">105</span>
+<span class="line-number" id="l-106">106</span>
+<span class="line-number" id="l-107">107</span>
+<span class="line-number" id="l-108">108</span>
+<span class="line-number" id="l-109">109</span>
+<span class="line-number" id="l-110">110</span>
+<span class="line-number" id="l-111">111</span>
+<span class="line-number" id="l-112">112</span>
+<span class="line-number" id="l-113">113</span>
+<span class="line-number" id="l-114">114</span>
+<span class="line-number" id="l-115">115</span>
+<span class="line-number" id="l-116">116</span>
+<span class="line-number" id="l-117">117</span>
+<span class="line-number" id="l-118">118</span>
+<span class="line-number" id="l-119">119</span>
+<span class="line-number" id="l-120">120</span>
+<span class="line-number" id="l-121">121</span>
+<span class="line-number" id="l-122">122</span>
+<span class="line-number" id="l-123">123</span>
+<span class="line-number" id="l-124">124</span>
+<span class="line-number" id="l-125">125</span>
+<span class="line-number" id="l-126">126</span>
+<span class="line-number" id="l-127">127</span>
+<span class="line-number" id="l-128">128</span>
+<span class="line-number" id="l-129">129</span>
+<span class="line-number" id="l-130">130</span>
+<span class="line-number" id="l-131">131</span>
+<span class="line-number" id="l-132">132</span>
+<span class="line-number" id="l-133">133</span>
+<span class="line-number" id="l-134">134</span>
+<span class="line-number" id="l-135">135</span>
+<span class="line-number" id="l-136">136</span>
+<span class="line-number" id="l-137">137</span>
+<span class="line-number" id="l-138">138</span>
+<span class="line-number" id="l-139">139</span>
+<span class="line-number" id="l-140">140</span>
+<span class="line-number" id="l-141">141</span>
+<span class="line-number" id="l-142">142</span>
+<span class="line-number" id="l-143">143</span>
+<span class="line-number" id="l-144">144</span>
+<span class="line-number" id="l-145">145</span>
+<span class="line-number" id="l-146">146</span>
+<span class="line-number" id="l-147">147</span>
+<span class="line-number" id="l-148">148</span>
+<span class="line-number" id="l-149">149</span>
+<span class="line-number" id="l-150">150</span>
+<span class="line-number" id="l-151">151</span>
+<span class="line-number" id="l-152">152</span>
+<span class="line-number" id="l-153">153</span>
+<span class="line-number" id="l-154">154</span>
+<span class="line-number" id="l-155">155</span>
+<span class="line-number" id="l-156">156</span>
+<span class="line-number" id="l-157">157</span>
+<span class="line-number" id="l-158">158</span>
+<span class="line-number" id="l-159">159</span>
+<span class="line-number" id="l-160">160</span>
+<span class="line-number" id="l-161">161</span>
+<span class="line-number" id="l-162">162</span>
+<span class="line-number" id="l-163">163</span>
+<span class="line-number" id="l-164">164</span>
+<span class="line-number" id="l-165">165</span>
+<span class="line-number" id="l-166">166</span>
+<span class="line-number" id="l-167">167</span>
+<span class="line-number" id="l-168">168</span>
+<span class="line-number" id="l-169">169</span>
+<span class="line-number" id="l-170">170</span>
+<span class="line-number" id="l-171">171</span>
+<span class="line-number" id="l-172">172</span>
+<span class="line-number" id="l-173">173</span>
+<span class="line-number" id="l-174">174</span>
+<span class="line-number" id="l-175">175</span>
+<span class="line-number" id="l-176">176</span>
+<span class="line-number" id="l-177">177</span>
+<span class="line-number" id="l-178">178</span>
+<span class="line-number" id="l-179">179</span>
+<span class="line-number" id="l-180">180</span>
+<span class="line-number" id="l-181">181</span>
+<span class="line-number" id="l-182">182</span>
+<span class="line-number" id="l-183">183</span>
+<span class="line-number" id="l-184">184</span>
+<span class="line-number" id="l-185">185</span>
+<span class="line-number" id="l-186">186</span>
+<span class="line-number" id="l-187">187</span>
+<span class="line-number" id="l-188">188</span>
+<span class="line-number" id="l-189">189</span>
+<span class="line-number" id="l-190">190</span>
+<span class="line-number" id="l-191">191</span>
+<span class="line-number" id="l-192">192</span>
+<span class="line-number" id="l-193">193</span>
+<span class="line-number" id="l-194">194</span>
+<span class="line-number" id="l-195">195</span>
+<span class="line-number" id="l-196">196</span>
+<span class="line-number" id="l-197">197</span>
+<span class="line-number" id="l-198">198</span>
+<span class="line-number" id="l-199">199</span>
+<span class="line-number" id="l-200">200</span>
+<span class="line-number" id="l-201">201</span>
+<span class="line-number" id="l-202">202</span>
+<span class="line-number" id="l-203">203</span>
+<span class="line-number" id="l-204">204</span>
+<span class="line-number" id="l-205">205</span>
+<span class="line-number" id="l-206">206</span>
+<span class="line-number" id="l-207">207</span>
+<span class="line-number" id="l-208">208</span>
+<span class="line-number" id="l-209">209</span>
+<span class="line-number" id="l-210">210</span>
+<span class="line-number" id="l-211">211</span>
+<span class="line-number" id="l-212">212</span>
+<span class="line-number" id="l-213">213</span>
+<span class="line-number" id="l-214">214</span>
+<span class="line-number" id="l-215">215</span>
+<span class="line-number" id="l-216">216</span>
+<span class="line-number" id="l-217">217</span>
+<span class="line-number" id="l-218">218</span>
+<span class="line-number" id="l-219">219</span>
+<span class="line-number" id="l-220">220</span>
+<span class="line-number" id="l-221">221</span>
+<span class="line-number" id="l-222">222</span>
+<span class="line-number" id="l-223">223</span>
+<span class="line-number" id="l-224">224</span>
+<span class="line-number" id="l-225">225</span>
+<span class="line-number" id="l-226">226</span>
+<span class="line-number" id="l-227">227</span>
+<span class="line-number" id="l-228">228</span>
+<span class="line-number" id="l-229">229</span>
+<span class="line-number" id="l-230">230</span>
+<span class="line-number" id="l-231">231</span>
+<span class="line-number" id="l-232">232</span>
+<span class="line-number" id="l-233">233</span>
+<span class="line-number" id="l-234">234</span>
+<span class="line-number" id="l-235">235</span>
+<span class="line-number" id="l-236">236</span>
+<span class="line-number" id="l-237">237</span>
+<span class="line-number" id="l-238">238</span>
+<span class="line-number" id="l-239">239</span>
+<span class="line-number" id="l-240">240</span>
+<span class="line-number" id="l-241">241</span>
+<span class="line-number" id="l-242">242</span>
+<span class="line-number" id="l-243">243</span>
+<span class="line-number" id="l-244">244</span>
+<span class="line-number" id="l-245">245</span>
+<span class="line-number" id="l-246">246</span>
+<span class="line-number" id="l-247">247</span>
+<span class="line-number" id="l-248">248</span>
+<span class="line-number" id="l-249">249</span>
+<span class="line-number" id="l-250">250</span>
+<span class="line-number" id="l-251">251</span>
+<span class="line-number" id="l-252">252</span>
+<span class="line-number" id="l-253">253</span>
+<span class="line-number" id="l-254">254</span>
+<span class="line-number" id="l-255">255</span>
+<span class="line-number" id="l-256">256</span>
+<span class="line-number" id="l-257">257</span>
+<span class="line-number" id="l-258">258</span>
+<span class="line-number" id="l-259">259</span>
+<span class="line-number" id="l-260">260</span>
+<span class="line-number" id="l-261">261</span>
+<span class="line-number" id="l-262">262</span>
+<span class="line-number" id="l-263">263</span>
+<span class="line-number" id="l-264">264</span>
+<span class="line-number" id="l-265">265</span>
+<span class="line-number" id="l-266">266</span>
+<span class="line-number" id="l-267">267</span>
+<span class="line-number" id="l-268">268</span>
+<span class="line-number" id="l-269">269</span>
+<span class="line-number" id="l-270">270</span>
+<span class="line-number" id="l-271">271</span>
+<span class="line-number" id="l-272">272</span>
+<span class="line-number" id="l-273">273</span>
+<span class="line-number" id="l-274">274</span>
+<span class="line-number" id="l-275">275</span>
+<span class="line-number" id="l-276">276</span>
+<span class="line-number" id="l-277">277</span>
+<span class="line-number" id="l-278">278</span>
+<span class="line-number" id="l-279">279</span>
+<span class="line-number" id="l-280">280</span>
+<span class="line-number" id="l-281">281</span>
+<span class="line-number" id="l-282">282</span>
+<span class="line-number" id="l-283">283</span>
+<span class="line-number" id="l-284">284</span>
+<span class="line-number" id="l-285">285</span>
+<span class="line-number" id="l-286">286</span>
+<span class="line-number" id="l-287">287</span>
+<span class="line-number" id="l-288">288</span>
+<span class="line-number" id="l-289">289</span>
+<span class="line-number" id="l-290">290</span>
+<span class="line-number" id="l-291">291</span>
+<span class="line-number" id="l-292">292</span>
+<span class="line-number" id="l-293">293</span>
+<span class="line-number" id="l-294">294</span>
+<span class="line-number" id="l-295">295</span>
+<span class="line-number" id="l-296">296</span>
+<span class="line-number" id="l-297">297</span>
+<span class="line-number" id="l-298">298</span>
+<span class="line-number" id="l-299">299</span>
+<span class="line-number" id="l-300">300</span>
+<span class="line-number" id="l-301">301</span>
+<span class="line-number" id="l-302">302</span>
+<span class="line-number" id="l-303">303</span>
+<span class="line-number" id="l-304">304</span>
+<span class="line-number" id="l-305">305</span>
+<span class="line-number" id="l-306">306</span>
+<span class="line-number" id="l-307">307</span>
+<span class="line-number" id="l-308">308</span>
+<span class="line-number" id="l-309">309</span>
+<span class="line-number" id="l-310">310</span>
+<span class="line-number" id="l-311">311</span>
+<span class="line-number" id="l-312">312</span>
+<span class="line-number" id="l-313">313</span>
+<span class="line-number" id="l-314">314</span>
+<span class="line-number" id="l-315">315</span>
+<span class="line-number" id="l-316">316</span>
+<span class="line-number" id="l-317">317</span>
+<span class="line-number" id="l-318">318</span>
+<span class="line-number" id="l-319">319</span>
+<span class="line-number" id="l-320">320</span>
+<span class="line-number" id="l-321">321</span>
+<span class="line-number" id="l-322">322</span>
+<span class="line-number" id="l-323">323</span>
+<span class="line-number" id="l-324">324</span>
+<span class="line-number" id="l-325">325</span>
+<span class="line-number" id="l-326">326</span>
+<span class="line-number" id="l-327">327</span>
+<span class="line-number" id="l-328">328</span>
+<span class="line-number" id="l-329">329</span>
+<span class="line-number" id="l-330">330</span>
+<span class="line-number" id="l-331">331</span>
+<span class="line-number" id="l-332">332</span>
+<span class="line-number" id="l-333">333</span>
+<span class="line-number" id="l-334">334</span>
+<span class="line-number" id="l-335">335</span>
+<span class="line-number" id="l-336">336</span>
+<span class="line-number" id="l-337">337</span>
+<span class="line-number" id="l-338">338</span>
+<span class="line-number" id="l-339">339</span>
+<span class="line-number" id="l-340">340</span>
+<span class="line-number" id="l-341">341</span>
+<span class="line-number" id="l-342">342</span>
+<span class="line-number" id="l-343">343</span>
+<span class="line-number" id="l-344">344</span>
+<span class="line-number" id="l-345">345</span>
+<span class="line-number" id="l-346">346</span>
+<span class="line-number" id="l-347">347</span>
+<span class="line-number" id="l-348">348</span>
+<span class="line-number" id="l-349">349</span>
+<span class="line-number" id="l-350">350</span>
+<span class="line-number" id="l-351">351</span>
+<span class="line-number" id="l-352">352</span>
+<span class="line-number" id="l-353">353</span>
+<span class="line-number" id="l-354">354</span>
+<span class="line-number" id="l-355">355</span>
+<span class="line-number" id="l-356">356</span>
+<span class="line-number" id="l-357">357</span>
+<span class="line-number" id="l-358">358</span>
+<span class="line-number" id="l-359">359</span>
+<span class="line-number" id="l-360">360</span>
+<span class="line-number" id="l-361">361</span>
+<span class="line-number" id="l-362">362</span>
+<span class="line-number" id="l-363">363</span>
+<span class="line-number" id="l-364">364</span>
+<span class="line-number" id="l-365">365</span>
+<span class="line-number" id="l-366">366</span>
+<span class="line-number" id="l-367">367</span>
+<span class="line-number" id="l-368">368</span>
+<span class="line-number" id="l-369">369</span>
+<span class="line-number" id="l-370">370</span>
+<span class="line-number" id="l-371">371</span>
+<span class="line-number" id="l-372">372</span>
+<span class="line-number" id="l-373">373</span>
+<span class="line-number" id="l-374">374</span>
+<span class="line-number" id="l-375">375</span>
+<span class="line-number" id="l-376">376</span>
+<span class="line-number" id="l-377">377</span>
+<span class="line-number" id="l-378">378</span>
+<span class="line-number" id="l-379">379</span>
+<span class="line-number" id="l-380">380</span>
+<span class="line-number" id="l-381">381</span>
+<span class="line-number" id="l-382">382</span>
+<span class="line-number" id="l-383">383</span>
+<span class="line-number" id="l-384">384</span>
+<span class="line-number" id="l-385">385</span>
+<span class="line-number" id="l-386">386</span>
+<span class="line-number" id="l-387">387</span>
+<span class="line-number" id="l-388">388</span>
+<span class="line-number" id="l-389">389</span>
+<span class="line-number" id="l-390">390</span>
+<span class="line-number" id="l-391">391</span>
+<span class="line-number" id="l-392">392</span>
+<span class="line-number" id="l-393">393</span>
+<span class="line-number" id="l-394">394</span>
+<span class="line-number" id="l-395">395</span>
+<span class="line-number" id="l-396">396</span>
+<span class="line-number" id="l-397">397</span>
+<span class="line-number" id="l-398">398</span>
+<span class="line-number" id="l-399">399</span>
+<span class="line-number" id="l-400">400</span>
+<span class="line-number" id="l-401">401</span>
+<span class="line-number" id="l-402">402</span>
+<span class="line-number" id="l-403">403</span>
+<span class="line-number" id="l-404">404</span>
+<span class="line-number" id="l-405">405</span>
+<span class="line-number" id="l-406">406</span>
+<span class="line-number" id="l-407">407</span>
+<span class="line-number" id="l-408">408</span>
+<span class="line-number" id="l-409">409</span>
+<span class="line-number" id="l-410">410</span>
+<span class="line-number" id="l-411">411</span>
+<span class="line-number" id="l-412">412</span>
+<span class="line-number" id="l-413">413</span>
+<span class="line-number" id="l-414">414</span>
+<span class="line-number" id="l-415">415</span>
+<span class="line-number" id="l-416">416</span>
+<span class="line-number" id="l-417">417</span>
+<span class="line-number" id="l-418">418</span>
+<span class="line-number" id="l-419">419</span>
+<span class="line-number" id="l-420">420</span>
+<span class="line-number" id="l-421">421</span>
+<span class="line-number" id="l-422">422</span>
+<span class="line-number" id="l-423">423</span>
+<span class="line-number" id="l-424">424</span>
+<span class="line-number" id="l-425">425</span>
+<span class="line-number" id="l-426">426</span>
+<span class="line-number" id="l-427">427</span>
+<span class="line-number" id="l-428">428</span>
+<span class="line-number" id="l-429">429</span>
+<span class="line-number" id="l-430">430</span>
+<span class="line-number" id="l-431">431</span>
+<span class="line-number" id="l-432">432</span>
+<span class="line-number" id="l-433">433</span>
+<span class="line-number" id="l-434">434</span>
+<span class="line-number" id="l-435">435</span>
+<span class="line-number" id="l-436">436</span>
+<span class="line-number" id="l-437">437</span>
+<span class="line-number" id="l-438">438</span>
+<span class="line-number" id="l-439">439</span>
+<span class="line-number" id="l-440">440</span>
+<span class="line-number" id="l-441">441</span>
+<span class="line-number" id="l-442">442</span>
+<span class="line-number" id="l-443">443</span>
+<span class="line-number" id="l-444">444</span>
+<span class="line-number" id="l-445">445</span>
+<span class="line-number" id="l-446">446</span>
+<span class="line-number" id="l-447">447</span>
+<span class="line-number" id="l-448">448</span>
+<span class="line-number" id="l-449">449</span>
+<span class="line-number" id="l-450">450</span>
+<span class="line-number" id="l-451">451</span>
+<span class="line-number" id="l-452">452</span>
+<span class="line-number" id="l-453">453</span>
+<span class="line-number" id="l-454">454</span>
+<span class="line-number" id="l-455">455</span>
+<span class="line-number" id="l-456">456</span>
+<span class="line-number" id="l-457">457</span>
+<span class="line-number" id="l-458">458</span>
+<span class="line-number" id="l-459">459</span>
+<span class="line-number" id="l-460">460</span>
+<span class="line-number" id="l-461">461</span>
+<span class="line-number" id="l-462">462</span>
+<span class="line-number" id="l-463">463</span>
+<span class="line-number" id="l-464">464</span>
+<span class="line-number" id="l-465">465</span>
+<span class="line-number" id="l-466">466</span>
+<span class="line-number" id="l-467">467</span>
+<span class="line-number" id="l-468">468</span>
+<span class="line-number" id="l-469">469</span>
+<span class="line-number" id="l-470">470</span>
+<span class="line-number" id="l-471">471</span>
+<span class="line-number" id="l-472">472</span>
+<span class="line-number" id="l-473">473</span>
+<span class="line-number" id="l-474">474</span>
+<span class="line-number" id="l-475">475</span>
+<span class="line-number" id="l-476">476</span>
+<span class="line-number" id="l-477">477</span>
+<span class="line-number" id="l-478">478</span>
+<span class="line-number" id="l-479">479</span>
+<span class="line-number" id="l-480">480</span>
+<span class="line-number" id="l-481">481</span>
+<span class="line-number" id="l-482">482</span>
+<span class="line-number" id="l-483">483</span>
+<span class="line-number" id="l-484">484</span>
+<span class="line-number" id="l-485">485</span>
+<span class="line-number" id="l-486">486</span>
+<span class="line-number" id="l-487">487</span>
+<span class="line-number" id="l-488">488</span>
+<span class="line-number" id="l-489">489</span>
+<span class="line-number" id="l-490">490</span>
+<span class="line-number" id="l-491">491</span>
+<span class="line-number" id="l-492">492</span>
+<span class="line-number" id="l-493">493</span>
+<span class="line-number" id="l-494">494</span>
+<span class="line-number" id="l-495">495</span>
+<span class="line-number" id="l-496">496</span>
+<span class="line-number" id="l-497">497</span>
+<span class="line-number" id="l-498">498</span>
+<span class="line-number" id="l-499">499</span>
+<span class="line-number" id="l-500">500</span>
+<span class="line-number" id="l-501">501</span>
+<span class="line-number" id="l-502">502</span>
+<span class="line-number" id="l-503">503</span>
+<span class="line-number" id="l-504">504</span>
+<span class="line-number" id="l-505">505</span>
+<span class="line-number" id="l-506">506</span>
+<span class="line-number" id="l-507">507</span>
+<span class="line-number" id="l-508">508</span>
+<span class="line-number" id="l-509">509</span>
+<span class="line-number" id="l-510">510</span>
+<span class="line-number" id="l-511">511</span>
+<span class="line-number" id="l-512">512</span>
+<span class="line-number" id="l-513">513</span>
+<span class="line-number" id="l-514">514</span>
+<span class="line-number" id="l-515">515</span>
+<span class="line-number" id="l-516">516</span>
+<span class="line-number" id="l-517">517</span>
+<span class="line-number" id="l-518">518</span>
+<span class="line-number" id="l-519">519</span>
+<span class="line-number" id="l-520">520</span>
+<span class="line-number" id="l-521">521</span>
+<span class="line-number" id="l-522">522</span>
+<span class="line-number" id="l-523">523</span>
+<span class="line-number" id="l-524">524</span>
+<span class="line-number" id="l-525">525</span>
+<span class="line-number" id="l-526">526</span>
+<span class="line-number" id="l-527">527</span>
+<span class="line-number" id="l-528">528</span>
+<span class="line-number" id="l-529">529</span>
+<span class="line-number" id="l-530">530</span>
+<span class="line-number" id="l-531">531</span>
+<span class="line-number" id="l-532">532</span>
+<span class="line-number" id="l-533">533</span>
+<span class="line-number" id="l-534">534</span>
+<span class="line-number" id="l-535">535</span>
+<span class="line-number" id="l-536">536</span>
+<span class="line-number" id="l-537">537</span>
+<span class="line-number" id="l-538">538</span>
+<span class="line-number" id="l-539">539</span>
+<span class="line-number" id="l-540">540</span>
+<span class="line-number" id="l-541">541</span>
+<span class="line-number" id="l-542">542</span>
+<span class="line-number" id="l-543">543</span>
+<span class="line-number" id="l-544">544</span>
+<span class="line-number" id="l-545">545</span>
+<span class="line-number" id="l-546">546</span>
+<span class="line-number" id="l-547">547</span>
+<span class="line-number" id="l-548">548</span>
+<span class="line-number" id="l-549">549</span>
+<span class="line-number" id="l-550">550</span>
+<span class="line-number" id="l-551">551</span>
+<span class="line-number" id="l-552">552</span>
+<span class="line-number" id="l-553">553</span>
+<span class="line-number" id="l-554">554</span>
+<span class="line-number" id="l-555">555</span>
+<span class="line-number" id="l-556">556</span>
+<span class="line-number" id="l-557">557</span>
+<span class="line-number" id="l-558">558</span>
+<span class="line-number" id="l-559">559</span>
+<span class="line-number" id="l-560">560</span>
+<span class="line-number" id="l-561">561</span>
+<span class="line-number" id="l-562">562</span>
+<span class="line-number" id="l-563">563</span>
+<span class="line-number" id="l-564">564</span>
+<span class="line-number" id="l-565">565</span>
+<span class="line-number" id="l-566">566</span>
+<span class="line-number" id="l-567">567</span>
+<span class="line-number" id="l-568">568</span>
+<span class="line-number" id="l-569">569</span>
+<span class="line-number" id="l-570">570</span>
+<span class="line-number" id="l-571">571</span>
+<span class="line-number" id="l-572">572</span>
+<span class="line-number" id="l-573">573</span>
+<span class="line-number" id="l-574">574</span>
+<span class="line-number" id="l-575">575</span>
+<span class="line-number" id="l-576">576</span>
+<span class="line-number" id="l-577">577</span>
+<span class="line-number" id="l-578">578</span>
+<span class="line-number" id="l-579">579</span>
+<span class="line-number" id="l-580">580</span>
+<span class="line-number" id="l-581">581</span>
+<span class="line-number" id="l-582">582</span>
+<span class="line-number" id="l-583">583</span>
+<span class="line-number" id="l-584">584</span>
+<span class="line-number" id="l-585">585</span>
+<span class="line-number" id="l-586">586</span>
+<span class="line-number" id="l-587">587</span>
+<span class="line-number" id="l-588">588</span>
+<span class="line-number" id="l-589">589</span>
+<span class="line-number" id="l-590">590</span>
+<span class="line-number" id="l-591">591</span>
+<span class="line-number" id="l-592">592</span>
+<span class="line-number" id="l-593">593</span>
+<span class="line-number" id="l-594">594</span>
+<span class="line-number" id="l-595">595</span>
+<span class="line-number" id="l-596">596</span>
+<span class="line-number" id="l-597">597</span>
+<span class="line-number" id="l-598">598</span>
+<span class="line-number" id="l-599">599</span>
+<span class="line-number" id="l-600">600</span>
+<span class="line-number" id="l-601">601</span>
+<span class="line-number" id="l-602">602</span>
+<span class="line-number" id="l-603">603</span>
+<span class="line-number" id="l-604">604</span>
+<span class="line-number" id="l-605">605</span>
+<span class="line-number" id="l-606">606</span>
+<span class="line-number" id="l-607">607</span>
+<span class="line-number" id="l-608">608</span>
+<span class="line-number" id="l-609">609</span>
+<span class="line-number" id="l-610">610</span>
+<span class="line-number" id="l-611">611</span>
+<span class="line-number" id="l-612">612</span>
+<span class="line-number" id="l-613">613</span>
+<span class="line-number" id="l-614">614</span>
+<span class="line-number" id="l-615">615</span>
+<span class="line-number" id="l-616">616</span>
+<span class="line-number" id="l-617">617</span>
+<span class="line-number" id="l-618">618</span>
+<span class="line-number" id="l-619">619</span>
+<span class="line-number" id="l-620">620</span>
+<span class="line-number" id="l-621">621</span>
+<span class="line-number" id="l-622">622</span>
+<span class="line-number" id="l-623">623</span>
+<span class="line-number" id="l-624">624</span>
+<span class="line-number" id="l-625">625</span>
+<span class="line-number" id="l-626">626</span>
+<span class="line-number" id="l-627">627</span>
+<span class="line-number" id="l-628">628</span>
+<span class="line-number" id="l-629">629</span>
+<span class="line-number" id="l-630">630</span>
+<span class="line-number" id="l-631">631</span>
+<span class="line-number" id="l-632">632</span>
+<span class="line-number" id="l-633">633</span>
+<span class="line-number" id="l-634">634</span>
+<span class="line-number" id="l-635">635</span>
+<span class="line-number" id="l-636">636</span>
+<span class="line-number" id="l-637">637</span>
+<span class="line-number" id="l-638">638</span>
+<span class="line-number" id="l-639">639</span>
+<span class="line-number" id="l-640">640</span>
+<span class="line-number" id="l-641">641</span>
+<span class="line-number" id="l-642">642</span>
+<span class="line-number" id="l-643">643</span>
+<span class="line-number" id="l-644">644</span>
+<span class="line-number" id="l-645">645</span>
+<span class="line-number" id="l-646">646</span>
+<span class="line-number" id="l-647">647</span>
+<span class="line-number" id="l-648">648</span>
+<span class="line-number" id="l-649">649</span>
+<span class="line-number" id="l-650">650</span>
+<span class="line-number" id="l-651">651</span>
+<span class="line-number" id="l-652">652</span>
+<span class="line-number" id="l-653">653</span>
+<span class="line-number" id="l-654">654</span>
+<span class="line-number" id="l-655">655</span>
+<span class="line-number" id="l-656">656</span>
+<span class="line-number" id="l-657">657</span>
+<span class="line-number" id="l-658">658</span>
+<span class="line-number" id="l-659">659</span>
+<span class="line-number" id="l-660">660</span>
+<span class="line-number" id="l-661">661</span>
+<span class="line-number" id="l-662">662</span>
+<span class="line-number" id="l-663">663</span>
+<span class="line-number" id="l-664">664</span>
+<span class="line-number" id="l-665">665</span>
+<span class="line-number" id="l-666">666</span>
+<span class="line-number" id="l-667">667</span>
+<span class="line-number" id="l-668">668</span>
+<span class="line-number" id="l-669">669</span>
+<span class="line-number" id="l-670">670</span>
+<span class="line-number" id="l-671">671</span>
+<span class="line-number" id="l-672">672</span>
+<span class="line-number" id="l-673">673</span>
+<span class="line-number" id="l-674">674</span>
+<span class="line-number" id="l-675">675</span>
+<span class="line-number" id="l-676">676</span>
+<span class="line-number" id="l-677">677</span>
+<span class="line-number" id="l-678">678</span>
+<span class="line-number" id="l-679">679</span>
+<span class="line-number" id="l-680">680</span>
+<span class="line-number" id="l-681">681</span>
+<span class="line-number" id="l-682">682</span>
+<span class="line-number" id="l-683">683</span>
+<span class="line-number" id="l-684">684</span>
+<span class="line-number" id="l-685">685</span>
+<span class="line-number" id="l-686">686</span>
+<span class="line-number" id="l-687">687</span>
+<span class="line-number" id="l-688">688</span>
+<span class="line-number" id="l-689">689</span>
+<span class="line-number" id="l-690">690</span>
+<span class="line-number" id="l-691">691</span>
+<span class="line-number" id="l-692">692</span>
+<span class="line-number" id="l-693">693</span>
+<span class="line-number" id="l-694">694</span>
+<span class="line-number" id="l-695">695</span>
+<span class="line-number" id="l-696">696</span>
+<span class="line-number" id="l-697">697</span>
+<span class="line-number" id="l-698">698</span>
+<span class="line-number" id="l-699">699</span>
+<span class="line-number" id="l-700">700</span>
+<span class="line-number" id="l-701">701</span>
+<span class="line-number" id="l-702">702</span>
+<span class="line-number" id="l-703">703</span>
+<span class="line-number" id="l-704">704</span>
+<span class="line-number" id="l-705">705</span>
+<span class="line-number" id="l-706">706</span>
+<span class="line-number" id="l-707">707</span>
+<span class="line-number" id="l-708">708</span>
+<span class="line-number" id="l-709">709</span>
+<span class="line-number" id="l-710">710</span>
+<span class="line-number" id="l-711">711</span>
+<span class="line-number" id="l-712">712</span>
+<span class="line-number" id="l-713">713</span>
+<span class="line-number" id="l-714">714</span>
+<span class="line-number" id="l-715">715</span>
+<span class="line-number" id="l-716">716</span>
+<span class="line-number" id="l-717">717</span>
+<span class="line-number" id="l-718">718</span>
+<span class="line-number" id="l-719">719</span>
+<span class="line-number" id="l-720">720</span>
+<span class="line-number" id="l-721">721</span>
+<span class="line-number" id="l-722">722</span>
+<span class="line-number" id="l-723">723</span>
+<span class="line-number" id="l-724">724</span>
+<span class="line-number" id="l-725">725</span>
+<span class="line-number" id="l-726">726</span>
+<span class="line-number" id="l-727">727</span>
+<span class="line-number" id="l-728">728</span>
+<span class="line-number" id="l-729">729</span>
+<span class="line-number" id="l-730">730</span>
+<span class="line-number" id="l-731">731</span>
+<span class="line-number" id="l-732">732</span>
+<span class="line-number" id="l-733">733</span>
+<span class="line-number" id="l-734">734</span>
+<span class="line-number" id="l-735">735</span>
+<span class="line-number" id="l-736">736</span>
+<span class="line-number" id="l-737">737</span>
+<span class="line-number" id="l-738">738</span>
+<span class="line-number" id="l-739">739</span>
+<span class="line-number" id="l-740">740</span>
+<span class="line-number" id="l-741">741</span>
+<span class="line-number" id="l-742">742</span>
+<span class="line-number" id="l-743">743</span>
+<span class="line-number" id="l-744">744</span>
+<span class="line-number" id="l-745">745</span>
+<span class="line-number" id="l-746">746</span>
+<span class="line-number" id="l-747">747</span>
+<span class="line-number" id="l-748">748</span>
+<span class="line-number" id="l-749">749</span>
+<span class="line-number" id="l-750">750</span>
+<span class="line-number" id="l-751">751</span>
+<span class="line-number" id="l-752">752</span>
+<span class="line-number" id="l-753">753</span>
+<span class="line-number" id="l-754">754</span>
+<span class="line-number" id="l-755">755</span>
+<span class="line-number" id="l-756">756</span>
+<span class="line-number" id="l-757">757</span>
+<span class="line-number" id="l-758">758</span>
+<span class="line-number" id="l-759">759</span>
+<span class="line-number" id="l-760">760</span>
+<span class="line-number" id="l-761">761</span>
+<span class="line-number" id="l-762">762</span>
+<span class="line-number" id="l-763">763</span>
+<span class="line-number" id="l-764">764</span>
+<span class="line-number" id="l-765">765</span>
+<span class="line-number" id="l-766">766</span>
+<span class="line-number" id="l-767">767</span>
+<span class="line-number" id="l-768">768</span>
+<span class="line-number" id="l-769">769</span>
+<span class="line-number" id="l-770">770</span>
+<span class="line-number" id="l-771">771</span>
+<span class="line-number" id="l-772">772</span>
+<span class="line-number" id="l-773">773</span>
+<span class="line-number" id="l-774">774</span>
+<span class="line-number" id="l-775">775</span>
+<span class="line-number" id="l-776">776</span>
+<span class="line-number" id="l-777">777</span>
+<span class="line-number" id="l-778">778</span>
+<span class="line-number" id="l-779">779</span>
+<span class="line-number" id="l-780">780</span>
+<span class="line-number" id="l-781">781</span>
+<span class="line-number" id="l-782">782</span>
+<span class="line-number" id="l-783">783</span>
+<span class="line-number" id="l-784">784</span>
+<span class="line-number" id="l-785">785</span>
+<span class="line-number" id="l-786">786</span>
+<span class="line-number" id="l-787">787</span>
+<span class="line-number" id="l-788">788</span>
+<span class="line-number" id="l-789">789</span>
+<span class="line-number" id="l-790">790</span>
+<span class="line-number" id="l-791">791</span>
+<span class="line-number" id="l-792">792</span>
+<span class="line-number" id="l-793">793</span>
+<span class="line-number" id="l-794">794</span>
+<span class="line-number" id="l-795">795</span>
+<span class="line-number" id="l-796">796</span>
+<span class="line-number" id="l-797">797</span>
+<span class="line-number" id="l-798">798</span>
+<span class="line-number" id="l-799">799</span>
+<span class="line-number" id="l-800">800</span>
+<span class="line-number" id="l-801">801</span>
+<span class="line-number" id="l-802">802</span>
+<span class="line-number" id="l-803">803</span>
+<span class="line-number" id="l-804">804</span>
+<span class="line-number" id="l-805">805</span>
+<span class="line-number" id="l-806">806</span>
+<span class="line-number" id="l-807">807</span>
+<span class="line-number" id="l-808">808</span>
+<span class="line-number" id="l-809">809</span>
+<span class="line-number" id="l-810">810</span>
+<span class="line-number" id="l-811">811</span>
+<span class="line-number" id="l-812">812</span>
+<span class="line-number" id="l-813">813</span>
+<span class="line-number" id="l-814">814</span>
+<span class="line-number" id="l-815">815</span>
+<span class="line-number" id="l-816">816</span>
+<span class="line-number" id="l-817">817</span>
+<span class="line-number" id="l-818">818</span>
+<span class="line-number" id="l-819">819</span>
+<span class="line-number" id="l-820">820</span>
+<span class="line-number" id="l-821">821</span>
+<span class="line-number" id="l-822">822</span>
+<span class="line-number" id="l-823">823</span>
+<span class="line-number" id="l-824">824</span>
+<span class="line-number" id="l-825">825</span>
+<span class="line-number" id="l-826">826</span>
+<span class="line-number" id="l-827">827</span>
+<span class="line-number" id="l-828">828</span>
+<span class="line-number" id="l-829">829</span>
+<span class="line-number" id="l-830">830</span>
+<span class="line-number" id="l-831">831</span>
+<span class="line-number" id="l-832">832</span>
+<span class="line-number" id="l-833">833</span>
+<span class="line-number" id="l-834">834</span>
+<span class="line-number" id="l-835">835</span>
+<span class="line-number" id="l-836">836</span>
+<span class="line-number" id="l-837">837</span>
+<span class="line-number" id="l-838">838</span>
+<span class="line-number" id="l-839">839</span>
+<span class="line-number" id="l-840">840</span>
+<span class="line-number" id="l-841">841</span>
+<span class="line-number" id="l-842">842</span>
+<span class="line-number" id="l-843">843</span>
+<span class="line-number" id="l-844">844</span>
+<span class="line-number" id="l-845">845</span>
+<span class="line-number" id="l-846">846</span>
+<span class="line-number" id="l-847">847</span>
+<span class="line-number" id="l-848">848</span>
+<span class="line-number" id="l-849">849</span>
+<span class="line-number" id="l-850">850</span>
+<span class="line-number" id="l-851">851</span>
+<span class="line-number" id="l-852">852</span>
+<span class="line-number" id="l-853">853</span>
+<span class="line-number" id="l-854">854</span>
+<span class="line-number" id="l-855">855</span>
+<span class="line-number" id="l-856">856</span>
+<span class="line-number" id="l-857">857</span>
+<span class="line-number" id="l-858">858</span>
+<span class="line-number" id="l-859">859</span>
+<span class="line-number" id="l-860">860</span>
+<span class="line-number" id="l-861">861</span>
+<span class="line-number" id="l-862">862</span>
+<span class="line-number" id="l-863">863</span>
+<span class="line-number" id="l-864">864</span>
+<span class="line-number" id="l-865">865</span>
+<span class="line-number" id="l-866">866</span>
+<span class="line-number" id="l-867">867</span>
+<span class="line-number" id="l-868">868</span>
+<span class="line-number" id="l-869">869</span>
+<span class="line-number" id="l-870">870</span>
+<span class="line-number" id="l-871">871</span>
+<span class="line-number" id="l-872">872</span>
+<span class="line-number" id="l-873">873</span>
+<span class="line-number" id="l-874">874</span>
+<span class="line-number" id="l-875">875</span>
+<span class="line-number" id="l-876">876</span>
+<span class="line-number" id="l-877">877</span>
+<span class="line-number" id="l-878">878</span>
+<span class="line-number" id="l-879">879</span>
+<span class="line-number" id="l-880">880</span>
+<span class="line-number" id="l-881">881</span>
+<span class="line-number" id="l-882">882</span>
+<span class="line-number" id="l-883">883</span>
+<span class="line-number" id="l-884">884</span>
+<span class="line-number" id="l-885">885</span>
+<span class="line-number" id="l-886">886</span>
+<span class="line-number" id="l-887">887</span>
+<span class="line-number" id="l-888">888</span>
+<span class="line-number" id="l-889">889</span>
+<span class="line-number" id="l-890">890</span>
+<span class="line-number" id="l-891">891</span>
+<span class="line-number" id="l-892">892</span>
+<span class="line-number" id="l-893">893</span>
+<span class="line-number" id="l-894">894</span>
+<span class="line-number" id="l-895">895</span>
+<span class="line-number" id="l-896">896</span>
+<span class="line-number" id="l-897">897</span>
+<span class="line-number" id="l-898">898</span>
+<span class="line-number" id="l-899">899</span>
+<span class="line-number" id="l-900">900</span>
+<span class="line-number" id="l-901">901</span>
+<span class="line-number" id="l-902">902</span>
+<span class="line-number" id="l-903">903</span>
+<span class="line-number" id="l-904">904</span>
+<span class="line-number" id="l-905">905</span>
+<span class="line-number" id="l-906">906</span>
+<span class="line-number" id="l-907">907</span>
+<span class="line-number" id="l-908">908</span>
+<span class="line-number" id="l-909">909</span>
+<span class="line-number" id="l-910">910</span>
+<span class="line-number" id="l-911">911</span>
+<span class="line-number" id="l-912">912</span>
+<span class="line-number" id="l-913">913</span>
+<span class="line-number" id="l-914">914</span>
+<span class="line-number" id="l-915">915</span>
+<span class="line-number" id="l-916">916</span>
+<span class="line-number" id="l-917">917</span>
+<span class="line-number" id="l-918">918</span>
+<span class="line-number" id="l-919">919</span>
+<span class="line-number" id="l-920">920</span>
+<span class="line-number" id="l-921">921</span>
+<span class="line-number" id="l-922">922</span>
+<span class="line-number" id="l-923">923</span>
+<span class="line-number" id="l-924">924</span>
+<span class="line-number" id="l-925">925</span>
+<span class="line-number" id="l-926">926</span>
+<span class="line-number" id="l-927">927</span>
+<span class="line-number" id="l-928">928</span>
+<span class="line-number" id="l-929">929</span>
+<span class="line-number" id="l-930">930</span>
+<span class="line-number" id="l-931">931</span>
+<span class="line-number" id="l-932">932</span>
+<span class="line-number" id="l-933">933</span>
+<span class="line-number" id="l-934">934</span>
+<span class="line-number" id="l-935">935</span>
+<span class="line-number" id="l-936">936</span>
+<span class="line-number" id="l-937">937</span>
+<span class="line-number" id="l-938">938</span>
+<span class="line-number" id="l-939">939</span>
+<span class="line-number" id="l-940">940</span>
+<span class="line-number" id="l-941">941</span>
+<span class="line-number" id="l-942">942</span>
+<span class="line-number" id="l-943">943</span>
+<span class="line-number" id="l-944">944</span>
+<span class="line-number" id="l-945">945</span>
+<span class="line-number" id="l-946">946</span>
+<span class="line-number" id="l-947">947</span>
+<span class="line-number" id="l-948">948</span>
+<span class="line-number" id="l-949">949</span>
+<span class="line-number" id="l-950">950</span>
+<span class="line-number" id="l-951">951</span>
+<span class="line-number" id="l-952">952</span>
+<span class="line-number" id="l-953">953</span>
+<span class="line-number" id="l-954">954</span>
+<span class="line-number" id="l-955">955</span>
+<span class="line-number" id="l-956">956</span>
+<span class="line-number" id="l-957">957</span>
+<span class="line-number" id="l-958">958</span>
+<span class="line-number" id="l-959">959</span>
+<span class="line-number" id="l-960">960</span>
+<span class="line-number" id="l-961">961</span>
+<span class="line-number" id="l-962">962</span>
+<span class="line-number" id="l-963">963</span>
+<span class="line-number" id="l-964">964</span>
+<span class="line-number" id="l-965">965</span>
+<span class="line-number" id="l-966">966</span>
+<span class="line-number" id="l-967">967</span>
+<span class="line-number" id="l-968">968</span>
+<span class="line-number" id="l-969">969</span>
+<span class="line-number" id="l-970">970</span>
+<span class="line-number" id="l-971">971</span>
+<span class="line-number" id="l-972">972</span>
+<span class="line-number" id="l-973">973</span>
+<span class="line-number" id="l-974">974</span>
+<span class="line-number" id="l-975">975</span>
+<span class="line-number" id="l-976">976</span>
+<span class="line-number" id="l-977">977</span>
+<span class="line-number" id="l-978">978</span>
+<span class="line-number" id="l-979">979</span>
+<span class="line-number" id="l-980">980</span>
+<span class="line-number" id="l-981">981</span>
+<span class="line-number" id="l-982">982</span>
+<span class="line-number" id="l-983">983</span>
+<span class="line-number" id="l-984">984</span>
+<span class="line-number" id="l-985">985</span>
+<span class="line-number" id="l-986">986</span>
+<span class="line-number" id="l-987">987</span>
+<span class="line-number" id="l-988">988</span>
+<span class="line-number" id="l-989">989</span>
+<span class="line-number" id="l-990">990</span>
+<span class="line-number" id="l-991">991</span>
+<span class="line-number" id="l-992">992</span>
+<span class="line-number" id="l-993">993</span>
+<span class="line-number" id="l-994">994</span>
+<span class="line-number" id="l-995">995</span>
+<span class="line-number" id="l-996">996</span>
+<span class="line-number" id="l-997">997</span>
+<span class="line-number" id="l-998">998</span>
+<span class="line-number" id="l-999">999</span>
+<span class="line-number" id="l-1000">1000</span>
+<span class="line-number" id="l-1001">1001</span>
+<span class="line-number" id="l-1002">1002</span>
+<span class="line-number" id="l-1003">1003</span>
+<span class="line-number" id="l-1004">1004</span>
+<span class="line-number" id="l-1005">1005</span>
+<span class="line-number" id="l-1006">1006</span>
+<span class="line-number" id="l-1007">1007</span>
+<span class="line-number" id="l-1008">1008</span>
+<span class="line-number" id="l-1009">1009</span>
+<span class="line-number" id="l-1010">1010</span>
+<span class="line-number" id="l-1011">1011</span>
+<span class="line-number" id="l-1012">1012</span>
+<span class="line-number" id="l-1013">1013</span>
+<span class="line-number" id="l-1014">1014</span>
+<span class="line-number" id="l-1015">1015</span>
+<span class="line-number" id="l-1016">1016</span>
+<span class="line-number" id="l-1017">1017</span>
+<span class="line-number" id="l-1018">1018</span>
+<span class="line-number" id="l-1019">1019</span>
+<span class="line-number" id="l-1020">1020</span>
+<span class="line-number" id="l-1021">1021</span>
+<span class="line-number" id="l-1022">1022</span>
+<span class="line-number" id="l-1023">1023</span>
+<span class="line-number" id="l-1024">1024</span>
+<span class="line-number" id="l-1025">1025</span>
+<span class="line-number" id="l-1026">1026</span>
+<span class="line-number" id="l-1027">1027</span>
+<span class="line-number" id="l-1028">1028</span>
+<span class="line-number" id="l-1029">1029</span>
+<span class="line-number" id="l-1030">1030</span>
+<span class="line-number" id="l-1031">1031</span>
+<span class="line-number" id="l-1032">1032</span>
+<span class="line-number" id="l-1033">1033</span>
+<span class="line-number" id="l-1034">1034</span>
+<span class="line-number" id="l-1035">1035</span>
+<span class="line-number" id="l-1036">1036</span>
+<span class="line-number" id="l-1037">1037</span>
+<span class="line-number" id="l-1038">1038</span>
+<span class="line-number" id="l-1039">1039</span>
+<span class="line-number" id="l-1040">1040</span>
+<span class="line-number" id="l-1041">1041</span>
+<span class="line-number" id="l-1042">1042</span>
+<span class="line-number" id="l-1043">1043</span>
+<span class="line-number" id="l-1044">1044</span>
+<span class="line-number" id="l-1045">1045</span>
+<span class="line-number" id="l-1046">1046</span>
+<span class="line-number" id="l-1047">1047</span>
+<span class="line-number" id="l-1048">1048</span>
+<span class="line-number" id="l-1049">1049</span>
+<span class="line-number" id="l-1050">1050</span>
+<span class="line-number" id="l-1051">1051</span>
+<span class="line-number" id="l-1052">1052</span>
+<span class="line-number" id="l-1053">1053</span>
+<span class="line-number" id="l-1054">1054</span>
+<span class="line-number" id="l-1055">1055</span>
+</pre>
+<pre id="src" class="highlight highlightjs">
+<code class="language-golo" data-lang="golo"># ............................................................................................... #
+#
+# Copyright (c) 2012-2021 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others
+#
+# This program and the accompanying materials are made available under the
+# terms of the Eclipse Public License 2.0 which is available at
+# http://www.eclipse.org/legal/epl-2.0.
+#
+# SPDX-License-Identifier: EPL-2.0
+#
+# ............................................................................................... #
+
+----
+This module contains several functions and higher order functions or
+decorators, mostly useful with HOF like `map`, `reduce` or in generators.
+
+Indeed, using HOF often require some classical functions like constants one,
+identity, or classical operators.
+
+Most of the times, these functions needs to be unary ones, i.e.
+have only one parameter. This module contains, among others, functions helping in the arity
+conversion of such functions:
+
+* [`curry`](#curry_1) that makes a function automatically partializable,
+* [`uncurry`](#uncurry_1) that is the reverse of `curry`,
+* [`unary`](#unary_1) and [`spreader`](#spreader_1) that convert a polyadic function into a unary
+  function taking an array or a tuple of values instead of several
+  values,
+* [`varargs`](#varargs_1) which is the reverse of `unary`
+
+Most of the binary operator functions defined here are curried. To ease
+partialization, the non commutative operators have a reversed version, with
+arguments swapped.
+For example, using the reverse division operator [`rdiv`](#rdiv_2) with
+[`map`](StandardAugmentations.html#java.util.List.map_2)
+
+    [2, 4, 8]: map(rdiv(2)) == [1, 2, 4]
+
+The identity function [`id`](#id_1), the constant function
+[`const`](#const_1), together with composition (`FunctionReference::andThen`,
+[`pipe`](#pipe_1), [`compose`](#compose_1)) and [`io`](#io_1) can be
+used to create monad-like processing chains.
+----
+module gololang.Functions
+
+import java.lang.invoke
+import java.util
+
+### Operators ##########################################################
+
+#== Arithmetic =========================================================
+----
+Polymorphic addition and concatenation.
+
+Adds `value` to `element`.
+The behavior depends on the type of `element`:
+
+- if a number or a string, equivalent to using `+`;
+- if a collection, equivalent to invoking `add` and returning the collection;
+- if an `Appendable` or a `StringBuilder`, equivalent to invoking `append` and
+  returning the collection.
+
+This function is *swapped* and curried. For instance:
+
+    add("b", "a") == "ab"
+
+    list[1, 2, 3]: map(add(3)) == list[4, 5, 6]
+
+    add("a", StringBuilder()): toString() == "a"
+
+    let f = add(42): andThen(add(1337)): andThen(add(69))
+    f(list[]) == list[42, 1337, 69]
+    f(0) == 1448
+    f(StringBuilder()): toString() == "42133769"
+
+
+- *param* `value`: the value to add
+- *param* `element`: the element to add the value to
+
+See also [`addTo`](#addTo_2)
+----
+@!curry
+function add = |value, element| {
+  case {
+    when _addWithPlus(element) {
+      return element + value
+    }
+    when _addWithAdd(element)  {
+      element: add(value)
+      return element
+    }
+    when _addWithAppend(element) {
+      element: append(value)
+      return element
+    }
+    otherwise {
+      throw IllegalArgumentException("Don't know how to add to a %s"
+            : format(element: getClass(): getName()))
+    }
+  }
+}
+
+local function _addWithPlus = |elt| -> elt oftype java.lang.Number.class
+                                    or elt oftype java.lang.String.class
+
+local function _addWithAdd = |elt| -> elt oftype java.util.Collection.class
+                                   or elt oftype java.util.stream.Stream$Builder.class
+                                   or elt oftype java.util.StringJoiner.class
+
+local function _addWithAppend = |elt| -> elt oftype java.lang.Appendable.class
+                                      or elt oftype java.lang.StringBuffer.class
+                                      or elt oftype java.lang.StringBuilder.class
+
+----
+Not swapped version of [`add`](#add_2)
+----
+@!curry
+function addTo = |element, value| -> add(value, element)
+
+----
+Number successor (side-effect free increment).
+
+    succ(x) == x + 1
+
+Equivalent to `add(1)`
+
+See also [`pred`](#pred_1)
+----
+function succ = |x| -> x + 1
+
+----
+Number predecessor (side-effect free decrement).
+
+    pred(x) == x - 1
+
+See also [`succ`](#succ_1)
+----
+function pred = |x| -> x - 1
+
+----
+Curried multiplication.
+
+    mul(x, y) == x * y
+
+See also [`div`](#div_2)
+----
+@!curry
+function mul = |x, y| -> x * y
+
+
+----
+Opposite (negative value).
+
+    neg(x) == -x
+
+Same as `mul(-1)`
+----
+function neg = |x| -> -1 * x
+
+----
+Curried subtract.
+
+    sub(x, y) == x - y
+
+See also [`add`](#add_2), [`rsub`](#rsub_2)
+----
+@!curry
+function sub = |x, y| -> x - y
+
+----
+Reversed curried subtract.
+
+    rsub(x, y) == y - x
+
+See also [`sub`](#sub_2)
+----
+@!curry
+function rsub = |x, y| -> y - x
+
+----
+Curried division.
+
+    div(x, y) == x / y
+
+See also [`mul`](#mul_2), [`rdiv`](#rdiv_2)
+----
+@!curry
+function div = |x, y| -> x / y
+
+----
+Reverse curried division.
+
+    rdiv(y, x) == x / y
+
+See also  [`mul`](#mul_2),  [`div`](#div_2)
+----
+@!curry
+function rdiv = |x, y| -> y / x
+
+----
+Curried modulo.
+
+    mod(a, b) == a % b
+
+See also [`rmod`](#rmod_2)
+----
+@!curry
+function mod = |a, b| -> (a % b)
+
+----
+Reverse curried modulo.
+
+    rmod(a, b) == b % a
+
+See also [`mod`](#mod_2)
+----
+@!curry
+function rmod = |a, b| -> (b % a)
+
+----
+Curried power.
+
+    pow(a, 2) == a*a
+
+Does an implicit conversion to double.
+
+See also [`rpow`](#rpow_2)
+----
+@!curry
+function pow = |a, b| -> Math.pow(doubleValue(a), doubleValue(b))
+
+----
+Reversed curried power.
+
+    rpow(2, a) == a*a
+
+Does an implicit conversion to double.
+
+See also [`pow`](#pow_2)
+----
+@!curry
+function rpow = |a, b| -> Math.pow(doubleValue(b), doubleValue(a))
+
+
+----
+Converts its argument to a `String`.
+----
+function str = |o| -> o: toString()
+
+
+#== Boolean operators ==================================================
+
+----
+Curried swapped *less than*.
+
+    lt(a, b) == b < a
+
+    lt(42) == |x| -> x < 42
+
+Note: this function is swapped to make curried version more readable: `lt(42)`
+is a predicate testing if its argument is "less than 42".
+
+See also [`le`](#le_2), [`gt`](#gt_2), [`ge`](#ge_2)
+----
+@!curry
+function lt = |a, b| -> b < a
+
+----
+Curried swapped *greater than*.
+
+    gt(a, b) == b > a
+
+Note: this function is swapped to make curried version more readable.
+
+See also [`lt`](#lt_2), [`le`](#le_2), [`ge`](#ge_2)
+----
+@!curry
+function gt = |a, b| -> b > a
+
+----
+Curried *equal*.
+
+    eq(a, b) == (a == b)
+
+See also [`ne`](#ne_2)
+----
+@!curry
+function eq = |a, b| -> a == b
+
+----
+Curried *not equal*.
+
+    ne(a, b) == (a != b)
+
+See also [`eq`](#eq_2)
+----
+@!curry
+function ne = |a, b| -> a != b
+
+----
+Curried swapped *greater than or equal*.
+
+    ge(a, b) == (b >= a)
+
+Note: this function is swapped to make curried version more readable.
+
+See also [`lt`](#lt_2), [`le`](#le_2), [`gt`](#gt_2)
+----
+@!curry
+function ge = |a, b| -> b >= a
+
+----
+Curried swapped *less than or equal*.
+
+    le(a, b) == (a <= b)
+
+Note: this function is swapped to make curried version more readable.
+
+See also [`lt`](#lt_2), [`ge`](#ge_2), [`gt`](#gt_2)
+----
+@!curry
+function le = |a, b| -> b <= a
+
+----
+Curried boolean *and*.
+
+This implementation is lazy.
+
+The arguments can be boolean expressions or predicate functions. If called with
+predicate functions, returns a new predicate function.
+
+    `and(a, b) == (a and b)
+    `and(gt(10), ^even) == |x| -> a > 10 and x % 2 == 0
+
+See also [`or`](#or_1), [`not`](#not_1), [`xor`](#xor_2)
+----
+@!uncurry
+function `and = |a| -> match {
+  when isClosure(a) then curry(|b, x| -> a(x) and b(x))
+  when a then ^id
+  otherwise ^False
+}
+
+----
+Curried boolean *or*.
+
+    `or(a, b) == (a or b)
+
+This implementation is lazy.
+
+The arguments can be boolean expressions or predicate functions. If called with
+predicate functions, returns a new predicate function.
+
+See also [`and`](#and_1), [`not`](#not_1), [`xor`](#xor_2)
+----
+@!uncurry
+function `or = |a| -> match {
+  when isClosure(a) then curry(|b, x| -> a(x) or b(x))
+  when a then ^True
+  otherwise ^id
+}
+
+----
+Polymorphic negation function.
+
+* when given a boolean-like value, returns its negation.
+* when given a predicate function, returns a new function returning the
+  negated result.
+
+E.g.
+
+    list[true, false, false]: map(^not) == list[false, true, true]
+
+    let even = |a| -> (a % 2) == 0
+    let odd = `not(even)
+
+See also [`and`](#and_1), [`or`](#or_1)
+----
+function `not = |a| -> match {
+  when isClosure(a) then a: andThen(|v| -> not v)
+  otherwise not a
+}
+
+----
+Curried boolean *xor*.
+
+    xor(a, b) == (a or b) and not (a and b)
+
+The arguments can be boolean expressions or predicate functions. If called with
+predicate functions, returns a new predicate function.
+
+See also [`and`](#and_1), [`or`](#or_1)
+----
+@!curry
+function xor = |a, b| -> match {
+  when isClosure(a) then curry(|b, x| -> _xor(a(x), b(x)))
+  otherwise _xor(a, b)
+}
+
+local function _xor = |a, b| -> (a or b) and not (a and b)
+
+----
+Checks if the value is even.
+
+See also [`odd`](#odd_1)
+----
+function even = |a| -> (a % 2) == 0
+
+----
+Checks if the value is odd.
+
+See also [`even`](#even_1)
+----
+function odd = |a| -> (a % 2) == 1
+
+----
+Swapped curried containment test.
+
+Checks if `collection` contains `value`.
+The collection object can be anything with a `contains` method.
+
+For instance:
+
+    let predicate = contains(42)
+    if (predicate(collection)) {
+      ...
+    }
+
+- *param* `value`: the value to test for containment
+- *param* `collection`: any object having a `contains` method
+----
+@!curry
+function contains = |value, collection| -> collection:contains(value)
+
+----
+Emptiness test.
+
+Checks if the collection-like argument is empty.
+----
+function isEmpty = |o| -> o: isEmpty()
+
+----
+Curried identity comparison
+
+    `is(ref, obj) == obj is ref
+
+Parameters are swapped to ease partialization, as in:
+
+    lst: filter(is(ref))
+----
+@!curry
+function `is = |ref, obj| -> obj is ref
+
+----
+Curried difference comparison
+
+    `isnt(ref, obj) = obj isnt ref
+
+Like `is`, this is more useful partialized. For instance:
+
+    lst: filter(`isnt(null))
+----
+@!curry
+function `isnt = |ref, obj| -> obj isnt ref
+
+----
+Curried type checking
+
+    `oftype(type, obj) = obj oftype type
+
+Partialized version can be used as a predicate, for instance in `filter`:
+
+    alist: filter(`oftype(String.class))
+
+----
+@!curry
+function `oftype = |type, object| -> object oftype type
+
+----
+Null value substitution
+
+    `orIfNull(0, 3) == 3
+    `orIfNull(0, null) == 0
+
+This function can be useful, for example, to replace `null` values in a list with
+a map:
+
+    list[1, 2, null, 3]:map(`orIfNull(0)) == list[1, 2, 0, 3]
+----
+@!curry
+function `orIfNull = |fallback, value| -> value orIfNull fallback
+
+
+#=== Destructuring =====================================================
+
+----
+First element of a list, tuple, vector, array.
+
+    fst([a, b]) == a
+
+- *param* `t`: any object with a `get` method and at least one element.
+- *throws* an `IndexOutOfBoundsException` if the object is empty.
+----
+function fst = |t| -> t: get(0)
+
+----
+Second element of a list, tuple, vector, array.
+
+    snd([a, b]) == b
+
+- *param* `t`: any object with a `get` method and at least two elements.
+- *throws* an `IndexOutOfBoundsException` if the object has less than 2 elements.
+----
+function snd = |t| -> t: get(1)
+
+----
+Curried indexing.
+
+    getitem(obj, i) == obj: get(i)
+
+Throws an `IndexOutOfBoundsException` (for a collection-like object) or returns
+`null` (for a map-like object) if the index is not present.
+
+- *param* `obj`: any object having a `get` method
+- *param* `i`: the index to get
+
+See also [`setitem`](#setitem_3), [`getter`](#getter_1)
+----
+@!curry
+function getitem = |obj, i| -> obj: get(i)
+
+----
+Curried indexed assignment
+
+    setitem(obj, i, v) == obj: set(i, v)
+
+- *param* `obj`: any object having a `set` method
+- *param* `i`: the index to set
+- *param* `v`: the value to set
+
+See also [`getitem`](#getitem_2), [`getter`](#getter_1)
+----
+@!curry
+function setitem = |obj, i, v| {
+  obj: set(i, v)
+  return obj
+}
+
+----
+Indexer factory (curried indexing).
+
+    let third = getter(2)
+    third([1, 2, 3, 4]) -> 3
+
+See also [`getitem`](#getitem_2)
+----
+function getter = |i| -> |col| -> col: get(i)
+
+
+####################################################################
+----
+The identity function.
+
+Returns it's argument unchanged. This can be useful with
+*higher order functions* (*I* combinator).
+----
+function id = |x| -> x
+
+----
+The constant function.
+
+Returns a new variadic functions that always returns `val`, ignoring its
+arguments. For example:
+
+    let theAnswerTo = const(42)
+
+    theAnswerTo() == 42
+    theAnswerTo(1, 2, 3) == 42
+    theAnswerTo("Life, the Universe and Everything") == 42
+
+One interesting use case is to write "pipe" like composition, with the argument
+on the left:
+
+    const(42): andThen(f): andThen(g): andThen(h)() == h(g(f(42)))
+
+This is also the *K* combinator.
+----
+function const = |val| -> |_...| -> val
+
+----
+`false` constant function.
+----
+function False = |_...| -> false
+
+----
+`true` constant function.
+----
+function True = |_...| -> true
+
+----
+`null` constant function.
+----
+function Null = |_...| -> null
+
+
+#== Changing a function arity =============================================
+----
+Function to curryfy a function, i.e. transforms a polyadic function into a
+sequence of variadic functions. This allows for automatic partial application.
+
+This is equivalent to applying `invokeOrBind` on each call.
+
+E.g.
+
+    function f = |a, b, c| -> a + b + c
+
+    let g = curry(^f)
+
+    g(29)(10)(3) == f(29, 10, 3)
+    g(29, 10)(3) == 42
+    g(29)(10, 3) == 42
+
+    let g1 = g(29)
+    let g2 = g1(10)
+    let g3 = g(29, 10)
+
+    g(29, 10, 3) == 42
+    g1(10, 3) == 42
+    g1(10)(3) == 42
+    g2(3) == 42
+    g3(3) == 42
+
+This is particularly useful to allow composing polyadic functions. For
+instance, with the previous `g`:
+
+    let h = g(2, 20): andThen(g("The answer", " is "))
+    h(20) == "The answer is 42"
+
+If the function is variadic, only the fixed parameters can be partialized.
+For instance, given:
+
+    @!curry
+    function f = |a, b, c...| -> ...
+    ...
+    let g = f(1, 2)
+
+then `g` is a variadic function that can't be called partially. All the
+following calls are valids:
+
+    g()
+    g(1)
+    g(1, 2, 3)
+
+but
+
+    g(1)(2)
+
+is not.
+
+This function can also be used as a decorator.
+
+- *param* `f` the function to curry
+- *return* a variadic function dispatching on `f` that can be partialized
+
+See also [`uncurry`](#uncurry_1)
+----
+function curry = |f| -> match {
+  when f: arity() < 2 then f
+  otherwise |args...| {
+    let result = f: invokeOrBind(args)
+    return match {
+      when isClosure(result) then curry(result)
+      otherwise result
+    }
+  }
+}
+
+----
+Reverse of [`curry`](#curry_1).
+
+Take a curried function (e.g. `|a| -> |b| -> a + b`) and return a polyadic
+function (e.g. `|a, b| -> a + b`).
+It is actually a variadic function calling the curried one in sequence.
+
+The two functions defined by
+
+    let f = curry(|a, b, c| -> a + b + c)
+    let g = uncurry(|a| -> |b| -> |c| -> a + b + c)
+
+have the same behavior.
+
+This function can also be used as a decorator.
+
+- *param* `f` the function to uncurry
+- *return* a variadic function dispatching on `f`
+
+See also [`curry`](#curry_1)
+----
+function uncurry = |f| -> match {
+  when f: isVarargsCollector() then f
+  otherwise |args...| {
+    var uc = f
+    var i = 0
+    var argslength = args: length()
+    while i < argslength and not uc: isVarargsCollector() {
+      uc = uc(args: get(i))
+      i = i + 1
+    }
+    return match {
+      when i < argslength then uc: invoke(Arrays.copyOfRange(args, i, argslength))
+      when isClosure(uc) then uncurry(uc)
+      otherwise uc
+    }
+  }
+}
+
+----
+Convers a polyadic function into an unary function.
+E.g.
+
+    let f = |a, b, c| -> a + b + c
+    let g = unary(f)
+
+    g([1, 2, 3]) == 6
+
+If the function already takes zero or one argument, it is returned
+unchanged.
+
+This can be useful in HOF, for example to `map` a binary function on a list of
+couple:
+
+    let f = |a, b| -> ...
+    list[["a", 1], ["b", 2], ["c", 3]]: map(unary(f))
+
+results in `list[f("a", 1), f("b", 2), f("c", 3)]`
+
+The resulting unary function will accept any object having a `toArray` method
+(array, tuple, collection, map entry, struct...)
+
+Thus, `unary(func)(arg)` is equivalent to `func: invoke(arg: toArray())`
+
+This function can also be used as a decorator.
+
+See also [`spreader`](#spreader_1) and [`varargs`](#varargs_1)
+----
+function unary = |f| -> |args| -> f: invoke(args: toArray())
+
+----
+Convers a polyadic function into an unary function.
+
+Similar to [`unary`](#unary_1) but using `spread` instead of `invoke`.
+
+This function can also be used as a decorator.
+
+See also [`varargs`](#varargs_1)
+----
+function spreader = |f| -> |args| -> f: spread(args: toArray())
+
+----
+Convert an unary function taking an array into a variadic function.
+
+This is the contrary of [`unary`](#unary_1).
+E.g.
+
+    let f = |t| -> t:get(0) + t:get(1) + t:get(2)
+    let g = varargs(f)
+
+    f([1, 2, 3]) == g(1, 2, 3)
+
+This function can also be used as a decorator.
+
+See also [`spreader`](#spreader_1) and [`unary`](#unary_1)
+----
+function varargs = |f| -> f: asVarargsCollector(objectArrayType())
+
+#=== Other signature changing HOF =============================================
+
+----
+Change the signature of the given binary function by swapping its arguments,
+such that:
+
+    swapArgs(f)(b, a) == f(a, b)
+
+*Warning*: when using this function with one previously wrapped in
+[`curry`](#curry_1) or [`uncurry`](#uncurry_1), the resulting function can't be
+automatically partialized any more.
+----
+function swapArgs = |func| {
+  return match {
+    when func: arity() == 2 and func: isVarargsCollector() then
+      |a, b| -> func: asFixedArity()(b, a)
+    when func: arity() == 1 and func: isVarargsCollector() then
+      |args...| -> func: invoke(swapCouple(args))
+    when func: arity() == 2 then |a, b| -> func: invoke(b, a)
+    otherwise raise("Can only swap binary functions")
+  }
+}
+
+----
+Change the signature of the given curried binary function by swapping its
+arguments, such that:
+
+    swapCurry(f)(a)(b) = f(b)(a)
+----
+function swapCurry = |func| -> |a| -> |b| -> func(b)(a)
+
+
+local function isCollection = |v| -> (
+  v oftype java.util.List.class
+  or v oftype gololang.Tuple.class
+  or v oftype java.util.RandomAccess.class
+  or isArray(v)
+)
+
+----
+Swap the values of a couple.
+
+The couple can be a tuple, a vector, a list or an array as long as its size is 2.
+The return value as the same type.
+
+For example:
+
+    swap([a, b]) == [b, a]
+----
+function swapCouple = |couple| {
+  require(couple: size() == 2, "Can only swap a couple")
+  let a = couple: get(1)
+  let b = couple: get(0)
+  return match {
+    when couple oftype java.util.List.class then list[a, b]
+    when couple oftype gololang.Tuple.class then tuple[a, b]
+    when couple oftype java.util.RandomAccess.class then vector[a, b]
+    when isArray(couple) then array[a, b]
+    otherwise
+      raise("Can't swap a " + couple:getClass():getName())
+  }
+}
+
+----
+Polymorphic swapping.
+
+This function dispatches on [`swapArgs`](#swapArgs_1),
+[`swapCurry`](#swapCurry_1) or [`swapCouple`](#swapCouple_1) according
+to its parameter.
+
+Note that we have the property that given a binary function `f` and a
+couple `c`
+
+    unary(f)(swap(c)) == unary(swap(f))(c)
+
+When applied to functions, equivalent to the *C* combinator.
+----
+function swap = |v| -> match {
+  when isClosure(v) and v:arity() == 1 and not v: isVarargsCollector() then swapCurry(v)
+  when isClosure(v) then swapArgs(v)
+  when isCollection(v) then swapCouple(v)
+  otherwise
+    raise("Can't swap a " + v:getClass():getName())
+}
+
+
+#==== Composition and application =============================================
+
+----
+Reversed curried function application.
+
+Apply the given function to the given value.
+
+    invokeWith("a", "b", "c")(f) == f("a", "b", "c")
+
+For instance, given a list of functions:
+
+    list[f, g, h]: map(invokeWith(42)) == list[f(42), g(42), h(42)]
+
+It can also be used to promote a value in continuation passing style.
+
+- *param* `args` the values on which apply the function
+----
+function invokeWith = |args...| -> |f| -> f: invoke(args)
+
+----
+Function chaining.
+
+This is similar to Unix pipe:
+
+    pipe(f1, f2, f3)(x) == f3(f2(f1(x))))
+
+i.e. apply `f1` to `x`, then pass it to `f2`, and then `f3`.
+This is the same as `f1: andThen(f2): andThen(f3)(x)`
+
+You can insert a side-effect only function in the chain using [`io`](#io_1):
+
+    pipe(f1, io({println("hello")}), f2)(42)
+
+is equivalent to:
+
+    let tmp = f1(x)
+    println("hello")
+    f2(tmp)
+
+This is similar to [`compose`](#compose_1), but with functions order
+reversed.
+
+Example:
+
+    let cmd = pipe(mul(2), add(4), ^toString, addTo("val: "))
+    cmd(19) == "val: 42"
+    let other = pipe(^intValue, add(4), mul(2))
+    other("17") == 42
+
+If no function is given, returns [`id`](#id_1)
+
+For a similar construct that deal with errors, see for instance the
+[`gololang.Errors`](Errors.html#java.util.Optional.andThen_this_f) module
+----
+function pipe = |funcs...| {
+  var r = ^id
+  foreach f in funcs {
+    r = r: andThen(f)
+  }
+  return r
+}
+
+----
+Function composition.
+
+    compose(f1, f2, f3)(x) == f1(f2(f3(x)))
+
+This is similar to [`pipe`](#pipe_1), but with functions order
+reversed (*B* combinator).
+----
+function compose = |funcs...| {
+  var r = ^id
+  for (var i = funcs: length() - 1, i >= 0, i = i - 1) {
+    r = r: andThen(funcs: get(i))
+  }
+  return r
+}
+
+----
+Transform a function with side effects (generally IO operations, thus the name)
+into a function applying the side effect. If the wrapped function returns
+`null`, its argument is return instead.
+
+The given function can have no parameters, or accept an argument.
+
+This can be used to insert such a function into a composition chain:
+
+    f1: andThen(io({println("hello")})): andThen(f2)
+
+is an anonymous function equivalent to:
+
+    |x| {
+      var result = f1(x)
+      println("hello")
+      return f2(result)
+    }
+
+and
+
+    f1: andThen(io(|x|{println("got " + x)})): andThen(f2)
+
+is an anonymous function equivalent to:
+
+    |x| {
+      var result = f1(x)
+      println("got " + result)
+      return f2(result)
+    }
+
+One last example with reading IO effect:
+
+    f1: andThen(io(|x| {
+      println("Got " + x)
+      return x + intValue(readln("Value to add? "))})
+    : andThen(f2)
+
+is an anonymous function equivalent to:
+
+    |x| {
+      var result = f1(x)
+      println("Got " + x)
+      result = result + intValue(readln("Value to add? "))
+      return f2(result)
+    }
+
+- *param* `block` a function with side effects
+
+See also [`pipe`](#pipe_1) and [`compose`](#compose_1)
+----
+function io = |block| -> |x| -> match {
+    when block: arity() == 1 then block(x)
+    otherwise block()
+  } orIfNull x
+
+----
+Apply the given function until the predicate holds.
+
+For instance:
+
+    let f = until(gt(10), mul(2))
+    f(15) == 15
+    f(2) == 16
+    f(9) == 18
+----
+function until = |predicate, fun| -> |x| {
+  var r = x
+  while not predicate: invoke(r) {
+    r = fun: invoke(r)
+  }
+  return r
+}
+
+----
+Fixed-point combinator.
+
+This is an abstraction of recursion.
+
+- *param* `f` the function that will recur
+- *return* a function that makes recursive call to `f`
+----
+function recur = |f| -> (|x| -> f(|y| -> x(x)(y)))((|x| -> f(|y| -> x(x)(y))))
+
+----
+Conditional application combinator.
+
+Equivalent to using the `match` construct:
+
+    let r = cond(predicate, ifTrue, ifFalse, x)
+
+    # equivalent to
+    let r = match {
+      when predicate(x) then ifTrue(x)
+      otherwise ifFalse(x)
+    }
+
+Since this function is curried, it can be used as:
+
+    let f = cond(predicate, ifTrue, ifFalse)
+
+    # equivalent to
+    let f = |x| -> match {
+      when predicate(x) then ifTrue(x)
+      otherwise ifFalse(x)
+    }
+
+- *param* `predicate` a boolean function
+- *param* `ifTrue` the unary function to apply if `predicate` holds
+- *param* `ifFalse` the unary function to apply otherwise
+----
+@curry
+function cond = |predicate, ifTrue, ifFalse, x| -> match {
+  when predicate(x) then ifTrue(x)
+  otherwise ifFalse(x)
+}
+</code>
+</pre>
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>
+hljs.initHighlighting();
+</script>
+</body>
+</html>

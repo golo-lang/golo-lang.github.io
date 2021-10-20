@@ -1,0 +1,1962 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>gololang.ir.DSL (Golo 3.4.0)</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon"
+        href="data:image/x-icon;base64,AAABAAEAFBQAAAEAIAC4BgAAFgAAACgAAAAUAAAAKAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmd/wAAAAAA/34ADf+LAET/gwBb/4MAWv+LAD7/kQAFAAAAAAOW9AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaX9AAAAAAA/4kAOv+GAMn/dAD/1l8A/6xRAP+pTwD/y1sA//9xAP//hgC0/4sAJgAAAAAAjvEAAAAAAAAAAAAAAAAAAAAAAAAAAAAImfQAAAAAAP+MAJ72aQD/a0EA/3REAP92RAD/cUIA/3FCAP92RAD/dEQA/25BAP//cwD//5AAeQAAAAAHlvEAAAAAAAAAAAAAAAAADJnzAAAAAAD/iwDBmVIA/3lHAP90RgD/k08A/81fAP//bwD/+24A/8VhAP+LSgD/d0cA/3RGAP/JXAD//44AmgAAAAAAgP8AAAAAAAAAAAAAAAAA/4gAmZxWAP9+SQD/gUoA//93AP//kQDw/44ArP+LAGb/jABt/44Auv+TAPjeaQD/fEoA/3xKAP/YZgD//5MAagAAAAAAAAAAHpT3AP+TAC/zbgD/gUwA/39OAP//hgD//5EAqgAAAAAAAAAAAAAAAACA/wAAAAAAAAAAAP+TAM//dAD/fkwA/3lOAP//fgD//4MACA+d9AAAAAAA/5kAuYFPAP+BTwD//3sA//+TAKQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJofYAAAAAAP+YANPBYwD/hFIA/65eAP//mQCMAAAAAAAAAAD/fgD/hFIA/5RZAP//kQD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASnfQA/5AAHP+LAP9/VAD/fFEA//+QAOsAAAAA/44ANup2AP+LWQH/2GwA//+TAJwAAAAAAAAAAAAAAAAlSnoAAAAAAIxbAgIAAAAAAAAAAAAAAAAAAAAA/5QAzJxcAP+IVgH//4QA//+DAAj/mABV0G8A/5FeBP/4dwD//5YAZRea7wAAAAAAAAAAAAAAAACUXASFlF8E/5BZAiMAAAAAAAAAAAAAAAD/lgCXxmsA/5FeBP/+ewD//5sAJP+TAFfQcQL/lGEH//qBAP//mQBhF6LoAAAAAAAAAAAAAAAAAJhjB6qUYQf/mGMH/5hhBB8mTn8AAAAAAP+YAJPQcQL/lGEH//p7AP//kwAm/5QAQO18Av+ZZAn/1nYF//+ZAJAAAAAAAAAAAAAAAAAySG4AAAAAAJtmCtOZZAn/mWQJ/5RhBx0AAAAA/5wAwLVpB/+WYwn//4YB//+QAA//kwAL/4sE/5ZkDP+ZZgz//5wB8wAAAAAAAAAAAAAAAAAAAAAnT4EAAAAAAJ5pDdacZwz/nGcM/85zByT/mAH/kGMM/5NkDP//lAT2AAAAAAAAAAD/oQfUnmsR/55uEf//hgn//6AJfQAAAAAAAAAAAAAAAAAAAAApUoMAAAAAAKNsD9qhbBH+oWwR/t5+Df+hbBH/rG8P//+ZBZ8AAAAAAAAAAP+jClb+hA3/pG8U/6FxFP//mwz//6EMcgAAAAAqrPcAAAAAAAAAAAAtiMUAAAAAALN0Eu+kcxT/pHMU/6FxFP//kA3//5wFHSSq9AAAAAAAAAAAAP+kDce9dxX/qHMX/6hzF///kRL//6gP3P+kEW3/ng0k/6APKf+jD4P/ow/p/6ER/7l2Ff+ocxf/yXsV//+oD5IAAAAAAAAAAAAAAAAprfcA/6MXBf+hEu21fBr+rnca/6h3Gv/Gfhn//5EU//+mFP//pBX//6MU//+jFP//oxT//6MU//+OFP//oxTHAAAAACuu9wAAAAAAAAAAAAAAAAAutf8A/6YZCv+mGdfoiRr/pnsf/7F7Hf+jeR///6gX//+kFf//pBX//6QV//+kFf//pBX//6gXtgAAAAAtrvgAAAAAAAAAAAAAAAAAAAAAAAAAAAAusvkAAAAAAP+cGWf/nh33/5Mf//+UHf//qRr//6ka//+pGv//ox3//6ka8P+jGVYAAAAALrH3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/phw0/6gfav+rHYX/qx2H/6wfbP+sHzQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/gfwAPgB8ADwAPAA4ABwAMAAMACB+BAAg/wQAIf8EAAH3gAAB44AAAeGAAAHwgAAB+AQAIPwEACB+BAAwAAwAMAAcADgAPAA+AHwAP4H8AA="/>
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      margin: 1em auto;
+      margin-left: 20em;
+      max-width: 50em;
+      text-align: left;
+      padding: 0.5em;
+    }
+    pre {
+      background-color: #eee;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .listing:hover code[data-lang]:before {
+      display: block;
+    }
+
+    .listing code {
+      position: relative;
+    }
+
+    .listing code[data-lang]:before {
+      display: none;
+      content: attr(data-lang);
+      position: absolute;
+      font-size: 0.75em;
+      top: .5rem;
+      right: 0.5rem;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    li p {
+      margin: 0.3em;
+    }
+
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 250%;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 200%;
+      font-style: normal;
+      font-weight: bold;
+    }
+
+    h3 {
+      color: #666;
+      font-size: 180%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h4 {
+      font-size: 130%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h5 {
+      font-size: 100%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h6 {
+      font-size: 100%;
+      font-style: italic;
+      font-weight: normal;
+    }
+
+    #global-nav {
+      display: block;
+      font-size: 80%;
+    }
+
+    #global-nav > a {
+      margin: 0em;
+      padding: 0 0.5em;
+    }
+
+    #toc {
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      width: 20em;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    #toc h1 {
+      margin: .5em;
+      padding: 1ex;
+      font-size: 90%;
+      font-weight: bold;
+      font-style: normal;
+      color: #333;
+      background-color: #eee;
+      text-align: center;
+    }
+
+    #toc ul {
+      padding-left: 1em;
+    }
+
+    #toc > ul {
+      font-size: 80%;
+      margin: 0.5em;
+    }
+
+    #toc > ul > li {
+      list-style: none;
+      margin-bottom: 2ex;
+    }
+
+    #toc > ul > li > a {
+      font-weight: bold;
+      color: #333;
+      display: block;
+      padding: 1ex;
+      margin: 0 1em 1ex 0;
+      border-bottom: 1px solid #999;
+    }
+
+    #toc li {
+      list-style-type: none;
+    }
+
+    :target {
+      background-color: yellow;
+    }
+
+    .permalink {
+      margin-left: .3em;
+      font-size: 70%;
+      visibility: hidden;
+    }
+
+    *:hover > .permalink {
+      visibility: visible;
+    }
+
+    .golodoc {
+      margin: 0;
+      padding: 0;
+      padding-left: 1.5em;
+    }
+
+    .srclink {
+      float:  right;
+      text-align: right;
+      color: #999;
+      font-size: 75%;
+      margin-top: -2em;
+    }
+
+    .srclink a {
+      color: inherit;
+    }
+
+    .modules-list li p {
+      display: inline-block;
+      margin: 0 0.5em;
+    }
+
+    @media (max-width: 50em) {
+      #toc {
+        margin: auto;
+        position: static;
+        width: 100%;
+        overflow: visible;
+        white-space: normal;
+      }
+
+      #toc ul {
+        padding-left: 1em;
+        margin: 0;
+      }
+
+      #toc > ul {
+        font-size: 100%;
+        margin: 0em;
+        padding: 0;
+      }
+
+      #toc > ul > li {
+        list-style: none;
+        margin-bottom: 1ex;
+      }
+
+      #toc > ul > li > a {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        padding: 0ex;
+        margin: 0;
+        border-bottom: none;
+      }
+
+      #toc h1 {
+        display: none;
+      }
+
+      #global-nav {
+        display: block;
+        font-size: 100%;
+        z-index: 1000;
+        background-color: #fff;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 1.5rem;
+      }
+
+      :target {
+        padding-top: 1.5rem;
+      }
+
+      body {
+        margin: 0;
+        padding: 0.5em;
+      }
+
+      h1 {
+        font-size: 200%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<h1>Documentation for gololang.ir.DSL</h1>
+
+
+<div class="golodoc">
+  <p>This module provides some factory functions and augmentations on IR elements
+to improve fluent IR building.</p>
+<p>See the <a href="../../javadoc/gololang/ir/package-summary.html"><code>gololang.ir</code></a> java
+package javadoc for documentation on the IR elements themselves.
+See the <a href="./ir/Quote.html"><code>gololang.ir.Quote</code></a> module for an alternative way to create IR nodes.</p>
+
+</div>
+
+
+<!-- begin table of content -->
+<nav id="toc">
+<h1>gololang.ir.DSL</h1>
+  <section id="global-nav">
+    <a href="../../index.html" rel="home">Module Index</a>
+    <a href="../../index-all.html" rel="index">Global Index</a>
+    
+    <a href="../ir.html" rel="up">Package Index</a>
+    
+  </section>
+<ul>
+  
+
+  
+
+  
+
+  
+  <li><a href="#augmentations">Augmentations</a><ul>
+    
+    <li><a href="#augment.gololang.ir.BlockContainer">gololang.ir.BlockContainer</a><ul>
+      
+      <li><a href="#augment.gololang.ir.BlockContainer.do_2v">do(this, statements...)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.gololang.ir.CaseStatement">gololang.ir.CaseStatement</a><ul>
+      
+      <li><a href="#augment.gololang.ir.CaseStatement.do_2v">do(this, statements...)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.gololang.ir.ConditionalBranching">gololang.ir.ConditionalBranching</a><ul>
+      
+      <li><a href="#augment.gololang.ir.ConditionalBranching.else_1">else(this)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ConditionalBranching.else_2v">else(this, statements...)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ConditionalBranching.then_1">then(this)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ConditionalBranching.then_2v">then(this, statements...)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.gololang.ir.ExpressionStatement">gololang.ir.ExpressionStatement</a><ul>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.and_2">and(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.divide_2">divide(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.equalsTo_2">equalsTo(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.is_2">is(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.isnt_2">isnt(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.lessOrEquals_2">lessOrEquals(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.lessThan_2">lessThan(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.moreOrEquals_2">moreOrEquals(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.moreThan_2">moreThan(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.notEquals_2">notEquals(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.oftype_2">oftype(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.or_2">or(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.orIfNull_2">orIfNull(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.plus_2">plus(this, other)</a></li>
+      
+      <li><a href="#augment.gololang.ir.ExpressionStatement.times_2">times(this, other)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.gololang.ir.GoloElement">gololang.ir.GoloElement</a><ul>
+      
+      <li><a href="#augment.gololang.ir.GoloElement.dump_1">dump(this)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.gololang.ir.GoloModule">gololang.ir.GoloModule</a><ul>
+      
+      <li><a href="#augment.gololang.ir.GoloModule.with_2v">with(this, elements...)</a></li>
+      
+    </ul></li>
+    
+    <li><a href="#augment.gololang.ir.TryCatchFinally">gololang.ir.TryCatchFinally</a><ul>
+      
+      <li><a href="#augment.gololang.ir.TryCatchFinally.catch_3v">catch(this, exceptionName, statements...)</a></li>
+      
+      <li><a href="#augment.gololang.ir.TryCatchFinally.finally_2v">finally(this, statements...)</a></li>
+      
+    </ul></li>
+    
+  </ul></li>
+  
+
+
+  
+
+  
+  <li><a href="#functions">Functions</a><ul>
+    
+    <li><a href="#and_2">and(left, right)</a></li>
+    
+    <li><a href="#array_1v">array(values...)</a></li>
+    
+    <li><a href="#arrayComprehension_2v">arrayComprehension(expression, loops...)</a></li>
+    
+    <li><a href="#assign_1">assign(value)</a></li>
+    
+    <li><a href="#assign_2">assign(name, value)</a></li>
+    
+    <li><a href="#augment_1">augment(target)</a></li>
+    
+    <li><a href="#augmentation_1">augmentation(name)</a></li>
+    
+    <li><a href="#block_1v">block(statements...)</a></li>
+    
+    <li><a href="#break_0">break()</a></li>
+    
+    <li><a href="#call_1">call(fun)</a></li>
+    
+    <li><a href="#case_0">case()</a></li>
+    
+    <li><a href="#comment_1">comment(message)</a></li>
+    
+    <li><a href="#constant_1">constant(value)</a></li>
+    
+    <li><a href="#continue_0">continue()</a></li>
+    
+    <li><a href="#decorator_1">decorator(expr)</a></li>
+    
+    <li><a href="#define_1">define(name)</a></li>
+    
+    <li><a href="#destruct_1">destruct(value)</a></li>
+    
+    <li><a href="#divide_2">divide(left, right)</a></li>
+    
+    <li><a href="#equals_2">equals(left, right)</a></li>
+    
+    <li><a href="#for_3">for(init, cond, post)</a></li>
+    
+    <li><a href="#foreach_1v">foreach(vars...)</a></li>
+    
+    <li><a href="#function_1">function(name)</a></li>
+    
+    <li><a href="#functionRef_1">functionRef(func)</a></li>
+    
+    <li><a href="#functionRef_2">functionRef(mod, func)</a></li>
+    
+    <li><a href="#functionRef_3">functionRef(mod, func, arity)</a></li>
+    
+    <li><a href="#functionRef_4">functionRef(mod, func, arity, varargs)</a></li>
+    
+    <li><a href="#if_1">if(cond)</a></li>
+    
+    <li><a href="#import_1">import(mod)</a></li>
+    
+    <li><a href="#invoke_1">invoke(meth)</a></li>
+    
+    <li><a href="#is_2">is(left, right)</a></li>
+    
+    <li><a href="#isnt_2">isnt(left, right)</a></li>
+    
+    <li><a href="#lambda_1v">lambda(parameters...)</a></li>
+    
+    <li><a href="#lessOrEquals_2">lessOrEquals(left, right)</a></li>
+    
+    <li><a href="#lessThan_2">lessThan(left, right)</a></li>
+    
+    <li><a href="#let_2">let(name, val)</a></li>
+    
+    <li><a href="#list_1v">list(values...)</a></li>
+    
+    <li><a href="#listComprehension_2v">listComprehension(expression, loops...)</a></li>
+    
+    <li><a href="#localRef_0">localRef()</a></li>
+    
+    <li><a href="#localRef_1">localRef(name)</a></li>
+    
+    <li><a href="#localRef_2">localRef(name, kind)</a></li>
+    
+    <li><a href="#macro_1">macro(name)</a></li>
+    
+    <li><a href="#macroCall_1">macroCall(name)</a></li>
+    
+    <li><a href="#map_1v">map(values...)</a></li>
+    
+    <li><a href="#mapComprehension_2v">mapComprehension(expression, loops...)</a></li>
+    
+    <li><a href="#match_0">match()</a></li>
+    
+    <li><a href="#member_1">member(name)</a></li>
+    
+    <li><a href="#minus_2">minus(left, right)</a></li>
+    
+    <li><a href="#module_1">module(name)</a></li>
+    
+    <li><a href="#modulo_2">modulo(left, right)</a></li>
+    
+    <li><a href="#moreOrEquals_2">moreOrEquals(left, right)</a></li>
+    
+    <li><a href="#moreThan_2">moreThan(left, right)</a></li>
+    
+    <li><a href="#namedArgument_2">namedArgument(name, value)</a></li>
+    
+    <li><a href="#noop_0">noop()</a></li>
+    
+    <li><a href="#not_1">not(value)</a></li>
+    
+    <li><a href="#notEquals_2">notEquals(left, right)</a></li>
+    
+    <li><a href="#oftype_2">oftype(left, right)</a></li>
+    
+    <li><a href="#or_2">or(left, right)</a></li>
+    
+    <li><a href="#orIfNull_2">orIfNull(left, right)</a></li>
+    
+    <li><a href="#plus_2">plus(left, right)</a></li>
+    
+    <li><a href="#range_1v">range(values...)</a></li>
+    
+    <li><a href="#refLookup_1">refLookup(name)</a></li>
+    
+    <li><a href="#return_1">return(value)</a></li>
+    
+    <li><a href="#set_1v">set(values...)</a></li>
+    
+    <li><a href="#setComprehension_2v">setComprehension(expression, loops...)</a></li>
+    
+    <li><a href="#struct_1">struct(name)</a></li>
+    
+    <li><a href="#throw_1">throw(ex)</a></li>
+    
+    <li><a href="#times_2">times(left, right)</a></li>
+    
+    <li><a href="#toplevels_1v">toplevels(elements...)</a></li>
+    
+    <li><a href="#try_1v">try(statements...)</a></li>
+    
+    <li><a href="#tuple_1v">tuple(values...)</a></li>
+    
+    <li><a href="#tupleComprehension_2v">tupleComprehension(expression, loops...)</a></li>
+    
+    <li><a href="#union_1">union(name)</a></li>
+    
+    <li><a href="#var_2">var(name, val)</a></li>
+    
+    <li><a href="#vector_1v">vector(values...)</a></li>
+    
+    <li><a href="#vectorComprehension_2v">vectorComprehension(expression, loops...)</a></li>
+    
+    <li><a href="#while_1">while(cond)</a></li>
+    
+  </ul></li>
+  
+</ul>
+</nav>
+<!-- end table of content -->
+
+
+
+
+
+
+
+
+
+
+
+  <h2 id="augmentations">Augmentations</h2>
+  
+    <h3 id="augment.gololang.ir.BlockContainer">gololang.ir.BlockContainer<a class="permalink" href="#augment.gololang.ir.BlockContainer" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1364" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Adds more fluent methods to build a block container.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.gololang.ir.BlockContainer.do_2v">do(this, statements...)<a class="permalink" href="#augment.gololang.ir.BlockContainer.do_2v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-1372" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Defines the block as the given statements</p>
+<p>See
+<a href="../../javadoc/gololang/ir/BlockContainer.html#body-java.lang.Object...-"><code>body</code></a></p>
+
+      </div>
+    
+  
+    <h3 id="augment.gololang.ir.CaseStatement">gololang.ir.CaseStatement<a class="permalink" href="#augment.gololang.ir.CaseStatement" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-383" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Adds more fluent methods to build a <code>case</code> statement.</p>
+<p>See <a href="../../javadoc/gololang/ir/CaseStatement.html"><code>CaseStatement</code></a> and
+associated <a href="#case_0">factory</a></p>
+
+    </div>
+    
+    
+      <h4 id="augment.gololang.ir.CaseStatement.do_2v">do(this, statements...)<a class="permalink" href="#augment.gololang.ir.CaseStatement.do_2v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-392" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Define the action for a <code>when</code> clause.</p>
+<ul>
+<li><em>param</em> <code>statements</code>: the statements representing the actions in the block. A <code>Block</code> is created if needed.</li>
+</ul>
+<p>See <a href="../../javadoc/gololang/ir/CaseStatement.html#then-java.lang.Object-"><code>then</code></a></p>
+
+      </div>
+    
+  
+    <h3 id="augment.gololang.ir.ConditionalBranching">gololang.ir.ConditionalBranching<a class="permalink" href="#augment.gololang.ir.ConditionalBranching" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-305" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Adds more fluent methods to build a conditional branching IR</p>
+<p>See
+<a href="../../javadoc/gololang/ir/ConditionalBranching.html"><code>ConditionalBranching</code></a>
+and the associated <a href="#if_1">factory</a></p>
+
+    </div>
+    
+    
+      <h4 id="augment.gololang.ir.ConditionalBranching.else_1">else(this)<a class="permalink" href="#augment.gololang.ir.ConditionalBranching.else_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-338" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns the false block or the nested branch.</p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ConditionalBranching.else_2v">else(this, statements...)<a class="permalink" href="#augment.gololang.ir.ConditionalBranching.else_2v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-330" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Defines the false block or nested conditional</p>
+<ul>
+<li><em>param</em> <code>statements</code>: the statements to execute when the condition is <code>false</code>. A <code>Block</code> is created if needed.</li>
+</ul>
+<p>See
+<a href="../../javadoc/gololang/ir/ConditionalBranching.html#otherwise-java.lang.Object-"><code>otherwise</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ConditionalBranching.then_1">then(this)<a class="permalink" href="#augment.gololang.ir.ConditionalBranching.then_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-320" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Returns the true block.</p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ConditionalBranching.then_2v">then(this, statements...)<a class="permalink" href="#augment.gololang.ir.ConditionalBranching.then_2v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-315" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Defines the true block.</p>
+<ul>
+<li><em>param</em> <code>statements</code>: the statements to execute when the condition is <code>true</code>. A <code>Block</code> is created if needed.</li>
+</ul>
+<p>See
+<a href="../../javadoc/gololang/ir/ConditionalBranching.html#whenTrue-java.lang.Object-"><code>whenTrue</code></a></p>
+
+      </div>
+    
+  
+    <h3 id="augment.gololang.ir.ExpressionStatement">gololang.ir.ExpressionStatement<a class="permalink" href="#augment.gololang.ir.ExpressionStatement" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-954" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Allows to use operator factories as methods on expressions, to look more like
+infix operator.</p>
+<p>For instance, <code>plus(constant(38), constant(4))</code> can be written
+<code>constant(38): plus(constant(4))</code></p>
+<p>See <a href="../../javadoc/gololang/ir/ExpressionStatement.html"><code>ExpressionStatement</code></a></p>
+
+    </div>
+    
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.and_2">and(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.and_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-958" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#and_2"><code>and</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.divide_2">divide(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.divide_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-963" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#divide_2"><code>divide</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.equalsTo_2">equalsTo(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.equalsTo_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-968" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#equals_2"><code>equals</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.is_2">is(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.is_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-973" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#is_2"><code>is</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.isnt_2">isnt(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.isnt_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-978" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#isnt_2"><code>isnt</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.lessOrEquals_2">lessOrEquals(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.lessOrEquals_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-983" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#lessOrEquals_2"><code>lessOrEquals</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.lessThan_2">lessThan(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.lessThan_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-988" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#lessThan_2"><code>lessThan</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.moreOrEquals_2">moreOrEquals(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.moreOrEquals_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-993" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#moreOrEquals_2"><code>moreOrEquals</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.moreThan_2">moreThan(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.moreThan_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-998" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#moreThan_2"><code>moreThan</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.notEquals_2">notEquals(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.notEquals_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-1003" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#notEquals_2"><code>notEquals</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.oftype_2">oftype(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.oftype_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-1008" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#oftype_2"><code>oftype</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.or_2">or(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.or_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-1013" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#or_2"><code>or</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.orIfNull_2">orIfNull(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.orIfNull_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-1018" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#orIfNull_2"><code>orIfNull</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.plus_2">plus(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.plus_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-1023" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#plus_2"><code>plus</code></a></p>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.ExpressionStatement.times_2">times(this, other)<a class="permalink" href="#augment.gololang.ir.ExpressionStatement.times_2" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-1028" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>See <a href="#times_2"><code>times</code></a></p>
+
+      </div>
+    
+  
+    <h3 id="augment.gololang.ir.GoloElement">gololang.ir.GoloElement<a class="permalink" href="#augment.gololang.ir.GoloElement" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-80" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Utility augmentation on all IR elements.</p>
+
+    </div>
+    
+    
+      <h4 id="augment.gololang.ir.GoloElement.dump_1">dump(this)<a class="permalink" href="#augment.gololang.ir.GoloElement.dump_1" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-84" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Prints a representation of this node subtree to the terminal.</p>
+
+      </div>
+    
+  
+    <h3 id="augment.gololang.ir.GoloModule">gololang.ir.GoloModule<a class="permalink" href="#augment.gololang.ir.GoloModule" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-52" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      
+    </div>
+    
+    
+      <h4 id="augment.gololang.ir.GoloModule.with_2v">with(this, elements...)<a class="permalink" href="#augment.gololang.ir.GoloModule.with_2v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-58" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Adds all the given elements to the module.</p>
+<ul>
+<li><em>returns</em> the module itself</li>
+</ul>
+
+      </div>
+    
+  
+    <h3 id="augment.gololang.ir.TryCatchFinally">gololang.ir.TryCatchFinally<a class="permalink" href="#augment.gololang.ir.TryCatchFinally" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-246" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>See <a href="../../javadoc/gololang/ir/TryCatchFinally.html"><code>TryCatchFinally</code></a> and the
+corresponding <a href="#try_1v">factory</a></p>
+
+    </div>
+    
+    
+      <h4 id="augment.gololang.ir.TryCatchFinally.catch_3v">catch(this, exceptionName, statements...)<a class="permalink" href="#augment.gololang.ir.TryCatchFinally.catch_3v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-254" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Defines the exception name and the statements in the <code>catch</code> block.</p>
+<ul>
+<li><em>param</em> <code>exceptionName</code>: the name of the variable holding the exception.</li>
+<li><em>param</em> <code>statements</code>: the statements in the <code>catch</code> block.</li>
+</ul>
+
+      </div>
+    
+      <h4 id="augment.gololang.ir.TryCatchFinally.finally_2v">finally(this, statements...)<a class="permalink" href="#augment.gololang.ir.TryCatchFinally.finally_2v" title="link to this section">&#182;</a></h4><nav class="srclink"><a href="DSL-src.html#l-262" rel="source" title="Link to the corresponding source">Source</a></nav>
+      <div class="golodoc">
+        <p>Defines the <code>finally</code> block.</p>
+<ul>
+<li><em>param</em> <code>statements</code>: the statements in the <code>finally</code> block.</li>
+</ul>
+
+      </div>
+    
+  
+
+
+
+
+
+  <h2 id="functions">Functions</h2>
+  
+    <h3 id="and_2">and(left, right)<a class="permalink" href="#and_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-882" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a logical conjunction operation <code>and</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="array_1v">array(values...)<a class="permalink" href="#array_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1075" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates an array literal.</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">array(
+  constant(42),
+  constant(1337),
+  call("f"): withArgs(constant("foo"))
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">array[42, 1337, f("foo")]
+</code></pre>
+<ul>
+<li><em>param</em> <code>values</code>: the expressions representing the values in the array</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/CollectionLiteral.html"><code>CollectionLiteral</code></a> node</li>
+</ul>
+
+    </div>
+  
+    <h3 id="arrayComprehension_2v">arrayComprehension(expression, loops...)<a class="permalink" href="#arrayComprehension_2v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1239" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates an array comprehension.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">arrayComprehension(
+  plus(refLookup("i"), 1),
+  `for(`var("i", 0),
+       lessThan(refLookup("i"), 10),
+       assign(plus(refLookup("i"), 1))
+  )
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">array[i + 1 for(var i = 0, i &lt; 10, i = i + 1)]
+</code></pre>
+<ul>
+<li><em>param</em> <code>expression</code>: the comprehension expression.</li>
+<li><em>param</em> <code>loops</code>: the loops of the comprehension.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/CollectionComprehension.html"><code>CollectionComprehension</code></a> node</li>
+</ul>
+
+    </div>
+  
+    <h3 id="assign_1">assign(value)<a class="permalink" href="#assign_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1477" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Create a assignment statement.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">answer = 42
+</code></pre>
+<p>can be created with</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">assign(42): to("foo")
+</code></pre>
+<ul>
+<li><em>param</em> <code>value</code>: the value to assign to the variable.</li>
+<li><em>returns</em> an <a href="../../javadoc/gololang/ir/AssignmentStatement.html"><code>AssignmentStatement</code></a>
+or a <a href="../../javadoc/gololang/ir/DestructuringAssignment.html"><code>DestructuringAssignment</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="assign_2">assign(name, value)<a class="permalink" href="#assign_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1441" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates an assignment statement.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">assign("foo", 42)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">foo = 42
+</code></pre>
+<ul>
+<li><em>param</em> <code>name</code>: the name of the variable to define, or a tuple for destructuring</li>
+<li><em>param</em> <code>val</code>: the value to assign to the variable.</li>
+<li><em>returns</em> an <a href="../../javadoc/gololang/ir/AssignmentStatement.html"><code>AssignmentStatement</code></a>
+or a <a href="../../javadoc/gololang/ir/DestructuringAssignment.html"><code>DestructuringAssignment</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="augment_1">augment(target)<a class="permalink" href="#augment_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-176" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates an augmentation on the target name.</p>
+<p>Typical usage:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">`augment(String.class): with(
+  `function("foo"): withParameters("this")
+    : returns(42))
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">augment java.lang.String {
+   function foo = |this| -&gt; 42
+}
+</code></pre>
+<ul>
+<li><em>param</em> <code>target</code> the name of the target (compatible with <code>PackageAndClass.of</code>)</li>
+<li><em>return</em> a classical augmentation (<code>Augmentation</code>)</li>
+</ul>
+
+    </div>
+  
+    <h3 id="augmentation_1">augmentation(name)<a class="permalink" href="#augmentation_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-198" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a named augmentation.</p>
+<p>Typical usage:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">`augmentation("Fooable"): add(
+  `function("foo"): withParameters("this")
+    : returns(42))
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">augmentation Fooable = {
+   function foo = |this| -&gt; 42
+}
+</code></pre>
+<ul>
+<li><em>param</em> <code>name</code>: the name of the augmentation (compatible with <code>PackageAndClass.of</code>)</li>
+<li><em>return</em> a named augmentation</li>
+</ul>
+
+    </div>
+  
+    <h3 id="block_1v">block(statements...)<a class="permalink" href="#block_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1359" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a block containing the given statements.</p>
+<p>If only one statement is given and it is a block, it is returned unchanged.</p>
+<ul>
+<li><em>param</em> <code>statements</code>: the statements to build the block from.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/Block.html"><code>Block</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="break_0">break()<a class="permalink" href="#break_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1516" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a <code>break</code> statement.</p>
+
+    </div>
+  
+    <h3 id="call_1">call(fun)<a class="permalink" href="#call_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-687" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Call a function.</p>
+<p>Delegates on <code>FunctionInvocation.of</code>.</p>
+<ul>
+<li><em>returns</em> a <code>FunctionInvocation</code></li>
+</ul>
+
+    </div>
+  
+    <h3 id="case_0">case()<a class="permalink" href="#case_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-375" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a <a href="../../javadoc/gololang/ir/CaseStatement.html"><code>case</code></a> statement.</p>
+<p>For instance</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">`case()
+  : `when(equals(refLookup("x"), 0)): do(
+    call("println"): withArgs(constant("null"))
+  )
+  : `otherwise(
+    call("println").withArgs(constant("not null"))
+  )
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">case {
+  when x == 0 {
+    println("null")
+  }
+  otherwise {
+    println("not null")
+  }
+}
+</code></pre>
+<p>See <a href="../../javadoc/gololang/ir/CaseStatement.html"><code>CaseStatement</code></a> and
+associated <a href="#augment.gololang.ir.CaseStatement">augmentation</a></p>
+
+    </div>
+  
+    <h3 id="comment_1">comment(message)<a class="permalink" href="#comment_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1541" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Void statement containing a message.</p>
+<p>Same as <a href="#noop_0"><code>noop</code></a>, but the message can be used by diagnose or debug
+tools.</p>
+
+    </div>
+  
+    <h3 id="constant_1">constant(value)<a class="permalink" href="#constant_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-525" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a constant expression.</p>
+<p>Constant expressions in the IR are numbers, strings or boolean values (namely
+literals).</p>
+<ul>
+<li><em>param</em> <code>value</code>: the runtime value of this constant expression.</li>
+<li><em>returns</em> a
+<a href="../../javadoc/gololang/ir/ConstantStatement.html"><code>ConstantStatement</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="continue_0">continue()<a class="permalink" href="#continue_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1522" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a <code>continue</code> statement.</p>
+
+    </div>
+  
+    <h3 id="decorator_1">decorator(expr)<a class="permalink" href="#decorator_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-130" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Create a function decorator from the given expression.</p>
+<ul>
+<li><em>param</em> <code>expr</code> the expression representing the decorator or any element that can be converted into a valid
+<code>ExpressionStatement</code></li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/Decorator.html"><code>Decorator</code></a></li>
+</ul>
+<p>See
+<a href="../../javadoc/gololang/ir/Decorator.html#of-java.lang.Object-"><code>Decorator.of</code></a></p>
+
+    </div>
+  
+    <h3 id="define_1">define(name)<a class="permalink" href="#define_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1459" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Create a declaring assignment statement.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let answer = 42
+</code></pre>
+<p>can be created with</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">define("answer"): as(42)
+</code></pre>
+<ul>
+<li><em>param</em> <code>name</code>: the name of the variable to define, or a tuple for destructuring</li>
+<li><em>returns</em> an <a href="../../javadoc/gololang/ir/AssignmentStatement.html"><code>AssignmentStatement</code></a>
+or a <a href="../../javadoc/gololang/ir/DestructuringAssignment.html"><code>DestructuringAssignment</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="destruct_1">destruct(value)<a class="permalink" href="#destruct_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1495" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Create a destructuring assignment statement.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">a, b = foo()
+</code></pre>
+<p>can be created with</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">destruct(call("foo")): to("a", "b")
+</code></pre>
+<ul>
+<li><em>param</em> <code>value</code>: the value to assign to the variable.</li>
+<li><em>returns</em> an <a href="../../javadoc/gololang/ir/AssignmentStatement.html"><code>AssignmentStatement</code></a>
+or a <a href="../../javadoc/gololang/ir/DestructuringAssignment.html"><code>DestructuringAssignment</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="divide_2">divide(left, right)<a class="permalink" href="#divide_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-786" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a division binary operation <code>/</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="equals_2">equals(left, right)<a class="permalink" href="#equals_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-810" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a equality binary operation <code>==</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="for_3">for(init, cond, post)<a class="permalink" href="#for_3" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-448" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a <a href="../../javadoc/gololang/ir/LoopStatement.html"><code>for</code> loop</a> IR node.</p>
+<p>For instance</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">`for(`var("x", 0),
+     lessThan(refLookup("x"), 10),
+     assign(plus(refLookup("x"), 1)): to("x")): do(
+  call("println"): withArgs(refLookup("x"))
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">for (var x = 0, x &lt; 10, x = x + 1) {
+  println(x)
+}
+</code></pre>
+<ul>
+<li><em>param</em> <code>init</code>: the node representing the loop variable initialization.</li>
+<li><em>param</em> <code>cond</code>: the node representing the loop halting condition.</li>
+<li><em>param</em> <code>post</code>: the node representing the loop variable increment.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/LoopStatement.html"><code>LoopStatement</code></a></li>
+</ul>
+<p>See <a href="../../javadoc/gololang/ir/LoopStatement.html"><code>LoopStatement</code></a>
+and the <a href="#augment.gololang.ir.BlockContainer"><code>BlockContainer</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="foreach_1v">foreach(vars...)<a class="permalink" href="#foreach_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-507" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a <a href="../../javadoc/gololang/ir/ForEachLoopStatement.html"><code>foreach</code> loop</a> IR node.</p>
+<p>Typical usage:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">`foreach("x"): in(call("range"): withArgs(5)): do(
+  call("println").withArgs(refLookup("x"))
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">foreach x in range(5) {
+  println(x)
+}
+</code></pre>
+<ul>
+<li><em>param</em> <code>vars</code>: the loop variables destructured from the iterable elements</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/ForEachLoopStatement.html"><code>ForEachLoopStatement</code></a></li>
+</ul>
+<p>See <a href="../../javadoc/gololang/ir/ForEachLoopStatement.html"><code>ForEachLoopStatement</code></a>
+and the <a href="#augment.gololang.ir.BlockContainer"><code>BlockContainer</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="function_1">function(name)<a class="permalink" href="#function_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-143" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a function declaration</p>
+<ul>
+<li><em>param</em> <code>name</code>: the name of the function</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/GoloFunction.html"><code>GoloFunction</code></a></li>
+</ul>
+<p>See
+<a href="../../javadoc/gololang/ir/GoloFunction.html#function-java.lang.Object-"><code>GoloFunction.function</code></a>
+and <a href="#lambda_1v"><code>lambda</code></a></p>
+
+    </div>
+  
+    <h3 id="functionRef_1">functionRef(func)<a class="permalink" href="#functionRef_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-605" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a reference to the named function.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">functionRef("foo")
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">^foo
+</code></pre>
+<ul>
+<li><em>param</em> <code>func</code> the function description. Can be a <code>String</code> for the function
+name, a <code>GoloFunction</code> or a <code>java.lang.reflect.Method</code>.</li>
+<li><em>returns</em> a constant statement containing the function reference.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="functionRef_2">functionRef(mod, func)<a class="permalink" href="#functionRef_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-627" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a reference to the named function and module.</p>
+<ul>
+<li><em>param</em> <code>mod</code> a <code>String</code> giving the module name, the <code>GoloModule</code>
+itself, or the <code>java.lang.Class</code> of the module.</li>
+<li><em>param</em> <code>func</code> the name of the function to reference.</li>
+<li><em>returns</em> a constant statement containing the function reference.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="functionRef_3">functionRef(mod, func, arity)<a class="permalink" href="#functionRef_3" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-647" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a reference to the named function and module with the given arity.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">functionRef(java.util.Objects.class, "equals", 2)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">^java.util.Objects::equals\2
+</code></pre>
+<ul>
+<li><em>param</em> <code>mod</code> a <code>String</code> giving the module name, the <code>GoloModule</code>
+itself, or the <code>java.lang.Class</code> of the module.</li>
+<li><em>param</em> <code>func</code> the name of the function to reference.</li>
+<li><em>param</em> <code>arity</code> the arity of the referenced function.</li>
+<li><em>returns</em> a constant statement containing the function reference.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="functionRef_4">functionRef(mod, func, arity, varargs)<a class="permalink" href="#functionRef_4" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-668" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a reference to the named function and module with the given (variable) arity.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">functionRef("java.util.Arrays", "asList", 1, true)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">^java.util.Arrays::asList\1...
+</code></pre>
+<ul>
+<li><em>param</em> <code>mod</code> a <code>String</code> giving the module name, the <code>GoloModule</code>
+itself, or the <code>java.lang.Class</code> of the module.</li>
+<li><em>param</em> <code>func</code> the name of the function to reference.</li>
+<li><em>param</em> <code>arity</code> the arity of the referenced function.</li>
+<li><em>param</em> <code>varargs</code> whether the function is varargs or not.</li>
+<li><em>returns</em> a constant statement containing the function reference.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="if_1">if(cond)<a class="permalink" href="#if_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-296" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a conditional branching IR node.</p>
+<p>For instance</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">if a != 0 {
+  println(a)
+} else {
+  println("zero")
+}
+</code></pre>
+<p>can be created by</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">`if(notEquals(refLookup("a"), 0)): `then(
+  call("println"): withArgs(refLookup("a"))
+): `else(
+  call("println"): withArgs("zero")
+)
+</code></pre>
+<ul>
+<li><em>param</em> <code>cond</code>: the condition node.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/ConditionalBranching.html"><code>ConditionalBranching</code></a></li>
+</ul>
+<p>See
+<a href="../../javadoc/gololang/ir/ConditionalBranching.html"><code>ConditionalBranching</code></a>
+and the associated <a href="#augment.gololang.ir.ConditionalBranching">augmentation</a></p>
+
+    </div>
+  
+    <h3 id="import_1">import(mod)<a class="permalink" href="#import_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-74" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates an IR <a href="../../javadoc/gololang/ir/ModuleImport.html"><code>import</code></a> node.</p>
+<ul>
+<li><em>param</em> <code>mod</code>: the module to import.</li>
+</ul>
+<p>See <a href="../../javadoc/gololang/ir/ModuleImport.html#of-java.lang.Object-"><code>ModuleImport.of</code></a></p>
+
+    </div>
+  
+    <h3 id="invoke_1">invoke(meth)<a class="permalink" href="#invoke_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-697" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Invoke a method.</p>
+<p>Delegates on <code>MethodInvocation.invoke</code>.</p>
+<ul>
+<li><em>returns</em> a <code>MethodInvocation</code></li>
+</ul>
+
+    </div>
+  
+    <h3 id="is_2">is(left, right)<a class="permalink" href="#is_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-930" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates an identity equality binary operation <code>is</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="isnt_2">isnt(left, right)<a class="permalink" href="#isnt_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-942" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates an identity difference binary operation <code>isnt</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="lambda_1v">lambda(parameters...)<a class="permalink" href="#lambda_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-582" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates an anonymous function.</p>
+<p>Typical usage:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">lambda("a", "b"): returns(plus(refLookup("a"), refLookup("b")))
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">|a, b| -&gt; a + b
+</code></pre>
+<ul>
+<li><em>param</em> <code>parameters</code>: the parameters names</li>
+<li><em>return</em> the reference to the anonymous function</li>
+</ul>
+
+    </div>
+  
+    <h3 id="lessOrEquals_2">lessOrEquals(left, right)<a class="permalink" href="#lessOrEquals_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-858" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a lesser comparison binary operation <code>&lt;=</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="lessThan_2">lessThan(left, right)<a class="permalink" href="#lessThan_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-834" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a lesser strict comparison binary operation <code>&lt;</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="let_2">let(name, val)<a class="permalink" href="#let_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1422" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a <code>let</code> declaration.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">`let("answer", 42)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let answer = 42
+</code></pre>
+<ul>
+<li><em>param</em> <code>name</code>: the name of the variable to define, or a tuple for destructuring</li>
+<li><em>param</em> <code>val</code>: the value to assign to the variable.</li>
+<li><em>returns</em> an <a href="../../javadoc/gololang/ir/AssignmentStatement.html"><code>AssignmentStatement</code></a>
+or a <a href="../../javadoc/gololang/ir/DestructuringAssignment.html"><code>DestructuringAssignment</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="list_1v">list(values...)<a class="permalink" href="#list_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1053" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a list literal.</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">list(
+  constant(42),
+  constant(1337),
+  call("f"): withArgs(constant("foo"))
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">list[42, 1337, f("foo")]
+</code></pre>
+<ul>
+<li><em>param</em> <code>values</code>: the expressions representing the values in the list</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/CollectionLiteral.html"><code>CollectionLiteral</code></a> node</li>
+</ul>
+
+    </div>
+  
+    <h3 id="listComprehension_2v">listComprehension(expression, loops...)<a class="permalink" href="#listComprehension_2v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1213" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a list comprehension.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">listComprehension(
+  plus(refLookup("i"), 1),
+  `for(`var("i", 0),
+       lessThan(refLookup("i"), 10),
+       assign(plus(refLookup("i"), 1))
+  )
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">list[i + 1 for(var i = 0, i &lt; 10, i = i + 1)]
+</code></pre>
+<ul>
+<li><em>param</em> <code>expression</code>: the comprehension expression.</li>
+<li><em>param</em> <code>loops</code>: the loops of the comprehension.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/CollectionComprehension.html"><code>CollectionComprehension</code></a> node</li>
+</ul>
+
+    </div>
+  
+    <h3 id="localRef_0">localRef()<a class="permalink" href="#localRef_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-545" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Create a local reference with a generated name.</p>
+<ul>
+<li><em>returns</em> a new <a href="../../javadoc/gololang/ir/LocalReference.html"><code>LocalReference</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="localRef_1">localRef(name)<a class="permalink" href="#localRef_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-554" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Create a local reference with the name.</p>
+<ul>
+<li><em>param</em> <code>name</code>: the name of the reference as a string or a
+<a href="../../javadoc/gololang/ir/ReferenceLookup.html"><code>ReferenceLookup</code></a></li>
+<li><em>returns</em> a new <a href="../../javadoc/gololang/ir/LocalReference.html"><code>LocalReference</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="localRef_2">localRef(name, kind)<a class="permalink" href="#localRef_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-561" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Create a local reference with a generated name.</p>
+<ul>
+<li><em>returns</em> a new <a href="../../javadoc/gololang/ir/LocalReference.html"><code>LocalReference</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="macro_1">macro(name)<a class="permalink" href="#macro_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-152" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Create a macro declaration.</p>
+<p>This is just a function with a macro flag set.</p>
+<p>See <a href="#function_1"><code>function</code></a></p>
+
+    </div>
+  
+    <h3 id="macroCall_1">macroCall(name)<a class="permalink" href="#macroCall_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-706" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Call a macro.</p>
+<ul>
+<li><em>param</em> <code>name</code>: the name of the macro</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/MacroInvocation.html"><code>MacroInvocation</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="map_1v">map(values...)<a class="permalink" href="#map_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1125" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a map literal.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">map(
+  tuple(constant("a"), constant(1)),
+  tuple(constant("b"), constant(2))
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">map[
+ ["a", 1],
+ ["b", 2]
+]
+</code></pre>
+<ul>
+<li><em>param</em> <code>values</code>: instances of tuple <code>CollectionLiteral</code></li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/CollectionLiteral.html"><code>CollectionLiteral</code></a> node</li>
+</ul>
+<p>See
+<a href="#tuple_1v"><code>tuple</code></a></p>
+
+    </div>
+  
+    <h3 id="mapComprehension_2v">mapComprehension(expression, loops...)<a class="permalink" href="#mapComprehension_2v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1343" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a map comprehension.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">mapComprehension(
+  tuple(refLookup("i"), plus(refLookup("i"), 1)),
+  `for(`var("i", 0),
+       lessThan(refLookup("i"), 10),
+       assign(plus(refLookup("i"), 1))
+  )
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">map[ [i, i + 1] for(var i = 0, i &lt; 10, i = i + 1)]
+</code></pre>
+<ul>
+<li><em>param</em> <code>expression</code>: the comprehension expression.</li>
+<li><em>param</em> <code>loops</code>: the loops of the comprehension.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/CollectionComprehension.html"><code>CollectionComprehension</code></a> node</li>
+</ul>
+
+    </div>
+  
+    <h3 id="match_0">match()<a class="permalink" href="#match_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-415" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a match expression.</p>
+<p>Typical usage:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">`let("r", match()
+  : when(refLookup("x": equalsTo(0)): then(constant("null"))
+  : otherwise(constant("non null")))
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">let r = match {
+  when x == 0 then "null"
+  otherwise "non null"
+}
+</code></pre>
+<p>See <a href="../../javadoc/gololang/ir/MatchExpression.html"><code>MatchExpression</code></a></p>
+
+    </div>
+  
+    <h3 id="member_1">member(name)<a class="permalink" href="#member_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-115" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a member for structures and union values.</p>
+<p>Builder API on these objects implicitly create the member when needed.
+However, this builder can be useful if one wants to customize the member (e.g. by adding a golodoc).</p>
+
+    </div>
+  
+    <h3 id="minus_2">minus(left, right)<a class="permalink" href="#minus_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-774" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a subtraction binary operation <code>-</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="module_1">module(name)<a class="permalink" href="#module_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-50" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a module with the given name.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">`module("MyModule"): `with(
+  `struct("Foo"): members("bar", "baz"),
+  `function("foo"): withParameters("x")
+    : returns(plus(refLookup("x"), constant(1))))
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">module MyModule
+
+struct Foo = { bar, baz }
+
+function foo = |x| -&gt; x + 1
+</code></pre>
+<ul>
+<li><em>param</em> <code>name</code> the name of the module.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="modulo_2">modulo(left, right)<a class="permalink" href="#modulo_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-798" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a modulo binary operation <code>%</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="moreOrEquals_2">moreOrEquals(left, right)<a class="permalink" href="#moreOrEquals_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-870" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a greater comparison binary operation <code>&gt;=</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="moreThan_2">moreThan(left, right)<a class="permalink" href="#moreThan_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-846" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a greater strict comparison binary operation <code>&gt;</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="namedArgument_2">namedArgument(name, value)<a class="permalink" href="#namedArgument_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-727" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a named argument in a call.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">call("foo"): withArgs(
+  namedArgument("b", 42),
+  namedArgument("a", "answer"))
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">foo(b=42, a="answer")
+</code></pre>
+<ul>
+<li><em>param</em> <code>name</code>: the name of the argument</li>
+<li><em>param</em> <code>value</code>: the expression node representing the value</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/NamedArgument.html"><code>NamedArgument</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="noop_0">noop()<a class="permalink" href="#noop_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1533" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Void statement.</p>
+<p>Since this statement is ignored, it can be used to replace a statement in the tree
+instead of removing it.</p>
+
+    </div>
+  
+    <h3 id="not_1">not(value)<a class="permalink" href="#not_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-738" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a logical negation operation <code>not</code></p>
+<ul>
+<li><em>param</em> <code>value</code>: the expression to negate</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/UnaryOperation.html"><code>UnaryOperation</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="notEquals_2">notEquals(left, right)<a class="permalink" href="#notEquals_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-822" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a difference binary operation <code>!=</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="oftype_2">oftype(left, right)<a class="permalink" href="#oftype_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-918" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a type-checking binary operation <code>oftype</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="or_2">or(left, right)<a class="permalink" href="#or_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-894" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a logical disjunction operation <code>or</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="orIfNull_2">orIfNull(left, right)<a class="permalink" href="#orIfNull_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-906" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a null-checking binary operation <code>orIfNull</code>.</p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression.</li>
+<li><em>param</em> <code>right</code>: the right expression.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="plus_2">plus(left, right)<a class="permalink" href="#plus_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-750" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates an addition binary operation <code>+</code></p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression</li>
+<li><em>param</em> <code>right</code>: the right expression</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="range_1v">range(values...)<a class="permalink" href="#range_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1186" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a range literal.</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">range(constant(1), constant(10))
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">[1..10]
+</code></pre>
+<ul>
+<li><em>param</em> <code>values</code>: the expressions representing the start and end values of the range</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/CollectionLiteral.html"><code>CollectionLiteral</code></a> node</li>
+</ul>
+
+    </div>
+  
+    <h3 id="refLookup_1">refLookup(name)<a class="permalink" href="#refLookup_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-537" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a reference lookup.</p>
+<ul>
+<li><em>param</em> <code>name</code>: the name of the variable to lookup as a string or a <a href="../../javadoc/gololang/ir/LocalReference.html"><code>LocalReference</code></a></li>
+<li><em>returns</em> a
+<a href="../../javadoc/gololang/ir/ReferenceLookup.html"><code>ReferenceLookup</code></a></li>
+</ul>
+<p>See <a href="../../javadoc/gololang/ir/LocalReference.html"><code>LocalReference</code></a></p>
+
+    </div>
+  
+    <h3 id="return_1">return(value)<a class="permalink" href="#return_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1510" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a <code>return</code> statement.</p>
+
+    </div>
+  
+    <h3 id="set_1v">set(values...)<a class="permalink" href="#set_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1098" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a set literal.</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">set(
+  constant(42),
+  constant(1337),
+  call("f"): withArgs(constant("foo"))
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">set[42, 1337, f("foo")]
+</code></pre>
+<ul>
+<li><em>param</em> <code>values</code>: the expressions representing the values in the set</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/CollectionLiteral.html"><code>CollectionLiteral</code></a> node</li>
+</ul>
+
+    </div>
+  
+    <h3 id="setComprehension_2v">setComprehension(expression, loops...)<a class="permalink" href="#setComprehension_2v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1265" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a set comprehension.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">setComprehension(
+  plus(refLookup("i"), 1),
+  `for(`var("i", 0),
+       lessThan(refLookup("i"), 10),
+       assign(plus(refLookup("i"), 1))
+  )
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">set[i + 1 for(var i = 0, i &lt; 10, i = i + 1)]
+</code></pre>
+<ul>
+<li><em>param</em> <code>expression</code>: the comprehension expression.</li>
+<li><em>param</em> <code>loops</code>: the loops of the comprehension.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/CollectionComprehension.html"><code>CollectionComprehension</code></a> node</li>
+</ul>
+
+    </div>
+  
+    <h3 id="struct_1">struct(name)<a class="permalink" href="#struct_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-100" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a structure</p>
+
+    </div>
+  
+    <h3 id="throw_1">throw(ex)<a class="permalink" href="#throw_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1504" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a <code>throw</code> statement.</p>
+
+    </div>
+  
+    <h3 id="times_2">times(left, right)<a class="permalink" href="#times_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-762" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a multiplication binary operation <code>*</code></p>
+<ul>
+<li><em>param</em> <code>left</code>: the left expression</li>
+<li><em>param</em> <code>right</code>: the right expression</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/BinaryOperation.html"><code>BinaryOperation</code></a></li>
+</ul>
+<p>See also the <a href="#augment.gololang.ir.ExpressionStatement"><code>ExpressionStatement</code> augmentation</a></p>
+
+    </div>
+  
+    <h3 id="toplevels_1v">toplevels(elements...)<a class="permalink" href="#toplevels_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-92" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Create a container for top-level elements</p>
+<p>See <a href="../../javadoc/gololang/ir/ToplevelElements.html#of-java.lang.Object...-"><code>ToplevelElements.of</code></a></p>
+
+    </div>
+  
+    <h3 id="try_1v">try(statements...)<a class="permalink" href="#try_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-239" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a <a href="../../javadoc/gololang/ir/TryCatchFinally.html"><code>try...catch...finally</code> statement</a> IR node.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">`try(
+  `let("a", 10),
+  call("println"): withArgs(refLookup("a"))
+): `catch("ex",
+  call("println"): withArgs(constant("An error occured"))
+  call("println"): withArgs(refLookup("ex"))
+): `finally(
+  call("cleanUp")
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">try {
+  let a = 10
+  println(a)
+} catch(ex) {
+  println("An error occured")
+  println(ex)
+} finally {
+  cleanUp()
+}
+</code></pre>
+<ul>
+<li><em>param</em> <code>statements</code>: the statements in the <code>try</code> block.</li>
+<li><em>returns</em> a <code>TryCatchFinally</code> node</li>
+</ul>
+<p>See <a href="../../javadoc/gololang/ir/TryCatchFinally.html"><code>TryCatchFinally</code></a> and the
+corresponding <a href="#augment.gololang.ir.TryCatchFinally">augmentation</a></p>
+
+    </div>
+  
+    <h3 id="tuple_1v">tuple(values...)<a class="permalink" href="#tuple_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1144" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a tuple literal.</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">tuple(constant(42), constant(1337))
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">[42, 1337]
+</code></pre>
+<ul>
+<li><em>param</em> <code>values</code>: the expressions representing the values in the tuple</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/CollectionLiteral.html"><code>CollectionLiteral</code></a> node</li>
+</ul>
+
+    </div>
+  
+    <h3 id="tupleComprehension_2v">tupleComprehension(expression, loops...)<a class="permalink" href="#tupleComprehension_2v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1291" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a tuple comprehension.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">tupleComprehension(
+  plus(refLookup("i"), 1),
+  `for(`var("i", 0),
+       lessThan(refLookup("i"), 10),
+       assign(plus(refLookup("i"), 1))
+  )
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">tuple[i + 1 for(var i = 0, i &lt; 10, i = i + 1)]
+</code></pre>
+<ul>
+<li><em>param</em> <code>expression</code>: the comprehension expression.</li>
+<li><em>param</em> <code>loops</code>: the loops of the comprehension.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/CollectionComprehension.html"><code>CollectionComprehension</code></a> node</li>
+</ul>
+
+    </div>
+  
+    <h3 id="union_1">union(name)<a class="permalink" href="#union_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-106" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Create an union type</p>
+
+    </div>
+  
+    <h3 id="var_2">var(name, val)<a class="permalink" href="#var_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1402" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a <code>var</code> declaration.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">`var("answer", 42)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">var answer = 42
+</code></pre>
+<ul>
+<li><em>param</em> <code>name</code>: the name of the variable to define, or a tuple for destructuring</li>
+<li><em>param</em> <code>val</code>: the value to assign to the variable.</li>
+<li><em>returns</em> an <a href="../../javadoc/gololang/ir/AssignmentStatement.html"><code>AssignmentStatement</code></a>
+or a <a href="../../javadoc/gololang/ir/DestructuringAssignment.html"><code>DestructuringAssignment</code></a></li>
+</ul>
+
+    </div>
+  
+    <h3 id="vector_1v">vector(values...)<a class="permalink" href="#vector_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1167" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a vector literal.</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">vector(
+  constant(42),
+  constant(1337),
+  call("f"): withArgs(constant("foo"))
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">vector[42, 1337, f("foo")]
+</code></pre>
+<ul>
+<li><em>param</em> <code>values</code>: the expressions representing the values in the vector</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/CollectionLiteral.html"><code>CollectionLiteral</code></a> node</li>
+</ul>
+
+    </div>
+  
+    <h3 id="vectorComprehension_2v">vectorComprehension(expression, loops...)<a class="permalink" href="#vectorComprehension_2v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-1317" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a vector comprehension.</p>
+<p>For instance:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">vectorComprehension(
+  plus(refLookup("i"), 1),
+  `for(`var("i", 0),
+       lessThan(refLookup("i"), 10),
+       assign(plus(refLookup("i"), 1))
+  )
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">vector[i + 1 for(var i = 0, i &lt; 10, i = i + 1)]
+</code></pre>
+<ul>
+<li><em>param</em> <code>expression</code>: the comprehension expression.</li>
+<li><em>param</em> <code>loops</code>: the loops of the comprehension.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/CollectionComprehension.html"><code>CollectionComprehension</code></a> node</li>
+</ul>
+
+    </div>
+  
+    <h3 id="while_1">while(cond)<a class="permalink" href="#while_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="DSL-src.html#l-482" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Creates a <a href="../../javadoc/gololang/ir/LoopStatement.html"><code>while</code> loop</a> IR node.</p>
+<p>For instance</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">block(
+  `var("x", 0),
+  `while(lessThan(refLookup("x"), 10)): do(
+    call("println"): withArgs(refLookup("x")),
+    assign(plus(refLookup("x"), 1)): to("x")
+  )
+)
+</code></pre>
+<p>creates</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">var x = 0
+while x &lt; 10 {
+  println(x)
+  x = x + 1
+}
+</code></pre>
+<ul>
+<li><em>param</em> <code>cond</code>: the node representing the <code>while</code> condition.</li>
+<li><em>returns</em> a <a href="../../javadoc/gololang/ir/LoopStatement.html"><code>LoopStatement</code></a></li>
+</ul>
+<p>See <a href="../../javadoc/gololang/ir/LoopStatement.html"><code>LoopStatement</code></a>
+and the <a href="#augment.gololang.ir.BlockContainer"><code>BlockContainer</code> augmentation</a></p>
+
+    </div>
+  
+
+
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
+</html>

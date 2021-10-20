@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>gololang.macros.Utils source</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    pre {
+        font-family: monospace;
+        font-size: 90%;
+        background-color: #eee;
+        padding: 0;
+        margin: 0;
+    }
+
+    pre code {
+        font-family: monospace;
+        font-size: inherit;
+        padding: 0.5em ;
+        margin: 0;
+    }
+
+    :target {
+        background-color: yellow;
+    }
+
+    #line-numbers {
+        float: left;
+        position: relative;
+        padding: 0.5em;
+    }
+
+    #src {
+        float: left;
+        position: relative;
+    }
+  </style>
+</head>
+<body>
+<pre id="line-numbers">
+<span class="line-number" id="l-1">1</span>
+<span class="line-number" id="l-2">2</span>
+<span class="line-number" id="l-3">3</span>
+<span class="line-number" id="l-4">4</span>
+<span class="line-number" id="l-5">5</span>
+<span class="line-number" id="l-6">6</span>
+<span class="line-number" id="l-7">7</span>
+<span class="line-number" id="l-8">8</span>
+<span class="line-number" id="l-9">9</span>
+<span class="line-number" id="l-10">10</span>
+<span class="line-number" id="l-11">11</span>
+<span class="line-number" id="l-12">12</span>
+<span class="line-number" id="l-13">13</span>
+<span class="line-number" id="l-14">14</span>
+<span class="line-number" id="l-15">15</span>
+<span class="line-number" id="l-16">16</span>
+<span class="line-number" id="l-17">17</span>
+<span class="line-number" id="l-18">18</span>
+<span class="line-number" id="l-19">19</span>
+<span class="line-number" id="l-20">20</span>
+<span class="line-number" id="l-21">21</span>
+<span class="line-number" id="l-22">22</span>
+<span class="line-number" id="l-23">23</span>
+<span class="line-number" id="l-24">24</span>
+<span class="line-number" id="l-25">25</span>
+<span class="line-number" id="l-26">26</span>
+<span class="line-number" id="l-27">27</span>
+<span class="line-number" id="l-28">28</span>
+<span class="line-number" id="l-29">29</span>
+<span class="line-number" id="l-30">30</span>
+<span class="line-number" id="l-31">31</span>
+<span class="line-number" id="l-32">32</span>
+<span class="line-number" id="l-33">33</span>
+<span class="line-number" id="l-34">34</span>
+<span class="line-number" id="l-35">35</span>
+<span class="line-number" id="l-36">36</span>
+<span class="line-number" id="l-37">37</span>
+<span class="line-number" id="l-38">38</span>
+<span class="line-number" id="l-39">39</span>
+<span class="line-number" id="l-40">40</span>
+<span class="line-number" id="l-41">41</span>
+<span class="line-number" id="l-42">42</span>
+<span class="line-number" id="l-43">43</span>
+<span class="line-number" id="l-44">44</span>
+<span class="line-number" id="l-45">45</span>
+<span class="line-number" id="l-46">46</span>
+<span class="line-number" id="l-47">47</span>
+<span class="line-number" id="l-48">48</span>
+<span class="line-number" id="l-49">49</span>
+<span class="line-number" id="l-50">50</span>
+<span class="line-number" id="l-51">51</span>
+<span class="line-number" id="l-52">52</span>
+<span class="line-number" id="l-53">53</span>
+<span class="line-number" id="l-54">54</span>
+<span class="line-number" id="l-55">55</span>
+<span class="line-number" id="l-56">56</span>
+<span class="line-number" id="l-57">57</span>
+<span class="line-number" id="l-58">58</span>
+<span class="line-number" id="l-59">59</span>
+<span class="line-number" id="l-60">60</span>
+<span class="line-number" id="l-61">61</span>
+<span class="line-number" id="l-62">62</span>
+<span class="line-number" id="l-63">63</span>
+<span class="line-number" id="l-64">64</span>
+<span class="line-number" id="l-65">65</span>
+<span class="line-number" id="l-66">66</span>
+<span class="line-number" id="l-67">67</span>
+<span class="line-number" id="l-68">68</span>
+<span class="line-number" id="l-69">69</span>
+<span class="line-number" id="l-70">70</span>
+<span class="line-number" id="l-71">71</span>
+<span class="line-number" id="l-72">72</span>
+<span class="line-number" id="l-73">73</span>
+<span class="line-number" id="l-74">74</span>
+<span class="line-number" id="l-75">75</span>
+<span class="line-number" id="l-76">76</span>
+<span class="line-number" id="l-77">77</span>
+<span class="line-number" id="l-78">78</span>
+<span class="line-number" id="l-79">79</span>
+<span class="line-number" id="l-80">80</span>
+<span class="line-number" id="l-81">81</span>
+<span class="line-number" id="l-82">82</span>
+<span class="line-number" id="l-83">83</span>
+<span class="line-number" id="l-84">84</span>
+<span class="line-number" id="l-85">85</span>
+<span class="line-number" id="l-86">86</span>
+<span class="line-number" id="l-87">87</span>
+<span class="line-number" id="l-88">88</span>
+<span class="line-number" id="l-89">89</span>
+<span class="line-number" id="l-90">90</span>
+<span class="line-number" id="l-91">91</span>
+<span class="line-number" id="l-92">92</span>
+<span class="line-number" id="l-93">93</span>
+<span class="line-number" id="l-94">94</span>
+<span class="line-number" id="l-95">95</span>
+<span class="line-number" id="l-96">96</span>
+<span class="line-number" id="l-97">97</span>
+<span class="line-number" id="l-98">98</span>
+<span class="line-number" id="l-99">99</span>
+<span class="line-number" id="l-100">100</span>
+<span class="line-number" id="l-101">101</span>
+<span class="line-number" id="l-102">102</span>
+<span class="line-number" id="l-103">103</span>
+<span class="line-number" id="l-104">104</span>
+<span class="line-number" id="l-105">105</span>
+<span class="line-number" id="l-106">106</span>
+<span class="line-number" id="l-107">107</span>
+<span class="line-number" id="l-108">108</span>
+<span class="line-number" id="l-109">109</span>
+<span class="line-number" id="l-110">110</span>
+<span class="line-number" id="l-111">111</span>
+<span class="line-number" id="l-112">112</span>
+<span class="line-number" id="l-113">113</span>
+<span class="line-number" id="l-114">114</span>
+<span class="line-number" id="l-115">115</span>
+<span class="line-number" id="l-116">116</span>
+<span class="line-number" id="l-117">117</span>
+<span class="line-number" id="l-118">118</span>
+<span class="line-number" id="l-119">119</span>
+<span class="line-number" id="l-120">120</span>
+<span class="line-number" id="l-121">121</span>
+<span class="line-number" id="l-122">122</span>
+<span class="line-number" id="l-123">123</span>
+<span class="line-number" id="l-124">124</span>
+<span class="line-number" id="l-125">125</span>
+<span class="line-number" id="l-126">126</span>
+<span class="line-number" id="l-127">127</span>
+<span class="line-number" id="l-128">128</span>
+<span class="line-number" id="l-129">129</span>
+<span class="line-number" id="l-130">130</span>
+<span class="line-number" id="l-131">131</span>
+<span class="line-number" id="l-132">132</span>
+<span class="line-number" id="l-133">133</span>
+<span class="line-number" id="l-134">134</span>
+<span class="line-number" id="l-135">135</span>
+<span class="line-number" id="l-136">136</span>
+<span class="line-number" id="l-137">137</span>
+<span class="line-number" id="l-138">138</span>
+<span class="line-number" id="l-139">139</span>
+<span class="line-number" id="l-140">140</span>
+<span class="line-number" id="l-141">141</span>
+<span class="line-number" id="l-142">142</span>
+<span class="line-number" id="l-143">143</span>
+<span class="line-number" id="l-144">144</span>
+<span class="line-number" id="l-145">145</span>
+<span class="line-number" id="l-146">146</span>
+<span class="line-number" id="l-147">147</span>
+<span class="line-number" id="l-148">148</span>
+<span class="line-number" id="l-149">149</span>
+<span class="line-number" id="l-150">150</span>
+<span class="line-number" id="l-151">151</span>
+<span class="line-number" id="l-152">152</span>
+<span class="line-number" id="l-153">153</span>
+<span class="line-number" id="l-154">154</span>
+<span class="line-number" id="l-155">155</span>
+<span class="line-number" id="l-156">156</span>
+<span class="line-number" id="l-157">157</span>
+<span class="line-number" id="l-158">158</span>
+<span class="line-number" id="l-159">159</span>
+<span class="line-number" id="l-160">160</span>
+<span class="line-number" id="l-161">161</span>
+<span class="line-number" id="l-162">162</span>
+<span class="line-number" id="l-163">163</span>
+<span class="line-number" id="l-164">164</span>
+<span class="line-number" id="l-165">165</span>
+<span class="line-number" id="l-166">166</span>
+<span class="line-number" id="l-167">167</span>
+<span class="line-number" id="l-168">168</span>
+<span class="line-number" id="l-169">169</span>
+<span class="line-number" id="l-170">170</span>
+<span class="line-number" id="l-171">171</span>
+<span class="line-number" id="l-172">172</span>
+<span class="line-number" id="l-173">173</span>
+<span class="line-number" id="l-174">174</span>
+<span class="line-number" id="l-175">175</span>
+<span class="line-number" id="l-176">176</span>
+<span class="line-number" id="l-177">177</span>
+<span class="line-number" id="l-178">178</span>
+<span class="line-number" id="l-179">179</span>
+<span class="line-number" id="l-180">180</span>
+<span class="line-number" id="l-181">181</span>
+<span class="line-number" id="l-182">182</span>
+<span class="line-number" id="l-183">183</span>
+<span class="line-number" id="l-184">184</span>
+<span class="line-number" id="l-185">185</span>
+<span class="line-number" id="l-186">186</span>
+<span class="line-number" id="l-187">187</span>
+<span class="line-number" id="l-188">188</span>
+<span class="line-number" id="l-189">189</span>
+<span class="line-number" id="l-190">190</span>
+<span class="line-number" id="l-191">191</span>
+<span class="line-number" id="l-192">192</span>
+<span class="line-number" id="l-193">193</span>
+<span class="line-number" id="l-194">194</span>
+<span class="line-number" id="l-195">195</span>
+<span class="line-number" id="l-196">196</span>
+<span class="line-number" id="l-197">197</span>
+<span class="line-number" id="l-198">198</span>
+<span class="line-number" id="l-199">199</span>
+<span class="line-number" id="l-200">200</span>
+<span class="line-number" id="l-201">201</span>
+<span class="line-number" id="l-202">202</span>
+<span class="line-number" id="l-203">203</span>
+<span class="line-number" id="l-204">204</span>
+<span class="line-number" id="l-205">205</span>
+<span class="line-number" id="l-206">206</span>
+<span class="line-number" id="l-207">207</span>
+<span class="line-number" id="l-208">208</span>
+<span class="line-number" id="l-209">209</span>
+<span class="line-number" id="l-210">210</span>
+<span class="line-number" id="l-211">211</span>
+<span class="line-number" id="l-212">212</span>
+<span class="line-number" id="l-213">213</span>
+<span class="line-number" id="l-214">214</span>
+<span class="line-number" id="l-215">215</span>
+<span class="line-number" id="l-216">216</span>
+<span class="line-number" id="l-217">217</span>
+<span class="line-number" id="l-218">218</span>
+<span class="line-number" id="l-219">219</span>
+<span class="line-number" id="l-220">220</span>
+<span class="line-number" id="l-221">221</span>
+<span class="line-number" id="l-222">222</span>
+<span class="line-number" id="l-223">223</span>
+<span class="line-number" id="l-224">224</span>
+<span class="line-number" id="l-225">225</span>
+<span class="line-number" id="l-226">226</span>
+<span class="line-number" id="l-227">227</span>
+<span class="line-number" id="l-228">228</span>
+<span class="line-number" id="l-229">229</span>
+<span class="line-number" id="l-230">230</span>
+<span class="line-number" id="l-231">231</span>
+<span class="line-number" id="l-232">232</span>
+<span class="line-number" id="l-233">233</span>
+<span class="line-number" id="l-234">234</span>
+<span class="line-number" id="l-235">235</span>
+<span class="line-number" id="l-236">236</span>
+<span class="line-number" id="l-237">237</span>
+<span class="line-number" id="l-238">238</span>
+<span class="line-number" id="l-239">239</span>
+<span class="line-number" id="l-240">240</span>
+<span class="line-number" id="l-241">241</span>
+<span class="line-number" id="l-242">242</span>
+<span class="line-number" id="l-243">243</span>
+<span class="line-number" id="l-244">244</span>
+<span class="line-number" id="l-245">245</span>
+<span class="line-number" id="l-246">246</span>
+<span class="line-number" id="l-247">247</span>
+<span class="line-number" id="l-248">248</span>
+<span class="line-number" id="l-249">249</span>
+<span class="line-number" id="l-250">250</span>
+<span class="line-number" id="l-251">251</span>
+<span class="line-number" id="l-252">252</span>
+<span class="line-number" id="l-253">253</span>
+<span class="line-number" id="l-254">254</span>
+<span class="line-number" id="l-255">255</span>
+<span class="line-number" id="l-256">256</span>
+<span class="line-number" id="l-257">257</span>
+<span class="line-number" id="l-258">258</span>
+<span class="line-number" id="l-259">259</span>
+<span class="line-number" id="l-260">260</span>
+<span class="line-number" id="l-261">261</span>
+<span class="line-number" id="l-262">262</span>
+<span class="line-number" id="l-263">263</span>
+<span class="line-number" id="l-264">264</span>
+<span class="line-number" id="l-265">265</span>
+<span class="line-number" id="l-266">266</span>
+<span class="line-number" id="l-267">267</span>
+<span class="line-number" id="l-268">268</span>
+<span class="line-number" id="l-269">269</span>
+<span class="line-number" id="l-270">270</span>
+<span class="line-number" id="l-271">271</span>
+<span class="line-number" id="l-272">272</span>
+<span class="line-number" id="l-273">273</span>
+<span class="line-number" id="l-274">274</span>
+<span class="line-number" id="l-275">275</span>
+<span class="line-number" id="l-276">276</span>
+<span class="line-number" id="l-277">277</span>
+<span class="line-number" id="l-278">278</span>
+<span class="line-number" id="l-279">279</span>
+<span class="line-number" id="l-280">280</span>
+<span class="line-number" id="l-281">281</span>
+<span class="line-number" id="l-282">282</span>
+<span class="line-number" id="l-283">283</span>
+<span class="line-number" id="l-284">284</span>
+<span class="line-number" id="l-285">285</span>
+<span class="line-number" id="l-286">286</span>
+<span class="line-number" id="l-287">287</span>
+<span class="line-number" id="l-288">288</span>
+<span class="line-number" id="l-289">289</span>
+<span class="line-number" id="l-290">290</span>
+<span class="line-number" id="l-291">291</span>
+<span class="line-number" id="l-292">292</span>
+<span class="line-number" id="l-293">293</span>
+<span class="line-number" id="l-294">294</span>
+<span class="line-number" id="l-295">295</span>
+<span class="line-number" id="l-296">296</span>
+<span class="line-number" id="l-297">297</span>
+<span class="line-number" id="l-298">298</span>
+<span class="line-number" id="l-299">299</span>
+<span class="line-number" id="l-300">300</span>
+<span class="line-number" id="l-301">301</span>
+<span class="line-number" id="l-302">302</span>
+<span class="line-number" id="l-303">303</span>
+<span class="line-number" id="l-304">304</span>
+<span class="line-number" id="l-305">305</span>
+<span class="line-number" id="l-306">306</span>
+<span class="line-number" id="l-307">307</span>
+<span class="line-number" id="l-308">308</span>
+<span class="line-number" id="l-309">309</span>
+<span class="line-number" id="l-310">310</span>
+<span class="line-number" id="l-311">311</span>
+<span class="line-number" id="l-312">312</span>
+<span class="line-number" id="l-313">313</span>
+<span class="line-number" id="l-314">314</span>
+<span class="line-number" id="l-315">315</span>
+<span class="line-number" id="l-316">316</span>
+<span class="line-number" id="l-317">317</span>
+<span class="line-number" id="l-318">318</span>
+<span class="line-number" id="l-319">319</span>
+<span class="line-number" id="l-320">320</span>
+<span class="line-number" id="l-321">321</span>
+<span class="line-number" id="l-322">322</span>
+<span class="line-number" id="l-323">323</span>
+<span class="line-number" id="l-324">324</span>
+<span class="line-number" id="l-325">325</span>
+<span class="line-number" id="l-326">326</span>
+<span class="line-number" id="l-327">327</span>
+<span class="line-number" id="l-328">328</span>
+<span class="line-number" id="l-329">329</span>
+<span class="line-number" id="l-330">330</span>
+<span class="line-number" id="l-331">331</span>
+<span class="line-number" id="l-332">332</span>
+<span class="line-number" id="l-333">333</span>
+<span class="line-number" id="l-334">334</span>
+<span class="line-number" id="l-335">335</span>
+<span class="line-number" id="l-336">336</span>
+<span class="line-number" id="l-337">337</span>
+<span class="line-number" id="l-338">338</span>
+<span class="line-number" id="l-339">339</span>
+<span class="line-number" id="l-340">340</span>
+<span class="line-number" id="l-341">341</span>
+<span class="line-number" id="l-342">342</span>
+<span class="line-number" id="l-343">343</span>
+<span class="line-number" id="l-344">344</span>
+<span class="line-number" id="l-345">345</span>
+<span class="line-number" id="l-346">346</span>
+<span class="line-number" id="l-347">347</span>
+<span class="line-number" id="l-348">348</span>
+<span class="line-number" id="l-349">349</span>
+<span class="line-number" id="l-350">350</span>
+<span class="line-number" id="l-351">351</span>
+<span class="line-number" id="l-352">352</span>
+<span class="line-number" id="l-353">353</span>
+<span class="line-number" id="l-354">354</span>
+<span class="line-number" id="l-355">355</span>
+<span class="line-number" id="l-356">356</span>
+<span class="line-number" id="l-357">357</span>
+<span class="line-number" id="l-358">358</span>
+<span class="line-number" id="l-359">359</span>
+<span class="line-number" id="l-360">360</span>
+<span class="line-number" id="l-361">361</span>
+<span class="line-number" id="l-362">362</span>
+<span class="line-number" id="l-363">363</span>
+<span class="line-number" id="l-364">364</span>
+<span class="line-number" id="l-365">365</span>
+<span class="line-number" id="l-366">366</span>
+<span class="line-number" id="l-367">367</span>
+<span class="line-number" id="l-368">368</span>
+<span class="line-number" id="l-369">369</span>
+<span class="line-number" id="l-370">370</span>
+<span class="line-number" id="l-371">371</span>
+<span class="line-number" id="l-372">372</span>
+</pre>
+<pre id="src" class="highlight highlightjs">
+<code class="language-golo" data-lang="golo"># ............................................................................................... #
+#
+# Copyright (c) 2012-2021 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others
+#
+# This program and the accompanying materials are made available under
+# the terms of the Eclipse Public License 2.0 which is available at
+# http://www.eclipse.org/legal/epl-2.0.
+#
+# SPDX-License-Identifier: EPL-2.0
+#
+# ............................................................................................... #
+----
+This module contains some functions to help writing macros.
+----
+module gololang.macros.Utils
+
+import gololang.ir
+import gololang.ir.DSL
+
+----
+Utility to extract the last argument of a varargs function.
+
+Useful when creating a macro used as a decorator that can take multiple
+arguments.
+
+# Example
+
+Such a macro can be used as
+
+```golo
+@myMacro(answer=42, ping="pong")
+function myFunction = ...
+```
+
+It will be defined as
+```golo
+macro foo = |args...| {
+  let arguments, element = extractLastArgument(args)
+  #...
+  return element
+}
+```
+
+In this example, `arguments` will be an array of `NamedArgument`s, and `element`
+will contain the `GoloFunction`.
+
+- *param* `args`: an array containing the arguments
+- *returns* a tuple containing an array of the arguments but the last, and the
+  last argument.
+
+See also [`parseArguments`](#parseArguments_2)
+----
+function extractLastArgument = |args| -> [
+  java.util.Arrays.copyOf(args, args: length() - 1),
+  args: get(args: length() - 1)
+]
+
+----
+Converts a `NamedArgument` collection into a map whose keys are the names of the
+named arguments, and values the associated values.
+
+# Example
+
+Given a macro defined as:
+```golo
+macro foo = |args...| {
+  let arguments = namedArgsToMap(args)
+  # ...
+}
+```
+
+When called as `&foo(a=42, b="hello")`, the `arguments` variable will contains
+`map[["a", constant(42)], ["b", constant("hello")]]`
+
+The elements of the collection that are not `NamedArgument` are ignored.
+
+See also [`parseArguments`](#parseArguments_2)
+----
+function namedArgsToMap = |args| -> map[
+  [arg: name(), arg: expression()]
+  foreach arg in args when arg oftype NamedArgument.class
+]
+
+----
+Converts a collection of expressions and named arguments into a triple
+containing a list of the expressions and a map extracted from named arguments
+like by [`namedArgsToMap`](#namedArgsToMap_1).
+
+If `extractLast` is `true` or `null`, also extract the last argument as by
+[`extractLastArgument`](#extractLastArgument_1). If `extractLast` is a type, the last argument is extracted only if it
+has the corresponding type.
+
+# Example
+
+```golo
+macro myMacro = |args...| {
+  let positional, named, last = parseArguments(args, true)
+  # ...
+}
+
+@myMacro(answer=42, "foo", foo="bar")
+function plop = -> "daplop"
+```
+
+In the `myMacro` macro, `positional` will be `array[constant("foo")]`, `named`
+will be `map[["answer", constant(42)], ["foo", constant("bar")]]` and `last` will
+be the `plop` function IR node.
+----
+function parseArguments = |args, extractLast| {
+  if mustExtractLast(args, extractLast) {
+    let begin, last = extractLastArgument(args)
+    let e = parseArguments(begin)
+    e: set(2, last)
+    return e
+  }
+  return parseArguments(args)
+}
+
+local function mustExtractLast = |args, extractLast| -> match {
+  when extractLast is null then true
+  when extractLast oftype Class.class then (
+    args: length() > 0 and (args: get(args: length() - 1) oftype extractLast))
+  when extractLast oftype Boolean.class then extractLast
+  otherwise false
+}
+
+----
+Same as `parseArguments(args, false)`
+
+See [`parseArguments(args, extractLast)`](#parseArguments_2)
+----
+function parseArguments = |args| -> array[
+  array[arg foreach arg in args when not (arg oftype NamedArgument.class)],
+  map[
+    [arg: name(), arg: expression()]
+    foreach arg in args when arg oftype NamedArgument.class
+  ],
+  null
+]
+
+
+----
+Converts a IR node into the corresponding runtime value.
+
+This only works for literal values, classes, enums or arrays of theses values.
+Otherwise the node itself is returned.
+----
+function getLiteralValue = |node| -> match {
+  when node is null then null
+  when node oftype gololang.ir.ConstantStatement.class and node: value() oftype
+    gololang.ir.ClassReference.class then node: value(): dereference()
+  when node oftype gololang.ir.ConstantStatement.class then node: value()
+  when node oftype gololang.ir.CollectionLiteral.class then array[getLiteralValue(e) foreach e in node: children()]
+  when isEnum(node) then loadEnum(node: packageAndClass())
+  otherwise node
+}
+
+local function isEnum = |arg| -> arg oftype gololang.ir.FunctionInvocation.class
+                                and arg: arity() == 0
+                                and Class.forName(arg: packageAndClass(): packageName()): isEnum()
+
+local function loadEnum = |name| -> java.lang.Enum.valueOf(Class.forName(name: packageName()), name: className())
+
+
+local function applyIfTypeMatches = |type, mac| -> |elt| -> match {
+  when elt oftype type then mac(elt)
+  otherwise elt
+}
+
+local function applyToAll = |fun, args| {
+  let res = toplevels()
+  foreach arg in args {
+    if arg oftype ToplevelElements.class {
+      res: add(applyToAll(fun, arg))
+    } else {
+      res: add(fun(arg))
+    }
+  }
+  return res
+}
+
+----
+Wrap the given object in a `ToplevelElements`.
+
+If the argument is an array or a collection of more than 1 element, it is wrapped in a `ToplevelElements`.
+Otherwise, the element is returned unchanged.
+----
+function wrapToplevel = |elt| -> match {
+  when (isArray(elt) or elt oftype java.lang.Collection.class) and elt: size() == 1 then elt: get(0)
+  when isArray(elt) or elt oftype java.lang.Collection.class then gololang.ir.ToplevelElements.of(elt)
+  otherwise elt
+}
+
+----
+Decorator to help define macros on top-level elements.
+
+Macros applied on top-level elements may often return a `ToplevelElements` to
+inject several top-level elements into the module, without using side effects.
+
+When stacking such macros, for instance with the decorator notation, each macro
+must be prepared to receive a `ToplevelElements` containing various kinds of
+elements, instead of the decorated one.
+
+For instance, a macro can work on a `struct` and inject several tooling
+functions and augmentations, such as:
+
+```golo
+macro myMacro = |structure| -> toplevels(
+  structure,
+  `function("workOn" + structure: name())
+      : withParameters("s"): body(...),
+  `augment(structure): with(...)
+)
+```
+
+Suppose that a macro `otherMacro` has a similar behavior. It is thus not possible to
+stack these two macro, as in:
+```golo
+@otherMacro
+@myMacro
+struct Foo = {x}
+```
+
+since here, the `otherMacro` will not receive a `Struct`, but the
+`ToplevelElements` returned by `myMacro`.
+
+This decorator adapt the macro to deal with `ToplevelElements`, applying it to
+each contained element if its type match the given one, and returning the
+element unchanged otherwise.
+
+In the previous example, we can use it on the two macros as:
+```golo
+@!toplevel(Struct.class)
+macro myMacro = |structure| -> toplevels(
+  structure,
+  `function("workOn" + structure: name())
+      : withParameters(s): body(...),
+  `augment(structure: packageAndClass()): with(...)
+)
+```
+
+The `myMacro` will be applied to its argument if its a `struct`, don't change
+any other type, and if its argument is a `ToplevelElements`, it will be applied
+to any contained element. The macro can therefore be stacked on the top of other
+macros whatever their returned type.
+
+To apply the macro on any type, just use `GoloElement.class` as a filter.
+
+Moreover, the decorator makes the macro varargs. It can therefore be called on
+several structures at once, like:
+
+```golo
+&myMacro {
+
+struct Foo = {x}
+
+struct Bar = {a, b}
+
+}
+```
+
+This decorator should be banged.
+
+- *param* `type`: the type of the nodes on which the macro must be applied.
+----
+function toplevel = |type| -> |mac| -> |args...| -> match {
+  when args: size() == 1 and args: get(0) oftype type then mac(args: get(0))
+  when args: size() == 1 and args: get(0) oftype ToplevelGoloElement.class then args: get(0)
+  otherwise applyToAll(applyIfTypeMatches(type, mac), args)
+}
+
+#== Symbols and scope management =======================================
+
+let SYMBOLS = org.eclipse.golo.compiler.SymbolGenerator()
+
+----
+Generates a new unique name using an internal `SymbolGenerator`.
+
+See also [SymbolGenerator](../../../javadoc/org/eclipse/golo/compiler/SymbolGenerator.html)
+----
+function gensym = -> SYMBOLS: next()
+
+----
+Generates a new unique name using an internal `SymbolGenerator` with the given name as prefix.
+
+See also [SymbolGenerator](../../../javadoc/org/eclipse/golo/compiler/SymbolGenerator.html)
+----
+function gensym = |name| -> SYMBOLS: next(name)
+
+----
+Mangles the given name to ensure hygiene.
+
+If the argument is a `LocalReference` or a `ReferenceLookup`, a new object with
+the same type, but with a mangled name, is returned.
+
+See also [SymbolGenerator](../../../javadoc/org/eclipse/golo/compiler/SymbolGenerator.html)
+----
+function mangle = |name| -> match {
+  when name oftype LocalReference.class then
+    localRef(SYMBOLS: getFor(name: name()))
+    : kind(name: kind())
+    : synthetic(name: isSynthetic())
+    : index(name: index())
+  when name oftype ReferenceLookup.class then
+    refLookup(SYMBOLS: getFor(name: name()))
+  otherwise SYMBOLS: getFor(name: toString())
+}
+
+----
+Enters a scope in the internal `SymbolGenerator` used by [`gensym`](#gensym_0) and [`mangle`](#mangle_1)
+----
+function enterSymScope = |scope| {
+  SYMBOLS: enter(scope)
+}
+
+----
+Exists a scope in the internal `SymbolGenerator` used by [`gensym`](#gensym_0) and [`mangle`](#mangle_1)
+----
+function exitSymScope = {
+  SYMBOLS: exit()
+}
+
+
+#== Misc utilities =====================================================
+
+----
+Throws a `StopCompilationException` to stop the compilation process.
+
+Note that this exception just stop the process and does not print anything on stderr.
+You should deal with error messages yourself.
+
+See `gololang.Messages` for instance to display console messages.
+----
+macro stopCompilation = |args...| -> `throw(call("org.eclipse.golo.compiler.StopCompilationException"): withArgs(args))
+
+
+----
+Generate a name in the current name space.
+
+Useful if a macro generates calls to functions defined in the same module. Instead of relying on the module to be
+imported, one wants to use a fully qualified function name. This macro generate such a name without hard coding the
+current module name in the written macro.
+
+For instance, instead of writing:
+```
+module MyModule
+
+function myFunction = -> null
+
+macro = -> gololang.ir.DSL.call("MyModule.myFunction")
+```
+we can write:
+```
+module MyModule
+
+function myFunction = -> null
+
+macro = -> gololang.ir.DSL.call(&gololang.macros.Utils.thisModule("myFunction")
+```
+----
+@contextual
+macro thisModule = |self, name| -> constant(self: enclosingModule(): packageAndClass(): toString() + "." + name: value())
+
+----
+Expands to the fully qualified name of the function in which this macro is called.
+
+Can be used for instance to define variable scopes in macro.
+----
+@contextual
+macro thisFunction = |self| -> constant(
+    self: enclosingModule(): packageAndClass(): toString() + "$" + self: ancestorOfType(GoloFunction.class): getName())
+
+</code>
+</pre>
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>
+hljs.initHighlighting();
+</script>
+</body>
+</html>

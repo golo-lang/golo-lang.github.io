@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>gololang.ir.Quote source</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    pre {
+        font-family: monospace;
+        font-size: 90%;
+        background-color: #eee;
+        padding: 0;
+        margin: 0;
+    }
+
+    pre code {
+        font-family: monospace;
+        font-size: inherit;
+        padding: 0.5em ;
+        margin: 0;
+    }
+
+    :target {
+        background-color: yellow;
+    }
+
+    #line-numbers {
+        float: left;
+        position: relative;
+        padding: 0.5em;
+    }
+
+    #src {
+        float: left;
+        position: relative;
+    }
+  </style>
+</head>
+<body>
+<pre id="line-numbers">
+<span class="line-number" id="l-1">1</span>
+<span class="line-number" id="l-2">2</span>
+<span class="line-number" id="l-3">3</span>
+<span class="line-number" id="l-4">4</span>
+<span class="line-number" id="l-5">5</span>
+<span class="line-number" id="l-6">6</span>
+<span class="line-number" id="l-7">7</span>
+<span class="line-number" id="l-8">8</span>
+<span class="line-number" id="l-9">9</span>
+<span class="line-number" id="l-10">10</span>
+<span class="line-number" id="l-11">11</span>
+<span class="line-number" id="l-12">12</span>
+<span class="line-number" id="l-13">13</span>
+<span class="line-number" id="l-14">14</span>
+<span class="line-number" id="l-15">15</span>
+<span class="line-number" id="l-16">16</span>
+<span class="line-number" id="l-17">17</span>
+<span class="line-number" id="l-18">18</span>
+<span class="line-number" id="l-19">19</span>
+<span class="line-number" id="l-20">20</span>
+<span class="line-number" id="l-21">21</span>
+<span class="line-number" id="l-22">22</span>
+<span class="line-number" id="l-23">23</span>
+<span class="line-number" id="l-24">24</span>
+<span class="line-number" id="l-25">25</span>
+<span class="line-number" id="l-26">26</span>
+<span class="line-number" id="l-27">27</span>
+<span class="line-number" id="l-28">28</span>
+<span class="line-number" id="l-29">29</span>
+<span class="line-number" id="l-30">30</span>
+<span class="line-number" id="l-31">31</span>
+<span class="line-number" id="l-32">32</span>
+<span class="line-number" id="l-33">33</span>
+<span class="line-number" id="l-34">34</span>
+<span class="line-number" id="l-35">35</span>
+<span class="line-number" id="l-36">36</span>
+<span class="line-number" id="l-37">37</span>
+<span class="line-number" id="l-38">38</span>
+<span class="line-number" id="l-39">39</span>
+<span class="line-number" id="l-40">40</span>
+<span class="line-number" id="l-41">41</span>
+<span class="line-number" id="l-42">42</span>
+<span class="line-number" id="l-43">43</span>
+<span class="line-number" id="l-44">44</span>
+<span class="line-number" id="l-45">45</span>
+<span class="line-number" id="l-46">46</span>
+<span class="line-number" id="l-47">47</span>
+<span class="line-number" id="l-48">48</span>
+<span class="line-number" id="l-49">49</span>
+<span class="line-number" id="l-50">50</span>
+<span class="line-number" id="l-51">51</span>
+<span class="line-number" id="l-52">52</span>
+<span class="line-number" id="l-53">53</span>
+<span class="line-number" id="l-54">54</span>
+<span class="line-number" id="l-55">55</span>
+<span class="line-number" id="l-56">56</span>
+<span class="line-number" id="l-57">57</span>
+<span class="line-number" id="l-58">58</span>
+<span class="line-number" id="l-59">59</span>
+<span class="line-number" id="l-60">60</span>
+<span class="line-number" id="l-61">61</span>
+<span class="line-number" id="l-62">62</span>
+<span class="line-number" id="l-63">63</span>
+<span class="line-number" id="l-64">64</span>
+<span class="line-number" id="l-65">65</span>
+<span class="line-number" id="l-66">66</span>
+<span class="line-number" id="l-67">67</span>
+<span class="line-number" id="l-68">68</span>
+<span class="line-number" id="l-69">69</span>
+<span class="line-number" id="l-70">70</span>
+<span class="line-number" id="l-71">71</span>
+<span class="line-number" id="l-72">72</span>
+<span class="line-number" id="l-73">73</span>
+<span class="line-number" id="l-74">74</span>
+<span class="line-number" id="l-75">75</span>
+<span class="line-number" id="l-76">76</span>
+<span class="line-number" id="l-77">77</span>
+<span class="line-number" id="l-78">78</span>
+<span class="line-number" id="l-79">79</span>
+<span class="line-number" id="l-80">80</span>
+<span class="line-number" id="l-81">81</span>
+<span class="line-number" id="l-82">82</span>
+<span class="line-number" id="l-83">83</span>
+<span class="line-number" id="l-84">84</span>
+<span class="line-number" id="l-85">85</span>
+<span class="line-number" id="l-86">86</span>
+<span class="line-number" id="l-87">87</span>
+<span class="line-number" id="l-88">88</span>
+<span class="line-number" id="l-89">89</span>
+<span class="line-number" id="l-90">90</span>
+<span class="line-number" id="l-91">91</span>
+<span class="line-number" id="l-92">92</span>
+<span class="line-number" id="l-93">93</span>
+<span class="line-number" id="l-94">94</span>
+<span class="line-number" id="l-95">95</span>
+<span class="line-number" id="l-96">96</span>
+<span class="line-number" id="l-97">97</span>
+<span class="line-number" id="l-98">98</span>
+<span class="line-number" id="l-99">99</span>
+<span class="line-number" id="l-100">100</span>
+<span class="line-number" id="l-101">101</span>
+<span class="line-number" id="l-102">102</span>
+<span class="line-number" id="l-103">103</span>
+<span class="line-number" id="l-104">104</span>
+<span class="line-number" id="l-105">105</span>
+<span class="line-number" id="l-106">106</span>
+<span class="line-number" id="l-107">107</span>
+<span class="line-number" id="l-108">108</span>
+<span class="line-number" id="l-109">109</span>
+<span class="line-number" id="l-110">110</span>
+<span class="line-number" id="l-111">111</span>
+<span class="line-number" id="l-112">112</span>
+<span class="line-number" id="l-113">113</span>
+<span class="line-number" id="l-114">114</span>
+<span class="line-number" id="l-115">115</span>
+<span class="line-number" id="l-116">116</span>
+<span class="line-number" id="l-117">117</span>
+<span class="line-number" id="l-118">118</span>
+<span class="line-number" id="l-119">119</span>
+<span class="line-number" id="l-120">120</span>
+<span class="line-number" id="l-121">121</span>
+<span class="line-number" id="l-122">122</span>
+<span class="line-number" id="l-123">123</span>
+<span class="line-number" id="l-124">124</span>
+<span class="line-number" id="l-125">125</span>
+<span class="line-number" id="l-126">126</span>
+<span class="line-number" id="l-127">127</span>
+<span class="line-number" id="l-128">128</span>
+<span class="line-number" id="l-129">129</span>
+<span class="line-number" id="l-130">130</span>
+<span class="line-number" id="l-131">131</span>
+<span class="line-number" id="l-132">132</span>
+<span class="line-number" id="l-133">133</span>
+<span class="line-number" id="l-134">134</span>
+<span class="line-number" id="l-135">135</span>
+<span class="line-number" id="l-136">136</span>
+<span class="line-number" id="l-137">137</span>
+<span class="line-number" id="l-138">138</span>
+<span class="line-number" id="l-139">139</span>
+<span class="line-number" id="l-140">140</span>
+<span class="line-number" id="l-141">141</span>
+<span class="line-number" id="l-142">142</span>
+<span class="line-number" id="l-143">143</span>
+<span class="line-number" id="l-144">144</span>
+<span class="line-number" id="l-145">145</span>
+<span class="line-number" id="l-146">146</span>
+<span class="line-number" id="l-147">147</span>
+<span class="line-number" id="l-148">148</span>
+<span class="line-number" id="l-149">149</span>
+<span class="line-number" id="l-150">150</span>
+<span class="line-number" id="l-151">151</span>
+<span class="line-number" id="l-152">152</span>
+<span class="line-number" id="l-153">153</span>
+<span class="line-number" id="l-154">154</span>
+<span class="line-number" id="l-155">155</span>
+<span class="line-number" id="l-156">156</span>
+<span class="line-number" id="l-157">157</span>
+<span class="line-number" id="l-158">158</span>
+<span class="line-number" id="l-159">159</span>
+<span class="line-number" id="l-160">160</span>
+<span class="line-number" id="l-161">161</span>
+<span class="line-number" id="l-162">162</span>
+<span class="line-number" id="l-163">163</span>
+<span class="line-number" id="l-164">164</span>
+<span class="line-number" id="l-165">165</span>
+<span class="line-number" id="l-166">166</span>
+<span class="line-number" id="l-167">167</span>
+<span class="line-number" id="l-168">168</span>
+<span class="line-number" id="l-169">169</span>
+<span class="line-number" id="l-170">170</span>
+<span class="line-number" id="l-171">171</span>
+<span class="line-number" id="l-172">172</span>
+<span class="line-number" id="l-173">173</span>
+<span class="line-number" id="l-174">174</span>
+<span class="line-number" id="l-175">175</span>
+<span class="line-number" id="l-176">176</span>
+<span class="line-number" id="l-177">177</span>
+<span class="line-number" id="l-178">178</span>
+<span class="line-number" id="l-179">179</span>
+<span class="line-number" id="l-180">180</span>
+<span class="line-number" id="l-181">181</span>
+<span class="line-number" id="l-182">182</span>
+<span class="line-number" id="l-183">183</span>
+<span class="line-number" id="l-184">184</span>
+<span class="line-number" id="l-185">185</span>
+<span class="line-number" id="l-186">186</span>
+<span class="line-number" id="l-187">187</span>
+<span class="line-number" id="l-188">188</span>
+<span class="line-number" id="l-189">189</span>
+<span class="line-number" id="l-190">190</span>
+<span class="line-number" id="l-191">191</span>
+<span class="line-number" id="l-192">192</span>
+<span class="line-number" id="l-193">193</span>
+<span class="line-number" id="l-194">194</span>
+<span class="line-number" id="l-195">195</span>
+<span class="line-number" id="l-196">196</span>
+<span class="line-number" id="l-197">197</span>
+<span class="line-number" id="l-198">198</span>
+<span class="line-number" id="l-199">199</span>
+<span class="line-number" id="l-200">200</span>
+<span class="line-number" id="l-201">201</span>
+<span class="line-number" id="l-202">202</span>
+<span class="line-number" id="l-203">203</span>
+<span class="line-number" id="l-204">204</span>
+<span class="line-number" id="l-205">205</span>
+<span class="line-number" id="l-206">206</span>
+<span class="line-number" id="l-207">207</span>
+<span class="line-number" id="l-208">208</span>
+<span class="line-number" id="l-209">209</span>
+<span class="line-number" id="l-210">210</span>
+<span class="line-number" id="l-211">211</span>
+<span class="line-number" id="l-212">212</span>
+<span class="line-number" id="l-213">213</span>
+<span class="line-number" id="l-214">214</span>
+<span class="line-number" id="l-215">215</span>
+<span class="line-number" id="l-216">216</span>
+<span class="line-number" id="l-217">217</span>
+<span class="line-number" id="l-218">218</span>
+<span class="line-number" id="l-219">219</span>
+<span class="line-number" id="l-220">220</span>
+<span class="line-number" id="l-221">221</span>
+<span class="line-number" id="l-222">222</span>
+<span class="line-number" id="l-223">223</span>
+<span class="line-number" id="l-224">224</span>
+<span class="line-number" id="l-225">225</span>
+<span class="line-number" id="l-226">226</span>
+<span class="line-number" id="l-227">227</span>
+<span class="line-number" id="l-228">228</span>
+<span class="line-number" id="l-229">229</span>
+<span class="line-number" id="l-230">230</span>
+<span class="line-number" id="l-231">231</span>
+<span class="line-number" id="l-232">232</span>
+<span class="line-number" id="l-233">233</span>
+<span class="line-number" id="l-234">234</span>
+<span class="line-number" id="l-235">235</span>
+<span class="line-number" id="l-236">236</span>
+<span class="line-number" id="l-237">237</span>
+<span class="line-number" id="l-238">238</span>
+<span class="line-number" id="l-239">239</span>
+<span class="line-number" id="l-240">240</span>
+<span class="line-number" id="l-241">241</span>
+<span class="line-number" id="l-242">242</span>
+<span class="line-number" id="l-243">243</span>
+<span class="line-number" id="l-244">244</span>
+<span class="line-number" id="l-245">245</span>
+<span class="line-number" id="l-246">246</span>
+<span class="line-number" id="l-247">247</span>
+<span class="line-number" id="l-248">248</span>
+<span class="line-number" id="l-249">249</span>
+<span class="line-number" id="l-250">250</span>
+<span class="line-number" id="l-251">251</span>
+<span class="line-number" id="l-252">252</span>
+<span class="line-number" id="l-253">253</span>
+<span class="line-number" id="l-254">254</span>
+<span class="line-number" id="l-255">255</span>
+<span class="line-number" id="l-256">256</span>
+<span class="line-number" id="l-257">257</span>
+<span class="line-number" id="l-258">258</span>
+<span class="line-number" id="l-259">259</span>
+<span class="line-number" id="l-260">260</span>
+<span class="line-number" id="l-261">261</span>
+<span class="line-number" id="l-262">262</span>
+<span class="line-number" id="l-263">263</span>
+<span class="line-number" id="l-264">264</span>
+<span class="line-number" id="l-265">265</span>
+<span class="line-number" id="l-266">266</span>
+<span class="line-number" id="l-267">267</span>
+<span class="line-number" id="l-268">268</span>
+<span class="line-number" id="l-269">269</span>
+<span class="line-number" id="l-270">270</span>
+<span class="line-number" id="l-271">271</span>
+<span class="line-number" id="l-272">272</span>
+<span class="line-number" id="l-273">273</span>
+<span class="line-number" id="l-274">274</span>
+<span class="line-number" id="l-275">275</span>
+<span class="line-number" id="l-276">276</span>
+<span class="line-number" id="l-277">277</span>
+<span class="line-number" id="l-278">278</span>
+<span class="line-number" id="l-279">279</span>
+<span class="line-number" id="l-280">280</span>
+<span class="line-number" id="l-281">281</span>
+<span class="line-number" id="l-282">282</span>
+<span class="line-number" id="l-283">283</span>
+<span class="line-number" id="l-284">284</span>
+<span class="line-number" id="l-285">285</span>
+<span class="line-number" id="l-286">286</span>
+<span class="line-number" id="l-287">287</span>
+<span class="line-number" id="l-288">288</span>
+<span class="line-number" id="l-289">289</span>
+<span class="line-number" id="l-290">290</span>
+<span class="line-number" id="l-291">291</span>
+<span class="line-number" id="l-292">292</span>
+<span class="line-number" id="l-293">293</span>
+<span class="line-number" id="l-294">294</span>
+<span class="line-number" id="l-295">295</span>
+<span class="line-number" id="l-296">296</span>
+<span class="line-number" id="l-297">297</span>
+<span class="line-number" id="l-298">298</span>
+<span class="line-number" id="l-299">299</span>
+<span class="line-number" id="l-300">300</span>
+<span class="line-number" id="l-301">301</span>
+<span class="line-number" id="l-302">302</span>
+<span class="line-number" id="l-303">303</span>
+<span class="line-number" id="l-304">304</span>
+<span class="line-number" id="l-305">305</span>
+<span class="line-number" id="l-306">306</span>
+<span class="line-number" id="l-307">307</span>
+<span class="line-number" id="l-308">308</span>
+<span class="line-number" id="l-309">309</span>
+<span class="line-number" id="l-310">310</span>
+<span class="line-number" id="l-311">311</span>
+<span class="line-number" id="l-312">312</span>
+<span class="line-number" id="l-313">313</span>
+<span class="line-number" id="l-314">314</span>
+<span class="line-number" id="l-315">315</span>
+<span class="line-number" id="l-316">316</span>
+<span class="line-number" id="l-317">317</span>
+<span class="line-number" id="l-318">318</span>
+<span class="line-number" id="l-319">319</span>
+<span class="line-number" id="l-320">320</span>
+<span class="line-number" id="l-321">321</span>
+<span class="line-number" id="l-322">322</span>
+<span class="line-number" id="l-323">323</span>
+<span class="line-number" id="l-324">324</span>
+<span class="line-number" id="l-325">325</span>
+<span class="line-number" id="l-326">326</span>
+<span class="line-number" id="l-327">327</span>
+<span class="line-number" id="l-328">328</span>
+<span class="line-number" id="l-329">329</span>
+<span class="line-number" id="l-330">330</span>
+<span class="line-number" id="l-331">331</span>
+<span class="line-number" id="l-332">332</span>
+<span class="line-number" id="l-333">333</span>
+<span class="line-number" id="l-334">334</span>
+<span class="line-number" id="l-335">335</span>
+<span class="line-number" id="l-336">336</span>
+<span class="line-number" id="l-337">337</span>
+<span class="line-number" id="l-338">338</span>
+<span class="line-number" id="l-339">339</span>
+<span class="line-number" id="l-340">340</span>
+<span class="line-number" id="l-341">341</span>
+<span class="line-number" id="l-342">342</span>
+<span class="line-number" id="l-343">343</span>
+<span class="line-number" id="l-344">344</span>
+<span class="line-number" id="l-345">345</span>
+<span class="line-number" id="l-346">346</span>
+<span class="line-number" id="l-347">347</span>
+<span class="line-number" id="l-348">348</span>
+<span class="line-number" id="l-349">349</span>
+<span class="line-number" id="l-350">350</span>
+<span class="line-number" id="l-351">351</span>
+<span class="line-number" id="l-352">352</span>
+<span class="line-number" id="l-353">353</span>
+<span class="line-number" id="l-354">354</span>
+<span class="line-number" id="l-355">355</span>
+<span class="line-number" id="l-356">356</span>
+<span class="line-number" id="l-357">357</span>
+<span class="line-number" id="l-358">358</span>
+<span class="line-number" id="l-359">359</span>
+<span class="line-number" id="l-360">360</span>
+<span class="line-number" id="l-361">361</span>
+<span class="line-number" id="l-362">362</span>
+<span class="line-number" id="l-363">363</span>
+<span class="line-number" id="l-364">364</span>
+<span class="line-number" id="l-365">365</span>
+<span class="line-number" id="l-366">366</span>
+<span class="line-number" id="l-367">367</span>
+<span class="line-number" id="l-368">368</span>
+<span class="line-number" id="l-369">369</span>
+<span class="line-number" id="l-370">370</span>
+<span class="line-number" id="l-371">371</span>
+<span class="line-number" id="l-372">372</span>
+<span class="line-number" id="l-373">373</span>
+<span class="line-number" id="l-374">374</span>
+<span class="line-number" id="l-375">375</span>
+<span class="line-number" id="l-376">376</span>
+<span class="line-number" id="l-377">377</span>
+<span class="line-number" id="l-378">378</span>
+<span class="line-number" id="l-379">379</span>
+<span class="line-number" id="l-380">380</span>
+<span class="line-number" id="l-381">381</span>
+<span class="line-number" id="l-382">382</span>
+<span class="line-number" id="l-383">383</span>
+<span class="line-number" id="l-384">384</span>
+<span class="line-number" id="l-385">385</span>
+<span class="line-number" id="l-386">386</span>
+<span class="line-number" id="l-387">387</span>
+<span class="line-number" id="l-388">388</span>
+<span class="line-number" id="l-389">389</span>
+<span class="line-number" id="l-390">390</span>
+<span class="line-number" id="l-391">391</span>
+<span class="line-number" id="l-392">392</span>
+<span class="line-number" id="l-393">393</span>
+<span class="line-number" id="l-394">394</span>
+<span class="line-number" id="l-395">395</span>
+<span class="line-number" id="l-396">396</span>
+<span class="line-number" id="l-397">397</span>
+<span class="line-number" id="l-398">398</span>
+<span class="line-number" id="l-399">399</span>
+<span class="line-number" id="l-400">400</span>
+<span class="line-number" id="l-401">401</span>
+<span class="line-number" id="l-402">402</span>
+<span class="line-number" id="l-403">403</span>
+<span class="line-number" id="l-404">404</span>
+<span class="line-number" id="l-405">405</span>
+<span class="line-number" id="l-406">406</span>
+<span class="line-number" id="l-407">407</span>
+<span class="line-number" id="l-408">408</span>
+<span class="line-number" id="l-409">409</span>
+<span class="line-number" id="l-410">410</span>
+<span class="line-number" id="l-411">411</span>
+<span class="line-number" id="l-412">412</span>
+<span class="line-number" id="l-413">413</span>
+<span class="line-number" id="l-414">414</span>
+<span class="line-number" id="l-415">415</span>
+<span class="line-number" id="l-416">416</span>
+<span class="line-number" id="l-417">417</span>
+<span class="line-number" id="l-418">418</span>
+<span class="line-number" id="l-419">419</span>
+<span class="line-number" id="l-420">420</span>
+<span class="line-number" id="l-421">421</span>
+<span class="line-number" id="l-422">422</span>
+<span class="line-number" id="l-423">423</span>
+<span class="line-number" id="l-424">424</span>
+<span class="line-number" id="l-425">425</span>
+<span class="line-number" id="l-426">426</span>
+<span class="line-number" id="l-427">427</span>
+<span class="line-number" id="l-428">428</span>
+<span class="line-number" id="l-429">429</span>
+<span class="line-number" id="l-430">430</span>
+<span class="line-number" id="l-431">431</span>
+<span class="line-number" id="l-432">432</span>
+<span class="line-number" id="l-433">433</span>
+<span class="line-number" id="l-434">434</span>
+<span class="line-number" id="l-435">435</span>
+<span class="line-number" id="l-436">436</span>
+<span class="line-number" id="l-437">437</span>
+<span class="line-number" id="l-438">438</span>
+<span class="line-number" id="l-439">439</span>
+<span class="line-number" id="l-440">440</span>
+<span class="line-number" id="l-441">441</span>
+<span class="line-number" id="l-442">442</span>
+<span class="line-number" id="l-443">443</span>
+<span class="line-number" id="l-444">444</span>
+<span class="line-number" id="l-445">445</span>
+<span class="line-number" id="l-446">446</span>
+<span class="line-number" id="l-447">447</span>
+<span class="line-number" id="l-448">448</span>
+<span class="line-number" id="l-449">449</span>
+<span class="line-number" id="l-450">450</span>
+<span class="line-number" id="l-451">451</span>
+<span class="line-number" id="l-452">452</span>
+<span class="line-number" id="l-453">453</span>
+<span class="line-number" id="l-454">454</span>
+<span class="line-number" id="l-455">455</span>
+<span class="line-number" id="l-456">456</span>
+<span class="line-number" id="l-457">457</span>
+<span class="line-number" id="l-458">458</span>
+<span class="line-number" id="l-459">459</span>
+<span class="line-number" id="l-460">460</span>
+<span class="line-number" id="l-461">461</span>
+<span class="line-number" id="l-462">462</span>
+<span class="line-number" id="l-463">463</span>
+<span class="line-number" id="l-464">464</span>
+<span class="line-number" id="l-465">465</span>
+<span class="line-number" id="l-466">466</span>
+<span class="line-number" id="l-467">467</span>
+<span class="line-number" id="l-468">468</span>
+<span class="line-number" id="l-469">469</span>
+<span class="line-number" id="l-470">470</span>
+<span class="line-number" id="l-471">471</span>
+<span class="line-number" id="l-472">472</span>
+<span class="line-number" id="l-473">473</span>
+<span class="line-number" id="l-474">474</span>
+<span class="line-number" id="l-475">475</span>
+<span class="line-number" id="l-476">476</span>
+<span class="line-number" id="l-477">477</span>
+<span class="line-number" id="l-478">478</span>
+<span class="line-number" id="l-479">479</span>
+<span class="line-number" id="l-480">480</span>
+<span class="line-number" id="l-481">481</span>
+<span class="line-number" id="l-482">482</span>
+<span class="line-number" id="l-483">483</span>
+<span class="line-number" id="l-484">484</span>
+<span class="line-number" id="l-485">485</span>
+<span class="line-number" id="l-486">486</span>
+</pre>
+<pre id="src" class="highlight highlightjs">
+<code class="language-golo" data-lang="golo"># ............................................................................................... #
+#
+# Copyright (c) 2012-2021 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others
+#
+# This program and the accompanying materials are made available under
+# the terms of the Eclipse Public License 2.0 which is available at
+# http://www.eclipse.org/legal/epl-2.0.
+#
+# SPDX-License-Identifier: EPL-2.0
+#
+# ............................................................................................... #
+----
+This module provides the [`quote`](#quote_1v) and [`unquote`](#unquote_1) macros
+to ease the creation of IR node.
+
+Using this macros is an alternative to creating IR nodes from scratch with the
+fluent API. It can be seen as an equivalent of string interpolation for IR
+nodes.
+
+For instance, to create a node representing the following code:
+```golo
+|a, b| -> a + b
+```
+
+one can use the [fluent builder API](../ir.html), as in:
+```golo
+let node = lambda("a", "b"): returns(
+            plus(refLookup("a"), refLookup("b")))
+```
+
+or the [`quote`](#quote_1v) macro, as in:
+```golo
+let node = &quote(|a, b| -> a + b)
+```
+
+Variable declared in the quoted code are mangled to prevent name clashes. For
+instance:
+```golo
+let node = &quote {
+  let tmp = 42
+}
+```
+
+creates a code equivalent to:
+```golo
+let node = define("__$$_quoted_tmp"): as(constant(42))
+```
+
+Since the mangling function use a
+[`SymbolGenerator`](../../../javadoc/org/eclipse/golo/compiler/SymbolGenerator.html),
+variables and references whose name starts with `$` are not mangled (but the `$` is removed).
+
+Unquoting can be compared to string interpolation. Unquoted variables containing
+IR nodes are injected as is, without being quoted. For instance, to create a
+`do while` macro, one can use:
+```golo
+macro doWhile = |condition, block| -> &quote {
+  $(block)
+  while $(condition) {
+    $(block)
+  }
+}
+```
+
+It is obviously possible to mix the API approach with the quoting one, as in:
+```golo
+`augment(String.class): `with(&quote {
+  function foo = |this| -> 42
+})
+```
+----
+module gololang.ir.Quote
+
+import gololang.ir
+
+let SYMBOLS = DynamicVariable(org.eclipse.golo.compiler.SymbolGenerator("quoted"))
+
+local function mangle = |name, protected| -> match {
+  when protected is null then name
+  when protected: contains(name) then name
+  otherwise SYMBOLS: value(): getFor(name)
+}
+
+local function augmentProtected = |p, ns| {
+  if p is null {
+    return null
+  }
+  let newP = set[]
+  newP: addAll(p)
+  if ns isnt null {
+    newP: addAll(ns)
+  }
+  return newP
+}
+
+local function callIr = |name| ->
+  FunctionInvocation.of("gololang.ir." + name)
+
+local function enumValue = |val| -> FunctionInvocation.of(
+    val: class(): name() + "." + val: name())
+
+local function quoteNodeArray = |a, p| -> array[quoteNode(e, p) foreach e in a]
+
+local function quoteConstant = |node, p| -> callIr("ConstantStatement.of"): withArgs(node)
+
+local function quoteBlock = |node, p| -> match {
+  when node is null or node: isEmpty() then callIr("Block.empty")
+  when node: statements(): size() == 1 then quoteNode(node: statements(): get(0), p)
+  otherwise quoteLocalDeclaration(
+    callIr("Block.block"): withArgs(quoteNodeArray(node: statements(), p)),
+    node: declarations(), p)
+}
+
+local function quoteBinaryOp = |node, p| -> quoteLocalDeclaration(
+  callIr("BinaryOperation.create")
+    : withArgs(
+      enumValue(node: type()),
+      quoteNode(node: left(), p),
+      quoteNode(node: right(), p)),
+  node: declarations(), p)
+
+local function quoteLocalDeclaration = |builder, declarations, p| {
+  var ir = builder
+  foreach dec in declarations {
+    ir = MethodInvocation.invoke("with")
+      : withArgs(quoteAssignment(dec, p))
+      : on(ir)
+  }
+  return ir
+}
+
+local function quoteUnaryOp = |node, p| -> quoteLocalDeclaration(
+  callIr("UnaryOperation.create")
+    : withArgs(
+      enumValue(node: type()),
+      quoteNode(node: expression(), p)),
+  node: declarations(), p)
+
+local function quoteFunctionInvocation = |node, p| -> quoteLocalDeclaration(
+  callIr("FunctionInvocation.create")
+    : withArgs(
+      ConstantStatement.of(match {
+        when node: isAnonymous() then null
+        otherwise node: name()
+      }),
+      ConstantStatement.of(node: isOnReference()),
+      ConstantStatement.of(node: isOnModuleState()),
+      ConstantStatement.of(node: isConstant()))
+    : withArgs(quoteNodeArray(node: arguments(), p)),
+  node: declarations(), p)
+
+local function quoteReturn = |node, p| -> match {
+  when node: isReturningVoid() then callIr("ReturnStatement.empty()")
+  otherwise callIr("ReturnStatement.of")
+    : withArgs(quoteNode(node: expression(), p))
+}
+
+local function quoteThrow = |node, p| -> callIr("ThrowStatement.of")
+  : withArgs(quoteNode(node: expression(), p))
+
+local function quoteLocalRef = |node, p| -> callIr("LocalReference.create"): withArgs(
+    ConstantStatement.of(mangle(node: name(), p)),
+    enumValue(node: kind()))
+
+local function quoteAssignment = |node, p| -> callIr("AssignmentStatement.create")
+  : withArgs(
+    quoteNode(node: localReference(), p),
+    quoteNode(node: expression(), p),
+    ConstantStatement.of(node: isDeclaring()))
+
+local function quoteReference = |node, p| -> quoteLocalDeclaration(
+  callIr("ReferenceLookup.of"): withArgs(
+    ConstantStatement.of(mangle(node: name(), p))),
+  node: declarations(), p)
+
+local function quoteCollection = |node, p| -> quoteLocalDeclaration(
+  callIr("CollectionLiteral.create")
+    : withArgs(enumValue(node: type()))
+    : withArgs(quoteNodeArray(node: expressions(), p)),
+  node: declarations(), p)
+
+local function quoteModuleImport = |node, p| -> callIr("ModuleImport.of")
+  : withArgs(ConstantStatement.of(node: packageAndClass(): toString()))
+
+local function quoteNamedArgument = |node, p| ->
+  callIr("NamedArgument.of")
+    : withArgs(
+        ConstantStatement.of(node: name()),
+        quoteNode(node: expression(), p))
+
+local function quoteMember = |node, p| -> callIr("Member.of"): withArgs(
+  ConstantStatement.of(node: name()))
+
+local function quoteMethodInvocation = |node, p| -> quoteLocalDeclaration(
+  MethodInvocation.invoke("withArgs")
+    : withArgs(quoteNodeArray(node: arguments(), p))
+    : on(MethodInvocation.invoke("nullSafe")
+      : withArgs(ConstantStatement.of(node: isNullSafeGuarded()))
+      : on(callIr("DSL.invoke"): withArgs(ConstantStatement.of(node: name())))),
+  node: declarations(), p)
+
+local function quoteTryCatch = |node, p| -> callIr("TryCatchFinally.create"): withArgs(
+  ConstantStatement.of(match {
+    when node: hasCatchBlock() then mangle(node: exceptionId(), p)
+    otherwise null
+  }),
+  quoteBlock(node: tryBlock(), p),
+  match {
+    when node: hasCatchBlock() then quoteBlock(node: catchBlock(), p)
+    otherwise ConstantStatement.of(null)
+  },
+  match {
+    when node: hasFinallyBlock() then quoteBlock(node: finallyBlock(), p)
+    otherwise ConstantStatement.of(null)
+  })
+
+local function quoteStruct = |node, p| -> MethodInvocation.invoke("members")
+  :withArgs(quoteNodeArray(node: getMembers(), p))
+  : on(callIr("Struct.struct"): withArgs(ConstantStatement.of(node: name())))
+
+local function quoteUnion = |node, p| {
+  var ir = callIr("Union.union"): withArgs(ConstantStatement.of(node: name()))
+  foreach val in node: values() {
+    ir = MethodInvocation.invoke("value")
+      : withArgs(ConstantStatement.of(val: name()))
+      : withArgs(quoteNodeArray(val: getMembers(), p))
+      : on(ir)
+  }
+  return ir
+}
+
+local function quoteLoopBreak = |node, p| -> match {
+  when node: type() is LoopBreakFlowStatement$Type.BREAK() then
+    callIr("LoopBreakFlowStatement.newBreak")
+  when node: type() is LoopBreakFlowStatement$Type.CONTINUE() then
+    callIr("LoopBreakFlowStatement.newContinue")
+  otherwise raise("Unknown type")
+}
+
+local function quoteLoopStatement = |node, p| -> callIr("LoopStatement.create"): withArgs(
+  quoteNode(node: init(), p),
+  quoteNode(node: condition(), p),
+  quoteNode(node: post(), p),
+  quoteNode(node: block(), p))
+
+local function quoteForEachLoop = |node, p| -> callIr("ForEachLoopStatement.create")
+  : withArgs(
+    ConstantStatement.of(node: isVarargs()),
+    quoteNode(node: iterable(), p),
+    quoteNode(node: whenClause(), p),
+    quoteNode(node: block(), p))
+  : withArgs(quoteNodeArray(node: references(), p))
+
+local function quoteWhenClauses = |element, node, p| {
+  var ir = MethodInvocation.invoke("otherwise")
+    : withArgs(quoteNode(node: `otherwise(), p))
+    : on(element)
+  foreach c, v in node: clauses() {
+    ir = MethodInvocation.invoke("then"): withArgs(quoteNode(v, p))
+          : on(MethodInvocation.invoke("when"): withArgs(quoteNode(c, p))
+            : on(ir))
+  }
+  return ir
+}
+
+local function quoteConditional = |node, p| -> callIr("ConditionalBranching.create"): withArgs(
+  quoteNode(node: condition(), p),
+  quoteNode(node: trueBlock(), p),
+  quoteNode(node: falseBlock(), p),
+  quoteNode(node: elseConditionalBranching(), p))
+
+local function quoteClosure = |node, p| {
+  var ir = callIr("DSL.lambda")
+    : withArgs(node: target(): parameterNames(): toArray())
+  let protected = augmentProtected(p, node: target(): parameterNames())
+  if node: isVarargs() {
+    ir = MethodInvocation.invoke("varargs"): on(ir)
+  }
+  ir = MethodInvocation.invoke("block")
+      : withArgs(callIr("Block.of")
+          : withArgs(quoteNode(node: target(): block(), protected)))
+      : on(ir)
+  return quoteLocalDeclaration(ir, node: declarations(), p)
+}
+
+local function quoteFunction = |node, p| {
+  let protected = augmentProtected(p, node: parameterNames())
+  var ir = callIr("GoloFunction.function"): withArgs(ConstantStatement.of(node: name()))
+  ir = MethodInvocation.invoke("withParameters")
+    : withArgs(array[ConstantStatement.of(n) foreach n in node: parameterNames()])
+    : on(ir)
+  ir = MethodInvocation.invoke("block")
+    : withArgs(callIr("Block.of")
+      : withArgs(quoteBlock(node: block(), protected)))
+    : on(ir)
+  if node: isVarargs() {
+    ir = MethodInvocation.invoke("varargs"): on(ir)
+  }
+  if node: isMacro() {
+    ir = MethodInvocation.invoke("asMacro"): on(ir)
+  }
+  if node: isLocal() {
+    ir = MethodInvocation.invoke("local"): on(ir)
+  }
+  if node: isDecorated() {
+    ir = MethodInvocation.invoke("decoratedWith")
+      : withArgs(quoteNodeArray(node: decorators(), p))
+      : on(ir)
+  }
+  ir = MethodInvocation.invoke("contextual")
+    : withArgs(ConstantStatement.of(node: isContextualMacro()))
+    : on(ir)
+  ir = MethodInvocation.invoke("special")
+    : withArgs(ConstantStatement.of(node: isSpecialMacro()))
+    : on(ir)
+  return ir
+}
+
+local function quoteDecorator = |node, p| {
+  let protected = augmentProtected(p, null)
+  if node: expression() oftype ReferenceLookup.class {
+    protected?: add(node: expression(): name())
+  }
+  return MethodInvocation.invoke("constant")
+  : withArgs(ConstantStatement.of(node: isConstant()))
+  : on(callIr("Decorator.of")
+      : withArgs(quoteNode(node: expression(), protected)))
+}
+
+local function quoteAugmentation = |node, p| {
+  var ir = callIr("Augmentation.of"): withArgs(ConstantStatement.of(node: target(): toString()))
+  ir = MethodInvocation.invoke("with")
+    : withArgs(array[ConstantStatement.of(name) foreach name in node: names()])
+    : on(ir)
+  ir = MethodInvocation.invoke("with")
+    : withArgs(quoteNodeArray(node: functions(), p))
+    : on(ir)
+  return ir
+}
+
+local function quoteNamedAugmentation = |node, p| -> MethodInvocation.invoke("add")
+    : withArgs(quoteNodeArray(node: functions(), p))
+    : on(callIr("NamedAugmentation.of"): withArgs(ConstantStatement.of(node: name())))
+
+local function quoteDestruct = |node, p| {
+  var ir = callIr("DestructuringAssignment.destruct"): withArgs(quoteNode(node: expression(), p))
+  ir = MethodInvocation.invoke("to")
+    : withArgs(quoteNodeArray(node: references(), p))
+    : on(ir)
+  ir = MethodInvocation.invoke("declaring")
+    : withArgs(ConstantStatement.of(node: isDeclaring()))
+    : on(ir)
+  ir = MethodInvocation.invoke("varargs")
+    : withArgs(ConstantStatement.of(node: isVarargs()))
+    : on(ir)
+  if not node: isConstant() {
+    ir = MethodInvocation.invoke("variable"): on(ir)
+  }
+  return ir
+}
+
+local function quoteCollComprehension = |node, p| -> quoteLocalDeclaration(
+  callIr("CollectionComprehension.create")
+    : withArgs(enumValue(node: type()))
+    : withArgs(quoteNode(node: expression(), p))
+    : withArgs(quoteNodeArray(node: loops(), p)),
+  node: declarations(), p)
+
+----
+Quotes the given node by converting it into calls to [IR API](../ir.html).
+
+This function should mainly be used by the [`quote`](#quote_1v) macro and not
+called directly.
+
+- *param* `node`: the node to quote
+- *param* `p`: a set of names that must not be mangled, or `null` if no name
+   must be mangled
+- *returns* an expression that evaluate to the quoted node.
+----
+function quoteNode = |node, p| -> match {
+  when node is null then ConstantStatement.of(null)
+  when isUnquoted(node) then node: metadata("unquoted", null)
+  when node oftype MacroInvocation.class then node
+  when node oftype ConstantStatement.class then quoteConstant(node, p)
+  when node oftype Block.class then quoteBlock(node, p)
+  when node oftype BinaryOperation.class then quoteBinaryOp(node, p)
+  when node oftype UnaryOperation.class then quoteUnaryOp(node, p)
+  when node oftype FunctionInvocation.class then quoteFunctionInvocation(node, p)
+  when node oftype ReturnStatement.class then quoteReturn(node, p)
+  when node oftype ThrowStatement.class then quoteThrow(node, p)
+  when node oftype AssignmentStatement.class then quoteAssignment(node, p)
+  when node oftype ReferenceLookup.class then quoteReference(node, p)
+  when node oftype CollectionLiteral.class then quoteCollection(node, p)
+  when node oftype ModuleImport.class then quoteModuleImport(node, p)
+  when node oftype NamedArgument.class then quoteNamedArgument(node, p)
+  when node oftype LocalReference.class then quoteLocalRef(node, p)
+  when node oftype MethodInvocation.class then quoteMethodInvocation(node, p)
+  when node oftype TryCatchFinally.class then quoteTryCatch(node, p)
+  when node oftype Struct.class then quoteStruct(node, p)
+  when node oftype Member.class then quoteMember(node, p)
+  when node oftype Union.class then quoteUnion(node, p)
+  when node oftype LoopBreakFlowStatement.class then quoteLoopBreak(node, p)
+  when node oftype LoopStatement.class then quoteLoopStatement(node, p)
+  when node oftype ForEachLoopStatement.class then quoteForEachLoop(node, p)
+  when node oftype MatchExpression.class then quoteWhenClauses(callIr("MatchExpression.match"), node, p)
+  when node oftype CaseStatement.class then quoteWhenClauses(callIr("CaseStatement.cases"), node, p)
+  when node oftype ConditionalBranching.class then quoteConditional(node, p)
+  when node oftype ClosureReference.class then quoteClosure(node, p)
+  when node oftype GoloFunction.class then quoteFunction(node, p)
+  when node oftype Decorator.class then quoteDecorator(node, p)
+  when node oftype Augmentation.class then quoteAugmentation(node, p)
+  when node oftype NamedAugmentation.class then quoteNamedAugmentation(node, p)
+  when node oftype DestructuringAssignment.class then quoteDestruct(node, p)
+  when node oftype CollectionComprehension.class then quoteCollComprehension(node, p)
+  when node oftype Noop.class then callIR("Noop.of"): withArgs(
+      ConstantStatement.of(node: comment()))
+  otherwise raise(String.format("Can't quote `%s`", node))
+}
+
+----
+Checks if the node is unquoted.
+----
+function isUnquoted = |node| -> node: metadata("unquoted") orIfNull false
+
+----
+Wrapper function to make quote work on collections of node, blocks, and
+toplevels
+----
+local function _quote_ = |protected, nodes| ->  match {
+  when nodes: isEmpty() then ConstantStatement.of(null)
+  when nodes: size() == 1 then quoteNode(nodes: get(0), protected)
+  when nodes: get(0) oftype ToplevelGoloElement.class then
+      callIr("ToplevelElements.of"): withArgs(quoteNodeArray(nodes, protected))
+  otherwise callIr("Block.block"): withArgs(quoteNodeArray(nodes, protected))
+}
+
+----
+Converts the given nodes to calls to builder functions.
+
+This macro should "just work". If applied to a single statement, a single node is returned.
+When applied to several statements, a block is returned, unless the statements are top-level ones, in which case a
+`ToplevelElements` is returned.
+
+See [`quoteNode`](#quoteNode_2).
+----
+@contextual
+macro quote = |self, nodes...| {
+  SYMBOLS: value(): enter(manglePrefix(self))
+  let quoted = _quote_(set[], nodes)
+  SYMBOLS: value(): exit()
+  return quoted
+}
+
+----
+Generate a mangle prefix from the macro call parameters.
+
+This helps to make unique names when calling the same macro several times.
+----
+local function manglePrefix = |invocation| {
+  let mod = invocation: enclosingModule()
+  let fun = invocation: ancestorOfType(GoloFunction.class)
+  return "%s_%s_%d": format(
+    mod: packageAndClass(): toString(),
+    fun?: name() orIfNull "",
+    fun?: arity() orIfNull 0)
+}
+----
+Converts the given nodes to calls to builder functions.
+
+Contrary to [`quote`](#quote_1v), no name is mangled by this macro.
+
+See [`quoteNode`](#quoteNode_2).
+----
+macro quoteNoMangle = |nodes...| -> _quote_(null, nodes)
+
+----
+Marks the node as unquoted so that it will be returned unchanged by the
+[`quote`](#quote_1v) macro.
+----
+macro unquote = |node| -> node: metadata("unquoted", true)
+
+----
+Alias for [`unquote`](#unquote_1)
+----
+macro $ = |node| -> node: metadata("unquoted", true)
+
+</code>
+</pre>
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>
+hljs.initHighlighting();
+</script>
+</body>
+</html>

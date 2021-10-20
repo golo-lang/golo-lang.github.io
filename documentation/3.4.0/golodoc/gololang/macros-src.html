@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>gololang.macros source</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    pre {
+        font-family: monospace;
+        font-size: 90%;
+        background-color: #eee;
+        padding: 0;
+        margin: 0;
+    }
+
+    pre code {
+        font-family: monospace;
+        font-size: inherit;
+        padding: 0.5em ;
+        margin: 0;
+    }
+
+    :target {
+        background-color: yellow;
+    }
+
+    #line-numbers {
+        float: left;
+        position: relative;
+        padding: 0.5em;
+    }
+
+    #src {
+        float: left;
+        position: relative;
+    }
+  </style>
+</head>
+<body>
+<pre id="line-numbers">
+<span class="line-number" id="l-1">1</span>
+<span class="line-number" id="l-2">2</span>
+<span class="line-number" id="l-3">3</span>
+<span class="line-number" id="l-4">4</span>
+<span class="line-number" id="l-5">5</span>
+<span class="line-number" id="l-6">6</span>
+<span class="line-number" id="l-7">7</span>
+<span class="line-number" id="l-8">8</span>
+<span class="line-number" id="l-9">9</span>
+<span class="line-number" id="l-10">10</span>
+<span class="line-number" id="l-11">11</span>
+<span class="line-number" id="l-12">12</span>
+<span class="line-number" id="l-13">13</span>
+<span class="line-number" id="l-14">14</span>
+<span class="line-number" id="l-15">15</span>
+<span class="line-number" id="l-16">16</span>
+<span class="line-number" id="l-17">17</span>
+<span class="line-number" id="l-18">18</span>
+<span class="line-number" id="l-19">19</span>
+<span class="line-number" id="l-20">20</span>
+<span class="line-number" id="l-21">21</span>
+<span class="line-number" id="l-22">22</span>
+<span class="line-number" id="l-23">23</span>
+<span class="line-number" id="l-24">24</span>
+<span class="line-number" id="l-25">25</span>
+<span class="line-number" id="l-26">26</span>
+<span class="line-number" id="l-27">27</span>
+<span class="line-number" id="l-28">28</span>
+<span class="line-number" id="l-29">29</span>
+<span class="line-number" id="l-30">30</span>
+<span class="line-number" id="l-31">31</span>
+<span class="line-number" id="l-32">32</span>
+<span class="line-number" id="l-33">33</span>
+<span class="line-number" id="l-34">34</span>
+<span class="line-number" id="l-35">35</span>
+<span class="line-number" id="l-36">36</span>
+<span class="line-number" id="l-37">37</span>
+<span class="line-number" id="l-38">38</span>
+<span class="line-number" id="l-39">39</span>
+<span class="line-number" id="l-40">40</span>
+<span class="line-number" id="l-41">41</span>
+<span class="line-number" id="l-42">42</span>
+<span class="line-number" id="l-43">43</span>
+<span class="line-number" id="l-44">44</span>
+<span class="line-number" id="l-45">45</span>
+<span class="line-number" id="l-46">46</span>
+<span class="line-number" id="l-47">47</span>
+<span class="line-number" id="l-48">48</span>
+<span class="line-number" id="l-49">49</span>
+<span class="line-number" id="l-50">50</span>
+<span class="line-number" id="l-51">51</span>
+<span class="line-number" id="l-52">52</span>
+<span class="line-number" id="l-53">53</span>
+<span class="line-number" id="l-54">54</span>
+<span class="line-number" id="l-55">55</span>
+<span class="line-number" id="l-56">56</span>
+<span class="line-number" id="l-57">57</span>
+<span class="line-number" id="l-58">58</span>
+<span class="line-number" id="l-59">59</span>
+<span class="line-number" id="l-60">60</span>
+<span class="line-number" id="l-61">61</span>
+<span class="line-number" id="l-62">62</span>
+<span class="line-number" id="l-63">63</span>
+<span class="line-number" id="l-64">64</span>
+<span class="line-number" id="l-65">65</span>
+<span class="line-number" id="l-66">66</span>
+<span class="line-number" id="l-67">67</span>
+<span class="line-number" id="l-68">68</span>
+<span class="line-number" id="l-69">69</span>
+<span class="line-number" id="l-70">70</span>
+<span class="line-number" id="l-71">71</span>
+<span class="line-number" id="l-72">72</span>
+<span class="line-number" id="l-73">73</span>
+<span class="line-number" id="l-74">74</span>
+<span class="line-number" id="l-75">75</span>
+<span class="line-number" id="l-76">76</span>
+<span class="line-number" id="l-77">77</span>
+<span class="line-number" id="l-78">78</span>
+<span class="line-number" id="l-79">79</span>
+<span class="line-number" id="l-80">80</span>
+<span class="line-number" id="l-81">81</span>
+<span class="line-number" id="l-82">82</span>
+<span class="line-number" id="l-83">83</span>
+<span class="line-number" id="l-84">84</span>
+<span class="line-number" id="l-85">85</span>
+<span class="line-number" id="l-86">86</span>
+<span class="line-number" id="l-87">87</span>
+<span class="line-number" id="l-88">88</span>
+<span class="line-number" id="l-89">89</span>
+<span class="line-number" id="l-90">90</span>
+<span class="line-number" id="l-91">91</span>
+<span class="line-number" id="l-92">92</span>
+<span class="line-number" id="l-93">93</span>
+<span class="line-number" id="l-94">94</span>
+<span class="line-number" id="l-95">95</span>
+<span class="line-number" id="l-96">96</span>
+<span class="line-number" id="l-97">97</span>
+<span class="line-number" id="l-98">98</span>
+<span class="line-number" id="l-99">99</span>
+<span class="line-number" id="l-100">100</span>
+<span class="line-number" id="l-101">101</span>
+<span class="line-number" id="l-102">102</span>
+<span class="line-number" id="l-103">103</span>
+<span class="line-number" id="l-104">104</span>
+<span class="line-number" id="l-105">105</span>
+<span class="line-number" id="l-106">106</span>
+<span class="line-number" id="l-107">107</span>
+<span class="line-number" id="l-108">108</span>
+<span class="line-number" id="l-109">109</span>
+<span class="line-number" id="l-110">110</span>
+<span class="line-number" id="l-111">111</span>
+<span class="line-number" id="l-112">112</span>
+<span class="line-number" id="l-113">113</span>
+<span class="line-number" id="l-114">114</span>
+<span class="line-number" id="l-115">115</span>
+<span class="line-number" id="l-116">116</span>
+<span class="line-number" id="l-117">117</span>
+<span class="line-number" id="l-118">118</span>
+<span class="line-number" id="l-119">119</span>
+<span class="line-number" id="l-120">120</span>
+<span class="line-number" id="l-121">121</span>
+<span class="line-number" id="l-122">122</span>
+<span class="line-number" id="l-123">123</span>
+<span class="line-number" id="l-124">124</span>
+<span class="line-number" id="l-125">125</span>
+<span class="line-number" id="l-126">126</span>
+<span class="line-number" id="l-127">127</span>
+<span class="line-number" id="l-128">128</span>
+<span class="line-number" id="l-129">129</span>
+<span class="line-number" id="l-130">130</span>
+<span class="line-number" id="l-131">131</span>
+<span class="line-number" id="l-132">132</span>
+<span class="line-number" id="l-133">133</span>
+<span class="line-number" id="l-134">134</span>
+<span class="line-number" id="l-135">135</span>
+<span class="line-number" id="l-136">136</span>
+<span class="line-number" id="l-137">137</span>
+<span class="line-number" id="l-138">138</span>
+<span class="line-number" id="l-139">139</span>
+<span class="line-number" id="l-140">140</span>
+<span class="line-number" id="l-141">141</span>
+<span class="line-number" id="l-142">142</span>
+<span class="line-number" id="l-143">143</span>
+<span class="line-number" id="l-144">144</span>
+<span class="line-number" id="l-145">145</span>
+<span class="line-number" id="l-146">146</span>
+<span class="line-number" id="l-147">147</span>
+<span class="line-number" id="l-148">148</span>
+<span class="line-number" id="l-149">149</span>
+<span class="line-number" id="l-150">150</span>
+<span class="line-number" id="l-151">151</span>
+<span class="line-number" id="l-152">152</span>
+<span class="line-number" id="l-153">153</span>
+<span class="line-number" id="l-154">154</span>
+<span class="line-number" id="l-155">155</span>
+<span class="line-number" id="l-156">156</span>
+<span class="line-number" id="l-157">157</span>
+<span class="line-number" id="l-158">158</span>
+<span class="line-number" id="l-159">159</span>
+<span class="line-number" id="l-160">160</span>
+<span class="line-number" id="l-161">161</span>
+<span class="line-number" id="l-162">162</span>
+<span class="line-number" id="l-163">163</span>
+<span class="line-number" id="l-164">164</span>
+<span class="line-number" id="l-165">165</span>
+<span class="line-number" id="l-166">166</span>
+<span class="line-number" id="l-167">167</span>
+<span class="line-number" id="l-168">168</span>
+<span class="line-number" id="l-169">169</span>
+<span class="line-number" id="l-170">170</span>
+<span class="line-number" id="l-171">171</span>
+<span class="line-number" id="l-172">172</span>
+<span class="line-number" id="l-173">173</span>
+<span class="line-number" id="l-174">174</span>
+<span class="line-number" id="l-175">175</span>
+<span class="line-number" id="l-176">176</span>
+<span class="line-number" id="l-177">177</span>
+<span class="line-number" id="l-178">178</span>
+<span class="line-number" id="l-179">179</span>
+<span class="line-number" id="l-180">180</span>
+<span class="line-number" id="l-181">181</span>
+<span class="line-number" id="l-182">182</span>
+<span class="line-number" id="l-183">183</span>
+<span class="line-number" id="l-184">184</span>
+<span class="line-number" id="l-185">185</span>
+<span class="line-number" id="l-186">186</span>
+<span class="line-number" id="l-187">187</span>
+<span class="line-number" id="l-188">188</span>
+<span class="line-number" id="l-189">189</span>
+<span class="line-number" id="l-190">190</span>
+<span class="line-number" id="l-191">191</span>
+<span class="line-number" id="l-192">192</span>
+<span class="line-number" id="l-193">193</span>
+<span class="line-number" id="l-194">194</span>
+<span class="line-number" id="l-195">195</span>
+<span class="line-number" id="l-196">196</span>
+<span class="line-number" id="l-197">197</span>
+<span class="line-number" id="l-198">198</span>
+<span class="line-number" id="l-199">199</span>
+<span class="line-number" id="l-200">200</span>
+<span class="line-number" id="l-201">201</span>
+<span class="line-number" id="l-202">202</span>
+<span class="line-number" id="l-203">203</span>
+<span class="line-number" id="l-204">204</span>
+<span class="line-number" id="l-205">205</span>
+<span class="line-number" id="l-206">206</span>
+<span class="line-number" id="l-207">207</span>
+<span class="line-number" id="l-208">208</span>
+<span class="line-number" id="l-209">209</span>
+</pre>
+<pre id="src" class="highlight highlightjs">
+<code class="language-golo" data-lang="golo"># ............................................................................................... #
+#
+# Copyright (c) 2012-2021 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others
+#
+# This program and the accompanying materials are made available under
+# the terms of the Eclipse Public License 2.0 which is available at
+# http://www.eclipse.org/legal/epl-2.0.
+#
+# SPDX-License-Identifier: EPL-2.0
+#
+# ............................................................................................... #
+----
+This module defines the set of predefined macros. It is `&use`d by default.
+----
+module gololang.macros
+
+import gololang.ir
+import gololang.macros.Utils
+
+----
+Don't expand the result of a macro.
+
+This special macro configure the expansion process to not expand the macros
+contained in the result of a macro expansion.
+This can be useful for debugging, to diagnose intermediary steps.
+----
+@special
+macro dontRecurse = |visitor| {
+  visitor: recurse(false)
+}
+
+
+----
+Don't try to expand regular calls as macros.
+
+This special macro configure the expansion process to not be tried on regular
+function invocations. Only explicit macro calls (prefixed with `&`) are
+expanded.
+----
+@special
+macro dontExpandRegularCalls = |visitor| {
+  visitor: expandRegularCalls(false)
+}
+
+
+----
+Define the recursion limit for macro expansion in the current module.
+
+This setting only takes effect for macros following it.
+----
+@special
+macro recursionLimit = |visitor, limit| {
+  require(limit oftype gololang.ir.ConstantStatement.class
+          and limit: value() oftype java.lang.Integer.class,
+      "The recursion limit must be an integer")
+  visitor: recursionLimit(limit: value())
+}
+
+----
+Adds a module in the macro resolution scope.
+
+Modules added with this special macro are used for macro resolution, but are not
+imported. They does not appear in the compiled code, and are not used for
+regular function invocation resolutions.
+
+Moreover, if the used module has a macro named `init`, a call to this macro,
+using the additional parameters of `use`, is injected into the module.
+
+For instance:
+
+```golo
+module Test
+
+&use("my.macros", "answer", 42)
+```
+
+configures the visitor to lookup macros in the `my.macros` module, and expands
+to
+
+```golo
+module Test
+
+&my.macros.init("answer", 42)
+```
+
+The `init` macro may be contextual, to further modify the calling module.
+
+- *param* `visitor`: the `MacroExpansionIrVisitor` used to expand this macro (injected)
+- *param* `mod`: the name of the module to use as a string, or a class literal.
+- *param `args`: additional arguments that will be passed to `init`
+- *returns* the call to `init` if the macro exists, `null` otherwise.
+----
+@special
+macro use = |visitor, mod, args...| {
+  require(mod oftype gololang.ir.ConstantStatement.class, "argument to `use` must be a constant")
+  let value = mod: value()
+  var name = match {
+    when value oftype java.lang.String.class then value
+    when value oftype gololang.ir.ClassReference.class then value: name()
+    otherwise raise("argument to `use` must be a string or a class literal")
+  }
+  visitor: useMacroModule(name)
+  let init = gololang.ir.MacroInvocation.create(name + ".init", args)
+  if visitor: macroExists(init) {
+    return init
+  }
+}
+
+----
+Macro to mark an element as deprecated.
+
+Can be used as a toplevel macro decorator.
+For instance, to mark a function as deprecated:
+
+```golo
+@deprecated
+function foo = |a, b| -> a + b
+```
+
+Moreover, some additional informations can be provided. They are used to modify the element documentation.
+
+```golo
+@deprecated(since="3.4", comment="Use `gololang.Functions::add` instead")
+function foo = |a, b| -> a + b
+```
+
+- *param* `since`: the version since the element is deprecated
+- *param* `comment`: a comment explaining the reasons of the deprecation or the element to use instead
+- *returns* the element itself
+
+See also [`gololang.meta.Annotations::makeDeprecated`](meta/Annotations.html#makeDeprecated_3v)
+----
+macro deprecated = |args...| {
+  # TODO: generate a list of deprecated functions and types (a la javadoc) ?
+  # TODO: when swithching to java >= 9, adds the `since` and `forRemoval` arguments to the annotation
+  let positional, named, _ = parseArguments(args)
+  require(positional: size() > 0, "`deprecated` macro must be applied on an element")
+  return gololang.meta.Annotations.makeDeprecated(
+      named: get("since")?: value(),
+      named: get("comment")?: value(),
+      positional)
+}
+
+----
+Use old-style destructuring for the current module.
+
+This macro customize the behavior of the destructuring feature by forcing the use of the `destruct` method instead of
+`_$$_destruct`.
+
+This is a toplevel macro.
+----
+@contextual
+macro useOldstyleDestruct = |self| {
+  self: enclosingModule(): metadata("golo.destruct.newstyle", false)
+}
+
+----
+Adds metadata to an element.
+
+The metadata can be used by another macro, for instance to conditionally deal with the marked element.
+
+The metadata value must be a value convertible by
+[`gololang.macros.Utils::getLiteralValue`](../macros/Utils.html#getLiteralValue_1)
+
+This macro is called with named parameters for metadata followed with the element to annotate, as in:
+
+```golo
+@meta(foo="bar", answer=42)
+function example = -> null
+```
+
+It is similar to [`withMetadata`](#withMetadata_3), but with a more convenient syntax, and allows to add several
+metadata at once.
+
+- *param* `key=value` sequence
+- *param* `element`: the element to which add the metadata
+- *returns* the element itself, with metadata added.
+
+See also [`withMetadata`](#withMetadata_3)
+----
+macro meta = |args...| {
+  let _, n, elt = parseArguments(args, true)
+  foreach k, v in n: entrySet() {
+    elt: metadata(k, getLiteralValue(v))
+  }
+  return elt
+}
+
+----
+Adds metadata to an element.
+
+The metadata can be used by another macro, for instance to conditionally deal with the marked element.
+
+The metadata value must be a value convertible by
+[`gololang.macros.Utils::getLiteralValue`](../macros/Utils.html#getLiteralValue_1)
+
+This macro is similar to [`meta`](#meta_1v), but allows to use a key with a name not allowed by the named parameter
+syntax (for instance `"foo.bar Bz"`.
+
+- *param* `key`: the metadata key (as a String)
+- *param* `value`: the metadata value
+- *param* `element`: the element to which add the metadata
+- *returns* the element itself, with metadata added.
+
+See also [`meta`](#meta_1v)
+----
+macro withMetadata = |key, value, element| -> element: metadata(key: value(), getLiteralValue(value))
+
+
+</code>
+</pre>
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>
+hljs.initHighlighting();
+</script>
+</body>
+</html>

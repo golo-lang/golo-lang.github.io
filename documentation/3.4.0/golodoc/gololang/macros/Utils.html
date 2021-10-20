@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>gololang.macros.Utils (Golo 3.4.0)</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon"
+        href="data:image/x-icon;base64,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"/>
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
+      background-color: #fff;
+      border-color: #999999;
+      border-width: 2px;
+      margin: 1em auto;
+      margin-left: 20em;
+      max-width: 50em;
+      text-align: left;
+      padding: 0.5em;
+    }
+    pre {
+      background-color: #eee;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      overflow: auto;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      background-color: #eee;
+      padding: 1px 3px;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+    }
+    pre code {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .listing:hover code[data-lang]:before {
+      display: block;
+    }
+
+    .listing code {
+      position: relative;
+    }
+
+    .listing code[data-lang]:before {
+      display: none;
+      content: attr(data-lang);
+      position: absolute;
+      font-size: 0.75em;
+      top: .5rem;
+      right: 0.5rem;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    li p {
+      margin: 0.3em;
+    }
+
+    ul > li {
+      list-style-type: disc;
+    }
+    a:link, a:visited {
+      color: #33e;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #00f;
+      text-decoration:underline;
+    }
+    h1 {
+      color: #999;
+      font-weight: 400;
+      font-size: 250%;
+    }
+    h2 {
+      border-bottom: 1px dotted #aaa;
+      margin-bottom: 1em;
+      color: #333;
+      font-size: 200%;
+      font-style: normal;
+      font-weight: bold;
+    }
+
+    h3 {
+      color: #666;
+      font-size: 180%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h4 {
+      font-size: 130%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h5 {
+      font-size: 100%;
+      font-style: normal;
+      font-weight: bold;
+    }
+    h6 {
+      font-size: 100%;
+      font-style: italic;
+      font-weight: normal;
+    }
+
+    #global-nav {
+      display: block;
+      font-size: 80%;
+    }
+
+    #global-nav > a {
+      margin: 0em;
+      padding: 0 0.5em;
+    }
+
+    #toc {
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      top: 0px;
+      bottom: 0px;
+      left: 0px;
+      width: 20em;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    #toc h1 {
+      margin: .5em;
+      padding: 1ex;
+      font-size: 90%;
+      font-weight: bold;
+      font-style: normal;
+      color: #333;
+      background-color: #eee;
+      text-align: center;
+    }
+
+    #toc ul {
+      padding-left: 1em;
+    }
+
+    #toc > ul {
+      font-size: 80%;
+      margin: 0.5em;
+    }
+
+    #toc > ul > li {
+      list-style: none;
+      margin-bottom: 2ex;
+    }
+
+    #toc > ul > li > a {
+      font-weight: bold;
+      color: #333;
+      display: block;
+      padding: 1ex;
+      margin: 0 1em 1ex 0;
+      border-bottom: 1px solid #999;
+    }
+
+    #toc li {
+      list-style-type: none;
+    }
+
+    :target {
+      background-color: yellow;
+    }
+
+    .permalink {
+      margin-left: .3em;
+      font-size: 70%;
+      visibility: hidden;
+    }
+
+    *:hover > .permalink {
+      visibility: visible;
+    }
+
+    .golodoc {
+      margin: 0;
+      padding: 0;
+      padding-left: 1.5em;
+    }
+
+    .srclink {
+      float:  right;
+      text-align: right;
+      color: #999;
+      font-size: 75%;
+      margin-top: -2em;
+    }
+
+    .srclink a {
+      color: inherit;
+    }
+
+    .modules-list li p {
+      display: inline-block;
+      margin: 0 0.5em;
+    }
+
+    @media (max-width: 50em) {
+      #toc {
+        margin: auto;
+        position: static;
+        width: 100%;
+        overflow: visible;
+        white-space: normal;
+      }
+
+      #toc ul {
+        padding-left: 1em;
+        margin: 0;
+      }
+
+      #toc > ul {
+        font-size: 100%;
+        margin: 0em;
+        padding: 0;
+      }
+
+      #toc > ul > li {
+        list-style: none;
+        margin-bottom: 1ex;
+      }
+
+      #toc > ul > li > a {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        padding: 0ex;
+        margin: 0;
+        border-bottom: none;
+      }
+
+      #toc h1 {
+        display: none;
+      }
+
+      #global-nav {
+        display: block;
+        font-size: 100%;
+        z-index: 1000;
+        background-color: #fff;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 1.5rem;
+      }
+
+      :target {
+        padding-top: 1.5rem;
+      }
+
+      body {
+        margin: 0;
+        padding: 0.5em;
+      }
+
+      h1 {
+        font-size: 200%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<h1>Documentation for gololang.macros.Utils</h1>
+
+
+<div class="golodoc">
+  <p>This module contains some functions to help writing macros.</p>
+
+</div>
+
+
+<!-- begin table of content -->
+<nav id="toc">
+<h1>gololang.macros.Utils</h1>
+  <section id="global-nav">
+    <a href="../../index.html" rel="home">Module Index</a>
+    <a href="../../index-all.html" rel="index">Global Index</a>
+    
+    <a href="../macros.html" rel="up">Package Index</a>
+    
+  </section>
+<ul>
+  
+
+  
+
+  
+
+  
+
+
+  
+  <li><a href="#macros">Macros</a><ul>
+    
+    <li><a href="#stopCompilation_1v">stopCompilation(args...)</a></li>
+    
+    <li><a href="#thisFunction_1">thisFunction(self)</a></li>
+    
+    <li><a href="#thisModule_2">thisModule(self, name)</a></li>
+    
+  </ul></li>
+  
+
+  
+  <li><a href="#functions">Functions</a><ul>
+    
+    <li><a href="#enterSymScope_1">enterSymScope(scope)</a></li>
+    
+    <li><a href="#exitSymScope_0">exitSymScope()</a></li>
+    
+    <li><a href="#extractLastArgument_1">extractLastArgument(args)</a></li>
+    
+    <li><a href="#gensym_0">gensym()</a></li>
+    
+    <li><a href="#gensym_1">gensym(name)</a></li>
+    
+    <li><a href="#getLiteralValue_1">getLiteralValue(node)</a></li>
+    
+    <li><a href="#mangle_1">mangle(name)</a></li>
+    
+    <li><a href="#namedArgsToMap_1">namedArgsToMap(args)</a></li>
+    
+    <li><a href="#parseArguments_1">parseArguments(args)</a></li>
+    
+    <li><a href="#parseArguments_2">parseArguments(args, extractLast)</a></li>
+    
+    <li><a href="#toplevel_1">toplevel(type)</a></li>
+    
+    <li><a href="#wrapToplevel_1">wrapToplevel(elt)</a></li>
+    
+  </ul></li>
+  
+</ul>
+</nav>
+<!-- end table of content -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 id="macros">Macros</h2>
+  
+    <h3 id="stopCompilation_1v">stopCompilation(args...)<a class="permalink" href="#stopCompilation_1v" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-334" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Throws a <code>StopCompilationException</code> to stop the compilation process.</p>
+<p>Note that this exception just stop the process and does not print anything on stderr.
+You should deal with error messages yourself.</p>
+<p>See <code>gololang.Messages</code> for instance to display console messages.</p>
+
+    </div>
+  
+    <h3 id="thisFunction_1">thisFunction(self)<a class="permalink" href="#thisFunction_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-370" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Expands to the fully qualified name of the function in which this macro is called.</p>
+<p>Can be used for instance to define variable scopes in macro.</p>
+
+    </div>
+  
+    <h3 id="thisModule_2">thisModule(self, name)<a class="permalink" href="#thisModule_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-362" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Generate a name in the current name space.</p>
+<p>Useful if a macro generates calls to functions defined in the same module. Instead of relying on the module to be
+imported, one wants to use a fully qualified function name. This macro generate such a name without hard coding the
+current module name in the written macro.</p>
+<p>For instance, instead of writing:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">module MyModule
+
+function myFunction = -&gt; null
+
+macro = -&gt; gololang.ir.DSL.call("MyModule.myFunction")
+</code></pre>
+<p>we can write:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">module MyModule
+
+function myFunction = -&gt; null
+
+macro = -&gt; gololang.ir.DSL.call(&amp;gololang.macros.Utils.thisModule("myFunction")
+</code></pre>
+
+    </div>
+  
+
+
+
+  <h2 id="functions">Functions</h2>
+  
+    <h3 id="enterSymScope_1">enterSymScope(scope)<a class="permalink" href="#enterSymScope_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-312" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Enters a scope in the internal <code>SymbolGenerator</code> used by <a href="#gensym_0"><code>gensym</code></a> and <a href="#mangle_1"><code>mangle</code></a></p>
+
+    </div>
+  
+    <h3 id="exitSymScope_0">exitSymScope()<a class="permalink" href="#exitSymScope_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-319" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Exists a scope in the internal <code>SymbolGenerator</code> used by <a href="#gensym_0"><code>gensym</code></a> and <a href="#mangle_1"><code>mangle</code></a></p>
+
+    </div>
+  
+    <h3 id="extractLastArgument_1">extractLastArgument(args)<a class="permalink" href="#extractLastArgument_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-53" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Utility to extract the last argument of a varargs function.</p>
+<p>Useful when creating a macro used as a decorator that can take multiple
+arguments.</p>
+<h4>Example</h4>
+<p>Such a macro can be used as</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">@myMacro(answer=42, ping="pong")
+function myFunction = ...
+</code></pre>
+<p>It will be defined as</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">macro foo = |args...| {
+  let arguments, element = extractLastArgument(args)
+####...
+  return element
+}
+</code></pre>
+<p>In this example, <code>arguments</code> will be an array of <code>NamedArgument</code>s, and <code>element</code>
+will contain the <code>GoloFunction</code>.</p>
+<ul>
+<li><em>param</em> <code>args</code>: an array containing the arguments</li>
+<li><em>returns</em> a tuple containing an array of the arguments but the last, and the
+last argument.</li>
+</ul>
+<p>See also <a href="#parseArguments_2"><code>parseArguments</code></a></p>
+
+    </div>
+  
+    <h3 id="gensym_0">gensym()<a class="permalink" href="#gensym_0" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-281" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Generates a new unique name using an internal <code>SymbolGenerator</code>.</p>
+<p>See also <a href="../../../javadoc/org/eclipse/golo/compiler/SymbolGenerator.html">SymbolGenerator</a></p>
+
+    </div>
+  
+    <h3 id="gensym_1">gensym(name)<a class="permalink" href="#gensym_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-288" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Generates a new unique name using an internal <code>SymbolGenerator</code> with the given name as prefix.</p>
+<p>See also <a href="../../../javadoc/org/eclipse/golo/compiler/SymbolGenerator.html">SymbolGenerator</a></p>
+
+    </div>
+  
+    <h3 id="getLiteralValue_1">getLiteralValue(node)<a class="permalink" href="#getLiteralValue_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-148" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Converts a IR node into the corresponding runtime value.</p>
+<p>This only works for literal values, classes, enums or arrays of theses values.
+Otherwise the node itself is returned.</p>
+
+    </div>
+  
+    <h3 id="mangle_1">mangle(name)<a class="permalink" href="#mangle_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-298" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Mangles the given name to ensure hygiene.</p>
+<p>If the argument is a <code>LocalReference</code> or a <code>ReferenceLookup</code>, a new object with
+the same type, but with a mangled name, is returned.</p>
+<p>See also <a href="../../../javadoc/org/eclipse/golo/compiler/SymbolGenerator.html">SymbolGenerator</a></p>
+
+    </div>
+  
+    <h3 id="namedArgsToMap_1">namedArgsToMap(args)<a class="permalink" href="#namedArgsToMap_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-79" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Converts a <code>NamedArgument</code> collection into a map whose keys are the names of the
+named arguments, and values the associated values.</p>
+<h4>Example</h4>
+<p>Given a macro defined as:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">macro foo = |args...| {
+  let arguments = namedArgsToMap(args)
+#### ...
+}
+</code></pre>
+<p>When called as <code>&amp;foo(a=42, b="hello")</code>, the <code>arguments</code> variable will contains
+<code>map[["a", constant(42)], ["b", constant("hello")]]</code></p>
+<p>The elements of the collection that are not <code>NamedArgument</code> are ignored.</p>
+<p>See also <a href="#parseArguments_2"><code>parseArguments</code></a></p>
+
+    </div>
+  
+    <h3 id="parseArguments_1">parseArguments(args)<a class="permalink" href="#parseArguments_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-132" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Same as <code>parseArguments(args, false)</code></p>
+<p>See <a href="#parseArguments_2"><code>parseArguments(args, extractLast)</code></a></p>
+
+    </div>
+  
+    <h3 id="parseArguments_2">parseArguments(args, extractLast)<a class="permalink" href="#parseArguments_2" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-109" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Converts a collection of expressions and named arguments into a triple
+containing a list of the expressions and a map extracted from named arguments
+like by <a href="#namedArgsToMap_1"><code>namedArgsToMap</code></a>.</p>
+<p>If <code>extractLast</code> is <code>true</code> or <code>null</code>, also extract the last argument as by
+<a href="#extractLastArgument_1"><code>extractLastArgument</code></a>. If <code>extractLast</code> is a type, the last argument is extracted only if it
+has the corresponding type.</p>
+<h4>Example</h4>
+<pre class="listing"><code class="lang-golo" data-lang="golo">macro myMacro = |args...| {
+  let positional, named, last = parseArguments(args, true)
+#### ...
+}
+
+@myMacro(answer=42, "foo", foo="bar")
+function plop = -&gt; "daplop"
+</code></pre>
+<p>In the <code>myMacro</code> macro, <code>positional</code> will be <code>array[constant("foo")]</code>, <code>named</code>
+will be <code>map[["answer", constant(42)], ["foo", constant("bar")]]</code> and <code>last</code> will
+be the <code>plop</code> function IR node.</p>
+
+    </div>
+  
+    <h3 id="toplevel_1">toplevel(type)<a class="permalink" href="#toplevel_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-266" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Decorator to help define macros on top-level elements.</p>
+<p>Macros applied on top-level elements may often return a <code>ToplevelElements</code> to
+inject several top-level elements into the module, without using side effects.</p>
+<p>When stacking such macros, for instance with the decorator notation, each macro
+must be prepared to receive a <code>ToplevelElements</code> containing various kinds of
+elements, instead of the decorated one.</p>
+<p>For instance, a macro can work on a <code>struct</code> and inject several tooling
+functions and augmentations, such as:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">macro myMacro = |structure| -&gt; toplevels(
+  structure,
+  `function("workOn" + structure: name())
+      : withParameters("s"): body(...),
+  `augment(structure): with(...)
+)
+</code></pre>
+<p>Suppose that a macro <code>otherMacro</code> has a similar behavior. It is thus not possible to
+stack these two macro, as in:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">@otherMacro
+@myMacro
+struct Foo = {x}
+</code></pre>
+<p>since here, the <code>otherMacro</code> will not receive a <code>Struct</code>, but the
+<code>ToplevelElements</code> returned by <code>myMacro</code>.</p>
+<p>This decorator adapt the macro to deal with <code>ToplevelElements</code>, applying it to
+each contained element if its type match the given one, and returning the
+element unchanged otherwise.</p>
+<p>In the previous example, we can use it on the two macros as:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">@!toplevel(Struct.class)
+macro myMacro = |structure| -&gt; toplevels(
+  structure,
+  `function("workOn" + structure: name())
+      : withParameters(s): body(...),
+  `augment(structure: packageAndClass()): with(...)
+)
+</code></pre>
+<p>The <code>myMacro</code> will be applied to its argument if its a <code>struct</code>, don't change
+any other type, and if its argument is a <code>ToplevelElements</code>, it will be applied
+to any contained element. The macro can therefore be stacked on the top of other
+macros whatever their returned type.</p>
+<p>To apply the macro on any type, just use <code>GoloElement.class</code> as a filter.</p>
+<p>Moreover, the decorator makes the macro varargs. It can therefore be called on
+several structures at once, like:</p>
+<pre class="listing"><code class="lang-golo" data-lang="golo">&amp;myMacro {
+
+struct Foo = {x}
+
+struct Bar = {a, b}
+
+}
+</code></pre>
+<p>This decorator should be banged.</p>
+<ul>
+<li><em>param</em> <code>type</code>: the type of the nodes on which the macro must be applied.</li>
+</ul>
+
+    </div>
+  
+    <h3 id="wrapToplevel_1">wrapToplevel(elt)<a class="permalink" href="#wrapToplevel_1" title="link to this section">&#182;</a></h3><nav class="srclink"><a href="Utils-src.html#l-188" rel="source" title="Link to the corresponding source">Source</a></nav>
+    <div class="golodoc">
+      <p>Wrap the given object in a <code>ToplevelElements</code>.</p>
+<p>If the argument is an array or a collection of more than 1 element, it is wrapped in a <code>ToplevelElements</code>.
+Otherwise, the element is returned unchanged.</p>
+
+    </div>
+  
+
+
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
+</html>

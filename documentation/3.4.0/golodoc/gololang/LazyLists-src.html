@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>gololang.LazyLists source</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    pre {
+        font-family: monospace;
+        font-size: 90%;
+        background-color: #eee;
+        padding: 0;
+        margin: 0;
+    }
+
+    pre code {
+        font-family: monospace;
+        font-size: inherit;
+        padding: 0.5em ;
+        margin: 0;
+    }
+
+    :target {
+        background-color: yellow;
+    }
+
+    #line-numbers {
+        float: left;
+        position: relative;
+        padding: 0.5em;
+    }
+
+    #src {
+        float: left;
+        position: relative;
+    }
+  </style>
+</head>
+<body>
+<pre id="line-numbers">
+<span class="line-number" id="l-1">1</span>
+<span class="line-number" id="l-2">2</span>
+<span class="line-number" id="l-3">3</span>
+<span class="line-number" id="l-4">4</span>
+<span class="line-number" id="l-5">5</span>
+<span class="line-number" id="l-6">6</span>
+<span class="line-number" id="l-7">7</span>
+<span class="line-number" id="l-8">8</span>
+<span class="line-number" id="l-9">9</span>
+<span class="line-number" id="l-10">10</span>
+<span class="line-number" id="l-11">11</span>
+<span class="line-number" id="l-12">12</span>
+<span class="line-number" id="l-13">13</span>
+<span class="line-number" id="l-14">14</span>
+<span class="line-number" id="l-15">15</span>
+<span class="line-number" id="l-16">16</span>
+<span class="line-number" id="l-17">17</span>
+<span class="line-number" id="l-18">18</span>
+<span class="line-number" id="l-19">19</span>
+<span class="line-number" id="l-20">20</span>
+<span class="line-number" id="l-21">21</span>
+<span class="line-number" id="l-22">22</span>
+<span class="line-number" id="l-23">23</span>
+<span class="line-number" id="l-24">24</span>
+<span class="line-number" id="l-25">25</span>
+<span class="line-number" id="l-26">26</span>
+<span class="line-number" id="l-27">27</span>
+<span class="line-number" id="l-28">28</span>
+<span class="line-number" id="l-29">29</span>
+<span class="line-number" id="l-30">30</span>
+<span class="line-number" id="l-31">31</span>
+<span class="line-number" id="l-32">32</span>
+<span class="line-number" id="l-33">33</span>
+<span class="line-number" id="l-34">34</span>
+<span class="line-number" id="l-35">35</span>
+<span class="line-number" id="l-36">36</span>
+<span class="line-number" id="l-37">37</span>
+<span class="line-number" id="l-38">38</span>
+<span class="line-number" id="l-39">39</span>
+<span class="line-number" id="l-40">40</span>
+<span class="line-number" id="l-41">41</span>
+<span class="line-number" id="l-42">42</span>
+<span class="line-number" id="l-43">43</span>
+<span class="line-number" id="l-44">44</span>
+<span class="line-number" id="l-45">45</span>
+<span class="line-number" id="l-46">46</span>
+<span class="line-number" id="l-47">47</span>
+<span class="line-number" id="l-48">48</span>
+<span class="line-number" id="l-49">49</span>
+<span class="line-number" id="l-50">50</span>
+<span class="line-number" id="l-51">51</span>
+<span class="line-number" id="l-52">52</span>
+<span class="line-number" id="l-53">53</span>
+<span class="line-number" id="l-54">54</span>
+<span class="line-number" id="l-55">55</span>
+<span class="line-number" id="l-56">56</span>
+<span class="line-number" id="l-57">57</span>
+<span class="line-number" id="l-58">58</span>
+<span class="line-number" id="l-59">59</span>
+<span class="line-number" id="l-60">60</span>
+<span class="line-number" id="l-61">61</span>
+<span class="line-number" id="l-62">62</span>
+<span class="line-number" id="l-63">63</span>
+<span class="line-number" id="l-64">64</span>
+<span class="line-number" id="l-65">65</span>
+<span class="line-number" id="l-66">66</span>
+<span class="line-number" id="l-67">67</span>
+<span class="line-number" id="l-68">68</span>
+<span class="line-number" id="l-69">69</span>
+<span class="line-number" id="l-70">70</span>
+<span class="line-number" id="l-71">71</span>
+<span class="line-number" id="l-72">72</span>
+<span class="line-number" id="l-73">73</span>
+<span class="line-number" id="l-74">74</span>
+<span class="line-number" id="l-75">75</span>
+<span class="line-number" id="l-76">76</span>
+<span class="line-number" id="l-77">77</span>
+<span class="line-number" id="l-78">78</span>
+<span class="line-number" id="l-79">79</span>
+<span class="line-number" id="l-80">80</span>
+<span class="line-number" id="l-81">81</span>
+<span class="line-number" id="l-82">82</span>
+<span class="line-number" id="l-83">83</span>
+<span class="line-number" id="l-84">84</span>
+<span class="line-number" id="l-85">85</span>
+<span class="line-number" id="l-86">86</span>
+<span class="line-number" id="l-87">87</span>
+<span class="line-number" id="l-88">88</span>
+<span class="line-number" id="l-89">89</span>
+<span class="line-number" id="l-90">90</span>
+<span class="line-number" id="l-91">91</span>
+<span class="line-number" id="l-92">92</span>
+<span class="line-number" id="l-93">93</span>
+<span class="line-number" id="l-94">94</span>
+<span class="line-number" id="l-95">95</span>
+<span class="line-number" id="l-96">96</span>
+<span class="line-number" id="l-97">97</span>
+<span class="line-number" id="l-98">98</span>
+<span class="line-number" id="l-99">99</span>
+<span class="line-number" id="l-100">100</span>
+<span class="line-number" id="l-101">101</span>
+<span class="line-number" id="l-102">102</span>
+<span class="line-number" id="l-103">103</span>
+<span class="line-number" id="l-104">104</span>
+<span class="line-number" id="l-105">105</span>
+<span class="line-number" id="l-106">106</span>
+<span class="line-number" id="l-107">107</span>
+<span class="line-number" id="l-108">108</span>
+<span class="line-number" id="l-109">109</span>
+<span class="line-number" id="l-110">110</span>
+<span class="line-number" id="l-111">111</span>
+<span class="line-number" id="l-112">112</span>
+<span class="line-number" id="l-113">113</span>
+<span class="line-number" id="l-114">114</span>
+<span class="line-number" id="l-115">115</span>
+<span class="line-number" id="l-116">116</span>
+<span class="line-number" id="l-117">117</span>
+<span class="line-number" id="l-118">118</span>
+<span class="line-number" id="l-119">119</span>
+<span class="line-number" id="l-120">120</span>
+<span class="line-number" id="l-121">121</span>
+<span class="line-number" id="l-122">122</span>
+<span class="line-number" id="l-123">123</span>
+<span class="line-number" id="l-124">124</span>
+<span class="line-number" id="l-125">125</span>
+<span class="line-number" id="l-126">126</span>
+<span class="line-number" id="l-127">127</span>
+<span class="line-number" id="l-128">128</span>
+<span class="line-number" id="l-129">129</span>
+<span class="line-number" id="l-130">130</span>
+<span class="line-number" id="l-131">131</span>
+<span class="line-number" id="l-132">132</span>
+<span class="line-number" id="l-133">133</span>
+<span class="line-number" id="l-134">134</span>
+<span class="line-number" id="l-135">135</span>
+<span class="line-number" id="l-136">136</span>
+<span class="line-number" id="l-137">137</span>
+<span class="line-number" id="l-138">138</span>
+<span class="line-number" id="l-139">139</span>
+<span class="line-number" id="l-140">140</span>
+<span class="line-number" id="l-141">141</span>
+<span class="line-number" id="l-142">142</span>
+<span class="line-number" id="l-143">143</span>
+<span class="line-number" id="l-144">144</span>
+<span class="line-number" id="l-145">145</span>
+<span class="line-number" id="l-146">146</span>
+<span class="line-number" id="l-147">147</span>
+<span class="line-number" id="l-148">148</span>
+<span class="line-number" id="l-149">149</span>
+<span class="line-number" id="l-150">150</span>
+<span class="line-number" id="l-151">151</span>
+<span class="line-number" id="l-152">152</span>
+<span class="line-number" id="l-153">153</span>
+<span class="line-number" id="l-154">154</span>
+<span class="line-number" id="l-155">155</span>
+<span class="line-number" id="l-156">156</span>
+<span class="line-number" id="l-157">157</span>
+<span class="line-number" id="l-158">158</span>
+<span class="line-number" id="l-159">159</span>
+<span class="line-number" id="l-160">160</span>
+<span class="line-number" id="l-161">161</span>
+<span class="line-number" id="l-162">162</span>
+<span class="line-number" id="l-163">163</span>
+<span class="line-number" id="l-164">164</span>
+<span class="line-number" id="l-165">165</span>
+<span class="line-number" id="l-166">166</span>
+<span class="line-number" id="l-167">167</span>
+<span class="line-number" id="l-168">168</span>
+<span class="line-number" id="l-169">169</span>
+<span class="line-number" id="l-170">170</span>
+<span class="line-number" id="l-171">171</span>
+<span class="line-number" id="l-172">172</span>
+<span class="line-number" id="l-173">173</span>
+<span class="line-number" id="l-174">174</span>
+<span class="line-number" id="l-175">175</span>
+<span class="line-number" id="l-176">176</span>
+<span class="line-number" id="l-177">177</span>
+<span class="line-number" id="l-178">178</span>
+<span class="line-number" id="l-179">179</span>
+<span class="line-number" id="l-180">180</span>
+<span class="line-number" id="l-181">181</span>
+<span class="line-number" id="l-182">182</span>
+<span class="line-number" id="l-183">183</span>
+<span class="line-number" id="l-184">184</span>
+<span class="line-number" id="l-185">185</span>
+<span class="line-number" id="l-186">186</span>
+<span class="line-number" id="l-187">187</span>
+<span class="line-number" id="l-188">188</span>
+<span class="line-number" id="l-189">189</span>
+<span class="line-number" id="l-190">190</span>
+<span class="line-number" id="l-191">191</span>
+<span class="line-number" id="l-192">192</span>
+<span class="line-number" id="l-193">193</span>
+<span class="line-number" id="l-194">194</span>
+<span class="line-number" id="l-195">195</span>
+<span class="line-number" id="l-196">196</span>
+<span class="line-number" id="l-197">197</span>
+<span class="line-number" id="l-198">198</span>
+<span class="line-number" id="l-199">199</span>
+<span class="line-number" id="l-200">200</span>
+<span class="line-number" id="l-201">201</span>
+<span class="line-number" id="l-202">202</span>
+<span class="line-number" id="l-203">203</span>
+<span class="line-number" id="l-204">204</span>
+<span class="line-number" id="l-205">205</span>
+<span class="line-number" id="l-206">206</span>
+<span class="line-number" id="l-207">207</span>
+<span class="line-number" id="l-208">208</span>
+<span class="line-number" id="l-209">209</span>
+<span class="line-number" id="l-210">210</span>
+<span class="line-number" id="l-211">211</span>
+<span class="line-number" id="l-212">212</span>
+<span class="line-number" id="l-213">213</span>
+<span class="line-number" id="l-214">214</span>
+<span class="line-number" id="l-215">215</span>
+<span class="line-number" id="l-216">216</span>
+<span class="line-number" id="l-217">217</span>
+<span class="line-number" id="l-218">218</span>
+<span class="line-number" id="l-219">219</span>
+<span class="line-number" id="l-220">220</span>
+<span class="line-number" id="l-221">221</span>
+<span class="line-number" id="l-222">222</span>
+<span class="line-number" id="l-223">223</span>
+<span class="line-number" id="l-224">224</span>
+<span class="line-number" id="l-225">225</span>
+<span class="line-number" id="l-226">226</span>
+<span class="line-number" id="l-227">227</span>
+<span class="line-number" id="l-228">228</span>
+<span class="line-number" id="l-229">229</span>
+<span class="line-number" id="l-230">230</span>
+<span class="line-number" id="l-231">231</span>
+<span class="line-number" id="l-232">232</span>
+<span class="line-number" id="l-233">233</span>
+<span class="line-number" id="l-234">234</span>
+<span class="line-number" id="l-235">235</span>
+<span class="line-number" id="l-236">236</span>
+<span class="line-number" id="l-237">237</span>
+<span class="line-number" id="l-238">238</span>
+<span class="line-number" id="l-239">239</span>
+<span class="line-number" id="l-240">240</span>
+<span class="line-number" id="l-241">241</span>
+<span class="line-number" id="l-242">242</span>
+<span class="line-number" id="l-243">243</span>
+<span class="line-number" id="l-244">244</span>
+<span class="line-number" id="l-245">245</span>
+<span class="line-number" id="l-246">246</span>
+<span class="line-number" id="l-247">247</span>
+<span class="line-number" id="l-248">248</span>
+<span class="line-number" id="l-249">249</span>
+<span class="line-number" id="l-250">250</span>
+<span class="line-number" id="l-251">251</span>
+<span class="line-number" id="l-252">252</span>
+<span class="line-number" id="l-253">253</span>
+<span class="line-number" id="l-254">254</span>
+<span class="line-number" id="l-255">255</span>
+<span class="line-number" id="l-256">256</span>
+<span class="line-number" id="l-257">257</span>
+<span class="line-number" id="l-258">258</span>
+<span class="line-number" id="l-259">259</span>
+<span class="line-number" id="l-260">260</span>
+<span class="line-number" id="l-261">261</span>
+<span class="line-number" id="l-262">262</span>
+<span class="line-number" id="l-263">263</span>
+<span class="line-number" id="l-264">264</span>
+<span class="line-number" id="l-265">265</span>
+<span class="line-number" id="l-266">266</span>
+<span class="line-number" id="l-267">267</span>
+<span class="line-number" id="l-268">268</span>
+<span class="line-number" id="l-269">269</span>
+<span class="line-number" id="l-270">270</span>
+<span class="line-number" id="l-271">271</span>
+<span class="line-number" id="l-272">272</span>
+<span class="line-number" id="l-273">273</span>
+<span class="line-number" id="l-274">274</span>
+<span class="line-number" id="l-275">275</span>
+<span class="line-number" id="l-276">276</span>
+<span class="line-number" id="l-277">277</span>
+<span class="line-number" id="l-278">278</span>
+<span class="line-number" id="l-279">279</span>
+<span class="line-number" id="l-280">280</span>
+<span class="line-number" id="l-281">281</span>
+<span class="line-number" id="l-282">282</span>
+<span class="line-number" id="l-283">283</span>
+<span class="line-number" id="l-284">284</span>
+<span class="line-number" id="l-285">285</span>
+<span class="line-number" id="l-286">286</span>
+<span class="line-number" id="l-287">287</span>
+<span class="line-number" id="l-288">288</span>
+<span class="line-number" id="l-289">289</span>
+<span class="line-number" id="l-290">290</span>
+<span class="line-number" id="l-291">291</span>
+<span class="line-number" id="l-292">292</span>
+<span class="line-number" id="l-293">293</span>
+<span class="line-number" id="l-294">294</span>
+<span class="line-number" id="l-295">295</span>
+<span class="line-number" id="l-296">296</span>
+<span class="line-number" id="l-297">297</span>
+<span class="line-number" id="l-298">298</span>
+<span class="line-number" id="l-299">299</span>
+<span class="line-number" id="l-300">300</span>
+<span class="line-number" id="l-301">301</span>
+<span class="line-number" id="l-302">302</span>
+<span class="line-number" id="l-303">303</span>
+<span class="line-number" id="l-304">304</span>
+<span class="line-number" id="l-305">305</span>
+<span class="line-number" id="l-306">306</span>
+<span class="line-number" id="l-307">307</span>
+<span class="line-number" id="l-308">308</span>
+<span class="line-number" id="l-309">309</span>
+<span class="line-number" id="l-310">310</span>
+<span class="line-number" id="l-311">311</span>
+<span class="line-number" id="l-312">312</span>
+<span class="line-number" id="l-313">313</span>
+<span class="line-number" id="l-314">314</span>
+<span class="line-number" id="l-315">315</span>
+<span class="line-number" id="l-316">316</span>
+<span class="line-number" id="l-317">317</span>
+<span class="line-number" id="l-318">318</span>
+<span class="line-number" id="l-319">319</span>
+<span class="line-number" id="l-320">320</span>
+<span class="line-number" id="l-321">321</span>
+<span class="line-number" id="l-322">322</span>
+<span class="line-number" id="l-323">323</span>
+<span class="line-number" id="l-324">324</span>
+<span class="line-number" id="l-325">325</span>
+<span class="line-number" id="l-326">326</span>
+<span class="line-number" id="l-327">327</span>
+<span class="line-number" id="l-328">328</span>
+<span class="line-number" id="l-329">329</span>
+<span class="line-number" id="l-330">330</span>
+<span class="line-number" id="l-331">331</span>
+<span class="line-number" id="l-332">332</span>
+<span class="line-number" id="l-333">333</span>
+<span class="line-number" id="l-334">334</span>
+<span class="line-number" id="l-335">335</span>
+<span class="line-number" id="l-336">336</span>
+<span class="line-number" id="l-337">337</span>
+<span class="line-number" id="l-338">338</span>
+<span class="line-number" id="l-339">339</span>
+<span class="line-number" id="l-340">340</span>
+<span class="line-number" id="l-341">341</span>
+<span class="line-number" id="l-342">342</span>
+<span class="line-number" id="l-343">343</span>
+<span class="line-number" id="l-344">344</span>
+<span class="line-number" id="l-345">345</span>
+<span class="line-number" id="l-346">346</span>
+<span class="line-number" id="l-347">347</span>
+<span class="line-number" id="l-348">348</span>
+<span class="line-number" id="l-349">349</span>
+<span class="line-number" id="l-350">350</span>
+<span class="line-number" id="l-351">351</span>
+<span class="line-number" id="l-352">352</span>
+<span class="line-number" id="l-353">353</span>
+<span class="line-number" id="l-354">354</span>
+<span class="line-number" id="l-355">355</span>
+</pre>
+<pre id="src" class="highlight highlightjs">
+<code class="language-golo" data-lang="golo"># ............................................................................................... #
+#
+# Copyright (c) 2012-2021 Institut National des Sciences Appliquées de Lyon (INSA Lyon) and others
+#
+# This program and the accompanying materials are made available under the
+# terms of the Eclipse Public License 2.0 which is available at
+# http://www.eclipse.org/legal/epl-2.0.
+#
+# SPDX-License-Identifier: EPL-2.0
+#
+# ............................................................................................... #
+
+----
+This module defines utility functions and augmentations to ease the use of
+the `gololang.LazyList` object.
+
+A lazy list is an *immutable* list whose elements are evaluated only when needed,
+as can be found in Haskell for example.
+
+This is very useful when using higher order function such as `map`. Mapping
+a long lazy list with a function and using only the 3 first elements will only
+apply the function to these elements, as opposed to regular lists.
+
+Lazy lists can also be used to create infinite lists, also known as generators
+(or anamorphisms).
+
+Lastly, they allow for elegant recursive implementations of several classical
+algorithms.
+
+For instance, one can create a infinite lazy list containing integers as:
+
+    function count = |start| -> cons(start, -> count(start + 1_L))
+    function count = -> count(0_L)
+
+On the other hand, functions or methods like `equals`, `size` or `contains` are
+not very efficients, since they must evaluate the whole list, and thus negate
+the laziness. They are here for completeness and compatibility with the regular
+lists interface, but you should avoid such methods.
+
+Some functions in this module are recursive (re)implementation of standard list
+HOF, such as `map` or `filter`. The recursive aspect should not be limiting since
+the resulting list is lazy.
+----
+module gololang.LazyLists
+
+import java.util
+
+# ............................................................................................... #
+# Utils, constructors and conversions
+
+----
+Returns the empty list.
+----
+function emptyList = -> gololang.LazyList.EMPTY()
+
+----
+Create a new lazy list from a head and tail values. Automatically wraps the
+tail in a closure if its not already one.
+
+For example:
+
+    let myList = cons(1, cons(2, cons(3, emptyList())))
+
+gives a lazy list equivalent to `list[1, 2, 3]`
+----
+function cons = |head, tail| -> match {
+  when isClosure(tail) then gololang.LazyList.cons(head, tail)
+  when tail is null then gololang.LazyList.cons(head, ^emptyList)
+  otherwise gololang.LazyList.cons(head, -> tail)
+}
+
+----
+Unary version of [`cons(head, tail)`](#cons_2).
+
+Its parameter is assumed to be a tuple (or any object having a `get(idx)` method)
+of the form `[head, tail]`.
+----
+function cons = |ht| -> cons(ht: get(0), ht: get(1))
+
+----
+Variadic function to create lazy lists from values.
+
+    let myList = lazyList(1, 2, 3, 4)
+
+is the equivalent to
+
+    let myList = cons(1, cons(2, cons(3, cons(4, emptyList()))))
+----
+function lazyList = |values...| -> iteratorToLazyList(values: asList(): iterator())
+
+----
+Wraps any object implementing `Iterable` or `Iterator` in a lazy list.
+The `next()` method of the underlying iterator is only called when the tail is
+used.
+
+NOTE:
+If called with an `Iterator` instance, the iterator is shared, so navigating
+through the list can have side effects if another object is using the same
+iterator.
+----
+function fromIter = |it| -> match {
+  when it oftype Iterable.class then
+    iteratorToLazyList(it: iterator())
+  when it oftype Iterator.class then
+    iteratorToLazyList(it)
+  otherwise raise("Invalid argument for fromIter")
+}
+
+augment java.lang.Iterable {
+  ----
+  Returns a lazy list from this `Iterable`. Can be used for instance to lazily
+  map a list.
+  ----
+  function asLazyList = |this| -> iteratorToLazyList(this: iterator())
+}
+
+augment java.util.Iterator {
+  ----
+  Returns a lazy list view of this `Iterator`.
+  ----
+  function asLazyList = |this| -> iteratorToLazyList(this)
+}
+
+local function iteratorToLazyList = |iterator| {
+  if not iterator: hasNext() {
+    return gololang.LazyList.EMPTY()
+  } else {
+    let head = iterator: next()
+    return gololang.LazyList.cons(head, -> iteratorToLazyList(iterator))
+  }
+}
+
+# ............................................................................................... #
+
+augment gololang.LazyList {
+
+  ----
+  Maps elements of a list using a function:
+
+      lazyList(1, 2, 3):map(|x| -> 2 * x)
+
+  `map` returns a new lazy list, i.e. `func` is applied only
+  when necessary.
+
+  This is a recursive implementation.
+  ----
+  function map = |this, func| -> match {
+    when this: isEmpty() then gololang.LazyList.EMPTY()
+    otherwise gololang.LazyList.cons(
+      func(this: head()), -> this: tail(): map(func)
+    )
+  }
+
+  ----
+  Filters elements based on a predicate.
+
+  Returns a new lazy list.
+  ----
+  function filter = |this, pred| -> match {
+    when this: isEmpty() then gololang.LazyList.EMPTY()
+    when pred(this: head()) then
+      gololang.LazyList.cons(this: head(), -> this: tail(): filter(pred))
+    otherwise this: tail(): filter(pred)
+  }
+
+  ----
+  Finds the first element of a list matching a predicate:
+
+      println(lazyList(1, 2, 3, 4): find(|n| -> n > 3))
+
+  * `this`: a lazy list.
+  * `pred`: a predicate function taking an element and returning a boolean.
+
+  `find` returns `null` when no element satisfies `pred`.
+
+  Note that in the worst case, all the list is search. Take care to **not use**
+  this method on infinite list, since no check is made.
+  ----
+  function find = |this, pred| -> match {
+    when this: isEmpty() then null
+    when pred(this: head()) then this: head()
+    otherwise this: tail(): find(pred)
+  }
+
+  ----
+  Joins the elements into a string:
+
+      println(list[1, 2, 3]: join(", "))
+
+  * `this`: a list.
+  * `separator`: the element separator string.
+
+  The returned string is `""` when the list is empty.
+  ----
+  function join = |this, separator| {
+    if this: isEmpty() {
+      return ""
+    }
+    var it = this: iterator()
+    var buffer = java.lang.StringBuilder(it: next(): toString())
+    while it: hasNext() {
+        buffer: append(separator)
+        buffer: append(it: next())
+    }
+    return buffer: toString()
+  }
+
+  ----
+  Folds left `this` using `func` with `zero` as initial value.
+  This is a recursive implementation.
+
+      lazyList(a, b, c): foldl(f, z) == f(f(f(z, a), b), c)
+
+  Equivalent to `foldr` if `func` is commutative.
+  ----
+  function foldl = |this, func, zero| -> match {
+    when this: isEmpty() then zero
+    otherwise this: tail(): foldl(func, func(zero, this: head()))
+  }
+
+  ----
+  Folds right `this` using `func` with `zero` as initial value.
+  This is a recursive implementation.
+
+      lazyList(a, b, c): foldr(f, z) == f(a, f(b, f(c, z)))
+
+  Equivalent to `foldl` if `func` is commutative.
+  ----
+  function foldr = |this, func, zero| -> match {
+    when this: isEmpty() then zero
+    otherwise func(this: head(), this: tail(): foldr(func, zero))
+  }
+
+
+  ----
+  Takes the `nb` first elements of the lazy list, as a lazy list.
+  This is a wrapper, the underlying list is resolved on demand, such that
+  everything remains lazy. `take` can thus be used on infinite lists.
+  ----
+  function take = |this, nb| -> match {
+    when nb <= 0 or this: isEmpty() then emptyList()
+    otherwise gololang.LazyList.cons(
+      this: head(),
+      -> this: tail(): take(nb - 1)
+    )
+  }
+
+  ----
+  Takes elements from the list as long as the given predicate is true.
+
+  * `pred`: the predicate function used to end the list.
+  ----
+  function takeWhile = |this, pred| -> match {
+    when this: isEmpty() or not pred(this: head()) then emptyList()
+    otherwise gololang.LazyList.cons(this: head(), -> this: tail() :takeWhile(pred))
+  }
+
+  ----
+  Remove `nb` elements from the list and return the rest as a lazy list.
+  ----
+  function drop = |this, nb| -> match {
+    when nb <= 0 then this
+    when this: isEmpty() then emptyList()
+    otherwise this: tail(): drop(nb - 1)
+  }
+
+  ----
+  Remove elements from the list as long as the given predicate is true.
+
+  * `pred`: the predicate function used to end the list.
+  ----
+  function dropWhile = |this, pred| -> match {
+    when this: isEmpty() then emptyList()
+    when not pred(this: head()) then this
+    otherwise this: tail(): dropWhile(pred)
+  }
+
+  ----
+  Extract a lazy sublist.
+
+  This is just a convenient method for `list: drop(from):take(to - from)`, so
+  the list remains lazy.
+
+  * `from`: low endpoint (inclusive) of the `subList`
+  * `to`: high endpoint (exclusive) of the `subList`
+  ----
+  function subList = |this, from, to| -> this:drop(from):take(to - from)
+
+}
+
+----
+Generator function on lazy lists (anamorphism).
+
+This function generates a (possibly infinite) lazy list. Starting with the
+`seed` value, if `finished(seed)` is `true`, the generation stops and an empty
+list is returned. Otherwise, `unspool` is called on `seed`, and must generate
+two values: the head of the list (current value) and the next seed that will be
+used to generate the tail.
+
+As an example, one can write a simple `range` function as:
+
+    let range = |start, end| -> generator(
+      |seed| -> [seed, seed + 1],
+      |seed| -> seed >= end,
+      start
+    )
+
+* `unspool`: the generative function
+* `finished`: the condition function
+* `seed`: the initial value
+----
+function generator = |unspool, finished, seed| {
+  if finished(seed) {
+    return gololang.LazyList.EMPTY()
+  }
+  let r = unspool(seed)
+  return gololang.LazyList.cons(
+    r:get(0),
+    -> generator(unspool, finished, r:get(1))
+  )
+}
+
+local function False = |args...| -> false
+
+----
+Produces a infinite list of values. If the argument is a closure, it must have
+no parameters, and it's used to produce the values (called for each `tail`
+access).
+
+For instance, `repeat(5)` will return an infinite lazy list of `5`s, and
+`repeat(^f)` will return a infinite lazy list of calls to `f`
+([f(), f(), f(), ...])
+
+* `value`: a value or a closure
+----
+function repeat = |value| -> match {
+  when isClosure(value) then generator(|seed| -> [value(), null], ^False, null)
+  otherwise generator(|seed| -> [value, null], ^False, null)
+}
+
+----
+Returns an infinite lazy list produced by iterative application of a function
+to an initial element.
+`iterate(z, f)` thus yields `z, f(z), f(f(z)), ...`
+
+For instance, one can create a infinite list of integers using:
+
+    iterate(0, |x| -> x + 1)
+
+
+* `zero`: the initial element of the list
+* `func`: the function to apply
+----
+function iterate = |zero, func| -> generator(|seed| -> [seed, func(seed)], ^False, zero)
+
+</code>
+</pre>
+<link rel="stylesheet" href="http://golo-lang.org/documentation/next/styles/github.min.css"/>
+<script src="http://golo-lang.org/documentation/next/highlight.min.js"></script>
+<script>
+hljs.initHighlighting();
+</script>
+</body>
+</html>
